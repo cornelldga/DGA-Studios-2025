@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -6,20 +8,23 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     private int dialogueIndex;
-
+    public Animator animator;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private float typingSpeed = 0.05f;
     void Start()
     {
         if (dialogueJsonFile != null)
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>("{\"dialogueLines\":" + dialogueJsonFile.text + "}");
         }
-        StartDialogue();
     }
 
-    public void StartDialogue()
+    public void StartDialogue(string dialogueID)
     {
+        animator.SetBool("isOpen", true);
         dialogueIndex = 0;
-        currentDialogueID = "npc1_greeting_1";
+        currentDialogueID = dialogueID;
         Debug.Log("Dialogue starts");
         DisplayNextLine();
     }
@@ -31,6 +36,9 @@ public class DialogueManager : MonoBehaviour
             DialogueLine line = currentDialogueData.dialogueLines[dialogueIndex];
             if (line.dialogueID == currentDialogueID)
             {
+                nameText.text = line.characterName;
+                StopAllCoroutines();
+                StartCoroutine(TypeSentence(line));
                 Debug.Log(line.dialogueText);
                 if (line.nextDialogueID != "")
                 {
@@ -38,17 +46,26 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             dialogueIndex++;
-            DisplayNextLine(); 
         }
         else
         {
             EndDialogue();
         }
     }
+    IEnumerator TypeSentence(DialogueLine line)
+    {
+        dialogueText.text = "";
+        foreach (char letter in line.dialogueText.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+    }
 
     public void EndDialogue()
     {
         Debug.Log("Dialogue end");
+        animator.SetBool("isOpen", false);
     }
 
 }
