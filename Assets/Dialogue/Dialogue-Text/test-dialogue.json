@@ -1,0 +1,32 @@
+[
+  {
+    "dialogueID": "npc1_greeting_1",
+    "characterName": "Townsperson-1",
+    "dialogueText": "Greetings!",
+    "choices": [],
+    "nextDialogueID": "npc1_greeting_1a"
+  },
+  {
+    "dialogueID": "npc1_greeting_1a",
+    "characterName": "Townsperson-1",
+    "dialogueText": "Nice weather we're having today, isn't it?",
+    "choices": [],
+    "nextDialogueID": ""
+  },
+  {
+    "dialogueId": "npc2_greeting_2",
+    "characterName": "Townsperson-2",
+    "dialogueText": "Hello there.",
+    "choices": [
+      {
+        "choiceText": "Hi!",
+        "nextDialogueChoiceId": "npc_greet_2"
+      },
+      {
+        "choiceText": "Go away.",
+        "nextDialogueChoiceId": "npc_rude_2"
+      }
+    ],
+    "nextDialogueID": ""
+  }
+]
