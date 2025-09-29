@@ -14,7 +14,6 @@ public class BossManager : MonoBehaviour
         healthBackDrop.SetActive(true);
         healthBackDrop.transform.localScale = new Vector3(startingHealth,1,1);
         healthBar.transform.localScale = new Vector3(startingHealth, 1, 1);
-
     }
 
     // Update is called once per frame
