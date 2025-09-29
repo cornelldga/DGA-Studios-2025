@@ -4,10 +4,14 @@ public class BossManager : MonoBehaviour
 {
     private int health;
     [SerializeField] private int startingHealth;
+    [SerializeField] private Transform healthBar;
+    [SerializeField] private Transform backdrop;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health = startingHealth;
+        healthBar.localScale.Set(health,1,1);
+        backdrop.localScale.Set(health, 1, 1);
     }
 
     // Update is called once per frame
@@ -21,7 +25,7 @@ public class BossManager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("FriendlyDamage"))
+        if (collision.gameObject.CompareTag("PlayerBullet"))
         {
             health--;
         }
