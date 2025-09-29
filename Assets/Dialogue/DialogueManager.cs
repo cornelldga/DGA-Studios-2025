@@ -42,7 +42,6 @@ public class DialogueManager : MonoBehaviour
             {
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(line));
-                Debug.Log(line.dialogueText);
                 if (line.nextDialogueID != "")
                 {
                     currentDialogueID = line.nextDialogueID;
