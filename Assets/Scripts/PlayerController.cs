@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float moveSpeed;
-    [SerializeField] PlayerInputActions playerControls;
+    // [SerializeField] PlayerInputActions playerControls;
+    private PlayerInputActions playerControls;
+
 
     // [SerializeField] InputAction playerControls;
 
     private Vector2 moveDirection;
-    private Vector2 prevMoveDirection;
 
     private InputAction move;
 
@@ -45,7 +46,5 @@ public class PlayerController : MonoBehaviour
     {
        
         rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-        Debug.Log(rb.linearVelocity.magnitude);
-
     }
 }
