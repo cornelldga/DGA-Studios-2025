@@ -16,7 +16,7 @@ public class BulletManager : MonoBehaviour {
 
     /*To be added:
      Switch cases for bullet patterns
-     
+     Bullet patterns may include homing attacks
      
      */
 

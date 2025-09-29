@@ -26,14 +26,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       
+       rb.linearVelocity = new Vector2(bulletSpeed * vertical * Time.deltaTime, bulletSpeed * horizontal * Time.deltaTime);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            
+            Destroy(this.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }
-}
+
