@@ -25,7 +25,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", true);
         dialogueIndex = 0;
         currentDialogueID = dialogueID;
-        Debug.Log("Dialogue starts");
+        Debug.Log("start");
         DisplayNextLine();
     }
 
@@ -36,7 +36,6 @@ public class DialogueManager : MonoBehaviour
             DialogueLine line = currentDialogueData.dialogueLines[dialogueIndex];
             if (line.dialogueID == currentDialogueID)
             {
-                nameText.text = line.characterName;
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(line));
                 Debug.Log(line.dialogueText);

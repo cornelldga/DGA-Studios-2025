@@ -2,7 +2,6 @@
 public class DialogueLine
 {
     public string dialogueID;
-    public string characterName;
     public string dialogueText;
     public string nextDialogueID;
     public Choice[] choices;

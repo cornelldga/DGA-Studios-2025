@@ -1,32 +1,41 @@
 [
   {
-    "dialogueID": "npc1_greeting_1",
-    "characterName": "Townsperson-1",
+    "dialogueID": "intro_1",
     "dialogueText": "Greetings!",
     "choices": [],
-    "nextDialogueID": "npc1_greeting_1a"
+    "nextDialogueID": "intro_1a"
   },
   {
-    "dialogueID": "npc1_greeting_1a",
-    "characterName": "Townsperson-1",
+    "dialogueID": "intro_1a",
     "dialogueText": "Nice weather we're having today, isn't it?",
     "choices": [],
     "nextDialogueID": ""
   },
   {
-    "dialogueID": "npc2_greeting_2",
-    "characterName": "Townsperson-2",
+    "dialogueID": "intro_2",
     "dialogueText": "Hello there.",
     "choices": [
       {
         "choiceText": "Hi!",
-        "nextDialogueChoiceId": "npc_greet_2"
+        "nextDialogueChoiceId": "intro_2_player_greet"
       },
       {
         "choiceText": "Go away.",
-        "nextDialogueChoiceId": "npc_rude_2"
+        "nextDialogueChoiceId": "intro_2_player_rude"
       }
     ],
+    "nextDialogueID": ""
+  },
+  {
+    "dialogueID": "intro_2_player_greet",
+    "dialogueText": "How are you doing?",
+    "choices": [],
+    "nextDialogueID": ""
+  },
+  {
+    "dialogueID": "intro_2_player_rude",
+    "dialogueText": "Well, that was rude.",
+    "choices": [],
     "nextDialogueID": ""
   }
 ]
