@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 1510011041645385304}
   - component: {fileID: 2499011387719981173}
   m_Layer: 5
-  m_Name: text
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 4002040823179843469}
   - component: {fileID: 234052430590988582}
   m_Layer: 5
-  m_Name: npc
+  m_Name: NpcImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84.415405, y: -22.488693}
+  m_AnchoredPosition: {x: 84, y: -20}
   m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &780576451526894721
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 6420355506375722275}
   - component: {fileID: 84009859514766997}
   m_Layer: 5
-  m_Name: continue
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7463419516922990523}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
         m_MethodName: DisplayNextLine
         m_Mode: 1
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 7944770772745476112}
   - component: {fileID: 3849594859096241467}
   m_Layer: 5
-  m_Name: name
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
