@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using Unity.Multiplayer.Center.Common;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     private int dialogueIndex;
+    private Choice[] choices;
     public Animator animator;
     [SerializeField] public GameObject character;
+    [SerializeField] private GameObject choiceDisplay;
+    [SerializeField] private TextMeshProUGUI firstChoiceText;
+    [SerializeField] private TextMeshProUGUI secondChoiceText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float typingSpeed = 0.05f;
@@ -29,7 +34,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", true);
         dialogueIndex = 0;
         currentDialogueID = dialogueID;
-        Debug.Log("start");
+        choiceDisplay.SetActive(false);
         DisplayNextLine();
     }
 
@@ -42,16 +47,25 @@ public class DialogueManager : MonoBehaviour
             {
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(line));
-                if (line.nextDialogueID != "")
+                if (line.choices.Length == 0)
                 {
-                    currentDialogueID = line.nextDialogueID;
+                    if (line.nextDialogueID == "")
+                    {
+                        EndDialogue();
+                    }
+                    else
+                    {
+                        currentDialogueID = line.nextDialogueID;
+                        Continue();
+                    }
+                }
+                else
+                {
+                    choices = line.choices;
+                    Choices();
                 }
             }
             dialogueIndex++;
-        }
-        else
-        {
-            EndDialogue();
         }
     }
     IEnumerator TypeSentence(DialogueLine line)
@@ -64,9 +78,39 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void Continue()
+    {
+        // click anywhere, freeze game events
+        if (true)
+        {
+            //if clicked
+            DisplayNextLine();
+        }
+    }
+
+    private void Choices()
+    {
+        choiceDisplay.SetActive(true);
+        firstChoiceText.text = choices[0].choiceText;
+        secondChoiceText.text = choices[1].choiceText;
+    }
+
+    public void FirstChoice()
+    {
+        currentDialogueID = choices[0].nextDialogueChoiceID;
+        choiceDisplay.SetActive(false);
+        DisplayNextLine();
+    }
+
+    public void SecondChoice()
+    {
+        currentDialogueID = choices[1].nextDialogueChoiceID;
+        choiceDisplay.SetActive(false);
+        DisplayNextLine();
+    }  
+
     public void EndDialogue()
     {
-        Debug.Log("Dialogue end");
         animator.SetBool("isOpen", false);
     }
 

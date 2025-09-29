@@ -11,7 +11,7 @@ public class DialogueLine
 public class Choice
 {
     public string choiceText;
-    public string nextDialogueChoiceId;
+    public string nextDialogueChoiceID;
 }
 
 [System.Serializable]
