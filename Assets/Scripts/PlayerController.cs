@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
     {
        
         rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-        Debug.Log(rb.linearVelocity.magnitude);
 
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8297629877696191856}
   - component: {fileID: 2296092601719707025}
   - component: {fileID: 1393996811320652784}
+  - component: {fileID: 2552512306546890594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -328,3 +329,20 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2552512306546890594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d98b9dcde162b49a33c87ae9f4e65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerProjectile
+  beerPrefab: {fileID: 9101882892545248675, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
+  ginPrefab: {fileID: 7471179523876741705, guid: b3f18be2c343fe64b95759835c6d0fa7, type: 3}
+  changeCooldown: 2
+  beerCooldown: 0.5
+  ginCooldown: 1.5
