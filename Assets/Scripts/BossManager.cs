@@ -3,18 +3,26 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    [Header("Health Parameters")]
     [SerializeField] private int health;
     [SerializeField] private int startingHealth;
+    
+    [Header("Health Bar Assets")]
     // Healthbar for testing purposes
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject healthBackDrop;
+    
+    // Types of movement the boss can do
     private enum MovementType
     {
         Standing,MoveRight,MoveLeft,MoveUp,MoveDown,Circle,Line
     } 
+
+    //Current Movement Pattern
     private MovementType movementType;
     private float timer;
-    //Temp variables
+
+    //Temp variables for moving boss
     private int moves;
     private int right;
 
@@ -32,7 +40,9 @@ public class BossManager : MonoBehaviour
         right = 1;
     }
 
-    // Update is called once per frame, Responsible for updating position, and the healthbar
+    /// <summary>
+    /// Update is called once per frame, Responsible for updating position, and the healthbar
+    /// </summary>
     void Update()
     {
         timer += Time.deltaTime;
@@ -43,7 +53,7 @@ public class BossManager : MonoBehaviour
             Time.timeScale = 0;
         }
         
-        //Imagined implementation: Select a location (Add Parameter?) and boss will pathfind, teleport, or jump to that location
+        //Imagined future implementation: Select a location (Add Parameter?) and boss will pathfind, teleport, or jump to that location
         if (movementType != MovementType.Standing)
         {
             if (movementType == MovementType.Line)
@@ -62,6 +72,10 @@ public class BossManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Responisble for decreasing boss health when making contact with a player bullet. Currently Destroys bullets that harm it
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
@@ -70,6 +84,7 @@ public class BossManager : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
 
     public int getHealth() { return health; }
     public void setHealth(int h) { health=h; }
