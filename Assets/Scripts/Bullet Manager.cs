@@ -26,7 +26,7 @@ public class BulletManager : MonoBehaviour {
 
     void Update()
     {
-        transform.position = new Vector2(Random.Range(-5,9), 5);
+        transform.position = new Vector2(Random.Range(-5,9), 0);
         timer += Time.deltaTime;
         if (timer > bulletCooldown)
         {
