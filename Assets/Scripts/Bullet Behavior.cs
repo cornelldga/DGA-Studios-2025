@@ -26,7 +26,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       rb.linearVelocity = new Vector2(bulletSpeed * vertical * Time.deltaTime, bulletSpeed * horizontal * Time.deltaTime);
+       rb.linearVelocity = new Vector2(bulletSpeed * horizontal * Time.deltaTime, bulletSpeed * vertical * Time.deltaTime);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -40,4 +40,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
     }
 }
-
+/* 
+ To do in file:
+ 
+ */
