@@ -1,13 +1,8 @@
 using System;
 using UnityEngine;
 
-public class Beer : MonoBehaviour
+public class Beer : Projectile
 {
-    public float baseSpeed = 10f;
-    public float baseLifetime = 1f;
-    public float baseCooldown = 0.5f;
-    
-
     private Rigidbody2D rb;
 
     private void Start()

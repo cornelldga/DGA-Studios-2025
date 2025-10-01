@@ -23,8 +23,6 @@ public class PlayerProjectile : MonoBehaviour
     [SerializeField] Gin ginPrefab;
 
     [SerializeField] float changeCooldown;
-    [SerializeField] float beerCooldown;
-    [SerializeField] float ginCooldown;
 
     private PlayerInputActions playerControls;
 
@@ -94,13 +92,13 @@ public class PlayerProjectile : MonoBehaviour
     void ShootBeer()
     {
           Beer beerProj = Instantiate(beerPrefab, gameObject.transform.position, fireDirection);
-          fireCooldown = beerProj.baseCooldown * cooldownMod;
+          fireCooldown = beerProj.getCooldown() * cooldownMod;
     }
 
     void ShootGin()
     {
           Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
-          fireCooldown = ginProj.baseCooldown * cooldownMod;
+          fireCooldown = ginProj.getCooldown() * cooldownMod;
     }
 
 }

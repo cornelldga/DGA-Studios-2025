@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public class Gin : MonoBehaviour
+public class Gin : Projectile
 {
-    public float baseSpeed = 20f;
-    public float baseLifetime = 2f;
-    public float baseCooldown = 1.5f;
-
     private Rigidbody2D rb;
 
     private void Start()
