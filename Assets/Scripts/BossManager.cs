@@ -5,6 +5,7 @@ public class BossManager : MonoBehaviour
 {
     [SerializeField] private int health;
     [SerializeField] private int startingHealth;
+    // Healthbar for testing purposes
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject healthBackDrop;
     private enum MovementType
@@ -31,7 +32,7 @@ public class BossManager : MonoBehaviour
         right = 1;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame, Responsible for updating position, and the healthbar
     void Update()
     {
         timer += Time.deltaTime;
@@ -61,11 +62,12 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
             health--;
+            Destroy(collision.gameObject);
         }
     }
 
