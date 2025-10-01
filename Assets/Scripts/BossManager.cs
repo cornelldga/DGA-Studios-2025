@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    private static int health;
+    [SerializeField] private int health;
     [SerializeField] private int startingHealth;
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject healthBackDrop;
