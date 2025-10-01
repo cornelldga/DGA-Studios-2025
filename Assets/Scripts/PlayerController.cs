@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
        
-        rb.linearVelocity = new Vector2(moveDirection.x * curSpeed, moveDirection.y * moveSpeed);
+        rb.linearVelocity = new Vector2(moveDirection.x * curSpeed, moveDirection.y * curSpeed);
 
     }
 
