@@ -14,6 +14,11 @@ public class PlayerProjectile : MonoBehaviour
 
     private float fireCooldown = 0;
 
+    private float cooldownMod = 1;
+    private float speedMod = 1;
+    private float lifetimeMod = 1;
+
+
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
 
@@ -81,16 +86,21 @@ public class PlayerProjectile : MonoBehaviour
         fireCooldown = changeCooldown;
     }
 
+    public void setCooldownMod(float mod)
+    {
+        cooldownMod = mod;
+    }
+
     void ShootBeer()
     {
-           Beer beerProj = Instantiate(beerPrefab, gameObject.transform.position, fireDirection);
-           fireCooldown = beerCooldown;
+          Beer beerProj = Instantiate(beerPrefab, gameObject.transform.position, fireDirection);
+          fireCooldown = beerProj.baseCooldown * cooldownMod;
     }
 
     void ShootGin()
     {
-           Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
-           fireCooldown = ginCooldown;
+          Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
+          fireCooldown = ginProj.baseCooldown * cooldownMod;
     }
 
 }
