@@ -1,54 +1,47 @@
-using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine;
-using Unity.Multiplayer.Center.Common;
+
+/// <summary>
+/// This script iterates through a dialogue sequence from a JSON file
+/// using DialogueLine and DialogueData.
+/// </summary>
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextAsset dialogueJsonFile;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
-    private int dialogueIndex;
-    private Choice[] choices;
     public Animator animator;
-    [SerializeField] public GameObject character;
-    [SerializeField] private GameObject choiceDisplay;
-    [SerializeField] private TextMeshProUGUI firstChoiceText;
-    [SerializeField] private TextMeshProUGUI secondChoiceText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float typingSpeed = 0.05f;
-    private Image characterImg;
-    void Start()
-    {
-        characterImg = character.GetComponent<Image>();
-        if (dialogueJsonFile != null)
-        {
-            currentDialogueData = JsonUtility.FromJson<DialogueData>("{\"dialogueLines\":" + dialogueJsonFile.text + "}");
-        }
-    }
 
+    /// <summary>
+    /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
+    /// </summary>
+    /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
     public void StartDialogue(string dialogueID)
     {
         animator.SetBool("isOpen", true);
-        dialogueIndex = 0;
         currentDialogueID = dialogueID;
-        choiceDisplay.SetActive(false);
         DisplayNextLine();
     }
 
+    /// <summary>
+    /// Searches for a DialogueLine with ID matching currentDialogueID, begins
+    /// Coroutine to display dialogue; if nextDialogueID is empty, ends dialogue;
+    /// else, sets currentDialogueID to nextDialogueID and continues,
+    /// </summary>
     public void DisplayNextLine()
     {
-        if (dialogueIndex < currentDialogueData.dialogueLines.Length)
+        if (currentDialogueData.dialogueLines.Length > 0)
         {
-            DialogueLine line = currentDialogueData.dialogueLines[dialogueIndex];
-            if (line.dialogueID == currentDialogueID)
+            foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
-                StopAllCoroutines();
-                StartCoroutine(TypeSentence(line));
-                if (line.choices.Length == 0)
+                if (line.dialogueID == currentDialogueID)
                 {
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(line));
                     if (line.nextDialogueID == "")
                     {
                         EndDialogue();
@@ -59,15 +52,10 @@ public class DialogueManager : MonoBehaviour
                         Continue();
                     }
                 }
-                else
-                {
-                    choices = line.choices;
-                    Choices();
-                }
             }
-            dialogueIndex++;
         }
     }
+
     IEnumerator TypeSentence(DialogueLine line)
     {
         dialogueText.text = "";
@@ -88,30 +76,25 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void Choices()
-    {
-        choiceDisplay.SetActive(true);
-        firstChoiceText.text = choices[0].choiceText;
-        secondChoiceText.text = choices[1].choiceText;
-    }
-
-    public void FirstChoice()
-    {
-        currentDialogueID = choices[0].nextDialogueChoiceID;
-        choiceDisplay.SetActive(false);
-        DisplayNextLine();
-    }
-
-    public void SecondChoice()
-    {
-        currentDialogueID = choices[1].nextDialogueChoiceID;
-        choiceDisplay.SetActive(false);
-        DisplayNextLine();
-    }  
-
+    /// <summary>
+    /// Dialogue ends, and UI is removed from the screen.
+    /// </summary>
     public void EndDialogue()
     {
         animator.SetBool("isOpen", false);
+    }
+
+    /// <summary>
+    /// Sets text of the given file to currentDialogueData through DialogueData class.
+    /// </summary>
+    /// <param name="file">The JSON text file to parse from.</param>
+    public void SetJSON(TextAsset file)
+    {
+        if (file != null)
+        {
+            currentDialogueData = JsonUtility.FromJson<DialogueData>
+                ("{\"dialogueLines\":" + file.text + "}");
+        }
     }
 
 }

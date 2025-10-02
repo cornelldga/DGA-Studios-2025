@@ -3,44 +3,30 @@
     "dialogueID": "intro_1",
     "dialogueText": "Greetings!",
     "emotion": "happy",
-    "choices": [],
     "nextDialogueID": "intro_1a"
   },
   {
     "dialogueID": "intro_1a",
     "dialogueText": "Nice weather we're having today, isn't it?",
     "emotion": "happy",
-    "choices": [],
     "nextDialogueID": ""
   },
   {
     "dialogueID": "intro_2",
     "dialogueText": "Hello there.",
     "emotion": "happy",
-    "choices": [
-      {
-        "choiceText": "Hi!",
-        "nextDialogueChoiceID": "intro_2_player_greet"
-      },
-      {
-        "choiceText": "Go away.",
-        "nextDialogueChoiceID": "intro_2_player_rude"
-      }
-    ],
     "nextDialogueID": ""
   },
   {
     "dialogueID": "intro_2_player_greet",
     "dialogueText": "How are you doing?",
     "emotion": "happy",
-    "choices": [],
     "nextDialogueID": ""
   },
   {
     "dialogueID": "intro_2_player_rude",
     "dialogueText": "Well, that was rude.",
     "emotion": "angry",
-    "choices": [],
     "nextDialogueID": ""
   }
 ]
