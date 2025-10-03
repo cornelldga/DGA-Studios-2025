@@ -49,8 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     /// <summary>
     /// Searches for a DialogueLine with ID matching currentDialogueID, begins
-    /// Coroutine to display dialogue; if nextDialogueID is empty, ends dialogue;
-    /// else, sets currentDialogueID to nextDialogueID and continues,
+    /// Coroutine to display dialogue.
     /// </summary>
     public void DisplayNextLine()
     {
@@ -63,20 +62,16 @@ public class DialogueManager : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    if (line.nextDialogueID == "")
-                    {
-                        EndDialogue();
-                    }
-                    else
-                    {
-                        currentDialogueID = line.nextDialogueID;
-                        Continue();
-                    }
+                    return;
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Does the animation for typing text; if nextDialogueID is empty, ends dialogue;
+    /// else, sets currentDialogueID to nextDialogueID and continues after a short time,
+    /// </summary>
     IEnumerator TypeSentence(DialogueLine line)
     {
         dialogueText.text = "";
@@ -85,15 +80,18 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-    }
-
-    private void Continue()
-    {
-        if (dialogueOngoing)
-        {
-            DisplayNextLine(); 
-        }
         
+        yield return new WaitForSeconds(2f);
+        
+        if (line.nextDialogueID == "")
+        {
+            EndDialogue();
+        }
+        else
+        {
+            currentDialogueID = line.nextDialogueID;
+            DisplayNextLine();
+        }
     }
 
     /// <summary>
