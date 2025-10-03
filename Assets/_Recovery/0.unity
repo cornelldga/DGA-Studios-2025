@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &104432962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5033198116382116301, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-  m_PrefabInstance: {fileID: 687531374}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &368442053
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,18 +479,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TriggerDialogue
       objectReference: {fileID: 0}
-    - target: {fileID: 6296795959397604827, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6296795959397604827, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1787952498}
-    - target: {fileID: 6296795959397604827, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TriggerDialogue
-      objectReference: {fileID: 0}
     - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_LocalPosition.x
       value: -84.415375
@@ -546,18 +523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1076226740}
-    - target: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: nameText
-      value: 
-      objectReference: {fileID: 104432962}
-    - target: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: dialogueText
-      value: 
-      objectReference: {fileID: 1329312104}
     - target: {fileID: 8544578262760634387, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_Name
       value: Start Dialogue
@@ -633,22 +598,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64581cef8622db04dbb7eb1cf34082e9, type: 3}
---- !u!95 &1076226740 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1917230275198679387, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-  m_PrefabInstance: {fileID: 687531374}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1329312104 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8206260911539718010, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-  m_PrefabInstance: {fileID: 687531374}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1399261717
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +687,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1787952497}
   - component: {fileID: 1787952496}
-  - component: {fileID: 1787952495}
   - component: {fileID: 1787952498}
   m_Layer: 0
   m_Name: NPC
@@ -747,18 +695,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1787952495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787952494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee0d297ec89842cf8476a214cfa288c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!61 &1787952496
 BoxCollider2D:
   m_ObjectHideFlags: 0
