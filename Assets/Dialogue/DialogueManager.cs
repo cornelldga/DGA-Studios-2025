@@ -42,7 +42,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
-            currentDialogueID = "DIALOGUE";
+            currentDialogueID = dialogueID;
             DisplayNextLine();
         }
     }
