@@ -1,7 +1,6 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
-using System;
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -42,14 +41,15 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
-            currentDialogueID = dialogueID;
+            currentDialogueID = "progress" + dialogueID + "_dialogue";
             DisplayNextLine();
         }
     }
 
     /// <summary>
     /// Searches for a DialogueLine with ID matching currentDialogueID, begins
-    /// Coroutine to display dialogue.
+    /// Coroutine to display dialogue. If nextDialogueID is empty, ends dialogue;
+    /// else, sets currentDialogueID to nextDialogueID 
     /// </summary>
     public void DisplayNextLine()
     {
@@ -62,15 +62,13 @@ public class DialogueManager : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    return;
                 }
             }
         }
     }
 
     /// <summary>
-    /// Does the animation for typing text; if nextDialogueID is empty, ends dialogue;
-    /// else, sets currentDialogueID to nextDialogueID and continues after a short time,
+    /// Does the animation for typing text and continues after a short time,
     /// </summary>
     IEnumerator TypeSentence(DialogueLine line)
     {
@@ -80,9 +78,7 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        
         yield return new WaitForSeconds(2f);
-        
         if (line.nextDialogueID == "")
         {
             EndDialogue();

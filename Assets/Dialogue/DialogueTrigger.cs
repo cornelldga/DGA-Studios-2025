@@ -3,16 +3,17 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] TextAsset jsonTextFile;
-
+    private int progressionInt;
     private GameObject trigger;
+
 
     /// <summary>
     /// Triggers start dialogue in dialogue manager with the correct dialogue ID given by the button.
     /// </summary>
     /// <param name="currentDialogueID">The dialogueID to show.</param>
-    public void TriggerDialogue(string currentDialogueID)
+    public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(jsonTextFile, currentDialogueID);
+        DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString());
     }
 
     /// <summary>
