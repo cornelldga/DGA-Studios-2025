@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
-    private bool dialogueOngoing;
+    public bool dialogueOngoing;
     public Animator animator;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
