@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     //Basic sensitivity.
     private const int base_sensitivity = 1;
 
+    private bool is_alive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +27,7 @@ public class PlayerManager : MonoBehaviour
         speed = base_speed;
         health = base_health;
         damage_sens = base_sensitivity;
+        is_alive = true;
     }
 
     // Update is called once per frame
@@ -33,9 +35,12 @@ public class PlayerManager : MonoBehaviour
     {
 
     }
-    void OnTriggerEnter2d(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("EnemyBullet"))
+        {
+            health -= 5;
+        }
     }
 
     public float GetSpeed()
@@ -50,9 +55,22 @@ public class PlayerManager : MonoBehaviour
     {
         return damage_sens;
     }
-
-    private void OnHit()
+    private void ResetSpeed()
     {
-        
+        speed = base_speed;
+    }
+     private void ResetDamage()
+    {
+        speed = base_sensitivity;
+    }
+    public void setSpeedMod(float mod)
+    {
+        ResetSpeed();
+        speed *= mod;
+    }
+    public void setDamageMod(float mod)
+    {
+        ResetDamage();
+        damage_sens *= mod;
     }
 }

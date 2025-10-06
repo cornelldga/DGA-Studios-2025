@@ -22,7 +22,6 @@ public class Mixers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnEnable()
@@ -42,13 +41,13 @@ public class Mixers : MonoBehaviour
         {
             limeMixed = true;
             playerProjectile.setCooldownMod(limeJuiceValue);
-            playerController.setSpeedMod(limeJuiceValue);
+            playerController.applyStatus(limeJuiceValue,1);
         }
         else
         {
             limeMixed = false;
             playerProjectile.setCooldownMod(1);
-            playerController.setSpeedMod(1);
+            playerController.applyStatus(1,1);
         }
     }
 }

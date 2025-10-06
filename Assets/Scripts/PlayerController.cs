@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerManager pm;
     private PlayerInputActions playerControls;
     private Vector2 moveDirection;
-
-    private float curSpeed;
-
     private InputAction move;
 
 
@@ -42,11 +39,9 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
     }
-
-
-
-    public void setSpeedMod(float mod)
+    public void applyStatus(float speed_mult, float damage_mult)
     {
-        // pm.GetSpeed() *= pm.GetSpeed() * mod;
+        pm.setSpeedMod(speed_mult);
+        pm.setDamageMod(damage_mult);
     }
 }
