@@ -10,7 +10,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "c2631cb9-f697-4d89-8967-c8a3449c29fd",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -31,12 +31,12 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "Change",
                     "type": "Button",
-                    "id": "6a9c9297-7c28-44fd-b4a8-233758638336",
+                    "id": "d78730b7-a83f-4b6e-867d-b1db9acbe615",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -284,23 +284,12 @@
                 },
                 {
                     "name": "",
-                    "id": "72ad17cb-cf7d-4e7e-ba19-60579d5eb873",
-                    "path": "<Keyboard>/e",
+                    "id": "96d80082-e03f-44f2-b081-84f838f5e8dc",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2c03507a-d2e9-4680-8c16-2467d984de07",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Interact",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Change",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
