@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     private string currentDialogueID;
     public bool dialogueOngoing;
     public Animator animator;
+    [SerializeField] public GameObject popup;
+    [SerializeField] private GameObject background;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float typingSpeed = 0.05f;
@@ -36,7 +38,9 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
     public void StartDialogue(TextAsset file, string dialogueID)
     {
+        // GameManager.Instance.pausePlayer();
         animator.SetBool("isOpen", true);
+        background.SetActive(true);
         if (file != null)
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
@@ -95,6 +99,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
+        // GameManager.Instance.unPausePlayer();
+        background.SetActive(false);
         dialogueOngoing = false;
         animator.SetBool("isOpen", false);
     }

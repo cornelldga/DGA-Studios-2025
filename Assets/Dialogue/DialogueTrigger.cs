@@ -58,7 +58,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !DialogueManager.Instance.dialogueOngoing)
         {
-            trigger = DialogueManager.Instance.transform.GetChild(0).gameObject;
+            trigger = DialogueManager.Instance.popup;
             trigger.SetActive(true);
             inRange = true;
         }
