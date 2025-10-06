@@ -5,9 +5,13 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BulletManager : MonoBehaviour {
-
+    [Tooltip("Bullet/Bullet Pattern Being Fired")]
     [SerializeField] private GameObject bullet;
+
+    [Tooltip("Time in Seconds between bullets being fired")]
     [SerializeField] private float bulletCooldown;
+
+    [Tooltip("Timer to count seconds between bullets")]
     private float timer;
 
     public static BulletManager Instance;
@@ -26,7 +30,7 @@ public class BulletManager : MonoBehaviour {
 
     void Update()
     {
-        transform.position = new Vector2(Random.Range(-5,9), 0);
+        //transform.position = new Vector2(Random.Range(-5,9), 0);
         timer += Time.deltaTime;
         if (timer > bulletCooldown)
         {
