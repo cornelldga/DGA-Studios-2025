@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -7,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     //Current speed
     private float speed;
     //Base speed
-    private const int base_speed = 1;
+    private const float base_speed = 7.5f;
 
     //How much health do we have at this point in time.
     private int health;
@@ -30,9 +31,27 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+    void OnTriggerEnter2d(Collision2D collision)
+    {
         
     }
-    void OnCollisionEnter2D(Collision2D collision)
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+    public float GetHealth()
+    {
+        return health;
+    }
+    public float GetDamageSens()
+    {
+        return damage_sens;
+    }
+
+    private void OnHit()
     {
         
     }
