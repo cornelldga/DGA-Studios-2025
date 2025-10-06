@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 prevMoveDirection;
 
-    private float curSpeed;
-
     private InputAction move;
 
 
@@ -35,7 +33,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        curSpeed = moveSpeed;
+
     }
 
     // Update is called once per frame
@@ -46,12 +44,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
        
-        rb.linearVelocity = new Vector2(moveDirection.x * curSpeed, moveDirection.y * curSpeed);
+        rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        Debug.Log(rb.linearVelocity.magnitude);
 
-    }
-
-    public void setSpeedMod(float mod)
-    {
-        curSpeed = moveSpeed * mod;
     }
 }
