@@ -123,6 +123,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Whip"",
                     ""type"": ""Button"",
                     ""id"": ""4ffdfab6-a324-491f-a22e-f9fbe5d08701"",
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a9c9297-7c28-44fd-b4a8-233758638336"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Change"",
+                    ""type"": ""Button"",
+                    ""id"": ""f894f370-0259-42b9-970a-e6d54d89c64d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mixer"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ec7385a-0215-41d4-98d1-988ba91b0489"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -358,6 +379,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Whip"",
+                    ""id"": ""72ad17cb-cf7d-4e7e-ba19-60579d5eb873"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -369,6 +396,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Whip"",
+                    ""id"": ""2c03507a-d2e9-4680-8c16-2467d984de07"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8794c7ee-2f3b-4596-8535-43a332dc64f0"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81b7f245-0977-464e-9d83-004b1faf09e5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mixer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -960,6 +1015,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Whip = m_Player.FindAction("Whip", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Change = m_Player.FindAction("Change", throwIfNotFound: true);
+        m_Player_Mixer = m_Player.FindAction("Mixer", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1057,6 +1115,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Whip;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Change;
+    private readonly InputAction m_Player_Mixer;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1084,6 +1145,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Whip".
         /// </summary>
         public InputAction @Whip => m_Wrapper.m_Player_Whip;
+        /// Provides access to the underlying input action "Player/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Change".
+        /// </summary>
+        public InputAction @Change => m_Wrapper.m_Player_Change;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Mixer".
+        /// </summary>
+        public InputAction @Mixer => m_Wrapper.m_Player_Mixer;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1122,6 +1194,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Whip.started += instance.OnWhip;
             @Whip.performed += instance.OnWhip;
             @Whip.canceled += instance.OnWhip;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @Change.started += instance.OnChange;
+            @Change.performed += instance.OnChange;
+            @Change.canceled += instance.OnChange;
+            @Mixer.started += instance.OnMixer;
+            @Mixer.performed += instance.OnMixer;
+            @Mixer.canceled += instance.OnMixer;
         }
 
         /// <summary>
@@ -1145,6 +1226,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Whip.started -= instance.OnWhip;
             @Whip.performed -= instance.OnWhip;
             @Whip.canceled -= instance.OnWhip;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @Change.started -= instance.OnChange;
+            @Change.performed -= instance.OnChange;
+            @Change.canceled -= instance.OnChange;
+            @Mixer.started -= instance.OnMixer;
+            @Mixer.performed -= instance.OnMixer;
+            @Mixer.canceled -= instance.OnMixer;
         }
 
         /// <summary>
@@ -1468,11 +1558,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Whip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWhip(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Change" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnChange(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Mixer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMixer(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
