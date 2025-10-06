@@ -1,11 +1,44 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] TextAsset jsonTextFile;
     private int progressionInt;
     private GameObject trigger;
+    private InputAction interact;
+    private PlayerInputActions playerControls;
 
+    /// <summary>
+    /// Enables the player input map to turn on.
+    /// </summary>
+    private void OnEnable()
+    {
+        playerControls = new PlayerInputActions();
+        interact = playerControls.Player.Interact;
+        interact.Enable();
+    }
+    /// <summary>
+    /// Disables the player input map to turn on.
+    /// </summary>
+    private void OnDisable()
+    {
+        interact.Disable();
+    }
+
+    /// <summary>
+    /// Checks if player pressed interact key
+    /// </summary>
+    private void Update()
+    {
+        if (interact.WasPressedThisFrame())
+        {
+            if (!DialogueManager.Instance.dialogueOngoing)
+            {
+                TriggerDialogue();
+            }
+        }
+    }
 
     /// <summary>
     /// Triggers start dialogue in dialogue manager with the correct dialogue ID given by the button.
