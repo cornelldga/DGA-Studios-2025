@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,8 @@ public class PlayerProjectile : MonoBehaviour
 {
     private bool isBeer = false;
     private bool isGin = false;
+    private bool isWhiskey = false;
+    private bool isWine = false;
 
     private InputAction fire;
     private InputAction change;
@@ -21,6 +24,8 @@ public class PlayerProjectile : MonoBehaviour
 
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
+    [SerializeField] Whiskey whiskeyPrefab;
+    [SerializeField] Gin winePrefab;
 
     [SerializeField] float changeCooldown;
 
@@ -66,6 +71,14 @@ public class PlayerProjectile : MonoBehaviour
             {
                 ShootGin();
             }
+            if (isWhiskey)
+            {
+                ShootWhiskey();
+            }
+            if (isWine)
+            {
+
+            }
         }
     }
 
@@ -79,6 +92,15 @@ public class PlayerProjectile : MonoBehaviour
         else if (isGin)
         {
             isGin = false;
+            isWhiskey = true;
+        }
+        else if (isWhiskey)
+        {
+            isWhiskey = false;
+            isWine = true;
+        }
+        else if (isWine){
+            isWine = false;
             isBeer = true;
         }
         fireCooldown = changeCooldown;
@@ -99,6 +121,12 @@ public class PlayerProjectile : MonoBehaviour
     {
           Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
           fireCooldown = ginProj.getCooldown() * cooldownMod;
+    }
+
+    void ShootWhiskey()
+    {
+        Whiskey whiskeyProj = Instantiate(whiskeyPrefab, gameObject.transform.position, fireDirection);
+        fireCooldown = whiskeyProj.getCooldown() * cooldownMod;
     }
 
 }

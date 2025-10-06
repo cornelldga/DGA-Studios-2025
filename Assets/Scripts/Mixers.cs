@@ -9,6 +9,8 @@ public class Mixers : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] PlayerProjectile playerProjectile;
 
+    [SerializeField] float limeJuiceValue;
+
     private bool limeMixed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,8 +41,8 @@ public class Mixers : MonoBehaviour
         if (!limeMixed)
         {
             limeMixed = true;
-            playerProjectile.setCooldownMod(0.75f);
-            playerController.setSpeedMod(0.75f);
+            playerProjectile.setCooldownMod(limeJuiceValue);
+            playerController.setSpeedMod(limeJuiceValue);
         }
         else
         {
