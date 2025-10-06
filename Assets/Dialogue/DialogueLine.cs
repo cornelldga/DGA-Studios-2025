@@ -7,6 +7,7 @@ public class DialogueLine
 {
     public string dialogueID;
     public string dialogueText;
+    public string emotion;
     public string nextDialogueID;
 }
 
