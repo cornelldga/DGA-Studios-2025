@@ -5,6 +5,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] TextAsset jsonTextFile;
     private int progressionInt;
+    private bool inRange = false;
     private GameObject trigger;
     private InputAction interact;
     private PlayerInputActions playerControls;
@@ -33,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (interact.WasPressedThisFrame())
         {
-            if (!DialogueManager.Instance.dialogueOngoing)
+            if (!DialogueManager.Instance.dialogueOngoing && inRange)
             {
                 TriggerDialogue();
             }
@@ -59,10 +60,12 @@ public class DialogueTrigger : MonoBehaviour
         {
             trigger = DialogueManager.Instance.transform.GetChild(0).gameObject;
             trigger.SetActive(true);
+            inRange = true;
         }
         else if (collision.CompareTag("Player") && DialogueManager.Instance.dialogueOngoing)
         {
             trigger.SetActive(false);
+            inRange = false;
         }
     }
 
