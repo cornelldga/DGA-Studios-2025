@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         playerControls = new PlayerInputActions();
         move = playerControls.Player.Move;
-        move.Enable(); 
+        move.Enable();
     }
     private void OnDisable()
     {
@@ -44,7 +44,12 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       
+
         rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+    }
+
+    private void OnHit()
+    {
+        
     }
 }
