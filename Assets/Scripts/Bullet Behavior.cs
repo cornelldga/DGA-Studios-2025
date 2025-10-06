@@ -28,7 +28,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
        rb.linearVelocity = new Vector2(bulletSpeed * horizontal * Time.deltaTime, bulletSpeed * vertical * Time.deltaTime);
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
