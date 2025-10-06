@@ -12,7 +12,7 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject healthBackDrop;
     
-    // Types of movement the boss can do
+    // Types of movement the boss can do (Temporary)
     private enum MovementType
     {
         Standing,MoveRight,MoveLeft,MoveUp,MoveDown,Circle,Line
@@ -41,7 +41,7 @@ public class BossManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Update is called once per frame, Responsible for updating position, and the healthbar
+    /// Update is called once per frame, the debug health bar and timer variable
     /// </summary>
     void Update()
     {
@@ -53,19 +53,33 @@ public class BossManager : MonoBehaviour
             Time.timeScale = 0;
         }
         
+        
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    /// <summary>
+    /// Responsible for Boss Movement. Currently moves back and forth, but should be different for every boss.
+    /// </summary>
+    private void Move()
+    {
         //Imagined future implementation: Select a location (Add Parameter?) and boss will pathfind, teleport, or jump to that location
         if (movementType != MovementType.Standing)
         {
             if (movementType == MovementType.Line)
             {
-                if (timer > .01f )
-               { transform.position = transform.position + new Vector3(.05f*right, 0, 0);
+                if (timer > .01f)
+                {
+                    transform.position = transform.position + new Vector3(.05f * right, 0, 0);
                     timer = 0;
                     moves++;
                 }
-                if (moves == 300/5)
+                if (moves == 300 / 5)
                 {
-                    right = right *-1;
+                    right = right * -1;
                     moves = 0;
                 }
             }
