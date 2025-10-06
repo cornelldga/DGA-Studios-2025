@@ -44,6 +44,7 @@ public class Mixers : MonoBehaviour
         {
             Debug.Log("Lime");
             limeMixed = true;
+            noMixer();
             mixLime();
         }
         else if (limeMixed)
@@ -51,6 +52,7 @@ public class Mixers : MonoBehaviour
             Debug.Log("Pimiento");
             limeMixed = false;
             pimientoMixed = true;
+            noMixer();
             mixPimiento();
         }
         else if (pimientoMixed)
