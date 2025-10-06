@@ -43,9 +43,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Mixer",
+                    "name": "Change",
                     "type": "Button",
-                    "id": "b75a9a14-b4ff-437d-9b52-4292df168124",
+                    "id": "f894f370-0259-42b9-970a-e6d54d89c64d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -297,12 +297,12 @@
                 },
                 {
                     "name": "",
-                    "id": "fb41ca88-af94-4f48-8a00-32f3cd8bb078",
-                    "path": "<Keyboard>/m",
+                    "id": "8794c7ee-2f3b-4596-8535-43a332dc64f0",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mixer",
+                    "action": "Change",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
