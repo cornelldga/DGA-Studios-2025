@@ -7,7 +7,7 @@ public class BossManager : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private int startingHealth;
     
-    [Header("Health Bar Assets")]
+    [Header("Temporary Health Bar Assets")]
     // Healthbar for testing purposes
     [SerializeField] private GameObject healthBar;
     [SerializeField] private GameObject healthBackDrop;
@@ -52,8 +52,6 @@ public class BossManager : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-        
-        
     }
 
     private void FixedUpdate()
