@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class Gin : MonoBehaviour
+public class Gin : Projectile
 {
-    private float baseSpeed = 20f;
-    private float baseLifetime = 5f;
-
     private Rigidbody2D rb;
 
     private void Start()
     {
+        Destroy(gameObject, baseLifetime);
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * baseSpeed, ForceMode2D.Impulse);
     }
