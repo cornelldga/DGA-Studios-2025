@@ -1,6 +1,7 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -14,8 +15,11 @@ public class DialogueManager : MonoBehaviour
     private string currentDialogueID;
     public bool dialogueOngoing;
     public Animator animator;
+    private bool fadeIn;
+    private bool fadeOut;
+    private bool isFading;
     [SerializeField] public GameObject popup;
-    [SerializeField] private GameObject background;
+    [SerializeField] public Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float typingSpeed = 0.05f;
@@ -32,6 +36,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (isFading)
+        {
+            Fade();
+        }
+    }
     /// <summary>
     /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
     /// </summary>
@@ -39,13 +50,19 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(TextAsset file, string dialogueID)
     {
         // GameManager.Instance.pausePlayer();
+        isFading = true;
+        fadeIn = true;
         animator.SetBool("isOpen", true);
-        background.SetActive(true);
         if (file != null)
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
             currentDialogueID = "progress" + dialogueID + "_dialogueA";
+            if (file.name.Length > 7)
+            {
+                nameText.fontSize = 18;
+            }
+            nameText.text = file.name;
             DisplayNextLine();
         }
     }
@@ -100,7 +117,8 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         // GameManager.Instance.unPausePlayer();
-        background.SetActive(false);
+        fadeOut = true;
+        Fade();
         dialogueOngoing = false;
         animator.SetBool("isOpen", false);
     }
@@ -115,6 +133,38 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
+        }
+    }
+
+    private void Fade()
+    {
+        if (fadeIn)
+        {
+            Color color = backgroundImg.color;
+            if (color.a < .36f)
+            {
+                color.a += Time.deltaTime;
+                if (color.a >= .36f)
+                {
+                    color.a = .36f; 
+                    fadeIn = false;
+                }
+                backgroundImg.color = color; 
+            }
+        }
+        if (fadeOut)
+        {
+            Color color = backgroundImg.color;
+            if (color.a > 0)
+            {
+                color.a -= Time.deltaTime;
+                if (color.a <= 0)
+                {
+                    color.a = 0; 
+                    fadeOut = false;
+                }
+                backgroundImg.color = color; 
+            }
         }
     }
 
