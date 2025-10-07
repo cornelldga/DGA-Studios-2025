@@ -48,6 +48,8 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString());
+        trigger.SetActive(false);
+        inRange = false;
     }
 
     /// <summary>
@@ -61,11 +63,6 @@ public class DialogueTrigger : MonoBehaviour
             trigger = DialogueManager.Instance.popup;
             trigger.SetActive(true);
             inRange = true;
-        }
-        else if (collision.CompareTag("Player") && DialogueManager.Instance.dialogueOngoing)
-        {
-            trigger.SetActive(false);
-            inRange = false;
         }
     }
 
