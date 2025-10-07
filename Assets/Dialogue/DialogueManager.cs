@@ -2,6 +2,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem; 
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -11,9 +12,12 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    private InputAction submit;
+    private PlayerInputActions playerControls;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     public bool dialogueOngoing;
+    private bool isTyping; 
     public Animator animator;
     private bool fadeIn;
     private bool fadeOut;
@@ -38,15 +42,53 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void Update()
+    /// <summary>
+    /// Enables the UI input map to turn on.
+    /// </summary>
+    private void OnEnable()
     {
+        playerControls = new PlayerInputActions();
+        submit = playerControls.UI.Submit;
+        submit.Enable();
+    }
+
+    /// <summary>
+    /// Disables the UI input map to turn on.
+    /// </summary>
+    private void OnDisable()
+    {
+        submit.Disable();
+    }
+
+    /// <summary>
+    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
+    /// </summary>
+    private void Update()
+    {
+        if (submit.WasPressedThisFrame())
+        {
+            if (dialogueOngoing)
+            {
+                if (isTyping)
+                {
+                    CompleteCurrentLine();
+                }
+                else
+                {
+                    DisplayNextLine();
+                }
+            }
+        }
+
         if (isFading)
         {
             Fade();
         }
     }
+    
     /// <summary>
     /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
+    /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
     public void StartDialogue(TextAsset file, string dialogueID)
@@ -64,7 +106,7 @@ public class DialogueManager : MonoBehaviour
             {
                 nameText.fontSize = 18;
             }
-            
+
             if (characters != null && characters.Length > 0)
             {
                 npcImg.sprite = characters[0];
@@ -91,6 +133,12 @@ public class DialogueManager : MonoBehaviour
     public void DisplayNextLine()
     {
         dialogueOngoing = true;
+        if (currentDialogueID == "")
+        {
+            EndDialogue();
+            return;
+        }
+        
         if (currentDialogueData.dialogueLines.Length > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
@@ -99,31 +147,44 @@ public class DialogueManager : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
+                    break; 
                 }
             }
         }
     }
 
     /// <summary>
-    /// Does the animation for typing text and continues after a short time,
+    /// Does the animation for typing text.
     /// </summary>
     IEnumerator TypeSentence(DialogueLine line)
     {
+        isTyping = true; 
         dialogueText.text = "";
         foreach (char letter in line.dialogueText.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        yield return new WaitForSeconds(2f);
-        if (line.nextDialogueID == "")
+        isTyping = false; 
+        currentDialogueID = line.nextDialogueID; 
+    }
+
+    /// <summary>
+    /// Completes the typing animation instantly
+    /// </summary>
+    private void CompleteCurrentLine()
+    {
+        StopAllCoroutines();
+        isTyping = false;
+        
+        foreach (DialogueLine line in currentDialogueData.dialogueLines)
         {
-            EndDialogue();
-        }
-        else
-        {
-            currentDialogueID = line.nextDialogueID;
-            DisplayNextLine();
+            if (line.dialogueID == currentDialogueID)
+            {
+                dialogueText.text = line.dialogueText;
+                currentDialogueID = line.nextDialogueID;
+                break;
+            }
         }
     }
 
@@ -152,6 +213,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fades in the gray background to prioritize the dialogue
+    /// </summary>
     private void Fade()
     {
         if (fadeIn)
@@ -162,10 +226,10 @@ public class DialogueManager : MonoBehaviour
                 color.a += Time.deltaTime;
                 if (color.a >= .36f)
                 {
-                    color.a = .36f; 
+                    color.a = .36f;
                     fadeIn = false;
                 }
-                backgroundImg.color = color; 
+                backgroundImg.color = color;
             }
         }
         if (fadeOut)
@@ -176,10 +240,10 @@ public class DialogueManager : MonoBehaviour
                 color.a -= Time.deltaTime;
                 if (color.a <= 0)
                 {
-                    color.a = 0; 
+                    color.a = 0;
                     fadeOut = false;
                 }
-                backgroundImg.color = color; 
+                backgroundImg.color = color;
             }
         }
     }
