@@ -246,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 138}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 0, y: 159.4}
+  m_SizeDelta: {x: 268.5579, y: 190.5593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4309618891307546710
 CanvasRenderer:
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16302161, g: 0.7264151, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -574,10 +574,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
   dialogueOngoing: 0
   animator: {fileID: 1917230275198679387}
+  characters: []
   popup: {fileID: 192141956475182573}
   backgroundImg: {fileID: 3096683302869022583}
   nameText: {fileID: 5033198116382116301}
   dialogueText: {fileID: 8206260911539718010}
+  npcImg: {fileID: 7930587990325121506}
   typingSpeed: 0.05
 --- !u!1 &7051788352098271787
 GameObject:
@@ -688,7 +690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 2.226, y: -8.114, z: 7.473}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -251, y: 64}
+  m_AnchoredPosition: {x: -251, y: 61}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7869342998950851847

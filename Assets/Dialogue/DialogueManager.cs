@@ -18,10 +18,12 @@ public class DialogueManager : MonoBehaviour
     private bool fadeIn;
     private bool fadeOut;
     private bool isFading;
+    [SerializeField] private Sprite[] characters;
     [SerializeField] public GameObject popup;
-    [SerializeField] public Image backgroundImg;
+    [SerializeField] private Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private Image npcImg;
     [SerializeField] private float typingSpeed = 0.05f;
 
     void Awake()
@@ -62,6 +64,20 @@ public class DialogueManager : MonoBehaviour
             {
                 nameText.fontSize = 18;
             }
+            
+            if (characters != null && characters.Length > 0)
+            {
+                npcImg.sprite = characters[0];
+                foreach (Sprite character in characters)
+                {
+                    if (character != null && character.name == file.name)
+                    {
+                        npcImg.sprite = character;
+                        break;
+                    }
+                }
+            }
+
             nameText.text = file.name;
             DisplayNextLine();
         }
