@@ -93,7 +93,6 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
     public void StartDialogue(TextAsset file, string dialogueID)
     {
-        // GameManager.Instance.pausePlayer();
         isFading = true;
         fadeIn = true;
         animator.SetBool("isOpen", true);
@@ -193,7 +192,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        // GameManager.Instance.unPausePlayer();
         fadeOut = true;
         Fade();
         dialogueOngoing = false;
