@@ -31,6 +31,18 @@ public class DialogueEditor : EditorWindow
         dialogueGameProgress = EditorGUILayout.IntSlider("In-Game Progress", dialogueGameProgress, 0, 5);
         dialogueSequenceProgress = EditorGUILayout.IntSlider("Current Dialogue Frame", dialogueSequenceProgress,
             0, 15);
+        if (GUILayout.Button("View Dialogue"))
+        {
+            ViewDialogue();
+        }
+        if (GUILayout.Button("Edit Dialogue"))
+        {
+            EditDialogue();
+        }
+        if (GUILayout.Button("Delete Dialogue"))
+        {
+            DeleteDialogue();
+        }
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
@@ -99,8 +111,7 @@ public class DialogueEditor : EditorWindow
                 }
             }
             lines.Add(newLine);
-            File.WriteAllText(filePath,JsonUtility.ToJson(new DialogueData { dialogueLines = lines })
-);
+            File.WriteAllText(filePath,JsonUtility.ToJson(new DialogueData { dialogueLines = lines }));
         }
         else
         {
@@ -108,7 +119,22 @@ public class DialogueEditor : EditorWindow
             lines.Add(WriteJSON());
             File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines}));
         }
-    } 
+    }
+
+    private void ViewDialogue()
+    {
+        
+    }
+
+    private void EditDialogue()
+    {
+
+    }
+
+    private void DeleteDialogue()
+    {
+        
+    }
 
     private DialogueLine WriteJSON()
     {
