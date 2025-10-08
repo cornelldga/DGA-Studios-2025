@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using Codice.Client.Common;
 
 public class DialogueEditor : EditorWindow
 {
@@ -11,11 +14,9 @@ public class DialogueEditor : EditorWindow
     int dialogueGameProgress = 0;
     // dialogueSequenceProgress refers to this specific sequence of dialogue and increases sequentially (starts with 0);
     int dialogueSequenceProgress = 0;
-    int nextDialogueGameProgress = 0;
     int nextDialogueSequenceProgress = 1;
     string dialogueText = "Hello!";
-    string emotion;
-    string jsonText;
+    string emotion = "";
 
     [MenuItem("Tools/Dialogue Editor")]
     public static void ShowWindow()
@@ -26,25 +27,21 @@ public class DialogueEditor : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Create New Dialogue Script", EditorStyles.boldLabel);
-
-
         fileName = EditorGUILayout.TextField("Character Name", fileName);
         dialogueGameProgress = EditorGUILayout.IntSlider("In-Game Progress", dialogueGameProgress, 0, 5);
-        // The in-game progress of the player will not change during a dialogue sequence, so we set it to the 
-        // dialogueGameProgress value
-        nextDialogueGameProgress = dialogueGameProgress;
         dialogueSequenceProgress = EditorGUILayout.IntSlider("Current Dialogue Frame", dialogueSequenceProgress,
             0, 15);
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
-        if (EditorGUI.DropdownButton(dropdownRect, new GUIContent("Select Option"), FocusType.Keyboard))
+        string dropdownLabel = string.IsNullOrEmpty(emotion) ? "Select Emotion" : $"{emotion}";
+        if (EditorGUI.DropdownButton(dropdownRect, new GUIContent(dropdownLabel), FocusType.Keyboard))
         {
             GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Neutral"), false, OnOptionSelected, "neutral");
-            menu.AddItem(new GUIContent("Happy"), false, OnOptionSelected, "happy");
-            menu.AddItem(new GUIContent("Sad"), false, OnOptionSelected, "sad");
-            menu.AddItem(new GUIContent("Angry"), false, OnOptionSelected, "angry");
+            menu.AddItem(new GUIContent("neutral"), false, OnOptionSelected, "neutral");
+            menu.AddItem(new GUIContent("happy"), false, OnOptionSelected, "happy");
+            menu.AddItem(new GUIContent("sad"), false, OnOptionSelected, "sad");
+            menu.AddItem(new GUIContent("angry"), false, OnOptionSelected, "angry");
             menu.ShowAsContext();
         }
 
@@ -78,29 +75,48 @@ public class DialogueEditor : EditorWindow
             Debug.LogError("Please enter dialogue text.");
             return;
         }
-        if (nextDialogueSequenceProgress != -1 && nextDialogueSequenceProgress < dialogueSequenceProgress)
-        {
-            Debug.LogError("The Next Dialogue Frame should not be less than the Current Dialogue" +
-                "Frame unless set to -1 (in which case, there is no dialogue to transition to).");
-            return;
-        }
         if (emotion == "")
         {
             Debug.LogError("Please select an emotion.");
             return;
         }
-        string filePath = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-        File.WriteAllText(filePath, WriteJSON());
-    }
+        if (dialogueSequenceProgress == nextDialogueSequenceProgress)
+        {
+            Debug.LogError("The Current Dialogue Frame cannot be the same as the Next Dialogue Frame");
+        }
+        string filePath = Path.Combine(Application.dataPath, "Dialogue/Dialogue Text",
+            fileName + ".json");
+        if (File.Exists(filePath))
+        {
+            List<DialogueLine> lines = JsonUtility.FromJson<DialogueData>
+                (File.ReadAllText(filePath)).dialogueLines;
+            lines.Add(WriteJSON());
+            File.WriteAllText(filePath,JsonUtility.ToJson(new DialogueData { dialogueLines = lines })
+);
+        }
+        else
+        {
+            List<DialogueLine> lines = new List<DialogueLine>();
+            lines.Add(WriteJSON());
+            File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines}));
+        }
+    } 
 
-    private string WriteJSON()
+    private DialogueLine WriteJSON()
     {
         DialogueLine currentLine = new DialogueLine();
         currentLine.dialogueID = "progress" + dialogueGameProgress.ToString() + "_dialogue"
             + dialogueSequenceProgress.ToString();
-        jsonText = jsonText + currentLine;
-
-        return jsonText;
+        currentLine.dialogueText = dialogueText;
+        currentLine.emotion = emotion;
+        string nextDialogueString = nextDialogueSequenceProgress.ToString();
+        if (nextDialogueSequenceProgress == -1)
+        {
+            nextDialogueString = "";
+        }
+        currentLine.nextDialogueID = "progress" + dialogueGameProgress.ToString() + "_dialogue"
+            + nextDialogueString;
+        return currentLine;
     }
 
 

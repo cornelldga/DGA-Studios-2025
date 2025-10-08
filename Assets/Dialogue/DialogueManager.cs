@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
     public void DisplayNextLine()
     {
         dialogueOngoing = true;
-        if (currentDialogueData.dialogueLines.Length > 0)
+        if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 /// <summary>
 /// This script creates class DialogueLine with fields to store information collected
 /// from a JSON file, and the class DialogueData to store a list of these DialogueLines.
@@ -13,5 +14,5 @@ public class DialogueLine
 
 public class DialogueData
 {
-    public DialogueLine[] dialogueLines;
+    public List<DialogueLine> dialogueLines = new List<DialogueLine>();
 }
