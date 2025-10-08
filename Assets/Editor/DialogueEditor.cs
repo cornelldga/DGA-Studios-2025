@@ -90,7 +90,15 @@ public class DialogueEditor : EditorWindow
         {
             List<DialogueLine> lines = JsonUtility.FromJson<DialogueData>
                 (File.ReadAllText(filePath)).dialogueLines;
-            lines.Add(WriteJSON());
+            DialogueLine newLine = WriteJSON();
+            for (int i = lines.Count - 1; i >= 0; i--)
+            {
+                if (lines[i].dialogueID == newLine.dialogueID)
+                {
+                    lines.RemoveAt(i);
+                }
+            }
+            lines.Add(newLine);
             File.WriteAllText(filePath,JsonUtility.ToJson(new DialogueData { dialogueLines = lines })
 );
         }
