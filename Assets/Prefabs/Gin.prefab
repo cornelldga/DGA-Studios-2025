@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6095515873937123509}
   m_Layer: 0
   m_Name: Gin
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   baseSpeed: 20
   baseLifetime: 2
   baseCooldown: 1.5
+  baseDamage: 0
 --- !u!50 &-5901824399817137907
 Rigidbody2D:
   serializedVersion: 5

@@ -2,16 +2,24 @@ using UnityEditor.Build.Content;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BulletManager : MonoBehaviour {
-
+    [Tooltip("Bullet/Bullet Pattern Being Fired")]
     [SerializeField] private GameObject bullet;
+
+    [Tooltip("Time in Seconds between bullets being fired")]
+    [SerializeField] private float bulletCooldown;
+
+    [Tooltip("Timer to count seconds between bullets")]
+    private float timer;
 
     public static BulletManager Instance;
 
     void Awake()
     {
         Instance = this;
+        timer = 0f;
     }
 
     /*To be added:
@@ -22,7 +30,13 @@ public class BulletManager : MonoBehaviour {
 
     void Update()
     {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        //transform.position = new Vector2(Random.Range(-5,9), 0);
+        timer += Time.deltaTime;
+        if (timer > bulletCooldown)
+        {
+            Instantiate(bullet, transform.position, Quaternion.identity);
+            timer = 0f;
+        }
     }
     
 }

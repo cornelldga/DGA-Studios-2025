@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2511277341272750638}
   m_Layer: 0
   m_Name: Whiskey
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +108,7 @@ MonoBehaviour:
   baseSpeed: 10
   baseLifetime: 0.5
   baseCooldown: 1
+  baseDamage: 0
 --- !u!50 &4458053370082309061
 Rigidbody2D:
   serializedVersion: 5
