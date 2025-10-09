@@ -41,13 +41,13 @@ public class Mixers : MonoBehaviour
         {
             limeMixed = true;
             playerProjectile.setCooldownMod(limeJuiceValue);
-            playerController.applyStatus(limeJuiceValue,1);
+            playerController.ApplyStatus(limeJuiceValue,1);
         }
         else
         {
             limeMixed = false;
             playerProjectile.setCooldownMod(1);
-            playerController.applyStatus(1,1);
+            playerController.ApplyStatus(1,1);
         }
     }
 }

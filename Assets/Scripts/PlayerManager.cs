@@ -3,31 +3,29 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    //How much faster the character should be moving right now as a multiplier.
-    private float speedmultiplier;
     //Current speed
     private float speed;
     //Base speed
-    private const float base_speed = 7.5f;
+    private const float baseSpeed = 7.5f;
 
     //How much health do we have at this point in time.
     private int health;
     //Base health
-    private const int base_health = 100;
+    private const int baseHealth = 100;
     //How much more damage should we recieve as a multiplier.
-    private float damage_sens;
+    private float damageSens;
     //Basic sensitivity.
-    private const int base_sensitivity = 1;
+    private const int baseSensitivity = 1;
 
-    private bool is_alive;
+    private bool isAlive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        speed = base_speed;
-        health = base_health;
-        damage_sens = base_sensitivity;
-        is_alive = true;
+        speed = baseSpeed;
+        health = baseHealth;
+        damageSens = baseSensitivity;
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -53,24 +51,30 @@ public class PlayerManager : MonoBehaviour
     }
     public float GetDamageSens()
     {
-        return damage_sens;
+        return damageSens;
     }
+    ///Reset the speed to the base.
+    ///
     private void ResetSpeed()
     {
-        speed = base_speed;
+        speed = baseSpeed;
     }
      private void ResetDamage()
     {
-        speed = base_sensitivity;
+        speed = baseSensitivity;
     }
-    public void setSpeedMod(float mod)
+    ///How much more speed should we have? i.e. 1.2 = 20% more speed.
+    ///
+    public void SetSpeedMod(float mod)
     {
         ResetSpeed();
         speed *= mod;
     }
-    public void setDamageMod(float mod)
+    ///How much more damage should we take? i.e. 1.2 = 20% more damage.
+    ///
+    public void SetDamageMod(float mod)
     {
         ResetDamage();
-        damage_sens *= mod;
+        damageSens *= mod;
     }
 }
