@@ -44,7 +44,7 @@ public class Mixers : MonoBehaviour
             Debug.Log("Lime");
             limeMixed = true;
             playerProjectile.setCooldownMod(limeJuiceValue);
-            playerController.setSpeedMod(limeJuiceValue);
+            playerController.ApplyStatus(limeJuiceValue,1);
         }
         else if (limeMixed)
         {
@@ -65,7 +65,7 @@ public class Mixers : MonoBehaviour
     private void noMixer()
     {
         playerProjectile.setCooldownMod(1);
-        playerController.setSpeedMod(1);
+        playerController.ApplyStatus(1,1);
         playerProjectile.setDamageMod(1);
     }
 

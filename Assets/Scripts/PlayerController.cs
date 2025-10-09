@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
     }
-    public void applyStatus(float speed_mult, float damage_mult)
+    public void ApplyStatus(float speed_mult, float damage_mult)
     {
-        pm.setSpeedMod(speed_mult);
-        pm.setDamageMod(damage_mult);
+        pm.SetSpeedMod(speed_mult);
+        pm.SetDamageMod(damage_mult);
     }
 }
