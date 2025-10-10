@@ -24,6 +24,9 @@ public class DialogueEditor : EditorWindow
         GetWindow(typeof(DialogueEditor));
     }
 
+    /// <summary>
+    /// Displays the GUI elements for the different dialogue components.
+    /// </summary>
     private void OnGUI()
     {
         GUILayout.Label("Create New Dialogue Script", EditorStyles.boldLabel);
@@ -31,18 +34,18 @@ public class DialogueEditor : EditorWindow
         dialogueGameProgress = EditorGUILayout.IntSlider("In-Game Progress", dialogueGameProgress, 0, 5);
         dialogueSequenceProgress = EditorGUILayout.IntSlider("Current Dialogue Frame", dialogueSequenceProgress,
             0, 15);
-       //if (GUILayout.Button("View Dialogue"))
+        //if (GUILayout.Button("View Dialogue"))
         //{
         //    ViewDialogue();
         //}
         //if (GUILayout.Button("Edit Dialogue"))
         //{
-       //     EditDialogue();
-       // }
-       // if (GUILayout.Button("Delete Dialogue"))
-       // {
-       //     DeleteDialogue();
-       // }
+        //     EditDialogue();
+        // }
+        // if (GUILayout.Button("Delete Dialogue"))
+        // {
+        //     DeleteDialogue();
+        // }
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
@@ -74,6 +77,11 @@ public class DialogueEditor : EditorWindow
             CreateDialogue();
         }
     }
+
+    /// <summary>
+    /// Writes to a JSON; if the text file exists and the dialogueID is in the file, then
+    /// it is replaced. Else, a brand new dialogue is created (or a new text file).
+    /// </summary>
 
     private void CreateDialogue()
     {
@@ -111,13 +119,13 @@ public class DialogueEditor : EditorWindow
                 }
             }
             lines.Add(newLine);
-            File.WriteAllText(filePath,JsonUtility.ToJson(new DialogueData { dialogueLines = lines }));
+            File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines }));
         }
         else
         {
             List<DialogueLine> lines = new List<DialogueLine>();
             lines.Add(WriteJSON());
-            File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines}));
+            File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines }));
         }
     }
 
@@ -133,9 +141,13 @@ public class DialogueEditor : EditorWindow
 
     private void DeleteDialogue()
     {
-        
-    }
 
+    }
+    
+    /// <summary>
+    /// Creates the JSON string to be added to a text file.
+    /// </summary>
+    /// <returns>DialogueLine</returns>
     private DialogueLine WriteJSON()
     {
         DialogueLine currentLine = new DialogueLine();
