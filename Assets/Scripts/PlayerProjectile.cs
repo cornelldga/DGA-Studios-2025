@@ -1,11 +1,15 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerProjectile : MonoBehaviour
 {
     private bool isBeer = false;
     private bool isGin = false;
+    private bool isWhiskey = false;
+    private bool isWine = false;
 
     private InputAction fire;
     private InputAction change;
@@ -17,12 +21,17 @@ public class PlayerProjectile : MonoBehaviour
     private float cooldownMod = 1;
     private float speedMod = 1;
     private float lifetimeMod = 1;
+    private float damageMod = 1;
 
 
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
+    [SerializeField] Whiskey whiskeyPrefab;
+    [SerializeField] Wine winePrefab;
 
     [SerializeField] float changeCooldown;
+
+    [SerializeField] TextMeshProUGUI projText;
 
     private PlayerInputActions playerControls;
 
@@ -31,6 +40,7 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         isBeer = true;
+        projText.text = "Beer";
     }
 
     private void OnEnable()
@@ -66,6 +76,14 @@ public class PlayerProjectile : MonoBehaviour
             {
                 ShootGin();
             }
+            if (isWhiskey)
+            {
+                ShootWhiskey();
+            }
+            if (isWine)
+            {
+                ShootWine();
+            }
         }
     }
 
@@ -75,11 +93,24 @@ public class PlayerProjectile : MonoBehaviour
         {
             isBeer = false;
             isGin = true;
+            projText.text = "Gin";
         }
         else if (isGin)
         {
             isGin = false;
+            isWhiskey = true;
+            projText.text = "Whiskey";
+        }
+        else if (isWhiskey)
+        {
+            isWhiskey = false;
+            isWine = true;
+            projText.text = "Wine";
+        }
+        else if (isWine){
+            isWine = false;
             isBeer = true;
+            projText.text = "Beer";
         }
         fireCooldown = changeCooldown;
     }
@@ -87,6 +118,11 @@ public class PlayerProjectile : MonoBehaviour
     public void setCooldownMod(float mod)
     {
         cooldownMod = mod;
+    }
+
+    public void setDamageMod(float mod)
+    {
+        damageMod = mod;
     }
 
     void ShootBeer()
@@ -99,6 +135,18 @@ public class PlayerProjectile : MonoBehaviour
     {
           Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
           fireCooldown = ginProj.getCooldown() * cooldownMod;
+    }
+
+    void ShootWhiskey()
+    {
+        Whiskey whiskeyProj = Instantiate(whiskeyPrefab, gameObject.transform.position, fireDirection);
+        fireCooldown = whiskeyProj.getCooldown() * cooldownMod;
+    }
+
+    void ShootWine()
+    {
+        Wine wineProj = Instantiate(winePrefab, gameObject.transform.position, fireDirection);
+        fireCooldown = wineProj.getCooldown() * cooldownMod;
     }
 
 }

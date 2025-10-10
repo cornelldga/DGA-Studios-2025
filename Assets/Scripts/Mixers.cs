@@ -9,7 +9,11 @@ public class Mixers : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] PlayerProjectile playerProjectile;
 
+    [SerializeField] float limeJuiceValue;
+    [SerializeField] float pimientoValue;
+
     private bool limeMixed = false;
+    private bool pimientoMixed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,17 +40,44 @@ public class Mixers : MonoBehaviour
 
     void OnMixer()
     {
-        if (!limeMixed)
+        if (!limeMixed && !pimientoMixed)
         {
+            Debug.Log("Lime");
             limeMixed = true;
-            playerProjectile.setCooldownMod(0.75f);
-            playerController.setSpeedMod(0.75f);
+            noMixer();
+            mixLime();
         }
-        else
+        else if (limeMixed)
         {
+            Debug.Log("Pimiento");
             limeMixed = false;
-            playerProjectile.setCooldownMod(1);
-            playerController.setSpeedMod(1);
+            pimientoMixed = true;
+            noMixer();
+            mixPimiento();
         }
+        else if (pimientoMixed)
+        {
+            Debug.Log("None");
+            pimientoMixed = false;
+            noMixer();
+        }
+    }
+
+    private void noMixer()
+    {
+        playerProjectile.setCooldownMod(1);
+        playerController.setSpeedMod(1);
+        playerProjectile.setDamageMod(1);
+    }
+
+    private void mixLime()
+    {
+        playerProjectile.setCooldownMod(limeJuiceValue);
+        playerController.setSpeedMod(limeJuiceValue);
+    }
+
+    private void mixPimiento()
+    {
+        playerProjectile.setDamageMod(pimientoValue);
     }
 }
