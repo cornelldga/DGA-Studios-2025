@@ -31,18 +31,18 @@ public class DialogueEditor : EditorWindow
         dialogueGameProgress = EditorGUILayout.IntSlider("In-Game Progress", dialogueGameProgress, 0, 5);
         dialogueSequenceProgress = EditorGUILayout.IntSlider("Current Dialogue Frame", dialogueSequenceProgress,
             0, 15);
-        if (GUILayout.Button("View Dialogue"))
-        {
-            ViewDialogue();
-        }
-        if (GUILayout.Button("Edit Dialogue"))
-        {
-            EditDialogue();
-        }
-        if (GUILayout.Button("Delete Dialogue"))
-        {
-            DeleteDialogue();
-        }
+       //if (GUILayout.Button("View Dialogue"))
+        //{
+        //    ViewDialogue();
+        //}
+        //if (GUILayout.Button("Edit Dialogue"))
+        //{
+       //     EditDialogue();
+       // }
+       // if (GUILayout.Button("Delete Dialogue"))
+       // {
+       //     DeleteDialogue();
+       // }
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
