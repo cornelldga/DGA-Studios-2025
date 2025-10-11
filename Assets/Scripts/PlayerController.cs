@@ -41,6 +41,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //temporary pause/unpause
+        if (DialogueManager.Instance.dialogueOngoing)
+        {
+            move.Disable();
+        }
+        else
+        {
+            move.Enable();
+        }
         moveDirection = move.ReadValue<Vector2>();
     }
     private void FixedUpdate()

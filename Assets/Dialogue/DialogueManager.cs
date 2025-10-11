@@ -1,6 +1,8 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem; 
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -10,12 +12,23 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    private InputAction submit;
+    private PlayerInputActions playerControls;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     public bool dialogueOngoing;
-    public Animator animator;
+    private bool isTyping; 
+    public Animator dialogueBox;
+    private bool fadeIn;
+    private bool fadeOut;
+    private bool isFading;
+    private string currentCharacterName;
+    private Sprite[] currentCharacterSprites;
+    [SerializeField] public GameObject popup;
+    [SerializeField] private Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private Image npcImg;
     [SerializeField] private float typingSpeed = 0.05f;
 
     void Awake()
@@ -31,17 +44,75 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Enables the UI input map to turn on.
+    /// </summary>
+    private void OnEnable()
+    {
+        playerControls = new PlayerInputActions();
+        submit = playerControls.UI.Submit;
+        submit.Enable();
+    }
+
+    /// <summary>
+    /// Disables the UI input map to turn on.
+    /// </summary>
+    private void OnDisable()
+    {
+        submit.Disable();
+    }
+
+    /// <summary>
+    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
+    /// </summary>
+    private void Update()
+    {
+        if (submit.WasPressedThisFrame())
+        {
+            if (dialogueOngoing)
+            {
+                if (isTyping)
+                {
+                    CompleteCurrentLine();
+                }
+                else
+                {
+                    DisplayNextLine();
+                }
+            }
+        }
+
+        if (isFading)
+        {
+            Fade();
+        }
+    }
+    
+    /// <summary>
     /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
+    /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
-    public void StartDialogue(TextAsset file, string dialogueID)
+    /// <param name="file">The json file associated to the specific character.</param>
+    /// <param name="characterSprites">The list of sprites associated to the character (emotions, borders, etc).</param>
+    public void StartDialogue(TextAsset file, string dialogueID, Sprite[] characterSprites)
     {
-        animator.SetBool("isOpen", true);
+        isFading = true;
+        fadeIn = true;
+        dialogueBox.SetBool("isOpen", true);
         if (file != null)
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
             currentDialogueID = "progress" + dialogueID + "_dialogueA";
+            if (file.name.Length > 7)
+            {
+                nameText.fontSize = 18;
+            }
+
+            currentCharacterName = file.name;
+            currentCharacterSprites = characterSprites;
+            nameText.text = file.name;
+            
             DisplayNextLine();
         }
     }
@@ -54,39 +125,62 @@ public class DialogueManager : MonoBehaviour
     public void DisplayNextLine()
     {
         dialogueOngoing = true;
+        if (currentDialogueID == "")
+        {
+            EndDialogue();
+            return;
+        }
+        
         if (currentDialogueData.dialogueLines.Length > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
                 if (line.dialogueID == currentDialogueID)
                 {
+                    Sprite[] lineSprites = GetCharacterSprites(currentCharacterName, line.emotion);
+                    npcImg.sprite = lineSprites[0];
+                    dialogueBox.GetComponent<Image>().sprite = lineSprites[1];
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
+                    break; 
                 }
             }
         }
     }
 
     /// <summary>
-    /// Does the animation for typing text and continues after a short time,
+    /// Does the animation for typing text.
     /// </summary>
+    /// <param name="line">The line of text from the JSON which is being displayed.</param>
     IEnumerator TypeSentence(DialogueLine line)
     {
+        isTyping = true; 
         dialogueText.text = "";
         foreach (char letter in line.dialogueText.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        yield return new WaitForSeconds(2f);
-        if (line.nextDialogueID == "")
+        isTyping = false; 
+        currentDialogueID = line.nextDialogueID; 
+    }
+
+    /// <summary>
+    /// Completes the typing animation instantly
+    /// </summary>
+    private void CompleteCurrentLine()
+    {
+        StopAllCoroutines();
+        isTyping = false;
+        
+        foreach (DialogueLine line in currentDialogueData.dialogueLines)
         {
-            EndDialogue();
-        }
-        else
-        {
-            currentDialogueID = line.nextDialogueID;
-            DisplayNextLine();
+            if (line.dialogueID == currentDialogueID)
+            {
+                dialogueText.text = line.dialogueText;
+                currentDialogueID = line.nextDialogueID;
+                break;
+            }
         }
     }
 
@@ -95,8 +189,10 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
+        fadeOut = true;
+        Fade();
         dialogueOngoing = false;
-        animator.SetBool("isOpen", false);
+        dialogueBox.SetBool("isOpen", false);
     }
 
     /// <summary>
@@ -109,6 +205,72 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
+        }
+    }
+
+    /// <summary>
+    /// Helper function to get the character sprite with wanted emotion and border.
+    /// </summary>
+    /// <param name="characterName">The name of the character</param>
+    /// <param name="emotion">The emotion wanted from the dialogue line.</param>
+    private Sprite[] GetCharacterSprites(string characterName, string emotion)
+    {
+        Sprite[] final = new Sprite[2];
+        string targetName = characterName + "_" + emotion;
+        foreach (Sprite sprite in currentCharacterSprites)
+        {
+            if (sprite != null && sprite.name == targetName)
+            {
+                final[0] = sprite;
+                break;
+            }
+        }
+
+        targetName = characterName + "_border";
+        foreach (Sprite sprite in currentCharacterSprites)
+        {
+            if (sprite != null && sprite.name == targetName)
+            {
+                final[1] = sprite;
+                break;
+            }
+        }
+
+        return final; 
+    }
+
+    /// <summary>
+    /// Fades in the gray background to prioritize the dialogue
+    /// </summary>
+    private void Fade()
+    {
+        if (fadeIn)
+        {
+            Color color = backgroundImg.color;
+            if (color.a < .36f)
+            {
+                color.a += Time.deltaTime;
+                if (color.a >= .36f)
+                {
+                    color.a = .36f;
+                    fadeIn = false;
+                }
+                backgroundImg.color = color;
+            }
+        }
+        if (fadeOut)
+        {
+            Color color = backgroundImg.color;
+            if (color.a > 0)
+            {
+                color.a -= Time.deltaTime;
+                if (color.a <= 0)
+                {
+                    color.a = 0;
+                    fadeOut = false;
+                }
+                backgroundImg.color = color;
+            }
         }
     }
 
