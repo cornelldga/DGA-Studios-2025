@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class InteractionZone : MonoBehaviour
 {
+    [Tooltip("UI that indicates the player is in range to trigger the interaction")]
     [SerializeField] SpriteRenderer InteractionIndicator;
+    [SerializeField] IInteractable interactable;
 
     bool canInteract = false;
 
@@ -43,7 +45,7 @@ public class InteractionZone : MonoBehaviour
 
     void Interact()
     {
-        Debug.Log("Interacting!");
+        interactable.Interact();
     }
 
 
