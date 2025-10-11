@@ -22,7 +22,8 @@ public class DialogueManager : MonoBehaviour
     private bool fadeIn;
     private bool fadeOut;
     private bool isFading;
-    [SerializeField] private Sprite[] characters;
+    private string currentCharacterName;
+    [SerializeField] private CharacterEmotions[] characters;
     [SerializeField] public GameObject popup;
     [SerializeField] private Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -106,20 +107,9 @@ public class DialogueManager : MonoBehaviour
                 nameText.fontSize = 18;
             }
 
-            if (characters != null && characters.Length > 0)
-            {
-                npcImg.sprite = characters[0];
-                foreach (Sprite character in characters)
-                {
-                    if (character != null && character.name == file.name)
-                    {
-                        npcImg.sprite = character;
-                        break;
-                    }
-                }
-            }
-
+            currentCharacterName = file.name;
             nameText.text = file.name;
+            
             DisplayNextLine();
         }
     }
@@ -144,6 +134,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
+                    npcImg.sprite = GetEmotionSprite(currentCharacterName, line.emotion);
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
                     break; 
@@ -209,6 +200,27 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
         }
+    }
+
+    /// <summary>
+    /// Helper function to get the character sprite with wanted emotion
+    /// </summary>
+    private Sprite GetEmotionSprite(string characterName, string emotion)
+    {
+        foreach (CharacterEmotions character in characters)
+        {
+            if (character.characterName == characterName)
+            {
+                string targetName = characterName + "_" + emotion;
+                foreach (Sprite sprite in character.emotionSprites)
+                {
+                    if (sprite != null && sprite.name == targetName)
+                        return sprite;
+                }
+                break;
+            }
+        }
+        return npcImg.sprite; 
     }
 
     /// <summary>
