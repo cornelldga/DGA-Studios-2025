@@ -18,12 +18,12 @@ public class DialogueManager : MonoBehaviour
     private string currentDialogueID;
     public bool dialogueOngoing;
     private bool isTyping; 
-    public Animator animator;
+    public Animator dialogueBox;
     private bool fadeIn;
     private bool fadeOut;
     private bool isFading;
     private string currentCharacterName;
-    private Sprite[] currentEmotionSprites;
+    private Sprite[] currentCharacterSprites;
     [SerializeField] public GameObject popup;
     [SerializeField] private Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -92,11 +92,13 @@ public class DialogueManager : MonoBehaviour
     /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
-    public void StartDialogue(TextAsset file, string dialogueID, Sprite[] emotionSprites)
+    /// <param name="file">The json file associated to the specific character.</param>
+    /// <param name="characterSprites">The list of sprites associated to the character (emotions, borders, etc).</param>
+    public void StartDialogue(TextAsset file, string dialogueID, Sprite[] characterSprites)
     {
         isFading = true;
         fadeIn = true;
-        animator.SetBool("isOpen", true);
+        dialogueBox.SetBool("isOpen", true);
         if (file != null)
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
@@ -108,7 +110,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             currentCharacterName = file.name;
-            currentEmotionSprites = emotionSprites;
+            currentCharacterSprites = characterSprites;
             nameText.text = file.name;
             
             DisplayNextLine();
@@ -135,7 +137,9 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    npcImg.sprite = GetEmotionSprite(currentCharacterName, line.emotion);
+                    Sprite[] lineSprites = GetCharacterSprites(currentCharacterName, line.emotion);
+                    npcImg.sprite = lineSprites[0];
+                    dialogueBox.GetComponent<Image>().sprite = lineSprites[1];
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
                     break; 
@@ -147,6 +151,7 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// Does the animation for typing text.
     /// </summary>
+    /// <param name="line">The line of text from the JSON which is being displayed.</param>
     IEnumerator TypeSentence(DialogueLine line)
     {
         isTyping = true; 
@@ -187,7 +192,7 @@ public class DialogueManager : MonoBehaviour
         fadeOut = true;
         Fade();
         dialogueOngoing = false;
-        animator.SetBool("isOpen", false);
+        dialogueBox.SetBool("isOpen", false);
     }
 
     /// <summary>
@@ -204,17 +209,34 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Helper function to get the character sprite with wanted emotion
+    /// Helper function to get the character sprite with wanted emotion and border.
     /// </summary>
-    private Sprite GetEmotionSprite(string characterName, string emotion)
+    /// <param name="characterName">The name of the character</param>
+    /// <param name="emotion">The emotion wanted from the dialogue line.</param>
+    private Sprite[] GetCharacterSprites(string characterName, string emotion)
     {
+        Sprite[] final = new Sprite[2];
         string targetName = characterName + "_" + emotion;
-        foreach (Sprite sprite in currentEmotionSprites)
+        foreach (Sprite sprite in currentCharacterSprites)
         {
             if (sprite != null && sprite.name == targetName)
-                return sprite;
+            {
+                final[0] = sprite;
+                break;
+            }
         }
-        return npcImg.sprite; 
+
+        targetName = characterName + "_border";
+        foreach (Sprite sprite in currentCharacterSprites)
+        {
+            if (sprite != null && sprite.name == targetName)
+            {
+                final[1] = sprite;
+                break;
+            }
+        }
+
+        return final; 
     }
 
     /// <summary>

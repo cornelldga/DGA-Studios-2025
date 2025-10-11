@@ -45,7 +45,6 @@ public class DialogueTrigger : MonoBehaviour
     /// <summary>
     /// Triggers start dialogue in dialogue manager with the correct dialogue ID given by the button.
     /// </summary>
-    /// <param name="currentDialogueID">The dialogueID to show.</param>
     public void TriggerDialogue()
     {
         DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(), emotionSprites);
