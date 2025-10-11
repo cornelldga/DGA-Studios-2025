@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     private bool fadeOut;
     private bool isFading;
     private string currentCharacterName;
-    [SerializeField] private CharacterEmotions[] characters;
+    private Sprite[] currentEmotionSprites;
     [SerializeField] public GameObject popup;
     [SerializeField] private Image backgroundImg;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -92,7 +92,7 @@ public class DialogueManager : MonoBehaviour
     /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
-    public void StartDialogue(TextAsset file, string dialogueID)
+    public void StartDialogue(TextAsset file, string dialogueID, Sprite[] emotionSprites)
     {
         isFading = true;
         fadeIn = true;
@@ -108,6 +108,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             currentCharacterName = file.name;
+            currentEmotionSprites = emotionSprites;
             nameText.text = file.name;
             
             DisplayNextLine();
@@ -207,18 +208,11 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private Sprite GetEmotionSprite(string characterName, string emotion)
     {
-        foreach (CharacterEmotions character in characters)
+        string targetName = characterName + "_" + emotion;
+        foreach (Sprite sprite in currentEmotionSprites)
         {
-            if (character.characterName == characterName)
-            {
-                string targetName = characterName + "_" + emotion;
-                foreach (Sprite sprite in character.emotionSprites)
-                {
-                    if (sprite != null && sprite.name == targetName)
-                        return sprite;
-                }
-                break;
-            }
+            if (sprite != null && sprite.name == targetName)
+                return sprite;
         }
         return npcImg.sprite; 
     }

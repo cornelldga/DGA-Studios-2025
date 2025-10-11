@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] TextAsset jsonTextFile;
+    [SerializeField] public Sprite[] emotionSprites;
     private int progressionInt;
     private bool inRange = false;
     private GameObject trigger;
@@ -47,7 +48,7 @@ public class DialogueTrigger : MonoBehaviour
     /// <param name="currentDialogueID">The dialogueID to show.</param>
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString());
+        DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(), emotionSprites);
         trigger.SetActive(false);
         inRange = false;
     }
