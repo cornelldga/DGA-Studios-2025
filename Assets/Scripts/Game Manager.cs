@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles all universal game logic and game state of the scene
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public PlayerController player;
 
     private void Awake()
     {
@@ -17,6 +22,12 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
     /// <summary>
     /// Load the given scene name
     /// </summary>
@@ -24,6 +35,15 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    /// <summary>
+    /// Toggles the player controller to freeze/unfreeze the player
+    /// </summary>
+    /// <param name="freeze"></param>
+    public void FreezePlayer(bool freeze)
+    {
+        player.enabled = false;
     }
 
 }
