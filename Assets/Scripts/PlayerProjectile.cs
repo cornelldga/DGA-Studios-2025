@@ -50,16 +50,6 @@ public class PlayerProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //temporary pause/unpause
-        if (DialogueManager.Instance.dialogueOngoing)
-        {
-            fire.Disable();
-        }
-        else
-        {
-            fire.Enable();
-        }
-
         fireCooldown -= Time.deltaTime;
         if (fire.ReadValue<float>() > 0 && fireCooldown <= 0)
         {

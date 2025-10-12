@@ -12,8 +12,6 @@ using UnityEngine.InputSystem;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    private InputAction submit;
-    private PlayerInputActions playerControls;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     public bool dialogueOngoing;
@@ -24,12 +22,10 @@ public class DialogueManager : MonoBehaviour
     private bool isFading;
     private string currentCharacterName;
     private Sprite[] currentCharacterSprites;
-    [SerializeField] public GameObject popup;
-    [SerializeField] private Image backgroundImg;
-    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private Image backgroundImg;
     [SerializeField] private Image npcImg;
-    [SerializeField] private float typingSpeed = 0.05f;
+    [SerializeField] private float typingSpeed;
 
     void Awake()
     {
@@ -43,22 +39,19 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Enables the UI input map to turn on.
-    /// </summary>
-    private void OnEnable()
+    public void OnSubmit()
     {
-        playerControls = new PlayerInputActions();
-        submit = playerControls.UI.Submit;
-        submit.Enable();
-    }
-
-    /// <summary>
-    /// Disables the UI input map to turn on.
-    /// </summary>
-    private void OnDisable()
-    {
-        submit.Disable();
+        if (dialogueOngoing)
+        {
+            if (isTyping)
+            {
+                CompleteCurrentLine();
+            }
+            else
+            {
+                DisplayNextLine();
+            }
+        }
     }
 
     /// <summary>
@@ -66,21 +59,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (submit.WasPressedThisFrame())
-        {
-            if (dialogueOngoing)
-            {
-                if (isTyping)
-                {
-                    CompleteCurrentLine();
-                }
-                else
-                {
-                    DisplayNextLine();
-                }
-            }
-        }
-
         if (isFading)
         {
             Fade();
@@ -104,14 +82,8 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
             currentDialogueID = "progress" + dialogueID + "_dialogueA";
-            if (file.name.Length > 7)
-            {
-                nameText.fontSize = 18;
-            }
 
-            currentCharacterName = file.name;
             currentCharacterSprites = characterSprites;
-            nameText.text = file.name;
             
             DisplayNextLine();
         }

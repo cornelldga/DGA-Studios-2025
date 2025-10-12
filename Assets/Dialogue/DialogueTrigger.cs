@@ -1,45 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] TextAsset jsonTextFile;
     [SerializeField] public Sprite[] emotionSprites;
     private int progressionInt;
-    private bool inRange = false;
-    private GameObject trigger;
-    private InputAction interact;
-    private PlayerInputActions playerControls;
 
-    /// <summary>
-    /// Enables the player input map to turn on.
-    /// </summary>
-    private void OnEnable()
+    public void Interact()
     {
-        playerControls = new PlayerInputActions();
-        interact = playerControls.Player.Interact;
-        interact.Enable();
-    }
-    /// <summary>
-    /// Disables the player input map to turn on.
-    /// </summary>
-    private void OnDisable()
-    {
-        interact.Disable();
-    }
-
-    /// <summary>
-    /// Checks if player pressed interact key
-    /// </summary>
-    private void Update()
-    {
-        if (interact.WasPressedThisFrame())
-        {
-            if (!DialogueManager.Instance.dialogueOngoing && inRange)
-            {
-                TriggerDialogue();
-            }
-        }
+        TriggerDialogue();
     }
 
     /// <summary>
@@ -47,34 +17,7 @@ public class DialogueTrigger : MonoBehaviour
     /// </summary>
     public void TriggerDialogue()
     {
+        Debug.Log("Trigger Dialogue");
         DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(), emotionSprites);
-        trigger.SetActive(false);
-        inRange = false;
-    }
-
-    /// <summary>
-    /// Shows dialogue button when player in radius and hides when player in dialogue
-    /// </summary>
-    /// <param name="collision">The player</param>
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !DialogueManager.Instance.dialogueOngoing)
-        {
-            trigger = DialogueManager.Instance.popup;
-            trigger.SetActive(true);
-            inRange = true;
-        }
-    }
-
-    /// <summary>
-    /// Hides dialogue button when player leaves
-    /// </summary>
-    /// <param name="collision">The player</param>
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && trigger != null)
-        {
-            trigger.SetActive(false);
-        }
     }
 }
