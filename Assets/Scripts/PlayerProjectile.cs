@@ -120,7 +120,7 @@ public class PlayerProjectile : MonoBehaviour
         cooldownMod = mod;
     }
 
-    public void setDamageMod(float mod)
+    public void SetDamageMod(float mod)
     {
         damageMod = mod;
     }
@@ -128,24 +128,28 @@ public class PlayerProjectile : MonoBehaviour
     void ShootBeer()
     {
           Beer beerProj = Instantiate(beerPrefab, gameObject.transform.position, fireDirection);
+          beerProj.SetProjectile(speedMod, lifetimeMod);
           fireCooldown = beerProj.getCooldown() * cooldownMod;
     }
 
     void ShootGin()
     {
           Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
+          ginProj.SetProjectile(speedMod, lifetimeMod);
           fireCooldown = ginProj.getCooldown() * cooldownMod;
     }
 
     void ShootWhiskey()
     {
         Whiskey whiskeyProj = Instantiate(whiskeyPrefab, gameObject.transform.position, fireDirection);
+        whiskeyProj.SetProjectile(speedMod, lifetimeMod);
         fireCooldown = whiskeyProj.getCooldown() * cooldownMod;
     }
 
     void ShootWine()
     {
         Wine wineProj = Instantiate(winePrefab, gameObject.transform.position, fireDirection);
+        wineProj.SetProjectile(speedMod, lifetimeMod);
         fireCooldown = wineProj.getCooldown() * cooldownMod;
     }
 

@@ -1,19 +1,21 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Mixers : MonoBehaviour
 {
-    private PlayerInputActions playerControls;
+    [SerializeField] PlayerManager pm;
     private InputAction mixer;
 
-    [SerializeField] PlayerController playerController;
-    [SerializeField] PlayerProjectile playerProjectile;
+    private PlayerInputActions playerControls;
+
 
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
 
-    private bool limeMixed = false;
-    private bool pimientoMixed = false;
+    [SerializeField] bool limeMixed = false;
+    [SerializeField] bool pimientoMixed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,7 +26,7 @@ public class Mixers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
@@ -33,51 +35,55 @@ public class Mixers : MonoBehaviour
         mixer = playerControls.Player.Mixer;
         mixer.Enable();
     }
+
+
     private void OnDisable()
     {
         mixer.Disable();
     }
 
-    void OnMixer()
+    public void OnMixer(InputAction.CallbackContext context)
     {
+        Debug.Log("Called");
         if (!limeMixed && !pimientoMixed)
         {
             Debug.Log("Lime");
             limeMixed = true;
-            noMixer();
-            mixLime();
+            MixLime();
+            pm.SetCooldownMod(limeJuiceValue);
+            pm.SetSpeedMod(limeJuiceValue);
         }
         else if (limeMixed)
         {
             Debug.Log("Pimiento");
             limeMixed = false;
             pimientoMixed = true;
-            noMixer();
-            mixPimiento();
+            NoMixer();
+            MixPimiento();
         }
         else if (pimientoMixed)
         {
             Debug.Log("None");
             pimientoMixed = false;
-            noMixer();
+            NoMixer();
         }
     }
 
-    private void noMixer()
+    private void NoMixer()
     {
-        playerProjectile.setCooldownMod(1);
-        playerController.setSpeedMod(1);
-        playerProjectile.setDamageMod(1);
+        pm.ResetCooldown();
+        pm.ResetDamageSens();
+        pm.ResetSpeed();
     }
 
-    private void mixLime()
+    private void MixLime()
     {
-        playerProjectile.setCooldownMod(limeJuiceValue);
-        playerController.setSpeedMod(limeJuiceValue);
+        pm.SetCooldownMod(limeJuiceValue);
+        pm.SetSpeedMod(limeJuiceValue);
     }
 
-    private void mixPimiento()
+    private void MixPimiento()
     {
-        playerProjectile.setDamageMod(pimientoValue);
+        pm.SetDamageMod(pimientoValue);
     }
 }

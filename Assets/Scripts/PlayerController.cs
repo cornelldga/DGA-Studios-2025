@@ -9,24 +9,17 @@ public class PlayerController : MonoBehaviour
 
 {
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] float moveSpeed;
-    [SerializeField] PlayerInputActions playerControls;
-
-    // [SerializeField] InputAction playerControls;
-
+    [SerializeField] PlayerManager pm;
+    private PlayerInputActions playerControls;
     private Vector2 moveDirection;
-    private Vector2 prevMoveDirection;
-
-    private float curSpeed;
-
     private InputAction move;
 
 
-    private void OnEnable()
+    private void Awake()
     {
         playerControls = new PlayerInputActions();
-        move = playerControls.Player.Move;
-        move.Enable(); 
+        move = playerControls.Player.Move; //Setting the new input actions and enabling the 'move' portion.
+        move.Enable();
     }
     private void OnDisable()
     {
@@ -35,7 +28,6 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        curSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -45,13 +37,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       
-        rb.linearVelocity = new Vector2(moveDirection.x * curSpeed, moveDirection.y * curSpeed);
-
+        //Handles movement of character using speed multipliers from the manager.
+        rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
     }
 
-    public void setSpeedMod(float mod)
-    {
-        curSpeed = moveSpeed * mod;
-    }
 }
