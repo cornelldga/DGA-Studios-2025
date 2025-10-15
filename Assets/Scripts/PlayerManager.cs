@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] PlayerProjectile playerProjectile;
     [SerializeField] Mixers mixers;
+    [SerializeField] PlayerInventory playerInventory;
     //Current speed
     private float speed;
     //Base speed
@@ -20,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     //Basic sensitivity.
     private const int baseSensitivity = 1;
     private bool isAlive;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -111,3 +113,4 @@ public class PlayerManager : MonoBehaviour
         playerProjectile.setCooldownMod(mod);
     }
 }
+
