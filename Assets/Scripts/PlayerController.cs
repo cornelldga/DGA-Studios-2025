@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
 
 
-    private void OnEnable()
+    private void Awake()
     {
         playerControls = new PlayerInputActions();
-        move = playerControls.Player.Move;
+        move = playerControls.Player.Move; //Setting the new input actions and enabling the 'move' portion.
         move.Enable();
     }
     private void OnDisable()
@@ -37,11 +37,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Handles movement of character using speed multipliers from the manager.
         rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
     }
-    public void ApplyStatus(float speed_mult, float damage_mult)
-    {
-        pm.SetSpeedMod(speed_mult);
-        pm.SetDamageMod(damage_mult);
-    }
+
 }

@@ -1,13 +1,16 @@
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] PlayerController playerController;
+    [SerializeField] PlayerProjectile playerProjectile;
+    [SerializeField] Mixers mixers;
     //Current speed
     private float speed;
     //Base speed
     private const float baseSpeed = 7.5f;
-
     //How much health do we have at this point in time.
     private int health;
     //Base health
@@ -16,7 +19,6 @@ public class PlayerManager : MonoBehaviour
     private float damageSens;
     //Basic sensitivity.
     private const int baseSensitivity = 1;
-
     private bool isAlive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,50 +33,81 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("EnemyBullet"))
+        //Check if we have died.
+        if (GetHealth() <= 0)
         {
-            health -= 5;
+            isAlive = false;
         }
     }
-
-    public float GetSpeed()
-    {
-        return speed;
+    public void OnTriggerEnter2D(Collider2D other)
+    {  
+        //Check if we were hit by enemy bullet. Need reference to how much damage it does.
+        if (other.CompareTag("EnemyBullet"))
+        {
+            //TakeDamage(other.getDamage)
+            //Need enemy bullet actual damage.^
+        }
     }
+    //Returns current player health
     public float GetHealth()
     {
         return health;
     }
-    public float GetDamageSens()
+    //Resets player health to base. To be used on picking up health, or restarting.
+    protected void ResetHealth()
     {
-        return damageSens;
+        health = baseHealth;
+    }
+    //Returns current player speed.
+    public float GetSpeed()
+    {
+        return speed;
     }
     ///Reset the speed to the base.
-    ///
     private void ResetSpeed()
     {
         speed = baseSpeed;
     }
-     private void ResetDamage()
-    {
-        speed = baseSensitivity;
-    }
+
     ///How much more speed should we have? i.e. 1.2 = 20% more speed.
-    ///
     public void SetSpeedMod(float mod)
     {
         ResetSpeed();
         speed *= mod;
     }
-    ///How much more damage should we take? i.e. 1.2 = 20% more damage.
-    ///
+    //Returns how much more damage we are taking as a multiplier.
+    public float GetDamageSens()
+    {
+        return damageSens;
+    }
+    //Resets the damage sensitivity to base (1).
+    private void ResetDamageSens()
+    {
+        damageSens = baseSensitivity;
+    }
+    //Take damage from environment, bullet, etc...
+    private void TakeDamage(float damage)
+    {
+        health -= (int)(damageSens * damage);
+    }
+    //Resets the gun damage multiplier.
+    private void ResetDamageMod()
+    {
+        playerProjectile.SetDamageMod(1);
+    }
+    //Sets how much more damage should the gun be doing as a multiplier.
     public void SetDamageMod(float mod)
     {
-        ResetDamage();
-        damageSens *= mod;
+        playerProjectile.SetDamageMod(mod);
+    }
+    //Resets the cooldown on gun usage.
+    private void ResetCooldown()
+    {
+        playerProjectile.setCooldownMod(1);
+    }
+    //Sets the cooldown on gun usage.
+    public void SetCooldownMod(float mod)
+    {
+        playerProjectile.setCooldownMod(mod);
     }
 }
