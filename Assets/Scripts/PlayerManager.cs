@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
         return speed;
     }
     ///Reset the speed to the base.
-    private void ResetSpeed()
+    public void ResetSpeed()
     {
         speed = baseSpeed;
     }
@@ -81,7 +81,7 @@ public class PlayerManager : MonoBehaviour
         return damageSens;
     }
     //Resets the damage sensitivity to base (1).
-    private void ResetDamageSens()
+    public void ResetDamageSens()
     {
         damageSens = baseSensitivity;
     }
@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviour
         health -= (int)(damageSens * damage);
     }
     //Resets the gun damage multiplier.
-    private void ResetDamageMod()
+    public void ResetDamageMod()
     {
         playerProjectile.SetDamageMod(1);
     }
@@ -101,7 +101,7 @@ public class PlayerManager : MonoBehaviour
         playerProjectile.SetDamageMod(mod);
     }
     //Resets the cooldown on gun usage.
-    private void ResetCooldown()
+    public void ResetCooldown()
     {
         playerProjectile.setCooldownMod(1);
     }

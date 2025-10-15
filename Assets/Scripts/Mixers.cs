@@ -50,7 +50,7 @@ public class Mixers : MonoBehaviour
             Debug.Log("Lime");
             limeMixed = true;
             MixLime();
-            pm.setCooldownMod(limeJuiceValue);
+            pm.SetCooldownMod(limeJuiceValue);
             pm.SetSpeedMod(limeJuiceValue);
         }
         else if (limeMixed)
@@ -78,7 +78,7 @@ public class Mixers : MonoBehaviour
 
     private void MixLime()
     {
-        pm.setCooldownMod(limeJuiceValue);
+        pm.SetCooldownMod(limeJuiceValue);
         pm.SetSpeedMod(limeJuiceValue);
     }
 
