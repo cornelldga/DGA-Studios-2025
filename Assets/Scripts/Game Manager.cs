@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public PlayerController player;
+    [HideInInspector] public PlayerController player;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     /// <param name="freeze"></param>
     public void FreezePlayer(bool freeze)
     {
-        player.enabled = false;
+        player.enabled = !freeze;
     }
 
 }

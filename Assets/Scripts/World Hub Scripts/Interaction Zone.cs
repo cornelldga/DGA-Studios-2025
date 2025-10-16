@@ -37,8 +37,6 @@ public class InteractionZone : MonoBehaviour
 
     void OnInteract()
     {
-        Debug.Log("Interact");
-        Debug.Log(canInteract);
         if (canInteract)
         {
             Interact();
@@ -47,7 +45,6 @@ public class InteractionZone : MonoBehaviour
 
     void Interact()
     {
-        Debug.Log("Interacting");
         interactable.GetComponent<IInteractable>().Interact();
     }
 

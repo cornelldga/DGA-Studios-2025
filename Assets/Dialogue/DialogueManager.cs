@@ -2,7 +2,8 @@ using TMPro;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -12,20 +13,21 @@ using UnityEngine.InputSystem;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    private DialogueData currentDialogueData;
-    private string currentDialogueID;
-    public bool dialogueOngoing;
-    private bool isTyping; 
     public Animator dialogueBox;
-    private bool fadeIn;
-    private bool fadeOut;
-    private bool isFading;
-    private string currentCharacterName;
-    private Sprite[] currentCharacterSprites;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image backgroundImg;
     [SerializeField] private Image npcImg;
     [SerializeField] private float typingSpeed;
+
+    DialogueData currentDialogueData;
+    string currentDialogueID;
+    Dictionary<DialogueEmotion, Sprite> currentEmotions;
+    bool ongoingDialogue = false;
+
+    bool isTyping; 
+    bool fadeIn;
+    bool fadeOut;
+    bool isFading;
 
     void Awake()
     {
@@ -38,10 +40,17 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void OnSubmit()
+    /// <summary>
+    /// Returns if there is ongoing dialouge
+    /// </summary>
+    public bool OngoingDialogue()
     {
-        if (dialogueOngoing)
+        return ongoingDialogue;
+    }
+
+    public void OnContinueDialogue()
+    {
+        if (ongoingDialogue)
         {
             if (isTyping)
             {
@@ -64,27 +73,28 @@ public class DialogueManager : MonoBehaviour
             Fade();
         }
     }
-    
+
     /// <summary>
     /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
     /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
     /// <param name="file">The json file associated to the specific character.</param>
-    /// <param name="characterSprites">The list of sprites associated to the character (emotions, borders, etc).</param>
-    public void StartDialogue(TextAsset file, string dialogueID, Sprite[] characterSprites)
+    /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
+    /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
+    public void StartDialogue(TextAsset file, string dialogueID, Sprite dialogueBoxSprite,
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary)
     {
-        isFading = true;
-        fadeIn = true;
-        dialogueBox.SetBool("isOpen", true);
         if (file != null)
         {
+            ongoingDialogue = true;
+            dialogueBox.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
             currentDialogueID = "progress" + dialogueID + "_dialogueA";
-
-            currentCharacterSprites = characterSprites;
-            
+            dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
+            currentEmotions = emotionDictionary;
+            GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
         }
     }
@@ -96,7 +106,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void DisplayNextLine()
     {
-        dialogueOngoing = true;
         if (currentDialogueID == "")
         {
             EndDialogue();
@@ -109,9 +118,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    Sprite[] lineSprites = GetCharacterSprites(currentCharacterName, line.emotion);
-                    npcImg.sprite = lineSprites[0];
-                    dialogueBox.GetComponent<Image>().sprite = lineSprites[1];
+                    npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
                     break; 
@@ -163,7 +170,8 @@ public class DialogueManager : MonoBehaviour
     {
         fadeOut = true;
         Fade();
-        dialogueOngoing = false;
+        ongoingDialogue = false;
+        GameManager.Instance.FreezePlayer(false);
         dialogueBox.SetBool("isOpen", false);
     }
 
@@ -178,37 +186,6 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
         }
-    }
-
-    /// <summary>
-    /// Helper function to get the character sprite with wanted emotion and border.
-    /// </summary>
-    /// <param name="characterName">The name of the character</param>
-    /// <param name="emotion">The emotion wanted from the dialogue line.</param>
-    private Sprite[] GetCharacterSprites(string characterName, string emotion)
-    {
-        Sprite[] final = new Sprite[2];
-        string targetName = characterName + "_" + emotion;
-        foreach (Sprite sprite in currentCharacterSprites)
-        {
-            if (sprite != null && sprite.name == targetName)
-            {
-                final[0] = sprite;
-                break;
-            }
-        }
-
-        targetName = characterName + "_border";
-        foreach (Sprite sprite in currentCharacterSprites)
-        {
-            if (sprite != null && sprite.name == targetName)
-            {
-                final[1] = sprite;
-                break;
-            }
-        }
-
-        return final; 
     }
 
     /// <summary>
@@ -230,7 +207,7 @@ public class DialogueManager : MonoBehaviour
                 backgroundImg.color = color;
             }
         }
-        if (fadeOut)
+        else if (fadeOut)
         {
             Color color = backgroundImg.color;
             if (color.a > 0)

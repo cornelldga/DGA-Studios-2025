@@ -1,11 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(PlayerInput))]
 
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] TextAsset jsonTextFile;
-    [SerializeField] public Sprite[] emotionSprites;
+    [SerializeField] Sprite dialogueBoxSprite;
+    [SerializeField] Sprite neutralSprite;
+    [SerializeField] Sprite happySprite;
+    [SerializeField] Sprite sadSprite;
     private int progressionInt;
+
+    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
+
+    /// <summary>
+    /// Set the emotion dictionary
+    /// </summary>
+    private void Start()
+    {
+        emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
+        emotionDictionary[DialogueEmotion.Happy] = happySprite;
+        emotionDictionary[DialogueEmotion.Sad] = sadSprite;
+    }
 
     public void Interact()
     {
@@ -17,7 +35,11 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     /// </summary>
     public void TriggerDialogue()
     {
-        Debug.Log("Trigger Dialogue");
-        DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(), emotionSprites);
+        if (!DialogueManager.Instance.OngoingDialogue())
+        {
+            DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(),
+            dialogueBoxSprite, emotionDictionary);
+        }
+            
     }
 }
