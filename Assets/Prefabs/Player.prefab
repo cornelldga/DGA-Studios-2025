@@ -396,7 +396,10 @@ MonoBehaviour:
   playerController: {fileID: 2490660517002178451}
   playerProjectile: {fileID: 2552512306546890594}
   limeJuiceValue: 0.75
-  pimientoValue: 1
+  pimientoValue: 1.25
+  gingerValue: 0.75
+  ciderValueSpeed: 1.25
+  ciderValueAccuracy: 2
 --- !u!114 &30826994986176382
 MonoBehaviour:
   m_ObjectHideFlags: 0
