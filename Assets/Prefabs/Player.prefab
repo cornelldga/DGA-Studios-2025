@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2296092601719707025}
   - component: {fileID: 1393996811320652784}
   - component: {fileID: 2552512306546890594}
+  - component: {fileID: 1912611718536070078}
+  - component: {fileID: 7121643822225576201}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -137,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb: {fileID: 3742945521850461030}
-  moveSpeed: 7.5
+  pm: {fileID: 1912611718536070078}
 --- !u!114 &8297629877696191856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +350,40 @@ MonoBehaviour:
   winePrefab: {fileID: -8039387722388129891, guid: 1f9bbc3c51e6c364a8f2c9c6567885d5, type: 3}
   changeCooldown: 0
   projText: {fileID: 0}
+--- !u!114 &1912611718536070078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e1a6a02af644faaad3f6ece22f3095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  playerController: {fileID: 2490660517002178451}
+  playerProjectile: {fileID: 2552512306546890594}
+  mixers: {fileID: 8078925751724115441}
+  playerInventory: {fileID: 7121643822225576201}
+--- !u!114 &7121643822225576201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7364097fe3f4015bcadcc93438a0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  mixerSlot1: 2
+  mixerSlot2: 2
+  baseSlot1: 4
+  baseSlot2: 4
+  equippedMixer: 2
+  equippedBase: 4
 --- !u!1 &7048925544631775802
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,10 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerController: {fileID: 2490660517002178451}
-  playerProjectile: {fileID: 2552512306546890594}
+  pm: {fileID: 0}
   limeJuiceValue: 0.75
   pimientoValue: 1
+  limeMixed: 0
+  pimientoMixed: 0
 --- !u!114 &30826994986176382
 MonoBehaviour:
   m_ObjectHideFlags: 0
