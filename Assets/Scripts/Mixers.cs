@@ -13,9 +13,14 @@ public class Mixers : MonoBehaviour
 
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
+    [SerializeField] float gingerValue;
+    [SerializeField] float ciderValueSpeed;
+    [SerializeField] float ciderValueAccuracy;
 
-    [SerializeField] bool limeMixed = false;
-    [SerializeField] bool pimientoMixed = false;
+    private bool limeMixed = false;
+    private bool pimientoMixed = false;
+    private bool gingerMixed = false;
+    private bool ciderMixed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,8 +49,7 @@ public class Mixers : MonoBehaviour
 
     public void OnMixer(InputAction.CallbackContext context)
     {
-        Debug.Log("Called");
-        if (!limeMixed && !pimientoMixed)
+        if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
         {
             Debug.Log("Lime");
             limeMixed = true;
@@ -63,8 +67,24 @@ public class Mixers : MonoBehaviour
         }
         else if (pimientoMixed)
         {
-            Debug.Log("None");
+            Debug.Log("Ginger");
             pimientoMixed = false;
+            gingerMixed = true;
+            NoMixer();
+            MixGinger();
+        }
+        else if (gingerMixed)
+        {
+            Debug.Log("Cider");
+            gingerMixed = false;
+            ciderMixed = true;
+            NoMixer();
+            mixCider();
+        }
+        else if (ciderMixed)
+        {
+            Debug.Log("None");
+            ciderMixed = false;
             NoMixer();
         }
     }
@@ -74,6 +94,11 @@ public class Mixers : MonoBehaviour
         pm.ResetCooldown();
         pm.ResetDamageSens();
         pm.ResetSpeed();
+        pm.ResetCooldown();
+        pm.ResetSpeed();
+        pm.ResetDamageMod();
+        pm.ResetAccuracyMod();
+        pm.SetDestroyBulletsOn();
     }
 
     private void MixLime()
@@ -85,5 +110,17 @@ public class Mixers : MonoBehaviour
     private void MixPimiento()
     {
         pm.SetDamageMod(pimientoValue);
+    }
+
+    private void MixGinger()
+    {
+        pm.SetDamageMod(gingerValue);
+        pm.SetDestroyBulletsOn();
+    }
+
+    private void mixCider()
+    {
+        pm.SetSpeedMod(ciderValueSpeed);
+        pm.SetAccuracyMod(ciderValueAccuracy);
     }
 }

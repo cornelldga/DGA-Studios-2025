@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 
 {
@@ -30,10 +30,9 @@ public class PlayerController : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMove(InputValue value)
     {
-        moveDirection = move.ReadValue<Vector2>();
+        moveDirection = value.Get<Vector2>();
     }
     private void FixedUpdate()
     {
