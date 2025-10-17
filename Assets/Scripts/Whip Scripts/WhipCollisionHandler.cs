@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class WhipCollisionHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Collide!");
+        if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            collision.gameObject.tag = "PlayerBullet";
+            float horizontal = collision.gameObject.GetComponent<BulletBehavior>().horizontal;
+            float vertical = collision.gameObject.GetComponent<BulletBehavior>().vertical;
+            collision.gameObject.GetComponent<BulletBehavior>().horizontal = -horizontal;
+            collision.gameObject.GetComponent <BulletBehavior>().vertical = -vertical;
+        }
     }
 }

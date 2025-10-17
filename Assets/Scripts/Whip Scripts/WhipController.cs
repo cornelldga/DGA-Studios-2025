@@ -93,7 +93,6 @@ public class WhipController : MonoBehaviour
         mousePosition.z = 0f;
         Vector3 direction = mousePosition - whipPivot.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
         angle = AngleAdjustment(angle);
         whipPivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
