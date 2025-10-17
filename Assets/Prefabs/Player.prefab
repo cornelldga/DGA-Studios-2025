@@ -163,10 +163,12 @@ GameObject:
   - component: {fileID: 3742945521850461030}
   - component: {fileID: 2490660517002178451}
   - component: {fileID: 8297629877696191856}
-  - component: {fileID: 2296092601719707025}
   - component: {fileID: 1393996811320652784}
   - component: {fileID: 2552512306546890594}
   - component: {fileID: 7646374472526627216}
+  - component: {fileID: 1716704249812087973}
+  - component: {fileID: 3196546790392033851}
+  - component: {fileID: 8498830316909026030}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,7 +186,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.68555, y: -0.16234, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5256116174507795738}
@@ -238,12 +240,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5d22a9e42483d74ebafd5aba1ffde3b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5889ec9b4deaba341a777dee2950c561, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.59375, y: 2.46875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -289,8 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb: {fileID: 3742945521850461030}
-  pm: {fileID: 0}
-  moveSpeed: 7.5
+  pm: {fileID: 3196546790392033851}
 --- !u!114 &8297629877696191856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,58 +322,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!68 &2296092601719707025
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2515787385012269526}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.48212194, y: 0.3468415}
-  - {x: 0.36881858, y: 0.49103454}
-  - {x: -0.014213443, y: 0.510579}
-  - {x: -0.4042837, y: 0.4942728}
-  - {x: -0.4889046, y: 0.3324165}
-  - {x: -0.4680006, y: -0.39940876}
-  - {x: -0.34387892, y: -0.49655896}
-  - {x: -0.013992667, y: -0.5108029}
-  - {x: 0.39603478, y: -0.49587706}
-  - {x: 0.517128, y: -0.34362504}
-  - {x: 0.5016468, y: 0.34053528}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!96 &1393996811320652784
 TrailRenderer:
   serializedVersion: 3
@@ -500,7 +449,6 @@ MonoBehaviour:
   whiskeyPrefab: {fileID: 1240062487690815842, guid: c93de10fbc021ca48a874e546c3d12c0, type: 3}
   winePrefab: {fileID: -8039387722388129891, guid: 1f9bbc3c51e6c364a8f2c9c6567885d5, type: 3}
   changeCooldown: 0
-  projText: {fileID: 0}
 --- !u!114 &7646374472526627216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +464,86 @@ MonoBehaviour:
   playerTransform: {fileID: 789207326938304623}
   whipPivot: {fileID: 385611104715913346}
   whipObject: {fileID: 1526259517069453148}
+--- !u!61 &1716704249812087973
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.59375, y: 2.46875}
+    newSize: {x: 1.59375, y: 2.46875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.59375, y: 2.46875}
+  m_EdgeRadius: 0
+--- !u!114 &3196546790392033851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e1a6a02af644faaad3f6ece22f3095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  playerController: {fileID: 2490660517002178451}
+  playerProjectile: {fileID: 2552512306546890594}
+  mixers: {fileID: 8078925751724115441}
+  playerInventory: {fileID: 8498830316909026030}
+--- !u!114 &8498830316909026030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515787385012269526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7364097fe3f4015bcadcc93438a0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  mixerSlot1: 2
+  mixerSlot2: 2
+  baseSlot1: 4
+  baseSlot2: 4
+  equippedMixer: 2
+  equippedBase: 4
 --- !u!1 &5069028328963976984
 GameObject:
   m_ObjectHideFlags: 0
