@@ -28,6 +28,12 @@ public class PlayerProjectile : MonoBehaviour
     //Modifier for how wide the range of possible directions the projectile goes in is
     private float accuracyMod = 1;
 
+    //Modifier for how fast a projectile moves
+    private float speedMod = 1;
+
+    //Modifier for how long a projectile lasts
+    float lifetimeMod = 1;
+
     //Whether projectile should destroy enemy bullets or not
     private bool destroyBullets = false;
 
