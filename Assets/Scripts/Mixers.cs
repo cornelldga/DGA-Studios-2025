@@ -11,9 +11,14 @@ public class Mixers : MonoBehaviour
 
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
+    [SerializeField] float gingerValue;
+    [SerializeField] float ciderValueSpeed;
+    [SerializeField] float ciderValueAccuracy;
 
     private bool limeMixed = false;
     private bool pimientoMixed = false;
+    private bool gingerMixed = false;
+    private bool ciderMixed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,7 +45,7 @@ public class Mixers : MonoBehaviour
 
     void OnMixer()
     {
-        if (!limeMixed && !pimientoMixed)
+        if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
         {
             Debug.Log("Lime");
             limeMixed = true;
@@ -57,8 +62,24 @@ public class Mixers : MonoBehaviour
         }
         else if (pimientoMixed)
         {
-            Debug.Log("None");
+            Debug.Log("Ginger");
             pimientoMixed = false;
+            gingerMixed = true;
+            noMixer();
+            mixGinger();
+        }
+        else if (gingerMixed)
+        {
+            Debug.Log("Cider");
+            gingerMixed = false;
+            ciderMixed = true;
+            noMixer();
+            mixCider();
+        }
+        else if (ciderMixed)
+        {
+            Debug.Log("None");
+            ciderMixed = false;
             noMixer();
         }
     }
@@ -68,6 +89,8 @@ public class Mixers : MonoBehaviour
         playerProjectile.setCooldownMod(1);
         playerController.setSpeedMod(1);
         playerProjectile.setDamageMod(1);
+        playerProjectile.setAccuracyMod(1);
+        playerProjectile.setDestroyBullets(false);
     }
 
     private void mixLime()
@@ -79,5 +102,17 @@ public class Mixers : MonoBehaviour
     private void mixPimiento()
     {
         playerProjectile.setDamageMod(pimientoValue);
+    }
+
+    private void mixGinger()
+    {
+        playerProjectile.setDamageMod(gingerValue);
+        playerProjectile.setDestroyBullets(true);
+    }
+
+    private void mixCider()
+    {
+        playerController.setSpeedMod(ciderValueSpeed);
+        playerProjectile.setAccuracyMod(ciderValueAccuracy);
     }
 }
