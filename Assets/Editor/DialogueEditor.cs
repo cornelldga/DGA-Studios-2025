@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-using System.Linq;
 using System.Collections.Generic;
-using Codice.Client.Common;
 
 public class DialogueEditor : EditorWindow
 {
@@ -12,9 +10,10 @@ public class DialogueEditor : EditorWindow
     // for example, defeating the first boss increases the dialogueGameProgress to 1, so this dialogue would be available
     // to the player only after the first boss is defeated and before the second boss is defeated.
     int dialogueGameProgress = 0;
-    // dialogueSequenceProgress refers to this specific sequence of dialogue and increases sequentially (starts with 0);
-    int dialogueSequenceProgress = 0;
-    int nextDialogueSequenceProgress = 1;
+    // dialogueName refers to this specific dialogue's unique name identifier (should NEVER be the same as
+    // another dialogue's unique name UNLESS they have different gameProgress values);
+    string dialogueName = "intro01";
+    string nextDialogueName = "";
     string dialogueText = "Hello!";
     string emotion = "";
 
@@ -32,20 +31,7 @@ public class DialogueEditor : EditorWindow
         GUILayout.Label("Create New Dialogue Script", EditorStyles.boldLabel);
         fileName = EditorGUILayout.TextField("Character Name", fileName);
         dialogueGameProgress = EditorGUILayout.IntSlider("In-Game Progress", dialogueGameProgress, 0, 5);
-        dialogueSequenceProgress = EditorGUILayout.IntSlider("Current Dialogue Frame", dialogueSequenceProgress,
-            0, 15);
-        //if (GUILayout.Button("View Dialogue"))
-        //{
-        //    ViewDialogue();
-        //}
-        //if (GUILayout.Button("Edit Dialogue"))
-        //{
-        //     EditDialogue();
-        // }
-        // if (GUILayout.Button("Delete Dialogue"))
-        // {
-        //     DeleteDialogue();
-        // }
+        dialogueName = EditorGUILayout.TextField("Dialogue Name", dialogueName);
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
@@ -68,9 +54,14 @@ public class DialogueEditor : EditorWindow
             }
         }
 
-        nextDialogueSequenceProgress = EditorGUILayout.IntSlider("Next Dialogue Frame" +
-            " (if there is no dialogue to transition to, set this to -1)",
-            nextDialogueSequenceProgress, -1, 15);
+        GUIStyle wrapStyle = new GUIStyle(EditorStyles.label);
+            wrapStyle.wordWrap = true;
+
+        GUILayout.Label("Please leave Next Dialogue ID blank if there are no further dialogue " +
+            "frames to transition to; otherwise, copy the exact dialogueID here.", wrapStyle);
+
+
+        nextDialogueName = EditorGUILayout.TextField("Next Dialogue ID", nextDialogueName);
 
         if (GUILayout.Button("Create Dialogue"))
         {
@@ -100,10 +91,6 @@ public class DialogueEditor : EditorWindow
             Debug.LogError("Please select an emotion.");
             return;
         }
-        if (dialogueSequenceProgress == nextDialogueSequenceProgress)
-        {
-            Debug.LogError("The Current Dialogue Frame cannot be the same as the Next Dialogue Frame");
-        }
         string filePath = Path.Combine(Application.dataPath, "Dialogue/Dialogue Text",
             fileName + ".json");
         if (File.Exists(filePath))
@@ -128,21 +115,6 @@ public class DialogueEditor : EditorWindow
             File.WriteAllText(filePath, JsonUtility.ToJson(new DialogueData { dialogueLines = lines }));
         }
     }
-
-    private void ViewDialogue()
-    {
-        
-    }
-
-    private void EditDialogue()
-    {
-
-    }
-
-    private void DeleteDialogue()
-    {
-
-    }
     
     /// <summary>
     /// Creates the JSON string to be added to a text file.
@@ -152,16 +124,16 @@ public class DialogueEditor : EditorWindow
     {
         DialogueLine currentLine = new DialogueLine();
         currentLine.dialogueID = "progress" + dialogueGameProgress.ToString() + "_dialogue"
-            + dialogueSequenceProgress.ToString();
+            + dialogueName;
         currentLine.dialogueText = dialogueText;
         currentLine.emotion = emotion;
-        string nextDialogueString = nextDialogueSequenceProgress.ToString();
-        if (nextDialogueSequenceProgress == -1)
+        if (nextDialogueName=="")
         {
-            nextDialogueString = "";
+            currentLine.nextDialogueID = "";
+        } else
+        {
+        currentLine.nextDialogueID = nextDialogueName; 
         }
-        currentLine.nextDialogueID = "progress" + dialogueGameProgress.ToString() + "_dialogue"
-            + nextDialogueString;
         return currentLine;
     }
 
