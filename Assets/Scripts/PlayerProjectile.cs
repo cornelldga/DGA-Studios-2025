@@ -28,6 +28,12 @@ public class PlayerProjectile : MonoBehaviour
     //Modifier for how wide the range of possible directions the projectile goes in is
     private float accuracyMod = 1;
 
+    //Modifier for how fast a projectile moves
+    private float speedMod = 1;
+
+    //Modifier for how long a projectile lasts
+    float lifetimeMod = 1;
+
     //Whether projectile should destroy enemy bullets or not
     private bool destroyBullets = false;
 
@@ -39,8 +45,6 @@ public class PlayerProjectile : MonoBehaviour
 
     [SerializeField] float changeCooldown;
 
-    [SerializeField] TextMeshProUGUI projText;
-
     private PlayerInputActions playerControls;
 
 
@@ -48,7 +52,6 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         isBeer = true;
-        projText.text = "Beer";
     }
 
     private void OnEnable()
@@ -102,24 +105,20 @@ public class PlayerProjectile : MonoBehaviour
         {
             isBeer = false;
             isGin = true;
-            projText.text = "Gin";
         }
         else if (isGin)
         {
             isGin = false;
             isWhiskey = true;
-            projText.text = "Whiskey";
         }
         else if (isWhiskey)
         {
             isWhiskey = false;
             isWine = true;
-            projText.text = "Wine";
         }
         else if (isWine){
             isWine = false;
             isBeer = true;
-            projText.text = "Beer";
         }
         fireCooldown = changeCooldown;
     }

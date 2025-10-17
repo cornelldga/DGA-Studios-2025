@@ -4,7 +4,6 @@ public class WhipCollisionHandler : MonoBehaviour
 {
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
-        Debug.Log("Collide!");
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             collision.gameObject.tag = "PlayerBullet";
