@@ -112,7 +112,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         
-        if (currentDialogueData.dialogueLines.Length > 0)
+        if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
