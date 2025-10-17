@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7103015756978625261, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1165.8881
@@ -617,6 +621,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2552512306546890594, guid: 64581cef8622db04dbb7eb1cf34082e9, type: 3}
+      propertyPath: projText
+      value: 
+      objectReference: {fileID: 1842206135}
     - target: {fileID: 8297629877696191856, guid: 64581cef8622db04dbb7eb1cf34082e9, type: 3}
       propertyPath: m_NotificationBehavior
       value: 0
@@ -626,6 +634,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64581cef8622db04dbb7eb1cf34082e9, type: 3}
+--- !u!114 &1842206135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1330093500456326006, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+  m_PrefabInstance: {fileID: 235870873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &2063537417
 PrefabInstance:
   m_ObjectHideFlags: 0
