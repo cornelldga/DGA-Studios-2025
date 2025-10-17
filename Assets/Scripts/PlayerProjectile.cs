@@ -162,7 +162,6 @@ public class PlayerProjectile : MonoBehaviour
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-whiskeyPrefab.getAccuracy() * accuracyMod, whiskeyPrefab.getAccuracy() * accuracyMod));
         Whiskey whiskeyProj = Instantiate(whiskeyPrefab, gameObject.transform.position, fireDirection);
-        whiskeyProj.SetProjectile(speedMod, lifetimeMod);
         fireCooldown = whiskeyProj.getCooldown() * cooldownMod;
     }
 
@@ -170,7 +169,6 @@ public class PlayerProjectile : MonoBehaviour
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-winePrefab.getAccuracy() * accuracyMod, winePrefab.getAccuracy() * accuracyMod));
         Wine wineProj = Instantiate(winePrefab, gameObject.transform.position, fireDirection);
-        wineProj.SetProjectile(speedMod, lifetimeMod);
         fireCooldown = wineProj.getCooldown() * cooldownMod;
     }
 
