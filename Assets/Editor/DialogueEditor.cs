@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+using System;
 
 public class DialogueEditor : EditorWindow
 {
@@ -15,7 +16,7 @@ public class DialogueEditor : EditorWindow
     string dialogueName = "intro01";
     string nextDialogueName = "";
     string dialogueText = "Hello!";
-    string emotion = "";
+    DialogueEmotion emotion;
 
     [MenuItem("Tools/Dialogue Editor")]
     public static void ShowWindow()
@@ -35,23 +36,22 @@ public class DialogueEditor : EditorWindow
         dialogueText = EditorGUILayout.TextField("Dialogue Text", dialogueText);
 
         Rect dropdownRect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
-        string dropdownLabel = string.IsNullOrEmpty(emotion) ? "Select Emotion" : $"{emotion}";
+        string dropdownLabel = string.IsNullOrEmpty(emotion.ToString()) ? "Select Emotion" : $"{emotion}";
         if (EditorGUI.DropdownButton(dropdownRect, new GUIContent(dropdownLabel), FocusType.Keyboard))
         {
             GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("neutral"), false, OnOptionSelected, "neutral");
-            menu.AddItem(new GUIContent("happy"), false, OnOptionSelected, "happy");
-            menu.AddItem(new GUIContent("sad"), false, OnOptionSelected, "sad");
-            menu.AddItem(new GUIContent("angry"), false, OnOptionSelected, "angry");
+            string[] emotions = Enum.GetNames(typeof(DialogueEmotion));
+            foreach (string each in emotions)
+            {
+                DialogueEmotion emotionChoice = (DialogueEmotion)Enum.Parse(typeof(DialogueEmotion), each);
+                menu.AddItem(new GUIContent(emotionChoice.ToString()), false, OnOptionSelected, emotionChoice);
+            }
             menu.ShowAsContext();
         }
 
         void OnOptionSelected(object userData)
         {
-            if (userData != null)
-            {
-                emotion = userData.ToString();
-            }
+            emotion = (DialogueEmotion) userData;
         }
 
         GUIStyle wrapStyle = new GUIStyle(EditorStyles.label);
@@ -84,11 +84,6 @@ public class DialogueEditor : EditorWindow
         if (dialogueText == "")
         {
             Debug.LogError("Please enter dialogue text.");
-            return;
-        }
-        if (emotion == "")
-        {
-            Debug.LogError("Please select an emotion.");
             return;
         }
         string filePath = Path.Combine(Application.dataPath, "Dialogue/Dialogue Text",
