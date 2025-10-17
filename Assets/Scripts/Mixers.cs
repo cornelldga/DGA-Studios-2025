@@ -1,13 +1,15 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Mixers : MonoBehaviour
 {
-    private PlayerInputActions playerControls;
+    [SerializeField] PlayerManager pm;
     private InputAction mixer;
 
-    [SerializeField] PlayerController playerController;
-    [SerializeField] PlayerProjectile playerProjectile;
+    private PlayerInputActions playerControls;
+
 
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
@@ -29,7 +31,7 @@ public class Mixers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
@@ -38,27 +40,30 @@ public class Mixers : MonoBehaviour
         mixer = playerControls.Player.Mixer;
         mixer.Enable();
     }
+
+
     private void OnDisable()
     {
         mixer.Disable();
     }
 
-    void OnMixer()
+    public void OnMixer(InputAction.CallbackContext context)
     {
         if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
         {
             Debug.Log("Lime");
             limeMixed = true;
-            noMixer();
-            mixLime();
+            MixLime();
+            pm.SetCooldownMod(limeJuiceValue);
+            pm.SetSpeedMod(limeJuiceValue);
         }
         else if (limeMixed)
         {
             Debug.Log("Pimiento");
             limeMixed = false;
             pimientoMixed = true;
-            noMixer();
-            mixPimiento();
+            NoMixer();
+            MixPimiento();
         }
         else if (pimientoMixed)
         {
@@ -84,7 +89,7 @@ public class Mixers : MonoBehaviour
         }
     }
 
-    private void noMixer()
+    private void NoMixer()
     {
         playerProjectile.setCooldownMod(1);
         playerController.setSpeedMod(1);
@@ -93,15 +98,15 @@ public class Mixers : MonoBehaviour
         playerProjectile.setDestroyBullets(false);
     }
 
-    private void mixLime()
+    private void MixLime()
     {
-        playerProjectile.setCooldownMod(limeJuiceValue);
-        playerController.setSpeedMod(limeJuiceValue);
+        pm.SetCooldownMod(limeJuiceValue);
+        pm.SetSpeedMod(limeJuiceValue);
     }
 
-    private void mixPimiento()
+    private void MixPimiento()
     {
-        playerProjectile.setDamageMod(pimientoValue);
+        pm.SetDamageMod(pimientoValue);
     }
 
     private void mixGinger()
