@@ -112,5 +112,17 @@ public class PlayerManager : MonoBehaviour
     {
         playerProjectile.setCooldownMod(mod);
     }
+    public void SetAccuracyMod(float mod)
+    {
+        playerProjectile.setAccuracyMod(mod);
+    }
+    public void ResetAccuracyMod()
+    {
+        playerProjectile.setAccuracyMod(1);
+    }
+    public void SetDestroyBulletsOn()
+    {
+        playerProjectile.setDestroyBullets(true);
+    }
 }
 
