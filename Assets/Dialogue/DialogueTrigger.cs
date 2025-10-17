@@ -1,83 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DialogueTrigger : MonoBehaviour
+[RequireComponent(typeof(PlayerInput))]
+
+public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] TextAsset jsonTextFile;
+    [SerializeField] Sprite dialogueBoxSprite;
+    [SerializeField] Sprite neutralSprite;
+    [SerializeField] Sprite happySprite;
+    [SerializeField] Sprite sadSprite;
     private int progressionInt;
-    private bool inRange = false;
-    private GameObject trigger;
-    private InputAction interact;
-    private PlayerInputActions playerControls;
+
+    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     /// <summary>
-    /// Enables the player input map to turn on.
+    /// Set the emotion dictionary
     /// </summary>
-    private void OnEnable()
+    private void Start()
     {
-        playerControls = new PlayerInputActions();
-        interact = playerControls.Player.Interact;
-        interact.Enable();
-    }
-    /// <summary>
-    /// Disables the player input map to turn on.
-    /// </summary>
-    private void OnDisable()
-    {
-        interact.Disable();
+        emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
+        emotionDictionary[DialogueEmotion.Happy] = happySprite;
+        emotionDictionary[DialogueEmotion.Sad] = sadSprite;
     }
 
-    /// <summary>
-    /// Checks if player pressed interact key
-    /// </summary>
-    private void Update()
+    public void Interact()
     {
-        if (interact.WasPressedThisFrame())
-        {
-            if (!DialogueManager.Instance.dialogueOngoing && inRange)
-            {
-                TriggerDialogue();
-            }
-        }
+        TriggerDialogue();
     }
 
     /// <summary>
     /// Triggers start dialogue in dialogue manager with the correct dialogue ID given by the button.
     /// </summary>
-    /// <param name="currentDialogueID">The dialogueID to show.</param>
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString());
-    }
-
-    /// <summary>
-    /// Shows dialogue button when player in radius and hides when player in dialogue
-    /// </summary>
-    /// <param name="collision">The player</param>
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !DialogueManager.Instance.dialogueOngoing)
+        if (!DialogueManager.Instance.OngoingDialogue())
         {
-            trigger = DialogueManager.Instance.transform.GetChild(0).gameObject;
-            trigger.SetActive(true);
-            inRange = true;
+            DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt.ToString(),
+            dialogueBoxSprite, emotionDictionary);
         }
-        else if (collision.CompareTag("Player") && DialogueManager.Instance.dialogueOngoing)
-        {
-            trigger.SetActive(false);
-            inRange = false;
-        }
-    }
-
-    /// <summary>
-    /// Hides dialogue button when player leaves
-    /// </summary>
-    /// <param name="collision">The player</param>
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && trigger != null)
-        {
-            trigger.SetActive(false);
-        }
+            
     }
 }

@@ -8,7 +8,7 @@ public class InteractionZone : MonoBehaviour
 {
     [Tooltip("UI that indicates the player is in range to trigger the interaction")]
     [SerializeField] SpriteRenderer InteractionIndicator;
-    [SerializeField] IInteractable interactable;
+    [SerializeField] GameObject interactable;
 
     bool canInteract = false;
 
@@ -45,7 +45,7 @@ public class InteractionZone : MonoBehaviour
 
     void Interact()
     {
-        interactable.Interact();
+        interactable.GetComponent<IInteractable>().Interact();
     }
 
 
