@@ -39,8 +39,6 @@ public class PlayerProjectile : MonoBehaviour
 
     [SerializeField] float changeCooldown;
 
-    [SerializeField] TextMeshProUGUI projText;
-
     private PlayerInputActions playerControls;
 
 
@@ -48,7 +46,6 @@ public class PlayerProjectile : MonoBehaviour
     void Start()
     {
         isBeer = true;
-        projText.text = "Beer";
     }
 
     private void OnEnable()
@@ -102,24 +99,20 @@ public class PlayerProjectile : MonoBehaviour
         {
             isBeer = false;
             isGin = true;
-            projText.text = "Gin";
         }
         else if (isGin)
         {
             isGin = false;
             isWhiskey = true;
-            projText.text = "Whiskey";
         }
         else if (isWhiskey)
         {
             isWhiskey = false;
             isWine = true;
-            projText.text = "Wine";
         }
         else if (isWine){
             isWine = false;
             isBeer = true;
-            projText.text = "Beer";
         }
         fireCooldown = changeCooldown;
     }
