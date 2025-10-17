@@ -1,6 +1,9 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -10,13 +13,21 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    private DialogueData currentDialogueData;
-    private string currentDialogueID;
-    public bool dialogueOngoing;
-    public Animator animator;
-    [SerializeField] private TextMeshProUGUI nameText;
+    public Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private float typingSpeed = 0.05f;
+    [SerializeField] private Image backgroundImg;
+    [SerializeField] private Image npcImg;
+    [SerializeField] private float typingSpeed;
+
+    DialogueData currentDialogueData;
+    string currentDialogueID;
+    Dictionary<DialogueEmotion, Sprite> currentEmotions;
+    bool ongoingDialogue = false;
+
+    bool isTyping; 
+    bool fadeIn;
+    bool fadeOut;
+    bool isFading;
 
     void Awake()
     {
@@ -29,19 +40,61 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    /// <summary>
+    /// Returns if there is ongoing dialouge
+    /// </summary>
+    public bool OngoingDialogue()
+    {
+        return ongoingDialogue;
+    }
+
+    public void OnContinueDialogue()
+    {
+        if (ongoingDialogue)
+        {
+            if (isTyping)
+            {
+                CompleteCurrentLine();
+            }
+            else
+            {
+                DisplayNextLine();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
+    /// </summary>
+    private void Update()
+    {
+        if (isFading)
+        {
+            Fade();
+        }
+    }
 
     /// <summary>
     /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
+    /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
     /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
-    public void StartDialogue(TextAsset file, string dialogueID)
+    /// <param name="file">The json file associated to the specific character.</param>
+    /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
+    /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
+    public void StartDialogue(TextAsset file, string dialogueID, Sprite dialogueBoxSprite,
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary)
     {
-        animator.SetBool("isOpen", true);
         if (file != null)
         {
+            ongoingDialogue = true;
+            dialogueBox.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
             currentDialogueID = "progress" + dialogueID + "_dialogueA";
+            dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
+            currentEmotions = emotionDictionary;
+            GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
         }
     }
@@ -53,40 +106,60 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void DisplayNextLine()
     {
-        dialogueOngoing = true;
+        if (currentDialogueID == "")
+        {
+            EndDialogue();
+            return;
+        }
+        
         if (currentDialogueData.dialogueLines.Length > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
                 if (line.dialogueID == currentDialogueID)
                 {
+                    npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
+                    break; 
                 }
             }
         }
     }
 
     /// <summary>
-    /// Does the animation for typing text and continues after a short time,
+    /// Does the animation for typing text.
     /// </summary>
+    /// <param name="line">The line of text from the JSON which is being displayed.</param>
     IEnumerator TypeSentence(DialogueLine line)
     {
+        isTyping = true; 
         dialogueText.text = "";
         foreach (char letter in line.dialogueText.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        yield return new WaitForSeconds(2f);
-        if (line.nextDialogueID == "")
+        isTyping = false; 
+        currentDialogueID = line.nextDialogueID; 
+    }
+
+    /// <summary>
+    /// Completes the typing animation instantly
+    /// </summary>
+    private void CompleteCurrentLine()
+    {
+        StopAllCoroutines();
+        isTyping = false;
+        
+        foreach (DialogueLine line in currentDialogueData.dialogueLines)
         {
-            EndDialogue();
-        }
-        else
-        {
-            currentDialogueID = line.nextDialogueID;
-            DisplayNextLine();
+            if (line.dialogueID == currentDialogueID)
+            {
+                dialogueText.text = line.dialogueText;
+                currentDialogueID = line.nextDialogueID;
+                break;
+            }
         }
     }
 
@@ -95,8 +168,11 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        dialogueOngoing = false;
-        animator.SetBool("isOpen", false);
+        fadeOut = true;
+        Fade();
+        ongoingDialogue = false;
+        GameManager.Instance.FreezePlayer(false);
+        dialogueBox.SetBool("isOpen", false);
     }
 
     /// <summary>
@@ -109,6 +185,41 @@ public class DialogueManager : MonoBehaviour
         {
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
+        }
+    }
+
+    /// <summary>
+    /// Fades in the gray background to prioritize the dialogue
+    /// </summary>
+    private void Fade()
+    {
+        if (fadeIn)
+        {
+            Color color = backgroundImg.color;
+            if (color.a < .36f)
+            {
+                color.a += Time.deltaTime;
+                if (color.a >= .36f)
+                {
+                    color.a = .36f;
+                    fadeIn = false;
+                }
+                backgroundImg.color = color;
+            }
+        }
+        else if (fadeOut)
+        {
+            Color color = backgroundImg.color;
+            if (color.a > 0)
+            {
+                color.a -= Time.deltaTime;
+                if (color.a <= 0)
+                {
+                    color.a = 0;
+                    fadeOut = false;
+                }
+                backgroundImg.color = color;
+            }
         }
     }
 

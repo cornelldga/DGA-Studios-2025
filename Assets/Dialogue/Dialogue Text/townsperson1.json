@@ -2,13 +2,13 @@
   {
     "dialogueID": "progress0_dialogueA",
     "dialogueText": "Greetings!",
-    "emotion": "happy",
+    "emotion": 1,
     "nextDialogueID": "progress0_dialogueB"
   },
   {
     "dialogueID": "progress0_dialogueB",
     "dialogueText": "Nice weather we're having today, isn't it?",
-    "emotion": "neutral",
+    "emotion": 0,
     "nextDialogueID": ""
   }
 ]
