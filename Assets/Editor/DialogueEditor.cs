@@ -118,7 +118,7 @@ public class DialogueEditor : EditorWindow
     private DialogueLine WriteJSON()
     {
         DialogueLine currentLine = new DialogueLine();
-        currentLine.dialogueID = "progress" + dialogueGameProgress.ToString() + "_dialogue"
+        currentLine.dialogueID = "progress" + dialogueGameProgress.ToString() + "_"
             + dialogueName;
         currentLine.dialogueText = dialogueText;
         currentLine.emotion = emotion;
