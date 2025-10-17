@@ -70,32 +70,35 @@ public class Mixers : MonoBehaviour
             Debug.Log("Ginger");
             pimientoMixed = false;
             gingerMixed = true;
-            noMixer();
-            mixGinger();
+            NoMixer();
+            MixGinger();
         }
         else if (gingerMixed)
         {
             Debug.Log("Cider");
             gingerMixed = false;
             ciderMixed = true;
-            noMixer();
+            NoMixer();
             mixCider();
         }
         else if (ciderMixed)
         {
             Debug.Log("None");
             ciderMixed = false;
-            noMixer();
+            NoMixer();
         }
     }
 
     private void NoMixer()
     {
-        playerProjectile.setCooldownMod(1);
-        playerController.setSpeedMod(1);
-        playerProjectile.setDamageMod(1);
-        playerProjectile.setAccuracyMod(1);
-        playerProjectile.setDestroyBullets(false);
+        pm.ResetCooldown();
+        pm.ResetDamageSens();
+        pm.ResetSpeed();
+        pm.ResetCooldown();
+        pm.ResetSpeed();
+        pm.ResetDamageMod();
+        pm.ResetAccuracyMod();
+        pm.SetDestroyBulletsOn();
     }
 
     private void MixLime()
@@ -109,15 +112,15 @@ public class Mixers : MonoBehaviour
         pm.SetDamageMod(pimientoValue);
     }
 
-    private void mixGinger()
+    private void MixGinger()
     {
-        playerProjectile.setDamageMod(gingerValue);
-        playerProjectile.setDestroyBullets(true);
+        pm.SetDamageMod(gingerValue);
+        pm.SetDestroyBulletsOn();
     }
 
     private void mixCider()
     {
-        playerController.setSpeedMod(ciderValueSpeed);
-        playerProjectile.setAccuracyMod(ciderValueAccuracy);
+        pm.SetSpeedMod(ciderValueSpeed);
+        pm.SetAccuracyMod(ciderValueAccuracy);
     }
 }
