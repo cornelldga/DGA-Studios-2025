@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -32,19 +33,56 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private MixerType equippedMixer = MixerType.None;
     [SerializeField] private BaseType equippedBase = BaseType.None;
 
-    //Could use prefabs of each mixer/base here, but figured seperate enums could work as well.
+    [Header("Selected Slots")]
+    [SerializeField] private int selectedBaseSlot = 1; // 1 or 2
+    [SerializeField] private int selectedMixerSlot = 1; // 1 or 2
 
+    //Could use prefabs of each mixer/base here, but figured seperate enums could work as well.
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        UpdateEquippedItems();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+     public void SelectBaseSlot(int slotIndex)
+    {
+        if (slotIndex == 1 || slotIndex == 2)
+        {
+            selectedBaseSlot = slotIndex;
+            UpdateEquippedBase();
+        }
+    }
+
+    public void SelectMixerSlot(int slotIndex)
+    {
+        if (slotIndex == 1 || slotIndex == 2)
+        {
+            selectedMixerSlot = slotIndex;
+            UpdateEquippedMixer();
+        }
+    }
+
+    private void UpdateEquippedBase()
+    {
+        equippedBase = GetBaseInSlot(selectedBaseSlot);
+    }
+
+    private void UpdateEquippedMixer()
+    {
+        equippedMixer = GetMixerInSlot(selectedMixerSlot);
+    }
+
+    private void UpdateEquippedItems()
+    {
+        UpdateEquippedBase();
+        UpdateEquippedMixer();
     }
 
     public bool AddMixer(MixerType mixerType)
