@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb: {fileID: 3742945521850461030}
+  pm: {fileID: 0}
   moveSpeed: 7.5
 --- !u!114 &8297629877696191856
 MonoBehaviour:
@@ -592,8 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerController: {fileID: 2490660517002178451}
-  playerProjectile: {fileID: 2552512306546890594}
+  pm: {fileID: 0}
   limeJuiceValue: 0.75
   pimientoValue: 1.25
   gingerValue: 0.75
