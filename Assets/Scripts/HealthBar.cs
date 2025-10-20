@@ -1,15 +1,17 @@
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class HealthBar : MonoBehaviour
 {
     private BossManager bossManager;
-    [SerializeField] private Slider slider;
+    public UnityEngine.UI.Slider healthSlider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bossManager = GameObject.Find("Boss").GetComponent<BossManager>();
+        healthSlider.maxValue = bossManager.getMaxHealth();
     }
 
     // Update is called once per frame
@@ -17,7 +19,9 @@ public class HealthBar : MonoBehaviour
     {
         if (bossManager.getMaxHealth() != 0)
         {
-            slider.SetValueWithoutNotify(bossManager.getHealth() / bossManager.getMaxHealth());
+
+            healthSlider.SetValueWithoutNotify(bossManager.getHealth());
+
         }
     }
 }
