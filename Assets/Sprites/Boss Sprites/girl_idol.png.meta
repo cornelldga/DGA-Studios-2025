@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 8990645874973175298
     second: girl_idol_0
+  - first:
+      213: 7026108393477574102
+    second: girl_idol_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -118,8 +121,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 76
-        height: 135
+        width: 150
+        height: 273
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +133,28 @@ TextureImporter:
       bones: []
       spriteID: 20e6b1fe9c035cc70800000000000000
       internalID: 8990645874973175298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_idol_1
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 107
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd0f92ab50c18160800000000000000
+      internalID: 7026108393477574102
       vertices: []
       indices: 
       edges: []
@@ -149,6 +174,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       girl_idol_0: 8990645874973175298
+      girl_idol_1: 7026108393477574102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
