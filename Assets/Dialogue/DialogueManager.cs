@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
@@ -59,6 +60,7 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 DisplayNextLine();
+                Debug.Log("display");
             }
         }
     }
@@ -75,23 +77,25 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Dialogue begins, calls DisplayNextLine() to begin dialogue sequence.
+    /// Dialogue begins by finding the start dialogue associated with the  specified progress.
+    /// Calls DisplayNextLine() to begin dialogue sequence.
     /// Changes the npcImg sprite to the correct characters sprite
     /// </summary>
-    /// <param name="dialogueID">The dialogueID of the first dialogue to show.</param>
+    /// <param name="progress">The progression number of the npc's dialogue</param>
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
-    public void StartDialogue(TextAsset file, string dialogueID, Sprite dialogueBoxSprite,
+    public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary)
     {
         if (file != null)
         {
             ongoingDialogue = true;
             dialogueBox.SetBool("isOpen", true);
-            currentDialogueData = JsonUtility.FromJson<DialogueData>
-                ("{\"dialogueLines\":" + file.text + "}");
-            currentDialogueID = "progress" + dialogueID + "_dialogueA";
+            currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
+            // Format followed by DialogueEditor.BuildLine()
+            currentDialogueID = progress.ToString() + "_" + "start";
+
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             currentEmotions = emotionDictionary;
             GameManager.Instance.FreezePlayer(true);
@@ -108,10 +112,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogueID == "")
         {
+            Debug.Log("end");
             EndDialogue();
             return;
         }
-        
+        Debug.Log(currentDialogueData.dialogueLines.Count);
         if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
@@ -121,9 +126,10 @@ public class DialogueManager : MonoBehaviour
                     npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    break; 
+                    return; 
                 }
             }
+            throw new System.Exception("No dialogue lines found");
         }
     }
 

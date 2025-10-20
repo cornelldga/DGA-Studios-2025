@@ -14,6 +14,7 @@ public class DialogueLine
     public string nextDialogueID;
 }
 
+[System.Serializable]
 public class DialogueData
 {
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();
