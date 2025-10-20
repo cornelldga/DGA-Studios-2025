@@ -6,18 +6,14 @@ using UnityEngine.InputSystem;
 public class Mixers : MonoBehaviour
 {
     [SerializeField] PlayerManager pm;
-
-
+    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
     [SerializeField] float gingerValue;
     [SerializeField] float ciderValueSpeed;
     [SerializeField] float ciderValueAccuracy;
 
-    private bool limeMixed = false;
-    private bool pimientoMixed = false;
-    private bool gingerMixed = false;
-    private bool ciderMixed = false;
+    private PlayerInventory.MixerType currentMixer = PlayerInventory.MixerType.None;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,53 +24,39 @@ public class Mixers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        
+        print(currentMixer);
+        currentMixer = playerInventory.GetEquippedMixer();
+          switch (currentMixer)
         {
-            Mixer();
+            case PlayerInventory.MixerType.None:
+                MixLime();
+                break;
+
+            case PlayerInventory.MixerType.Lime:
+                MixPimiento();
+                break;
+
+            case PlayerInventory.MixerType.Pimiento:
+                currentMixer = PlayerInventory.MixerType.Ginger;
+                MixGinger();
+                break;
+
+            case PlayerInventory.MixerType.Ginger:
+                currentMixer = PlayerInventory.MixerType.Cider;
+                mixCider();
+                break;
+
+            case PlayerInventory.MixerType.Cider:
+                currentMixer = PlayerInventory.MixerType.None;
+                break;
         }
+
     }
 
-    public void Mixer()
-    {
-        if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
-        {
-            Debug.Log("Lime");
-            limeMixed = true;
-            MixLime();
-            pm.SetCooldownMod(limeJuiceValue);
-            pm.SetSpeedMod(limeJuiceValue);
-        }
-        else if (limeMixed)
-        {
-            Debug.Log("Pimiento");
-            limeMixed = false;
-            pimientoMixed = true;
-            NoMixer();
-            MixPimiento();
-        }
-        else if (pimientoMixed)
-        {
-            Debug.Log("Ginger");
-            pimientoMixed = false;
-            gingerMixed = true;
-            NoMixer();
-            MixGinger();
-        }
-        else if (gingerMixed)
-        {
-            Debug.Log("Cider");
-            gingerMixed = false;
-            ciderMixed = true;
-            NoMixer();
-            mixCider();
-        }
-        else if (ciderMixed)
-        {
-            Debug.Log("None");
-            ciderMixed = false;
-            NoMixer();
-        }
-    }
+    
+      
+    
 
     private void NoMixer()
     {

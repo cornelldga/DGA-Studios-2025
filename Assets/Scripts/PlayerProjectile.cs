@@ -34,7 +34,7 @@ public class PlayerProjectile : MonoBehaviour
     //Whether projectile should destroy enemy bullets or not
     private bool destroyBullets = false;
 
-
+    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
     [SerializeField] Whiskey whiskeyPrefab;
@@ -43,12 +43,13 @@ public class PlayerProjectile : MonoBehaviour
     [SerializeField] float changeCooldown;
 
     private PlayerInputActions playerControls;
+    private PlayerInventory.BaseType currentBase;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isBeer = true;
+        currentBase = playerInventory.GetEquippedBase();
     }
 
     // Update is called once per frame
@@ -61,55 +62,27 @@ public class PlayerProjectile : MonoBehaviour
             mouseWorldPos.z = 0f;
             Vector3 direction = mouseWorldPos - transform.position;
             angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            if (isBeer)
+            currentBase = playerInventory.GetEquippedBase();
+            switch (currentBase)
             {
+            case PlayerInventory.BaseType.Beer:
                 ShootBeer();
-            }
-            if (isGin)
-            {
+                break;
+            case PlayerInventory.BaseType.Gin:
                 ShootGin();
-            }
-            if (isWhiskey)
-            {
+                break;
+            case PlayerInventory.BaseType.Whiskey:
                 ShootWhiskey();
-            }
-            if (isWine)
-            {
+                break;
+            case PlayerInventory.BaseType.Wine:
                 ShootWine();
+                break;
+            case PlayerInventory.BaseType.None:
+                break;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Change();
-        }
     }
 
-
-
-    void Change()
-    {
-        if (isBeer)
-        {
-            isBeer = false;
-            isGin = true;
-        }
-        else if (isGin)
-        {
-            isGin = false;
-            isWhiskey = true;
-        }
-        else if (isWhiskey)
-        {
-            isWhiskey = false;
-            isWine = true;
-        }
-        else if (isWine){
-            isWine = false;
-            isBeer = true;
-        }
-        fireCooldown = changeCooldown;
-    }
 
     public void setCooldownMod(float mod)
     {
