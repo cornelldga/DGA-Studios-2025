@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,9 +7,7 @@ public class WhipController : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform whipPivot;
     [SerializeField] GameObject whipObject;
-    PlayerInputActions playerControls;
 
-    private InputAction whip;
     private bool whipping;
     private float timer;
 
@@ -17,20 +16,12 @@ public class WhipController : MonoBehaviour
     //the bigger the number, the less we will adjust
     private float MAGIC_ADJUSTMENT_RATIO = 3f;
 
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        whip = playerControls.Player.Whip;
-        whip.Enable();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        whipObject.SetActive(false);
-    }
-
     private void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            OnWhip();
+        }
         if (whipping)
         {
             timer = timer - Time.deltaTime;
