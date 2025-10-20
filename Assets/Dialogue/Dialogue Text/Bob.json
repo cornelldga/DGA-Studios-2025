@@ -2,25 +2,25 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "WE OUT HERE WINNING!!!",
+            "dialogueText": "Hi, how are you doing? My name's Bob.",
             "emotion": 1,
             "nextDialogueID": "0_weather"
         },
         {
             "dialogueID": "0_weather",
-            "dialogueText": "So anways, the weather we're having.  . .",
+            "dialogueText": "Nice weather we're having.",
             "emotion": 0,
             "nextDialogueID": "0_awesome"
         },
         {
             "dialogueID": "0_awesome",
-            "dialogueText": "Test cause I messed up the dialogue stuff. . .",
+            "dialogueText": "There's this really mean guy that keeps bullying everyone. Can you stop him?",
             "emotion": 0,
             "nextDialogueID": "0_see ya"
         },
         {
             "dialogueID": "0_see ya",
-            "dialogueText": "See ya bruvy!",
+            "dialogueText": "Thank you.",
             "emotion": 1,
             "nextDialogueID": ""
         }
