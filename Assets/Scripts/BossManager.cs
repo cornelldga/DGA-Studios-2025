@@ -99,6 +99,7 @@ public class BossManager : MonoBehaviour
 
 
     public int getHealth() { return health; }
+    public int getMaxHealth() { return startingHealth; }
     public void setHealth(int h) { health=h; }
 
 }
