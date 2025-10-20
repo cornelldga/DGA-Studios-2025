@@ -112,11 +112,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogueID == "")
         {
-            Debug.Log("end");
             EndDialogue();
             return;
         }
-        Debug.Log(currentDialogueData.dialogueLines.Count);
         if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)

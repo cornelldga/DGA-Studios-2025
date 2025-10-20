@@ -236,9 +236,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
   mixerSlot1: 0
   mixerSlot2: 1
-  baseSlot1: 4
-  baseSlot2: 4
-  equippedMixer: 2
+  baseSlot1: 0
+  baseSlot2: 2
+  equippedMixer: 4
   equippedBase: 4
 --- !u!61 &212490275120157305
 BoxCollider2D:
