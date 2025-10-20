@@ -1,0 +1,28 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "WE OUT HERE WINNING!!!",
+            "emotion": 1,
+            "nextDialogueID": "0_weather"
+        },
+        {
+            "dialogueID": "0_weather",
+            "dialogueText": "So anways, the weather we're having.  . .",
+            "emotion": 0,
+            "nextDialogueID": "0_awesome"
+        },
+        {
+            "dialogueID": "0_awesome",
+            "dialogueText": "Test cause I messed up the dialogue stuff. . .",
+            "emotion": 0,
+            "nextDialogueID": "0_see ya"
+        },
+        {
+            "dialogueID": "0_see ya",
+            "dialogueText": "See ya bruvy!",
+            "emotion": 1,
+            "nextDialogueID": ""
+        }
+    ]
+}

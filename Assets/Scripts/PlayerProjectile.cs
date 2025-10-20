@@ -12,9 +12,6 @@ public class PlayerProjectile : MonoBehaviour
     private bool isWhiskey = false;
     private bool isWine = false;
 
-    private InputAction fire;
-    private InputAction change;
-
     private float angle;
 
     private float fireCooldown = 0;
@@ -28,10 +25,16 @@ public class PlayerProjectile : MonoBehaviour
     //Modifier for how wide the range of possible directions the projectile goes in is
     private float accuracyMod = 1;
 
+    //Modifier for how fast a projectile moves
+    private float speedMod = 1;
+
+    //Modifier for how long a projectile lasts
+    float lifetimeMod = 1;
+
     //Whether projectile should destroy enemy bullets or not
     private bool destroyBullets = false;
 
-
+    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
     [SerializeField] Whiskey whiskeyPrefab;
@@ -39,97 +42,54 @@ public class PlayerProjectile : MonoBehaviour
 
     [SerializeField] float changeCooldown;
 
-    [SerializeField] TextMeshProUGUI projText;
-
     private PlayerInputActions playerControls;
+    private PlayerInventory.BaseType currentBase;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isBeer = true;
-        projText.text = "Beer";
-    }
-
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        fire = playerControls.Player.Fire;
-        fire.Enable();
-        change = playerControls.Player.Change;
-        change.Enable();
-    }
-
-    private void OnDisable()
-    {
-        fire.Disable();
+        currentBase = playerInventory.GetEquippedBase();
     }
 
     // Update is called once per frame
     void Update()
     {
         fireCooldown -= Time.deltaTime;
-        if (fire.ReadValue<float>() > 0 && fireCooldown <= 0)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             mouseWorldPos.z = 0f;
             Vector3 direction = mouseWorldPos - transform.position;
             angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            if (isBeer)
+            currentBase = playerInventory.GetEquippedBase();
+            switch (currentBase)
             {
+            case PlayerInventory.BaseType.Beer:
                 ShootBeer();
-            }
-            if (isGin)
-            {
+                break;
+            case PlayerInventory.BaseType.Gin:
                 ShootGin();
-            }
-            if (isWhiskey)
-            {
+                break;
+            case PlayerInventory.BaseType.Whiskey:
                 ShootWhiskey();
-            }
-            if (isWine)
-            {
+                break;
+            case PlayerInventory.BaseType.Wine:
                 ShootWine();
+                break;
+            case PlayerInventory.BaseType.None:
+                break;
             }
         }
     }
 
-
-
-    void OnChange()
-    {
-        if (isBeer)
-        {
-            isBeer = false;
-            isGin = true;
-            projText.text = "Gin";
-        }
-        else if (isGin)
-        {
-            isGin = false;
-            isWhiskey = true;
-            projText.text = "Whiskey";
-        }
-        else if (isWhiskey)
-        {
-            isWhiskey = false;
-            isWine = true;
-            projText.text = "Wine";
-        }
-        else if (isWine){
-            isWine = false;
-            isBeer = true;
-            projText.text = "Beer";
-        }
-        fireCooldown = changeCooldown;
-    }
 
     public void setCooldownMod(float mod)
     {
         cooldownMod = mod;
     }
 
-    public void setDamageMod(float mod)
+    public void SetDamageMod(float mod)
     {
         damageMod = mod;
     }

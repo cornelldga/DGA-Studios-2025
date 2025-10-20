@@ -1,24 +1,19 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Mixers : MonoBehaviour
 {
-    private PlayerInputActions playerControls;
-    private InputAction mixer;
-
-    [SerializeField] PlayerController playerController;
-    [SerializeField] PlayerProjectile playerProjectile;
-
+    [SerializeField] PlayerManager pm;
+    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
     [SerializeField] float gingerValue;
     [SerializeField] float ciderValueSpeed;
     [SerializeField] float ciderValueAccuracy;
 
-    private bool limeMixed = false;
-    private bool pimientoMixed = false;
-    private bool gingerMixed = false;
-    private bool ciderMixed = false;
+    private PlayerInventory.MixerType currentMixer = PlayerInventory.MixerType.None;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,89 +25,71 @@ public class Mixers : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        mixer = playerControls.Player.Mixer;
-        mixer.Enable();
-    }
-    private void OnDisable()
-    {
-        mixer.Disable();
-    }
-
-    void OnMixer()
-    {
-        if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
+        print(currentMixer);
+        currentMixer = playerInventory.GetEquippedMixer();
+          switch (currentMixer)
         {
-            Debug.Log("Lime");
-            limeMixed = true;
-            noMixer();
-            mixLime();
+            case PlayerInventory.MixerType.None:
+                MixLime();
+                break;
+
+            case PlayerInventory.MixerType.Lime:
+                MixPimiento();
+                break;
+
+            case PlayerInventory.MixerType.Pimiento:
+                currentMixer = PlayerInventory.MixerType.Ginger;
+                MixGinger();
+                break;
+
+            case PlayerInventory.MixerType.Ginger:
+                currentMixer = PlayerInventory.MixerType.Cider;
+                mixCider();
+                break;
+
+            case PlayerInventory.MixerType.Cider:
+                currentMixer = PlayerInventory.MixerType.None;
+                break;
         }
-        else if (limeMixed)
-        {
-            Debug.Log("Pimiento");
-            limeMixed = false;
-            pimientoMixed = true;
-            noMixer();
-            mixPimiento();
-        }
-        else if (pimientoMixed)
-        {
-            Debug.Log("Ginger");
-            pimientoMixed = false;
-            gingerMixed = true;
-            noMixer();
-            mixGinger();
-        }
-        else if (gingerMixed)
-        {
-            Debug.Log("Cider");
-            gingerMixed = false;
-            ciderMixed = true;
-            noMixer();
-            mixCider();
-        }
-        else if (ciderMixed)
-        {
-            Debug.Log("None");
-            ciderMixed = false;
-            noMixer();
-        }
+
     }
 
-    private void noMixer()
+    
+      
+    
+
+    private void NoMixer()
     {
-        playerProjectile.setCooldownMod(1);
-        playerController.setSpeedMod(1);
-        playerProjectile.setDamageMod(1);
-        playerProjectile.setAccuracyMod(1);
-        playerProjectile.setDestroyBullets(false);
+        pm.ResetCooldown();
+        pm.ResetDamageSens();
+        pm.ResetSpeed();
+        pm.ResetCooldown();
+        pm.ResetSpeed();
+        pm.ResetDamageMod();
+        pm.ResetAccuracyMod();
+        pm.SetDestroyBulletsOn();
     }
 
-    private void mixLime()
+    private void MixLime()
     {
-        playerProjectile.setCooldownMod(limeJuiceValue);
-        playerController.setSpeedMod(limeJuiceValue);
+        pm.SetCooldownMod(limeJuiceValue);
+        pm.SetSpeedMod(limeJuiceValue);
     }
 
-    private void mixPimiento()
+    private void MixPimiento()
     {
-        playerProjectile.setDamageMod(pimientoValue);
+        pm.SetDamageMod(pimientoValue);
     }
 
-    private void mixGinger()
+    private void MixGinger()
     {
-        playerProjectile.setDamageMod(gingerValue);
-        playerProjectile.setDestroyBullets(true);
+        pm.SetDamageMod(gingerValue);
+        pm.SetDestroyBulletsOn();
     }
 
     private void mixCider()
     {
-        playerController.setSpeedMod(ciderValueSpeed);
-        playerProjectile.setAccuracyMod(ciderValueAccuracy);
+        pm.SetSpeedMod(ciderValueSpeed);
+        pm.SetAccuracyMod(ciderValueAccuracy);
     }
 }
