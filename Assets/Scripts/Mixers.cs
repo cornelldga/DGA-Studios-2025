@@ -7,8 +7,6 @@ public class Mixers : MonoBehaviour
 {
     [SerializeField] PlayerManager pm;
     [SerializeField] PlayerInventory playerInventory;
-
-    private InputAction mixer;
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
     [SerializeField] float gingerValue;
