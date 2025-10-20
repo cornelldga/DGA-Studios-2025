@@ -12,9 +12,6 @@ public class PlayerProjectile : MonoBehaviour
     private bool isWhiskey = false;
     private bool isWine = false;
 
-    private InputAction fire;
-    private InputAction change;
-
     private float angle;
 
     private float fireCooldown = 0;
@@ -54,25 +51,11 @@ public class PlayerProjectile : MonoBehaviour
         isBeer = true;
     }
 
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        fire = playerControls.Player.Fire;
-        fire.Enable();
-        change = playerControls.Player.Change;
-        change.Enable();
-    }
-
-    private void OnDisable()
-    {
-        fire.Disable();
-    }
-
     // Update is called once per frame
     void Update()
     {
         fireCooldown -= Time.deltaTime;
-        if (fire.ReadValue<float>() > 0 && fireCooldown <= 0)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             mouseWorldPos.z = 0f;
@@ -95,11 +78,16 @@ public class PlayerProjectile : MonoBehaviour
                 ShootWine();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Change();
+        }
     }
 
 
 
-    void OnChange()
+    void Change()
     {
         if (isBeer)
         {

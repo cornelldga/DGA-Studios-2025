@@ -6,9 +6,6 @@ using UnityEngine.InputSystem;
 public class Mixers : MonoBehaviour
 {
     [SerializeField] PlayerManager pm;
-    private InputAction mixer;
-
-    private PlayerInputActions playerControls;
 
 
     [SerializeField] float limeJuiceValue;
@@ -31,23 +28,13 @@ public class Mixers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Mixer();
+        }
     }
 
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        mixer = playerControls.Player.Mixer;
-        mixer.Enable();
-    }
-
-
-    private void OnDisable()
-    {
-        mixer.Disable();
-    }
-
-    public void OnMixer(InputAction.CallbackContext context)
+    public void Mixer()
     {
         if (!limeMixed && !pimientoMixed && !gingerMixed && !ciderMixed)
         {
