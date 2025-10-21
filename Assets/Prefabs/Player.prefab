@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593850575938455306}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.11, z: 0}
   m_LocalScale: {x: 1, y: 0.6666667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -206,6 +206,9 @@ MonoBehaviour:
   playerTransform: {fileID: 4588022867240271486}
   whipPivot: {fileID: 1523022322800746459}
   whipObject: {fileID: 5911507543233875158}
+  cooldownDef: 2
+  existanceDef: 1
+  windUpDef: 1
 --- !u!114 &9091669001675644578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,8 +317,8 @@ Transform:
   m_GameObject: {fileID: 5911507543233875158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.222, y: 0.004, z: 0}
-  m_LocalScale: {x: 2.4555, y: 0.2371, z: 1}
+  m_LocalPosition: {x: 0.51, y: -0.002, z: 0}
+  m_LocalScale: {x: 1.0218652, y: 0.130783, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1523022322800746459}
