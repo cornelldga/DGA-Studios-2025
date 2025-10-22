@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
+        Vector2 direction = new(moveDirection.x, moveDirection.y);
+        direction = direction.normalized;
+        rb.linearVelocity = direction * pm.GetSpeed();
     }
 
 
