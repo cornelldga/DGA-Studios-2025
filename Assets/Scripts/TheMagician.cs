@@ -42,4 +42,11 @@ public class TheMagician : MonoBehaviour
         timer += Time.deltaTime;
         
     }
+
+
+    public bool isOffStage()
+    { 
+    if(currentStage == Stage.Backstage) return true;
+    else return false;
+    }
 }
