@@ -31,22 +31,38 @@ public class TheMagician : MonoBehaviour
         if (timer == 0) {
             if (currentStage != Stage.Backstage)
             { currentStage = Stage.Backstage; }
-            else { 
-                int rStage = UnityEngine.Random.Range(1,4); 
-                if(rStage == 1)currentStage=Stage.Knife;
-                if (rStage == 2) currentStage = Stage.Card;
-                if (rStage == 3) currentStage = Stage.Dove;
+            else
+            {
+                int rStage = UnityEngine.Random.Range(1, 4);
+                if (rStage == 1) { 
+                    currentStage = Stage.Knife;
+                    this.transform.position = knifeStage.transform.position;
+                }
+                if (rStage == 2)
+                {
+                    currentStage = Stage.Card;
+                    this.transform.position = cardStage.transform.position;
+                }
+                if (rStage == 3)
+                {
+                    currentStage = Stage.Dove;
+                    this.transform.position = doveStage.transform.position;
+                }
             }
         } 
         
+
         timer += Time.deltaTime;
+        
         
     }
 
 
-    public bool isOffStage()
+    public bool IsOffStage()
     { 
     if(currentStage == Stage.Backstage) return true;
     else return false;
     }
+    private void Shuffle()
+    { }
 }
