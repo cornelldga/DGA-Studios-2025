@@ -7,10 +7,11 @@ public class HealthBar : MonoBehaviour
 {
     private BossManager bossManager;
     public UnityEngine.UI.Slider healthSlider;
+    [SerializeField] string bossName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bossManager = GameObject.Find("Boss").GetComponent<BossManager>();
+        bossManager = GameObject.Find(bossName).GetComponent<BossManager>();
         healthSlider.maxValue = bossManager.getMaxHealth();
     }
 

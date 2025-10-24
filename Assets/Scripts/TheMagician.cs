@@ -48,6 +48,7 @@ public class TheMagician : MonoBehaviour
                     currentStage = Stage.Dove;
                     this.transform.position = doveStage.transform.position;
                 }
+                Shuffle();
             }
         } 
         
@@ -57,12 +58,21 @@ public class TheMagician : MonoBehaviour
         
     }
 
-
+    /// <summary>
+    /// Used to Determine if The Magician is OffStage
+    /// </summary>
+    /// <returns> true if The Magician is Backstage,
+    /// false otherwise
+    /// </returns>
     public bool IsOffStage()
     { 
     if(currentStage == Stage.Backstage) return true;
     else return false;
     }
+
+    /// <summary>
+    /// Randomizes the types of Stages
+    /// </summary>
     private void Shuffle()
     { }
 }
