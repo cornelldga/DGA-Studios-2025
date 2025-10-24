@@ -1280,11 +1280,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.25
+      value: 1.125
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3.046875
+      value: 1.5234375
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -1372,8 +1372,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3717318877211396489, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       insertIndex: -1
       addedObject: {fileID: 377119648}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2558422003454636115}
   m_SourcePrefab: {fileID: 100100000, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+--- !u!1 &2558422003454636114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+  m_PrefabInstance: {fileID: 2558422003454636113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2558422003454636115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558422003454636114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  stages: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
