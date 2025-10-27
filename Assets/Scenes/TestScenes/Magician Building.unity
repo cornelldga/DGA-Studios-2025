@@ -920,7 +920,7 @@ PrefabInstance:
     - target: {fileID: 3522220637217935748, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 505483f1aed711244bd42f5973591501, type: 3}
+      objectReference: {fileID: 21300000, guid: c8ce5ebc7c2534a468e63e4308cbff5d, type: 3}
     - target: {fileID: 3522220637217935748, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   stages: {fileID: 0}
   attackDuration: 5
+  backstageDuration: 0
 --- !u!1001 &7928132895601185172
 PrefabInstance:
   m_ObjectHideFlags: 0
