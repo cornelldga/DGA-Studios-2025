@@ -857,6 +857,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 993098309761967156, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: bulletCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_Size.x
       value: 2.3298013
@@ -895,11 +899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.125
+      value: 0.58984375
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.5234375
+      value: 1.0664062
       objectReference: {fileID: 0}
     - target: {fileID: 3056291565771337819, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -1009,9 +1013,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  stages: {fileID: 0}
+  stages: {fileID: 2123550124}
   attackDuration: 5
-  backstageDuration: 0
+  backstageDuration: 3
 --- !u!1001 &7928132895601185172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1111,6 +1115,10 @@ PrefabInstance:
     - target: {fileID: 3497739690889705795, guid: 926264d73dd89d543ac6be54ea338bf5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164228580551658090, guid: 926264d73dd89d543ac6be54ea338bf5, type: 3}
+      propertyPath: m_Value
+      value: 0.63
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

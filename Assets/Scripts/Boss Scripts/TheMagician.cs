@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,13 +19,20 @@ public class TheMagician : MonoBehaviour
     // Time Magician spends off screen
     public float backstageDuration = 0;
 
+    private Vector3 firstStage,secondStage,thirdStage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         knifeStage = GameObject.Find("Knife");
+        firstStage=knifeStage.transform.position;
+
         cardStage = GameObject.Find("Card");
+        secondStage = cardStage.transform.position;
+
         doveStage = GameObject.Find("Dove");
+        thirdStage = doveStage.transform.position;
+        
         currentStage=Stage.Backstage;
         timer = 0;
     }
@@ -42,7 +50,7 @@ public class TheMagician : MonoBehaviour
             }
             else
             {
-
+                Shuffle();
                 int rStage = UnityEngine.Random.Range(1, 4);
                 if (rStage == 1) { 
                     currentStage = Stage.Knife;
@@ -58,12 +66,10 @@ public class TheMagician : MonoBehaviour
                     currentStage = Stage.Dove;
                     this.transform.position = doveStage.transform.position;
                 }
-                Shuffle();
             }
         }
-       //______________________________________________
 
-        // Responsible for updating timer and setting it back to 0 
+        // Responsible for updating timer and setting it back to 0 when attack is done or when enough time is spent backstage
         timer += Time.deltaTime;
         if (currentStage != Stage.Backstage)
         {
@@ -89,16 +95,35 @@ public class TheMagician : MonoBehaviour
     /// false otherwise
     /// </returns>
     public bool IsOffStage()
-    { 
-    if(currentStage == Stage.Backstage) return true;
-    else return false;
+    {
+        if (currentStage == Stage.Backstage)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
     /// Randomizes the types of Stages
     /// </summary>
     private void Shuffle()
-    { 
-    
+    {
+        List<GameObject> unassigned = new List<GameObject>();
+        unassigned.Add(cardStage);
+        unassigned.Add(doveStage);
+        unassigned.Add(knifeStage);
+
+        int rStage = UnityEngine.Random.Range(0, 3);
+        unassigned[rStage].transform.position = firstStage;
+        unassigned.RemoveAt(rStage);
+
+        rStage = UnityEngine.Random.Range(0, 2);
+        unassigned[rStage].transform.position = secondStage;
+        unassigned.RemoveAt(rStage);
+
+        unassigned[rStage].transform.position = thirdStage;
     }
 }
