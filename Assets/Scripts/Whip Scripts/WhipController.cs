@@ -1,6 +1,8 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WhipController : MonoBehaviour
 {
@@ -9,12 +11,14 @@ public class WhipController : MonoBehaviour
     [SerializeField] GameObject whipObject;
     [SerializeField] float cooldownDef = 1; //default for cooldown
     [SerializeField] float existanceDef = 1; //default for existance 
-    [SerializeField] float windUpDef = 1; //default for windup
+    [SerializeField] TextMeshProUGUI cooldownDisplay;
 
     private float cooldown = 0;
     private float existance = 0;
-    private float windUp = 0;
     private bool whipping = false;
+
+    //how much we want the cooldown to increase/decrease. Bigger numbers means faster
+    public float cooldownMultiplier = 1;
    
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
@@ -23,7 +27,20 @@ public class WhipController : MonoBehaviour
 
     private void Update()
     {
-        cooldown -= Time.deltaTime;
+        cooldown -= Time.deltaTime * cooldownMultiplier;
+        if(cooldownDisplay != null)
+        {
+            if (cooldown < 0)
+            {
+                cooldownDisplay.text = "Whip is ready";
+            }
+            else
+            {
+                cooldownDisplay.text = "Whip has " + cooldown + " seconds.";
+            }
+        }
+        
+           
         if (Input.GetMouseButtonDown(1) && cooldown < 0)
         {
             OnWhip();
@@ -100,16 +117,6 @@ public class WhipController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle = AngleAdjustment(angle);
         whipPivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-    }
-
-    /// <summary>
-    /// Changes the rate at which the cooldown increases/decreases
-    ///
-    /// </summary>
-    /// <param name="multiplier"> how much we want the cooldown to increase/decrease. Bigger numbers means faster</param>
-    public void SetCooldownRate(float multiplier)
-    {
-
     }
 
 }
