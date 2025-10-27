@@ -108,8 +108,11 @@ MonoBehaviour:
   bulletSpeed: 500
   vertical: -1
   horizontal: 0
+  angle: 0
   bulletLife: 10
+  isCurved: 0
   rb: {fileID: 4482821146816361124}
+  Bullet: {fileID: 11400000, guid: 07e5f8886c89bcc43a1dae01c508eb07, type: 2}
 --- !u!50 &4482821146816361124
 Rigidbody2D:
   serializedVersion: 5
