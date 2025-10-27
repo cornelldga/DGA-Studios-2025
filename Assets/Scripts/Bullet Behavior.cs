@@ -10,21 +10,20 @@ public class BulletBehavior : MonoBehaviour
     public float vertical;
     public float horizontal;
     public float angle;
-    public float bulletLife;
     public bool isCurved;
     private float horizSpeedMod = 1f;
     private float vertSpeedMod = 1f;
-    [SerializeField] private Rigidbody2D rb;
+    Rigidbody2D rb;
 
     [SerializeField] private BulletScriptable Bullet;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         bulletSpeed = Bullet.bulletSpeed;
         horizontal = Bullet.horizontal;
         vertical = Bullet.vertical;
-        bulletLife = Bullet.bulletLife;
-        rb = Bullet.rb;
+        Destroy(gameObject, Bullet.bulletLife);
         angle = Bullet.angle;
         isCurved = Bullet.isCurved;
     }
@@ -32,21 +31,19 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bulletLife -= Time.deltaTime;
-        if (bulletLife <= 0 )
-        {
-            Destroy(this.gameObject);
-        }
         if (isCurved)
         {
-            horizSpeedMod = Mathf.Cos(bulletLife * angle);
-            ///print(horizontal);
+            horizSpeedMod = Mathf.Cos(Time.time * angle);
         }
     }
     private void FixedUpdate()
     {
-            rb.linearVelocity = new Vector2(bulletSpeed * horizontal * horizSpeedMod * Time.deltaTime, bulletSpeed * vertical * vertSpeedMod * Time.deltaTime);
-            print(rb.linearVelocityX);
+        BulletMove();
+    }
+
+    public void BulletMove()
+    {
+        rb.linearVelocity = new Vector2(bulletSpeed * horizontal * horizSpeedMod * Time.deltaTime, bulletSpeed * vertical * vertSpeedMod * Time.deltaTime);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

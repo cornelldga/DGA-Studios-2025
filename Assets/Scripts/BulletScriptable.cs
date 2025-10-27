@@ -4,10 +4,9 @@ using UnityEngine;
 public class BulletScriptable : ScriptableObject
 {
     public float bulletSpeed;
+    public float bulletLife;
     public float vertical;
     public float horizontal;
-    public float bulletLife;
-    public Rigidbody2D rb;
     public bool isCurved;
     public float angle;
 
