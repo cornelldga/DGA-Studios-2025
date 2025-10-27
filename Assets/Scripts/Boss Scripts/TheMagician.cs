@@ -12,7 +12,12 @@ public class TheMagician : MonoBehaviour
     private GameObject knifeStage,doveStage,cardStage;
     private Stage currentStage;
     private float timer;
-   
+
+    // Time Magician spends attaacking
+    public float attackDuration=0;
+    // Time Magician spends off screen
+    public float backstageDuration = 0;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,12 +32,17 @@ public class TheMagician : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if timer is ever set to 0, magician changes stage
+        // if timer is ever set to 0, magician changes stage This section of Code is responsible for switching the location of the Magician and updating
+        // the currentStage Variable to be accurate
         if (timer == 0) {
             if (currentStage != Stage.Backstage)
-            { currentStage = Stage.Backstage; }
+            { 
+                currentStage = Stage.Backstage;
+                this.transform.position = new Vector3(10000,10000,10000);
+            }
             else
             {
+
                 int rStage = UnityEngine.Random.Range(1, 4);
                 if (rStage == 1) { 
                     currentStage = Stage.Knife;
@@ -50,12 +60,26 @@ public class TheMagician : MonoBehaviour
                 }
                 Shuffle();
             }
-        } 
-        
+        }
+       //______________________________________________
 
+        // Responsible for updating timer and setting it back to 0 
         timer += Time.deltaTime;
-        
-        
+        if (currentStage != Stage.Backstage)
+        {
+            if (timer > backstageDuration)
+            {
+                timer = 0;
+            }
+        }
+        else
+        {
+            if (timer > attackDuration)
+            {
+                timer = 0;
+            }
+        }
+
     }
 
     /// <summary>
@@ -74,5 +98,7 @@ public class TheMagician : MonoBehaviour
     /// Randomizes the types of Stages
     /// </summary>
     private void Shuffle()
-    { }
+    { 
+    
+    }
 }
