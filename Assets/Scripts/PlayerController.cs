@@ -3,24 +3,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] PlayerManager pm;
     [SerializeField] PlayerInventory inventory;
-    private PlayerInputActions playerControls;
     private Vector2 moveDirection;
-    private InputAction move;
-
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
     void Update()
     {
@@ -47,7 +36,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDirection.x * pm.GetSpeed(), moveDirection.y * pm.GetSpeed());
+        Vector2 direction = new(moveDirection.x, moveDirection.y);
+        direction = direction.normalized;
+        rb.linearVelocity = direction * pm.GetSpeed();
     }
 
 

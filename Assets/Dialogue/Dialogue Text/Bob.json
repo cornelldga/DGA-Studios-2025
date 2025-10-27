@@ -1,1 +1,28 @@
-{"dialogueLines":[{"dialogueID":"progress0_intro01","dialogueText":"Hello!","emotion":0,"nextDialogueID":""}]}
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Hi, how are you doing? My name's Bob.",
+            "emotion": 1,
+            "nextDialogueID": "0_weather"
+        },
+        {
+            "dialogueID": "0_weather",
+            "dialogueText": "Nice weather we're having.",
+            "emotion": 0,
+            "nextDialogueID": "0_awesome"
+        },
+        {
+            "dialogueID": "0_awesome",
+            "dialogueText": "There's this really mean guy that keeps bullying everyone. Can you stop him?",
+            "emotion": 0,
+            "nextDialogueID": "0_see ya"
+        },
+        {
+            "dialogueID": "0_see ya",
+            "dialogueText": "Thank you.",
+            "emotion": 1,
+            "nextDialogueID": ""
+        }
+    ]
+}

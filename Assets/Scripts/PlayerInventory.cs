@@ -8,6 +8,8 @@ public class PlayerInventory : MonoBehaviour
     {
         Lime,
         Pimiento,
+        Ginger,
+        Cider,
         None,
 
     }
@@ -33,9 +35,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private MixerType equippedMixer = MixerType.None;
     [SerializeField] private BaseType equippedBase = BaseType.None;
 
-    [Header("Selected Slots")]
-    [SerializeField] private int selectedBaseSlot = 1; // 1 or 2
-    [SerializeField] private int selectedMixerSlot = 1; // 1 or 2
+    private int selectedBaseSlot = 1; // 1 or 2
+    private int selectedMixerSlot = 1; // 1 or 2
 
     //Could use prefabs of each mixer/base here, but figured seperate enums could work as well.
 

@@ -40,6 +40,7 @@ public class PlayerManager : MonoBehaviour
         if (GetHealth() <= 0)
         {
             isAlive = false;
+            GameManager.Instance.LoadScene("Main Menu"); //player lose condition
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
@@ -47,8 +48,9 @@ public class PlayerManager : MonoBehaviour
         //Check if we were hit by enemy bullet. Need reference to how much damage it does.
         if (other.CompareTag("EnemyBullet"))
         {
-            //TakeDamage(other.getDamage)
-            //Need enemy bullet actual damage.^
+            int damage = 1;
+            //int damage = other.GetComponent<Enemybullet>.getDamage; //TODO: once enemy bullets have a damage value
+            TakeDamage(damage);
         }
     }
     //Returns current player health

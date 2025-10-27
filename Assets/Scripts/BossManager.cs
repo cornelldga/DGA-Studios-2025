@@ -48,9 +48,9 @@ public class BossManager : MonoBehaviour
         timer += Time.deltaTime;
         healthBar.transform.localScale = new Vector3(health, 1, 1);
         
-        if (health == 0)
+        if (health <= 0)
         {
-            Time.timeScale = 0;
+            GameManager.Instance.LoadScene("Main Menu");
         }
     }
 

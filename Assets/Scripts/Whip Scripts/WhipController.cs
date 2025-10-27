@@ -1,40 +1,56 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WhipController : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform whipPivot;
     [SerializeField] GameObject whipObject;
-    PlayerInputActions playerControls;
+    [SerializeField] float cooldownDef = 1; //default for cooldown
+    [SerializeField] float existanceDef = 1; //default for existance 
+    [SerializeField] TextMeshProUGUI cooldownDisplay;
 
-    private InputAction whip;
-    private bool whipping;
-    private float timer;
+    private float cooldown = 0;
+    private float existance = 0;
+    private bool whipping = false;
 
+    //how much we want the cooldown to increase/decrease. Bigger numbers means faster
+    public float cooldownMultiplier = 1;
+   
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
     //the bigger the number, the less we will adjust
-    private float MAGIC_ADJUSTMENT_RATIO = 3f;
-
-    private void OnEnable()
-    {
-        playerControls = new PlayerInputActions();
-        whip = playerControls.Player.Whip;
-        whip.Enable();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        whipObject.SetActive(false);
-    }
+    private float MAGIC_ADJUSTMENT_RATIO = 5f;
 
     private void Update()
     {
+        cooldown -= Time.deltaTime * cooldownMultiplier;
+        if(cooldownDisplay != null)
+        {
+            if (cooldown < 0)
+            {
+                cooldownDisplay.text = "Whip is ready";
+            }
+            else
+            {
+                cooldownDisplay.text = "Whip has " + cooldown + " seconds.";
+            }
+        }
+        
+           
+        if (Input.GetMouseButtonDown(1) && cooldown < 0)
+        {
+            OnWhip();
+            cooldown = cooldownDef;
+        }
+
         if (whipping)
         {
-            timer = timer - Time.deltaTime;
-            if (timer < 0)
+            existance = existance - Time.deltaTime;
+            if (existance < 0)
             {
                 whipping = false;
                 whipObject.SetActive(false);
@@ -42,6 +58,9 @@ public class WhipController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns an adjusted angle that makes the whip's final location more accurate to where the user clicked
+    /// </summary>
     public float AngleAdjustment(float originalAngle)
     {
         float finalAngle = originalAngle;
@@ -82,10 +101,13 @@ public class WhipController : MonoBehaviour
         return finalAngle;
     }
 
+    /// <summary>
+    /// Rotates the whip towards the mouse and 
+    /// </summary>
     public void OnWhip()
     {
         whipping = true;
-        timer = 1;
+        existance = existanceDef;
         whipObject.SetActive(true);
         //find angle between player and mouse
         //whipObject.transform.rotation = Quaternion.identity;
