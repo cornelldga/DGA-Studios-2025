@@ -26,8 +26,6 @@ public class DialogueManager : MonoBehaviour
     bool ongoingDialogue = false;
 
     bool isTyping; 
-    bool fadeIn;
-    bool fadeOut;
     bool isFading;
 
     void Awake()
@@ -62,17 +60,6 @@ public class DialogueManager : MonoBehaviour
                 DisplayNextLine();
                 Debug.Log("display");
             }
-        }
-    }
-
-    /// <summary>
-    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
-    /// </summary>
-    private void Update()
-    {
-        if (isFading)
-        {
-            Fade();
         }
     }
 
@@ -172,8 +159,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        fadeOut = true;
-        Fade();
         ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
         dialogueBox.SetBool("isOpen", false);
@@ -191,40 +176,4 @@ public class DialogueManager : MonoBehaviour
                 ("{\"dialogueLines\":" + file.text + "}");
         }
     }
-
-    /// <summary>
-    /// Fades in the gray background to prioritize the dialogue
-    /// </summary>
-    private void Fade()
-    {
-        if (fadeIn)
-        {
-            Color color = backgroundImg.color;
-            if (color.a < .36f)
-            {
-                color.a += Time.deltaTime;
-                if (color.a >= .36f)
-                {
-                    color.a = .36f;
-                    fadeIn = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-        else if (fadeOut)
-        {
-            Color color = backgroundImg.color;
-            if (color.a > 0)
-            {
-                color.a -= Time.deltaTime;
-                if (color.a <= 0)
-                {
-                    color.a = 0;
-                    fadeOut = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-    }
-
 }
