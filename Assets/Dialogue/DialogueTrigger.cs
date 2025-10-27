@@ -11,6 +11,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [SerializeField] Sprite neutralSprite;
     [SerializeField] Sprite happySprite;
     [SerializeField] Sprite sadSprite;
+    [SerializeField] string sceneName = "";
     private int progressionInt;
 
     Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
@@ -38,7 +39,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         if (!DialogueManager.Instance.OngoingDialogue())
         {
             DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt,
-            dialogueBoxSprite, emotionDictionary);
+            dialogueBoxSprite, emotionDictionary, sceneName);
         }
             
     }
