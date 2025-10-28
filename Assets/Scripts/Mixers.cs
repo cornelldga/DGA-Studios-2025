@@ -25,7 +25,6 @@ public class Mixers : MonoBehaviour
     void Update()
     {
         
-        print(currentMixer);
         currentMixer = playerInventory.GetEquippedMixer();
           switch (currentMixer)
         {
