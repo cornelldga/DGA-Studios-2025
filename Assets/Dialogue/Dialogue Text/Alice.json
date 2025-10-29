@@ -1,0 +1,22 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Hi, there. I'm Alice.",
+            "emotion": 1,
+            "nextDialogueID": "0_weather"
+        },
+        {
+            "dialogueID": "0_weather",
+            "dialogueText": "Weather's pretty nice, huh?",
+            "emotion": 0,
+            "nextDialogueID": "0_fight"
+        },
+        {
+            "dialogueID": "0_fight",
+            "dialogueText": "I'd be careful going over there. That's one of Grandma's goons.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}

@@ -19,13 +19,16 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Image backgroundImg;
     [SerializeField] private Image npcImg;
     [SerializeField] private float typingSpeed;
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
 
     DialogueData currentDialogueData;
     string currentDialogueID;
     Dictionary<DialogueEmotion, Sprite> currentEmotions;
     bool ongoingDialogue = false;
 
-    bool isTyping; 
+    bool isTyping;
+    bool bossFight;
     bool fadeIn;
     bool fadeOut;
     bool isFading;
@@ -36,6 +39,8 @@ public class DialogueManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            yesButton.gameObject.SetActive(false);
+            noButton.gameObject.SetActive(false);
         }
         else
         {
@@ -87,7 +92,7 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene)
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, bool boss)
     {
         if (file != null)
         {
@@ -97,7 +102,7 @@ public class DialogueManager : MonoBehaviour
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
             sceneName = scene;
-
+            bossFight = boss;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             currentEmotions = emotionDictionary;
             GameManager.Instance.FreezePlayer(true);
@@ -114,7 +119,13 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogueID == "")
         {
-            EndDialogue();
+            if (bossFight)
+            {
+                DialogueChoice();
+            } else
+            {
+                EndDialogue();
+            }
             return;
         }
         if (currentDialogueData.dialogueLines.Count > 0)
@@ -178,12 +189,7 @@ public class DialogueManager : MonoBehaviour
         Fade();
         ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
-        dialogueBox.SetBool("isOpen", false);
-        if (sceneName!="")
-        {
-            GameManager.Instance.LoadScene(sceneName);
-            sceneName = "";
-        }
+        dialogueBox.SetBool("isOpen", false); 
     }
 
     /// <summary>
@@ -197,6 +203,26 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>
                 ("{\"dialogueLines\":" + file.text + "}");
         }
+    }
+
+    private void DialogueChoice()
+    {
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+    }
+
+    public void Fight()
+    {
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        GameManager.Instance.LoadScene(sceneName);
+    }
+
+    public void NoFight()
+    {
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        EndDialogue();
     }
 
     /// <summary>
