@@ -9,9 +9,16 @@ public class BulletBehavior : MonoBehaviour
     public float horizontal;
     public float bulletLife;
     [SerializeField] private Rigidbody2D rb;
+
+    private int damageMod;
     void Start()
     {
-        
+        damageMod = 1;
+    }
+
+    public void setDamageMod(int mod)
+    {
+        damageMod = mod;
     }
 
     // Update is called once per frame
@@ -36,6 +43,11 @@ public class BulletBehavior : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
+            Destroy(this.gameObject);
+        }
+        if (this.gameObject.CompareTag("PlayerBullet") && collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<BossManager>().setHealth(collision.gameObject.GetComponent<BossManager>().getHealth() - 1 * damageMod);
             Destroy(this.gameObject);
         }
     }
