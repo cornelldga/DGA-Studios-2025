@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55f66295dbbea4b46b5a4e2f9a6f787e, type: 3}
-  m_Name: BulletScriptable
+  m_Name: Card Bullet
   m_EditorClassIdentifier: Assembly-CSharp::BulletScriptable
   bulletSpeed: 50
-  bulletLife: 10
+  bulletLife: 5
   vertical: -1
-  horizontal: 1
-  isCurved: 1
-  angle: 9
+  horizontal: 0
+  isCurved: 0
+  angle: 0
