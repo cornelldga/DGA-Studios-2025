@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -50,13 +51,14 @@ public class BossManager : MonoBehaviour
         
         if (health <= 0)
         {
+           this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
     }
 
     private void FixedUpdate()
     {
-        Move();
+       // Move();
     }
 
     /// <summary>

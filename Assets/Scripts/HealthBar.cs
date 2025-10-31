@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,11 +19,19 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bossManager == null)
+        {
+            this.gameObject.SetActive(false);
+        }
         if (bossManager.getMaxHealth() != 0)
         {
 
             healthSlider.SetValueWithoutNotify(bossManager.getHealth());
 
+        }
+        if(bossManager.getHealth()==0)
+        {
+            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "The Magician, Defeated!!!!";
         }
     }
 }

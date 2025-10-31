@@ -27,6 +27,8 @@ public class TheMagician : MonoBehaviour
     //Attack cool down
     [SerializeField] private float attackCooldown;
     private float attackTimer;
+    // Player
+    private GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +45,7 @@ public class TheMagician : MonoBehaviour
         currentStage=Stage.Backstage;
         timer = 0;
         attackTimer = 0;
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -138,6 +141,7 @@ public class TheMagician : MonoBehaviour
     /// </summary>
     private void attack()
     {
+        // "player" shold be the name of the player object if it's location is needed
         if (currentStage == Stage.Knife)
         { }
         else if (currentStage == Stage.Card)
