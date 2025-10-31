@@ -44,10 +44,7 @@ GameObject:
   - component: {fileID: 1075589582035499218}
   - component: {fileID: 5903920608498839182}
   - component: {fileID: 4557611548015582227}
-  - component: {fileID: 7953285055988216103}
   - component: {fileID: 671402573874655419}
-  - component: {fileID: 9091669001675644578}
-  - component: {fileID: 1113607209091070886}
   - component: {fileID: 212490275120157305}
   m_Layer: 0
   m_Name: Player
@@ -170,27 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612c7ac16233f488291ce28d5614fcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  rb: {fileID: 5903920608498839182}
-  pm: {fileID: 9091669001675644578}
-  inventory: {fileID: 1113607209091070886}
---- !u!114 &7953285055988216103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2241333523866175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d98b9dcde162b49a33c87ae9f4e65a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerProjectile
-  playerInventory: {fileID: 1113607209091070886}
-  beerPrefab: {fileID: 9101882892545248675, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
-  ginPrefab: {fileID: 7471179523876741705, guid: b3f18be2c343fe64b95759835c6d0fa7, type: 3}
-  whiskeyPrefab: {fileID: 1240062487690815842, guid: c93de10fbc021ca48a874e546c3d12c0, type: 3}
-  winePrefab: {fileID: -8039387722388129891, guid: 1f9bbc3c51e6c364a8f2c9c6567885d5, type: 3}
-  changeCooldown: 0
+  baseSpeed: 0
+  maxHealth: 0
+  changeCooldownTime: 0
+  equippedMixers: 
+  equippedBases: 
 --- !u!114 &671402573874655419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,40 +191,6 @@ MonoBehaviour:
   existanceDef: 0.3
   cooldownDisplay: {fileID: 0}
   cooldownMultiplier: 1
---- !u!114 &9091669001675644578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2241333523866175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e1a6a02af644faaad3f6ece22f3095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  playerController: {fileID: 4557611548015582227}
-  playerProjectile: {fileID: 7953285055988216103}
-  mixers: {fileID: 3819530607651134763}
-  playerInventory: {fileID: 1113607209091070886}
---- !u!114 &1113607209091070886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2241333523866175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7364097fe3f4015bcadcc93438a0e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  mixerSlot1: 0
-  mixerSlot2: 1
-  baseSlot1: 0
-  baseSlot2: 2
-  equippedMixer: 4
-  equippedBase: 4
 --- !u!61 &212490275120157305
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -485,13 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  pm: {fileID: 9091669001675644578}
-  playerInventory: {fileID: 1113607209091070886}
-  limeJuiceValue: 0.75
-  pimientoValue: 1.25
-  gingerValue: 0.75
-  ciderValueSpeed: 1.25
-  ciderValueAccuracy: 2
+  mixers: []
 --- !u!114 &2592310935581460178
 MonoBehaviour:
   m_ObjectHideFlags: 0
