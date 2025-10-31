@@ -24,6 +24,9 @@ public class TheMagician : MonoBehaviour
     //Current Boss Phase
     private int phase = 1;
 
+    //Attack cool down
+    [SerializeField] private float attackCooldown;
+    private float attackTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,6 +42,7 @@ public class TheMagician : MonoBehaviour
         
         currentStage=Stage.Backstage;
         timer = 0;
+        attackTimer = 0;
     }
 
     // Update is called once per frame
@@ -75,6 +79,7 @@ public class TheMagician : MonoBehaviour
 
         // Responsible for updating timer and setting it back to 0 when attack is done or when enough time is spent backstage
         timer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
         if (currentStage != Stage.Backstage)
         {
             if (timer > backstageDuration)
@@ -99,7 +104,50 @@ public class TheMagician : MonoBehaviour
         {
             phase = 3;
         }
+
+        //Put attacks here, check with timer variable if needed
+        if (phase ==1)
+        {
+            if (attackTimer>attackCooldown)
+            {
+                attack();
+                attackTimer = 0;
+            }
+            
+        }
+        else if (phase == 2)
+        {
+            if (attackTimer > attackCooldown*.7)
+            {
+                attack();
+                attackTimer = 0;
+            }
+        }
+        else if (phase == 3)
+        {
+            if (attackTimer > attackCooldown*.4)
+            {
+                attack();
+                attackTimer = 0;
+            }
+        }
     }
+
+    /// <summary>
+    /// Sends out a bullet depending on what stage the magician is standing
+    /// </summary>
+    private void attack()
+    {
+        if (currentStage == Stage.Knife)
+        { }
+        else if (currentStage == Stage.Card)
+        { }
+        else if (currentStage == Stage.Dove)
+        { }
+    }
+
+
+
 
     /// <summary>
     /// Used to Determine if The Magician is OffStage
@@ -117,6 +165,11 @@ public class TheMagician : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public int GetPhase()
+    {
+        return phase;
     }
 
     /// <summary>

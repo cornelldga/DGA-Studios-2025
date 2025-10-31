@@ -1020,6 +1020,7 @@ MonoBehaviour:
   stages: {fileID: 2123550124}
   attackDuration: 5
   backstageDuration: 3
+  attackCooldown: 2.5
 --- !u!114 &2558422003454636118 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4102453222384681232, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
