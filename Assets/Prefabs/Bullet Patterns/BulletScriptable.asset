@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: BulletScriptable
   m_EditorClassIdentifier: Assembly-CSharp::BulletScriptable
   bulletSpeed: 50
-  vertical: 1
-  horizontal: 1
   bulletLife: 10
-  rb: {fileID: 5999972174013097874, guid: e3e3f7f4b2b21cd46be681863f0b7f44, type: 3}
+  vertical: -1
+  horizontal: 1
   isCurved: 1
-  angle: 45
+  angle: 9

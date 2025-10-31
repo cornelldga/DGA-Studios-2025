@@ -37,5 +37,10 @@ public class BulletManager : MonoBehaviour {
             timer = 0f;
         }
     }
-    
+
+    /*void Launch()
+    {
+        Fire_Bullet();
+    }
+    */
 }
