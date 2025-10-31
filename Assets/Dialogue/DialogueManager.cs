@@ -26,9 +26,8 @@ public class DialogueManager : MonoBehaviour
     bool ongoingDialogue = false;
 
     bool isTyping; 
-    bool fadeIn;
-    bool fadeOut;
     bool isFading;
+    string sceneName;
 
     void Awake()
     {
@@ -66,17 +65,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
-    /// </summary>
-    private void Update()
-    {
-        if (isFading)
-        {
-            Fade();
-        }
-    }
-
-    /// <summary>
     /// Dialogue begins by finding the start dialogue associated with the  specified progress.
     /// Calls DisplayNextLine() to begin dialogue sequence.
     /// Changes the npcImg sprite to the correct characters sprite
@@ -86,7 +74,7 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary)
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene)
     {
         if (file != null)
         {
@@ -95,6 +83,7 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
+            sceneName = scene;
 
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             currentEmotions = emotionDictionary;
@@ -172,11 +161,14 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        fadeOut = true;
-        Fade();
         ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
         dialogueBox.SetBool("isOpen", false);
+        if (sceneName!="")
+        {
+            GameManager.Instance.LoadScene(sceneName);
+            sceneName = "";
+        }
     }
 
     /// <summary>
@@ -191,40 +183,4 @@ public class DialogueManager : MonoBehaviour
                 ("{\"dialogueLines\":" + file.text + "}");
         }
     }
-
-    /// <summary>
-    /// Fades in the gray background to prioritize the dialogue
-    /// </summary>
-    private void Fade()
-    {
-        if (fadeIn)
-        {
-            Color color = backgroundImg.color;
-            if (color.a < .36f)
-            {
-                color.a += Time.deltaTime;
-                if (color.a >= .36f)
-                {
-                    color.a = .36f;
-                    fadeIn = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-        else if (fadeOut)
-        {
-            Color color = backgroundImg.color;
-            if (color.a > 0)
-            {
-                color.a -= Time.deltaTime;
-                if (color.a <= 0)
-                {
-                    color.a = 0;
-                    fadeOut = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-    }
-
 }
