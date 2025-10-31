@@ -15,6 +15,12 @@ public class Smoker : MonoBehaviour
     [SerializeField] Transform releasePoint;
     //A transform centered on the smoker to allow for 360 smoking.
     [SerializeField] Transform pivot;
+    [SerializeField] TheMagician magician;
+
+    private bool isOnStage;
+    void Start()
+    {
+    }
 
     // Update is called once per frame
     /// <summary>
@@ -24,7 +30,8 @@ public class Smoker : MonoBehaviour
     {
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer += Time.deltaTime;
-        if (smokeTimer >= resetTime)
+        
+        if (smokeTimer >= resetTime && magician.IsOffStage())
         {
             ShootSmoke();
             smokeTimer = 0;
