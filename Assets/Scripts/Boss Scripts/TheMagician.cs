@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TheMagician : MonoBehaviour
 {
+    public BossManager BossManager;
     private enum Stage
     {
         Knife,Dove,Card,Backstage
@@ -18,8 +19,11 @@ public class TheMagician : MonoBehaviour
     public float attackDuration=0;
     // Time Magician spends off screen
     public float backstageDuration = 0;
-
+    // Original stage locations
     private Vector3 firstStage,secondStage,thirdStage;
+    //Current Boss Phase
+    private int phase = 1;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -86,6 +90,15 @@ public class TheMagician : MonoBehaviour
             }
         }
 
+        // Changes Boss Phase in response to health state
+        if(BossManager.getHealth()/BossManager.getMaxHealth() <= .5 & phase ==1 )
+        {
+           phase = 2;
+        }
+        if (BossManager.getHealth() / BossManager.getMaxHealth() <= .25 & phase==2)
+        {
+            phase = 3;
+        }
     }
 
     /// <summary>

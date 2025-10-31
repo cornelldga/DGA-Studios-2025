@@ -995,6 +995,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2558422003454636115}
+    - targetCorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2558422003454636120}
   m_SourcePrefab: {fileID: 100100000, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
 --- !u!1 &2558422003454636114 stripped
 GameObject:
@@ -1013,9 +1016,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  BossManager: {fileID: 2558422003454636118}
   stages: {fileID: 2123550124}
   attackDuration: 5
   backstageDuration: 3
+--- !u!114 &2558422003454636118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4102453222384681232, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+  m_PrefabInstance: {fileID: 2558422003454636113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558422003454636114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e6f8bbdcd5898498a68e0d6bbc6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!95 &2558422003454636120
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558422003454636114}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7928132895601185172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1035,6 +1072,10 @@ PrefabInstance:
     - target: {fileID: 2424577850964959185, guid: 926264d73dd89d543ac6be54ea338bf5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858460118254580580, guid: 926264d73dd89d543ac6be54ea338bf5, type: 3}
+      propertyPath: m_text
+      value: The Magician, Proprietor of Wonder
       objectReference: {fileID: 0}
     - target: {fileID: 3497739690889705795, guid: 926264d73dd89d543ac6be54ea338bf5, type: 3}
       propertyPath: m_Pivot.x
