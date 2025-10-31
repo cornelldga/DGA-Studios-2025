@@ -31,10 +31,7 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCurved)
-        {
-            horizSpeedMod = Mathf.Cos(Time.time * angle);
-        }
+        
     }
     private void FixedUpdate()
     {
@@ -43,7 +40,14 @@ public class BulletBehavior : MonoBehaviour
 
     public void BulletMove()
     {
+        if (isCurved)
+        {
+            horizSpeedMod = Mathf.Cos(Time.time * angle) * 10;
+        }
+        Vector2 forward = transform.forward;
+        Vector2 perp = transform.right;
         rb.linearVelocity = new Vector2(bulletSpeed * horizontal * horizSpeedMod * Time.deltaTime, bulletSpeed * vertical * vertSpeedMod * Time.deltaTime);
+        
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
