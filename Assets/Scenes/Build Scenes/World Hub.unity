@@ -371,7 +371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cdc73a67c4a424dace0185f39a82a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  sceneName: Angel Boss Template
 --- !u!1 &1012723034
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +551,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1024449440}
   - component: {fileID: 1024449441}
+  - component: {fileID: 1024449443}
+  - component: {fileID: 1024449442}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -632,6 +633,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1024449442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024449439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210622398acbc450f826856914321c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
+  jsonTextFile: {fileID: 4900000, guid: 3c1b3946d00bc457baf8480e3f0ff0db, type: 3}
+  dialogueBoxSprite: {fileID: 3877369958027668088, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+  neutralSprite: {fileID: 2383559155859820356, guid: 805cb6f13560a41a88cc9278d622a032, type: 3}
+  happySprite: {fileID: 21300000, guid: 37853438fc9d1449c8d2cf1bc6e99560, type: 3}
+  sadSprite: {fileID: 2383559155859820356, guid: 805cb6f13560a41a88cc9278d622a032, type: 3}
+  bossChar: 1
+  sceneName: Angel Boss Template
+--- !u!114 &1024449443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024449439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1390739398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -643,7 +693,7 @@ PrefabInstance:
     - target: {fileID: 1178753060098462306, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: interactable
       value: 
-      objectReference: {fileID: 430434651}
+      objectReference: {fileID: 1024449439}
     - target: {fileID: 1685251416819008211, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: m_Name
       value: Interaction Zone

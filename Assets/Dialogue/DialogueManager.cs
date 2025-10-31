@@ -205,12 +205,18 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets UI buttons active.
+    /// </summary>
     private void DialogueChoice()
     {
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Deactivates UI buttons and loads new scene.
+    /// </summary>
     public void Fight()
     {
         yesButton.gameObject.SetActive(false);
@@ -218,6 +224,9 @@ public class DialogueManager : MonoBehaviour
         GameManager.Instance.LoadScene(sceneName);
     }
 
+    /// <summary>
+    /// Sets UI buttons inactive and ends dialogue.
+    /// </summary>
     public void NoFight()
     {
         yesButton.gameObject.SetActive(false);
