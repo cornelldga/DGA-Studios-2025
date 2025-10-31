@@ -54,6 +54,7 @@ public class BossManager : MonoBehaviour
            this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
+
     }
 
     private void FixedUpdate()
@@ -90,14 +91,15 @@ public class BossManager : MonoBehaviour
     /// Responisble for decreasing boss health when making contact with a player bullet. Currently Destroys bullets that harm it
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            health--;
+            health -= 1 * damageMod;
+            
             Destroy(collision.gameObject);
         }
-    }
+    }*/
 
 
     public int getHealth() { return health; }
