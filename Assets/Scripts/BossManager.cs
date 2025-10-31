@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -50,6 +51,7 @@ public class BossManager : MonoBehaviour
         
         if (health <= 0)
         {
+           //this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
 
@@ -57,7 +59,7 @@ public class BossManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+       // Move();
     }
 
     /// <summary>
@@ -101,6 +103,7 @@ public class BossManager : MonoBehaviour
 
 
     public int getHealth() { return health; }
+    public int getMaxHealth() { return startingHealth; }
     public void setHealth(int h) { health=h; }
 
 }
