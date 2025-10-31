@@ -9,12 +9,7 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     public float vertical;
     public float horizontal;
-
     private int damageMod;
-    void Start()
-    {
-        damageMod = 1;
-    }
 
     public void setDamageMod(int mod)
     {
