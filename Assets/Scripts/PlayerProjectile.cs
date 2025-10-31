@@ -31,9 +31,6 @@ public class PlayerProjectile : MonoBehaviour
     //Modifier for how long a projectile lasts
     float lifetimeMod = 1;
 
-    //Whether projectile should destroy enemy bullets or not
-    private bool destroyBullets = false;
-
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Beer beerPrefab;
     [SerializeField] Gin ginPrefab;
@@ -99,15 +96,11 @@ public class PlayerProjectile : MonoBehaviour
         accuracyMod = mod;
     }
 
-    public void setDestroyBullets(bool ginger)
-    {
-        destroyBullets = ginger;
-    }
-
     void ShootBeer()
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-beerPrefab.getAccuracy() * accuracyMod, beerPrefab.getAccuracy() * accuracyMod));
         Beer beerProj = Instantiate(beerPrefab, gameObject.transform.position, fireDirection);
+        beerProj.SetDamageMod((int)damageMod);
         fireCooldown = beerProj.getCooldown() * cooldownMod;
     }
 
@@ -115,6 +108,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-ginPrefab.getAccuracy() * accuracyMod, ginPrefab.getAccuracy() * accuracyMod));
         Gin ginProj = Instantiate(ginPrefab, gameObject.transform.position, fireDirection);
+        ginProj.SetDamageMod((int)damageMod);
         fireCooldown = ginProj.getCooldown() * cooldownMod;
     }
 
@@ -122,6 +116,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-whiskeyPrefab.getAccuracy() * accuracyMod, whiskeyPrefab.getAccuracy() * accuracyMod));
         Whiskey whiskeyProj = Instantiate(whiskeyPrefab, gameObject.transform.position, fireDirection);
+        whiskeyProj.SetDamageMod((int)damageMod);
         fireCooldown = whiskeyProj.getCooldown() * cooldownMod;
     }
 
@@ -129,6 +124,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle + Random.Range(-winePrefab.getAccuracy() * accuracyMod, winePrefab.getAccuracy() * accuracyMod));
         Wine wineProj = Instantiate(winePrefab, gameObject.transform.position, fireDirection);
+        wineProj.SetDamageMod((int)damageMod);
         fireCooldown = wineProj.getCooldown() * cooldownMod;
     }
 

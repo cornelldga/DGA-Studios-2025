@@ -486,10 +486,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pm: {fileID: 9091669001675644578}
+  bm: {fileID: 4102453222384681232, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
   playerInventory: {fileID: 1113607209091070886}
+  wch: {fileID: 9146597292848217168}
   limeJuiceValue: 0.75
-  pimientoValue: 1.25
-  gingerValue: 0.75
+  pimientoValue: 2
+  gingerValueProjDamage: 0.5
+  gingerValueWhipDamage: 2
   ciderValueSpeed: 1.25
   ciderValueAccuracy: 2
 --- !u!114 &2592310935581460178
