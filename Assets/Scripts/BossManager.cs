@@ -51,7 +51,7 @@ public class BossManager : MonoBehaviour
         
         if (health <= 0)
         {
-           this.gameObject.SetActive(false);
+           //this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
 
