@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -50,13 +51,15 @@ public class BossManager : MonoBehaviour
         
         if (health <= 0)
         {
+           //this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
+
     }
 
     private void FixedUpdate()
     {
-        Move();
+       // Move();
     }
 
     /// <summary>
@@ -88,17 +91,19 @@ public class BossManager : MonoBehaviour
     /// Responisble for decreasing boss health when making contact with a player bullet. Currently Destroys bullets that harm it
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            health--;
+            health -= 1 * damageMod;
+            
             Destroy(collision.gameObject);
         }
-    }
+    }*/
 
 
     public int getHealth() { return health; }
+    public int getMaxHealth() { return startingHealth; }
     public void setHealth(int h) { health=h; }
 
 }

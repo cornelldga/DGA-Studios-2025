@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 public class Mixers : MonoBehaviour
 {
     [SerializeField] PlayerManager pm;
+    [SerializeField] BossManager bm;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] WhipCollisionHandler wch;
     [SerializeField] float limeJuiceValue;
     [SerializeField] float pimientoValue;
-    [SerializeField] float gingerValue;
+    [SerializeField] float gingerValueProjDamage;
+    [SerializeField] float gingerValueWhipDamage;
     [SerializeField] float ciderValueSpeed;
     [SerializeField] float ciderValueAccuracy;
 
@@ -18,40 +21,45 @@ public class Mixers : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        currentMixer = PlayerInventory.MixerType.None;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        print(currentMixer);
-        currentMixer = playerInventory.GetEquippedMixer();
-          switch (currentMixer)
+        if (currentMixer != playerInventory.GetEquippedMixer())
         {
-            case PlayerInventory.MixerType.None:
-                MixLime();
-                break;
+            currentMixer = playerInventory.GetEquippedMixer();
+            print(currentMixer);
+            switch (currentMixer)
+            {
+                case PlayerInventory.MixerType.None:
+                    NoMixer();
+                    break;
 
-            case PlayerInventory.MixerType.Lime:
-                MixPimiento();
-                break;
+                case PlayerInventory.MixerType.Lime:
+                    NoMixer();
+                    MixLime();
+                    break;
 
-            case PlayerInventory.MixerType.Pimiento:
-                currentMixer = PlayerInventory.MixerType.Ginger;
-                MixGinger();
-                break;
+                case PlayerInventory.MixerType.Pimiento:
+                    NoMixer();
+                    MixPimiento();
+                    break;
 
-            case PlayerInventory.MixerType.Ginger:
-                currentMixer = PlayerInventory.MixerType.Cider;
-                mixCider();
-                break;
+                case PlayerInventory.MixerType.Ginger:
+                    NoMixer();
+                    MixGinger();
+                    break;
 
-            case PlayerInventory.MixerType.Cider:
-                currentMixer = PlayerInventory.MixerType.None;
-                break;
+                case PlayerInventory.MixerType.Cider:
+                    NoMixer();
+                    MixCider();
+                    break;
+            }
         }
-
+        
     }
 
     
@@ -67,7 +75,7 @@ public class Mixers : MonoBehaviour
         pm.ResetSpeed();
         pm.ResetDamageMod();
         pm.ResetAccuracyMod();
-        pm.SetDestroyBulletsOn();
+        wch.ResetDamageMod();
     }
 
     private void MixLime()
@@ -83,11 +91,11 @@ public class Mixers : MonoBehaviour
 
     private void MixGinger()
     {
-        pm.SetDamageMod(gingerValue);
-        pm.SetDestroyBulletsOn();
+        pm.SetDamageMod(gingerValueProjDamage);
+        wch.SetDamageMod((int)gingerValueWhipDamage);
     }
 
-    private void mixCider()
+    private void MixCider()
     {
         pm.SetSpeedMod(ciderValueSpeed);
         pm.SetAccuracyMod(ciderValueAccuracy);

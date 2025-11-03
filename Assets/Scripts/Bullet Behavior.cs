@@ -9,6 +9,13 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     public float vertical;
     public float horizontal;
+    private int damageMod;
+
+    public void setDamageMod(int mod)
+    {
+        damageMod = mod;
+    }
+    
     public float angle;
     public bool isCurved;
     private float horizSpeedMod = 1f;
@@ -26,6 +33,7 @@ public class BulletBehavior : MonoBehaviour
         Destroy(gameObject, Bullet.bulletLife);
         angle = Bullet.angle;
         isCurved = Bullet.isCurved;
+        damageMod = 1;
     }
 
     // Update is called once per frame
@@ -59,7 +67,11 @@ public class BulletBehavior : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        
+        if (this.gameObject.CompareTag("PlayerBullet") && collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<BossManager>().setHealth(collision.gameObject.GetComponent<BossManager>().getHealth() - 1 * damageMod);
+            Destroy(this.gameObject);
+        }
     }
 }
 /* 

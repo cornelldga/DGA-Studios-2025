@@ -123,9 +123,5 @@ public class PlayerManager : MonoBehaviour
     {
         playerProjectile.setAccuracyMod(1);
     }
-    public void SetDestroyBulletsOn()
-    {
-        playerProjectile.setDestroyBullets(true);
-    }
 }
 

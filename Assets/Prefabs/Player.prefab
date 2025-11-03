@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 9091669001675644578}
   - component: {fileID: 1113607209091070886}
   - component: {fileID: 212490275120157305}
+  - component: {fileID: 1003108770316439225}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -290,6 +291,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.79, y: 1.06}
   m_EdgeRadius: 0
+--- !u!95 &1003108770316439225
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241333523866175095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f45391707e2ee04497cb7bbb62758db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5911507543233875158
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,10 +509,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pm: {fileID: 9091669001675644578}
+  bm: {fileID: 4102453222384681232, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
   playerInventory: {fileID: 1113607209091070886}
+  wch: {fileID: 9146597292848217168}
   limeJuiceValue: 0.75
-  pimientoValue: 1.25
-  gingerValue: 0.75
+  pimientoValue: 2
+  gingerValueProjDamage: 0.5
+  gingerValueWhipDamage: 2
   ciderValueSpeed: 1.25
   ciderValueAccuracy: 2
 --- !u!114 &2592310935581460178
