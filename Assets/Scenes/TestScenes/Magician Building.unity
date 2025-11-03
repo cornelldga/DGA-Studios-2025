@@ -709,6 +709,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &1198015381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+  m_PrefabInstance: {fileID: 309325213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457449396
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +818,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1198015381}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: magician
       value: 

@@ -52,8 +52,10 @@ public class BulletBehavior : MonoBehaviour
         {
             horizSpeedMod = Mathf.Cos(Time.time * angle) * 10;
         }
+        /*
         Vector2 forward = transform.forward;
         Vector2 perp = transform.right;
+        */
         rb.linearVelocity = new Vector2(bulletSpeed * horizontal * horizSpeedMod * Time.deltaTime, bulletSpeed * vertical * vertSpeedMod * Time.deltaTime);
         
     }
