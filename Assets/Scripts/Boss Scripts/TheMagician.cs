@@ -14,6 +14,11 @@ public class TheMagician : MonoBehaviour
     private GameObject knifeStage,doveStage,cardStage;
     private Stage currentStage;
     private float timer;
+    //Bullet handling
+    [SerializeField] private GameObject dove;
+    [SerializeField] private GameObject card;
+    [SerializeField] private GameObject knife;
+    private BulletBehavior BulletBehavior;
 
     // Time Magician spends attaacking
     public float attackDuration=0;
@@ -46,6 +51,7 @@ public class TheMagician : MonoBehaviour
         timer = 0;
         attackTimer = 0;
         player = GameObject.Find("Player");
+        BulletBehavior= dove.GetComponent<BulletBehavior>();
     }
 
     // Update is called once per frame
@@ -111,7 +117,7 @@ public class TheMagician : MonoBehaviour
         //Put attacks here, check with timer variable if needed
         if (phase ==1)
         {
-            if (attackTimer>attackCooldown)
+            if (attackTimer>attackCooldown && currentStage != Stage.Backstage)
             {
                 attack();
                 attackTimer = 0;
@@ -120,7 +126,7 @@ public class TheMagician : MonoBehaviour
         }
         else if (phase == 2)
         {
-            if (attackTimer > attackCooldown*.7)
+            if (attackTimer > attackCooldown*.7 && currentStage != Stage.Backstage)
             {
                 attack();
                 attackTimer = 0;
@@ -128,7 +134,7 @@ public class TheMagician : MonoBehaviour
         }
         else if (phase == 3)
         {
-            if (attackTimer > attackCooldown*.4)
+            if (attackTimer > attackCooldown*.4 && currentStage != Stage.Backstage)
             {
                 attack();
                 attackTimer = 0;
@@ -143,11 +149,18 @@ public class TheMagician : MonoBehaviour
     {
         // "player" shold be the name of the player object if it's location is needed
         if (currentStage == Stage.Knife)
-        { }
+        { 
+            
+            //Instantiate(knife, transform.position, Quaternion.identity).transform.LookAt(player.transform);
+        }
         else if (currentStage == Stage.Card)
-        { }
+        {
+            //Instantiate(card, transform.position, Quaternion.identity).transform.LookAt(player.transform);
+        }
         else if (currentStage == Stage.Dove)
-        { }
+        {
+           // Instantiate(dove, transform.position, Quaternion.identity).transform.LookAt(player.transform);
+        }
     }
 
 
@@ -194,6 +207,6 @@ public class TheMagician : MonoBehaviour
         unassigned[rStage].transform.position = secondStage;
         unassigned.RemoveAt(rStage);
 
-        unassigned[rStage].transform.position = thirdStage;
+        unassigned[0].transform.position = thirdStage;
     }
 }

@@ -919,6 +919,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 993098309761967156, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 993098309761967156, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: bulletCooldown
       value: 0.5
       objectReference: {fileID: 0}
@@ -1046,6 +1050,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4102453222384681232, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: startingHealth
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1079,6 +1087,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   BossManager: {fileID: 2558422003454636118}
   stages: {fileID: 2123550124}
+  dove: {fileID: 8650238367645017955, guid: e3e3f7f4b2b21cd46be681863f0b7f44, type: 3}
+  card: {fileID: 1021661675863380410, guid: fa09c6d0ee5cacd4082f15a706641328, type: 3}
+  knife: {fileID: 1547497767259206229, guid: 9db62dad53cd9174ebd40f8bcdf3f226, type: 3}
   attackDuration: 5
   backstageDuration: 3
   attackCooldown: 2.5
