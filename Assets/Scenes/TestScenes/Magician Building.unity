@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a6ce0fd5775c344b24f9286ec07319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
-  bullet: {fileID: 1547497767259206229, guid: 9db62dad53cd9174ebd40f8bcdf3f226, type: 3}
+  bullet: {fileID: 1021661675863380410, guid: e2e415300b99af146a9503e13dc67e52, type: 3}
   bulletCooldown: 1
 --- !u!212 &377119650
 SpriteRenderer:
@@ -918,6 +918,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 993098309761967156, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1021661675863380410, guid: 6a793db086fdd6f4d93c4ad22d4abdb0, type: 3}
     - target: {fileID: 993098309761967156, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: bulletCooldown
       value: 0.5
