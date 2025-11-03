@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class SmokeTempScript : MonoBehaviour
 {
+    //Array of 4 smoke sprites to choose from
+    [SerializeField] private Sprite[] smokeSprites = new Sprite[4];
+
     //Increasing factor on drag.
     private float dragIncrease = 0.7f;
     //At what velocity should we stop moving completely.
@@ -27,11 +30,27 @@ public class SmokeTempScript : MonoBehaviour
 
     /// <summary>
     /// On start, the colors of each cloud piece are stored, as well as their scales. Dambing is set to zero to allow for complete velocity.
+    /// A random sprite is selected from the smokeSprites array and applied to all child sprite renderers.
     /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        // Select a random sprite from the array
+        if (smokeSprites.Length > 0)
+        {
+            Sprite randomSprite = smokeSprites[Random.Range(0, smokeSprites.Length)];
+
+            // Apply the random sprite to all child sprite renderers
+            foreach (SpriteRenderer sr in spriteRenderers)
+            {
+                if (sr != null)
+                {
+                    sr.sprite = randomSprite;
+                }
+            }
+        }
 
         startColors = new Color[spriteRenderers.Length];
         childStartScales = new Vector2[spriteRenderers.Length];
