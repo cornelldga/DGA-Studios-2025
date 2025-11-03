@@ -151,7 +151,7 @@ public class TheMagician : MonoBehaviour
         if (currentStage == Stage.Knife)
         { 
             
-            //Instantiate(knife, transform.position, Quaternion.identity).transform.LookAt(player.transform);
+            //Instantiate(knife, transform.position, Quaternion.identity).transform.LookAt(player.transform, Vector3.forward);
         }
         else if (currentStage == Stage.Card)
         {
