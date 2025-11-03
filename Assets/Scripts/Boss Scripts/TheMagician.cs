@@ -14,6 +14,8 @@ public class TheMagician : MonoBehaviour
     private GameObject knifeStage,doveStage,cardStage;
     private Stage currentStage;
     private float timer;
+    [SerializeField] private Animator animator;
+
     //Bullet handling
     [SerializeField] private GameObject dove;
     [SerializeField] private GameObject card;
@@ -139,6 +141,15 @@ public class TheMagician : MonoBehaviour
                 attack();
                 attackTimer = 0;
             }
+        }
+
+        if(attackTimer<125)
+        {
+            animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
         }
     }
 
