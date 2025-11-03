@@ -5,13 +5,8 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     [Header("Health Parameters")]
-    [SerializeField] private int health;
-    [SerializeField] private int startingHealth;
-    
-    [Header("Temporary Health Bar Assets")]
-    // Healthbar for testing purposes
-    [SerializeField] private GameObject healthBar;
-    [SerializeField] private GameObject healthBackDrop;
+    [SerializeField] private float health;
+    [SerializeField] private float startingHealth;
     
     // Types of movement the boss can do (Temporary)
     private enum MovementType
@@ -31,10 +26,6 @@ public class BossManager : MonoBehaviour
     void Start()
     {
         health = startingHealth;
-        healthBar.SetActive(true);
-        healthBackDrop.SetActive(true);
-        healthBackDrop.transform.localScale = new Vector3(startingHealth,1,1);
-        healthBar.transform.localScale = new Vector3(startingHealth, 1, 1);
         movementType=MovementType.Line;
         timer = 0;
         moves = 0;
@@ -47,7 +38,6 @@ public class BossManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        healthBar.transform.localScale = new Vector3(health, 1, 1);
         
         if (health <= 0)
         {
@@ -102,8 +92,8 @@ public class BossManager : MonoBehaviour
     }*/
 
 
-    public int getHealth() { return health; }
-    public int getMaxHealth() { return startingHealth; }
-    public void setHealth(int h) { health=h; }
+    public float getHealth() { return health; }
+    public float getMaxHealth() { return startingHealth; }
+    public void setHealth(float h) { health=h; }
 
 }
