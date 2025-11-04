@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,11 +26,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BaseType[] equippedBases;
     PlayerBases playerBases;
 
+    [Header("Whip")]
+    [SerializeField] Transform whipPivot;
+    [SerializeField] GameObject whipObject;
+    [SerializeField] float whipCooldownTime;
+    [SerializeField] float whipTime;
+    [SerializeField] TextMeshProUGUI cooldownDisplay;
+
+    //a magical number that I use to divide the offset of an angle from the angle it should move towards
+    //this helps me make that micromovement I need to move the whip in a way that is less warped.
+    //the bigger the number, the less we will adjust
+    private float MAGIC_ADJUSTMENT_RATIO = 5f;
+
     Rigidbody2D rb;
     float angle;
     Vector2 moveDirection;
     float fireCooldown;
     float changeCooldown;
+    float whipCooldown;
+    private bool whipping;
 
     void Start()
     {
@@ -38,6 +53,8 @@ public class PlayerController : MonoBehaviour
         playerBases = GetComponent<PlayerBases>();
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
+        playerBases.SelectBase(0);
+        playerMixers.SelectMixer(0);
         speed = baseSpeed;
         health = maxHealth;
         isAlive = true;
@@ -51,6 +68,7 @@ public class PlayerController : MonoBehaviour
         }
         fireCooldown -= Time.deltaTime;
         changeCooldown -= Time.deltaTime;
+        whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
     void PlayerInputs()
@@ -84,11 +102,82 @@ public class PlayerController : MonoBehaviour
                 changeCooldown = changeCooldownTime;
             }
         }
+        if (Input.GetMouseButtonDown(1) && whipCooldown <= 0)
+        {
+            OnWhip();
+            whipCooldown = whipCooldownTime;
+        }
 
         if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             Fire();
         }
+    }
+    /// <summary>
+    /// Returns an adjusted angle that makes the whip's final location more accurate to where the user clicked
+    /// </summary>
+    public float AngleAdjustment(float originalAngle)
+    {
+        float finalAngle = originalAngle;
+        float sign = originalAngle / Mathf.Abs(originalAngle);
+        float adjustAmountAbs = 0;
+        if (originalAngle >= -45 && originalAngle <= 45)
+        {
+            //adjust against 0
+            adjustAmountAbs = Mathf.Abs(originalAngle);
+        }
+        else if (originalAngle <= -45 && originalAngle >= -135)
+        {
+            adjustAmountAbs = Mathf.Abs(90 - Mathf.Abs(originalAngle));
+            //adjust against -90
+        }
+        else if (originalAngle <= 135 && originalAngle >= 45)
+        {
+            adjustAmountAbs = Mathf.Abs(90 - Mathf.Abs(originalAngle));
+            //adjust against 90
+
+        }
+        else if (originalAngle >= 135 || originalAngle <= -135)
+        {
+            //adjust against 180
+            adjustAmountAbs = 180 - Mathf.Abs(originalAngle);
+        }
+
+        if (Mathf.Abs(originalAngle) < 90)
+        {
+            //adjust towards 0
+            finalAngle = originalAngle - (sign * adjustAmountAbs / MAGIC_ADJUSTMENT_RATIO);
+        }
+        else if (Mathf.Abs(originalAngle) > 90)
+        {
+            //adjust towards 180
+            finalAngle = originalAngle + (sign * adjustAmountAbs / MAGIC_ADJUSTMENT_RATIO);
+        }
+        return finalAngle;
+    }
+    /// <summary>
+    /// Rotates the whip towards the mouse and 
+    /// </summary>
+    public void OnWhip()
+    {
+        whipping = true;
+        whipObject.SetActive(true);
+        //find angle between player and mouse
+        //whipObject.transform.rotation = Quaternion.identity;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePosition.z = 0f;
+        Vector3 direction = mousePosition - whipPivot.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = AngleAdjustment(angle);
+        whipPivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        StartCoroutine(nameof(WhipTime));
+    }
+
+    IEnumerator WhipTime()
+    {
+        yield return new WaitForSeconds(whipTime);
+        whipping = false;
+        whipObject.SetActive(false);
     }
 
     void Fire()

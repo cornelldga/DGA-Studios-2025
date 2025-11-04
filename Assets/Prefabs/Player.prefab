@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 1593850575938455306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.11, z: 0}
-  m_LocalScale: {x: 1, y: 0.6666667, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4772556966185623901}
@@ -42,9 +42,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4588022867240271486}
   - component: {fileID: 1075589582035499218}
-  - component: {fileID: 5903920608498839182}
   - component: {fileID: 4557611548015582227}
-  - component: {fileID: 671402573874655419}
+  - component: {fileID: 4663871014066381724}
+  - component: {fileID: 1637807250424486218}
+  - component: {fileID: 5903920608498839182}
   - component: {fileID: 212490275120157305}
   m_Layer: 0
   m_Name: Player
@@ -128,6 +129,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4557611548015582227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241333523866175095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612c7ac16233f488291ce28d5614fcc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  baseSpeed: 5
+  maxHealth: 5
+  changeCooldownTime: 0.5
+  equippedMixers: 
+  equippedBases: 
+  whipPivot: {fileID: 1523022322800746459}
+  whipObject: {fileID: 5911507543233875158}
+  whipCooldownTime: 1
+  whipTime: 1
+  cooldownDisplay: {fileID: 0}
+--- !u!114 &4663871014066381724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241333523866175095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3273448cfca88734aa000b56d2a9cdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBases
+  bases: []
+--- !u!114 &1637807250424486218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241333523866175095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMixers
+  mixers: []
 --- !u!50 &5903920608498839182
 Rigidbody2D:
   serializedVersion: 5
@@ -155,42 +204,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4557611548015582227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2241333523866175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612c7ac16233f488291ce28d5614fcc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  baseSpeed: 0
-  maxHealth: 0
-  changeCooldownTime: 0
-  equippedMixers: 
-  equippedBases: 
---- !u!114 &671402573874655419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2241333523866175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f98b25edecbe34c94209feea91137d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WhipController
-  playerTransform: {fileID: 4588022867240271486}
-  whipPivot: {fileID: 1523022322800746459}
-  whipObject: {fileID: 5911507543233875158}
-  cooldownDef: 1
-  existanceDef: 0.3
-  cooldownDisplay: {fileID: 0}
-  cooldownMultiplier: 1
 --- !u!61 &212490275120157305
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -265,8 +278,8 @@ Transform:
   m_GameObject: {fileID: 5911507543233875158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5069, y: -0.0051, z: 0}
-  m_LocalScale: {x: 1.0155119, y: 0.30820274, z: 1}
+  m_LocalPosition: {x: 0.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1523022322800746459}
