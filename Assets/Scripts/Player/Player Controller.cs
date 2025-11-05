@@ -250,6 +250,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(damage);
+        health -= damage;
+        if(health= < 0)
+        {
+            GameManager.Instance.LoseGame();
+        }
     }
 }

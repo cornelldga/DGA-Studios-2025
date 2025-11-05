@@ -23,7 +23,6 @@ public abstract class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));
-        Debug.Log(transform.right * speed);
         rb.AddForce(transform.right * speed, ForceMode2D.Impulse);
         Destroy(gameObject, lifeDuration);
     }

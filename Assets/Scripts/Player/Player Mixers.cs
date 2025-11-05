@@ -20,6 +20,9 @@ public enum MixerType
 /// </summary>
 public class PlayerMixers : MonoBehaviour
 {
+    /// <summary>
+    /// Mixers are associated to their corresponding <see cref="MixerType"/>
+    /// </summary>
     [SerializeField] Mixer[] mixers;
     Dictionary<MixerType, Mixer> mixersDict = new Dictionary<MixerType, Mixer>();
 

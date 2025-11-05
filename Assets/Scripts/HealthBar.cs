@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class HealthBar : MonoBehaviour
 {
-    private BossManager bossManager;
     public UnityEngine.UI.Slider healthSlider;
     [SerializeField] string bossName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

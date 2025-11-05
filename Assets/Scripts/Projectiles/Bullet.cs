@@ -6,7 +6,7 @@ using UnityEngine;
 /// Projectiles that the bosses shoot
 /// </summary>
 
-public class EnemyProjectile : Projectile
+public class Bullet : Projectile
 {
     [Tooltip("True if the player whipped this projectile")]
     bool whipped;

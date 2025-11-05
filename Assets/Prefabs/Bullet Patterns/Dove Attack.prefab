@@ -140,12 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: -1
-  angle: 0
-  isCurved: 0
-  Bullet: {fileID: 11400000, guid: 84c7b91be08723c4d8720e4ef38e46a1, type: 2}
+  speed: 2
+  lifeDuration: 4
+  cooldown: 0
+  damage: 1
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &4217097477996312705
 Rigidbody2D:
   serializedVersion: 5
@@ -347,12 +349,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 0
-  angle: 0
-  isCurved: 0
-  Bullet: {fileID: 11400000, guid: 84c7b91be08723c4d8720e4ef38e46a1, type: 2}
+  speed: 2
+  lifeDuration: 4
+  cooldown: 0
+  damage: 1
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &2169941197459293042
 Rigidbody2D:
   serializedVersion: 5
@@ -554,12 +558,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 2
-  angle: 0
-  isCurved: 0
-  Bullet: {fileID: 11400000, guid: 84c7b91be08723c4d8720e4ef38e46a1, type: 2}
+  speed: 2
+  lifeDuration: 4
+  cooldown: 0
+  damage: 1
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &1923546619437872466
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Whip : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            EnemyProjectile projectile = collision.gameObject.GetComponent<EnemyProjectile>();
+            Bullet projectile = collision.gameObject.GetComponent<Bullet>();
             if (!projectile.Whipped())
             {
                 projectile.WhipProjectile(damageMultiplier);

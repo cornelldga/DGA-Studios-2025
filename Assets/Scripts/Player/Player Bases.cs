@@ -21,6 +21,9 @@ public enum BaseType
 /// </summary>
 public class PlayerBases : MonoBehaviour
 {
+    /// <summary>
+    /// Basses are associated to their corresponding <see cref="BaseType"/>
+    /// </summary>
     [SerializeField] Base[] bases;
     Dictionary<BaseType, Base> basesDict = new Dictionary<BaseType, Base>();
 
