@@ -105,11 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: -1
-  bulletLife: 10
-  rb: {fileID: 8582323924408409773}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &8582323924408409773
 Rigidbody2D:
   serializedVersion: 5
@@ -399,11 +402,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: -1
-  bulletLife: 10
-  rb: {fileID: 5699701421092151198}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2493548669385468521
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,11 +515,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: -1
-  bulletLife: 10
-  rb: {fileID: 4217097477996312705}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &4217097477996312705
 Rigidbody2D:
   serializedVersion: 5
@@ -692,11 +701,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 0
-  bulletLife: 3600
-  rb: {fileID: 2169941197459293042}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &2169941197459293042
 Rigidbody2D:
   serializedVersion: 5
@@ -875,11 +887,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 2
-  bulletLife: 10
-  rb: {fileID: 7285295044984386687}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &7285295044984386687
 Rigidbody2D:
   serializedVersion: 5
@@ -1131,11 +1146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 2
-  bulletLife: 10
-  rb: {fileID: 2286365742352388830}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8178195336943856703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,11 +1259,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 20
-  vertical: -1
-  horizontal: 2
-  bulletLife: 10
-  rb: {fileID: 73933238307302073}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &1923546619437872466
 BoxCollider2D:
   m_ObjectHideFlags: 0

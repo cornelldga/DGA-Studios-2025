@@ -9,10 +9,10 @@ using System.Collections.Generic;
 
 public enum MixerType
 {
-    Lime = 0,
-    Pimiento,
-    Ginger,
     Cider,
+    Ginger,
+    Lime,
+    Pimiento,
 }
 
 /// <summary>
@@ -22,8 +22,6 @@ public class PlayerMixers : MonoBehaviour
 {
     [SerializeField] Mixer[] mixers;
     Dictionary<MixerType, Mixer> mixersDict = new Dictionary<MixerType, Mixer>();
-
-    Mixer selectedMixer;
 
     private void Start()
     {
@@ -37,40 +35,13 @@ public class PlayerMixers : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the selected mixer
+    /// Returns the mixers of the associated <see cref="MixerType"/>
     /// </summary>
     /// <param name="type"></param>
-    public void SelectMixer(MixerType type)
+    public Mixer GetMixer(MixerType mixer)
     {
-        selectedMixer = mixersDict[type];
-    }
-    /// <summary>
-    /// Gets the selected mixer
-    /// </summary>
-    /// <returns>The selected mixer</returns>
-    public Mixer GetMixer()
-    {
-        return selectedMixer;
+        return mixersDict[mixer];
     }
 
 
-}
-
-/// <summary>
-/// A Mixer modifies a base and/or player while equipped
-/// </summary>
-
-public abstract class Mixer : MonoBehaviour
-{
-    /// <summary>
-    /// Applies the mixer to the given base
-    /// </summary>
-    /// <param name="baseDrink"></param>
-    public abstract void ApplyMixer(Base baseDrink);
-
-    /// <summary>
-    /// Applies the mixer to the player
-    /// </summary>
-    /// <param name="player"></param>
-    public abstract void ApplyMixer(PlayerController player);
 }

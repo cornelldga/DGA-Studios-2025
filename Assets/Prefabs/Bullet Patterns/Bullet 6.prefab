@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6814794379457766822}
   m_Layer: 0
   m_Name: Bullet 6
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,14 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  bulletSpeed: 500
-  vertical: -1
-  horizontal: 0
-  angle: 0
-  bulletLife: 10
-  isCurved: 0
-  rb: {fileID: 4482821146816361124}
-  Bullet: {fileID: 11400000, guid: 07e5f8886c89bcc43a1dae01c508eb07, type: 2}
+  speed: 0
+  lifeDuration: 0
+  cooldown: 0
+  damage: 0
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &4482821146816361124
 Rigidbody2D:
   serializedVersion: 5

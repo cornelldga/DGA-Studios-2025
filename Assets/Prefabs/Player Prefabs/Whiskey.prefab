@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 9207985057009275299}
   - component: {fileID: 8902211564644797998}
-  - component: {fileID: 1240062487690815842}
   - component: {fileID: 4458053370082309061}
   - component: {fileID: -2511277341272750638}
-  m_Layer: 0
+  - component: {fileID: 6001040598022860389}
+  m_Layer: 7
   m_Name: Whiskey
-  m_TagString: PlayerBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,23 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1240062487690815842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2614745467271669489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d681b4aae9421a4d8d7e767c57df630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  baseSpeed: 10
-  baseLifetime: 0.5
-  baseCooldown: 1
-  baseDamage: 0
-  baseAccuracy: 10
 --- !u!50 &4458053370082309061
 Rigidbody2D:
   serializedVersion: 5
@@ -135,7 +118,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &-2511277341272750638
 BoxCollider2D:
@@ -183,3 +166,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6001040598022860389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614745467271669489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c619e88cd1996c45a0b6902ecc872d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Base
+  speed: 5
+  lifeDuration: 5
+  cooldown: 1
+  damage: 1
+  accuracy: 0
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0

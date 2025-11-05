@@ -9,29 +9,30 @@ using UnityEngine.UIElements;
 /// <summary>
 /// Controls the player
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 
 {
     [Header("Stats")]
-    [SerializeField] float baseSpeed;
-    private float speed;
+    public float baseSpeed;
+    [HideInInspector] public float speed;
     [SerializeField] int maxHealth;
     private int health;
+    [Tooltip("Percent damage dealt back from an enemy projectile")]
+    public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
     private bool isAlive;
 
     [Header("Player Inventory")]
-    [SerializeField] private MixerType[] equippedMixers;
-    PlayerMixers playerMixers;
     [SerializeField] private BaseType[] equippedBases;
     PlayerBases playerBases;
+    [SerializeField] private MixerType[] equippedMixers;
+    PlayerMixers playerMixers;
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
-    [SerializeField] GameObject whipObject;
+    public Whip whip;
     [SerializeField] float whipCooldownTime;
     [SerializeField] float whipTime;
-    [SerializeField] TextMeshProUGUI cooldownDisplay;
 
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
@@ -46,6 +47,10 @@ public class PlayerController : MonoBehaviour
     float whipCooldown;
     private bool whipping;
 
+    Base selectedBase;
+    Mixer selectedMixer;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,10 +58,13 @@ public class PlayerController : MonoBehaviour
         playerBases = GetComponent<PlayerBases>();
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
-        playerBases.SelectBase(0);
-        playerMixers.SelectMixer(0);
         speed = baseSpeed;
         health = maxHealth;
+        whip.damageMultiplier = whipBaseDamageMultiplier;
+        selectedBase = playerBases.GetBase(equippedBases[0]);
+        selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
+        selectedMixer.ApplyMixer(this);
+
         isAlive = true;
     }
 
@@ -71,6 +79,9 @@ public class PlayerController : MonoBehaviour
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+    /// <summary>
+    /// Read the player's inputs
+    /// </summary>
     void PlayerInputs()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -81,28 +92,30 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                playerBases.SelectBase(equippedBases[0]);
+                selectedBase = playerBases.GetBase(equippedBases[0]);
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                playerBases.SelectBase(equippedBases[1]);
+                selectedBase = playerBases.GetBase(equippedBases[1]);
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                playerMixers.SelectMixer(equippedMixers[0]);
-                playerMixers.GetMixer().ApplyMixer(this);
+                selectedMixer.RemoveMixer(this);
+                selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
+                selectedMixer.ApplyMixer(this);
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                playerMixers.SelectMixer(equippedMixers[1]);
-                playerMixers.GetMixer().ApplyMixer(this);
+                selectedMixer.RemoveMixer(this);
+                selectedMixer = playerMixers.GetMixer(equippedMixers[1]);
+                selectedMixer.ApplyMixer(this);
                 changeCooldown = changeCooldownTime;
             }
         }
-        if (Input.GetMouseButtonDown(1) && whipCooldown <= 0)
+        if (!whipping && Input.GetMouseButtonDown(1) && whipCooldown <= 0)
         {
             OnWhip();
             whipCooldown = whipCooldownTime;
@@ -113,6 +126,22 @@ public class PlayerController : MonoBehaviour
             Fire();
         }
     }
+    /// <summary>
+    /// Fires the base towards the direction of the mouse with applied Mixer effects
+    /// </summary>
+    void Fire()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mouseWorldPos.z = 0f;
+        Vector3 direction = mouseWorldPos - transform.position;
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
+        // TODO: The position should be a transform where the player fires, not the center of the player
+        Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
+        selectedMixer.ApplyMixer(baseDrink);
+        fireCooldown = baseDrink.cooldown;
+    }
+
     /// <summary>
     /// Returns an adjusted angle that makes the whip's final location more accurate to where the user clicked
     /// </summary>
@@ -161,7 +190,7 @@ public class PlayerController : MonoBehaviour
     public void OnWhip()
     {
         whipping = true;
-        whipObject.SetActive(true);
+        whip.gameObject.SetActive(true);
         //find angle between player and mouse
         //whipObject.transform.rotation = Quaternion.identity;
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -177,20 +206,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(whipTime);
         whipping = false;
-        whipObject.SetActive(false);
-    }
-
-    void Fire()
-    {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        mouseWorldPos.z = 0f;
-        Vector3 direction = mouseWorldPos - transform.position;
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
-        // TODO: The position should be a transform where the player fires, not the center of the player
-        Base baseDrink = Instantiate(playerBases.GetBase(), transform.position, fireDirection);
-        playerMixers.GetMixer().ApplyMixer(baseDrink);
-        
+        whip.gameObject.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -232,5 +248,8 @@ public class PlayerController : MonoBehaviour
         return lastEquippedBase;
     }
 
-
+    public void TakeDamage(float damage)
+    {
+        Debug.Log(damage);
+    }
 }

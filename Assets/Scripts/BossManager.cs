@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class BossManager : MonoBehaviour
+public class BossManager : MonoBehaviour, IDamageable
 {
     [Header("Health Parameters")]
     [SerializeField] private int health;
@@ -101,4 +101,8 @@ public class BossManager : MonoBehaviour
     public int getHealth() { return health; }
     public void setHealth(int h) { health=h; }
 
+    public void TakeDamage(float damage)
+    {
+        Debug.Log(damage);
+    }
 }

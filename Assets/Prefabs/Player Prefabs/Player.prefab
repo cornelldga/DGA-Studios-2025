@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523022322800746459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Whip Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1637807250424486218}
   - component: {fileID: 5903920608498839182}
   - component: {fileID: 212490275120157305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -67,7 +67,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1071578458436876888}
   - {fileID: 1523022322800746459}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -142,15 +141,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   baseSpeed: 5
+  speed: 0
   maxHealth: 5
+  whipBaseDamageMultiplier: 1
   changeCooldownTime: 0.5
-  equippedMixers: 
-  equippedBases: 
+  equippedBases: 0000000002000000
+  equippedMixers: 0200000001000000
   whipPivot: {fileID: 1523022322800746459}
-  whipObject: {fileID: 5911507543233875158}
+  whip: {fileID: 3676044735641770482}
   whipCooldownTime: 1
   whipTime: 1
-  cooldownDisplay: {fileID: 0}
 --- !u!114 &4663871014066381724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3273448cfca88734aa000b56d2a9cdca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBases
-  bases: []
+  bases:
+  - {fileID: 3814195944134518128, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
+  - {fileID: 5220344265110755228, guid: b3f18be2c343fe64b95759835c6d0fa7, type: 3}
+  - {fileID: 6001040598022860389, guid: c93de10fbc021ca48a874e546c3d12c0, type: 3}
+  - {fileID: 6507160882352728098, guid: 1f9bbc3c51e6c364a8f2c9c6567885d5, type: 3}
 --- !u!114 &1637807250424486218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMixers
-  mixers: []
+  mixers:
+  - {fileID: 11400000, guid: 34b3d88844dae424c909fcdc5adab52d, type: 2}
+  - {fileID: 11400000, guid: a319374efa06e9a4a96b6c64addbdbe8, type: 2}
+  - {fileID: 11400000, guid: 4bb9854f2260edd49a71de1dc30331f7, type: 2}
+  - {fileID: 11400000, guid: ac58dae2c2dbdef47ae95f338f01d369, type: 2}
 --- !u!50 &5903920608498839182
 Rigidbody2D:
   serializedVersion: 5
@@ -261,8 +269,8 @@ GameObject:
   - component: {fileID: 4772556966185623901}
   - component: {fileID: 5944175202603568319}
   - component: {fileID: 8629098600308274521}
-  - component: {fileID: 9146597292848217168}
-  m_Layer: 0
+  - component: {fileID: 3676044735641770482}
+  m_Layer: 7
   m_Name: Whip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +396,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &9146597292848217168
+--- !u!114 &3676044735641770482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,82 +405,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5911507543233875158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21a85f52c7bcf6e45a68806419aa9f88, type: 3}
+  m_Script: {fileID: 11500000, guid: 24f5785fa3eff6c478846104a999de26, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WhipCollisionHandler
---- !u!1 &6582936206694705117
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1071578458436876888}
-  - component: {fileID: 3819530607651134763}
-  - component: {fileID: 2592310935581460178}
-  m_Layer: 0
-  m_Name: Mixers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1071578458436876888
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582936206694705117}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4588022867240271486}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3819530607651134763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582936206694705117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88703935ecc7cbd41b6a2fb81409f7dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  mixers: []
---- !u!114 &2592310935581460178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582936206694705117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: e1c8890f04d344514af094dad038af70, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Whip
+  damageMultiplier: 0.5
