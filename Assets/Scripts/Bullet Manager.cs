@@ -29,6 +29,7 @@ public class BulletManager : MonoBehaviour {
 
     void Update()
     {
+        
         //transform.position = new Vector2(Random.Range(-5,9), 0);
         timer += Time.deltaTime;
         if (timer > bulletCooldown)
@@ -37,5 +38,10 @@ public class BulletManager : MonoBehaviour {
             timer = 0f;
         }
     }
-    
+
+    /*void Launch()
+    {
+        Fire_Bullet();
+    }
+    */
 }

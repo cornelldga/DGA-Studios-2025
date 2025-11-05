@@ -2,26 +2,20 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "Hi, how are you doing? My name's Bob.",
+            "dialogueText": "Hey, you. You're the new saloon owner.",
             "emotion": 1,
-            "nextDialogueID": "0_weather"
+            "nextDialogueID": "0_challenge"
         },
         {
-            "dialogueID": "0_weather",
-            "dialogueText": "Nice weather we're having.",
+            "dialogueID": "0_challenge",
+            "dialogueText": "My boss sent me to teach you a lesson. No encroaching on her turf.",
             "emotion": 0,
-            "nextDialogueID": "0_awesome"
+            "nextDialogueID": "0_fight"
         },
         {
-            "dialogueID": "0_awesome",
-            "dialogueText": "There's this really mean guy that keeps bullying everyone. Can you stop him?",
+            "dialogueID": "0_fight",
+            "dialogueText": "But I'm an honorable man. I won't ambush you. Are we gonna fight now or what?",
             "emotion": 0,
-            "nextDialogueID": "0_see ya"
-        },
-        {
-            "dialogueID": "0_see ya",
-            "dialogueText": "Thank you.",
-            "emotion": 1,
             "nextDialogueID": ""
         }
     ]

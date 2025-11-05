@@ -1,16 +1,12 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class BossManager : MonoBehaviour, IDamageable
 {
     [Header("Health Parameters")]
-    [SerializeField] private int health;
-    [SerializeField] private int startingHealth;
-    
-    [Header("Temporary Health Bar Assets")]
-    // Healthbar for testing purposes
-    [SerializeField] private GameObject healthBar;
-    [SerializeField] private GameObject healthBackDrop;
+    [SerializeField] private float health;
+    [SerializeField] private float startingHealth;
     
     // Types of movement the boss can do (Temporary)
     private enum MovementType
@@ -30,10 +26,6 @@ public class BossManager : MonoBehaviour, IDamageable
     void Start()
     {
         health = startingHealth;
-        healthBar.SetActive(true);
-        healthBackDrop.SetActive(true);
-        healthBackDrop.transform.localScale = new Vector3(startingHealth,1,1);
-        healthBar.transform.localScale = new Vector3(startingHealth, 1, 1);
         movementType=MovementType.Line;
         timer = 0;
         moves = 0;
@@ -46,17 +38,18 @@ public class BossManager : MonoBehaviour, IDamageable
     void Update()
     {
         timer += Time.deltaTime;
-        healthBar.transform.localScale = new Vector3(health, 1, 1);
         
         if (health <= 0)
         {
+           //this.gameObject.SetActive(false);
             GameManager.Instance.LoadScene("Main Menu");
         }
+
     }
 
     private void FixedUpdate()
     {
-        Move();
+       // Move();
     }
 
     /// <summary>
@@ -88,18 +81,20 @@ public class BossManager : MonoBehaviour, IDamageable
     /// Responisble for decreasing boss health when making contact with a player bullet. Currently Destroys bullets that harm it
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            health--;
+            health -= 1 * damageMod;
+            
             Destroy(collision.gameObject);
         }
-    }
+    }*/
 
 
-    public int getHealth() { return health; }
-    public void setHealth(int h) { health=h; }
+    public float getHealth() { return health; }
+    public float getMaxHealth() { return startingHealth; }
+    public void setHealth(float h) { health=h; }
 
     public void TakeDamage(float damage)
     {
