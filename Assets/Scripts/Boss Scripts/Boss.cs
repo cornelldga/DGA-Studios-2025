@@ -39,9 +39,14 @@ public abstract class Boss : MonoBehaviour
     }
 
     /// <summary>
-    /// The attack logic for the boss for when it can attack
+    /// The attack logic for the boss for when it can attack. Points the bullet origin towards
+    /// the position of the player
     /// </summary>
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+            - bulletOrigin.transform.position;
+    }
 
     public void TakeDamage(float damage)
     {

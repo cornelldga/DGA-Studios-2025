@@ -76,6 +76,7 @@ public class TheMagician : Boss
     {
         ChooseNewStage();
         MoveToStage();
+        base.Attack();
         switch (currentStage)
         {
             case Stage.Backstage:

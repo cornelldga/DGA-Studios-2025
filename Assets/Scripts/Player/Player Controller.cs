@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("Stats")]
     public float baseSpeed;
     [HideInInspector] public float speed;
-    [SerializeField] int maxHealth;
-    private int health;
+    [SerializeField] float maxHealth;
+    private float health;
     [Tooltip("Percent damage dealt back from an enemy projectile")]
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health= < 0)
+        if(health <= 0)
         {
             GameManager.Instance.LoseGame();
         }
