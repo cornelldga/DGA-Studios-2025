@@ -31,7 +31,7 @@ public class Smoker : MonoBehaviour
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer += Time.deltaTime;
         
-        if (smokeTimer >= resetTime && magician.IsOffStage())
+        if (smokeTimer >= resetTime && magician.currentStage == Stage.Backstage)
         {
             ShootSmoke();
             smokeTimer = 0;

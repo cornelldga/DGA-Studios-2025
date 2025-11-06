@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
+  m_Name: Fan
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
+  bullets:
+  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
+  bulletAngles:
+  - -60
+  - -45
+  - -30
+  - -15
+  - 0
+  - 15
+  - 30
+  - 45
+  - 60
+  bulletDelay:
+  - 0
+  minAttackCooldown: 1
+  maxAttackCooldown: 2

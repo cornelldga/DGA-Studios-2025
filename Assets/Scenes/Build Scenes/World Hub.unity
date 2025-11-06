@@ -270,6 +270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4557611548015582227, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: 'equippedMixers.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4588022867240271486, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.68
@@ -1062,11 +1066,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5981265968517647459, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.1875
+      value: 0.58984375
       objectReference: {fileID: 0}
     - target: {fileID: 5981265968517647459, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.109375
+      value: 1.0664062
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite

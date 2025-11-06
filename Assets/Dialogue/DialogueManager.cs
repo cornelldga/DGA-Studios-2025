@@ -66,7 +66,6 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 DisplayNextLine();
-                Debug.Log("display");
             }
         }
     }

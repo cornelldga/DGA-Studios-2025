@@ -46,4 +46,12 @@ public class GameManager : MonoBehaviour
         player.enabled = !freeze;
     }
 
+    /// <summary>
+    /// Makes the player lose the game and initiates a Lose Game Screen
+    /// </summary>
+    public void LoseGame()
+    {
+        Debug.Log("Lose Game");
+    }
+
 }
