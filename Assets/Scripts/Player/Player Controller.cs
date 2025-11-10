@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -247,7 +248,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         equippedBases[slotIndex] = baseDrink;
         return lastEquippedBase;
     }
-
     public void TakeDamage(float damage)
     {
         health -= damage;
