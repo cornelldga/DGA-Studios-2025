@@ -16,11 +16,11 @@ public abstract class Mixer : ScriptableObject
     /// Applies the mixer to the player
     /// </summary>
     /// <param name="player"></param>
-    public abstract void ApplyMixer(PlayerController player);
+    public abstract void ApplyMixer(Player player);
     /// <summary>
     /// Removes the mixer from the player
     /// </summary>
     /// <param name="player"></param>
-    public abstract void RemoveMixer(PlayerController player);
+    public abstract void RemoveMixer(Player player);
 
 }

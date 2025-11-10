@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 /// <summary>
-/// Controls the player
+/// Represents the charater you play in the game. Contains stats, handles inventory, and player inputs
 /// </summary>
-public class PlayerController : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable
 
 {
     [Header("Stats")]
