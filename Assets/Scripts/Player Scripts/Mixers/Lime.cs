@@ -11,12 +11,12 @@ public class Lime : Mixer
         baseDrink.speed *= limeJuiceValue;
         baseDrink.cooldown *= limeJuiceValue;
     }
-    public override void ApplyMixer(PlayerController player)
+    public override void ApplyMixer(Player player)
     {
         player.speed = player.baseSpeed * limeJuiceValue;
     }
 
-    public override void RemoveMixer(PlayerController player)
+    public override void RemoveMixer(Player player)
     {
         player.speed = player.baseSpeed;
     }
