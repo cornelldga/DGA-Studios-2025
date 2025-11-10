@@ -40,8 +40,6 @@ public class InteractionZone : MonoBehaviour
         if (canInteract)
         {
             Interact();
-            canInteract = false;
-            InteractionIndicator.gameObject.SetActive(false);
         }
     }
 

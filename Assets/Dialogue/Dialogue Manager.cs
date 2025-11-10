@@ -14,7 +14,7 @@ using System.ComponentModel;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    private Animator dialogueBox;
+    public Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image backgroundImg;
@@ -48,13 +48,6 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void Start()
-    {
-        npcImg.enabled = false;
-    }
-
-
     /// <summary>
     /// Returns if there is ongoing dialouge
     /// </summary>
@@ -148,7 +141,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (bossFight)
                     {
-                        npcImg.enabled = true;
+                        npcImg.gameObject.SetActive(true);
                         npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     }
                     StopAllCoroutines();
