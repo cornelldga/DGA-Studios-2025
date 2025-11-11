@@ -16,20 +16,20 @@ public class Pig_Rider : Boss
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
-    [SerializeField] private float baseSpeed = 5f;
+    private float baseSpeed = 5f;
     //Acceleration amount for charging (accelerating while charging).
-    [SerializeField] private float acceleration = 6f;
+    private float acceleration = 6f;
     //Maximum speed to cap given acceleration.
-    [SerializeField] private float maxChargeSpeed = 10f;
+    private float maxChargeSpeed = 10f;
 
 
     [Header("State Timing")]
     //How much time to get a lock on player.
-    [SerializeField] private float targetingTime = 1f;
+    private float targetingTime = 1f;
     //How long we should stun upon collision.
-    [SerializeField] private float stunnedTime = 1f;
+    private float stunnedTime = 1f;
     //How much to recoil upon collision or player collision.
-    [SerializeField] private float recoilForce = 2f;
+    private float recoilForce = 2f;
     [Header("Attack Settings")]
     [Tooltip("Chance (0-1) that boss will mark instead of charge")]
     [SerializeField] private float markChance = 0.3f;
@@ -37,31 +37,28 @@ public class Pig_Rider : Boss
     [SerializeField] private float bounceChance = 0.2f;
     //How fast to move during bouncing state.
     private float bounceSpeed;
-    [SerializeField] private float baseBounceSpeed = 10f;
+    private float baseBounceSpeed = 10f;
 
     //How many more bounces we should take in bounce mode.
-    [SerializeField] private float bouncesRemaining = 5f;
+    private float bouncesRemaining = 5f;
     //The marking bullet pattern.
-    [SerializeField] private BulletPattern markingBulletPattern;
+    private BulletPattern markingBulletPattern;
 
     [Header("Bounce Mode Settings")]
-    [Tooltip("Number of bounces charges during bouncing mode")]
-    [SerializeField] private int bounces = 5;
     private float damage = 1f;
 
     [Header("Screen Shake")]
-    [SerializeField] private CinemachineImpulseSource impulseSource;
+    private CinemachineImpulseSource impulseSource;
     [Tooltip("Force multiplier for wall collision shake")]
-    [SerializeField] private float wallShakeForce = 1f;
+    private float wallShakeForce = 1f;
     [Tooltip("Force multiplier for player collision shake")]
-    [SerializeField] private float playersShakeForce = 0.5f;
+    private float playersShakeForce = 0.5f;
 
 
     [Header("Victory Spin")]
-    [Tooltip("Enable spin animation after marking attack")]
-    [SerializeField] private bool enableVictorySpin = true;
-    [SerializeField] private float spinDuration = 1f;
-    [SerializeField] private float spinSpeed = 360;
+    private bool enableVictorySpin = true;
+    private float spinDuration = 1f;
+    private float spinSpeed = 360;
 
     private Vector2 targetPosition;
     //direction of current charge.
@@ -92,6 +89,7 @@ public class Pig_Rider : Boss
         currentState = State.Targeting;
         stateTimer = targetingTime;
         bounceSpeed = baseBounceSpeed;
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
     /// <summary>
     /// Updating of the statemachine.
