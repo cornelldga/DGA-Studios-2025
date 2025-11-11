@@ -4,14 +4,15 @@ using UnityEngine;
 using Unity.Cinemachine;
 
 //All possible states for the bull boss.
-public enum State
-{
-    Charging, Targeting, Stunned, Marking, Bouncing
-}
+
 
 
 public class Pig_Rider : Boss
 {
+    public enum State
+{
+    Charging, Targeting, Stunned, Marking, Bouncing
+}
     public State currentState;
 
     [Header("Movement Settings")]
