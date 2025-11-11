@@ -21,7 +21,7 @@ public abstract class Boss : MonoBehaviour
     public bool isAttacking;
     [HideInInspector] public float attackCooldown;
 
-    [Tooltip("The speed of teh attack cooldown")]
+    [Tooltip("The speed of the attack cooldown")]
     public float attackRate = 1;
 
     public virtual void Start()

@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7029770135339947437}
   - component: {fileID: 722755417629996029}
   - component: {fileID: 26987428809012855}
-  - component: {fileID: 6544121181942965593}
+  - component: {fileID: 8931499830204347460}
   m_Layer: 0
-  m_Name: Card Bullet Prefab
+  m_Name: Knife Bullet Prefab 2
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478843839408097374}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &8109280398840041209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8132526007973258892, guid: a3ce1b3006bf75448b19a911bde4457b, type: 3}
+  m_Sprite: {fileID: 761100573506273824, guid: 31b725f2565207c41b4e7de6c0dd4a62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  speed: 3
+  speed: 6
   lifeDuration: 4
   cooldown: 1
   damage: 1
@@ -177,17 +177,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015437692, y: 0.019301914}
+  m_Offset: {x: -0.10902625, y: 0.008499056}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.578125, y: 0.53125}
+    oldSize: {x: 0.52, y: 0.79}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.41336673, y: 0.36808264}
+  m_Size: {x: 0.32631832, y: 0.7954908}
   m_EdgeRadius: 0
 --- !u!95 &722755417629996029
 Animator:
@@ -227,7 +227,7 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
---- !u!96 &6544121181942965593
+--- !u!96 &8931499830204347460
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,7 +275,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -284,8 +284,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.6076164
-        value: 0.2882843
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -297,7 +297,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5801887, g: 0.51695716, b: 0.36672303, a: 1}
+      key0: {r: 0.5754717, g: 0.5591848, b: 0.5591848, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -325,8 +325,8 @@ TrailRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 3
-    numCapVertices: 3
+    numCornerVertices: 1
+    numCapVertices: 1
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}

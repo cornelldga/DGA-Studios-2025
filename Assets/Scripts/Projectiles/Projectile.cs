@@ -18,7 +18,7 @@ public abstract class Projectile : MonoBehaviour
 
 
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -19,6 +19,7 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
+    [SerializeField] BulletPattern DesperationAttack;
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
 
