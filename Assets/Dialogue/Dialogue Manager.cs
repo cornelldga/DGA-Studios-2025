@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     public Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image backgroundImg;
     [SerializeField] private Image npcImg;
     [SerializeField] private float typingSpeed;
@@ -95,6 +96,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (file != null)
         {
+            nameText.text = file.name;
             ongoingDialogue = true;
             dialogueBox.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
@@ -103,7 +105,10 @@ public class DialogueManager : MonoBehaviour
             sceneName = scene;
             bossFight = boss;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
-            currentEmotions = emotionDictionary;
+            if (bossFight)
+            {
+                currentEmotions = emotionDictionary;
+            }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
         }
@@ -121,7 +126,8 @@ public class DialogueManager : MonoBehaviour
             if (bossFight)
             {
                 DialogueChoice();
-            } else
+            }
+            else
             {
                 EndDialogue();
             }
@@ -133,10 +139,14 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                    if (bossFight)
+                    {
+                        npcImg.gameObject.SetActive(true);
+                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                    }
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    return; 
+                    return;
                 }
             }
             throw new System.Exception("No dialogue lines found");
@@ -149,15 +159,15 @@ public class DialogueManager : MonoBehaviour
     /// <param name="line">The line of text from the JSON which is being displayed.</param>
     IEnumerator TypeSentence(DialogueLine line)
     {
-        isTyping = true; 
+        isTyping = true;
         dialogueText.text = "";
         foreach (char letter in line.dialogueText.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        isTyping = false; 
-        currentDialogueID = line.nextDialogueID; 
+        isTyping = false;
+        currentDialogueID = line.nextDialogueID;
     }
 
     /// <summary>
@@ -167,7 +177,7 @@ public class DialogueManager : MonoBehaviour
     {
         StopAllCoroutines();
         isTyping = false;
-        
+
         foreach (DialogueLine line in currentDialogueData.dialogueLines)
         {
             if (line.dialogueID == currentDialogueID)
@@ -188,7 +198,7 @@ public class DialogueManager : MonoBehaviour
         Fade();
         ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
-        dialogueBox.SetBool("isOpen", false); 
+        dialogueBox.SetBool("isOpen", false);
     }
 
     /// <summary>

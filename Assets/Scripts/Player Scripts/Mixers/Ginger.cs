@@ -13,12 +13,12 @@ public class Ginger : Mixer
         baseDrink.damage *= gingerValueProjDamage;
     }
 
-    public override void ApplyMixer(PlayerController player)
+    public override void ApplyMixer(Player player)
     {
         player.whip.damageMultiplier = gingerWhipDamageMultiplier;
     }
 
-    public override void RemoveMixer(PlayerController player)
+    public override void RemoveMixer(Player player)
     {
         player.whip.damageMultiplier = player.whipBaseDamageMultiplier;
     }
