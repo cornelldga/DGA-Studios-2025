@@ -308,13 +308,17 @@ public class Pig_Rider : Boss
             {
                 impulseSource.GenerateImpulse(wallShakeForce);
             }
+            else if (collision.gameObject.CompareTag("Player") && impulseSource != null){
+                collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+                impulseSource.GenerateImpulse(playersShakeForce);
+            }
 
             TransitionToStunned();
         }
         if (currentState == State.Bouncing && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player") ))
         {
             //Send impulse to cinemachine.
-            if (impulseSource != null)
+            if (impulseSource != null && collision.gameObject.CompareTag("Player"))
             {
                 impulseSource.GenerateImpulse(playersShakeForce);
             }
