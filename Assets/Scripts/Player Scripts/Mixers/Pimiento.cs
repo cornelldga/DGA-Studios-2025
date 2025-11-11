@@ -11,12 +11,12 @@ public class Pimiento : Mixer
         baseDrink.damage *= pimientoValue;
     }
 
-    public override void ApplyMixer(PlayerController player)
+    public override void ApplyMixer(Player player)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void RemoveMixer(PlayerController player)
+    public override void RemoveMixer(Player player)
     {
         throw new System.NotImplementedException();
     }
