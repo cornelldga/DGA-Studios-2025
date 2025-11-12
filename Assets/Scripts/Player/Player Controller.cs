@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private float MAGIC_ADJUSTMENT_RATIO = 5f;
 
     Rigidbody2D rb;
+    SpriteRenderer sprite;
     float angle;
     Vector2 moveDirection;
     float fireCooldown;
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
         playerBases = GetComponent<PlayerBases>();
         // This should be set by the equipped mixer and not by the base stats
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             markTimer -= Time.deltaTime;
             if (markTimer <= 0)
             {
+                sprite.color = Color.white;
                 isMarked = false;
             }
         }
@@ -271,6 +274,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyMark(float markDuration)
     {
         isMarked = true;
+        sprite.color = new Color(1f, 0.6f, 0.6f);
         markTimer = markDuration;
     }
     public bool IsMarked()
