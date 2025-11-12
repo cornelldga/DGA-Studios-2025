@@ -25,11 +25,11 @@ public class BulletPattern : ScriptableObject
     {
         boss.isAttacking = true;
         int arrayLength = Mathf.Max(bullets.Length, bulletAngles.Length, bulletDelay.Length);
-        for(int i = 0; i < arrayLength; i++)
+        for (int i = 0; i < arrayLength; i++)
         {
-            yield return new WaitForSeconds(bulletDelay[i%bulletDelay.Length]);
+            yield return new WaitForSeconds(bulletDelay[i % bulletDelay.Length]);
             Bullet bullet = Instantiate(bullets[i % bullets.Length], boss.bulletOrigin.position, boss.bulletOrigin.rotation);
-            bullet.transform.Rotate(0,0, bulletAngles[i % bulletAngles.Length], Space.Self);
+            bullet.transform.Rotate(0, 0, bulletAngles[i % bulletAngles.Length], Space.Self);
 
         }
         boss.attackCooldown = Random.Range(minAttackCooldown, maxAttackCooldown);
