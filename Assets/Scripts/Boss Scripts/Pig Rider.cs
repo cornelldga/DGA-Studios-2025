@@ -26,6 +26,8 @@ public class Pig_Rider : Boss
     [SerializeField] private float markChance = 0.3f;
     [Tooltip("Chance (0-1) that boss will enter bounce mode instead of normal charge")]
     [SerializeField] private float bounceChance = 0.2f;
+    [Tooltip("Chance (0-1) that boss will enter enraged bounce mode when below half health")]
+    [SerializeField] private float enragedBounceChance = 1f;
     private float bounceSpeed;
     [SerializeField] private float baseBounceSpeed = 10f;
 
@@ -36,6 +38,7 @@ public class Pig_Rider : Boss
     [Header("Bounce Mode Settings")]
     [Tooltip("Number of bounces charges during bouncing mode")]
     [SerializeField] private int bounces = 5;
+    private bool isEnraged = false;
     private float damage = 1f;
 
     [Header("Screen Shake")]
@@ -202,11 +205,26 @@ public class Pig_Rider : Boss
         currentState = State.Stunned;
         stateTimer = stunnedTime;
     }
-     private void TransitionToBouncing()
+    private void TransitionToBouncing()
     {
         currentState = State.Bouncing;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         bouncesRemaining = Random.Range(3, 7);
+    }
+    
+    /// <summary>
+    /// Sets the phase of pig rider based on its health percentage 
+    /// </summary>
+    /// <param name="healthPercent">Current health of pig rider as a percent of its maxHealth</param>
+    public override void SetPhase(float healthPercent)
+    {
+        base.SetPhase(healthPercent);
+        
+        if (healthPercent <= 0.5f)
+        {
+            isEnraged = true;
+            bounceChance = enragedBounceChance;
+        }
     }
 
 
