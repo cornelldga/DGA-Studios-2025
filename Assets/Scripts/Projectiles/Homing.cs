@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
 
-// TODO add header
+/// <summary>
+/// This script can be added to any moving object to make them home in on the player's position.
+/// They will maintain their current speed and rotate at `turnSpeed`.
+/// </summary>
 public class Homing : MonoBehaviour
 {
     [Tooltip("The maximum speed that this object will turn in while homing, in deg/s")]
@@ -28,7 +31,7 @@ public class Homing : MonoBehaviour
         if (player == null) return;
 
         Vector2 targetDirection = (player.position - rb.position).normalized;
-        
+
         float currentAngle = rb.rotation;
         float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, turnSpeed * Time.fixedDeltaTime);
