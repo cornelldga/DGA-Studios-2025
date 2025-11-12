@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Base : Projectile
 {
+    public Sprite baseSprite;
     public override void OnProjectileHit(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -13,5 +14,10 @@ public class Base : Projectile
             Destroy(gameObject);
         }
         base.OnProjectileHit(collision);
+    }
+
+    public Sprite getSprite()
+    {
+        return baseSprite;
     }
 }

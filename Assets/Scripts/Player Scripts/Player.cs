@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 /// <summary>
 /// Represents the charater you play in the game. Contains stats, handles inventory, and player inputs
@@ -34,6 +35,10 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float whipCooldownTime;
     [SerializeField] float whipTime;
 
+    [Header("UI")]
+    [SerializeField] Image equippedImage;
+    [SerializeField] Image backupImage;
+
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
     //the bigger the number, the less we will adjust
@@ -48,6 +53,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool whipping;
 
     Base selectedBase;
+    Base backupBase;
     Mixer selectedMixer;
 
 
@@ -62,8 +68,12 @@ public class Player : MonoBehaviour, IDamageable
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
         selectedBase = playerBases.GetBase(equippedBases[0]);
+        backupBase = playerBases.GetBase(equippedBases[1]);
         selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         selectedMixer.ApplyMixer(this);
+
+        equippedImage.sprite = selectedBase.getSprite();
+        backupImage.sprite = backupBase.getSprite();
 
         isAlive = true;
     }
@@ -90,14 +100,29 @@ public class Player : MonoBehaviour, IDamageable
         moveDirection = new Vector2(horizontal, vertical);
         if(changeCooldown <= 0)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Base tempBase = selectedBase;
+                selectedBase = backupBase;
+                backupBase = tempBase;
+                equippedImage.sprite = selectedBase.getSprite();
+                backupImage.sprite = backupBase.getSprite();
+                changeCooldown = changeCooldownTime;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 selectedBase = playerBases.GetBase(equippedBases[0]);
+                backupBase = playerBases.GetBase(equippedBases[1]);
+                equippedImage.sprite = selectedBase.getSprite();
+                backupImage.sprite = backupBase.getSprite();
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 selectedBase = playerBases.GetBase(equippedBases[1]);
+                backupBase = playerBases.GetBase(equippedBases[0]);
+                equippedImage.sprite = selectedBase.getSprite();
+                backupImage.sprite = backupBase.getSprite();
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
