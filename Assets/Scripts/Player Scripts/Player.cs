@@ -161,25 +161,10 @@ public class Player : MonoBehaviour, IDamageable
         Vector3 direction = mouseWorldPos - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // TODO: The position should be a transform where the player fires, not the center of the player
-        if (selectedBase == playerBases.GetBase(BaseType.Whiskey))
-        {
-            float pelletAngle = angle - 10;
-            for (int i = 0; i < 5; i++)
-            {
-                Quaternion fireDirection = Quaternion.Euler(0f, 0f, pelletAngle);
-                Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
-                selectedMixer.ApplyMixer(baseDrink);
-                pelletAngle += 5;
-                fireCooldown = baseDrink.cooldown;
-            }
-        }
-        else
-        {
-            Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
-            Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
-            selectedMixer.ApplyMixer(baseDrink);
-            fireCooldown = baseDrink.cooldown;
-        }
+        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
+        Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
+        selectedMixer.ApplyMixer(baseDrink);
+        fireCooldown = baseDrink.cooldown;
     }
 
     /// <summary>
