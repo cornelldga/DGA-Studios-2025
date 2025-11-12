@@ -10,17 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
-  m_Name: Card Fan
+  m_Name: New Bullet Pattern
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
-  bullets:
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
-  bulletAngles:
-  - -15
-  - 0
-  - 15
-  bulletDelay:
-  - 0
-  minAttackCooldown: 1
-  maxAttackCooldown: 2
+  bullets: []
+  bulletAngles: []
+  bulletDelay: []
+  minAttackCooldown: 0
+  maxAttackCooldown: 0
