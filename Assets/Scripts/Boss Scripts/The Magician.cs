@@ -115,8 +115,8 @@ public class TheMagician : Boss
         switch (currentStage)
         {
             case Stage.Backstage:
-                //attackCooldown = stag`;
-                isAttacking = true;
+                //attackCooldown = 0;
+                isAttacking = false;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
