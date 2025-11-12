@@ -19,6 +19,7 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
+
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
 
@@ -92,6 +93,10 @@ public class TheMagician : Boss
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
                 break;
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.gameObject.CompareTag("Player");
     }
 
     public override void SetPhase(float healthPercent)
