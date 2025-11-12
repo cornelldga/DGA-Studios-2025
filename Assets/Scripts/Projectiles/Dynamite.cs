@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using Unity.Cinemachine;
 //The dynamite is a non-moving aoe attack. Although not a "real projectile," it has overlapping features
-public class Dynamite : Projectile
+public class Dynamite : MonoBehaviour
 {
     public float max_radius;
     private float curr_radius;
     private float last_time;
     public float time_between;
     public float num_increases;
+    public float damage;
     //damage only dealt when isExploding = true;
     private bool isExploding;
     [SerializeField] Transform transform_object;
@@ -22,11 +23,9 @@ public class Dynamite : Projectile
         isExploding = false;
         max_radius = 1f;
         time_between = 0.001f;
-        Debug.Log("running");
         curr_radius = transform_object.localScale.x / 2;
         damage = 1;
         Explode();
-
     }
 
     // Update is called once per frame
@@ -47,10 +46,7 @@ public class Dynamite : Projectile
                     curr_radius = transform_object.localScale.x / 2;
                 }
             }
-                
-            
         }
-
     }
 
     void Explode()
@@ -58,18 +54,18 @@ public class Dynamite : Projectile
         isExploding = true;
         last_time = Time.time;
         if (impulseSource != null)
-        {
             impulseSource.GenerateImpulse(0.5f);
-        }
-            
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        OnAttackHit(collision);
     }
 
-     public override void OnProjectileHit(Collider2D collision)
+     public virtual void OnAttackHit(Collider2D collision)
     {
         if (isExploding && collision.CompareTag("Player"))
-        {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-        }
     }
 
 }
