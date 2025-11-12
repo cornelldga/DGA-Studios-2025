@@ -23,6 +23,10 @@ public class TheMagician : Boss
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
 
+    [Tooltip("How long The Magician stays on any one Stage")]
+    [SerializeField] float onStageTime;
+    private float stageTimer;
+
     public Stage currentStage;
     [SerializeField] private Animator animator;
 
@@ -30,12 +34,33 @@ public class TheMagician : Boss
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        attackCooldown = backStageTime;
+        attackCooldown = onStageTime /3.1f;
+        stageTimer = onStageTime;
     }
 
     public override void Update()
     {
         base.Update();
+        if (currentStage != Stage.Backstage)
+        {
+            stageTimer -= Time.deltaTime;
+            if (stageTimer <= 0)
+            {
+                stageTimer = backStageTime;
+                currentStage = Stage.Backstage;
+            }
+        }
+        else 
+        {
+            stageTimer -= Time.deltaTime;
+            if (stageTimer <= 0)
+            {
+                stageTimer = onStageTime;
+                Shuffle();
+                ChooseNewStage();
+            }
+        }
+            MoveToStage();
         animator.SetBool("isAttacking", isAttacking);
     }
 
@@ -61,36 +86,52 @@ public class TheMagician : Boss
         }
     }
     /// <summary>
-    /// Choose a random stage location that was not chosen previousely
+    /// Choose a random stage location from knife, dove, or cards
     /// </summary>
     private void ChooseNewStage()
     {
         List<Stage> stages = new List<Stage>();
         stages.AddRange(Enum.GetValues(typeof(Stage)));
-        stages.Remove(currentStage);
+        stages.Remove(Stage.Backstage);
         currentStage = stages[UnityEngine.Random.Range(0, stages.Count)];
+    }
+
+    /// <summary>
+    /// Moves The Magician to the current stage
+    /// </summary>
+    public void Shuffle()
+    {
+
     }
     /// <summary>
     /// The Magician chooses to a new stage to move to and executes the corresponding attack
     /// </summary>
+    /// 
     public override void Attack()
     {
-        ChooseNewStage();
-        MoveToStage();
+        //ChooseNewStage();
+        //MoveToStage();
         base.Attack();
         switch (currentStage)
         {
             case Stage.Backstage:
-                attackCooldown = backStageTime;
+                //attackCooldown = stag`;
+                isAttacking = true;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
+                attackCooldown = onStageTime / 3.1f;
+                isAttacking = false;
                 break;
             case Stage.Dove:
                 StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+                attackCooldown = onStageTime / 3.1f;
+                isAttacking = false;
                 break;
             case Stage.Knife:
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
+                attackCooldown = onStageTime / 3.1f;
+                isAttacking = false;
                 break;
         }
     }
