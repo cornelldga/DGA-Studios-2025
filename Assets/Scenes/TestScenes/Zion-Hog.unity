@@ -167,6 +167,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 816368028224125326, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 816368028224125326, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
@@ -780,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7078328412400213699, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -57.299988
+      value: -57.30005
       objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1357,26 +1361,10 @@ MonoBehaviour:
   isAttacking: 0
   attackCooldown: 0
   attackRate: 1
-  baseSpeed: 5
-  acceleration: 10
-  maxChargeSpeed: 16
-  impulseWeight: 200
-  targetingTime: 1
-  stunnedTime: 2
-  recoilForce: 10
+  currentState: 0
   markChance: 0.3
   bounceChance: 0.2
-  baseBounceSpeed: 10
-  bouncesRemaining: 5
   markingBulletPattern: {fileID: 11400000, guid: 3bf8c04eca9a940b8a1314203cc6cdea, type: 2}
-  bounces: 5
-  impulseSource: {fileID: 1633922070}
-  wallShakeForce: 0.5
-  playersShakeForce: 1
-  enableVictorySpin: 1
-  spinDuration: 0.5
-  spinSpeed: 720
-  currentState: 0
 --- !u!114 &1633922070
 MonoBehaviour:
   m_ObjectHideFlags: 0

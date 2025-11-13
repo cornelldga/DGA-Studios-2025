@@ -43,7 +43,7 @@ public class Pig_Rider : Boss
     //How many more bounces we should take in bounce mode.
     private float bouncesRemaining = 5f;
     //The marking bullet pattern.
-    private BulletPattern markingBulletPattern;
+    [SerializeField] private BulletPattern markingBulletPattern;
 
     [Header("Bounce Mode Settings")]
     private float damage = 1f;
@@ -77,20 +77,10 @@ public class Pig_Rider : Boss
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>();
-        }
-        rb.gravityScale = 0;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rb.bodyType = RigidbodyType2D.Dynamic;
-
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
         bounceSpeed = baseBounceSpeed;
-        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
     /// <summary>
     /// Updating of the statemachine.
@@ -285,6 +275,66 @@ public class Pig_Rider : Boss
             yield return null;
         }
     }
+    private void HandleCharge(Collision2D collision)
+    {
+        // Stop current velocity first
+        rb.linearVelocity = Vector2.zero;
+
+        // Calculate recoil direction (bounce back from the surface)
+        Vector2 collisionNormal = collision.contacts[0].normal;
+        Vector2 recoilDirection = collisionNormal;
+
+        // Apply recoil impulse
+        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+
+        // Trigger screen shake on wall hit
+        if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
+        {
+            impulseSource.GenerateImpulse(wallShakeForce);
+        }
+        else if (collision.gameObject.CompareTag("Player") && impulseSource != null)
+        {
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            impulseSource.GenerateImpulse(playersShakeForce);
+        }
+    }
+    private void HandleBounce(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            impulseSource.GenerateImpulse(playersShakeForce);
+            // Stop and recoil when hitting player
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            rb.linearVelocity = Vector2.zero;
+            Vector2 collisionNormal = collision.contacts[0].normal;
+            rb.AddForce(collisionNormal * recoilForce, ForceMode2D.Impulse);
+            bounceSpeed = baseBounceSpeed;
+            TransitionToStunned();
+            return;
+        }
+          
+        float shakeIntensity = wallShakeForce * (bounceSpeed / baseBounceSpeed);
+        impulseSource.GenerateImpulse(shakeIntensity);
+    
+        // Reflect the charge direction off the wall Increase our speed.
+        Vector2 wallNormal = collision.contacts[0].normal;
+        chargeDirection = Vector2.Reflect(chargeDirection, wallNormal);
+        bounceSpeed += 1;
+        bouncesRemaining--;
+
+        // Trigger screen shake on each bounce (gets stronger with speed)
+        
+        //Stun when out of bounces.
+        if (bouncesRemaining <= 0)
+        {
+            // Stop and recoil when bounces run out
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(wallNormal * recoilForce, ForceMode2D.Impulse);
+
+            bounceSpeed = baseBounceSpeed;
+            TransitionToStunned();
+        }
+    }
     /// <summary>
     /// Decides what should happen depending on state and if collision is with wal or player.
     /// </summary>
@@ -293,71 +343,13 @@ public class Pig_Rider : Boss
         // Normal charge mode - get stunned on collision
         if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
         {
-            // Stop current velocity first
-            rb.linearVelocity = Vector2.zero;
-
-            // Calculate recoil direction (bounce back from the surface)
-            Vector2 collisionNormal = collision.contacts[0].normal;
-            Vector2 recoilDirection = collisionNormal;
-
-            // Apply recoil impulse
-            rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
-
-            // Trigger screen shake on wall hit
-            if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
-            {
-                impulseSource.GenerateImpulse(wallShakeForce);
-            }
-            else if (collision.gameObject.CompareTag("Player") && impulseSource != null){
-                collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-                impulseSource.GenerateImpulse(playersShakeForce);
-            }
-
+            HandleCharge(collision);
             TransitionToStunned();
         }
         if (currentState == State.Bouncing && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player") ))
         {
-            //Send impulse to cinemachine.
-            if (impulseSource != null && collision.gameObject.CompareTag("Player"))
-            {
-                impulseSource.GenerateImpulse(playersShakeForce);
-            }
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                // Stop and recoil when hitting player
-                collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-                rb.linearVelocity = Vector2.zero;
-                Vector2 collisionNormal = collision.contacts[0].normal;
-                rb.AddForce(collisionNormal * recoilForce, ForceMode2D.Impulse);
-
-                bounceSpeed = baseBounceSpeed;
-                TransitionToStunned();
-                return;
-            }
-
-            // Reflect the charge direction off the wall Increase our speed.
-            Vector2 wallNormal = collision.contacts[0].normal;
-            chargeDirection = Vector2.Reflect(chargeDirection, wallNormal);
-            bounceSpeed += 1;
-            bouncesRemaining--;
-
-            // Trigger screen shake on each bounce (gets stronger with speed)
-            if (impulseSource != null)
-            {
-                float shakeIntensity = wallShakeForce * (bounceSpeed / baseBounceSpeed);
-                impulseSource.GenerateImpulse(shakeIntensity);
-            }
-            //Stun when out of bounces.
-            if (bouncesRemaining <= 0)
-            {
-                // Stop and recoil when bounces run out
-                rb.linearVelocity = Vector2.zero;
-                rb.AddForce(wallNormal * recoilForce, ForceMode2D.Impulse);
-
-                bounceSpeed = baseBounceSpeed;
-                TransitionToStunned();
-            }
-}
+            HandleBounce(collision);
+        }
     }
 
     public override void Attack()
