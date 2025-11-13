@@ -16,75 +16,88 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] private Button secondBase;
     [SerializeField] private Button thirdBase;
     [SerializeField] private Button fourthBase;
-    [SerializeField] private Sprite baseSlotOne;
-    [SerializeField] private Sprite baseSlotTwo;
-    [SerializeField] private Sprite mixerSlotOne;
-    [SerializeField] private Sprite mixerSlotTwo;
-    private Sprite currentSlot;
+    [SerializeField] private SpriteRenderer baseSlotOne;
+    [SerializeField] private SpriteRenderer baseSlotTwo;
+    [SerializeField] private SpriteRenderer mixerSlotOne;
+    [SerializeField] private SpriteRenderer mixerSlotTwo;
+    private SpriteRenderer currentSlot;
 
     public void SelectMixer(Button buttonSelected)
     {
-        MixerType mixer;
+        MixerType mixerType;
+        Button button;
         if (buttonSelected == firstMixer)
         {
-            mixer = MixerType.Cider;
-            firstMixer.gameObject.SetActive(false);
-            currentSlot = firstMixer.GetComponent<Sprite>();
-        }
-        else if (buttonSelected == secondMixer)
+            mixerType = MixerType.Cider;
+            button = firstMixer;
+        } else if (buttonSelected == secondMixer)
         {
-            mixer = MixerType.Ginger;
-            secondMixer.gameObject.SetActive(false);
-            currentSlot = secondMixer.GetComponent<Sprite>();
+            mixerType = MixerType.Ginger;
+            button = secondMixer;
         }
         else if (buttonSelected == thirdMixer)
         {
-            mixer = MixerType.Lime;
-            thirdMixer.gameObject.SetActive(false);
-            currentSlot = thirdMixer.GetComponent<Sprite>();
+            mixerType = MixerType.Lime;
+            button = thirdMixer;
         }
         else
         {
-            mixer = MixerType.Pimiento;
-            fourthMixer.gameObject.SetActive(false);
-            currentSlot = fourthMixer.GetComponent<Sprite>();
+            mixerType = MixerType.Pimiento;
+            button = fourthMixer;
         }
-        // change it from just zero?
-        GameManager.Instance.player.SwapMixerSlot(0, mixer);
+        button.gameObject.SetActive(false);
+        currentSlot.sprite = button.GetComponent<Sprite>();
+        if (currentSlot==mixerSlotOne)
+        {
+            GameManager.Instance.player.SwapMixerSlot(0, mixerType);
+        } else if (currentSlot==mixerSlotTwo)
+        {
+            GameManager.Instance.player.SwapMixerSlot(1, mixerType);
+        } else
+        {
+            Debug.Log("No mixer slot selected");
+        }
     }
 
     public void SelectBase(Button buttonSelected)
     {
         BaseType baseType;
+        Button button;
         if (buttonSelected == firstBase)
         {
             baseType = BaseType.Beer;
-            firstBase.gameObject.SetActive(false);
-            currentSlot = firstBase.GetComponent<Sprite>();
+            button = firstBase;
         }
         else if (buttonSelected == secondBase)
         {
             baseType = BaseType.Gin;
-            secondBase.gameObject.SetActive(false);
-            currentSlot = secondBase.GetComponent<Sprite>();
+            button = secondBase;
         }
         else if (buttonSelected == thirdBase)
         {
             baseType = BaseType.Whiskey;
-            thirdBase.gameObject.SetActive(false);
-            currentSlot = thirdBase.GetComponent<Sprite>();
+            button = thirdBase;
         }
         else
         {
             baseType = BaseType.Wine;
-            fourthBase.gameObject.SetActive(false);
-            currentSlot = fourthBase.GetComponent<Sprite>();
+            button = fourthMixer;
         }
-        // change it from just zero?
-        GameManager.Instance.player.SwapBaseSlot(0, baseType);
+        button.gameObject.SetActive(false);
+        currentSlot.sprite = button.GetComponent<Sprite>();
+        if (currentSlot==baseSlotOne)
+        {
+            GameManager.Instance.player.SwapBaseSlot(0, baseType);
+        } else if (currentSlot==baseSlotTwo)
+        {
+            GameManager.Instance.player.SwapBaseSlot(1, baseType);
+        } else
+        {
+            Debug.Log("No base slot selected");
+        }
     }
 
-    public void Slot(Sprite slot)
+    public void Slot(SpriteRenderer slot)
     {
         if (slot==baseSlotOne)
         {
