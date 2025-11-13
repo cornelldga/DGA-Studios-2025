@@ -81,7 +81,7 @@ public class LoadoutManager : MonoBehaviour
         else
         {
             baseType = BaseType.Wine;
-            button = fourthMixer;
+            button = fourthBase;
         }
         button.gameObject.SetActive(false);
         currentSlot.sprite = button.GetComponent<Sprite>();
