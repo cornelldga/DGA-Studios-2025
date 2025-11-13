@@ -1205,12 +1205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TheMagician
-  maxHealth: 10
+  maxHealth: 20
   healthBar: {fileID: 1249336682}
   bulletOrigin: {fileID: 1306603026}
   phasePercents:
+  - 0.8
   - 0.5
-  - 0.2
   isAttacking: 0
   attackCooldown: 0
   attackRate: 1
@@ -1226,6 +1226,7 @@ MonoBehaviour:
   cardStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
   doveStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
   knifeStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
+  obscure: 0
 --- !u!114 &1306603029
 MonoBehaviour:
   m_ObjectHideFlags: 0
