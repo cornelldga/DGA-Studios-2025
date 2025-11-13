@@ -22,6 +22,10 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] private SpriteRenderer mixerSlotTwo;
     private SpriteRenderer currentSlot;
 
+    /// <summary>
+    /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
+    /// <param name="line">The line of text from the JSON which is being displayed.</param>
+    /// </summary>
     public void SelectMixer(Button buttonSelected)
     {
         MixerType mixerType;
@@ -59,6 +63,9 @@ public class LoadoutManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets a base in a specific slot for the player and changes the image displayed in slot.
+    /// </summary>
     public void SelectBase(Button buttonSelected)
     {
         BaseType baseType;
@@ -97,6 +104,9 @@ public class LoadoutManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When a slot is selected, changes current slot to the slot selected
+    /// </summary>
     public void Slot(SpriteRenderer slot)
     {
         if (slot==baseSlotOne)
