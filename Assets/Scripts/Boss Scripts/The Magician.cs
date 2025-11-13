@@ -39,7 +39,8 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
-    private bool obscure;
+
+    [HideInInspector] public bool obscure;
 
     
 
@@ -61,6 +62,11 @@ public class TheMagician : Boss
             Attack();
         }
 
+        if (stageTimer < .5 * backStageTime && currentStage == Stage.Backstage)
+        {
+            obscure=true;
+        }
+
         if (stageTimer <= 0)
         {
             teleportDelayTimer -= Time.deltaTime * attackRate;
@@ -77,6 +83,7 @@ public class TheMagician : Boss
                 {
                     stageTimer = attackTime;
                     teleportDelayTimer = teleportDelay;
+                    obscure = false;
                     Shuffle();
                     ChooseNewStage();
                 }
