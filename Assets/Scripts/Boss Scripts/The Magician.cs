@@ -12,54 +12,78 @@ public enum Stage
 }
 public class TheMagician : Boss
 {
+    public Stage currentStage;
+
+    [Tooltip("Magician Animation Controller")]
+    [SerializeField] private Animator animator;
+
+    [Header("Movement Control Variables")]
+    [Tooltip("How long The Magician hides in the backstage")]
+    [SerializeField] float backStageTime;
+    private float stageTimer;
+
+    [Tooltip("How long The Magician spends attacking on Stage")]
+    [SerializeField] float attackTime;
+
+    [Tooltip("How long the Magician Waits before Teleporting")]
+    [SerializeField] float teleportDelay;
+    private float teleportDelayTimer;
+
+    [Header("Stages")]
     [SerializeField] Transform backStage;
     [SerializeField] Transform cardStage;
     [SerializeField] Transform doveStage;
     [SerializeField] Transform knifeStage;
+
+    [Header("Bullet Patterns")]
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
+    private bool obscure;
 
-    [Tooltip("How long The Magician hides in the backstage")]
-    [SerializeField] float backStageTime;
-
-    [Tooltip("How long The Magician stays on any one Stage")]
-    [SerializeField] float onStageTime;
-    private float stageTimer;
-
-    public Stage currentStage;
-    [SerializeField] private Animator animator;
+    
 
     public override void Start()
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        attackCooldown = onStageTime /3.1f;
-        stageTimer = onStageTime;
+        attackCooldown = attackTime / 3f;
+        stageTimer = attackTime;
+        teleportDelayTimer = teleportDelay;
     }
 
     public override void Update()
     {
-        base.Update();
-        if (currentStage != Stage.Backstage)
+        attackCooldown -= Time.deltaTime * attackRate;
+        stageTimer -= Time.deltaTime;
+        if (!isAttacking && attackCooldown <= 0 && stageTimer >= 0)
         {
-            stageTimer -= Time.deltaTime;
-            if (stageTimer <= 0)
-            {
-                stageTimer = backStageTime;
-                currentStage = Stage.Backstage;
-            }
+            Attack();
         }
-        else 
+
+        if (stageTimer <= 0)
         {
-            stageTimer -= Time.deltaTime;
-            if (stageTimer <= 0)
+            teleportDelayTimer -= Time.deltaTime * attackRate;
+            
+            if(teleportDelayTimer <= 0) 
             {
-                stageTimer = onStageTime;
-                Shuffle();
-                ChooseNewStage();
+                if (currentStage != Stage.Backstage)
+                {
+                    stageTimer = backStageTime;
+                    teleportDelayTimer = 0;
+                    currentStage = Stage.Backstage;
+                }
+                else
+                {
+                    stageTimer = attackTime;
+                    teleportDelayTimer = teleportDelay;
+                    Shuffle();
+                    ChooseNewStage();
+                }
             }
+            
         }
+        
             MoveToStage();
         animator.SetBool("isAttacking", isAttacking);
     }
@@ -97,14 +121,15 @@ public class TheMagician : Boss
     }
 
     /// <summary>
-    /// Moves The Magician to the current stage
+    /// Shuffles the location of the Stages
     /// </summary>
     public void Shuffle()
     {
 
     }
+
     /// <summary>
-    /// The Magician chooses to a new stage to move to and executes the corresponding attack
+    /// The Magician executes the attack corresponding to her current stage
     /// </summary>
     /// 
     public override void Attack()
@@ -116,29 +141,22 @@ public class TheMagician : Boss
         {
             case Stage.Backstage:
                 //attackCooldown = 0;
-                isAttacking = false;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = onStageTime / 3.1f;
-                isAttacking = false;
+                attackCooldown = attackTime / 3f;
                 break;
             case Stage.Dove:
                 StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = onStageTime / 3.1f;
-                isAttacking = false;
+                attackCooldown = attackTime / 3f;
                 break;
             case Stage.Knife:
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = onStageTime / 3.1f;
-                isAttacking = false;
+                attackCooldown = attackTime / 3f;
                 break;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        collision.gameObject.CompareTag("Player");
-    }
+ 
 
     public override void SetPhase(float healthPercent)
     {
@@ -146,10 +164,10 @@ public class TheMagician : Boss
         switch (currentPhase)
         {
             case 1:
-                attackRate = 1.25f;
+                attackRate = 4f;
                 break;
             case 2:
-                attackRate = 1.5f;
+                attackRate = 9f;
                 break;
         }
     }
