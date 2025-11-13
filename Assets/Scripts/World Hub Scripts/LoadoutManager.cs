@@ -1,13 +1,9 @@
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadoutManager : MonoBehaviour
 {
+    [Header("The mixer + base buttons")]
     [SerializeField] private Button firstMixer;
     [SerializeField] private Button secondMixer;
     [SerializeField] private Button thirdMixer;
@@ -16,6 +12,7 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] private Button secondBase;
     [SerializeField] private Button thirdBase;
     [SerializeField] private Button fourthBase;
+    [Header("The inventory slot sprite renderers")]
     [SerializeField] private SpriteRenderer baseSlotOne;
     [SerializeField] private SpriteRenderer baseSlotTwo;
     [SerializeField] private SpriteRenderer mixerSlotOne;
@@ -24,7 +21,7 @@ public class LoadoutManager : MonoBehaviour
 
     /// <summary>
     /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
-    /// <param name="line">The line of text from the JSON which is being displayed.</param>
+    /// <param name="buttonSelected">The Button that was clicked by the player.</param>
     /// </summary>
     public void SelectMixer(Button buttonSelected)
     {
@@ -65,6 +62,7 @@ public class LoadoutManager : MonoBehaviour
 
     /// <summary>
     /// Sets a base in a specific slot for the player and changes the image displayed in slot.
+    /// <param name="buttonSelected">The Button that was clicked by the player.</param>
     /// </summary>
     public void SelectBase(Button buttonSelected)
     {
@@ -106,6 +104,7 @@ public class LoadoutManager : MonoBehaviour
 
     /// <summary>
     /// When a slot is selected, changes current slot to the slot selected
+    /// <param name="slot">The SpriteRenderer of the slot that was selected by the player.</param>
     /// </summary>
     public void Slot(SpriteRenderer slot)
     {
