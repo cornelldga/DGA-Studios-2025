@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f68b4031ca44a7985972c279895275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  emersionHole: 0
+  debrisPrefab: {fileID: 3814195944134518128, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
   spawnOffset: 0.2
   radius: 3
   debrisCount: 10
@@ -146,7 +148,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7b3ec3cf00fd4c418ab04b113a054a6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -180,5 +182,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 0.75, y: 0.7}
   m_EdgeRadius: 0.1
