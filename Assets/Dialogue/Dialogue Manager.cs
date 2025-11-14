@@ -230,36 +230,39 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets UI buttons active.
+    /// Sets UI buttons active and updates button text based on dialogue type.
     /// </summary>
     private void DialogueChoice()
     {
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
+
+        if (currentDialogueType == DialogueType.Boss)
+        {
+            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Let's Fight!";
+            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Not Yet";
+        }
+        else if (currentDialogueType == DialogueType.Interactive)
+        {
+            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Yes";
+            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "No";
+        }
     }
 
     /// <summary>
-    /// Deactivates UI buttons and loads new scene.
+    /// Handles the "Yes" choice for boss fights or interactive objects like doors.
     /// </summary>
-    public void Fight()
+    public void YesChoice()
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        if (currentDialogueType == DialogueType.Boss)
-        {
-            GameManager.Instance.LoadScene(sceneName);
-        }
-        // Interactives like objects and doors will need something, temporary placeholder is ending the dialogue
-        else if (currentDialogueType == DialogueType.Interactive)
-        {
-            EndDialogue();
-        }
+        GameManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>
-    /// Sets UI buttons inactive and ends dialogue.
+    /// Handles the "No" choice, ending dialogue without taking action.
     /// </summary>
-    public void NoFight()
+    public void NoChoice()
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
