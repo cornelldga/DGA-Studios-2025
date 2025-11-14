@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Base class for all bosses in the game
 /// </summary>
-public abstract class Boss : MonoBehaviour
+public abstract class Boss : MonoBehaviour, IDamageable
 {
     [SerializeField] protected float maxHealth;
     protected float health;

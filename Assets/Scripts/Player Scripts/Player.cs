@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour, IDamageable
     public Whip whip;
     [SerializeField] float whipCooldownTime;
     [SerializeField] float whipTime;
+    private bool isMarked;
+    private float markTimer;
 
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour, IDamageable
     Animator animationControl;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
+    SpriteRenderer sprite;
     float angle;
     Vector2 moveDirection;
     float fireCooldown;
@@ -56,6 +60,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
         playerBases = GetComponent<PlayerBases>();
         animationControl = GetComponent<Animator>();
@@ -68,6 +73,7 @@ public class Player : MonoBehaviour, IDamageable
         selectedBase = playerBases.GetBase(equippedBases[0]);
         selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         selectedMixer.ApplyMixer(this);
+        isMarked = false;
 
         isAlive = true;
     }
@@ -77,6 +83,15 @@ public class Player : MonoBehaviour, IDamageable
         if (!isAlive)
         {
             return;
+        }
+        if (isMarked)
+        {
+            markTimer -= Time.deltaTime;
+            if (markTimer <= 0)
+            {
+                sprite.color = Color.white;
+                isMarked = false;
+            }
         }
         fireCooldown -= Time.deltaTime;
         changeCooldown -= Time.deltaTime;
@@ -267,9 +282,23 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             GameManager.Instance.LoseGame();
         }
+    }
+    public void ApplyMark(float markDuration)
+    {
+        isMarked = true;
+        sprite.color = new Color(1f, 0.6f, 0.6f);
+        markTimer = markDuration;
+    }
+    public bool IsMarked()
+    {
+        return isMarked;
+    }
+    public float GetHealth()
+    {
+        return health;
     }
 }
