@@ -152,6 +152,8 @@ MonoBehaviour:
   whip: {fileID: 3676044735641770482}
   whipCooldownTime: 1
   whipTime: 1
+  equippedImage: {fileID: 0}
+  backupImage: {fileID: 0}
 --- !u!114 &4663871014066381724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +169,7 @@ MonoBehaviour:
   bases:
   - {fileID: 3814195944134518128, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
   - {fileID: 5220344265110755228, guid: b3f18be2c343fe64b95759835c6d0fa7, type: 3}
-  - {fileID: 6001040598022860389, guid: c93de10fbc021ca48a874e546c3d12c0, type: 3}
+  - {fileID: 6757635485101326290, guid: c93de10fbc021ca48a874e546c3d12c0, type: 3}
   - {fileID: 6507160882352728098, guid: 1f9bbc3c51e6c364a8f2c9c6567885d5, type: 3}
 --- !u!114 &1637807250424486218
 MonoBehaviour:
