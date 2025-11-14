@@ -982,10 +982,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
   jsonTextFile: {fileID: 4900000, guid: 3c1b3946d00bc457baf8480e3f0ff0db, type: 3}
   dialogueBoxSprite: {fileID: 3877369958027668088, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+  dialogueType: 1
   neutralSprite: {fileID: 2383559155859820356, guid: 805cb6f13560a41a88cc9278d622a032, type: 3}
   happySprite: {fileID: 21300000, guid: 37853438fc9d1449c8d2cf1bc6e99560, type: 3}
   sadSprite: {fileID: 2383559155859820356, guid: 805cb6f13560a41a88cc9278d622a032, type: 3}
-  bossChar: 1
   sceneName: Magician Building
 --- !u!114 &1024449443
 MonoBehaviour:
@@ -1528,15 +1528,15 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 37853438fc9d1449c8d2cf1bc6e99560, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
       value: 
-      objectReference: {fileID: 4900000, guid: 3c1b3946d00bc457baf8480e3f0ff0db, type: 3}
+      objectReference: {fileID: 4900000, guid: bea203d4ea1ab437b8e8b1fed8f7497a, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 2383559155859820356, guid: 805cb6f13560a41a88cc9278d622a032, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 

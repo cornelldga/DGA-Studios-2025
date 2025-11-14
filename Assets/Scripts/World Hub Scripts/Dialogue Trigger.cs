@@ -8,23 +8,30 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] TextAsset jsonTextFile;
     [SerializeField] Sprite dialogueBoxSprite;
+    [SerializeField] DialogueType dialogueType = DialogueType.NPC;
+
+    [Header("Boss-only Fields")]
     [SerializeField] Sprite neutralSprite;
     [SerializeField] Sprite happySprite;
     [SerializeField] Sprite sadSprite;
-    [SerializeField] bool bossChar;
+    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
+
+    [Header("Boss and interactable Fields")]
     [SerializeField] string sceneName = "";
     private int progressionInt;
 
-    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
-
+    
     /// <summary>
     /// Set the emotion dictionary
     /// </summary>
     private void Start()
     {
-        emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
-        emotionDictionary[DialogueEmotion.Happy] = happySprite;
-        emotionDictionary[DialogueEmotion.Sad] = sadSprite;
+        if (dialogueType == DialogueType.Boss)
+        {
+            emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
+            emotionDictionary[DialogueEmotion.Happy] = happySprite;
+            emotionDictionary[DialogueEmotion.Sad] = sadSprite;
+        }
     }
 
     public void Interact()
@@ -40,7 +47,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         if (!DialogueManager.Instance.OngoingDialogue())
         {
             DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt,
-            dialogueBoxSprite, emotionDictionary, sceneName, bossChar);
+            dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
             
     }
