@@ -13,12 +13,12 @@ public class Cider : Mixer
         baseDrink.accuracy += ciderAccuracyDecrease;
     }
 
-    public override void ApplyMixer(PlayerController player)
+    public override void ApplyMixer(Player player)
     {
         
     }
 
-    public override void RemoveMixer(PlayerController player)
+    public override void RemoveMixer(Player player)
     {
         
     }

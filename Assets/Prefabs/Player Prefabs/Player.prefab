@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523022322800746459}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Whip Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,8 @@ GameObject:
   - component: {fileID: 1637807250424486218}
   - component: {fileID: 5903920608498839182}
   - component: {fileID: 212490275120157305}
-  m_Layer: 7
+  - component: {fileID: 8599153739709188770}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,6 +259,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 0.95}
   m_EdgeRadius: 0
+--- !u!95 &8599153739709188770
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241333523866175095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f45391707e2ee04497cb7bbb62758db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5911507543233875158
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +293,7 @@ GameObject:
   - component: {fileID: 5944175202603568319}
   - component: {fileID: 8629098600308274521}
   - component: {fileID: 3676044735641770482}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Whip
   m_TagString: Untagged
   m_Icon: {fileID: 0}

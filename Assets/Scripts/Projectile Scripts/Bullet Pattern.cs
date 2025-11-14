@@ -9,7 +9,7 @@ public class BulletPattern : ScriptableObject
 {
     [SerializeField] Bullet[] bullets;
     [SerializeField] float[] bulletAngles;
-    [SerializeField] float[] bulletDelay;
+    [SerializeField] float[] bulletDelays;
     [Range(0, 10)]
     [SerializeField] float minAttackCooldown;
     [Range(0, 10)]
@@ -24,12 +24,12 @@ public class BulletPattern : ScriptableObject
     public IEnumerator DoBulletPattern(Boss boss)
     {
         boss.isAttacking = true;
-        int arrayLength = Mathf.Max(bullets.Length, bulletAngles.Length, bulletDelay.Length);
-        for (int i = 0; i < arrayLength; i++)
+        int arrayLength = Mathf.Max(bullets.Length, bulletAngles.Length, bulletDelays.Length);
+        for(int i = 0; i < arrayLength; i++)
         {
-            yield return new WaitForSeconds(bulletDelay[i % bulletDelay.Length]);
+            yield return new WaitForSeconds(bulletDelays[i%bulletDelays.Length]);
             Bullet bullet = Instantiate(bullets[i % bullets.Length], boss.bulletOrigin.position, boss.bulletOrigin.rotation);
-            bullet.transform.Rotate(0, 0, bulletAngles[i % bulletAngles.Length], Space.Self);
+            bullet.transform.Rotate(0,0, bulletAngles[i % bulletAngles.Length], Space.Self);
 
         }
         boss.attackCooldown = Random.Range(minAttackCooldown, maxAttackCooldown);
