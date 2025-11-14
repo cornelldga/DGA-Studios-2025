@@ -4,23 +4,27 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 
+/// <summary>
+/// Triggers dialogue sequences when interacted with for all dialogue types.
+/// </summary> 
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
-    [SerializeField] TextAsset jsonTextFile;
-    [SerializeField] Sprite dialogueBoxSprite;
-    [SerializeField] DialogueType dialogueType = DialogueType.NPC;
+    [Header("General Settings")]
+    [SerializeField] private TextAsset jsonTextFile;
+    [SerializeField] private Sprite dialogueBoxSprite;
+    [SerializeField] private DialogueType dialogueType = DialogueType.NPC;
 
     [Header("Boss-only Fields")]
-    [SerializeField] Sprite neutralSprite;
-    [SerializeField] Sprite happySprite;
-    [SerializeField] Sprite sadSprite;
+    [SerializeField] private Sprite neutralSprite;
+    [SerializeField] private Sprite happySprite;
+    [SerializeField] private Sprite sadSprite;
     Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     [Header("Boss and interactable Fields")]
-    [SerializeField] string sceneName = "";
+    [SerializeField] private string sceneName = "";
     private int progressionInt;
 
-    
+
     /// <summary>
     /// Set the emotion dictionary
     /// </summary>
@@ -34,6 +38,9 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         }
     }
 
+    /// <summary>
+    /// Will trigger dialogue when interacted.
+    /// </summary>
     public void Interact()
     {
         TriggerDialogue();
@@ -49,6 +56,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt,
             dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
-            
+
     }
 }

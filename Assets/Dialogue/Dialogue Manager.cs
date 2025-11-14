@@ -25,9 +25,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     [Header("UI Components")]
     [SerializeField] private Animator dialogueBox;
+    [Tooltip("Where the actual dialogue is displayed")]
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] private TextMeshProUGUI nameText;
+    [Tooltip("The grey out background for when dialogue plays")]
     [SerializeField] private Image backgroundImg;
+    [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
 
     [Header("Choice Buttons")]
@@ -43,6 +47,10 @@ public class DialogueManager : MonoBehaviour
     bool isTyping;
     DialogueType currentDialogueType;
     string sceneName;
+
+    /// <summary>
+    /// Initializes the singleton, hides choices at start up.
+    /// </summary>
     void Awake()
     {
         if (Instance == null)
