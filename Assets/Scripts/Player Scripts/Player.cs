@@ -44,6 +44,8 @@ public class Player : MonoBehaviour, IDamageable
     //the bigger the number, the less we will adjust
     private float MAGIC_ADJUSTMENT_RATIO = 5f;
 
+    Animator animationControl;
+    SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
     float angle;
     Vector2 moveDirection;
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         playerMixers = GetComponent<PlayerMixers>();
         playerBases = GetComponent<PlayerBases>();
+        animationControl = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
         speed = baseSpeed;
@@ -98,9 +102,21 @@ public class Player : MonoBehaviour, IDamageable
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
+        
         moveDirection = new Vector2(horizontal, vertical);
-        if(changeCooldown <= 0)
+
+        animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
+
+        if (moveDirection.x < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveDirection.x > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        if (changeCooldown <= 0)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
