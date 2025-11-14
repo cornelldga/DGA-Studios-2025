@@ -17,6 +17,16 @@ public class TheMagician : Boss
     [Tooltip("Magician Animation Controller")]
     [SerializeField] private Animator animator;
 
+    [Header("Attack Control Variables")]
+    [Tooltip("Number of Attacks per Phase")]
+    [SerializeField] float attacksNum;
+
+    [Tooltip("Attack rate during the second phase")]
+    [SerializeField] float secondAttackRate;
+
+    [Tooltip("Attack rate during the third phase")]
+    [SerializeField] float thirdAttackRate;
+
     [Header("Movement Control Variables")]
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
@@ -48,7 +58,7 @@ public class TheMagician : Boss
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        attackCooldown = attackTime / 3f;
+        attackCooldown = attackTime / attacksNum;
         stageTimer = attackTime;
         teleportDelayTimer = teleportDelay;
     }
@@ -151,15 +161,15 @@ public class TheMagician : Boss
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = attackTime / 3f;
+                attackCooldown = attackTime / attacksNum;
                 break;
             case Stage.Dove:
                 StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = attackTime / 3f;
+                attackCooldown = attackTime / attacksNum;
                 break;
             case Stage.Knife:
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
-                attackCooldown = attackTime / 3f;
+                attackCooldown = attackTime / attacksNum;
                 break;
         }
     }
@@ -171,10 +181,10 @@ public class TheMagician : Boss
         switch (currentPhase)
         {
             case 1:
-                attackRate = 4f;
+                attackRate = secondAttackRate;
                 break;
             case 2:
-                attackRate = 9f;
+                attackRate = thirdAttackRate;
                 break;
         }
     }
