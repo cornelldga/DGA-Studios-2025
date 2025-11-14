@@ -40,13 +40,13 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float typingSpeed;
-    DialogueData currentDialogueData;
-    string currentDialogueID;
-    Dictionary<DialogueEmotion, Sprite> currentEmotions;
-    bool ongoingDialogue = false;
-    bool isTyping;
-    DialogueType currentDialogueType;
-    string sceneName;
+    private DialogueData currentDialogueData;
+    private string currentDialogueID;
+    private Dictionary<DialogueEmotion, Sprite> currentEmotions;
+    private bool ongoingDialogue = false;
+    private bool isTyping;
+    private DialogueType currentDialogueType;
+    private string sceneName;
 
     /// <summary>
     /// Initializes the singleton, hides choices at start up.
