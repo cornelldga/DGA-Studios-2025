@@ -90,17 +90,10 @@ public class Player : MonoBehaviour, IDamageable
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
-        moveDirection = new Vector2(horizontal, vertical);
         
-        if (moveDirection.magnitude <= 0 && horizontal <= 0 && vertical <= 0)
-        {
-            animationControl.SetBool("Walking", false);
-        }
-        else if (moveDirection.magnitude > 0)
-        {
-            animationControl.SetBool("Walking", true);
-        }
+        moveDirection = new Vector2(horizontal, vertical);
+
+        animationControl.SetFloat("Speed", moveDirection.magnitude);
 
         if (moveDirection.x < 0)
         {
