@@ -14,7 +14,7 @@ using System.ComponentModel;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    public Animator dialogueBox;
+    [SerializeField] private Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image backgroundImg;
@@ -102,12 +102,12 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
-            sceneName = scene;
             bossFight = boss;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             if (bossFight)
             {
                 currentEmotions = emotionDictionary;
+                sceneName = scene;
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
