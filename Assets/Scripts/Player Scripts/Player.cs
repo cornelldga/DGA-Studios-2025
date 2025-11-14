@@ -52,6 +52,7 @@ public class Player : MonoBehaviour, IDamageable
     float whipCooldown;
     private bool whipping;
 
+    int baseIndex;
     Base selectedBase;
     Base backupBase;
     Mixer selectedMixer;
@@ -67,8 +68,9 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
-        selectedBase = playerBases.GetBase(equippedBases[0]);
-        backupBase = playerBases.GetBase(equippedBases[1]);
+        baseIndex = 0;
+        selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+        backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
         selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         selectedMixer.ApplyMixer(this);
 
@@ -102,25 +104,27 @@ public class Player : MonoBehaviour, IDamageable
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                Base tempBase = selectedBase;
-                selectedBase = backupBase;
-                backupBase = tempBase;
+                baseIndex = (baseIndex + 1) % equippedBases.Length;
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
                 equippedImage.sprite = selectedBase.getSprite();
                 backupImage.sprite = backupBase.getSprite();
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                selectedBase = playerBases.GetBase(equippedBases[0]);
-                backupBase = playerBases.GetBase(equippedBases[1]);
+                baseIndex = 0;
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
                 equippedImage.sprite = selectedBase.getSprite();
                 backupImage.sprite = backupBase.getSprite();
                 changeCooldown = changeCooldownTime;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                selectedBase = playerBases.GetBase(equippedBases[1]);
-                backupBase = playerBases.GetBase(equippedBases[0]);
+                baseIndex = 1;
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
                 equippedImage.sprite = selectedBase.getSprite();
                 backupImage.sprite = backupBase.getSprite();
                 changeCooldown = changeCooldownTime;

@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Base : Projectile
 {
-    public Sprite baseSprite;
+    [SerializeField] Sprite baseSprite;
     public override void OnProjectileHit(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
