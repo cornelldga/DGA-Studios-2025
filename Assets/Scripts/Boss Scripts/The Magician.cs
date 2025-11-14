@@ -50,8 +50,6 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
 
-    [HideInInspector] public bool obscure;
-
     
 
     public override void Start()
@@ -93,7 +91,6 @@ public class TheMagician : Boss
                 {
                     stageTimer = attackTime;
                     teleportDelayTimer = teleportDelay;
-                    obscure = false;
                     Shuffle();
                     ChooseNewStage();
                 }
@@ -137,13 +134,6 @@ public class TheMagician : Boss
         currentStage = stages[UnityEngine.Random.Range(0, stages.Count)];
     }
 
-    /// <summary>
-    /// Shuffles the location of the Stages
-    /// </summary>
-    public void Shuffle()
-    {
-
-    }
 
     /// <summary>
     /// The Magician executes the attack corresponding to her current stage
