@@ -15,7 +15,7 @@ public class MarkingBullet : Bullet
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            Player player = collision.gameObject.GetComponent<Player>();
             if (player != null)
             {
                 player.ApplyMark(markDuration);
