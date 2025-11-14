@@ -93,7 +93,7 @@ public class Player : MonoBehaviour, IDamageable
         
         moveDirection = new Vector2(horizontal, vertical);
 
-        animationControl.SetFloat("Speed", moveDirection.magnitude);
+        animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
 
         if (moveDirection.x < 0)
         {
