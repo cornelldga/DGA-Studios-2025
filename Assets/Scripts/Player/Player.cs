@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 /// <summary>
 /// Controls the player
 /// </summary>
-public class PlayerController : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable
 
 {
     [Header("Stats")]
