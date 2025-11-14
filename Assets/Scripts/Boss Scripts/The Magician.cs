@@ -29,7 +29,7 @@ public class TheMagician : Boss
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        SetAttackCooldown(backStageTime);
+        attackCooldown = backStageTime;
     }
 
     public override void Update()
@@ -85,7 +85,7 @@ public class TheMagician : Boss
         switch (currentStage)
         {
             case Stage.Backstage:
-                SetAttackCooldown(backStageTime);
+                attackCooldown = backStageTime;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
