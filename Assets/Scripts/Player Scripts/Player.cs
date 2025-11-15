@@ -55,6 +55,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool whipping;
 
     int baseIndex;
+    int mixerIndex;
     Base selectedBase;
     Base backupBase;
     Mixer selectedMixer;
@@ -72,11 +73,8 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
-        baseIndex = 0;
-        selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
-        backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
-        selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
-        selectedMixer.ApplyMixer(this);
+        SelectBase(0);
+        SelectMixer(0);
 
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
@@ -95,6 +93,34 @@ public class Player : MonoBehaviour, IDamageable
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+    /// <summary>
+    /// Selects the base using the current baseIndex and swaps out the secondary base
+    /// </summary>
+    /// <param name="index">The index of the base</param>
+    void SelectBase(int index)
+    {
+        baseIndex = index;
+        selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+        backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
+        equippedImage.sprite = selectedBase.getSprite();
+        backupImage.sprite = backupBase.getSprite();
+        changeCooldown = changeCooldownTime;
+    }
+
+    /// <summary>
+    /// Selects the mixer using the current mixerIndex and removes the previous mixer affects
+    /// </summary>
+    /// <param name="index">The index of the mixer</param>
+    void SelectMixer(int index)
+    {
+        mixerIndex = index;
+        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        selectedMixer.RemoveMixer(this);
+        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        selectedMixer.ApplyMixer(this);
+        changeCooldown = changeCooldownTime;
+    }
+
     /// <summary>
     /// Read the player's inputs
     /// </summary>
@@ -120,44 +146,23 @@ public class Player : MonoBehaviour, IDamageable
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                baseIndex = (baseIndex + 1) % equippedBases.Length;
-                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
-                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
-                equippedImage.sprite = selectedBase.getSprite();
-                backupImage.sprite = backupBase.getSprite();
-                changeCooldown = changeCooldownTime;
+                SelectBase((baseIndex + 1) % equippedBases.Length);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha1))
+            else if (Input.GetKeyDown(KeyCode.Alpha1) && baseIndex != 0)
             {
-                baseIndex = 0;
-                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
-                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
-                equippedImage.sprite = selectedBase.getSprite();
-                backupImage.sprite = backupBase.getSprite();
-                changeCooldown = changeCooldownTime;
+                SelectBase(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && baseIndex != 1)
             {
-                baseIndex = 1;
-                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
-                backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
-                equippedImage.sprite = selectedBase.getSprite();
-                backupImage.sprite = backupBase.getSprite();
-                changeCooldown = changeCooldownTime;
+                SelectBase(1);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && mixerIndex != 0)
             {
-                selectedMixer.RemoveMixer(this);
-                selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
-                selectedMixer.ApplyMixer(this);
-                changeCooldown = changeCooldownTime;
+                SelectMixer(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && mixerIndex != 1)
             {
-                selectedMixer.RemoveMixer(this);
-                selectedMixer = playerMixers.GetMixer(equippedMixers[1]);
-                selectedMixer.ApplyMixer(this);
-                changeCooldown = changeCooldownTime;
+                SelectMixer(1);
             }
         }
         if (!whipping && Input.GetMouseButtonDown(1) && whipCooldown <= 0)
