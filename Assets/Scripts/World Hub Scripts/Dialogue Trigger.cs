@@ -18,7 +18,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [SerializeField] private Sprite neutralSprite;
     [SerializeField] private Sprite happySprite;
     [SerializeField] private Sprite sadSprite;
-    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
+    private Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     [Header("Boss and interactable Fields")]
     [SerializeField] private string sceneName = "";
