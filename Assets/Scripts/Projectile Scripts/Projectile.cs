@@ -12,7 +12,6 @@ public abstract class Projectile : MonoBehaviour
     public float lifeDuration;
     public float cooldown;
     public float damage;
-    public int extraBullets;
     [Tooltip("0 is perfect accuracy")]
     [Range(0, 180)]
     public float accuracy;
@@ -22,30 +21,11 @@ public abstract class Projectile : MonoBehaviour
 
 
     Rigidbody2D rb;
-    private void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));
         rb.AddForce(transform.right * speed, ForceMode2D.Impulse);
-        float angleChange = 5;
-        for (int i = 0; i < extraBullets; i++)
-        {
-            if (i % 2 == 0)
-            {
-                float newAngle = transform.rotation.eulerAngles.z - angleChange;
-                Quaternion newRotation = Quaternion.Euler(0, 0, newAngle);
-                Projectile proj = Instantiate(this, transform.position, newRotation);
-                proj.extraBullets = 0;
-            }
-            if (i % 2 == 1)
-            {
-                float newAngle = transform.rotation.eulerAngles.z + angleChange;
-                Quaternion newRotation = Quaternion.Euler(0, 0, newAngle);
-                Projectile proj = Instantiate(this, transform.position, newRotation);
-                proj.extraBullets = 0;
-                angleChange += 5;
-            }
-        }
         Destroy(gameObject, lifeDuration);
     }
 
