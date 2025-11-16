@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Whiskey : Base
 {
+    [Tooltip("The number of additional bullets fired")]
     [SerializeField] int extraBullets;
     [SerializeField] float angleChange;
 
@@ -13,25 +14,24 @@ public class Whiskey : Base
     public override void Start()
     {
         base.Start();
-        float angle = angleChange;
+        float evenAngle = (extraBullets % 2 == 0) ? .5f : 0;
+        transform.Rotate(new Vector3(0, 0, .5f * angleChange), Space.Self);
+        float angle = (Mathf.Floor(extraBullets / 2) + evenAngle) * -angleChange;
         if (!original) return;
-        for (int i = 0; i < extraBullets; i++)
+        for (int i = 0; i < extraBullets/2; i++)
         {
-            if (i % 2 == 0)
-            {
-                float newAngle = transform.rotation.eulerAngles.z - angleChange;
-                Quaternion newRotation = Quaternion.Euler(0, 0, newAngle);
-                Whiskey proj = Instantiate(this, transform.position, newRotation);
-                proj.original = false;
-            }
-            if (i % 2 == 1)
-            {
-                float newAngle = transform.rotation.eulerAngles.z + angleChange;
-                Quaternion newRotation = Quaternion.Euler(0, 0, newAngle);
-                Whiskey proj = Instantiate(this, transform.position, newRotation);
-                angle += angleChange;
-                proj.original = false;
-            }
+            Whiskey proj = Instantiate(this, transform.position, transform.rotation);
+            proj.original = false;
+            proj.transform.Rotate(new Vector3(0, 0, angle), Space.Self);
+            angle += angleChange;
+        }
+        angle += angleChange;
+        for (int i = extraBullets / 2; i < extraBullets; i++)
+        {
+            Whiskey proj = Instantiate(this, transform.position, transform.rotation);
+            proj.original = false;
+            proj.transform.Rotate(new Vector3(0, 0, angle), Space.Self);
+            angle += angleChange;
         }
     }
 }

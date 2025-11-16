@@ -178,11 +178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a44f628256e8e40a0d314468560a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whiskey
-  speed: 15
-  lifeDuration: 0.5
+  speed: 18
+  lifeDuration: 0.7
   cooldown: 1
   damage: 1
-  accuracy: 2
+  accuracy: 1
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
