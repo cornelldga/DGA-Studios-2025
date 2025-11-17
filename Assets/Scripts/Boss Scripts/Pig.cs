@@ -16,6 +16,7 @@ public class Pig : MonoBehaviour, IDamageable
     private float acceleration = 6f;
     //Maximum speed to cap given acceleration.
     private float maxChargeSpeed = 10f;
+    private Vector2 startingPoint;
 
     State currentState;
 
@@ -36,6 +37,7 @@ public class Pig : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Patrolling;
+        startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
 
     /// <summary>
