@@ -46,7 +46,7 @@ public class Smoker : MonoBehaviour
         {
             if (smokeTimer >= resetTime)
             {
-                ShootSmoke();
+                //ShootSmoke();
                 smokeTimer = 0;
                 resetTime = UnityEngine.Random.Range(0.05f, 0.1f);
 
