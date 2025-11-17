@@ -23,6 +23,9 @@ public class Pig : MonoBehaviour, IDamageable
     private float maxChargeSpeed = 10f;
     private Vector2 startingPoint;
 
+    private float damage = 1f;
+    private float recoilForce = 2f;
+
     State currentState;
 
     public enum State
@@ -87,7 +90,7 @@ public class Pig : MonoBehaviour, IDamageable
         {
             player.TakeDamage(damage);
             impulseSource.GenerateImpulse(playersShakeForce);
-            player.Unmark();
+            player.removeMark();
         }
     }
 
