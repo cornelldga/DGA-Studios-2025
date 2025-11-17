@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -252,12 +251,10 @@ public class Pig_Rider : Boss
     /// <summary>
     /// Sets the phase of bull rider based on the health percent.
     /// </summary>
-    /// <param name="healthPercent">The current health of pig rider as a percent of the max health.</param>
-    public override void SetPhase(float healthPercent)
+    public override void SetPhase()
     {
-        base.SetPhase(healthPercent);
 
-        if (healthPercent <= 0.5f && !isEnraged)
+        if (currentPhase == 1 && !isEnraged)
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
