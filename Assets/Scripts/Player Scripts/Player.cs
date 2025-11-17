@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using NUnit.Framework;
 using TMPro;
@@ -98,8 +99,7 @@ public class Player : MonoBehaviour, IDamageable
             markTimer -= Time.deltaTime;
             if (markTimer <= 0)
             {
-                sprite.color = Color.white;
-                isMarked = false;
+                removeMark();
             }
         }
         fireCooldown -= Time.deltaTime;
@@ -107,6 +107,16 @@ public class Player : MonoBehaviour, IDamageable
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+
+    /// <summary>
+    /// Removes mark on player.
+    /// </summary>
+    public void removeMark()
+    {
+        sprite.color = Color.white;
+        isMarked = false;
+    }
+
     /// <summary>
     /// Selects the base using the current baseIndex and swaps out the secondary base
     /// </summary>
@@ -142,7 +152,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        
+
         moveDirection = new Vector2(horizontal, vertical);
 
         animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
