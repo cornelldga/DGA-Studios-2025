@@ -32,7 +32,7 @@ public class DynamiteExplosion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-        // if (collision.CompareTag("Hole")); //do something
+        if (collision.CompareTag("Hole"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         
     }
 
