@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 6cd733e0b211c3f4e8dabee7684c1395
+guid: ead13fdcae29d4eeb83f7060ee84f466
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2491103210591063447
-    second: guy_idle_animation_0
-  - first:
-      213: 7071850993782506033
-    second: guy_idle_animation_1
-  - first:
-      213: 8299063221503013060
-    second: guy_idle_animation_2
-  - first:
-      213: -3725121294380388459
-    second: guy_idle_animation_3
-  - first:
-      213: 5324847206010162226
-    second: guy_idle_animation_4
+      213: 264779650132920427
+    second: drill_narrative_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: guy_idle_animation_0
+      name: drill_narrative_0
       rect:
         serializedVersion: 2
-        x: 107
+        x: 90
         y: 0
-        width: 295
-        height: 388
+        width: 554
+        height: 701
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96272e114d2dd6dd0800000000000000
-      internalID: -2491103210591063447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_1
-      rect:
-        serializedVersion: 2
-        x: 619
-        y: 0
-        width: 296
-        height: 380
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13246e4b203442260800000000000000
-      internalID: 7071850993782506033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_2
-      rect:
-        serializedVersion: 2
-        x: 1131
-        y: 0
-        width: 298
-        height: 377
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c0323697023c2370800000000000000
-      internalID: 8299063221503013060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_3
-      rect:
-        serializedVersion: 2
-        x: 1643
-        y: 0
-        width: 295
-        height: 388
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 59fa6375be5bd4cc0800000000000000
-      internalID: -3725121294380388459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_4
-      rect:
-        serializedVersion: 2
-        x: 2155
-        y: 0
-        width: 296
-        height: 391
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 23c87755258a5e940800000000000000
-      internalID: 5324847206010162226
+      spriteID: b68cced50bfaca300800000000000000
+      internalID: 264779650132920427
       vertices: []
       indices: 
       edges: []
@@ -235,11 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      guy_idle_animation_0: -2491103210591063447
-      guy_idle_animation_1: 7071850993782506033
-      guy_idle_animation_2: 8299063221503013060
-      guy_idle_animation_3: -3725121294380388459
-      guy_idle_animation_4: 5324847206010162226
+      drill_narrative_0: 264779650132920427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,22 +1,13 @@
 fileFormatVersion: 2
-guid: 6cd733e0b211c3f4e8dabee7684c1395
+guid: b44afcb4a801e48f99f4430c6d41cbc8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2491103210591063447
-    second: guy_idle_animation_0
+      213: -8630540010466922766
+    second: hog_narrative_0
   - first:
-      213: 7071850993782506033
-    second: guy_idle_animation_1
-  - first:
-      213: 8299063221503013060
-    second: guy_idle_animation_2
-  - first:
-      213: -3725121294380388459
-    second: guy_idle_animation_3
-  - first:
-      213: 5324847206010162226
-    second: guy_idle_animation_4
+      213: 2123380285344647843
+    second: hog_narrative_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: guy_idle_animation_0
+      name: hog_narrative_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 0
-        width: 295
-        height: 388
+        x: 56
+        y: 14
+        width: 1218
+        height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96272e114d2dd6dd0800000000000000
-      internalID: -2491103210591063447
+      spriteID: 2fea25846992a3880800000000000000
+      internalID: -8630540010466922766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: guy_idle_animation_1
+      name: hog_narrative_1
       rect:
         serializedVersion: 2
-        x: 619
-        y: 0
-        width: 296
-        height: 380
+        x: 1564
+        y: 31
+        width: 646
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,74 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13246e4b203442260800000000000000
-      internalID: 7071850993782506033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_2
-      rect:
-        serializedVersion: 2
-        x: 1131
-        y: 0
-        width: 298
-        height: 377
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c0323697023c2370800000000000000
-      internalID: 8299063221503013060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_3
-      rect:
-        serializedVersion: 2
-        x: 1643
-        y: 0
-        width: 295
-        height: 388
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 59fa6375be5bd4cc0800000000000000
-      internalID: -3725121294380388459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guy_idle_animation_4
-      rect:
-        serializedVersion: 2
-        x: 2155
-        y: 0
-        width: 296
-        height: 391
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 23c87755258a5e940800000000000000
-      internalID: 5324847206010162226
+      spriteID: 3aa090f8e13c77d10800000000000000
+      internalID: 2123380285344647843
       vertices: []
       indices: 
       edges: []
@@ -235,11 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      guy_idle_animation_0: -2491103210591063447
-      guy_idle_animation_1: 7071850993782506033
-      guy_idle_animation_2: 8299063221503013060
-      guy_idle_animation_3: -3725121294380388459
-      guy_idle_animation_4: 5324847206010162226
+      hog_narrative_0: -8630540010466922766
+      hog_narrative_1: 2123380285344647843
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
