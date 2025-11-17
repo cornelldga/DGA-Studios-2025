@@ -1,53 +1,57 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadoutManager : MonoBehaviour
 {
-    [Header("The mixer + base buttons")]
-    [SerializeField] private Button firstMixer;
-    [SerializeField] private Button secondMixer;
-    [SerializeField] private Button thirdMixer;
-    [SerializeField] private Button fourthMixer;
-    [SerializeField] private Button firstBase;
-    [SerializeField] private Button secondBase;
-    [SerializeField] private Button thirdBase;
-    [SerializeField] private Button fourthBase;
-    [Header("The inventory slot sprite renderers")]
+    [Header("The Mixer + Base Buttons")]
+    [SerializeField] private Button beerButton;
+    [SerializeField] private Button ginButton;
+    [SerializeField] private Button whiskeyButton;
+    [SerializeField] private Button wineButton;
+    [SerializeField] private Button ciderButton;
+    [SerializeField] private Button gingerButton;
+    [SerializeField] private Button limeButton;
+    [SerializeField] private Button pimientoButton;
+
+    [Header("The Inventory Slot Sprite Renderers")]
     [SerializeField] private SpriteRenderer baseSlotOne;
     [SerializeField] private SpriteRenderer baseSlotTwo;
     [SerializeField] private SpriteRenderer mixerSlotOne;
     [SerializeField] private SpriteRenderer mixerSlotTwo;
     private SpriteRenderer currentSlot;
+    private Dictionary<BaseType, Button> baseButtons;
+    private Dictionary<MixerType, Button> mixerButtons;
+
+
+    private void Start()
+    {
+        baseButtons = new Dictionary<BaseType, Button>()
+        {
+        { BaseType.Beer, beerButton },
+        { BaseType.Gin, ginButton },
+        { BaseType.Whiskey, whiskeyButton },
+        { BaseType.Wine, wineButton }
+    };
+        mixerButtons = new Dictionary<MixerType, Button>()
+        {
+        { MixerType.Cider, ciderButton },
+        { MixerType.Ginger, gingerButton },
+        { MixerType.Lime, limeButton },
+        { MixerType.Pimiento, pimientoButton }
+    };
+
+    }
 
     /// <summary>
     /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
-    /// <param name="buttonSelected">The Button that was clicked by the player.</param>
+    /// <param name="mixerType">The MixerType value of the button that was clicked by the player.</param>
     /// </summary>
-    public void SelectMixer(Button buttonSelected)
+    public void SelectMixer(MixerType mixerType)
     {
-        MixerType mixerType;
-        Button button;
-        if (buttonSelected == firstMixer)
-        {
-            mixerType = MixerType.Cider;
-            button = firstMixer;
-        } else if (buttonSelected == secondMixer)
-        {
-            mixerType = MixerType.Ginger;
-            button = secondMixer;
-        }
-        else if (buttonSelected == thirdMixer)
-        {
-            mixerType = MixerType.Lime;
-            button = thirdMixer;
-        }
-        else
-        {
-            mixerType = MixerType.Pimiento;
-            button = fourthMixer;
-        }
+        mixerButtons.TryGetValue(mixerType, out Button button);
         button.gameObject.SetActive(false);
-        currentSlot.sprite = button.GetComponent<Sprite>();
+        currentSlot.sprite = button.GetComponent<SpriteRenderer>().sprite;
         if (currentSlot==mixerSlotOne)
         {
             GameManager.Instance.player.SwapMixerSlot(0, mixerType);
@@ -62,34 +66,13 @@ public class LoadoutManager : MonoBehaviour
 
     /// <summary>
     /// Sets a base in a specific slot for the player and changes the image displayed in slot.
-    /// <param name="buttonSelected">The Button that was clicked by the player.</param>
+    /// <param name="baseType">The BaseType value of the button that was clicked by the player.</param>
     /// </summary>
-    public void SelectBase(Button buttonSelected)
+    public void SelectBase(BaseType baseType)
     {
-        BaseType baseType;
-        Button button;
-        if (buttonSelected == firstBase)
-        {
-            baseType = BaseType.Beer;
-            button = firstBase;
-        }
-        else if (buttonSelected == secondBase)
-        {
-            baseType = BaseType.Gin;
-            button = secondBase;
-        }
-        else if (buttonSelected == thirdBase)
-        {
-            baseType = BaseType.Whiskey;
-            button = thirdBase;
-        }
-        else
-        {
-            baseType = BaseType.Wine;
-            button = fourthBase;
-        }
+        baseButtons.TryGetValue(baseType, out Button button);
         button.gameObject.SetActive(false);
-        currentSlot.sprite = button.GetComponent<Sprite>();
+        currentSlot.sprite = button.GetComponent<SpriteRenderer>().sprite;
         if (currentSlot==baseSlotOne)
         {
             GameManager.Instance.player.SwapBaseSlot(0, baseType);
