@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 2483679245883956629}
   - component: {fileID: 3867278518298356845}
   - component: {fileID: 8008339833196448568}
+  - component: {fileID: 954788390806585248}
   m_Layer: 0
   m_Name: SmokeTemp
   m_TagString: Untagged
@@ -301,6 +302,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &954788390806585248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638474580147778060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74680a5d78e95364aace2433f9960e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  smokeSprites:
+  - {fileID: -4867654237150278327, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  - {fileID: -356755377443963557, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  - {fileID: -6902590303278265700, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  - {fileID: 762050836466721937, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
 --- !u!1 &9001908743855615020
 GameObject:
   m_ObjectHideFlags: 0
