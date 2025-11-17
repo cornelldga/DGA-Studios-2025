@@ -1,84 +1,32 @@
 using System;
-using UnityEngine;
 using Unity.Cinemachine;
+using UnityEngine;
 
-/// <summary>
-/// Dynamites that the drill boss spawns
-/// </summary>
-public class Dynamite : MonoBehaviour
+public class Dynamite : Projectile
 {
-    [Tooltip("True when the dynamite is exploding")]
-    private bool isExploding;
+    [SerializeField] double timeBeforeEplosion;
+    [SerializeField] float impulseForce;
+    [SerializeField] CinemachineImpulseSource impulseSource;
+    [SerializeField] GameObject originalExplosion;
+    private double timer;
 
-    private float max_radius;
-    private float curr_radius;
-    private float last_time;
-    private float time_between;
-    private float num_increases;
-    private float damage;
-    [SerializeField] Transform transform_object;
-    [SerializeField] private CinemachineImpulseSource impulseSource;
-
-    /// <summary>
-    /// Dynamites that the drill boss spawns
-    /// </summary>
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isExploding = false;
-        max_radius = 1f;
-        time_between = 0.001f;
-        curr_radius = transform_object.localScale.x / 2;
-        damage = 1;
-        Explode();
+
     }
 
-
-    /// <summary>
-    /// On update, if the dynamite is exploding, the affect area increases
-    /// </summary>
+    // Update is called once per frame
     void Update()
     {
-        if (isExploding)
+        timer += Time.deltaTime;
+        if (timer> timeBeforeEplosion)
         {
-            if (curr_radius >= max_radius) { isExploding = false; }
-            else
-            {
-                float curr_time = Time.time;
-                if ((curr_time - last_time) >= time_between)
-                {
-                    num_increases++;
-                    last_time = curr_time;
-                    time_between += 0.001f * (float)Math.Sqrt(num_increases);
-                    transform_object.localScale += new Vector3(0.1f, 0.1f, 0);
-                    curr_radius = transform_object.localScale.x / 2;
-                }
-            }
+            impulseSource.GenerateImpulse(impulseForce);
+            Instantiate(originalExplosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            
         }
-    }
-
-    /// <summary>
-    /// Sets isExplosion() to true and shakes screen.
-    /// </summary>
-    void Explode()
-    {
-        isExploding = true;
-        last_time = Time.time;
-        if (impulseSource != null)
-            impulseSource.GenerateImpulse(0.5f);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnAttackHit(collision);
-    }
-
-    /// <summary>
-    /// If contacts player during explosion, then deals damage.
-    /// </summary>
-    public virtual void OnAttackHit(Collider2D collision)
-    {
-        if (isExploding && collision.CompareTag("Player"))
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
     }
 
 }
