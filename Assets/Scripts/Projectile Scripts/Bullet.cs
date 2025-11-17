@@ -19,6 +19,13 @@ public class Bullet : Projectile
     {
         whipped = true;
         damage *= whipDamageMultiplier;
+
+        // Stop from homing to player if reflected
+        Homing homingScript = this.GetComponent<Homing>();
+        if (homingScript != null)
+        {
+            homingScript.enabled = false;
+        }
     }
 
     /// <summary>

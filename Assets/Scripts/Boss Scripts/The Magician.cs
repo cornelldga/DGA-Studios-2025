@@ -99,6 +99,11 @@ public class TheMagician : Boss
         }
         
             MoveToStage();
+    }
+
+    public override void SetAttackState(bool isAttacking)
+    {
+        base.SetAttackState(isAttacking);
         animator.SetBool("isAttacking", isAttacking);
     }
 
