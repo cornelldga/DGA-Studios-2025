@@ -102,12 +102,12 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
-            currentEmotions = emotionDictionary;
+            sceneName = scene;
             bossFight = boss;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             if (bossFight)
             {
-                sceneName = scene;
+                currentEmotions = emotionDictionary;
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
