@@ -1,4 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
@@ -16,12 +18,12 @@ public class DoveMovement : Bullet
     private float timer;
 
     // Update is called once per frame
+
     private void FixedUpdate()
     {
         timer += Time.deltaTime; 
-        float waveForce = amplitude * Mathf.Cos(frequency * timer); 
-        rb.AddForce(transform.up * waveForce, ForceMode2D.Impulse);
+        float waveForce = amplitude * Mathf.Cos(2 * Mathf.PI / frequency * timer); 
+        //rb.linearVelocityY = waveForce;
+        rb.AddForce(transform.up * waveForce, ForceMode2D.Force);
     }
-
-    
 }

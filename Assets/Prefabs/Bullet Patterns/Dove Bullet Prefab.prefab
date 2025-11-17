@@ -113,7 +113,7 @@ MonoBehaviour:
   lifeDuration: 4
   cooldown: 1
   damage: 1
-  accuracy: 1
+  accuracy: 96
   collisionLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -358,5 +358,5 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
-  frequency: 1000000
-  amplitude: 5
+  frequency: 2
+  amplitude: 10
