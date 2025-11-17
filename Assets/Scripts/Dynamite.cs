@@ -30,7 +30,6 @@ public class Dynamite : Projectile
             impulseSource.GenerateImpulse(impulseForce);
             Instantiate(originalExplosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            
         }
     }
 
