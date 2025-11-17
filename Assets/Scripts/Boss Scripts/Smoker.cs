@@ -11,7 +11,7 @@ public class Smoker : MonoBehaviour
     [Tooltip("Fire rate of smoke")]
     [SerializeField] float smokeRate;
     //A counter on how long it has been since the last smoke was shot.
-    [SerializeField] float smokeTimer = 0f;
+    float smokeTimer = 0f;
     [SerializeField] GameObject smokePelletPrefab;
     //Where the smoke should be released from.
     [SerializeField] Transform releasePoint;
