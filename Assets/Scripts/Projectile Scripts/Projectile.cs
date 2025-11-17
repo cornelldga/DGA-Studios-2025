@@ -1,4 +1,6 @@
+using System.IO.Pipes;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// A moving object that checks for a collision and applies damage
@@ -19,7 +21,7 @@ public abstract class Projectile : MonoBehaviour
 
 
     Rigidbody2D rb;
-    private void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));

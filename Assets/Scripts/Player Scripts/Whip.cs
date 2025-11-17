@@ -12,7 +12,7 @@ public class Whip : MonoBehaviour
             if (!projectile.Whipped())
             {
                 projectile.WhipProjectile(damageMultiplier);
-                collision.transform.RotateAround(transform.position, transform.up, 180f); ;
+                collision.GetComponent<Rigidbody2D>().linearVelocity = -4 * collision.GetComponent<Rigidbody2D>().linearVelocity;
             }
         }
     }

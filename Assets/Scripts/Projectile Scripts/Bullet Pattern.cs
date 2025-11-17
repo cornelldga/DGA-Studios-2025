@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 /// <summary>
 /// Defines a boss's bullet pattern when they attack. The indexes of the
@@ -23,7 +24,9 @@ public class BulletPattern : ScriptableObject
     /// <returns></returns>
     public IEnumerator DoBulletPattern(Boss boss)
     {
-        boss.isAttacking = true;
+        boss.SetAttackState(true);
+        // sum of delays + random cooldown
+        boss.SetAttackCooldown(bulletDelays.Sum() + Random.Range(minAttackCooldown, maxAttackCooldown));
         int arrayLength = Mathf.Max(bullets.Length, bulletAngles.Length, bulletDelays.Length);
         for(int i = 0; i < arrayLength; i++)
         {
@@ -32,7 +35,6 @@ public class BulletPattern : ScriptableObject
             bullet.transform.Rotate(0,0, bulletAngles[i % bulletAngles.Length], Space.Self);
 
         }
-        boss.attackCooldown = Random.Range(minAttackCooldown, maxAttackCooldown);
-        boss.isAttacking = false;
+        boss.SetAttackState(false);
     }
 }
