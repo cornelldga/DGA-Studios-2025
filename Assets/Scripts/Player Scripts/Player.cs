@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 /// <summary>
 /// Represents the charater you play in the game. Contains stats, handles inventory, and player inputs
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour, IDamageable
     private bool isMarked;
     private float markTimer;
 
+    [Header("UI")]
+    [SerializeField] Image equippedImage;
+    [SerializeField] Image backupImage;
+
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
     //the bigger the number, the less we will adjust
@@ -53,7 +58,10 @@ public class Player : MonoBehaviour, IDamageable
     float whipCooldown;
     private bool whipping;
 
+    int baseIndex;
+    int mixerIndex;
     Base selectedBase;
+    Base backupBase;
     Mixer selectedMixer;
 
 
@@ -70,10 +78,11 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
-        selectedBase = playerBases.GetBase(equippedBases[0]);
-        selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
-        selectedMixer.ApplyMixer(this);
-        isMarked = false;
+        SelectBase(0);
+        SelectMixer(0);
+
+        equippedImage.sprite = selectedBase.getSprite();
+        backupImage.sprite = backupBase.getSprite();
 
         isAlive = true;
     }
@@ -99,6 +108,34 @@ public class Player : MonoBehaviour, IDamageable
         PlayerInputs();
     }
     /// <summary>
+    /// Selects the base using the current baseIndex and swaps out the secondary base
+    /// </summary>
+    /// <param name="index">The index of the base</param>
+    void SelectBase(int index)
+    {
+        baseIndex = index;
+        selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+        backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
+        equippedImage.sprite = selectedBase.getSprite();
+        backupImage.sprite = backupBase.getSprite();
+        changeCooldown = changeCooldownTime;
+    }
+
+    /// <summary>
+    /// Selects the mixer using the current mixerIndex and removes the previous mixer affects
+    /// </summary>
+    /// <param name="index">The index of the mixer</param>
+    void SelectMixer(int index)
+    {
+        mixerIndex = index;
+        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        selectedMixer.RemoveMixer(this);
+        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        selectedMixer.ApplyMixer(this);
+        changeCooldown = changeCooldownTime;
+    }
+
+    /// <summary>
     /// Read the player's inputs
     /// </summary>
     void PlayerInputs()
@@ -121,29 +158,25 @@ public class Player : MonoBehaviour, IDamageable
 
         if (changeCooldown <= 0)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                selectedBase = playerBases.GetBase(equippedBases[0]);
-                changeCooldown = changeCooldownTime;
+                SelectBase((baseIndex + 1) % equippedBases.Length);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha1) && baseIndex != 0)
             {
-                selectedBase = playerBases.GetBase(equippedBases[1]);
-                changeCooldown = changeCooldownTime;
+                SelectBase(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && baseIndex != 1)
             {
-                selectedMixer.RemoveMixer(this);
-                selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
-                selectedMixer.ApplyMixer(this);
-                changeCooldown = changeCooldownTime;
+                SelectBase(1);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && mixerIndex != 0)
             {
-                selectedMixer.RemoveMixer(this);
-                selectedMixer = playerMixers.GetMixer(equippedMixers[1]);
-                selectedMixer.ApplyMixer(this);
-                changeCooldown = changeCooldownTime;
+                SelectMixer(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && mixerIndex != 1)
+            {
+                SelectMixer(1);
             }
         }
         if (!whipping && Input.GetMouseButtonDown(1) && whipCooldown <= 0)
@@ -166,8 +199,8 @@ public class Player : MonoBehaviour, IDamageable
         mouseWorldPos.z = 0f;
         Vector3 direction = mouseWorldPos - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
         // TODO: The position should be a transform where the player fires, not the center of the player
+        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
         Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;

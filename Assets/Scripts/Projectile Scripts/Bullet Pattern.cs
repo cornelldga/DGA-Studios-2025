@@ -23,7 +23,7 @@ public class BulletPattern : ScriptableObject
     /// <returns></returns>
     public IEnumerator DoBulletPattern(Boss boss)
     {
-        boss.isAttacking = true;
+        boss.SetAttackState(true);
         int arrayLength = Mathf.Max(bullets.Length, bulletAngles.Length, bulletDelays.Length);
         for(int i = 0; i < arrayLength; i++)
         {
@@ -32,7 +32,7 @@ public class BulletPattern : ScriptableObject
             bullet.transform.Rotate(0,0, bulletAngles[i % bulletAngles.Length], Space.Self);
 
         }
-        boss.attackCooldown = Random.Range(minAttackCooldown, maxAttackCooldown);
-        boss.isAttacking = false;
+        boss.SetAttackCooldown(Random.Range(minAttackCooldown, maxAttackCooldown));
+        boss.SetAttackState(false);
     }
 }
