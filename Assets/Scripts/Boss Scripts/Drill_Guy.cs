@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using System;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Drill_Guy : Boss
 {
@@ -16,6 +18,7 @@ public class Drill_Guy : Boss
     private float stateTimer;
     private Rigidbody2D rb;
     private CinemachineImpulseSource impulseSource;
+    private List<GameObject> holes; //holes
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,10 +49,10 @@ public class Drill_Guy : Boss
                 UpdateTargeting();
                 break;
             case State.Underground_Chase:
-                UpdateChase();
+                UpdateUG_Chase();
                 break;
             case State.Underground_Random:
-                UpdateUG_R();
+                UpdateUG_Random();
                 break;
             case State.Throwing:
                 // Handled by coroutine
@@ -73,12 +76,12 @@ public class Drill_Guy : Boss
         throw new NotImplementedException();
     }
 
-    private void UpdateChase()
+    private void UpdateUG_Chase()
     {
         throw new NotImplementedException();
     }
 
-    private void UpdateUG_R()
+    private void UpdateUG_Random()
     {
         throw new NotImplementedException();
     }
@@ -91,5 +94,17 @@ public class Drill_Guy : Boss
     private void UpdateExiting()
     {
         throw new NotImplementedException();
+    }
+
+
+    /// <summary>
+    /// Dynamite throwing.
+    /// </summary>
+    private void PerformThrow()
+    {
+        for (int i = 0; i<holes.Count; i++){
+            Vector2 target = holes[i].transform.position;
+            //Throw dynamite in that direction.
+        }
     }
 }

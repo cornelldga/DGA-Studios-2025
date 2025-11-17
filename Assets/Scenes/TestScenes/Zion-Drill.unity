@@ -301,10 +301,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1633922064}
+      addedObject: {fileID: 1633922070}
     - targetCorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1633922070}
+      addedObject: {fileID: 1633922071}
   m_SourcePrefab: {fileID: 100100000, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
 --- !u!1 &40533169 stripped
 GameObject:
@@ -1326,45 +1326,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1558118267 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2100067247850913026, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-  m_PrefabInstance: {fileID: 28081431}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1633922063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3191004070358083228, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
   m_PrefabInstance: {fileID: 28081431}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1633922064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633922063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxHealth: 50
-  healthBar: {fileID: 1558118267}
-  bulletOrigin: {fileID: 1873236462}
-  phasePercents: []
-  isAttacking: 0
-  attackCooldown: 0
-  attackRate: 1
-  currentState: 0
-  markChance: 0.3
-  bounceChance: 0.2
-  markingBulletPattern: {fileID: 11400000, guid: 3bf8c04eca9a940b8a1314203cc6cdea, type: 2}
 --- !u!114 &1633922070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,6 +1384,26 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1633922071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633922063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfaca095e88b40dfbf4145e25126707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxHealth: 0
+  healthBar: {fileID: 0}
+  bulletOrigin: {fileID: 0}
+  phasePercents: []
+  isAttacking: 0
+  attackCooldown: 0
+  attackRate: 1
+  currentState: 0
 --- !u!1 &1654717633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,11 +1541,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!4 &1873236462 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6913094105630645781, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-  m_PrefabInstance: {fileID: 28081431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1958840266
 PrefabInstance:
   m_ObjectHideFlags: 0
