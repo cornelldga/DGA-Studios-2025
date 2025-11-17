@@ -9,28 +9,19 @@ public class Homing : MonoBehaviour
 {
     [Tooltip("The maximum speed that this object will turn in while homing, in deg/s")]
     [SerializeField] private float turnSpeed;
-    private Rigidbody2D player;
     private Rigidbody2D rb;
+    private Rigidbody2D playerRB;
 
     void Start()
     {
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            player = GameManager.Instance.player.GetComponent<Rigidbody2D>();
-        }
-        else
-        {
-            enabled = false;
-        }
-
         rb = GetComponent<Rigidbody2D>();
+        playerRB = GameManager.Instance.player.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
-        if (player == null) return;
 
-        Vector2 targetDirection = (player.position - rb.position).normalized;
+        Vector2 targetDirection = (playerRB.position - rb.position).normalized;
 
         float currentAngle = rb.rotation;
         float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
