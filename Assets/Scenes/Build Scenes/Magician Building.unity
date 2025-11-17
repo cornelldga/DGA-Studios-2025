@@ -1211,14 +1211,15 @@ MonoBehaviour:
   phasePercents:
   - 0.8
   - 0.5
-  isAttacking: 0
-  attackCooldown: 0
   attackRate: 1
   currentStage: 0
   animator: {fileID: 1306603027}
+  attacksNum: 3
+  secondAttackRate: 2
+  thirdAttackRate: 5
   backStageTime: 2
-  attackTime: 5
-  teleportDelay: 5
+  attackTime: 3
+  teleportDelay: 3
   backStage: {fileID: 717211469}
   cardStage: {fileID: 1457449397}
   doveStage: {fileID: 11705904}
@@ -1226,7 +1227,6 @@ MonoBehaviour:
   cardStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
   doveStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
   knifeStageBulletPattern: {fileID: 11400000, guid: a9d3806e6dc1f8c438fcbc095339ad97, type: 2}
-  obscure: 0
 --- !u!114 &1306603029
 MonoBehaviour:
   m_ObjectHideFlags: 0

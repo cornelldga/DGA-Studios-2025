@@ -65,14 +65,9 @@ public class TheMagician : Boss
     {
         attackCooldown -= Time.deltaTime * attackRate;
         stageTimer -= Time.deltaTime;
-        if (!isAttacking && attackCooldown <= 0 && stageTimer >= 0)
+        if ( attackCooldown <= 0 && stageTimer >= 0)
         {
             Attack();
-        }
-
-        if (stageTimer < .5 * backStageTime && currentStage == Stage.Backstage)
-        {
-            obscure=true;
         }
 
         if (stageTimer <= 0)
@@ -91,7 +86,6 @@ public class TheMagician : Boss
                 {
                     stageTimer = attackTime;
                     teleportDelayTimer = teleportDelay;
-                    Shuffle();
                     ChooseNewStage();
                 }
             }
