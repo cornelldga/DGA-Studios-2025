@@ -5,7 +5,12 @@ public class Pig : MonoBehaviour, IDamageable
 {
     Player player;
     Boss pigRider;
+    [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
+    [Tooltip("Force multiplier for wall collision shake")]
+    private float wallShakeForce = 1f;
+    [Tooltip("Force multiplier for player collision shake")]
+    private float playersShakeForce = 0.5f;
     private Vector2 chargeDirection;
     private float currentSpeed;
     private Rigidbody2D rb;
@@ -54,11 +59,10 @@ public class Pig : MonoBehaviour, IDamageable
     /// </summary>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Normal charge mode - get stunned on collision
+        // Normal charge mode
         if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
         {
             HandleCharge(collision);
-            TransitionToStunned();
         }
     }
 
