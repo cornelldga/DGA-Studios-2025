@@ -22,7 +22,7 @@ public class Pig : MonoBehaviour, IDamageable
 
     public enum State
     {
-        Charging, Targeting, Patrolling
+        Patrolling, Targeting,Charging, Returning
     }
 
     public void TakeDamage(float damage)
