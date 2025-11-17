@@ -6,7 +6,6 @@ using System.Collections.Generic;
 /// <summary>
 /// The type of mixer
 /// </summary>
-
 public enum MixerType
 {
     Cider,

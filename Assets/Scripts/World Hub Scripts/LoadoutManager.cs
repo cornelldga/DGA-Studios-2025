@@ -47,7 +47,7 @@ public class LoadoutManager : MonoBehaviour
     /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
     /// <param name="mixerType">The MixerType value of the button that was clicked by the player.</param>
     /// </summary>
-    public void SelectMixer(MixerType mixerType)
+    private void SelectMixer(MixerType mixerType)
     {
         mixerButtons.TryGetValue(mixerType, out Button button);
         button.gameObject.SetActive(false);
@@ -63,12 +63,17 @@ public class LoadoutManager : MonoBehaviour
             Debug.Log("No mixer slot selected");
         }
     }
+    // Base button wrappers
+    public void SelectBeer() => SelectBase(BaseType.Beer);
+    public void SelectGin() => SelectBase(BaseType.Gin);
+    public void SelectWhiskey() => SelectBase(BaseType.Whiskey);
+    public void SelectWine() => SelectBase(BaseType.Wine);
 
     /// <summary>
     /// Sets a base in a specific slot for the player and changes the image displayed in slot.
     /// <param name="baseType">The BaseType value of the button that was clicked by the player.</param>
     /// </summary>
-    public void SelectBase(BaseType baseType)
+    private void SelectBase(BaseType baseType)
     {
         baseButtons.TryGetValue(baseType, out Button button);
         button.gameObject.SetActive(false);
@@ -84,6 +89,12 @@ public class LoadoutManager : MonoBehaviour
             Debug.Log("No base slot selected");
         }
     }
+    // Mixer button wrappers
+    public void SelectCider() => SelectMixer(MixerType.Cider);
+    public void SelectGinger() => SelectMixer(MixerType.Ginger);
+    public void SelectLime() => SelectMixer(MixerType.Lime);
+    public void SelectPimiento() => SelectMixer(MixerType.Pimiento);
+
 
     /// <summary>
     /// When a slot is selected, changes current slot to the slot selected

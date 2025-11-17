@@ -6,7 +6,6 @@ using UnityEngine;
 /// <summary>
 /// The type of base
 /// </summary>
-
 public enum BaseType
 {
     Beer = 0,
