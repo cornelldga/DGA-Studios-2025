@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
+  m_Name: Card Mark Fan
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
+  bullets:
+  - {fileID: 6490914910762157081, guid: 17bb29fbb850e48eca1129c2fadccb57, type: 3}
+  - {fileID: 6490914910762157081, guid: 17bb29fbb850e48eca1129c2fadccb57, type: 3}
+  - {fileID: 6490914910762157081, guid: 17bb29fbb850e48eca1129c2fadccb57, type: 3}
+  bulletAngles:
+  - -15
+  - 0
+  - 15
+  bulletDelays:
+  - 0
+  minAttackCooldown: 1
+  maxAttackCooldown: 2

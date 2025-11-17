@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private PlayerController player;
+    [SerializeField] private Player player;
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI healthText;

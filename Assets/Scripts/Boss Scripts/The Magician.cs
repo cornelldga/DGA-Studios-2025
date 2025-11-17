@@ -35,6 +35,11 @@ public class TheMagician : Boss
     public override void Update()
     {
         base.Update();
+    }
+
+    public override void SetAttackState(bool isAttacking)
+    {
+        base.SetAttackState(isAttacking);
         animator.SetBool("isAttacking", isAttacking);
     }
 
