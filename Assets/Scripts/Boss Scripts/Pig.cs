@@ -22,7 +22,7 @@ public class Pig : MonoBehaviour, IDamageable
 
     public enum State
     {
-        Patrolling, Targeting,Charging, Returning
+        Patrolling, Targeting, Charging, Returning
     }
 
     public void TakeDamage(float damage)
@@ -81,8 +81,9 @@ public class Pig : MonoBehaviour, IDamageable
         }
         else if (collision.gameObject.CompareTag("Player") && impulseSource != null)
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            player.TakeDamage(damage);
             impulseSource.GenerateImpulse(playersShakeForce);
+            player.Unmark();
         }
     }
 
