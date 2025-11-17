@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Base class for all bosses in the game
 /// </summary>
-public abstract class Boss : MonoBehaviour
+public abstract class Boss : MonoBehaviour, IDamageable
 {
     [SerializeField] protected float maxHealth;
     protected float health;
@@ -18,8 +18,8 @@ public abstract class Boss : MonoBehaviour
 
     protected int currentPhase = 0;
 
-    public bool isAttacking;
-    [HideInInspector] public float attackCooldown;
+    bool isAttacking;
+    protected float attackCooldown;
 
     [Tooltip("The speed of teh attack cooldown")]
     public float attackRate = 1;
@@ -36,6 +36,23 @@ public abstract class Boss : MonoBehaviour
         {
             Attack();
         }
+    }
+    /// <summary>
+    /// Sets the boss attack state
+    /// </summary>
+    /// <param name="isAttacking">whether the boss is attacking</param>
+    public virtual void SetAttackState(bool isAttacking)
+    {
+        this.isAttacking = isAttacking;
+    }
+    /// <summary>
+    /// Sets the boss attack cooldown
+    /// </summary>
+    /// <param name="cooldown">the cooldown in seconds</param>
+    /// <returns></returns>
+    public void SetAttackCooldown(float cooldown)
+    {
+        attackCooldown = cooldown;
     }
 
     /// <summary>
