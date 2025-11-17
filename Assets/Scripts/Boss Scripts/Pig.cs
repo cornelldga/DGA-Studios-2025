@@ -1,42 +1,40 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class Pig : MonoBehaviour, IDamageable
+public class Pig : MonoBehaviour
 {
     Player player;
-    Boss pigRider;
+    [SerializeField] Pig_Rider pigRider;
+
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
     [Tooltip("Force multiplier for wall collision shake")]
     private float wallShakeForce = 1f;
     [Tooltip("Force multiplier for player collision shake")]
     private float playersShakeForce = 0.5f;
-    private Vector2 chargeDirection;
-    private float currentSpeed;
-    private Rigidbody2D rb;
 
+    [Header("Movement Settings")]
     //Base speed when charging (regular)
     private float baseSpeed = 5f;
     //Acceleration amount for charging (accelerating while charging).
     private float acceleration = 6f;
     //Maximum speed to cap given acceleration.
     private float maxChargeSpeed = 10f;
+
+    private Vector2 chargeDirection;
     private Vector2 startingPoint;
+    private float currentSpeed;
+    private Rigidbody2D rb;
 
     private float damage = 1f;
     private float recoilForce = 2f;
-
-    State currentState;
 
     public enum State
     {
         Patrolling, Targeting, Charging, Returning
     }
 
-    public void TakeDamage(float damage)
-    {
-        //TODO: damage logic here
-    }
+    public State currentState;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,6 +44,26 @@ public class Pig : MonoBehaviour, IDamageable
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Patrolling;
         startingPoint = new Vector2(transform.position.x, transform.position.y);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (currentState)
+        {
+            case State.Patrolling:
+                UpdatePatrolling();
+                break;
+            case State.Targeting:
+                UpdateTargeting();
+                break;
+            case State.Charging:
+                UpdateCharging();
+                break;
+            case State.Returning:
+                UpdateReturning();
+                break;
+        }
     }
 
     /// <summary>
@@ -70,18 +88,6 @@ public class Pig : MonoBehaviour, IDamageable
     private void UpdateReturning()
     {
 
-    }
-
-    /// <summary>
-    /// Decides what should happen depending on state and if collision is with wal or player.
-    /// </summary>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Normal charge mode
-        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
-        {
-            HandleCharge(collision);
-        }
     }
 
     private void HandleCharge(Collision2D collision)
@@ -109,25 +115,15 @@ public class Pig : MonoBehaviour, IDamageable
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Decides what should happen depending on state and if collision is with wal or player.
+    /// </summary>
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (currentState)
+        // Normal charge mode
+        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
         {
-            case State.Patrolling:
-                UpdatePatrolling();
-                break;
-            case State.Targeting:
-                UpdateTargeting();
-                break;
-            case State.Charging:
-                UpdateCharging();
-                break;
-            case State.Returning:
-                UpdateReturning();
-                break;
+            HandleCharge(collision);
         }
     }
-
-    //hitting marked player unmarks them
 }
