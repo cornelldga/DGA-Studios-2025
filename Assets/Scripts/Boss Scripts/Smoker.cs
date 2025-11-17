@@ -18,6 +18,8 @@ public class Smoker : MonoBehaviour
     [SerializeField] TheMagician magician;
 
     private bool isOnStage;
+    private bool hideStage;
+
     void Start()
     {
     }
@@ -38,6 +40,8 @@ public class Smoker : MonoBehaviour
             resetTime = Random.Range(0.05f, 0.1f);
 
         }
+
+        if (magician.currentStage == Stage.Backstage && )
 
     }
     /// <summary>
