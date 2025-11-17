@@ -57,6 +57,21 @@ public class Pig : MonoBehaviour, IDamageable
         rb.linearVelocity = chargeDirection * currentSpeed;
     }
 
+    private void UpdatePatrolling()
+    {
+
+    }
+
+    private void UpdateTargeting()
+    {
+
+    }
+
+    private void UpdateReturning()
+    {
+
+    }
+
     /// <summary>
     /// Decides what should happen depending on state and if collision is with wal or player.
     /// </summary>
@@ -97,10 +112,20 @@ public class Pig : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (player.IsMarked())
+        switch (currentState)
         {
-            //enter charging
-            //then charge
+            case State.Patrolling:
+                UpdatePatrolling();
+                break;
+            case State.Targeting:
+                UpdateTargeting();
+                break;
+            case State.Charging:
+                UpdateCharging();
+                break;
+            case State.Returning:
+                UpdateReturning();
+                break;
         }
     }
 
