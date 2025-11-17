@@ -2,6 +2,10 @@ using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// Dynamite used by Driller Boss: 
+/// Will be thrown into holes (not yet implemented) and creates a ring explosion (circle for now)
+/// </summary>
 public class Dynamite : Projectile
 {
     [SerializeField] double timeBeforeEplosion;
