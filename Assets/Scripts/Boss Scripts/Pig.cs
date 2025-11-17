@@ -73,6 +73,9 @@ public class Pig : MonoBehaviour
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
+
+        //Remember to turn collisions back on between the boss and the player while charging 
+        //They will need to be turned off again when switching to other states.
     }
 
     private void UpdatePatrolling()
