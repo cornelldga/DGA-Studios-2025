@@ -10,9 +10,9 @@ using Unity.Cinemachine;
 public class Pig_Rider : Boss
 {
     public enum State
-{
+    {
     Charging, Targeting, Stunned, Marking, Bouncing
-}
+    }
     public State currentState;
 
     [Header("Movement Settings")]
