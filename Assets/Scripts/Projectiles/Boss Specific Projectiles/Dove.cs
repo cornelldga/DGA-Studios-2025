@@ -9,15 +9,16 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class DoveMovement : Bullet
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Tooltip("Width of the Projectile's arcs")]
     public float frequency;
+    [Tooltip("Height of the Projectile's arcs")]
     public float amplitude;
     private float timer;
-
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        timer += 1f; 
+        timer += Time.deltaTime; 
         float waveForce = amplitude * Mathf.Cos(frequency * timer); 
         rb.AddForce(transform.up * waveForce, ForceMode2D.Impulse);
     }

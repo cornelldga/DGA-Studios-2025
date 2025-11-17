@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 722755417629996029}
   - component: {fileID: 26987428809012855}
   - component: {fileID: 4852246855494786611}
+  - component: {fileID: 5497219266821191237}
   m_Layer: 0
   m_Name: Inaccurate Dove
   m_TagString: EnemyBullet
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478843839408097374}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
@@ -235,7 +236,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478843839408097374}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -337,3 +338,25 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5497219266821191237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478843839408097374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d22d0236b17e4d4f9d31da62a81b402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoveMovement
+  speed: 7.5
+  lifeDuration: 5
+  cooldown: 1
+  damage: 1
+  accuracy: 15
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  frequency: 1000000
+  amplitude: 5
