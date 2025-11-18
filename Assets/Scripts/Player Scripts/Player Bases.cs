@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public enum BaseType
 {
-    Beer = 0,
+    Beer,
     Gin,
     Whiskey,
     Wine

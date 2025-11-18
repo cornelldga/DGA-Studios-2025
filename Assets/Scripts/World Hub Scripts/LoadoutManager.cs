@@ -22,9 +22,13 @@ public class LoadoutManager : MonoBehaviour
     private SpriteRenderer currentSlot;
     private Dictionary<BaseType, Button> baseButtons;
     private Dictionary<MixerType, Button> mixerButtons;
+    private MixerType mixerType;
+    private BaseType baseType;
 
-
-    private void Start()
+    /// <summary>
+    /// Initializes the baseButtons and mixerButtons before anything else.
+    /// </summary>
+    private void Awake()
     {
         baseButtons = new Dictionary<BaseType, Button>()
         {
@@ -44,77 +48,128 @@ public class LoadoutManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
-    /// <param name="mixerType">The MixerType value of the button that was clicked by the player.</param>
+    /// When Opened will make sure the slots are synced and any currently equipped bases and mixers dont have a button.
     /// </summary>
-    private void SelectMixer(MixerType mixerType)
+    private void OnEnable()
     {
-        mixerButtons.TryGetValue(mixerType, out Button button);
-        button.gameObject.SetActive(false);
-        currentSlot.sprite = button.GetComponent<SpriteRenderer>().sprite;
-        if (currentSlot==mixerSlotOne)
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
         {
-            GameManager.Instance.player.SwapMixerSlot(0, mixerType);
-        } else if (currentSlot==mixerSlotTwo)
-        {
-            GameManager.Instance.player.SwapMixerSlot(1, mixerType);
-        } else
-        {
-            Debug.Log("No mixer slot selected");
+            SyncSlots();
+            HideEquippedButtons();
         }
     }
-    // Base button wrappers
-    public void SelectBeer() => SelectBase(BaseType.Beer);
-    public void SelectGin() => SelectBase(BaseType.Gin);
-    public void SelectWhiskey() => SelectBase(BaseType.Whiskey);
-    public void SelectWine() => SelectBase(BaseType.Wine);
-
+    
     /// <summary>
     /// Sets a base in a specific slot for the player and changes the image displayed in slot.
-    /// <param name="baseType">The BaseType value of the button that was clicked by the player.</param>
+    /// <param name="baseIndex">The BaseType value of the button that was clicked by the player.</param>
     /// </summary>
-    private void SelectBase(BaseType baseType)
+    public void SelectBase(int baseIndex)
     {
+        baseType = (BaseType)baseIndex;
         baseButtons.TryGetValue(baseType, out Button button);
+        
+        int playerCurrentSlot = GameManager.Instance.player.GetCurrentBaseIndex();
+        SpriteRenderer targetSlot = (playerCurrentSlot == 0) ? baseSlotOne : baseSlotTwo;
+        
+        targetSlot.sprite = button.GetComponent<Image>().sprite;
+        
+        BaseType replacedBase = GameManager.Instance.player.SwapBaseSlot(playerCurrentSlot, baseType);
+        
         button.gameObject.SetActive(false);
-        currentSlot.sprite = button.GetComponent<SpriteRenderer>().sprite;
-        if (currentSlot==baseSlotOne)
+        
+        if (baseButtons.TryGetValue(replacedBase, out Button replacedButton))
         {
-            GameManager.Instance.player.SwapBaseSlot(0, baseType);
-        } else if (currentSlot==baseSlotTwo)
-        {
-            GameManager.Instance.player.SwapBaseSlot(1, baseType);
-        } else
+            replacedButton.gameObject.SetActive(true);
+        }
+        else
         {
             Debug.Log("No base slot selected");
         }
-    }
-    // Mixer button wrappers
-    public void SelectCider() => SelectMixer(MixerType.Cider);
-    public void SelectGinger() => SelectMixer(MixerType.Ginger);
-    public void SelectLime() => SelectMixer(MixerType.Lime);
-    public void SelectPimiento() => SelectMixer(MixerType.Pimiento);
 
+        GameManager.Instance.player.RefreshUIIfNeeded(playerCurrentSlot, true);
+        
+        SyncSlots();
+    }
 
     /// <summary>
-    /// When a slot is selected, changes current slot to the slot selected
-    /// <param name="slot">The SpriteRenderer of the slot that was selected by the player.</param>
+    /// Sets a base in a specific slot for the player and changes the image displayed in slot.
+    /// <param name="mixerIndex">The MixerType value of the button that was clicked by the player.</param>
     /// </summary>
-    public void Slot(SpriteRenderer slot)
+    public void SelectMixer(int mixerIndex)
     {
-        if (slot==baseSlotOne)
+        mixerType = (MixerType)mixerIndex;
+        mixerButtons.TryGetValue(mixerType, out Button button);
+        
+        int playerCurrentSlot = GameManager.Instance.player.GetCurrentMixerIndex();
+        SpriteRenderer targetSlot = (playerCurrentSlot == 0) ? mixerSlotOne : mixerSlotTwo;
+        
+        targetSlot.sprite = button.GetComponent<Image>().sprite;
+        
+        MixerType replacedMixer = GameManager.Instance.player.SwapMixerSlot(playerCurrentSlot, mixerType);
+        
+        button.gameObject.SetActive(false);
+        
+        if (mixerButtons.TryGetValue(replacedMixer, out Button replacedButton))
         {
-            currentSlot = baseSlotOne;
-        } else if (slot==baseSlotTwo)
+            replacedButton.gameObject.SetActive(true);
+        }
+        else
         {
-            currentSlot = baseSlotTwo;
-        } else if (slot==mixerSlotOne)
+            Debug.Log("No mixer slot selected");
+        }
+
+        GameManager.Instance.player.RefreshUIIfNeeded(playerCurrentSlot, false);
+        
+        SyncSlots();
+    }
+
+    /// <summary>
+    /// Syncs the loadout slots with player's current inventory
+    /// </summary>
+    private void SyncSlots()
+    {
+        PlayerBases playerBasesComponent = GameManager.Instance.player.GetComponent<PlayerBases>();
+        
+        BaseType[] equippedBases = GameManager.Instance.player.GetEquippedBases();
+        MixerType[] equippedMixers = GameManager.Instance.player.GetEquippedMixers();
+        
+        Base base1 = playerBasesComponent.GetBase(equippedBases[0]);
+        Base base2 = playerBasesComponent.GetBase(equippedBases[1]);
+        baseSlotOne.sprite = base1.getSprite();
+        baseSlotTwo.sprite = base2.getSprite();
+        
+        if (mixerButtons.TryGetValue(equippedMixers[0], out Button mixer1Button))
         {
-            currentSlot = mixerSlotOne;
-        } else
+            mixerSlotOne.sprite = mixer1Button.GetComponent<Image>().sprite;
+        }
+        if (mixerButtons.TryGetValue(equippedMixers[1], out Button mixer2Button))
         {
-            currentSlot = mixerSlotTwo;
+            mixerSlotTwo.sprite = mixer2Button.GetComponent<Image>().sprite;
         }
     }
 
+    /// <summary>
+    /// Hides the buttons that are currently equipped mixers and bases.
+    /// </summary>
+    private void HideEquippedButtons()
+    {
+        BaseType[] playerBases = GameManager.Instance.player.GetEquippedBases();
+        MixerType[] playerMixers = GameManager.Instance.player.GetEquippedMixers();
+        
+        foreach (BaseType baseType in playerBases)
+        {
+            if (baseButtons.TryGetValue(baseType, out Button button))
+            {
+                button.gameObject.SetActive(false);
+            }
+        }
+        
+        foreach (MixerType mixerType in playerMixers)
+        {
+            if (mixerButtons.TryGetValue(mixerType, out Button button))
+            {
+                button.gameObject.SetActive(false);
+            }
+        }
+    }
 }

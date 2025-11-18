@@ -156,6 +156,11 @@ public class Player : MonoBehaviour, IDamageable
             spriteRenderer.flipX = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GameManager.Instance.ToggleLoadoutManager();
+        }
+
         if (changeCooldown <= 0)
         {
             if (Input.GetKeyDown(KeyCode.Q))
@@ -311,6 +316,29 @@ public class Player : MonoBehaviour, IDamageable
         equippedBases[slotIndex] = baseDrink;
         return lastEquippedBase;
     }
+    
+    public void RefreshUIIfNeeded(int changedSlotIndex, bool isBase)
+    {
+        if (isBase)
+        {
+            if (changedSlotIndex == baseIndex)
+            {
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                equippedImage.sprite = selectedBase.getSprite();
+            }
+            backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
+            backupImage.sprite = backupBase.getSprite();
+        }
+        else
+        {
+            if (changedSlotIndex == mixerIndex)
+            {
+                selectedMixer.RemoveMixer(this);
+                selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+                selectedMixer.ApplyMixer(this);
+            }
+        }
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -332,5 +360,24 @@ public class Player : MonoBehaviour, IDamageable
     public float GetHealth()
     {
         return health;
+    }
+    public BaseType[] GetEquippedBases()
+    {
+        return equippedBases;
+    }
+
+    public MixerType[] GetEquippedMixers()
+    {
+        return equippedMixers;
+    } 
+
+    public int GetCurrentBaseIndex()
+    {
+        return baseIndex;
+    }
+
+    public int GetCurrentMixerIndex()
+    {
+        return mixerIndex;
     }
 }
