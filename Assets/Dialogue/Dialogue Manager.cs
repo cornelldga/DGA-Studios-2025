@@ -14,7 +14,7 @@ using System.ComponentModel;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    public Animator dialogueBox;
+    [SerializeField] private Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image backgroundImg;
