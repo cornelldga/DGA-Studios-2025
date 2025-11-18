@@ -23,9 +23,7 @@ public enum DialogueType
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    [Header("UI Components")]
     [SerializeField] private Animator dialogueBox;
-    [Tooltip("Where the actual dialogue is displayed")]
     [SerializeField] private TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] private TextMeshProUGUI nameText;
