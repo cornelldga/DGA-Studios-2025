@@ -19,7 +19,6 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] private SpriteRenderer baseSlotTwo;
     [SerializeField] private SpriteRenderer mixerSlotOne;
     [SerializeField] private SpriteRenderer mixerSlotTwo;
-    private SpriteRenderer currentSlot;
     private Dictionary<BaseType, Button> baseButtons;
     private Dictionary<MixerType, Button> mixerButtons;
     private MixerType mixerType;
