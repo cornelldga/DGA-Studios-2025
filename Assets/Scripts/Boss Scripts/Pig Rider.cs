@@ -254,7 +254,7 @@ public class Pig_Rider : Boss
     public override void SetPhase()
     {
 
-        if (currentPhase == 1 && !isEnraged)
+        if (currentPhase == 0 && !isEnraged)
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
