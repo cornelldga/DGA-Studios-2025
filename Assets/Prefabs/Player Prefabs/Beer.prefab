@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2528757710639879618}
   - component: {fileID: 3814195944134518128}
   - component: {fileID: 3301654434265093489}
-  - component: {fileID: 4805350761005490925}
+  - component: {fileID: 3145207849952410808}
   m_Layer: 7
   m_Name: Beer
   m_TagString: Untagged
@@ -185,10 +185,10 @@ SpriteRenderer:
   m_Size: {x: 0.890625, y: 0.359375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4805350761005490925
+--- !u!95 &3145207849952410808
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 4114909415036440440}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 94260d7fdd1ee7947884a5ee18ee1a3c, type: 2}
+  m_Controller: {fileID: 9100000, guid: b11e57ea6262d7841900c0cfbf563880, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
