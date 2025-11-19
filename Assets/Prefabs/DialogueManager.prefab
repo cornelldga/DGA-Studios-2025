@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5889659671287058270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -868,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
   dialogueBox: {fileID: 1917230275198679387}
   dialogueText: {fileID: 8206260911539718010}
+  nameText: {fileID: 5033198116382116301}
   backgroundImg: {fileID: 3096683302869022583}
   npcImg: {fileID: 7930587990325121506}
   typingSpeed: 0.05
