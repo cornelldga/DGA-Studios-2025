@@ -256,12 +256,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TheMagician
-  maxHealth: 50
+  maxHealth: 70
   healthBar: {fileID: 2100067247850913026}
   bulletOrigin: {fileID: 6913094105630645781}
   phasePercents:
   - 0.65
   - 0.25
+  currentPhase: 0
   attackRate: 1
   currentStage: 0
   animator: {fileID: 458241386248563458}
