@@ -36,6 +36,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+     /// <summary>
+    /// Load the given scene name
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 
     /// <summary>
     /// Toggles the player controller to freeze/unfreeze the player
@@ -52,6 +60,11 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("Lose Game");
+        LoadScene(GetCurrentSceneName());
+    }
+    public void BossDefeated(string nextSceneName)
+    {
+        LoadScene(nextSceneName);
     }
 
 }

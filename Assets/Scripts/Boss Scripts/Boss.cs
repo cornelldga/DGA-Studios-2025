@@ -70,8 +70,9 @@ public abstract class Boss : MonoBehaviour, IDamageable
         health -= damage;
         if(health <= 0)
         {
-            this.enabled = false;
+            
             healthBar.fillAmount = 0;
+            GameManager.Instance.BossDefeated("World Hub");
         }
         else
         {

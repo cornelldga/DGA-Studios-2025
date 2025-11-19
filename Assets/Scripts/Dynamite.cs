@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class Dynamite : Projectile
 {
-    [SerializeField] double timeBeforeEplosion;
+    [SerializeField] double timeBeforeExplosion;
     [SerializeField] float impulseForce;
     [SerializeField] CinemachineImpulseSource impulseSource;
     [SerializeField] GameObject originalExplosion;
@@ -17,13 +17,13 @@ public class Dynamite : Projectile
     // Update is called once per frame
     void Update()
     {
+        
         timer += Time.deltaTime;
-        if (timer> timeBeforeEplosion)
+        if (timer> timeBeforeExplosion)
         {
             impulseSource.GenerateImpulse(impulseForce);
             Instantiate(originalExplosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            
         }
     }
 
