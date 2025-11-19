@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 26987428809012855}
   - component: {fileID: 6544121181942965593}
   m_Layer: 0
-  m_Name: Card Bullet Prefab
+  m_Name: Inaccurate Card
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,11 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  speed: 3
+  speed: 5
   lifeDuration: 4
   cooldown: 1
   damage: 1
-  accuracy: 1
+  accuracy: 45
   collisionLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -235,7 +235,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478843839408097374}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

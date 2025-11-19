@@ -10,23 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
-  m_Name: Card Fan
+  m_Name: Desperation Attack
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
   bullets:
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
-  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
+  - {fileID: 2660713567375334150, guid: 6eab5b2f97586d24bab21a945dd961b6, type: 3}
+  - {fileID: -1811460914074235590, guid: 85c7d32d6abb94649894ea4b51974f10, type: 3}
+  - {fileID: 2660713567375334150, guid: b92d2999b714f3941a0a40e66969385a, type: 3}
   bulletAngles:
-  - -60
-  - -45
-  - -30
+  - 0
+  - -15
+  - 15
   - -15
   - 0
   - 15
-  - 30
-  - 45
-  - 60
+  - 15
+  - -15
+  - 0
   bulletDelays:
   - 0
+  - 0
+  - 0
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.25
   minAttackCooldown: 1
   maxAttackCooldown: 2
