@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -31,11 +30,19 @@ public class Pig_Rider : Boss
     private float stunnedTime = 1f;
     //How much to recoil upon collision or player collision.
     private float recoilForce = 2f;
+
     [Header("Attack Settings")]
     [Tooltip("Chance (0-1) that boss will mark instead of charge")]
+    [Range(0f, 1f)]
     [SerializeField] private float markChance = 0.3f;
+
     [Tooltip("Chance (0-1) that boss will enter bounce mode instead of normal charge")]
+    [Range(0f, 1f)]
     [SerializeField] private float bounceChance = 0.2f;
+
+    [Tooltip("Chance (0-1) that boss will enter enraged bounce mode when below half health")]
+    [Range(0f, 1f)]
+    [SerializeField] private float enragedBounceChance = 1f;
     //How fast to move during bouncing state.
     private float bounceSpeed;
     private float baseBounceSpeed = 10f;
@@ -46,7 +53,14 @@ public class Pig_Rider : Boss
     [SerializeField] private BulletPattern markingBulletPattern;
 
     [Header("Bounce Mode Settings")]
+    [Tooltip("Minimum number of bounces in bounce mode")]
+    [SerializeField] private int minBounces = 3;
+
+    [Tooltip("Maximum number of bounces in bounce mode")]
+    [SerializeField] private int maxBounces = 7;
     private float damage = 1f;
+    private bool isEnraged = false;
+
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -231,10 +245,21 @@ public class Pig_Rider : Boss
     {
         currentState = State.Bouncing;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
-        bouncesRemaining = Random.Range(3, 7);
+        bouncesRemaining = Random.Range(minBounces, maxBounces);
     }
 
+    /// <summary>
+    /// Sets the phase of bull rider based on the health percent.
+    /// </summary>
+    public override void SetPhase()
+    {
 
+        if (currentPhase == 0 && !isEnraged)
+        {
+            isEnraged = true;
+            bounceChance = enragedBounceChance;
+        }   
+    }
 
     /// <summary>
     /// Marking attack targeting and execution.
