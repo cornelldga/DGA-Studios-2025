@@ -4,29 +4,43 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 
+/// <summary>
+/// Triggers dialogue sequences when interacted with for all dialogue types.
+/// </summary> 
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
-    [SerializeField] TextAsset jsonTextFile;
-    [SerializeField] Sprite dialogueBoxSprite;
-    [SerializeField] Sprite neutralSprite;
-    [SerializeField] Sprite happySprite;
-    [SerializeField] Sprite sadSprite;
-    [SerializeField] bool bossChar;
-    [SerializeField] string sceneName = "";
+    [Header("General Settings")]
+    [SerializeField] private TextAsset jsonTextFile;
+    [SerializeField] private Sprite dialogueBoxSprite;
+    [SerializeField] private DialogueType dialogueType = DialogueType.NPC;
+
+    [Header("Boss-only Fields")]
+    [SerializeField] private Sprite neutralSprite;
+    [SerializeField] private Sprite happySprite;
+    [SerializeField] private Sprite sadSprite;
+    private Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
+
+    [Header("Boss and interactable Fields")]
+    [SerializeField] private string sceneName = "";
     private int progressionInt;
 
-    Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     /// <summary>
     /// Set the emotion dictionary
     /// </summary>
     private void Start()
     {
-        emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
-        emotionDictionary[DialogueEmotion.Happy] = happySprite;
-        emotionDictionary[DialogueEmotion.Sad] = sadSprite;
+        if (dialogueType == DialogueType.Boss)
+        {
+            emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
+            emotionDictionary[DialogueEmotion.Happy] = happySprite;
+            emotionDictionary[DialogueEmotion.Sad] = sadSprite;
+        }
     }
 
+    /// <summary>
+    /// Will trigger dialogue when interacted.
+    /// </summary>
     public void Interact()
     {
         TriggerDialogue();
@@ -40,8 +54,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         if (!DialogueManager.Instance.OngoingDialogue())
         {
             DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt,
-            dialogueBoxSprite, emotionDictionary, sceneName, bossChar);
+            dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
-            
+
     }
 }
