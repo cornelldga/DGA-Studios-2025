@@ -175,9 +175,8 @@ public class TheMagician : Boss
     }
  
 
-    public override void SetPhase(float healthPercent)
+    public override void SetPhase()
     {
-        base.SetPhase(healthPercent);
         switch (currentPhase)
         {
             case 1:

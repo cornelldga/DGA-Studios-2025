@@ -390,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7947622557283230081}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00000046193594, w: 1}
   m_LocalPosition: {x: 0.97522, y: 0.0563, z: 0}
   m_LocalScale: {x: 1.28, y: 1.28, z: 1.28}
   m_ConstrainProportionsScale: 1
@@ -529,7 +529,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &4816767515093266525
 Animator:
   serializedVersion: 7
@@ -568,29 +568,14 @@ MonoBehaviour:
   healthBar: {fileID: 928173876691222959}
   bulletOrigin: {fileID: 6029264802078557319}
   phasePercents: []
-  isAttacking: 0
-  attackCooldown: 0
   attackRate: 1
-  baseSpeed: 5
-  acceleration: 10
-  maxChargeSpeed: 16
-  impulseWeight: 200
-  targetingTime: 1
-  stunnedTime: 2
-  recoilForce: 10
+  currentState: 0
   markChance: 0.3
   bounceChance: 0.2
-  baseBounceSpeed: 10
-  bouncesRemaining: 5
+  enragedBounceChance: 1
   markingBulletPattern: {fileID: 11400000, guid: 3bf8c04eca9a940b8a1314203cc6cdea, type: 2}
-  bounces: 5
-  impulseSource: {fileID: 517389824748420973}
-  wallShakeForce: 0.5
-  playersShakeForce: 1
-  enableVictorySpin: 1
-  spinDuration: 0.5
-  spinSpeed: 720
-  currentState: 0
+  minBounces: 3
+  maxBounces: 7
 --- !u!114 &517389824748420973
 MonoBehaviour:
   m_ObjectHideFlags: 0

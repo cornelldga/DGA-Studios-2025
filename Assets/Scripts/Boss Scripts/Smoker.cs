@@ -5,13 +5,13 @@ using UnityEngine;
 public class Smoker : MonoBehaviour
 {
     //How fast should the smoker spin. (Can be modified later for different patterns)
-    private float spinSpeed = 50;
+    [SerializeField] float spinSpeed = 50;
     //How fast should smoke be shot out of smoker pipe.
-    private float pelletSpeed = 3;
+    [SerializeField] float pelletSpeed = 3;
+    [Tooltip("Fire rate of smoke")]
+    [SerializeField] float smokeRate;
     //A counter on how long it has been since the last smoke was shot.
-    private float smokeTimer = 0f;
-    //The smoke should be shot once this amount of time has elapsed.
-    private float resetTime = 0.15f;
+    float smokeTimer = 0f;
     [SerializeField] GameObject smokePelletPrefab;
     //Where the smoke should be released from.
     [SerializeField] Transform releasePoint;
@@ -41,15 +41,13 @@ public class Smoker : MonoBehaviour
     void Update()
     {
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
-        smokeTimer += Time.deltaTime;
+        smokeTimer -= Time.deltaTime;
         if (magician.currentStage == Stage.Backstage)
         {
-            if (smokeTimer >= resetTime)
+            if(smokeTimer <= 0)
             {
-                //ShootSmoke();
-                smokeTimer = 0;
-                resetTime = UnityEngine.Random.Range(0.05f, 0.1f);
-
+                ShootSmoke();
+                smokeTimer = smokeRate;
                 if (!hidStage)
                 {
                     ObscureStage();
