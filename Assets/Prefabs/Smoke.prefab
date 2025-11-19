@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 8008339833196448568}
   - component: {fileID: 954788390806585248}
   m_Layer: 0
-  m_Name: SmokeTemp
+  m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,6 +319,12 @@ MonoBehaviour:
   - {fileID: -356755377443963557, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
   - {fileID: -6902590303278265700, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
   - {fileID: 762050836466721937, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  dragIncrease: 1.5
+  stopThreshold: 0.25
+  lifetime: 8
+  fadeStartTime: 0.5
+  maxScale: 3
+  expansionSpeed: 1
 --- !u!1 &9001908743855615020
 GameObject:
   m_ObjectHideFlags: 0

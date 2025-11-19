@@ -3,12 +3,11 @@ using System.Runtime.CompilerServices;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 /// <summary>
 /// Enables a bullet to move in a sinusoidal pattern by adding forces perpendicular to its travel direction
 /// </summary>
-public class DoveMovement : Bullet
+public class Dove : Bullet
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Tooltip("Width of the Projectile's arcs")]

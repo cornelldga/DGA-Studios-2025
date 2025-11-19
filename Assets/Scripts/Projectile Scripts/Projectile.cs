@@ -21,7 +21,7 @@ public abstract class Projectile : MonoBehaviour
 
 
     protected Rigidbody2D rb;
-    private void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));

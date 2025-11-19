@@ -16,7 +16,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         "and the percent health they are triggered")]
     [SerializeField] protected float[] phasePercents;
 
-    protected int currentPhase = 0;
+    [SerializeField] protected int currentPhase = 0;
 
     bool isAttacking;
     protected float attackCooldown;

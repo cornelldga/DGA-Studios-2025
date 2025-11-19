@@ -262,18 +262,23 @@ MonoBehaviour:
   phasePercents:
   - 0.65
   - 0.25
-  isAttacking: 0
-  attackCooldown: 0
+  attackRate: 1
+  currentStage: 0
+  animator: {fileID: 458241386248563458}
+  attacksNum: 0
+  secondAttackRate: 0
+  thirdAttackRate: 0
+  attackTime: 0
+  teleportDelay: 0
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
   doveStage: {fileID: 0}
   knifeStage: {fileID: 0}
-  cardStageBulletPattern: {fileID: 11400000, guid: f3cde4ae492ebdb4296ecebe988f7db8, type: 2}
-  doveStageBulletPattern: {fileID: 11400000, guid: f3cde4ae492ebdb4296ecebe988f7db8, type: 2}
-  knifeStageBulletPattern: {fileID: 11400000, guid: f3cde4ae492ebdb4296ecebe988f7db8, type: 2}
+  cardStageBulletPattern: {fileID: 11400000, guid: e577a600caaf7df4d9a01479ba396364, type: 2}
+  doveStageBulletPattern: {fileID: 11400000, guid: 535397873af6a3d4bb6bb24812e42b8e, type: 2}
+  knifeStageBulletPattern: {fileID: 11400000, guid: f0bce6c2221399c4f96ddf8175ea0d67, type: 2}
+  DesperationAttack: {fileID: 11400000, guid: 59e941ebc45089d4592437e1e63bcc6c, type: 2}
   backStageTime: 2
-  currentStage: 0
-  animator: {fileID: 458241386248563458}
 --- !u!95 &458241386248563458
 Animator:
   serializedVersion: 7
