@@ -52,6 +52,10 @@ public class GameManager : MonoBehaviour
     public void FreezePlayer(bool freeze)
     {
         player.enabled = !freeze;
+        if (freeze)
+        {
+            player.StopPlayer();
+        }
     }
 
     /// <summary>
@@ -60,6 +64,7 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("Lose Game");
+        FreezePlayer(true);
         LoadScene(GetCurrentSceneName());
     }
     public void BossDefeated(string nextSceneName)
