@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
   bullets:
-  - {fileID: 0}
+  - {fileID: 2660713567375334150, guid: 5126a20016b90b346af90ccc4dd93152, type: 3}
   bulletAngles:
   - 0
   - 15
@@ -22,7 +22,7 @@ MonoBehaviour:
   - 60
   - 75
   - 90
-  bulletDelay:
-  - 0.15
+  bulletDelays:
+  - 0
   minAttackCooldown: 1
   maxAttackCooldown: 2
