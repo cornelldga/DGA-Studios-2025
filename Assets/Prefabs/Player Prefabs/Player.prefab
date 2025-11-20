@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612c7ac16233f488291ce28d5614fcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  baseSpeed: 5
+  baseSpeed: 7
   speed: 0
-  maxHealth: 5
+  maxHealth: 10
   whipBaseDamageMultiplier: 1
   changeCooldownTime: 0.5
   equippedBases: 0000000002000000
@@ -335,7 +335,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 0.95}
+  m_Size: {x: 0.5, y: 0.81}
   m_EdgeRadius: 0
 --- !u!95 &6114037429775835929
 Animator:

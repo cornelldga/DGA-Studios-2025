@@ -40,10 +40,12 @@ public class Bullet : Projectile
         if(whipped && collision.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         base.OnProjectileHit(collision);
     }
