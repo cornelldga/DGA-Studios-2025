@@ -1167,12 +1167,16 @@ PrefabInstance:
       objectReference: {fileID: 11705904}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: smokeRate
-      value: 0.125
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
+    - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
+      propertyPath: pelletSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7071902628436390820, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_Name
       value: Smoker
@@ -1187,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8566838738226957433, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.66
+      value: -2.11
       objectReference: {fileID: 0}
     - target: {fileID: 8566838738226957433, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_LocalPosition.z
