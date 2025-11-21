@@ -28,7 +28,7 @@ public class PlayerBases : MonoBehaviour
 
     Base selectedBase;
 
-    private void Start()
+    private void Awake()
     {
         if (bases.Length != sizeof(BaseType))
         {

@@ -1,18 +1,23 @@
 using UnityEngine;
-
+/// <summary>
+/// A smoke particle that grows and changes size and sprites over time
+/// </summary>
 public class SmokePellet : MonoBehaviour
 {
-    //Array of 4 smoke sprites to choose from
-    [SerializeField] private Sprite[] smokeSprites = new Sprite[4];
+    [SerializeField] private Sprite[] smokeSprites;
 
-    //Increasing factor on drag.
-    private float dragIncrease = 0.7f;
-    //At what velocity should we stop moving completely.
-    private float stopThreshold = 0.1f;
-    //Lifetime of a smoke cloud.
-    private float lifetime = 10f;
-    //Time threshold in seconds for when cloud should begin fading.
-    private float fadeStartTime = 5f;
+    [Tooltip("Increasing factor on drag")]
+    [SerializeField] float dragIncrease;
+    [Tooltip("At what velocity should we stop moving completely")]
+    [SerializeField] float stopThreshold;
+    [Tooltip("Lifetime of a smoke cloud")]
+    [SerializeField] float lifetime;
+    [Tooltip("Time threshold in seconds for when cloud should begin fading")]
+    [SerializeField] float fadeStartTime;
+    [Tooltip("Maximum size of a cloud relative to its start size")]
+    [SerializeField] float maxScale;
+    [Tooltip("How fast should the cloud expand")]
+    [SerializeField] float expansionSpeed;
 
     private Rigidbody2D rb;
     //A cloud is composed of 3 seperate circle sprites. They are children, and so need to be treated differently.
@@ -21,10 +26,6 @@ public class SmokePellet : MonoBehaviour
     private Color[] startColors;
     //How long has this cloud been alive.
     private float aliveTime;
-    //Maximum size of a cloud relative to its start size.
-    private float maxScale = 4f;
-    //How fast should the cloud expand.
-    private float expansionSpeed = 0.5f;
     //The initial scales of each circle
     private Vector2[] childStartScales;
 
@@ -68,7 +69,7 @@ public class SmokePellet : MonoBehaviour
         }
     }
     /// <summary>
-    /// On update, the damping is iincreased on the cloud, and if it has been slowed enough it will stop. Each part of the smoke cloud is increased in scale.
+    /// On update, the damping is increased on the cloud, and if it has been slowed enough it will stop. Each part of the smoke cloud is increased in scale.
     /// Once the cloud has lived long enough, it will begin to fade, and after their lifetime, will be destroyed.
     /// </summary>
     private void Update()

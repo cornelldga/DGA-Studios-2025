@@ -29,8 +29,6 @@ public class TheMagician : Boss
     [SerializeField] float thirdAttackRate;
 
     [Header("Movement Control Variables")]
-    [Tooltip("How long The Magician hides in the backstage")]
-    [SerializeField] float backStageTime;
     private float stageTimer;
 
     [Tooltip("How long The Magician spends attacking on Stage")]
@@ -50,6 +48,9 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
+    [SerializeField] BulletPattern DesperationAttack;
+    [Tooltip("How long The Magician hides in the backstage")]
+    [SerializeField] float backStageTime;
 
     
 
@@ -176,11 +177,30 @@ public class TheMagician : Boss
     {
         switch (currentPhase)
         {
-            case 1:
+            case 0:
                 attackRate = secondAttackRate;
                 break;
-            case 2:
+            case 1:
                 attackRate = thirdAttackRate;
+                switch (currentStage)
+                {
+                    case Stage.Backstage:
+                        //attackCooldown = 0;
+                        break;
+                    case Stage.Card:
+                        StopCoroutine(cardStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                    case Stage.Dove:
+                        StopCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                    case Stage.Knife:
+                        StopCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                }
+                StartCoroutine(DesperationAttack.DoBulletPattern(this));
                 break;
         }
     }
