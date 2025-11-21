@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5139313081211936209}
   - component: {fileID: 7029770135339947437}
   - component: {fileID: 722755417629996029}
-  - component: {fileID: 26987428809012855}
   - component: {fileID: 1633624123496950494}
   m_Layer: 0
   m_Name: Dove Bullet Prefab
@@ -178,7 +177,7 @@ Animator:
   m_GameObject: {fileID: 7478843839408097374}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7607813c9d82c6f419dea919bea4381f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -190,22 +189,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &26987428809012855
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478843839408097374}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!114 &1633624123496950494
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1426,8 +1426,16 @@ PrefabInstance:
       value: 1.5234375
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: sadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
+      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
@@ -1436,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
@@ -1677,8 +1685,16 @@ PrefabInstance:
       value: 1.5234375
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: sadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
+      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
@@ -1687,7 +1703,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
