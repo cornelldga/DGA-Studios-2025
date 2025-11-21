@@ -125,22 +125,18 @@ public class Pig_Rider : Boss
         switch (currentState)
         {
             case State.Targeting:
-                animator.SetBool("IsCharging", false);
                 UpdateTargeting();
                 break;
             case State.Charging:
-                animator.SetBool("IsCharging", true);
                 UpdateCharging();
                 break;
             case State.Stunned:
-                animator.SetBool("IsCharging", false);
                 UpdateStunned();
                 break;
             case State.Marking:
                 // Handled by coroutine
                 break;
             case State.Bouncing:
-                animator.SetBool("IsCharging", true);
                 UpdateBouncing();
                 break;
         }
@@ -207,6 +203,8 @@ public class Pig_Rider : Boss
     {
         currentSpeed = bounceSpeed;
         rb.linearVelocity = chargeDirection * currentSpeed;
+        if (chargeDirection.x > 0) { sprite.flipX = true; }
+        else if (chargeDirection.x < 0) { sprite.flipX = false; }
     }
 
 
@@ -230,6 +228,7 @@ public class Pig_Rider : Boss
     /// </summary>
     private void TransitionToTargeting()
     {
+        animator.SetBool("IsCharging", false);
         currentState = State.Targeting;
         stateTimer = targetingTime;
         rb.linearVelocity = Vector2.zero;
@@ -242,6 +241,10 @@ public class Pig_Rider : Boss
         currentState = State.Charging;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         currentSpeed = baseSpeed;
+
+        if (chargeDirection.x > 0) { sprite.flipX = true; }
+        else if (chargeDirection.x < 0) { sprite.flipX = false; }
+
         animator.SetBool("IsCharging", true);
     }
     /// <summary>
@@ -249,6 +252,7 @@ public class Pig_Rider : Boss
     /// </summary>
     private void TransitionToMarking()
     {
+        animator.SetBool("IsCharging", false);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
 
@@ -267,6 +271,7 @@ public class Pig_Rider : Boss
     /// </summary>
     private void TransitionToStunned()
     {
+        animator.SetBool("IsCharging", false);
         if (currentState == State.Bouncing)
         {
             currentState = State.Stunned;
@@ -281,6 +286,7 @@ public class Pig_Rider : Boss
     /// </summary>
     private void TransitionToBouncing()
     {
+        animator.SetBool("IsCharging", true);
         currentState = State.Bouncing;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         bouncesRemaining = Random.Range(minBounces, maxBounces);
@@ -309,6 +315,9 @@ public class Pig_Rider : Boss
         {
             bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                 - bulletOrigin.transform.position;
+
+            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
+            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
         }
 
         // Execute the bullet pattern
