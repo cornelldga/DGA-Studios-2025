@@ -19,6 +19,13 @@ public class Bullet : Projectile
     {
         whipped = true;
         damage *= whipDamageMultiplier;
+
+        // Stop from homing to player if reflected
+        Homing homingScript = this.GetComponent<Homing>();
+        if (homingScript != null)
+        {
+            homingScript.enabled = false;
+        }
     }
 
     /// <summary>
@@ -33,10 +40,12 @@ public class Bullet : Projectile
         if(whipped && collision.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            Destroy(gameObject);
         }
         base.OnProjectileHit(collision);
     }
