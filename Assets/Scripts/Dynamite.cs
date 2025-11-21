@@ -1,36 +1,36 @@
-using System;
-using Unity.Cinemachine;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /// <summary>
-/// Dynamite used by Driller Boss: 
-/// Will be thrown into holes (not yet implemented) and creates a ring explosion (circle for now)
+/// Projectile thrown by the boss.
 /// </summary>
-public class Dynamite : Projectile
+public class Dynamite : MonoBehaviour
 {
-    [SerializeField] double timeBeforeEplosion;
-    [SerializeField] float impulseForce;
-    [SerializeField] CinemachineImpulseSource impulseSource;
-    [SerializeField] GameObject originalExplosion;
     private double timer;
+    [SerializeField] float timeBeforeEplosion; //should be same as dynamite pattern's. not sure how to change
+    [SerializeField] GameObject explosionPrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// After a certain amoutn of time, spawn an explosion and delete the dynamite.
+    /// This time should be the same time used to calculate dynamite path in dynamite pattern.
+    /// </summary>
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer> timeBeforeEplosion)
-        {
-            impulseSource.GenerateImpulse(impulseForce);
-            Instantiate(originalExplosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-            
-        }
+         timer += Time.deltaTime;
+         if (timer> timeBeforeEplosion)
+         {
+             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+             Destroy(gameObject);
+            }
     }
 
+    /// <summary>
+    /// This projectile shouldn't damage the player. 
+    /// Maybe trigger something if it hits a hole?
+    /// </summary>
+    public virtual void OnProjectileHit(Collider2D collision)
+    {
+        //do nothing for now
+    }
 }

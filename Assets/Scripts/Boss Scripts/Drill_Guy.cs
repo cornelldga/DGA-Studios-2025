@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Drill_Guy : Boss
 {
@@ -19,7 +20,7 @@ public class Drill_Guy : Boss
     private Rigidbody2D rb;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
-
+    [SerializeField] DynamitePattern dynamitePattern;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -29,6 +30,7 @@ public class Drill_Guy : Boss
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
+
     }
 
     /// <summary>
@@ -55,6 +57,7 @@ public class Drill_Guy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
+                ThrowDynamiteAtPlayer();
                 // Handled by coroutine
                 break;
             case State.Entering:
@@ -64,6 +67,12 @@ public class Drill_Guy : Boss
                 UpdateExiting();
                 break;
         }
+    }
+
+    //Throws Dynamite at the player
+    private void ThrowDynamiteAtPlayer()
+    {
+        dynamitePattern.ThrowAt(GameManager.Instance.player.transform.position, this);
     }
 
     private void UpdateWalking()
