@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 742907776488134504}
   - component: {fileID: 8109280398840041209}
-  - component: {fileID: 6490914910762157081}
+  - component: {fileID: 2660713567375334150}
   - component: {fileID: 5139313081211936209}
   - component: {fileID: 7029770135339947437}
   - component: {fileID: 722755417629996029}
   - component: {fileID: 26987428809012855}
   m_Layer: 0
-  m_Name: Marking Bullet
+  m_Name: Dynamite Prefab 1
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -8132526007973258892, guid: a3ce1b3006bf75448b19a911bde4457b, type: 3}
+  m_Sprite: {fileID: -2672482093796730595, guid: fd398c38084aa1348a31453ac33143de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6490914910762157081
+--- !u!114 &2660713567375334150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,18 +104,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7478843839408097374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb6c413c2edf4b9795a4bf8f5156163, type: 3}
+  m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MarkingBullet
-  speed: 4
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  speed: 3
   lifeDuration: 4
   cooldown: 1
-  damage: 0
+  damage: 1
   accuracy: 0
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 0
-  markDuration: 2
+    m_Bits: 64
 --- !u!50 &5139313081211936209
 Rigidbody2D:
   serializedVersion: 5
@@ -177,17 +176,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.019}
+  m_Offset: {x: 0.015437692, y: 0.009262651}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.578125, y: 0.53125}
+    oldSize: {x: 1, y: 1.7391304}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.41336673, y: 0.3}
+  m_Size: {x: 0.41336673, y: 0.5862692}
   m_EdgeRadius: 0
 --- !u!95 &722755417629996029
 Animator:
