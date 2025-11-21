@@ -87,6 +87,9 @@ public class Pig_Rider : Boss
     private bool isMarked;
     private float markTimer;
 
+    private Animator animator;
+    private SpriteRenderer sprite;
+
     /// <summary>
     /// On start, we set the rigid body, and change its attributes. Immediately enter targeting.
     /// </summary>
@@ -95,6 +98,8 @@ public class Pig_Rider : Boss
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
         bounceSpeed = baseBounceSpeed;
@@ -120,18 +125,22 @@ public class Pig_Rider : Boss
         switch (currentState)
         {
             case State.Targeting:
+                animator.SetBool("IsCharging", false);
                 UpdateTargeting();
                 break;
             case State.Charging:
+                animator.SetBool("IsCharging", true);
                 UpdateCharging();
                 break;
             case State.Stunned:
+                animator.SetBool("IsCharging", false);
                 UpdateStunned();
                 break;
             case State.Marking:
                 // Handled by coroutine
                 break;
             case State.Bouncing:
+                animator.SetBool("IsCharging", true);
                 UpdateBouncing();
                 break;
         }
@@ -231,9 +240,9 @@ public class Pig_Rider : Boss
     private void TransitionToCharging()
     {
         currentState = State.Charging;
-
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         currentSpeed = baseSpeed;
+        animator.SetBool("IsCharging", true);
     }
     /// <summary>
     /// Setting state to marking. Uses a coroutine to perform the marking attack. Handles null case.

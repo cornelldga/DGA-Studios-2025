@@ -160,182 +160,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trail_smoke_animation_0
-      rect:
-        serializedVersion: 2
-        x: 612
-        y: 82
-        width: 46
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: adee9df1cbbfdf080800000000000000
-      internalID: -9151882082340180262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_1
-      rect:
-        serializedVersion: 2
-        x: 885
-        y: 110
-        width: 30
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 31c093cc6d1298af0800000000000000
-      internalID: -393746285985199085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_2
-      rect:
-        serializedVersion: 2
-        x: 1160
-        y: 123
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8c276afcfde99c9e0800000000000000
-      internalID: -1600573508454812984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_3
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 70
-        width: 31
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 067a039a82aba9060800000000000000
-      internalID: 6961080857854519136
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_4
-      rect:
-        serializedVersion: 2
-        x: 876
-        y: 92
-        width: 16
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8bc3c274a3df0faa0800000000000000
-      internalID: -6129120666107233096
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_5
-      rect:
-        serializedVersion: 2
-        x: 902
-        y: 83
-        width: 24
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ccc4463ce51d28d0800000000000000
-      internalID: -2869613283298194237
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_6
-      rect:
-        serializedVersion: 2
-        x: 1138
-        y: 79
-        width: 12
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f8f5b840b90d9ff20800000000000000
-      internalID: 3457023553198317455
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_7
-      rect:
-        serializedVersion: 2
-        x: 1172
-        y: 79
-        width: 11
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f98a6a55bea253d90800000000000000
-      internalID: -7118736445746534241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: trail_smoke_animation_8
       rect:
         serializedVersion: 2
@@ -344,7 +168,7 @@ TextureImporter:
         width: 147
         height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -361,12 +185,12 @@ TextureImporter:
       name: trail_smoke_animation_9
       rect:
         serializedVersion: 2
-        x: 255
+        x: 256
         y: 0
-        width: 134
-        height: 91
+        width: 148
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -380,37 +204,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trail_smoke_animation_10
-      rect:
-        serializedVersion: 2
-        x: 380
-        y: 28
-        width: 21
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: afb660e545774d250800000000000000
-      internalID: 5968526610411187194
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: trail_smoke_animation_11
       rect:
         serializedVersion: 2
-        x: 511
+        x: 512
         y: 0
-        width: 126
-        height: 85
+        width: 177
+        height: 126
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -424,37 +226,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trail_smoke_animation_12
-      rect:
-        serializedVersion: 2
-        x: 646
-        y: 26
-        width: 32
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 26dace7770b19c9e0800000000000000
-      internalID: -1600718473662780062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: trail_smoke_animation_13
       rect:
         serializedVersion: 2
         x: 767
         y: 0
-        width: 149
-        height: 85
+        width: 188
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -468,59 +248,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trail_smoke_animation_14
-      rect:
-        serializedVersion: 2
-        x: 921
-        y: 40
-        width: 16
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c470b84117d68a980800000000000000
-      internalID: -8527445561982646452
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_15
-      rect:
-        serializedVersion: 2
-        x: 937
-        y: 40
-        width: 16
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de8344208a91a58c0800000000000000
-      internalID: -4009864308836779795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: trail_smoke_animation_16
       rect:
         serializedVersion: 2
-        x: 1023
+        x: 1025
         y: 0
-        width: 151
-        height: 82
+        width: 201
+        height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -533,99 +269,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_17
-      rect:
-        serializedVersion: 2
-        x: 1180
-        y: 49
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7798397f8f9232030800000000000000
-      internalID: 3468662287287683447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_18
-      rect:
-        serializedVersion: 2
-        x: 1206
-        y: 45
-        width: 18
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 19c9d7a0472654120800000000000000
-      internalID: 2397430627176389777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_19
-      rect:
-        serializedVersion: 2
-        x: 920
-        y: 18
-        width: 15
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3834c035dbe69c3d0800000000000000
-      internalID: -3185893501966728317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trail_smoke_animation_20
-      rect:
-        serializedVersion: 2
-        x: 1183
-        y: 19
-        width: 17
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 84ded1b44a96c5270800000000000000
-      internalID: 8240577572536970568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f589b2a765f04d341958e186095b0743
     internalID: 0
     vertices: []
     indices: 
