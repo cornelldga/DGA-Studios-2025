@@ -107,4 +107,9 @@ public class Drill_Guy : Boss
             //Throw dynamite in that direction.
         }
     }
+
+    public override void SetPhase()
+    {
+        throw new NotImplementedException();
+    }
 }
