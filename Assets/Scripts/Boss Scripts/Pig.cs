@@ -23,6 +23,21 @@ public class Pig : MonoBehaviour
     //Maximum speed to cap given acceleration.
     private float maxChargeSpeed = 10f;
 
+    [Header("Patrol Settings")]
+    [Tooltip("Speed while patrolling side to side")]
+    [SerializeField] private float patrolSpeed = 2f;
+    [Tooltip("Distance to patrol left and right from starting point")]
+    [SerializeField] private float patrolDistance = 1f;
+    private float patrolDirection = 1f; // 1 for right, -1 for left
+    private float leftBoundary;
+    private float rightBoundary;
+
+    [Header("Return Settings")]
+    [Tooltip("Speed when returning to starting point")]
+    [SerializeField] private float returnSpeed = 4f;
+    [Tooltip("Distance threshold to consider pig has arrived at starting point")]
+    [SerializeField] private float arrivalThreshold = 0.1f;
+
     private Vector2 targetPosition;
     private Vector2 chargeDirection;
     private Vector2 startingPoint;
@@ -30,6 +45,7 @@ public class Pig : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D thisCollider;
     private List<Collider2D> ignoredColliders;
+    private SpriteRenderer spriteRenderer;
 
     private float damage = 1f;
     private float recoilForce = 2f;
@@ -47,9 +63,15 @@ public class Pig : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         thisCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         ignoredColliders = new List<Collider2D>();
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
+        leftBoundary = startingPoint.x - patrolDistance;
+        rightBoundary = startingPoint.x + patrolDistance;
+
+        FlipSprite();
+
         TransitionToPatrolling();
     }
 
@@ -88,6 +110,7 @@ public class Pig : MonoBehaviour
 
     /// <summary>
     /// Boss behavior in charging mode. Accelerating to a max speed.
+    /// If targets lose their marks, transition to returning instead of patrolling.
     /// </summary>
     private void UpdateCharging()
     {
@@ -96,14 +119,50 @@ public class Pig : MonoBehaviour
 
         if (pigRider != null && GameManager.Instance.player != null && !pigRider.IsMarked() && !GameManager.Instance.player.IsMarked())
         {
-            TransitionToPatrolling();
+            TransitionToReturning();
         }
     }
 
+    /// <summary>
+    /// Pig patrols side to side between boundaries, flipping sprite based on direction.
+    /// Transitions to targeting when a valid target is marked.
+    /// </summary>
     private void UpdatePatrolling()
     {
-        // TODO Remove: Temporary to verify targeting/charging
-        TransitionToTargeting();
+        if (pigRider != null && GameManager.Instance.player != null)
+        {
+            bool validTarget = pigRider.IsMarked() || GameManager.Instance.player.IsMarked();
+            if (validTarget)
+            {
+                TransitionToTargeting();
+                return;
+            }
+        }
+
+        Vector2 movement = new Vector2(patrolDirection * patrolSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = movement;
+
+        if (patrolDirection > 0 && transform.position.x >= rightBoundary)
+        {
+            patrolDirection = -1f;
+            FlipSprite();
+        }
+        else if (patrolDirection < 0 && transform.position.x <= leftBoundary)
+        {
+            patrolDirection = 1f;
+            FlipSprite();
+        }
+    }
+
+    /// <summary>
+    /// Flips the sprite horizontally to face the movement direction.
+    /// </summary>
+    private void FlipSprite()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
     }
 
     private void UpdateTargeting()
@@ -130,9 +189,23 @@ public class Pig : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pig returns to starting position after charging. Transitions to patrolling upon arrival.
+    /// </summary>
     private void UpdateReturning()
     {
+        Vector2 directionToStart = (startingPoint - (Vector2)transform.position).normalized;
 
+        rb.linearVelocity = directionToStart * returnSpeed;
+
+        float distanceToStart = Vector2.Distance(transform.position, startingPoint);
+        if (distanceToStart <= arrivalThreshold)
+        {
+            rb.linearVelocity = Vector2.zero;
+            transform.position = startingPoint;
+
+            TransitionToPatrolling();
+        }
     }
 
     private void TransitionToTargeting()
@@ -143,6 +216,9 @@ public class Pig : MonoBehaviour
     private void TransitionToReturning()
     {
         currentState = State.Returning;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
     }
 
     private void TransitionToPatrolling()
@@ -160,6 +236,11 @@ public class Pig : MonoBehaviour
         currentSpeed = baseSpeed;
     }
 
+    /// <summary>
+    /// Handles collision during charge state. Applies recoil, damage, and screen shake.
+    /// Transitions to returning state after collision.
+    /// </summary>
+    /// <param name="collision">The collision data from OnCollisionEnter2D</param>
     private void HandleCharge(Collision2D collision)
     {
         // Stop current velocity first
@@ -202,6 +283,8 @@ public class Pig : MonoBehaviour
                 impulseSource.GenerateImpulse(enemyShakeForce);
             }
         }
+
+        TransitionToReturning();
     }
 
     /// <summary>

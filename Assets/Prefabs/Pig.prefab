@@ -203,6 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pigRider: {fileID: 0}
+  patrolSpeed: 2
+  patrolDistance: 1
+  returnSpeed: 4
+  arrivalThreshold: 0.1
   currentState: 0
 --- !u!114 &4991580028861837001
 MonoBehaviour:
