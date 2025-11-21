@@ -525,6 +525,14 @@ PrefabInstance:
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 3877369958027668088, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.90234375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.5234375
+      objectReference: {fileID: 0}
     - target: {fileID: 6885286470691652321, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -824,6 +832,14 @@ PrefabInstance:
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 3877369958027668088, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.58984375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.0664062
+      objectReference: {fileID: 0}
     - target: {fileID: 7080179304938087386, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -19642,7 +19658,7 @@ SceneRoots:
   - {fileID: 7115981717209479595}
   - {fileID: 2063537417}
   - {fileID: 235870873}
-  - {fileID: 264821123}
   - {fileID: 2390142266443859913}
   - {fileID: 302993219}
   - {fileID: 1934830897}
+  - {fileID: 264821123}

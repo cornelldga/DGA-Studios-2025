@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 742907776488134504}
   - component: {fileID: 8109280398840041209}
+  - component: {fileID: 7622451095888436343}
   - component: {fileID: 6490914910762157081}
   - component: {fileID: 5139313081211936209}
   - component: {fileID: 7029770135339947437}
   - component: {fileID: 722755417629996029}
   - component: {fileID: 26987428809012855}
   m_Layer: 0
-  m_Name: Marking Bullet
+  m_Name: Homing Marking Bullet 1
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,6 +96,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7622451095888436343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478843839408097374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85ff7071691c9745a04822da75021f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Homing
+  turnSpeed: 45
 --- !u!114 &6490914910762157081
 MonoBehaviour:
   m_ObjectHideFlags: 0
