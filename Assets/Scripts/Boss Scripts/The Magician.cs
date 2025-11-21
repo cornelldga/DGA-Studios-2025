@@ -44,6 +44,10 @@ public class TheMagician : Boss
     [SerializeField] Transform doveStage;
     [SerializeField] Transform knifeStage;
 
+    private Vector3 ogCard;
+    private Vector3 ogDove;
+    private Vector3 ogKnife;
+
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
@@ -61,6 +65,10 @@ public class TheMagician : Boss
         attackCount = 0;
         stageTimer = attackTime;
         teleportDelayTimer = teleportDelay;
+
+        ogCard = cardStage.position;
+        ogKnife = knifeStage.position;
+        ogDove = doveStage.position;
     }
 
     public override void Update()
@@ -88,6 +96,7 @@ public class TheMagician : Boss
                     teleportDelayTimer = 0;
                     currentStage = Stage.Backstage;
                     attackCount = 0;
+                    Shuffle();
                 }
                 else
                 {
@@ -139,6 +148,36 @@ public class TheMagician : Boss
         stages.AddRange(Enum.GetValues(typeof(Stage)));
         stages.Remove(Stage.Backstage);
         currentStage = stages[UnityEngine.Random.Range(0, stages.Count)];
+    }
+
+    /// <summary>
+    /// Shuffles stage locations
+    /// </summary>
+    private void Shuffle()
+    {
+        List<Stage> stages = new List<Stage>();
+        stages.AddRange(Enum.GetValues(typeof(Stage)));
+        stages.Remove(Stage.Backstage);
+        Stage cStage;
+        Vector3[] pos = { ogCard, ogDove, ogKnife };
+
+        for (int i = 0; i < 3; i++)
+        {
+            cStage = stages[UnityEngine.Random.Range(0, stages.Count)];
+            stages.Remove(cStage);
+            switch (cStage)
+            {
+                case Stage.Card:
+                    cardStage.position= pos[i];
+                    break;
+                case Stage.Dove:
+                    doveStage.position = pos[i];
+                    break;
+                case Stage.Knife:
+                    knifeStage.position = pos[i];
+                    break;
+            }
+        }
     }
 
 
