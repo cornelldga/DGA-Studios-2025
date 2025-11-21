@@ -344,4 +344,14 @@ public class Player : MonoBehaviour, IDamageable
     {
         return health;
     }
+    /// <summary>
+    /// Stops the player and all all actions
+    /// </summary>
+    public void StopPlayer()
+    {
+        rb.linearVelocity = Vector2.zero;
+        animationControl.SetFloat("Speed", 0);
+        this.enabled = false;
+        
+    }
 }

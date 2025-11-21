@@ -16,12 +16,12 @@ public abstract class Boss : MonoBehaviour, IDamageable
         "and the percent health they are triggered")]
     [SerializeField] protected float[] phasePercents;
 
-    protected int currentPhase = 0;
+    [SerializeField] protected int currentPhase = 0;
 
     bool isAttacking;
     protected float attackCooldown;
 
-    [Tooltip("The speed of teh attack cooldown")]
+    [Tooltip("The speed of the attack cooldown")]
     public float attackRate = 1;
 
     public virtual void Start()
@@ -70,8 +70,9 @@ public abstract class Boss : MonoBehaviour, IDamageable
         health -= damage;
         if(health <= 0)
         {
-            this.enabled = false;
+            
             healthBar.fillAmount = 0;
+            GameManager.Instance.BossDefeated("World Hub");
         }
         else
         {
