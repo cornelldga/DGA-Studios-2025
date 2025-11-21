@@ -10,7 +10,7 @@ public class Pig_Rider : Boss
 {
     public enum State
     {
-    Charging, Targeting, Stunned, Marking, Bouncing
+        Charging, Targeting, Stunned, Marking, Bouncing
     }
     public State currentState;
 
@@ -83,10 +83,13 @@ public class Pig_Rider : Boss
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
+    // Marking logic
+    private bool isMarked;
+    private float markTimer;
 
-/// <summary>
-/// On start, we set the rigid body, and change its attributes. Immediately enter targeting.
-/// </summary>
+    /// <summary>
+    /// On start, we set the rigid body, and change its attributes. Immediately enter targeting.
+    /// </summary>
     public override void Start()
     {
         base.Start();
@@ -104,6 +107,15 @@ public class Pig_Rider : Boss
         base.Update();
 
         stateTimer -= Time.deltaTime;
+
+        if (isMarked)
+        {
+            markTimer -= Time.deltaTime;
+            if (markTimer <= 0)
+            {
+                removeMark();
+            }
+        }
 
         switch (currentState)
         {
@@ -124,6 +136,23 @@ public class Pig_Rider : Boss
                 break;
         }
     }
+
+    public bool IsMarked()
+    {
+        return isMarked;
+    }
+
+    public void ApplyMark(float markDuration)
+    {
+        isMarked = true;
+        markTimer = markDuration;
+    }
+
+    public void removeMark()
+    {
+        isMarked = false;
+    }
+
     /// <summary>
     /// Handles logic for targeting mode.
     /// </summary>
@@ -186,7 +215,7 @@ public class Pig_Rider : Boss
             TransitionToTargeting();
         }
     }
-   
+
     /// <summary>
     /// Setting state to targeting.
     /// </summary>
@@ -203,7 +232,7 @@ public class Pig_Rider : Boss
     {
         currentState = State.Charging;
 
-        chargeDirection =(targetPosition - (Vector2)transform.position).normalized;
+        chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         currentSpeed = baseSpeed;
     }
     /// <summary>
@@ -241,7 +270,7 @@ public class Pig_Rider : Boss
     /// <summary>
     /// Setting state to bouncing, and choosing some amount of bounces.
     /// </summary>
-     private void TransitionToBouncing()
+    private void TransitionToBouncing()
     {
         currentState = State.Bouncing;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
@@ -258,7 +287,7 @@ public class Pig_Rider : Boss
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
-        }   
+        }
     }
 
     /// <summary>
@@ -317,10 +346,13 @@ public class Pig_Rider : Boss
         {
             impulseSource.GenerateImpulse(wallShakeForce);
         }
-        else if (collision.gameObject.CompareTag("Player") && impulseSource != null)
+        else if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-            impulseSource.GenerateImpulse(playersShakeForce);
+            if (impulseSource != null)
+            {
+                impulseSource.GenerateImpulse(playersShakeForce);
+            }
         }
     }
     private void HandleBounce(Collision2D collision)
@@ -337,10 +369,10 @@ public class Pig_Rider : Boss
             TransitionToStunned();
             return;
         }
-          
+
         float shakeIntensity = wallShakeForce * (bounceSpeed / baseBounceSpeed);
         impulseSource.GenerateImpulse(shakeIntensity);
-    
+
         // Reflect the charge direction off the wall Increase our speed.
         Vector2 wallNormal = collision.contacts[0].normal;
         chargeDirection = Vector2.Reflect(chargeDirection, wallNormal);
@@ -348,7 +380,7 @@ public class Pig_Rider : Boss
         bouncesRemaining--;
 
         // Trigger screen shake on each bounce (gets stronger with speed)
-        
+
         //Stun when out of bounces.
         if (bouncesRemaining <= 0)
         {
@@ -366,12 +398,13 @@ public class Pig_Rider : Boss
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Normal charge mode - get stunned on collision
-        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
+        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")
+            || collision.gameObject.CompareTag("Enemy")))
         {
             HandleCharge(collision);
             TransitionToStunned();
         }
-        if (currentState == State.Bouncing && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player") ))
+        if (currentState == State.Bouncing && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
         {
             HandleBounce(collision);
         }

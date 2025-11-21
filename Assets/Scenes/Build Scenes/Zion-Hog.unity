@@ -486,6 +486,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+      propertyPath: pigRider
+      value: 
+      objectReference: {fileID: 783180771}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.02
@@ -543,6 +547,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+      propertyPath: pigRider
+      value: 
+      objectReference: {fileID: 783180771}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7
@@ -623,6 +631,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &783180771 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
+  m_PrefabInstance: {fileID: 926295270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &837528334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,6 +1496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+      propertyPath: pigRider
+      value: 
+      objectReference: {fileID: 783180771}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.01
