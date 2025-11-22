@@ -854,53 +854,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: maxHealth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: attackTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: attacksNum
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: teleportDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: thirdAttackRate
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: secondAttackRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: phasePercents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[0]'
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[1]'
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[2]'
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[3]'
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
