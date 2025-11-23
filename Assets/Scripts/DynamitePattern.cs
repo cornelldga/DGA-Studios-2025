@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Dynamite used by Driller Boss: 
-/// Can be thrown add n targeted locations with specified path time.
+/// Can be thrown at n targeted locations with specified path time.
 /// </summary>
 public class DynamitePattern : Projectile
 {
