@@ -257,6 +257,6 @@ public class Drill_Guy : Boss
 
     public override void SetPhase()
     {
-        
+        throw new NotImplementedException();
     }
 }

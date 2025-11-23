@@ -17,11 +17,6 @@ public class TheMagician : Boss
     [Tooltip("Magician Animation Controller")]
     [SerializeField] private Animator animator;
 
-    [Header("Attack Control Variables")]
-    [Tooltip("Number of Attacks per Phase")]
-    [SerializeField] float attacksNum;
-    private int attackCount;
-
     [Tooltip("Attack rate during the second phase")]
     [SerializeField] float secondAttackRate;
 
@@ -44,6 +39,10 @@ public class TheMagician : Boss
     [SerializeField] Transform doveStage;
     [SerializeField] Transform knifeStage;
 
+    private Vector3 ogCard;
+    private Vector3 ogDove;
+    private Vector3 ogKnife;
+
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
@@ -58,28 +57,21 @@ public class TheMagician : Boss
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        attackCount = 0;
         stageTimer = attackTime;
         teleportDelayTimer = teleportDelay;
+
+        ogCard = cardStage.position;
+        ogKnife = knifeStage.position;
+        ogDove = doveStage.position;
     }
 
     public override void Update()
     {
-        
+        base.Update();
         stageTimer -= Time.deltaTime;
-        if ( attackCount < attacksNum*attackRate)
-        {
-            base.Update();
-        }
-        else
-        {
-            attackCooldown -= Time.deltaTime * attackRate;
-        }
-
-        if (stageTimer <= 0 && attacksNum * attackRate == attackCount)
+        if (stageTimer <= 0)
         {
             teleportDelayTimer -= Time.deltaTime * attackRate;
-
             if (teleportDelayTimer <= 0)
             {
                 if (currentStage != Stage.Backstage)
@@ -87,19 +79,16 @@ public class TheMagician : Boss
                     stageTimer = backStageTime;
                     teleportDelayTimer = 0;
                     currentStage = Stage.Backstage;
-                    attackCount = 0;
+                    Shuffle();
                 }
                 else
                 {
                     stageTimer = attackTime;
                     teleportDelayTimer = teleportDelay;
                     ChooseNewStage();
-                    attackCount = 0;
                 }
             }
-
         }
-        
             MoveToStage();
     }
 
@@ -141,6 +130,36 @@ public class TheMagician : Boss
         currentStage = stages[UnityEngine.Random.Range(0, stages.Count)];
     }
 
+    /// <summary>
+    /// Shuffles stage locations
+    /// </summary>
+    private void Shuffle()
+    {
+        List<Stage> stages = new List<Stage>();
+        stages.AddRange(Enum.GetValues(typeof(Stage)));
+        stages.Remove(Stage.Backstage);
+        Stage cStage;
+        Vector3[] pos = { ogCard, ogDove, ogKnife };
+
+        for (int i = 0; i < 3; i++)
+        {
+            cStage = stages[UnityEngine.Random.Range(0, stages.Count)];
+            stages.Remove(cStage);
+            switch (cStage)
+            {
+                case Stage.Card:
+                    cardStage.position= pos[i];
+                    break;
+                case Stage.Dove:
+                    doveStage.position = pos[i];
+                    break;
+                case Stage.Knife:
+                    knifeStage.position = pos[i];
+                    break;
+            }
+        }
+    }
+
 
     /// <summary>
     /// The Magician executes the attack corresponding to her current stage
@@ -148,14 +167,10 @@ public class TheMagician : Boss
     /// 
     public override void Attack()
     {
-        //ChooseNewStage();
-        //MoveToStage();
         base.Attack();
-        attackCount++;
         switch (currentStage)
         {
             case Stage.Backstage:
-                //attackCooldown = 0;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
@@ -177,15 +192,14 @@ public class TheMagician : Boss
     {
         switch (currentPhase)
         {
-            case 0:
+            case 1:
                 attackRate = secondAttackRate;
                 break;
-            case 1:
+            case 2:
                 attackRate = thirdAttackRate;
                 switch (currentStage)
                 {
                     case Stage.Backstage:
-                        //attackCooldown = 0;
                         break;
                     case Stage.Card:
                         StopCoroutine(cardStageBulletPattern.DoBulletPattern(this));

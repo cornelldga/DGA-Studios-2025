@@ -390,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7947622557283230081}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.00000046193594, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.97522, y: 0.0563, z: 0}
   m_LocalScale: {x: 1.28, y: 1.28, z: 1.28}
   m_ConstrainProportionsScale: 1
@@ -446,7 +446,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6716385517776337488, guid: 20da2429363a06347a012f4ecf399bbc, type: 3}
+  m_Sprite: {fileID: 2099575702267041649, guid: c2a3342c4edc1bd40acb8fdb0dc0e6c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -491,17 +491,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0076515526, y: -0.0076515675}
+  m_Offset: {x: 0.11, y: -0.03}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5859375, y: 1.0703125}
+    oldSize: {x: 1.3945312, y: 1.5042169}
     newSize: {x: 0.5859375, y: 1.0703125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.612231, y: 1.0713294}
+  m_Size: {x: 0.94, y: 1.4}
   m_EdgeRadius: 0
 --- !u!50 &8589973979640659551
 Rigidbody2D:
@@ -540,7 +540,7 @@ Animator:
   m_GameObject: {fileID: 7947622557283230081}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7cf7877459a16ea4ea27a200eb52238f, type: 2}
+  m_Controller: {fileID: 9100000, guid: e7ab03df51e6c404d8772834f789ef9b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -573,7 +573,7 @@ MonoBehaviour:
   markChance: 0.3
   bounceChance: 0.2
   enragedBounceChance: 1
-  markingBulletPattern: {fileID: 11400000, guid: 3bf8c04eca9a940b8a1314203cc6cdea, type: 2}
+  markingBulletPattern: {fileID: 11400000, guid: e806d7228f93fd048a9f35616c064dd9, type: 2}
   minBounces: 3
   maxBounces: 7
 --- !u!114 &517389824748420973

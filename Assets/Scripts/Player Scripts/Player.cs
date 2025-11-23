@@ -42,6 +42,8 @@ public class Player : MonoBehaviour, IDamageable
     [Header("UI")]
     [SerializeField] Image equippedImage;
     [SerializeField] Image backupImage;
+    [SerializeField] Image mixerEquippedImage;
+    [SerializeField] Image mixerBackupImage;
 
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour, IDamageable
     Base selectedBase;
     Base backupBase;
     Mixer selectedMixer;
+    Mixer backupMixer;
 
 
     void Start()
@@ -79,11 +82,15 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
+        selectedBase = playerBases.GetBase(equippedBases[0]);
+        selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         SelectBase(0);
         SelectMixer(0);
 
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
+        mixerEquippedImage.sprite = selectedMixer.getSprite();
+        mixerBackupImage.sprite = backupMixer.getSprite();
 
         isAlive = true;
     }
@@ -99,8 +106,7 @@ public class Player : MonoBehaviour, IDamageable
             markTimer -= Time.deltaTime;
             if (markTimer <= 0)
             {
-                sprite.color = Color.white;
-                isMarked = false;
+                removeMark();
             }
         }
         fireCooldown -= Time.deltaTime;
@@ -108,6 +114,16 @@ public class Player : MonoBehaviour, IDamageable
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+
+    /// <summary>
+    /// Removes mark on player.
+    /// </summary>
+    public void removeMark()
+    {
+        sprite.color = Color.white;
+        isMarked = false;
+    }
+
     /// <summary>
     /// Selects the base using the current baseIndex and swaps out the secondary base
     /// </summary>
@@ -129,10 +145,12 @@ public class Player : MonoBehaviour, IDamageable
     void SelectMixer(int index)
     {
         mixerIndex = index;
-        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
         selectedMixer.RemoveMixer(this);
         selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        backupMixer = playerMixers.GetMixer(equippedMixers[(mixerIndex + 1) % equippedMixers.Length]);
         selectedMixer.ApplyMixer(this);
+        mixerEquippedImage.sprite = selectedMixer.getSprite();
+        mixerBackupImage.sprite = backupMixer.getSprite();
         changeCooldown = changeCooldownTime;
     }
 
@@ -143,7 +161,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        
+
         moveDirection = new Vector2(horizontal, vertical);
 
         animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
@@ -162,6 +180,10 @@ public class Player : MonoBehaviour, IDamageable
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SelectBase((baseIndex + 1) % equippedBases.Length);
+            }
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                SelectMixer((mixerIndex + 1) % equippedMixers.Length);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha1) && baseIndex != 0)
             {
@@ -334,5 +356,15 @@ public class Player : MonoBehaviour, IDamageable
     public float GetHealth()
     {
         return health;
+    }
+    /// <summary>
+    /// Stops the player and all all actions
+    /// </summary>
+    public void StopPlayer()
+    {
+        rb.linearVelocity = Vector2.zero;
+        animationControl.SetFloat("Speed", 0);
+        this.enabled = false;
+        
     }
 }
