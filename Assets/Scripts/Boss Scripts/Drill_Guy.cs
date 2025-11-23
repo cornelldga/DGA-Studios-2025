@@ -30,7 +30,6 @@ public class Drill_Guy : Boss
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
-
     }
 
     /// <summary>
@@ -69,10 +68,21 @@ public class Drill_Guy : Boss
         }
     }
 
-    //Throws Dynamite at the player
+    //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
-        dynamitePattern.ThrowAt(GameManager.Instance.player.transform.position, this);
+        Vector2[] targets = {GameManager.Instance.player.transform.position};
+        dynamitePattern.ThrowAt(targets, this);
+    }
+
+
+    //Throws Dynamite at holes (phase 2) -> test when holes are created
+    private void ThrowDynamiteAtHole()
+    {
+        Vector2[] targets = new Vector2[holes.Count];
+        for (int i = 0; i < targets.Length; i++)
+            targets[i] = holes[i].transform.position;
+         dynamitePattern.ThrowAt(targets, this);
     }
 
     private void UpdateWalking()
