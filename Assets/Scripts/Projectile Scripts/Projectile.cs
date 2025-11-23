@@ -20,7 +20,7 @@ public abstract class Projectile : MonoBehaviour
 
 
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -1,0 +1,22 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "I miss my wife...",
+            "emotion": 0,
+            "nextDialogueID": "0_sigh"
+        },
+        {
+            "dialogueID": "0_sigh",
+            "dialogueText": "*sigh*",
+            "emotion": 0,
+            "nextDialogueID": "0_fight"
+        },
+        {
+            "dialogueID": "0_fight",
+            "dialogueText": "What're you looking at? You want to fight?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}

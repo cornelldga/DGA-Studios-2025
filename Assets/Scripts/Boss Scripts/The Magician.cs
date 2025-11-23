@@ -12,29 +12,84 @@ public enum Stage
 }
 public class TheMagician : Boss
 {
+    public Stage currentStage;
+
+    [Tooltip("Magician Animation Controller")]
+    [SerializeField] private Animator animator;
+
+    [Tooltip("Attack rate during the second phase")]
+    [SerializeField] float secondAttackRate;
+
+    [Tooltip("Attack rate during the third phase")]
+    [SerializeField] float thirdAttackRate;
+
+    [Header("Movement Control Variables")]
+    private float stageTimer;
+
+    [Tooltip("How long The Magician spends attacking on Stage")]
+    [SerializeField] float attackTime;
+
+    [Tooltip("How long the Magician Waits before Teleporting")]
+    [SerializeField] float teleportDelay;
+    private float teleportDelayTimer;
+
+    [Header("Stages")]
     [SerializeField] Transform backStage;
     [SerializeField] Transform cardStage;
     [SerializeField] Transform doveStage;
     [SerializeField] Transform knifeStage;
+
+    private Vector3 ogCard;
+    private Vector3 ogDove;
+    private Vector3 ogKnife;
+
+    [Header("Bullet Patterns")]
     [SerializeField] BulletPattern cardStageBulletPattern;
     [SerializeField] BulletPattern doveStageBulletPattern;
     [SerializeField] BulletPattern knifeStageBulletPattern;
+    [SerializeField] BulletPattern DesperationAttack;
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
 
-    public Stage currentStage;
-    [SerializeField] private Animator animator;
+    
 
     public override void Start()
     {   
         base.Start();
         currentStage = Stage.Backstage;
-        attackCooldown = backStageTime;
+        stageTimer = attackTime;
+        teleportDelayTimer = teleportDelay;
+
+        ogCard = cardStage.position;
+        ogKnife = knifeStage.position;
+        ogDove = doveStage.position;
     }
 
     public override void Update()
     {
         base.Update();
+        stageTimer -= Time.deltaTime;
+        if (stageTimer <= 0)
+        {
+            teleportDelayTimer -= Time.deltaTime * attackRate;
+            if (teleportDelayTimer <= 0)
+            {
+                if (currentStage != Stage.Backstage)
+                {
+                    stageTimer = backStageTime;
+                    teleportDelayTimer = 0;
+                    currentStage = Stage.Backstage;
+                    Shuffle();
+                }
+                else
+                {
+                    stageTimer = attackTime;
+                    teleportDelayTimer = teleportDelay;
+                    ChooseNewStage();
+                }
+            }
+        }
+            MoveToStage();
     }
 
     public override void SetAttackState(bool isAttacking)
@@ -65,50 +120,101 @@ public class TheMagician : Boss
         }
     }
     /// <summary>
-    /// Choose a random stage location that was not chosen previousely
+    /// Choose a random stage location from knife, dove, or cards
     /// </summary>
     private void ChooseNewStage()
     {
         List<Stage> stages = new List<Stage>();
         stages.AddRange(Enum.GetValues(typeof(Stage)));
-        stages.Remove(currentStage);
+        stages.Remove(Stage.Backstage);
         currentStage = stages[UnityEngine.Random.Range(0, stages.Count)];
     }
+
     /// <summary>
-    /// The Magician chooses to a new stage to move to and executes the corresponding attack
+    /// Shuffles stage locations
     /// </summary>
+    private void Shuffle()
+    {
+        List<Stage> stages = new List<Stage>();
+        stages.AddRange(Enum.GetValues(typeof(Stage)));
+        stages.Remove(Stage.Backstage);
+        Stage cStage;
+        Vector3[] pos = { ogCard, ogDove, ogKnife };
+
+        for (int i = 0; i < 3; i++)
+        {
+            cStage = stages[UnityEngine.Random.Range(0, stages.Count)];
+            stages.Remove(cStage);
+            switch (cStage)
+            {
+                case Stage.Card:
+                    cardStage.position= pos[i];
+                    break;
+                case Stage.Dove:
+                    doveStage.position = pos[i];
+                    break;
+                case Stage.Knife:
+                    knifeStage.position = pos[i];
+                    break;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// The Magician executes the attack corresponding to her current stage
+    /// </summary>
+    /// 
     public override void Attack()
     {
-        ChooseNewStage();
-        MoveToStage();
         base.Attack();
         switch (currentStage)
         {
             case Stage.Backstage:
-                attackCooldown = backStageTime;
                 break;
             case Stage.Card:
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
+
                 break;
             case Stage.Dove:
                 StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+
                 break;
             case Stage.Knife:
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
+
                 break;
         }
     }
+ 
 
-    public override void SetPhase(float healthPercent)
+    public override void SetPhase()
     {
-        base.SetPhase(healthPercent);
         switch (currentPhase)
         {
             case 1:
-                attackRate = 1.25f;
+                attackRate = secondAttackRate;
                 break;
             case 2:
-                attackRate = 1.5f;
+                attackRate = thirdAttackRate;
+                switch (currentStage)
+                {
+                    case Stage.Backstage:
+                        break;
+                    case Stage.Card:
+                        StopCoroutine(cardStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                    case Stage.Dove:
+                        StopCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                    case Stage.Knife:
+                        StopCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
+
+                        break;
+                }
+                StartCoroutine(DesperationAttack.DoBulletPattern(this));
                 break;
         }
     }

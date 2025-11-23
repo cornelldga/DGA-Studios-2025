@@ -36,6 +36,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+     /// <summary>
+    /// Load the given scene name
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 
     /// <summary>
     /// Toggles the player controller to freeze/unfreeze the player
@@ -44,6 +52,10 @@ public class GameManager : MonoBehaviour
     public void FreezePlayer(bool freeze)
     {
         player.enabled = !freeze;
+        if (freeze)
+        {
+            player.StopPlayer();
+        }
     }
 
     /// <summary>
@@ -52,6 +64,12 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("Lose Game");
+        FreezePlayer(true);
+        LoadScene(GetCurrentSceneName());
+    }
+    public void BossDefeated(string nextSceneName)
+    {
+        LoadScene(nextSceneName);
     }
 
 }
