@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Splines;
 
-public class Drill_Guy : Boss
+public class DrillGuy : Boss
 {
     public enum State
     {
