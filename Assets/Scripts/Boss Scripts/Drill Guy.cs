@@ -15,6 +15,7 @@ public class DrillGuy : Boss
     [Header("State Timing")]
     //How much time to get a lock on player.
     private float targetingTime = 1f;
+    private float walkingTime = 4f;
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
@@ -39,9 +40,13 @@ public class DrillGuy : Boss
     // how far along we are along this path
     private float t;
     // how fast we should complete this dig (DO NOT GO OVER 2 ITS OP!)
-    private float speedModifier = 0.8f;
+    private float speedModifier = 0.5f;
     private float pushRadius = 1f;
     private Collider2D digCollider;
+
+    [Tooltip("Driller Animation Controller")]
+    [SerializeField] private Animator animator;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,7 +56,7 @@ public class DrillGuy : Boss
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Walking;
-        stateTimer = targetingTime;
+        stateTimer = walkingTime;
         isUnderground = false;
     }
 
@@ -143,7 +148,7 @@ public class DrillGuy : Boss
         Instantiate(exitHolePrefab, transform.position, Quaternion.identity);
 
         currentState = State.Walking;
-        stateTimer = 1f;
+        stateTimer = walkingTime;
     }
 
     /// <summary>
@@ -157,7 +162,6 @@ public class DrillGuy : Boss
         Vector2 p3 = GameManager.Instance.player.transform.position; 
         
         Vector2 directionToPlayer = (p3 - p0).normalized;
-        p3 += directionToPlayer * 1.5f;
         float distanceToPlayer = Vector2.Distance(p0, p3);
         
         Vector2 p1 = GenerateControlPoint(p0, p3, directionToPlayer, distanceToPlayer, 0.15f);
