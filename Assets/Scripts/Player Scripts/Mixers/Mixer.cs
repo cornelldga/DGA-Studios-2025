@@ -6,6 +6,8 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Mixer : ScriptableObject
 {
+    [SerializeField] Sprite mixerSprite;
+
     /// <summary>
     /// Applies the mixer to the given base
     /// </summary>
@@ -22,5 +24,10 @@ public abstract class Mixer : ScriptableObject
     /// </summary>
     /// <param name="player"></param>
     public abstract void RemoveMixer(Player player);
+
+    public Sprite getSprite()
+    {
+        return mixerSprite;
+    }
 
 }

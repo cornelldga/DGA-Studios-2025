@@ -26,10 +26,15 @@ public class Player : MonoBehaviour, IDamageable
     private bool isAlive;
 
     [Header("Player Inventory")]
-    [SerializeField] private BaseType[] equippedBases;
+    [SerializeField] private BaseType[] defaultEquippedBases;
+    [SerializeField] private MixerType[] defaultEquippedMixers;
+    private static BaseType[] equippedBases;      
+    private static MixerType[] equippedMixers;   
     PlayerBases playerBases;
-    [SerializeField] private MixerType[] equippedMixers;
     PlayerMixers playerMixers;
+    private static int lastBaseIndex = 0; 
+    private static int lastMixerIndex = 0; 
+    private static bool isInitialized = false;
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
@@ -42,6 +47,8 @@ public class Player : MonoBehaviour, IDamageable
     [Header("UI")]
     [SerializeField] Image equippedImage;
     [SerializeField] Image backupImage;
+    [SerializeField] Image mixerEquippedImage;
+    [SerializeField] Image mixerBackupImage;
 
     //a magical number that I use to divide the offset of an angle from the angle it should move towards
     //this helps me make that micromovement I need to move the whip in a way that is less warped.
@@ -64,6 +71,7 @@ public class Player : MonoBehaviour, IDamageable
     Base selectedBase;
     Base backupBase;
     Mixer selectedMixer;
+    Mixer backupMixer;
 
 
     void Start()
@@ -79,13 +87,26 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
+        selectedBase = playerBases.GetBase(equippedBases[0]);
+        selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         SelectBase(0);
         SelectMixer(0);
 
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
+        mixerEquippedImage.sprite = selectedMixer.getSprite();
+        mixerBackupImage.sprite = backupMixer.getSprite();
 
         isAlive = true;
+    }
+    void Awake()
+    {
+        if (!isInitialized)
+        {
+            equippedBases = (BaseType[])defaultEquippedBases.Clone();
+            equippedMixers = (MixerType[])defaultEquippedMixers.Clone();
+            isInitialized = true;
+        }
     }
 
     void Update()
@@ -99,8 +120,7 @@ public class Player : MonoBehaviour, IDamageable
             markTimer -= Time.deltaTime;
             if (markTimer <= 0)
             {
-                sprite.color = Color.white;
-                isMarked = false;
+                removeMark();
             }
         }
         fireCooldown -= Time.deltaTime;
@@ -108,6 +128,16 @@ public class Player : MonoBehaviour, IDamageable
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+
+    /// <summary>
+    /// Removes mark on player.
+    /// </summary>
+    public void removeMark()
+    {
+        sprite.color = Color.white;
+        isMarked = false;
+    }
+
     /// <summary>
     /// Selects the base using the current baseIndex and swaps out the secondary base
     /// </summary>
@@ -115,6 +145,7 @@ public class Player : MonoBehaviour, IDamageable
     void SelectBase(int index)
     {
         baseIndex = index;
+        lastBaseIndex = index;
         selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
         backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
         equippedImage.sprite = selectedBase.getSprite();
@@ -129,10 +160,12 @@ public class Player : MonoBehaviour, IDamageable
     void SelectMixer(int index)
     {
         mixerIndex = index;
-        selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
         selectedMixer.RemoveMixer(this);
         selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+        backupMixer = playerMixers.GetMixer(equippedMixers[(mixerIndex + 1) % equippedMixers.Length]);
         selectedMixer.ApplyMixer(this);
+        mixerEquippedImage.sprite = selectedMixer.getSprite();
+        mixerBackupImage.sprite = backupMixer.getSprite();
         changeCooldown = changeCooldownTime;
     }
 
@@ -143,7 +176,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        
+
         moveDirection = new Vector2(horizontal, vertical);
 
         animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
@@ -162,6 +195,10 @@ public class Player : MonoBehaviour, IDamageable
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SelectBase((baseIndex + 1) % equippedBases.Length);
+            }
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                SelectMixer((mixerIndex + 1) % equippedMixers.Length);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha1) && baseIndex != 0)
             {
@@ -312,7 +349,37 @@ public class Player : MonoBehaviour, IDamageable
         equippedBases[slotIndex] = baseDrink;
         return lastEquippedBase;
     }
-
+    
+    /// <summary>
+    /// Updates UI and applied effects when a base or mixer slot changes.
+    /// </summary>
+    /// <param name="changedSlotIndex"></param>
+    /// <param name="isBase"></param>
+    public void RefreshUIIfNeeded(int changedSlotIndex, bool isBase)
+    {
+        if (isBase)
+        {
+            if (changedSlotIndex == baseIndex)
+            {
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                equippedImage.sprite = selectedBase.getSprite();
+            }
+            backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
+            backupImage.sprite = backupBase.getSprite();
+        }
+        else
+        {
+            if (changedSlotIndex == mixerIndex)
+            {
+                selectedMixer.RemoveMixer(this);
+                selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+                selectedMixer.ApplyMixer(this);
+                mixerEquippedImage.sprite = selectedMixer.getSprite();  
+            }
+            backupMixer = playerMixers.GetMixer(equippedMixers[(mixerIndex + 1) % equippedMixers.Length]); 
+            mixerBackupImage.sprite = backupMixer.getSprite(); 
+        }
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -334,5 +401,35 @@ public class Player : MonoBehaviour, IDamageable
     public float GetHealth()
     {
         return health;
+    }
+    public BaseType[] GetEquippedBases()
+    {
+        return equippedBases;
+    }
+
+    public MixerType[] GetEquippedMixers()
+    {
+        return equippedMixers;
+    } 
+
+    public int GetCurrentBaseIndex()
+    {
+        return baseIndex;
+    }
+
+    public int GetCurrentMixerIndex()
+    {
+        return mixerIndex;
+    }
+    
+    /// <summary>
+    /// Stops the player and all all actions
+    /// </summary>
+    public void StopPlayer()
+    {
+        rb.linearVelocity = Vector2.zero;
+        animationControl.SetFloat("Speed", 0);
+        this.enabled = false;
+        
     }
 }

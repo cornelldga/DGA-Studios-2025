@@ -6,10 +6,9 @@ using UnityEngine;
 /// <summary>
 /// The type of base
 /// </summary>
-
 public enum BaseType
 {
-    Beer = 0,
+    Beer,
     Gin,
     Whiskey,
     Wine
@@ -29,7 +28,7 @@ public class PlayerBases : MonoBehaviour
 
     Base selectedBase;
 
-    private void Start()
+    private void Awake()
     {
         if (bases.Length != sizeof(BaseType))
         {

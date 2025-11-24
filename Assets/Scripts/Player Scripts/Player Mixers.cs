@@ -6,7 +6,6 @@ using System.Collections.Generic;
 /// <summary>
 /// The type of mixer
 /// </summary>
-
 public enum MixerType
 {
     Cider,
@@ -26,7 +25,7 @@ public class PlayerMixers : MonoBehaviour
     [SerializeField] Mixer[] mixers;
     Dictionary<MixerType, Mixer> mixersDict = new Dictionary<MixerType, Mixer>();
 
-    private void Start()
+    private void Awake()
     {
         if(mixers.Length != sizeof(MixerType)){
             throw new InvalidImplementationException("Mixer array must match the size of MixerType and in order of mixer type");

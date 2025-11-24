@@ -2,39 +2,51 @@ using TMPro;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using System.ComponentModel;
+
+/// <summary>
+/// The types of dialogue
+/// </summary>
+public enum DialogueType
+{
+    NPC,
+    Boss,
+    Interactive
+}
 
 /// <summary>
 /// This script iterates through a dialogue sequence from a JSON file
 /// using DialogueLine and DialogueData.
 /// </summary>
-
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
     [SerializeField] private Animator dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] private TextMeshProUGUI nameText;
+    [Tooltip("The grey out background for when dialogue plays")]
     [SerializeField] private Image backgroundImg;
+    [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
-    [SerializeField] private float typingSpeed;
+
+    [Header("Choice Buttons")]
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
-    DialogueData currentDialogueData;
-    string currentDialogueID;
-    Dictionary<DialogueEmotion, Sprite> currentEmotions;
-    bool ongoingDialogue = false;
+    [Header("Settings")]
+    [SerializeField] private float typingSpeed;
+    private DialogueData currentDialogueData;
+    private string currentDialogueID;
+    private Dictionary<DialogueEmotion, Sprite> currentEmotions;
+    private bool ongoingDialogue = false;
+    private bool isTyping;
+    private DialogueType currentDialogueType;
+    private string sceneName;
 
-    bool isTyping;
-    bool bossFight;
-    bool fadeIn;
-    bool fadeOut;
-    bool isFading;
-    string sceneName;
-
+    /// <summary>
+    /// Initializes the singleton, hides choices at start up.
+    /// </summary>
     void Awake()
     {
         if (Instance == null)
@@ -48,6 +60,7 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     /// <summary>
     /// Returns if there is ongoing dialouge
     /// </summary>
@@ -56,6 +69,9 @@ public class DialogueManager : MonoBehaviour
         return ongoingDialogue;
     }
 
+    /// <summary>
+    /// Finishes the dialogue line if not finished yet, goes to next line otherwise.
+    /// </summary>
     public void OnContinueDialogue()
     {
         if (ongoingDialogue)
@@ -72,27 +88,19 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if they are clicking through dialogue and if the fade for blurring background needs to occur.
-    /// </summary>
-    private void Update()
-    {
-        if (isFading)
-        {
-            Fade();
-        }
-    }
-
-    /// <summary>
     /// Dialogue begins by finding the start dialogue associated with the  specified progress.
     /// Calls DisplayNextLine() to begin dialogue sequence.
-    /// Changes the npcImg sprite to the correct characters sprite
+    /// Changes the npcImg sprite to the correct characters sprite if a boss
+    /// If an interactable or boss will change scene to what is next
     /// </summary>
     /// <param name="progress">The progression number of the npc's dialogue</param>
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
+    /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
+    /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
     public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, bool boss)
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
         if (file != null)
         {
@@ -102,12 +110,18 @@ public class DialogueManager : MonoBehaviour
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
+            currentDialogueType = type;
             sceneName = scene;
-            bossFight = boss;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
-            if (bossFight)
+            // Does emotion sprites IF a boss dialogue
+            if (type == DialogueType.Boss)
             {
                 currentEmotions = emotionDictionary;
+                npcImg.gameObject.SetActive(true);
+            }
+            else
+            {
+                npcImg.gameObject.SetActive(false);
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
@@ -123,7 +137,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogueID == "")
         {
-            if (bossFight)
+            if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive)
             {
                 DialogueChoice();
             }
@@ -139,9 +153,8 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    if (bossFight)
+                    if (currentDialogueType == DialogueType.Boss)
                     {
-                        npcImg.gameObject.SetActive(true);
                         npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     }
                     StopAllCoroutines();
@@ -194,8 +207,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        fadeOut = true;
-        Fade();
         ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
         dialogueBox.SetBool("isOpen", false);
@@ -215,67 +226,49 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets UI buttons active.
+    /// Sets UI buttons active and updates button text based on dialogue type.
     /// </summary>
     private void DialogueChoice()
     {
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
+
+        if (currentDialogueType == DialogueType.Boss)
+        {
+            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Let's Fight!";
+            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Not Yet";
+        }
+        else if (currentDialogueType == DialogueType.Interactive)
+        {
+            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Yes";
+            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "No";
+        }
     }
 
     /// <summary>
-    /// Deactivates UI buttons and loads new scene.
+    /// Handles the "Yes" choice for boss fights or interactive objects like doors.
     /// </summary>
-    public void Fight()
+    public void YesChoice()
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        GameManager.Instance.LoadScene(sceneName);
+        if (nameText.text == "Loadout"){
+            GameManager.Instance.ToggleLoadoutManager(true);
+        }
+        else
+        {
+            GameManager.Instance.LoadScene(sceneName);
+        }
+        EndDialogue();
     }
 
     /// <summary>
-    /// Sets UI buttons inactive and ends dialogue.
+    /// Handles the "No" choice, ending dialogue without taking action.
     /// </summary>
-    public void NoFight()
+    public void NoChoice()
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
         EndDialogue();
     }
-
-    /// <summary>
-    /// Fades in the gray background to prioritize the dialogue
-    /// </summary>
-    private void Fade()
-    {
-        if (fadeIn)
-        {
-            Color color = backgroundImg.color;
-            if (color.a < .36f)
-            {
-                color.a += Time.deltaTime;
-                if (color.a >= .36f)
-                {
-                    color.a = .36f;
-                    fadeIn = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-        else if (fadeOut)
-        {
-            Color color = backgroundImg.color;
-            if (color.a > 0)
-            {
-                color.a -= Time.deltaTime;
-                if (color.a <= 0)
-                {
-                    color.a = 0;
-                    fadeOut = false;
-                }
-                backgroundImg.color = color;
-            }
-        }
-    }
-
 }

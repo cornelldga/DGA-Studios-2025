@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
+  m_Name: Desperation Attack
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
+  bullets:
+  - {fileID: 2660713567375334150, guid: 6eab5b2f97586d24bab21a945dd961b6, type: 3}
+  - {fileID: -1811460914074235590, guid: 85c7d32d6abb94649894ea4b51974f10, type: 3}
+  - {fileID: 2660713567375334150, guid: b92d2999b714f3941a0a40e66969385a, type: 3}
+  bulletAngles:
+  - -15
+  - -7.5
+  - 0
+  - 7.5
+  - 15
+  bulletDelays:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  minAttackCooldown: 1
+  maxAttackCooldown: 2

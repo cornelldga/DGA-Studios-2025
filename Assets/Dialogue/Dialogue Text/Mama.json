@@ -1,0 +1,20 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Well, hi there. You must be the owner of this new bar.",
+            "emotion": 0,
+            "nextDialogueID": "1_start"
+        }, {
+            "dialogueID": "1_start",
+            "dialogueText": "It's a bit empty, no? I wonder how long you'll last...",
+            "emotion": 0,
+            "nextDialogueID": "2_start"
+        }, {
+            "dialogueID": "2_start",
+            "dialogueText": "Oh, never mind, dear. I'm sure it'll all work out.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}

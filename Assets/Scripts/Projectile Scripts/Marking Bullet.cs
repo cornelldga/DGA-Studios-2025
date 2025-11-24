@@ -20,6 +20,13 @@ public class MarkingBullet : Bullet
             {
                 player.ApplyMark(markDuration);
             }
+        } else if (Whipped() && collision.CompareTag("Enemy"))
+        {
+            Pig_Rider pigRider = collision.gameObject.GetComponent<Pig_Rider>();
+            if (pigRider != null)
+            {
+                pigRider.ApplyMark(markDuration);
+            }
         }
         base.OnProjectileHit(collision);
     }
