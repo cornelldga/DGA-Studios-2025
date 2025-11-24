@@ -30,6 +30,8 @@ public class Player : MonoBehaviour, IDamageable
     PlayerBases playerBases;
     [SerializeField] private MixerType[] equippedMixers;
     PlayerMixers playerMixers;
+    private static int lastBaseIndex = 0;  
+    private static int lastMixerIndex = 0;  
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
@@ -79,8 +81,8 @@ public class Player : MonoBehaviour, IDamageable
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
-        SelectBase(0);
-        SelectMixer(0);
+        SelectBase(lastBaseIndex);
+        SelectMixer(lastMixerIndex);
 
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
@@ -115,6 +117,7 @@ public class Player : MonoBehaviour, IDamageable
     void SelectBase(int index)
     {
         baseIndex = index;
+        lastBaseIndex = index;
         selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
         backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
         equippedImage.sprite = selectedBase.getSprite();
@@ -129,6 +132,7 @@ public class Player : MonoBehaviour, IDamageable
     void SelectMixer(int index)
     {
         mixerIndex = index;
+        lastMixerIndex = index;
         selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
         selectedMixer.RemoveMixer(this);
         selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
@@ -155,11 +159,6 @@ public class Player : MonoBehaviour, IDamageable
         else if (moveDirection.x > 0)
         {
             spriteRenderer.flipX = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            GameManager.Instance.ToggleLoadoutManager();
         }
 
         if (changeCooldown <= 0)
@@ -318,6 +317,11 @@ public class Player : MonoBehaviour, IDamageable
         return lastEquippedBase;
     }
     
+    /// <summary>
+    /// Updates UI and applied effects when a base or mixer slot changes.
+    /// </summary>
+    /// <param name="changedSlotIndex"></param>
+    /// <param name="isBase"></param>
     public void RefreshUIIfNeeded(int changedSlotIndex, bool isBase)
     {
         if (isBase)

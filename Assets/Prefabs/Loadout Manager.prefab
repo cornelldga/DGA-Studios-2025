@@ -31,6 +31,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2128330443380714281}
   - {fileID: 9050959769622010946}
   - {fileID: 7383305521813126916}
   - {fileID: 470627961327048639}
@@ -39,11 +40,11 @@ RectTransform:
   - {fileID: 8634845891637239895}
   - {fileID: 7891314045454752781}
   - {fileID: 7673537365130365276}
+  - {fileID: 9084537286182508447}
   - {fileID: 4232941531998941931}
   - {fileID: 6649055991245750102}
   - {fileID: 7318681828401585713}
   - {fileID: 5900201520013659409}
-  - {fileID: 2128330443380714281}
   m_Father: {fileID: 2125632557601000495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -86,12 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -141,8 +142,8 @@ Transform:
   m_GameObject: {fileID: 838435768090716887}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 144.63548, y: -194.4652, z: 0}
-  m_LocalScale: {x: 29.760996, y: 23.688438, z: 27.792233}
+  m_LocalPosition: {x: 202.166, y: -205.719, z: 0}
+  m_LocalScale: {x: 94.5164, y: 75.61842, z: 27.792233}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8118620717579376812}
@@ -296,8 +297,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: -130}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: -66.721, y: -0}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2976829896204371636
 CanvasRenderer:
@@ -383,12 +384,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectGinger
-        m_Mode: 1
+        m_MethodName: SelectMixer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -428,8 +429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -130}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: 60.359, y: -0}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8911864842272320218
 CanvasRenderer:
@@ -515,12 +516,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectLime
-        m_Mode: 1
+        m_MethodName: SelectMixer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -552,8 +553,8 @@ Transform:
   m_GameObject: {fileID: 4195848244182348583}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.095034, y: -194.81789, z: 0}
-  m_LocalScale: {x: 29.691206, y: 23.632889, z: 27.727062}
+  m_LocalPosition: {x: -318.004, y: -206.844, z: 0}
+  m_LocalScale: {x: 94.29476, y: 75.44109, z: 27.727062}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8118620717579376812}
@@ -723,13 +724,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   beerButton: {fileID: 2485300179231259769}
-  ginButton: {fileID: 0}
-  whiskeyButton: {fileID: 0}
-  wineButton: {fileID: 0}
-  ciderButton: {fileID: 0}
-  gingerButton: {fileID: 0}
-  limeButton: {fileID: 0}
-  pimientoButton: {fileID: 0}
+  ginButton: {fileID: 5287728541048575339}
+  whiskeyButton: {fileID: 8644647363917849048}
+  wineButton: {fileID: 3336791088526768777}
+  ciderButton: {fileID: 6627531924354710224}
+  gingerButton: {fileID: 4011206566910064825}
+  limeButton: {fileID: 8618269876097348377}
+  pimientoButton: {fileID: 7994734132517695594}
   baseSlotOne: {fileID: 8012107771003938674}
   baseSlotTwo: {fileID: 25364306965751873}
   mixerSlotOne: {fileID: 2451028486032454720}
@@ -769,8 +770,8 @@ Transform:
   m_GameObject: {fileID: 4977360192723828655}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.849302, y: -195.36746, z: 0}
-  m_LocalScale: {x: 29.691206, y: 23.632889, z: 27.727062}
+  m_LocalPosition: {x: -197.456, y: -208.597, z: 0}
+  m_LocalScale: {x: 94.29476, y: 75.44109, z: 27.727062}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8118620717579376812}
@@ -924,8 +925,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: -90}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: -66.721, y: 127.646}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &339105722326293989
 CanvasRenderer:
@@ -948,14 +949,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.26826474, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6ce665523dd6cf4abcd3d4a5cc9d883, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1011,12 +1012,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectGin
-        m_Mode: 1
+        m_MethodName: SelectBase
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1056,8 +1057,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: -130}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: 187.439, y: -0}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6019846608262228499
 CanvasRenderer:
@@ -1143,12 +1144,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectPimiento
-        m_Mode: 1
+        m_MethodName: SelectMixer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1180,8 +1181,8 @@ Transform:
   m_GameObject: {fileID: 5885649355325199895}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 182.66844, y: -195.01602, z: 0}
-  m_LocalScale: {x: 29.760996, y: 23.688438, z: 27.792233}
+  m_LocalPosition: {x: 322.997, y: -207.476, z: 0}
+  m_LocalScale: {x: 94.5164, y: 75.61842, z: 27.792233}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8118620717579376812}
@@ -1300,6 +1301,138 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &6140942178614922867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9084537286182508447}
+  - component: {fileID: 4468744607779063790}
+  - component: {fileID: 3635514033945642750}
+  - component: {fileID: 1585333237705669495}
+  m_Layer: 5
+  m_Name: CLOSE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9084537286182508447
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140942178614922867}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8118620717579376812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -860.96924, y: 449.9503}
+  m_SizeDelta: {x: 111.194, y: 111.69}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4468744607779063790
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140942178614922867}
+  m_CullTransparentMesh: 1
+--- !u!114 &3635514033945642750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140942178614922867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7a0568d5e3330b84687e307992be3030, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1585333237705669495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140942178614922867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3635514033945642750}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7009952458992258767}
+        m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6811738256265297148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,8 +1468,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: -90}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: -193.801, y: 127.646}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5116799986563187770
 CanvasRenderer:
@@ -1359,14 +1492,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28b87faa36f294b4e9ef6959a573cc9c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1422,8 +1555,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectBeer
-        m_Mode: 1
+        m_MethodName: SelectBase
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1449,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2128330443380714281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1466,8 +1599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 77.83996, y: -144.72122}
-  m_SizeDelta: {x: 782, y: 445}
+  m_AnchoredPosition: {x: 0.002, y: 0}
+  m_SizeDelta: {x: 4750.558, y: 2683.528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3793715196858293242
 CanvasRenderer:
@@ -1542,8 +1675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: -90}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: 187.439, y: 127.646}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6063932462427300948
 CanvasRenderer:
@@ -1566,14 +1699,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13586688, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 808244e519a2b1443b292dc22c9d9694, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1629,12 +1762,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectWine
-        m_Mode: 1
+        m_MethodName: SelectBase
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1674,8 +1807,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -90}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: 60.359, y: 127.646}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &501803675340292789
 CanvasRenderer:
@@ -1698,14 +1831,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9605979, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0cbb352a1d09784896f5b0ab54aa63e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1761,12 +1894,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectWhiskey
-        m_Mode: 1
+        m_MethodName: SelectBase
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1806,8 +1939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: -130}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: -193.801, y: -0}
+  m_SizeDelta: {x: 111.194, y: 111.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7857861472436204367
 CanvasRenderer:
@@ -1893,8 +2026,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7009952458992258767}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectCider
-        m_Mode: 1
+        m_MethodName: SelectMixer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

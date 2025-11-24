@@ -252,7 +252,14 @@ public class DialogueManager : MonoBehaviour
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        GameManager.Instance.LoadScene(sceneName);
+        if (nameText.text == "Loadout"){
+            GameManager.Instance.ToggleLoadoutManager(true);
+        }
+        else
+        {
+            GameManager.Instance.LoadScene(sceneName);
+        }
+        EndDialogue();
     }
 
     /// <summary>

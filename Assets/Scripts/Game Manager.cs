@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Sets the loadout manager to active.
     /// </summary>
-    public void ToggleLoadoutManager()
+    public void ToggleLoadoutManager(bool open)
     {
         if (loadoutCanvas != null)
         {
-            loadoutCanvas.SetActive(!loadoutCanvas.activeSelf);
+            loadoutCanvas.SetActive(open);
         }
     }
+
 
     private void Awake()
     {

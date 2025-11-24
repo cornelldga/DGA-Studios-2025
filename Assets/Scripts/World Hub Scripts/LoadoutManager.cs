@@ -57,6 +57,10 @@ public class LoadoutManager : MonoBehaviour
             HideEquippedButtons();
         }
     }
+    public void Close()
+    {
+        GameManager.Instance.ToggleLoadoutManager(false);
+    }
     
     /// <summary>
     /// Sets a base in a specific slot for the player and changes the image displayed in slot.
@@ -80,10 +84,6 @@ public class LoadoutManager : MonoBehaviour
         {
             replacedButton.gameObject.SetActive(true);
         }
-        else
-        {
-            Debug.Log("No base slot selected");
-        }
 
         GameManager.Instance.player.RefreshUIIfNeeded(playerCurrentSlot, true);
         
@@ -91,7 +91,7 @@ public class LoadoutManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets a base in a specific slot for the player and changes the image displayed in slot.
+    /// Sets a mixer in a specific slot for the player and changes the image displayed in slot.
     /// <param name="mixerIndex">The MixerType value of the button that was clicked by the player.</param>
     /// </summary>
     public void SelectMixer(int mixerIndex)
@@ -111,10 +111,6 @@ public class LoadoutManager : MonoBehaviour
         if (mixerButtons.TryGetValue(replacedMixer, out Button replacedButton))
         {
             replacedButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("No mixer slot selected");
         }
 
         GameManager.Instance.player.RefreshUIIfNeeded(playerCurrentSlot, false);
