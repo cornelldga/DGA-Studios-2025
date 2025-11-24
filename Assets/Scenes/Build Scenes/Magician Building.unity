@@ -854,53 +854,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: maxHealth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: attackTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: attacksNum
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: teleportDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: thirdAttackRate
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: secondAttackRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: phasePercents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[0]'
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[1]'
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[2]'
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-      propertyPath: 'phasePercents.Array.data[3]'
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1167,12 +1123,16 @@ PrefabInstance:
       objectReference: {fileID: 11705904}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: smokeRate
-      value: 0.125
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
+    - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
+      propertyPath: pelletSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7071902628436390820, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_Name
       value: Smoker
@@ -1187,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8566838738226957433, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.66
+      value: -2.11
       objectReference: {fileID: 0}
     - target: {fileID: 8566838738226957433, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_LocalPosition.z

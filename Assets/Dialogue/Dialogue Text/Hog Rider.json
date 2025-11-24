@@ -14,6 +14,12 @@
             "dialogueID": "2_start",
             "dialogueText": "Why don't we fight it out then? If I win, I get a free drink.",
             "emotion": 0,
+            "nextDialogueID": "1_start"
+        },
+        {
+            "dialogueID": "1_start",
+            "dialogueText": "Should we test out your mettle?",
+            "emotion": 0,
             "nextDialogueID": ""
         }
     ]
