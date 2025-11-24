@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     }
 
 
+    [Header("World Settings")]
+    [SerializeField] private MusicType currentSong;
+    public MusicType CurrentSong => currentSong;
+
     private void Awake()
     {
         if (Instance == null)
@@ -40,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        AudioManager.Instance.PlayMusic(currentSong);
     }
 
     /// <summary>
