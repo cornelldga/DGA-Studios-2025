@@ -26,10 +26,15 @@ public class Player : MonoBehaviour, IDamageable
     private bool isAlive;
 
     [Header("Player Inventory")]
-    [SerializeField] private BaseType[] equippedBases;
+    [SerializeField] private BaseType[] defaultEquippedBases;
+    [SerializeField] private MixerType[] defaultEquippedMixers;
+    private static BaseType[] equippedBases;      
+    private static MixerType[] equippedMixers;   
     PlayerBases playerBases;
-    [SerializeField] private MixerType[] equippedMixers;
     PlayerMixers playerMixers;
+    private static int lastBaseIndex = 0; 
+    private static int lastMixerIndex = 0; 
+    private static bool isInitialized = false;
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
@@ -94,6 +99,15 @@ public class Player : MonoBehaviour, IDamageable
 
         isAlive = true;
     }
+    void Awake()
+    {
+        if (!isInitialized)
+        {
+            equippedBases = (BaseType[])defaultEquippedBases.Clone();
+            equippedMixers = (MixerType[])defaultEquippedMixers.Clone();
+            isInitialized = true;
+        }
+    }
 
     void Update()
     {
@@ -131,6 +145,7 @@ public class Player : MonoBehaviour, IDamageable
     void SelectBase(int index)
     {
         baseIndex = index;
+        lastBaseIndex = index;
         selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
         backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
         equippedImage.sprite = selectedBase.getSprite();
@@ -334,7 +349,37 @@ public class Player : MonoBehaviour, IDamageable
         equippedBases[slotIndex] = baseDrink;
         return lastEquippedBase;
     }
-
+    
+    /// <summary>
+    /// Updates UI and applied effects when a base or mixer slot changes.
+    /// </summary>
+    /// <param name="changedSlotIndex"></param>
+    /// <param name="isBase"></param>
+    public void RefreshUIIfNeeded(int changedSlotIndex, bool isBase)
+    {
+        if (isBase)
+        {
+            if (changedSlotIndex == baseIndex)
+            {
+                selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
+                equippedImage.sprite = selectedBase.getSprite();
+            }
+            backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
+            backupImage.sprite = backupBase.getSprite();
+        }
+        else
+        {
+            if (changedSlotIndex == mixerIndex)
+            {
+                selectedMixer.RemoveMixer(this);
+                selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
+                selectedMixer.ApplyMixer(this);
+                mixerEquippedImage.sprite = selectedMixer.getSprite();  
+            }
+            backupMixer = playerMixers.GetMixer(equippedMixers[(mixerIndex + 1) % equippedMixers.Length]); 
+            mixerBackupImage.sprite = backupMixer.getSprite(); 
+        }
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -357,6 +402,26 @@ public class Player : MonoBehaviour, IDamageable
     {
         return health;
     }
+    public BaseType[] GetEquippedBases()
+    {
+        return equippedBases;
+    }
+
+    public MixerType[] GetEquippedMixers()
+    {
+        return equippedMixers;
+    } 
+
+    public int GetCurrentBaseIndex()
+    {
+        return baseIndex;
+    }
+
+    public int GetCurrentMixerIndex()
+    {
+        return mixerIndex;
+    }
+    
     /// <summary>
     /// Stops the player and all all actions
     /// </summary>

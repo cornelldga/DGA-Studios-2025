@@ -2,13 +2,18 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "I miss my wife...",
+            "dialogueText": "You're the new bar owner, right? Trying to encroach on our turf or something?",
             "emotion": 0,
-            "nextDialogueID": "0_sigh"
+            "nextDialogueID": "1_start"
         },
         {
-            "dialogueID": "0_sigh",
-            "dialogueText": "*sigh*",
+            "dialogueID": "1_start",
+            "dialogueText": "I like what you've done with the place, but I can't let you take our customers.",
+            "emotion": 0,
+            "nextDialogueID": "2_start"
+        }, {
+            "dialogueID": "2_start",
+            "dialogueText": "So what's it gonna be, lad?",
             "emotion": 0,
             "nextDialogueID": "0_fight"
         },

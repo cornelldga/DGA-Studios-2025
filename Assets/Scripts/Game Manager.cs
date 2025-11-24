@@ -9,6 +9,20 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [HideInInspector] public Player player;
+    
+    [SerializeField] [Tooltip("Reference to the loadout UI canvas that displays equipment selection")] private GameObject loadoutCanvas; 
+
+    /// <summary>
+    /// Sets the loadout manager to active.
+    /// </summary>
+    public void ToggleLoadoutManager(bool open)
+    {
+        if (loadoutCanvas != null)
+        {
+            loadoutCanvas.SetActive(open);
+        }
+    }
+
 
     private void Awake()
     {
