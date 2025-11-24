@@ -112,12 +112,12 @@ TextureImporter:
       name: ash_idle_animation_0
       rect:
         serializedVersion: 2
-        x: 92
+        x: 0
         y: 0
-        width: 322
-        height: 369
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: ash_idle_animation_1
       rect:
         serializedVersion: 2
-        x: 604
+        x: 512
         y: 0
-        width: 319
-        height: 376
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: ash_idle_animation_2
       rect:
         serializedVersion: 2
-        x: 1125
+        x: 1024
         y: 0
-        width: 311
-        height: 384
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: ash_idle_animation_3
       rect:
         serializedVersion: 2
-        x: 1634
+        x: 1536
         y: 0
-        width: 320
-        height: 382
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c34c62bd862e31648bc3690f2796b270
     internalID: 0
     vertices: []
     indices: 
