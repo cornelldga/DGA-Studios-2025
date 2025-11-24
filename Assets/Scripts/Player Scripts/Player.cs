@@ -26,12 +26,15 @@ public class Player : MonoBehaviour, IDamageable
     private bool isAlive;
 
     [Header("Player Inventory")]
-    [SerializeField] private BaseType[] equippedBases;
+    [SerializeField] private BaseType[] defaultEquippedBases;
+    [SerializeField] private MixerType[] defaultEquippedMixers;
+    private static BaseType[] equippedBases;      
+    private static MixerType[] equippedMixers;   
     PlayerBases playerBases;
-    [SerializeField] private MixerType[] equippedMixers;
     PlayerMixers playerMixers;
-    private static int lastBaseIndex = 0;  
-    private static int lastMixerIndex = 0;  
+    private static int lastBaseIndex = 0; 
+    private static int lastMixerIndex = 0; 
+    private static bool isInitialized = false;
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
@@ -88,6 +91,15 @@ public class Player : MonoBehaviour, IDamageable
         backupImage.sprite = backupBase.getSprite();
 
         isAlive = true;
+    }
+    void Awake()
+    {
+        if (!isInitialized)
+        {
+            equippedBases = (BaseType[])defaultEquippedBases.Clone();
+            equippedMixers = (MixerType[])defaultEquippedMixers.Clone();
+            isInitialized = true;
+        }
     }
 
     void Update()

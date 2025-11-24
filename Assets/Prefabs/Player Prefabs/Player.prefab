@@ -222,8 +222,8 @@ MonoBehaviour:
   maxHealth: 10
   whipBaseDamageMultiplier: 1
   changeCooldownTime: 0.5
-  equippedBases: 0000000002000000
-  equippedMixers: 0200000001000000
+  defaultEquippedBases: 0000000001000000
+  defaultEquippedMixers: 0000000001000000
   whipPivot: {fileID: 1523022322800746459}
   whip: {fileID: 3676044735641770482}
   whipCooldownTime: 1
