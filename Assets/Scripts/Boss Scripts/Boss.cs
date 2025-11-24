@@ -22,7 +22,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     protected float attackCooldown;
 
     [Tooltip("The speed of the attack cooldown")]
-    public float attackRate = 1;
+    [SerializeField] protected float attackRate = 1;
 
     public virtual void Start()
     {
@@ -92,7 +92,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         {
             if (healthPercent <= phasePercents[i])
             {
-                currentPhase = i;
+                currentPhase = i+1;
                 SetPhase();
             }
         }

@@ -266,11 +266,11 @@ MonoBehaviour:
   attackRate: 1
   currentStage: 0
   animator: {fileID: 458241386248563458}
-  attacksNum: 0
-  secondAttackRate: 0
-  thirdAttackRate: 0
-  attackTime: 0
-  teleportDelay: 0
+  attacksNum: 3
+  secondAttackRate: 1.3
+  thirdAttackRate: 1.75
+  attackTime: 3
+  teleportDelay: 3
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
   doveStage: {fileID: 0}
