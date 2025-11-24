@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] Pig_Rider pigRider;
+    [SerializeField] PigRider pigRider;
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -270,7 +270,7 @@ public class Pig : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Pig_Rider pigRider = collision.gameObject.GetComponent<Pig_Rider>();
+            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
 
             if (pigRider != null)
             {
