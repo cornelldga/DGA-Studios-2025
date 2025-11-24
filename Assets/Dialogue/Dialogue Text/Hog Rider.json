@@ -2,7 +2,17 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "I love riding Hogs!",
+            "dialogueText": "You got anything to drink here? I'm thirsty.",
+            "emotion": 0,
+            "nextDialogueID": "1_start"
+        }, {
+            "dialogueID": "1_start",
+            "dialogueText": "Well, I can't pay. Granny would kill me for supporting another bar.",
+            "emotion": 0,
+            "nextDialogueID": "2_start"
+        }, {
+            "dialogueID": "2_start",
+            "dialogueText": "Why don't we fight it out then? If I win, I get a free drink.",
             "emotion": 0,
             "nextDialogueID": ""
         }
