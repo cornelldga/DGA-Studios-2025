@@ -374,7 +374,10 @@ public class Player : MonoBehaviour, IDamageable
                 selectedMixer.RemoveMixer(this);
                 selectedMixer = playerMixers.GetMixer(equippedMixers[mixerIndex]);
                 selectedMixer.ApplyMixer(this);
+                mixerEquippedImage.sprite = selectedMixer.getSprite();  
             }
+            backupMixer = playerMixers.GetMixer(equippedMixers[(mixerIndex + 1) % equippedMixers.Length]); 
+            mixerBackupImage.sprite = backupMixer.getSprite(); 
         }
     }
     public void TakeDamage(float damage)

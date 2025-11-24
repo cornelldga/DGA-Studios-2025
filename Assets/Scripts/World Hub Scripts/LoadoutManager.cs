@@ -124,6 +124,7 @@ public class LoadoutManager : MonoBehaviour
     private void SyncSlots()
     {
         PlayerBases playerBasesComponent = GameManager.Instance.player.GetComponent<PlayerBases>();
+        PlayerMixers playerMixersComponent = GameManager.Instance.player.GetComponent<PlayerMixers>();
         
         BaseType[] equippedBases = GameManager.Instance.player.GetEquippedBases();
         MixerType[] equippedMixers = GameManager.Instance.player.GetEquippedMixers();
@@ -132,15 +133,11 @@ public class LoadoutManager : MonoBehaviour
         Base base2 = playerBasesComponent.GetBase(equippedBases[1]);
         baseSlotOne.sprite = base1.getSprite();
         baseSlotTwo.sprite = base2.getSprite();
-        
-        if (mixerButtons.TryGetValue(equippedMixers[0], out Button mixer1Button))
-        {
-            mixerSlotOne.sprite = mixer1Button.GetComponent<Image>().sprite;
-        }
-        if (mixerButtons.TryGetValue(equippedMixers[1], out Button mixer2Button))
-        {
-            mixerSlotTwo.sprite = mixer2Button.GetComponent<Image>().sprite;
-        }
+
+        Mixer mixer1 = playerMixersComponent.GetMixer(equippedMixers[0]);
+        Mixer mixer2 = playerMixersComponent.GetMixer(equippedMixers[1]);
+        mixerSlotOne.sprite = mixer1.getSprite();
+        mixerSlotTwo.sprite = mixer2.getSprite();
     }
 
     /// <summary>
