@@ -35,6 +35,14 @@ public class InteractionZone : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnInteract();
+        }
+    }
+
     void OnInteract()
     {
         if (canInteract)

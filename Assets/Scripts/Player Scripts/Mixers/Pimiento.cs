@@ -13,11 +13,11 @@ public class Pimiento : Mixer
 
     public override void ApplyMixer(Player player)
     {
-        throw new System.NotImplementedException();
+        player.damageTakenMultiplier *= pimientoValue;
     }
 
     public override void RemoveMixer(Player player)
     {
-        throw new System.NotImplementedException();
+        player.damageTakenMultiplier /= pimientoValue;
     }
 }
