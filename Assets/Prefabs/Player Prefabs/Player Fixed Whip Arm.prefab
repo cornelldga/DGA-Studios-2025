@@ -467,6 +467,7 @@ MonoBehaviour:
   whipPivotAnimator: {fileID: 8853913472280483555}
   armPivot: {fileID: 963596286954911090}
   armAnimator: {fileID: 2776549083798574066}
+  bulletOrigin: {fileID: 445543088449445870}
   equippedImage: {fileID: 6752871522193191210}
   backupImage: {fileID: 2211820427753075301}
   mixerEquippedImage: {fileID: 7557071018758148260}
@@ -1434,7 +1435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 445543088449445870}
   m_Layer: 0
-  m_Name: BulletOrigin
+  m_Name: Bullet Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1448,13 +1449,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8408253714595935904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.43, y: 0.015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 963596286954911090}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &9218045453956786950
 GameObject:
   m_ObjectHideFlags: 0

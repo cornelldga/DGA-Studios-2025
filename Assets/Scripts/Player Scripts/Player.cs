@@ -51,6 +51,8 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
     [SerializeField] Animator armAnimator;
+    [SerializeField] Transform bulletOrigin;
+    private Vector3 defaultGunRight;
 
     [Header("UI")]
     [SerializeField] Image equippedImage;
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour, IDamageable
         playerTransform = GetComponent<Transform>();
 
         whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
+        defaultGunRight = bulletOrigin.right;
 
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
@@ -192,6 +195,7 @@ public class Player : MonoBehaviour, IDamageable
             
             scale.x = 1; // Flip horizontally
             playerTransform.localScale = scale;
+            bulletOrigin.right = defaultGunRight;
 
         }
         else if ((armPivot.transform.position - mousePos).x < 0)
@@ -199,6 +203,7 @@ public class Player : MonoBehaviour, IDamageable
             armPivot.right = -armPivot.right; //need to flip the pivot so it points the correct way
             scale.x = -1; // Flip horizontally
             playerTransform.localScale = scale;
+            bulletOrigin.right = -defaultGunRight;
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -254,13 +259,13 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     void Fire()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        mouseWorldPos.z = 0f;
-        Vector3 direction = mouseWorldPos - transform.position;
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // TODO: The position should be a transform where the player fires, not the center of the player
-        Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
-        Base baseDrink = Instantiate(selectedBase, transform.position, fireDirection);
+        //Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        //mouseWorldPos.z = 0f;
+        //Vector3 direction = mouseWorldPos - bulletOrigin.position;
+        //angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //// TODO: The position should be a transform where the player fires, not the center of the player
+        //Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
+        Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, bulletOrigin.rotation);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;
     }
