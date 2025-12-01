@@ -273,7 +273,7 @@ public class Player : MonoBehaviour, IDamageable
         //angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //// TODO: The position should be a transform where the player fires, not the center of the player
         //Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
-        Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, bulletOrigin.rotation);
+        Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, armPivot.rotation);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;
     }
