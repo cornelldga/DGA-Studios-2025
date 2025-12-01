@@ -445,7 +445,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 2099575702267041649, guid: c2a3342c4edc1bd40acb8fdb0dc0e6c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -568,6 +568,7 @@ MonoBehaviour:
   healthBar: {fileID: 928173876691222959}
   bulletOrigin: {fileID: 6029264802078557319}
   phasePercents: []
+  currentPhase: 0
   attackRate: 1
   currentState: 0
   markChance: 0.3
