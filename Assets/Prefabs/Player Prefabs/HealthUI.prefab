@@ -87,9 +87,8 @@ GameObject:
   - component: {fileID: 4236314692354371954}
   - component: {fileID: 2900723817015646950}
   - component: {fileID: 672825786310081605}
-  - component: {fileID: 5141174377639428220}
   m_Layer: 0
-  m_Name: CurrentHealthImage
+  m_Name: Player Health Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,19 +151,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5141174377639428220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645668935709248834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f06ec5d194a4086bd3a17537b19f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthUI
-  healthImage: {fileID: 672825786310081605}
-  healthySprite: {fileID: -5550154393050170253, guid: 588c2a81a4acd4bc0a4c4577d0ec659a, type: 3}
-  lowHealthSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
-  alternateSpeed: 0.5
