@@ -56,15 +56,19 @@ public class Smoker : MonoBehaviour
                     switch (i) {
                     case 0:
                         SetLeft();
+                        
                         break;
                     case 1: 
                         SetRight(); 
+                        
                         break;
                     case 2:
                         SetUp();
+                        
                         break;
                     case 3:
                         SetAround();
+
                         break;
                     }
                         
@@ -115,6 +119,7 @@ public class Smoker : MonoBehaviour
     {
         pivot.transform.rotation = Quaternion.Euler(0, 0, -45);
         spinSpeed = -ogSpeed;
+        
     }
 
     /// <summary>
@@ -132,7 +137,7 @@ public class Smoker : MonoBehaviour
     void SetAround()
     {
         pivot.transform.rotation = Quaternion.Euler(0, 0, 0);
-        spinSpeed = ogSpeed * 6;
+        spinSpeed = ogSpeed * 4;
     }
 
 
@@ -154,8 +159,9 @@ public class Smoker : MonoBehaviour
             switch (hideStage)
             {
                 case Stage.Card:
-                    Instantiate(smokePelletPrefab, cardStage.position, Quaternion.identity);
+                    Instantiate(smokePelletPrefab, cardStage.position, Quaternion.identity); 
                     break;
+
                 case Stage.Dove:
                     Instantiate(smokePelletPrefab, doveStage.position, Quaternion.identity);
                     break;

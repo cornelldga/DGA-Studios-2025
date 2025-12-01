@@ -11,11 +11,11 @@ public class SmokePellet : MonoBehaviour
     [Tooltip("At what velocity should we stop moving completely")]
     [SerializeField] float stopThreshold;
     [Tooltip("Lifetime of a smoke cloud")]
-    [SerializeField] float lifetime;
+    public float lifetime;
     [Tooltip("Time threshold in seconds for when cloud should begin fading")]
-    [SerializeField] float fadeStartTime;
+    public float fadeStartTime;
     [Tooltip("Maximum size of a cloud relative to its start size")]
-    [SerializeField] float maxScale;
+    public float maxScale;
     [Tooltip("How fast should the cloud expand")]
     [SerializeField] float expansionSpeed;
 
