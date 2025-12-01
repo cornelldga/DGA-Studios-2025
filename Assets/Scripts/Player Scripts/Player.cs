@@ -245,7 +245,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
-            armAnimator.Play("Shoot", 0);
+            armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
     }
