@@ -6,8 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
 
 /// <summary>
 /// Represents the charater you play in the game. Contains stats, handles inventory, and player inputs
@@ -59,6 +58,15 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Image backupImage;
     [SerializeField] Image mixerEquippedImage;
     [SerializeField] Image mixerBackupImage;
+    [SerializeField] Image healthImage;
+
+    // Sprite fields temporary. These should be removed and change the health animator
+    // [SerializeField] Animator healthAnimator;
+    [SerializeField] Sprite healthySprite;
+    [SerializeField] Sprite midSprite;
+    [SerializeField] Sprite lowHealthSprite;
+    [SerializeField] float midHealthThreshold;
+    [SerializeField] float criticalThreshold;
 
     Animator animationControl;
     SpriteRenderer spriteRenderer;
@@ -361,6 +369,17 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health -= damage * damageTakenMultiplier;
+        float healthRatio = health / maxHealth;
+        if (healthRatio <= midHealthThreshold)
+        {
+            healthImage.sprite = midSprite;
+            // Should set this boolean animation to true
+        }
+        if (healthRatio <= criticalThreshold)
+        {
+            healthImage.sprite = lowHealthSprite;
+            // Should set this boolean animation to true
+        }
         if (health <= 0)
         {
             GameManager.Instance.LoseGame();
