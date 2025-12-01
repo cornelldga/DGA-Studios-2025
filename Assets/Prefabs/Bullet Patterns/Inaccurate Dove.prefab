@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1238243162362475361, guid: 34c524d385f6dce42b1428e9bbd8ca65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4fba9043d383143bd4986678c7148c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dove
-  speed: 4.5
+  speed: 4
   lifeDuration: 5
   cooldown: 1
   damage: 1
