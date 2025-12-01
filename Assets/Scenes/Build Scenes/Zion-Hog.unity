@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pig_Rider
       objectReference: {fileID: 0}
+    - target: {fileID: 3522220637217935748, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3717318877211396489, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.28
@@ -1065,7 +1069,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
   m_PrefabInstance: {fileID: 309325213}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/TestScenes/Zion-Hog.unity
 --- !u!1 &1437913644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,8 +1160,7 @@ MonoBehaviour:
   healthImage: {fileID: 1437913646}
   healthySprite: {fileID: -5550154393050170253, guid: 588c2a81a4acd4bc0a4c4577d0ec659a, type: 3}
   lowHealthSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
-=======
->>>>>>> 32a1a69649844f5f75f7d5042d6f40c3ebc19aa8:Assets/Scenes/Build Scenes/Zion-Hog.unity
+  alternateSpeed: 0.5
 --- !u!1 &1457449396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,12 +1223,8 @@ MonoBehaviour:
   maxHealth: 50
   healthBar: {fileID: 1558118267}
   bulletOrigin: {fileID: 1873236462}
-<<<<<<< HEAD:Assets/Scenes/TestScenes/Zion-Hog.unity
   phasePercents: []
-=======
-  phasePercents:
-  - 0.5
->>>>>>> 32a1a69649844f5f75f7d5042d6f40c3ebc19aa8:Assets/Scenes/Build Scenes/Zion-Hog.unity
+  currentPhase: 0
   attackRate: 1
   currentState: 0
   markChance: 0.3
