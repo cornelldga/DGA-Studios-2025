@@ -23,16 +23,32 @@ public class PunchZone : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > punchTime)
             {
-
+                punch();
             }
         }
+        else { timer = 0; }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         if (collision.CompareTag("Player"))
         {
             punching = true;
         }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            punching = false;
+        }
+    }
+
+    private void punch()
+    {
+
     }
 }
