@@ -69,6 +69,7 @@ public class DrillGuy : Boss
         base.Update();
         Debug.Log(currentState);
         stateTimer -= Time.deltaTime;
+        attackCooldown -= Time.deltaTime * attackRate;
 
         switch (currentState)
         {
@@ -85,7 +86,12 @@ public class DrillGuy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
-                // Handled by coroutine
+                if (attackCooldown <= 0)
+                {
+                    ThrowDynamiteAtPlayer(); //phase 1
+                    // ThrowDynamiteAtHoles(); //phase 2
+                    attackCooldown = dynamitePattern.cooldown;
+                }
                 break;
             case State.Entering:
                 UpdateEntering();
@@ -94,6 +100,20 @@ public class DrillGuy : Boss
                 UpdateExiting();
                 break;
         }
+    }
+
+    //Throws Dynamite at the player (phase 1)
+    private void ThrowDynamiteAtPlayer()
+    {
+        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+    }
+
+     //Throws Dynamite at the holes (phase 2)
+    private void ThrowDynamiteAtHoles()
+    {
+        foreach(GameObject hole in holes)
+            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        currentState = State.Targeting;
     }
 
     /// <summary>
@@ -275,16 +295,6 @@ public class DrillGuy : Boss
         }
     }
 
-    /// <summary>
-    /// Dynamite throwing.
-    /// </summary>
-    private void PerformThrow()
-    {
-        for (int i = 0; i<holes.Count; i++){
-            Vector2 target = holes[i].transform.position;
-            //Throw dynamite in that direction.
-        }
-    }
 
     public override void SetPhase()
     {
