@@ -1,13 +1,8 @@
 using System;
 using System.Collections;
-using NUnit.Framework;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.UI;
 
 /// <summary>
 /// Represents the charater you play in the game. Contains stats, handles inventory, and player inputs
