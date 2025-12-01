@@ -14,6 +14,9 @@ public class TheMagician : Boss
 {
     public Stage currentStage;
 
+    [Tooltip("Magician Rigidbody")]
+    [SerializeField] Rigidbody2D rb;
+
     [Tooltip("Magician Animation Controller")]
     [SerializeField] private Animator animator;
 
@@ -63,6 +66,8 @@ public class TheMagician : Boss
         ogCard = cardStage.position;
         ogKnife = knifeStage.position;
         ogDove = doveStage.position;
+
+        rb.gravityScale = 0;
     }
 
     public override void Update()
@@ -173,18 +178,17 @@ public class TheMagician : Boss
             case Stage.Backstage:
                 break;
             case Stage.Card:
+                
                 StartCoroutine(cardStageBulletPattern.DoBulletPattern(this));
-
                 break;
             case Stage.Dove:
                 StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
-
                 break;
             case Stage.Knife:
                 StartCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
-
                 break;
         }
+
     }
  
 
@@ -203,15 +207,12 @@ public class TheMagician : Boss
                         break;
                     case Stage.Card:
                         StopCoroutine(cardStageBulletPattern.DoBulletPattern(this));
-
                         break;
                     case Stage.Dove:
                         StopCoroutine(doveStageBulletPattern.DoBulletPattern(this));
-
                         break;
                     case Stage.Knife:
                         StopCoroutine(knifeStageBulletPattern.DoBulletPattern(this));
-
                         break;
                 }
                 StartCoroutine(DesperationAttack.DoBulletPattern(this));
