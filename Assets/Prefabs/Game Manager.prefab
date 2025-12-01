@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 0}
+  loadoutCanvas: {fileID: 0}
+  currentSong: 0
 --- !u!1 &8277095928795180850
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +187,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1470413429427222570
 MonoBehaviour:

@@ -45,7 +45,7 @@ public class DrillGuy : Boss
     private Collider2D digCollider;
 
     [Tooltip("Driller Animation Controller")]
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
 
 
@@ -58,6 +58,7 @@ public class DrillGuy : Boss
         currentState = State.Walking;
         stateTimer = walkingTime;
         isUnderground = false;
+        animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -68,6 +69,7 @@ public class DrillGuy : Boss
         base.Update();
         Debug.Log(currentState);
         stateTimer -= Time.deltaTime;
+        attackCooldown -= Time.deltaTime * attackRate;
 
         switch (currentState)
         {
@@ -84,7 +86,12 @@ public class DrillGuy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
-                // Handled by coroutine
+                if (attackCooldown <= 0)
+                {
+                    ThrowDynamiteAtPlayer(); //phase 1
+                    // ThrowDynamiteAtHoles(); //phase 2
+                    attackCooldown = dynamitePattern.cooldown;
+                }
                 break;
             case State.Entering:
                 UpdateEntering();
@@ -95,6 +102,29 @@ public class DrillGuy : Boss
         }
     }
 
+    //Throws Dynamite at the player (phase 1)
+    private void ThrowDynamiteAtPlayer()
+    {
+        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+    }
+
+     //Throws Dynamite at the holes (phase 2)
+    private void ThrowDynamiteAtHoles()
+    {
+        foreach(GameObject hole in holes)
+            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        currentState = State.Targeting;
+    }
+
+    /// <summary>
+    /// Transition to walking.
+    /// </summary>
+    private void TransitionToWalking()
+    {
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isExiting", false);
+    }
+
     /// <summary>
     /// What the boss does when walking around
     /// Planning for attacking the player is done in Targeting
@@ -103,7 +133,7 @@ public class DrillGuy : Boss
     {
         if (stateTimer <= 0)
         {
-            currentState = State.Entering;
+            TransitionToEntering();
         }
     }
 
@@ -126,6 +156,15 @@ public class DrillGuy : Boss
     }
 
     /// <summary>
+    /// Transitions to the Entering state
+    /// </summary>
+    private void TransitionToEntering()
+    {
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isEntering", true); 
+    }
+
+    /// <summary>
     /// Updates the Drill boss during Entering state.
     /// </summary>
     private void UpdateEntering()
@@ -137,6 +176,14 @@ public class DrillGuy : Boss
         StartCoroutine(DigPath());
         
         currentState = State.Underground_Chase;
+    }
+
+    /// <summary>
+    /// Transitions to exiting state
+    /// </summary>
+    private void TransitionToExiting()
+    {
+        
     }
 
     /// <summary>
@@ -248,16 +295,6 @@ public class DrillGuy : Boss
         }
     }
 
-    /// <summary>
-    /// Dynamite throwing.
-    /// </summary>
-    private void PerformThrow()
-    {
-        for (int i = 0; i<holes.Count; i++){
-            Vector2 target = holes[i].transform.position;
-            //Throw dynamite in that direction.
-        }
-    }
 
     public override void SetPhase()
     {
