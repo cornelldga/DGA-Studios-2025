@@ -45,7 +45,7 @@ public class DrillGuy : Boss
     private Collider2D digCollider;
 
     [Tooltip("Driller Animation Controller")]
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
 
 
@@ -58,6 +58,7 @@ public class DrillGuy : Boss
         currentState = State.Walking;
         stateTimer = walkingTime;
         isUnderground = false;
+        animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -96,6 +97,15 @@ public class DrillGuy : Boss
     }
 
     /// <summary>
+    /// Transition to walking.
+    /// </summary>
+    private void TransitionToWalking()
+    {
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isExiting", false);
+    }
+
+    /// <summary>
     /// What the boss does when walking around
     /// Planning for attacking the player is done in Targeting
     /// </summary>
@@ -103,7 +113,7 @@ public class DrillGuy : Boss
     {
         if (stateTimer <= 0)
         {
-            currentState = State.Entering;
+            TransitionToEntering();
         }
     }
 
@@ -126,6 +136,15 @@ public class DrillGuy : Boss
     }
 
     /// <summary>
+    /// Transitions to the Entering state
+    /// </summary>
+    private void TransitionToEntering()
+    {
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isEntering", true); 
+    }
+
+    /// <summary>
     /// Updates the Drill boss during Entering state.
     /// </summary>
     private void UpdateEntering()
@@ -137,6 +156,14 @@ public class DrillGuy : Boss
         StartCoroutine(DigPath());
         
         currentState = State.Underground_Chase;
+    }
+
+    /// <summary>
+    /// Transitions to exiting state
+    /// </summary>
+    private void TransitionToExiting()
+    {
+        
     }
 
     /// <summary>
