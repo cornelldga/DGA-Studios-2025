@@ -648,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 1012723034}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000440612, y: 0.00000009682148, z: -4.2660704e-15, w: 1}
-  m_LocalPosition: {x: -3.215071, y: -1.4800391, z: -10}
+  m_LocalPosition: {x: -3.3174372, y: -1.4802394, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -886,9 +886,21 @@ PrefabInstance:
       value: 1.0664062
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: happySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
       value: 
       objectReference: {fileID: 4900000, guid: bea203d4ea1ab437b8e8b1fed8f7497a, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: neutralSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
@@ -1049,6 +1061,22 @@ PrefabInstance:
     - target: {fileID: 3868355705443199317, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 680.1505
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 292.2542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 178
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 177
       objectReference: {fileID: 0}
     - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_LocalPosition.x
