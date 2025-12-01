@@ -46,6 +46,10 @@ public class Player : MonoBehaviour, IDamageable
     private bool isMarked;
     private float markTimer;
 
+    [Header("Gun Arm")]
+    [SerializeField] Transform armPivot;
+    [SerializeField] Animator armAnimator;
+
     [Header("UI")]
     [SerializeField] Image equippedImage;
     [SerializeField] Image backupImage;
@@ -61,6 +65,7 @@ public class Player : MonoBehaviour, IDamageable
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
     SpriteRenderer sprite;
+    Transform playerTransform;
     float angle;
     Vector2 moveDirection;
     float fireCooldown;
@@ -84,6 +89,7 @@ public class Player : MonoBehaviour, IDamageable
         playerBases = GetComponent<PlayerBases>();
         animationControl = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerTransform = GetComponent<Transform>();
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
         speed = baseSpeed;
@@ -176,6 +182,25 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     void PlayerInputs()
     {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePos.z = armPivot.transform.position.z;
+        armPivot.right = armPivot.transform.position - mousePos;
+        
+        Vector3 scale = playerTransform.localScale;
+        if ((armPivot.transform.position - mousePos).x > 0)
+        {
+            
+            scale.x = 1; // Flip horizontally
+            playerTransform.localScale = scale;
+
+        }
+        else if ((armPivot.transform.position - mousePos).x < 0)
+        {
+            armPivot.right = -armPivot.right; //need to flip the pivot so it points the correct way
+            scale.x = -1; // Flip horizontally
+            playerTransform.localScale = scale;
+        }
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -183,14 +208,7 @@ public class Player : MonoBehaviour, IDamageable
 
         animationControl.SetFloat("Speed", Mathf.Abs(moveDirection.magnitude));
 
-        if (moveDirection.x < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (moveDirection.x > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
+
 
         if (changeCooldown <= 0)
         {
@@ -227,6 +245,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
+            armAnimator.Play("Shoot", 0);
             Fire();
         }
     }
