@@ -3,6 +3,8 @@ using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Drill_Guy : Boss
 {
@@ -19,6 +21,7 @@ public class Drill_Guy : Boss
     private Rigidbody2D rb;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
+    [SerializeField] DynamitePattern dynamitePattern;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +42,7 @@ public class Drill_Guy : Boss
         base.Update();
 
         stateTimer -= Time.deltaTime;
+        attackCooldown -= Time.deltaTime * attackRate;
 
         switch (currentState)
         {
@@ -55,7 +59,12 @@ public class Drill_Guy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
-                // Handled by coroutine
+                if (attackCooldown <= 0)
+                {
+                    ThrowDynamiteAtPlayer(); //phase 1
+                    // ThrowDynamiteAtHoles(); //phase 2
+                    attackCooldown = dynamitePattern.cooldown;
+                }
                 break;
             case State.Entering:
                 UpdateEntering();
@@ -64,6 +73,21 @@ public class Drill_Guy : Boss
                 UpdateExiting();
                 break;
         }
+    }
+
+
+    //Throws Dynamite at the player (phase 1)
+    private void ThrowDynamiteAtPlayer()
+    {
+        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+    }
+
+     //Throws Dynamite at the holes (phase 2)
+    private void ThrowDynamiteAtHoles()
+    {
+        foreach(GameObject hole in holes)
+            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        currentState = State.Targeting;
     }
 
     private void UpdateWalking()
