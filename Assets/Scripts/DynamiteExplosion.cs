@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Cinemachine;
+using System.Threading;
 
 /// <summary>
 /// Explosion after Driller Boss's dynamite is exploded
@@ -9,31 +10,25 @@ public class DynamiteExplosion : MonoBehaviour
 {
     [SerializeField] float damage;
     [SerializeField] float explosionDuration;
-    private double timer;
+    [SerializeField] float impulseForce;
+    [SerializeField] CinemachineImpulseSource impulseSource;
     
-    void Start()
-    {
-    }
-
     /// <summary>
-    /// Destroys itself when time is up
+    /// Shakes screen upon spawning, and destroys itself after explosionDuration has passed.
     /// </summary>
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > explosionDuration)
-            Destroy(gameObject);
+    void Start()
+    { 
+        if (impulseSource != null)
+            impulseSource.GenerateImpulse(impulseForce);
+        Destroy(gameObject, explosionDuration);
     }
 
     /// <summary>
-    /// Deals damage to the player upon contact.
-    /// Should do something to holes, not yet decided.
+    /// Deals damage to the player and hole upon contact.
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-        // if (collision.CompareTag("Hole")); //do something
-        
+        if (collision.CompareTag("Hole"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
     }
-
 }
