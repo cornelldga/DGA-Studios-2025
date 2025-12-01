@@ -898,6 +898,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3826142819789326717, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: backStage
       value: 
@@ -916,7 +920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: maxHealth
-      value: 70
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: knifeStage
