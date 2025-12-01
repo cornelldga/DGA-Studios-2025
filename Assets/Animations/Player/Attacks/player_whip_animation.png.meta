@@ -121,10 +121,10 @@ TextureImporter:
       name: player_whip_animation_0
       rect:
         serializedVersion: 2
-        x: 112
+        x: 0
         y: 0
-        width: 183
-        height: 418
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,9 +143,9 @@ TextureImporter:
       name: player_whip_animation_1
       rect:
         serializedVersion: 2
-        x: 422
+        x: 339
         y: 0
-        width: 218
+        width: 339
         height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -165,10 +165,10 @@ TextureImporter:
       name: player_whip_animation_2
       rect:
         serializedVersion: 2
-        x: 748
+        x: 678
         y: 0
-        width: 255
-        height: 377
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: player_whip_animation_3
       rect:
         serializedVersion: 2
-        x: 1065
+        x: 1017
         y: 0
-        width: 295
-        height: 374
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,10 +209,10 @@ TextureImporter:
       name: player_whip_animation_4
       rect:
         serializedVersion: 2
-        x: 1432
+        x: 1356
         y: 0
-        width: 228
-        height: 306
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: player_whip_animation_5
       rect:
         serializedVersion: 2
-        x: 1751
+        x: 1695
         y: 0
-        width: 249
-        height: 249
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: player_whip_animation_6
       rect:
         serializedVersion: 2
-        x: 2038
+        x: 2034
         y: 0
-        width: 303
-        height: 126
+        width: 339
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -283,7 +283,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":1.0},"gridSpriteSize":{"x":339.0,"y":450.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       player_whip_animation_0: 343834117074378269
       player_whip_animation_1: -5794710771108566917
