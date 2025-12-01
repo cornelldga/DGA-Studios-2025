@@ -145,6 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523022322800746459}
+  - component: {fileID: 8853913472280483555}
   m_Layer: 0
   m_Name: Whip Pivot
   m_TagString: Untagged
@@ -160,14 +161,36 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593850575938455306}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.86737484, w: 0.4976554}
+  m_LocalRotation: {x: 0, y: 0, z: 0.69528586, w: 0.7187333}
   m_LocalPosition: {x: 0.07, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7811330039102704796}
   m_Father: {fileID: 4588022867240271486}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -120.31}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 88.1}
+--- !u!95 &8853913472280483555
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593850575938455306}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 805bbb38eca38a7438e3e26942832999, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2024992274200817882
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +465,7 @@ MonoBehaviour:
   whipCooldownTime: 1
   whipTime: 1
   whipAnimator: {fileID: 0}
+  whipPivotAnimator: {fileID: 8853913472280483555}
   armPivot: {fileID: 963596286954911090}
   armAnimator: {fileID: 2776549083798574066}
   equippedImage: {fileID: 6752871522193191210}
@@ -749,7 +773,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 343834117074378269, guid: b86e801ca8f078140bfcb72f540b6f2d, type: 3}
+  m_Sprite: {fileID: 2394273617515671053, guid: e5644ee425b810e408b6b3a39f2eb4bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -770,7 +794,7 @@ Animator:
   m_GameObject: {fileID: 3174485103968557596}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 805bbb38eca38a7438e3e26942832999, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

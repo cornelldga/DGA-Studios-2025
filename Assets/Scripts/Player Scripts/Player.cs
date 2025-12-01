@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float whipCooldownTime;
     [SerializeField] float whipTime;
     [SerializeField] Animator whipAnimator;
+    [SerializeField] Animator whipPivotAnimator;
     private bool isMarked;
     private float markTimer;
 
@@ -314,15 +315,16 @@ public class Player : MonoBehaviour, IDamageable
     public void OnWhip()
     {
         whipping = true;
-        whip.gameObject.SetActive(true);
+        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
         //find angle between player and mouse
         //whipObject.transform.rotation = Quaternion.identity;
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        mousePosition.z = 0f;
-        Vector3 direction = mousePosition - whipPivot.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle = AngleAdjustment(angle);
-        whipPivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        //mousePosition.z = 0f;
+        //Vector3 direction = mousePosition - whipPivot.position;
+        whipPivotAnimator.Play("Whip Rotate", 0, 0f);
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //angle = AngleAdjustment(angle);
+        //whipPivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         StartCoroutine(nameof(WhipTime));
     }
 
@@ -330,7 +332,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(whipTime);
         whipping = false;
-        whip.gameObject.SetActive(false);
+        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
     }
     private void FixedUpdate()
     {
