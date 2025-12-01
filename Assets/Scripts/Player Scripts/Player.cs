@@ -42,7 +42,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Transform whipPivot;
     public Whip whip;
     [SerializeField] float whipCooldownTime;
-    [SerializeField] float whipTime;
+    float whipTime; //determined by length of animation
     [SerializeField] Animator whipAnimator;
     [SerializeField] Animator whipPivotAnimator;
     private bool isMarked;
@@ -87,6 +87,9 @@ public class Player : MonoBehaviour, IDamageable
         animationControl = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
+
+        whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
+
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
         speed = baseSpeed;
