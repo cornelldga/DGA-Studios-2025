@@ -43,6 +43,7 @@ public class Player : MonoBehaviour, IDamageable
     public Whip whip;
     [SerializeField] float whipCooldownTime;
     [SerializeField] float whipTime;
+    [SerializeField] Animator whipAnimator;
     private bool isMarked;
     private float markTimer;
 
