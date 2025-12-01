@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3058450982754141}
   - component: {fileID: 5594327275760362469}
   - component: {fileID: 1039106421978289570}
-  - component: {fileID: 6261832820625868356}
   m_Layer: 0
   m_Name: Dynamite
   m_TagString: Untagged
@@ -173,17 +172,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6261832820625868356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505345824832376928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95b7e302132d64408af881f89df4898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dynamite
-  timeBeforeEplosion: 1
-  explosionPrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}

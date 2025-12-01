@@ -12,25 +12,19 @@ public class DynamiteExplosion : MonoBehaviour
     [SerializeField] float explosionDuration;
     [SerializeField] float impulseForce;
     [SerializeField] CinemachineImpulseSource impulseSource;
-    private double timer;
-    void Start()
-    {
-        impulseSource.GenerateImpulse(impulseForce);
-    }
-
+    
     /// <summary>
-    /// Destroys itself when time is up
+    /// Shakes screen upon spawning, and destroys itself after explosionDuration has passed.
     /// </summary>
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > explosionDuration)
-            Destroy(gameObject);
+    void Start()
+    { 
+        if (impulseSource != null)
+            impulseSource.GenerateImpulse(impulseForce);
+        Destroy(gameObject, explosionDuration);
     }
 
     /// <summary>
-    /// Deals damage to the player upon contact.
-    /// Currently removes hole upon contact. Might change later.
+    /// Deals damage to the player and hole upon contact.
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {

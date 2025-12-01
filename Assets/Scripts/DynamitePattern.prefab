@@ -47,11 +47,45 @@ MonoBehaviour:
   speed: 0
   lifeDuration: 0
   cooldown: 1
-  damage: 0
+  damage: 1
   accuracy: 0
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
+  duration: 0.5
+  heightY: 2
   dynamitePrefab: {fileID: 4505345824832376928, guid: 3275559c0cf96aa4b805657b724d27c2, type: 3}
-  timeBeforeExplosion: 1
-  force: 9
+  explosionPrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

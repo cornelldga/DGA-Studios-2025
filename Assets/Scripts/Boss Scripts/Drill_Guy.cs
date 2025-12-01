@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Drill_Guy : Boss
 {
@@ -21,6 +22,7 @@ public class Drill_Guy : Boss
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
     [SerializeField] DynamitePattern dynamitePattern;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -40,6 +42,7 @@ public class Drill_Guy : Boss
         base.Update();
 
         stateTimer -= Time.deltaTime;
+        attackCooldown -= Time.deltaTime * attackRate;
 
         switch (currentState)
         {
@@ -56,8 +59,12 @@ public class Drill_Guy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
-                ThrowDynamiteAtPlayer();
-                // Handled by coroutine
+                if (attackCooldown <= 0)
+                {
+                    ThrowDynamiteAtPlayer(); //phase 1
+                    // ThrowDynamiteAtHoles(); //phase 2
+                    attackCooldown = dynamitePattern.cooldown;
+                }
                 break;
             case State.Entering:
                 UpdateEntering();
@@ -68,21 +75,19 @@ public class Drill_Guy : Boss
         }
     }
 
+
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
-        Vector2[] targets = {GameManager.Instance.player.transform.position};
-        dynamitePattern.ThrowAt(targets, this);
+        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
     }
 
-
-    //Throws Dynamite at holes (phase 2) -> test when holes are created
-    private void ThrowDynamiteAtHole()
+     //Throws Dynamite at the holes (phase 2)
+    private void ThrowDynamiteAtHoles()
     {
-        Vector2[] targets = new Vector2[holes.Count];
-        for (int i = 0; i < targets.Length; i++)
-            targets[i] = holes[i].transform.position;
-         dynamitePattern.ThrowAt(targets, this);
+        foreach(GameObject hole in holes)
+            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        currentState = State.Targeting;
     }
 
     private void UpdateWalking()
