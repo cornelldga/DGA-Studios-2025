@@ -14,7 +14,7 @@ public class DynamitePattern : Projectile
     [SerializeField] AnimationCurve curve;
 
     /// <summary>
-    /// Spawns a dynamite and make it travel in a prabolic path using animation curve.
+    /// Spawns a dynamite and make it travel in a parabolic path using animation curve.
     /// At the end of the path, spawn an explosion
     /// </summary>
     /// <param name="target">Target location of the parabolic path </param>
