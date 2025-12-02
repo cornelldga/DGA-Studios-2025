@@ -1,0 +1,20 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Hey, kid. Feel like gambling?",
+            "emotion": 0,
+            "nextDialogueID": "0_pay"
+        }, {
+            "dialogueID": "0_pay",
+            "dialogueText": "Let's say you and I have a little scuffle. If I win, I get unlimited drinks.",
+            "emotion": 0,
+            "nextDialogueID": "0_fight"
+        }, {
+            "dialogueID": "0_fight",
+            "dialogueText": "If you win ... well, you can pick. What do you say?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}
