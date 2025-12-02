@@ -2,9 +2,6 @@ using UnityEngine;
 using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
 
 public class Drill_Guy : Boss
 {
@@ -21,7 +18,10 @@ public class Drill_Guy : Boss
     private Rigidbody2D rb;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
-    [SerializeField] DynamitePattern dynamitePattern;
+    [SerializeField] DynamitePattern dynamitePatternPhase1;
+    [SerializeField] DynamitePattern dynamitePatternPhase2;
+
+    [SerializeField] GameObject EnterHolePrefab;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +32,8 @@ public class Drill_Guy : Boss
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
+        holes = new List<GameObject>();
+        // holes.Add(Instantiate(EnterHolePrefab, GameManager.Instance.player.transform.position,  Quaternion.identity)); //for testing throwing at holes
     }
 
     /// <summary>
@@ -61,9 +63,15 @@ public class Drill_Guy : Boss
             case State.Throwing:
                 if (attackCooldown <= 0)
                 {
-                    ThrowDynamiteAtPlayer(); //phase 1
-                    // ThrowDynamiteAtHoles(); //phase 2
-                    attackCooldown = dynamitePattern.cooldown;
+                    if (currentPhase == 1)
+                    {
+                         ThrowDynamiteAtPlayer(); //phase 1
+                         attackCooldown = dynamitePatternPhase1.cooldown;
+                    }
+                    else if (currentPhase == 2) {
+                        ThrowDynamiteAtHoles(); //phase 2
+                        currentState = State.Walking;
+                    }
                 }
                 break;
             case State.Entering:
@@ -79,15 +87,15 @@ public class Drill_Guy : Boss
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
-        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+        StartCoroutine(dynamitePatternPhase1.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
     }
 
      //Throws Dynamite at the holes (phase 2)
     private void ThrowDynamiteAtHoles()
     {
         foreach(GameObject hole in holes)
-            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
-        currentState = State.Targeting;
+            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        holes.Clear();
     }
 
     private void UpdateWalking()
@@ -118,18 +126,6 @@ public class Drill_Guy : Boss
     private void UpdateExiting()
     {
         throw new NotImplementedException();
-    }
-
-
-    /// <summary>
-    /// Dynamite throwing.
-    /// </summary>
-    private void PerformThrow()
-    {
-        for (int i = 0; i<holes.Count; i++){
-            Vector2 target = holes[i].transform.position;
-            //Throw dynamite in that direction.
-        }
     }
 
     public override void SetPhase()
