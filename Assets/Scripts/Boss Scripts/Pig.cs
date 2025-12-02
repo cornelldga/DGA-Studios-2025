@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Pig : MonoBehaviour
 {
     [SerializeField] Pig_Rider pigRider;
+    [SerializeField] float ramDamage = 1f;
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -60,8 +59,6 @@ public class Pig : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    private float damage = 1f;
-    private float recoilForce = 2f;
 
     public enum State
     {
@@ -308,7 +305,7 @@ public class Pig : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.player.TakeDamage(damage);
+            GameManager.Instance.player.TakeDamage(ramDamage);
             GameManager.Instance.player.removeMark();
 
             if (impulseSource != null)
@@ -322,7 +319,7 @@ public class Pig : MonoBehaviour
 
             if (pigRider != null)
             {
-                pigRider.TakeDamage(damage);
+                pigRider.TakeDamage(ramDamage);
                 pigRider.removeMark();
             }
 
