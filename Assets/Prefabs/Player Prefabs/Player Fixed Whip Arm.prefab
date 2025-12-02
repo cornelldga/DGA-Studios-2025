@@ -472,6 +472,12 @@ MonoBehaviour:
   backupImage: {fileID: 2211820427753075301}
   mixerEquippedImage: {fileID: 7557071018758148260}
   mixerBackupImage: {fileID: 1663225418546566521}
+  healthImage: {fileID: 0}
+  healthySprite: {fileID: 0}
+  midSprite: {fileID: 0}
+  lowHealthSprite: {fileID: 0}
+  midHealthThreshold: 0
+  criticalThreshold: 0
 --- !u!114 &4663871014066381724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 2360108873131012200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.104, y: -0.05, z: 0}
+  m_LocalPosition: {x: -0.1, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1450,7 +1456,7 @@ Transform:
   m_GameObject: {fileID: 8408253714595935904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.43, y: 0.015, z: 0}
+  m_LocalPosition: {x: -0.482, y: 0.021, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

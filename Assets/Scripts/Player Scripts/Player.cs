@@ -1,6 +1,6 @@
+
 using System;
 using System.Collections;
-using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Transform armPivot;
     [SerializeField] Animator armAnimator;
     [SerializeField] Transform bulletOrigin;
-    private Vector3 defaultGunRight;
+    Vector3 bulletRight;
 
     [Header("UI")]
     [SerializeField] Image equippedImage;
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour, IDamageable
         playerTransform = GetComponent<Transform>();
 
         whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
-        defaultGunRight = bulletOrigin.right;
+        bulletRight = bulletOrigin.right;
 
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
@@ -195,23 +195,22 @@ public class Player : MonoBehaviour, IDamageable
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         mousePos.z = armPivot.transform.position.z;
-        armPivot.right = armPivot.transform.position - mousePos;
-        
+        Vector3 difference = armPivot.transform.position - mousePos;
         Vector3 scale = playerTransform.localScale;
+
+        bulletOrigin.right = difference;
         if ((armPivot.transform.position - mousePos).x > 0)
         {
-            
+            armPivot.right = difference;
             scale.x = 1; // Flip horizontally
             playerTransform.localScale = scale;
-            bulletOrigin.right = defaultGunRight;
-
+            
         }
         else if ((armPivot.transform.position - mousePos).x < 0)
         {
-            armPivot.right = -armPivot.right; //need to flip the pivot so it points the correct way
+            armPivot.right = -difference;
             scale.x = -1; // Flip horizontally
             playerTransform.localScale = scale;
-            bulletOrigin.right = -defaultGunRight;
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -273,7 +272,7 @@ public class Player : MonoBehaviour, IDamageable
         //angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //// TODO: The position should be a transform where the player fires, not the center of the player
         //Quaternion fireDirection = Quaternion.Euler(0f, 0f, angle);
-        Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, armPivot.rotation);
+        Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, bulletOrigin.rotation);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;
     }
