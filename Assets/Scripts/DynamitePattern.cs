@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class DynamitePattern : Projectile
 {
-    [SerializeField] float duration;
+    [SerializeField] float duration; //duration can be changed
     [SerializeField] float heightY;
     [SerializeField] GameObject dynamitePrefab;
     [SerializeField] GameObject explosionPrefab;
@@ -20,7 +20,7 @@ public class DynamitePattern : Projectile
     /// <param name="target">Target location of the parabolic path </param>
     /// <param name="boss"></param>
     /// <returns></returns>
-    public IEnumerator ThrowRoutine (Vector2 start, Vector2 target)
+    public IEnumerator ThrowRoutine (Vector3 start, Vector3 target)
 
     {
         //spawns dynamite object
@@ -34,7 +34,7 @@ public class DynamitePattern : Projectile
             float linearT = timer/duration; // between 0 and 1
             float heightT = curve.Evaluate(linearT);//value from curve
             float height = Mathf.Lerp(0, heightY, heightT); //interpolates b/w 0 and heightY
-            dynamite.transform.position = Vector2.Lerp(start, target, linearT) + new Vector2(0f, height);
+            dynamite.transform.position =Vector3.Lerp(start, target, linearT) + new Vector3(0f, height, 0f);
             yield return null; //this waits for next frame
         }
 
