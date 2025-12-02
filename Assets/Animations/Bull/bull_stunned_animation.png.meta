@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 836397b2d20d48c4283112b62344c43f
+guid: 1b77f5aac50c14ff68c53519eca6232b
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -114,7 +114,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -166,12 +166,12 @@ TextureImporter:
       name: bull_stunned_animation_0
       rect:
         serializedVersion: 2
-        x: 125
-        y: 0
+        x: 120
+        y: 511
         width: 231
-        height: 154
+        height: 155
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: bull_stunned_animation_1
       rect:
         serializedVersion: 2
-        x: 639
-        y: 0
+        x: 633
+        y: 511
         width: 228
-        height: 161
+        height: 162
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: bull_stunned_animation_2
       rect:
         serializedVersion: 2
-        x: 1160
-        y: 0
+        x: 1154
+        y: 511
         width: 210
-        height: 162
+        height: 163
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -232,12 +232,12 @@ TextureImporter:
       name: bull_stunned_animation_3
       rect:
         serializedVersion: 2
-        x: 1674
-        y: 0
+        x: 1669
+        y: 511
         width: 205
-        height: 172
+        height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,12 +254,12 @@ TextureImporter:
       name: bull_stunned_animation_4
       rect:
         serializedVersion: 2
-        x: 2187
-        y: 0
+        x: 2182
+        y: 511
         width: 197
-        height: 170
+        height: 171
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -276,12 +276,12 @@ TextureImporter:
       name: bull_stunned_animation_5
       rect:
         serializedVersion: 2
-        x: 2687
-        y: 0
+        x: 2681
+        y: 511
         width: 222
-        height: 166
+        height: 167
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -295,37 +295,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_stunned_animation_6
-      rect:
-        serializedVersion: 2
-        x: 2897
-        y: 140
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf55ef787a65e2750800000000000000
-      internalID: 6282053807769540091
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: bull_stunned_animation_7
       rect:
         serializedVersion: 2
-        x: 3193
-        y: 0
+        x: 3187
+        y: 511
         width: 240
-        height: 168
+        height: 169
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -339,59 +317,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_stunned_animation_8
+      name: bull_stunned_animation_10
       rect:
         serializedVersion: 2
-        x: 3706
+        x: 117
         y: 0
         width: 237
         height: 158
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 790d5ae5ce2d31d70800000000000000
-      internalID: 9012779191940534423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_9
-      rect:
-        serializedVersion: 2
-        x: 4229
-        y: 13
-        width: 215
-        height: 183
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 835e861230fe15d90800000000000000
-      internalID: -7110639539916839624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_10
-      rect:
-        serializedVersion: 2
-        x: 4746
-        y: 5
-        width: 205
-        height: 225
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -408,12 +342,12 @@ TextureImporter:
       name: bull_stunned_animation_11
       rect:
         serializedVersion: 2
-        x: 5266
-        y: 8
-        width: 189
-        height: 227
+        x: 640
+        y: 13
+        width: 215
+        height: 183
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -430,12 +364,12 @@ TextureImporter:
       name: bull_stunned_animation_12
       rect:
         serializedVersion: 2
-        x: 5781
-        y: 0
-        width: 183
-        height: 223
+        x: 1157
+        y: 5
+        width: 205
+        height: 225
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -452,12 +386,12 @@ TextureImporter:
       name: bull_stunned_animation_13
       rect:
         serializedVersion: 2
-        x: 6287
-        y: 0
-        width: 196
-        height: 198
+        x: 1677
+        y: 8
+        width: 189
+        height: 227
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -474,12 +408,12 @@ TextureImporter:
       name: bull_stunned_animation_14
       rect:
         serializedVersion: 2
-        x: 6783
+        x: 2192
         y: 0
-        width: 212
-        height: 170
+        width: 183
+        height: 223
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -496,12 +430,12 @@ TextureImporter:
       name: bull_stunned_animation_15
       rect:
         serializedVersion: 2
-        x: 2384
-        y: 75
-        width: 6
-        height: 7
+        x: 2697
+        y: 0
+        width: 196
+        height: 198
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -518,12 +452,12 @@ TextureImporter:
       name: bull_stunned_animation_16
       rect:
         serializedVersion: 2
-        x: 2908
-        y: 78
-        width: 7
-        height: 7
+        x: 3193
+        y: 0
+        width: 212
+        height: 170
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -536,121 +470,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_17
-      rect:
-        serializedVersion: 2
-        x: 4388
-        y: 0
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 490ddc0fee4105de0800000000000000
-      internalID: -1346553272108986220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_18
-      rect:
-        serializedVersion: 2
-        x: 7004
-        y: 10
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 07372c3675b5208b0800000000000000
-      internalID: -5187483389883419792
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_19
-      rect:
-        serializedVersion: 2
-        x: 4881
-        y: 0
-        width: 7
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4f3495bf4f8955970800000000000000
-      internalID: 8743062429566059508
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_20
-      rect:
-        serializedVersion: 2
-        x: 5374
-        y: 0
-        width: 8
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 79d9072c96f968700800000000000000
-      internalID: 542296081727266199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_stunned_animation_21
-      rect:
-        serializedVersion: 2
-        x: 6403
-        y: 0
-        width: 6
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2741ce0c233b5c020800000000000000
-      internalID: 2361490610192127090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 630a94f83e6f445018d0b1a87f33031d
     internalID: 0
     vertices: []
     indices: 

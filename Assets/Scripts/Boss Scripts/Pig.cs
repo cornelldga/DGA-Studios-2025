@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Pig : MonoBehaviour
 {
@@ -28,9 +30,14 @@ public class Pig : MonoBehaviour
     [SerializeField] private float patrolSpeed = 2f;
     [Tooltip("Distance to patrol left and right from starting point")]
     [SerializeField] private float patrolDistance = 1f;
-    private float patrolDirection = 1f; // 1 for right, -1 for left
+    [Tooltip("Elevation offset while patrolling")]
+    [SerializeField] private float patrolElevation = 1f;
+    private float patrolDirectionX = 1f; // 1 for right, -1 for left
+    private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
     private float rightBoundary;
+    private float upBoundary;
+    private float downBoundary;
 
     [Header("Return Settings")]
     [Tooltip("Speed when returning to starting point")]
@@ -46,6 +53,7 @@ public class Pig : MonoBehaviour
     private Collider2D thisCollider;
     private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     private float damage = 1f;
     private float recoilForce = 2f;
@@ -64,11 +72,14 @@ public class Pig : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         thisCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         ignoredColliders = new List<Collider2D>();
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
         leftBoundary = startingPoint.x - patrolDistance;
         rightBoundary = startingPoint.x + patrolDistance;
+        upBoundary = startingPoint.y + patrolElevation;
+        downBoundary = startingPoint.y - patrolElevation;
 
         FlipSprite();
 
@@ -139,18 +150,29 @@ public class Pig : MonoBehaviour
             }
         }
 
-        Vector2 movement = new Vector2(patrolDirection * patrolSpeed, rb.linearVelocity.y);
+        float randomElevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
+
+        Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * randomElevation);
         rb.linearVelocity = movement;
 
-        if (patrolDirection > 0 && transform.position.x >= rightBoundary)
+        if (patrolDirectionX > 0 && transform.position.x >= rightBoundary)
         {
-            patrolDirection = -1f;
+            patrolDirectionX = -1f;
             FlipSprite();
         }
-        else if (patrolDirection < 0 && transform.position.x <= leftBoundary)
+        else if (patrolDirectionX < 0 && transform.position.x <= leftBoundary)
         {
-            patrolDirection = 1f;
+            patrolDirectionX = 1f;
             FlipSprite();
+        }
+
+        if (patrolDirectionY > 0 && transform.position.y >= upBoundary)
+        {
+            patrolDirectionY = -1f;
+        }
+        else if (patrolDirectionY < 0 && transform.position.y <= downBoundary)
+        {
+            patrolDirectionY = 1f;
         }
     }
 
@@ -224,10 +246,12 @@ public class Pig : MonoBehaviour
     private void TransitionToPatrolling()
     {
         currentState = State.Patrolling;
+        animator.SetBool("isCharging", false);
     }
 
     private void TransitionToCharging()
     {
+        animator.SetBool("isCharging", true);
         currentState = State.Charging;
         // Reenable colliders when charging
         clearIgnoredColliders();
