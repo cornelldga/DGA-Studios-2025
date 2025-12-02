@@ -178,9 +178,9 @@ public class Pig : MonoBehaviour
             }
         }
 
-        float randomElevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
+        float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
 
-        Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * randomElevation);
+        Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * elevation);
         rb.linearVelocity = movement;
 
         if (patrolDirectionX > 0 && transform.position.x >= rightBoundary)
