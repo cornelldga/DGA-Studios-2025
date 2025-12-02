@@ -3,7 +3,7 @@ using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
 
-public class Drill_Guy : Boss
+public class DrillGuy : Boss
 {
     public enum State
     {
@@ -42,9 +42,7 @@ public class Drill_Guy : Boss
     public override void Update()
     {
         base.Update();
-
         stateTimer -= Time.deltaTime;
-        attackCooldown -= Time.deltaTime * attackRate;
 
         switch (currentState)
         {
