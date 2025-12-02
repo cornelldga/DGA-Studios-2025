@@ -60,7 +60,7 @@ public class Pig : MonoBehaviour
 
     public enum State
     {
-        Patrolling, Targeting, Charging, Returning
+        Patrolling, Targeting, Charging, Returning, Stunned
     }
 
     public State currentState;
@@ -102,6 +102,11 @@ public class Pig : MonoBehaviour
                 break;
             case State.Returning:
                 UpdateReturning();
+                break;
+            case State.Stunned:
+                // Handled by a coroutine
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
                 break;
         }
     }
@@ -262,20 +267,16 @@ public class Pig : MonoBehaviour
 
     /// <summary>
     /// Handles collision during charge state. Applies recoil, damage, and screen shake.
-    /// Transitions to returning state after collision.
+    /// Transitions to stunned state, then to returning state after stun duration.
     /// </summary>
     /// <param name="collision">The collision data from OnCollisionEnter2D</param>
     private void HandleCharge(Collision2D collision)
     {
-        // Stop current velocity first
+        currentState = State.Stunned;
         rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
 
-        // Calculate recoil direction (bounce back from the surface)
-        Vector2 collisionNormal = collision.contacts[0].normal;
-        Vector2 recoilDirection = collisionNormal;
-
-        // Apply recoil impulse
-        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+        animator.SetBool("isStunned", true);
 
         // Trigger screen shake on wall hit
         if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
@@ -308,6 +309,18 @@ public class Pig : MonoBehaviour
             }
         }
 
+        StartCoroutine(StunCoroutine());
+    }
+
+    /// <summary>
+    /// Coroutine that handles the stun state with a freeze duration.
+    /// </summary>
+    private System.Collections.IEnumerator StunCoroutine()
+    {
+        GameManager.Instance.player.removeMark();
+
+        yield return new WaitForSeconds(1.09f);
+        animator.SetBool("isStunned", false);
         TransitionToReturning();
     }
 
