@@ -32,12 +32,17 @@ public class Pig : MonoBehaviour
     [SerializeField] private float patrolDistance = 1f;
     [Tooltip("Elevation offset while patrolling")]
     [SerializeField] private float patrolElevation = 1f;
+    [Tooltip("Minimum random delay before pig starts moving")]
+    [SerializeField] private float minStartDelay = 0f;
+    [Tooltip("Maximum random delay before pig starts moving")]
+    [SerializeField] private float maxStartDelay = 2f;
     private float patrolDirectionX = 1f; // 1 for right, -1 for left
     private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
     private float rightBoundary;
     private float upBoundary;
     private float downBoundary;
+    private bool isInitialized = false;
 
     [Header("Return Settings")]
     [Tooltip("Speed when returning to starting point")]
@@ -83,12 +88,30 @@ public class Pig : MonoBehaviour
 
         FlipSprite();
 
+        // Start with a random delay
+        float randomDelay = Random.Range(minStartDelay, maxStartDelay);
+        StartCoroutine(InitializeWithDelay(randomDelay));
+    }
+
+    /// <summary>
+    /// Initializes the pig after a random delay to desynchronize multiple pigs.
+    /// </summary>
+    private System.Collections.IEnumerator InitializeWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isInitialized = true;
         TransitionToPatrolling();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Don't do anything until initialized
+        if (!isInitialized && currentState != State.Stunned && currentState != State.Charging)
+        {
+            return;
+        }
+
         switch (currentState)
         {
             case State.Patrolling:
