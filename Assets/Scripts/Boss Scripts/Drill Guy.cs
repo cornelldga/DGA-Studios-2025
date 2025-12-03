@@ -51,6 +51,9 @@ public class DrillGuy : Boss
     private Animator animator;
     [SerializeField] DynamitePattern dynamitePattern;
 
+    //Time until we should change states.
+    [SerializeField] DynamitePattern dynamitePatternPhase1;
+    [SerializeField] DynamitePattern dynamitePatternPhase2;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -63,6 +66,8 @@ public class DrillGuy : Boss
         stateTimer = walkingTime;
         isUnderground = false;
         animator = GetComponent<Animator>();
+        holes = new List<GameObject>();
+        // holes.Add(Instantiate(EnterHolePrefab, GameManager.Instance.player.transform.position,  Quaternion.identity)); //for testing throwing at holes
     }
 
     /// <summary>
@@ -93,9 +98,15 @@ public class DrillGuy : Boss
             case State.Throwing:
                 if (attackCooldown <= 0)
                 {
-                    ThrowDynamiteAtPlayer(); //phase 1
-                    // ThrowDynamiteAtHoles(); //phase 2
-                    attackCooldown = dynamitePattern.cooldown;
+                    if (currentPhase == 1)
+                    {
+                         ThrowDynamiteAtPlayer(); //phase 1
+                         attackCooldown = dynamitePatternPhase1.cooldown;
+                    }
+                    else if (currentPhase == 2) {
+                        ThrowDynamiteAtHoles(); //phase 2
+                        currentState = State.Walking;
+                    }
                 }
                 break;
             case State.Entering:
@@ -107,10 +118,11 @@ public class DrillGuy : Boss
         }
     }
 
+
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
-        StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+        StartCoroutine(dynamitePatternPhase1.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
     }
 
      //Throws Dynamite at the holes (phase 2)
@@ -142,6 +154,13 @@ public class DrillGuy : Boss
         {
             TransitionToEntering();
         }
+            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        holes.Clear();
+    }
+
+    private void UpdateWalking()
+    {
+        throw new NotImplementedException();
     }
 
     private void UpdateTargeting()

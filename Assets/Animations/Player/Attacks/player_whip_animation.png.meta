@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 93401663e946da9488d2ec0c2438573b
+guid: b86e801ca8f078140bfcb72f540b6f2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6619710095317976718
-    second: bull_summon_charge_animation_0
+      213: 343834117074378269
+    second: player_whip_animation_0
   - first:
-      213: 7849737086628250907
-    second: bull_summon_charge_animation_1
+      213: -5794710771108566917
+    second: player_whip_animation_1
   - first:
-      213: 8968963790910026661
-    second: bull_summon_charge_animation_2
+      213: 689579955299943118
+    second: player_whip_animation_2
   - first:
-      213: 1827233838343438627
-    second: bull_summon_charge_animation_3
+      213: 8058957941837406301
+    second: player_whip_animation_3
   - first:
-      213: 3800834764833348070
-    second: bull_summon_charge_animation_4
+      213: 7308946961223572432
+    second: player_whip_animation_4
   - first:
-      213: -578801832438656924
-    second: bull_summon_charge_animation_5
+      213: -1328146289896676534
+    second: player_whip_animation_5
+  - first:
+      213: 4198703041921750701
+    second: player_whip_animation_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,133 +118,155 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bull_summon_charge_animation_0
+      name: player_whip_animation_0
       rect:
         serializedVersion: 2
-        x: 122
+        x: 0
         y: 0
-        width: 236
-        height: 162
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2793184bdb01224a0800000000000000
-      internalID: -6619710095317976718
+      spriteID: d1ed0e9ce4b85c400800000000000000
+      internalID: 343834117074378269
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_1
+      name: player_whip_animation_1
       rect:
         serializedVersion: 2
-        x: 636
-        y: 1
-        width: 249
-        height: 155
+        x: 339
+        y: 0
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b15cfa46a4edfec60800000000000000
-      internalID: 7849737086628250907
+      spriteID: b78a1ff514d059fa0800000000000000
+      internalID: -5794710771108566917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_2
+      name: player_whip_animation_2
       rect:
         serializedVersion: 2
-        x: 1150
-        y: 1
-        width: 259
-        height: 162
+        x: 678
+        y: 0
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a378885c09287c70800000000000000
-      internalID: 8968963790910026661
+      spriteID: ec202e7d051e19900800000000000000
+      internalID: 689579955299943118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_3
+      name: player_whip_animation_3
       rect:
         serializedVersion: 2
-        x: 1666
-        y: 9
-        width: 246
-        height: 157
+        x: 1017
+        y: 0
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 321c800be73ab5910800000000000000
-      internalID: 1827233838343438627
+      spriteID: d502807cc8b27df60800000000000000
+      internalID: 8058957941837406301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_4
+      name: player_whip_animation_4
       rect:
         serializedVersion: 2
-        x: 2174
-        y: 1
-        width: 259
-        height: 162
+        x: 1356
+        y: 0
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e9d8d7b4174fb430800000000000000
-      internalID: 3800834764833348070
+      spriteID: 0dbd6e969889e6560800000000000000
+      internalID: 7308946961223572432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_5
+      name: player_whip_animation_5
       rect:
         serializedVersion: 2
-        x: 2684
-        y: 1
-        width: 249
-        height: 155
+        x: 1695
+        y: 0
+        width: 339
+        height: 450
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 460162ecccea7f7f0800000000000000
-      internalID: -578801832438656924
+      spriteID: a43a4f47cf9719de0800000000000000
+      internalID: -1328146289896676534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_whip_animation_6
+      rect:
+        serializedVersion: 2
+        x: 2034
+        y: 0
+        width: 339
+        height: 450
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da61913cb2ac44a30800000000000000
+      internalID: 4198703041921750701
       vertices: []
       indices: 
       edges: []
@@ -250,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0b9d9bf9b62379442ab93721aba2ea24
     internalID: 0
     vertices: []
     indices: 
@@ -258,14 +283,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":1.0},"gridSpriteSize":{"x":339.0,"y":450.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      bull_summon_charge_animation_0: -6619710095317976718
-      bull_summon_charge_animation_1: 7849737086628250907
-      bull_summon_charge_animation_2: 8968963790910026661
-      bull_summon_charge_animation_3: 1827233838343438627
-      bull_summon_charge_animation_4: 3800834764833348070
-      bull_summon_charge_animation_5: -578801832438656924
+      player_whip_animation_0: 343834117074378269
+      player_whip_animation_1: -5794710771108566917
+      player_whip_animation_2: 689579955299943118
+      player_whip_animation_3: 8058957941837406301
+      player_whip_animation_4: 7308946961223572432
+      player_whip_animation_5: -1328146289896676534
+      player_whip_animation_6: 4198703041921750701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] PigRider pigRider;
+    [SerializeField] Pig_Rider pigRider;
+    [SerializeField] float ramDamage = 1f;
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -28,9 +29,19 @@ public class Pig : MonoBehaviour
     [SerializeField] private float patrolSpeed = 2f;
     [Tooltip("Distance to patrol left and right from starting point")]
     [SerializeField] private float patrolDistance = 1f;
-    private float patrolDirection = 1f; // 1 for right, -1 for left
+    [Tooltip("Elevation offset while patrolling")]
+    [SerializeField] private float patrolElevation = 1f;
+    [Tooltip("Minimum random delay before pig starts moving")]
+    [SerializeField] private float minStartDelay = 0f;
+    [Tooltip("Maximum random delay before pig starts moving")]
+    [SerializeField] private float maxStartDelay = 2f;
+    private float patrolDirectionX = 1f; // 1 for right, -1 for left
+    private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
     private float rightBoundary;
+    private float upBoundary;
+    private float downBoundary;
+    private bool isInitialized = false;
 
     [Header("Return Settings")]
     [Tooltip("Speed when returning to starting point")]
@@ -46,13 +57,12 @@ public class Pig : MonoBehaviour
     private Collider2D thisCollider;
     private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
-    private float damage = 1f;
-    private float recoilForce = 2f;
 
     public enum State
     {
-        Patrolling, Targeting, Charging, Returning
+        Patrolling, Targeting, Charging, Returning, Stunned
     }
 
     public State currentState;
@@ -64,20 +74,41 @@ public class Pig : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         thisCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         ignoredColliders = new List<Collider2D>();
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
         leftBoundary = startingPoint.x - patrolDistance;
         rightBoundary = startingPoint.x + patrolDistance;
+        upBoundary = startingPoint.y + patrolElevation;
+        downBoundary = startingPoint.y - patrolElevation;
 
         FlipSprite();
 
+        // Start with a random delay
+        float randomDelay = Random.Range(minStartDelay, maxStartDelay);
+        StartCoroutine(InitializeWithDelay(randomDelay));
+    }
+
+    /// <summary>
+    /// Initializes the pig after a random delay to desynchronize multiple pigs.
+    /// </summary>
+    private System.Collections.IEnumerator InitializeWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isInitialized = true;
         TransitionToPatrolling();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Don't do anything until initialized
+        if (!isInitialized && currentState != State.Stunned && currentState != State.Charging)
+        {
+            return;
+        }
+
         switch (currentState)
         {
             case State.Patrolling:
@@ -91,6 +122,11 @@ public class Pig : MonoBehaviour
                 break;
             case State.Returning:
                 UpdateReturning();
+                break;
+            case State.Stunned:
+                // Handled by a coroutine
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
                 break;
         }
     }
@@ -139,18 +175,29 @@ public class Pig : MonoBehaviour
             }
         }
 
-        Vector2 movement = new Vector2(patrolDirection * patrolSpeed, rb.linearVelocity.y);
+        float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
+
+        Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * elevation);
         rb.linearVelocity = movement;
 
-        if (patrolDirection > 0 && transform.position.x >= rightBoundary)
+        if (patrolDirectionX > 0 && transform.position.x >= rightBoundary)
         {
-            patrolDirection = -1f;
+            patrolDirectionX = -1f;
             FlipSprite();
         }
-        else if (patrolDirection < 0 && transform.position.x <= leftBoundary)
+        else if (patrolDirectionX < 0 && transform.position.x <= leftBoundary)
         {
-            patrolDirection = 1f;
+            patrolDirectionX = 1f;
             FlipSprite();
+        }
+
+        if (patrolDirectionY > 0 && transform.position.y >= upBoundary)
+        {
+            patrolDirectionY = -1f;
+        }
+        else if (patrolDirectionY < 0 && transform.position.y <= downBoundary)
+        {
+            patrolDirectionY = 1f;
         }
     }
 
@@ -224,10 +271,12 @@ public class Pig : MonoBehaviour
     private void TransitionToPatrolling()
     {
         currentState = State.Patrolling;
+        animator.SetBool("isCharging", false);
     }
 
     private void TransitionToCharging()
     {
+        animator.SetBool("isCharging", true);
         currentState = State.Charging;
         // Reenable colliders when charging
         clearIgnoredColliders();
@@ -238,20 +287,16 @@ public class Pig : MonoBehaviour
 
     /// <summary>
     /// Handles collision during charge state. Applies recoil, damage, and screen shake.
-    /// Transitions to returning state after collision.
+    /// Transitions to stunned state, then to returning state after stun duration.
     /// </summary>
     /// <param name="collision">The collision data from OnCollisionEnter2D</param>
     private void HandleCharge(Collision2D collision)
     {
-        // Stop current velocity first
+        currentState = State.Stunned;
         rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
 
-        // Calculate recoil direction (bounce back from the surface)
-        Vector2 collisionNormal = collision.contacts[0].normal;
-        Vector2 recoilDirection = collisionNormal;
-
-        // Apply recoil impulse
-        rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
+        animator.SetBool("isStunned", true);
 
         // Trigger screen shake on wall hit
         if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
@@ -260,7 +305,7 @@ public class Pig : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.player.TakeDamage(damage);
+            GameManager.Instance.player.TakeDamage(ramDamage);
             GameManager.Instance.player.removeMark();
 
             if (impulseSource != null)
@@ -274,7 +319,7 @@ public class Pig : MonoBehaviour
 
             if (pigRider != null)
             {
-                pigRider.TakeDamage(damage);
+                pigRider.TakeDamage(ramDamage);
                 pigRider.removeMark();
             }
 
@@ -284,6 +329,18 @@ public class Pig : MonoBehaviour
             }
         }
 
+        StartCoroutine(StunCoroutine());
+    }
+
+    /// <summary>
+    /// Coroutine that handles the stun state with a freeze duration.
+    /// </summary>
+    private System.Collections.IEnumerator StunCoroutine()
+    {
+        GameManager.Instance.player.removeMark();
+
+        yield return new WaitForSeconds(1.09f);
+        animator.SetBool("isStunned", false);
         TransitionToReturning();
     }
 
