@@ -202,6 +202,7 @@ public class Player : MonoBehaviour, IDamageable
         aimDir.z = 0;
         aimDir.Normalize();
         armPivot.right = scale.x * aimDir;
+        bulletOrigin.right = aimDir;
 
 
         float horizontal = Input.GetAxisRaw("Horizontal");
