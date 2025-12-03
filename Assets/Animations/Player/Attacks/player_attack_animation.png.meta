@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 93401663e946da9488d2ec0c2438573b
+guid: 2afe786213a7a594da5f246dce57f27d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6619710095317976718
-    second: bull_summon_charge_animation_0
+      213: 2215813446999248392
+    second: player_attack_animation_0
   - first:
-      213: 7849737086628250907
-    second: bull_summon_charge_animation_1
+      213: -2609455011653481376
+    second: player_attack_animation_1
   - first:
-      213: 8968963790910026661
-    second: bull_summon_charge_animation_2
+      213: -8170351152120054117
+    second: player_attack_animation_2
   - first:
-      213: 1827233838343438627
-    second: bull_summon_charge_animation_3
+      213: -2625499048072253657
+    second: player_attack_animation_3
   - first:
-      213: 3800834764833348070
-    second: bull_summon_charge_animation_4
-  - first:
-      213: -578801832438656924
-    second: bull_summon_charge_animation_5
+      213: 3672850832565718251
+    second: player_attack_animation_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -111,137 +108,141 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bull_summon_charge_animation_0
+      name: player_attack_animation_0
       rect:
         serializedVersion: 2
-        x: 122
+        x: 0
         y: 0
-        width: 236
-        height: 162
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2793184bdb01224a0800000000000000
-      internalID: -6619710095317976718
+      spriteID: 80e8ce4179620ce10800000000000000
+      internalID: 2215813446999248392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_1
+      name: player_attack_animation_1
       rect:
         serializedVersion: 2
-        x: 636
-        y: 1
-        width: 249
-        height: 155
+        x: 170
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b15cfa46a4edfec60800000000000000
-      internalID: 7849737086628250907
+      spriteID: 06c080d0e7a59cbd0800000000000000
+      internalID: -2609455011653481376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_2
+      name: player_attack_animation_2
       rect:
         serializedVersion: 2
-        x: 1150
-        y: 1
-        width: 259
-        height: 162
+        x: 340
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a378885c09287c70800000000000000
-      internalID: 8968963790910026661
+      spriteID: b9e3eaf5ae41d9e80800000000000000
+      internalID: -8170351152120054117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_3
+      name: player_attack_animation_3
       rect:
         serializedVersion: 2
-        x: 1666
-        y: 9
-        width: 246
-        height: 157
+        x: 510
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 321c800be73ab5910800000000000000
-      internalID: 1827233838343438627
+      spriteID: 72fe689b68a509bd0800000000000000
+      internalID: -2625499048072253657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bull_summon_charge_animation_4
+      name: player_attack_animation_4
       rect:
         serializedVersion: 2
-        x: 2174
-        y: 1
-        width: 259
-        height: 162
+        x: 680
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e9d8d7b4174fb430800000000000000
-      internalID: 3800834764833348070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bull_summon_charge_animation_5
-      rect:
-        serializedVersion: 2
-        x: 2684
-        y: 1
-        width: 249
-        height: 155
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 460162ecccea7f7f0800000000000000
-      internalID: -578801832438656924
+      spriteID: becc3146f5698f230800000000000000
+      internalID: 3672850832565718251
       vertices: []
       indices: 
       edges: []
@@ -250,7 +251,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6535e8a8846c15c4dbefa74e3d60cc4f
     internalID: 0
     vertices: []
     indices: 
@@ -258,14 +259,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":170.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      bull_summon_charge_animation_0: -6619710095317976718
-      bull_summon_charge_animation_1: 7849737086628250907
-      bull_summon_charge_animation_2: 8968963790910026661
-      bull_summon_charge_animation_3: 1827233838343438627
-      bull_summon_charge_animation_4: 3800834764833348070
-      bull_summon_charge_animation_5: -578801832438656924
+      player_attack_animation_0: 2215813446999248392
+      player_attack_animation_1: -2609455011653481376
+      player_attack_animation_2: -8170351152120054117
+      player_attack_animation_3: -2625499048072253657
+      player_attack_animation_4: 3672850832565718251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
