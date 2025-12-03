@@ -49,7 +49,6 @@ public class DrillGuy : Boss
 
     [Tooltip("Driller Animation Controller")]
     private Animator animator;
-    [SerializeField] DynamitePattern dynamitePattern;
 
     //Time until we should change states.
     [SerializeField] DynamitePattern dynamitePatternPhase1;
@@ -129,7 +128,7 @@ public class DrillGuy : Boss
     private void ThrowDynamiteAtHoles()
     {
         foreach(GameObject hole in holes)
-            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
         currentState = State.Targeting;
     }
 
@@ -154,13 +153,9 @@ public class DrillGuy : Boss
         {
             TransitionToEntering();
         }
+        foreach(GameObject hole in holes)
             StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
         holes.Clear();
-    }
-
-    private void UpdateWalking()
-    {
-        throw new NotImplementedException();
     }
 
     private void UpdateTargeting()

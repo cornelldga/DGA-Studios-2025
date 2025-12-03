@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] Pig_Rider pigRider;
+    [SerializeField] PigRider pigRider;
     [SerializeField] float ramDamage = 1f;
 
     [Header("Screen Shake")]

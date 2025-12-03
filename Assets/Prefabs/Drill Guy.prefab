@@ -153,7 +153,8 @@ MonoBehaviour:
   exitHolePrefab: {fileID: 6583115881950436634, guid: abf724d3357484374a775ab932ed3528, type: 3}
   enterHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
   pushForce: 30
-  dynamitePattern: {fileID: 0}
+  dynamitePatternPhase1: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
+  dynamitePatternPhase2: {fileID: 9129332198681593025, guid: 02d0c0a1c64759c45aea006e67751d0c, type: 3}
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7
