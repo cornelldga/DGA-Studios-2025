@@ -32,6 +32,8 @@ public class Pig_Rider : Boss
     private float recoilForce = 2f;
 
     [Header("Attack Settings")]
+    [Tooltip("The layers that represent walls for collision detection")]
+    public LayerMask wallLayers;
     [Tooltip("Chance (0-1) that boss will mark instead of charge")]
     [Range(0f, 1f)]
     [SerializeField] private float markChance = 0.3f;
@@ -292,7 +294,7 @@ public class Pig_Rider : Boss
     public override void SetPhase()
     {
 
-        if (currentPhase == 0 && !isEnraged)
+        if (currentPhase == 1 && !isEnraged)
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
@@ -333,7 +335,7 @@ public class Pig_Rider : Boss
         rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
 
         // Trigger screen shake on wall hit
-        if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
+        if (((1 << collision.gameObject.layer) & wallLayers) != 0 && impulseSource != null)
         {
             impulseSource.GenerateImpulse(wallShakeForce);
         }
@@ -389,13 +391,13 @@ public class Pig_Rider : Boss
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Normal charge mode - get stunned on collision
-        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")
+        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || collision.gameObject.CompareTag("Player")
             || collision.gameObject.CompareTag("Enemy")))
         {
             HandleCharge(collision);
             TransitionToStunned();
         }
-        if (currentState == State.Bouncing && (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Player")))
+        if (currentState == State.Bouncing && (((1 << collision.gameObject.layer) & wallLayers) != 0 || collision.gameObject.CompareTag("Player")))
         {
             HandleBounce(collision);
         }
