@@ -69,12 +69,6 @@ public class PigRider : Boss
     [Tooltip("Force multiplier for player collision shake")]
     private float playersShakeForce = 0.5f;
 
-
-    [Header("Victory Spin")]
-    private bool enableVictorySpin = true;
-    private float spinDuration = 1f;
-    private float spinSpeed = 360;
-
     private Vector2 targetPosition;
     //direction of current charge.
     private Vector2 chargeDirection;
@@ -323,29 +317,8 @@ public class PigRider : Boss
         // Execute the bullet pattern
         yield return StartCoroutine(markingBulletPattern.DoBulletPattern(this));
 
-        // Visual spin after successful marking
-        if (enableVictorySpin)
-        {
-            yield return StartCoroutine(VictorySpin());
-        }
-
         // After marking (and spinning), return to targeting
         TransitionToTargeting();
-    }
-    /// <summary>
-    /// Spinning in a full cicrle after attack.
-    /// </summary>
-    private IEnumerator VictorySpin()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < spinDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float rotationAmount = spinSpeed * Time.deltaTime;
-            transform.Rotate(0f, 0f, rotationAmount);
-            yield return null;
-        }
     }
     private void HandleCharge(Collision2D collision)
     {
