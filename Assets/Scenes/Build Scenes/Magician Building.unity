@@ -412,14 +412,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5634910492374757290, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
---- !u!4 &363369391 stripped
+--- !u!4 &309325214 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4588022867240271486, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+  m_CorrespondingSourceObject: {fileID: 871742177484969984, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
   m_PrefabInstance: {fileID: 309325213}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &416365286
@@ -686,7 +690,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -711,7 +715,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.36, y: 0.6, z: -10}
+  m_LocalPosition: {x: 4.8402414, y: 0.25029, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -877,11 +881,6 @@ PolygonCollider2D:
       - {x: 14.208111, y: -6.318651}
       - {x: 14.252376, y: 10.73014}
   m_UseDelaunayMesh: 0
---- !u!1 &1198015381 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-  m_PrefabInstance: {fileID: 309325213}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1306603024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19116,12 +19115,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1268472078111149479, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: Lens.OrthographicSize
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268472078111149479, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 363369391}
+      objectReference: {fileID: 309325214}
     - target: {fileID: 2348387358040995328, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_Name
       value: Player Camera
@@ -19136,11 +19135,11 @@ PrefabInstance:
       objectReference: {fileID: 862405997}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19194,7 +19193,7 @@ PrefabInstance:
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1198015381}
+      objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: magician
       value: 
