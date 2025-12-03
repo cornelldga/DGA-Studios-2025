@@ -10,7 +10,7 @@ public class Base : Projectile
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            collision.gameObject.GetComponent<IDamageable>()?.TakeDamage(damage);
             Destroy(gameObject);
         }
         base.OnProjectileHit(collision);
