@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 /// <summary>
 /// The types of stages for The Magician
@@ -50,8 +51,11 @@ public class TheMagician : Boss
     [SerializeField] BulletPattern DesperationAttack;
     [Tooltip("How long The Magician hides in the backstage")]
     [SerializeField] float backStageTime;
+    [Tooltip("How long The Magician waits before attacking")]
+    [SerializeField] float appearDelay = 2f;
+    private float appearDelayTimer;
 
-    
+
 
     public override void Start()
     {   
@@ -63,33 +67,45 @@ public class TheMagician : Boss
         ogCard = cardStage.position;
         ogKnife = knifeStage.position;
         ogDove = doveStage.position;
+
+        appearDelayTimer = 0;
+
     }
 
     public override void Update()
     {
-        base.Update();
-        stageTimer -= Time.deltaTime;
-        if (stageTimer <= 0)
+        if (appearDelay / (currentPhase + 1) < appearDelayTimer)
         {
-            teleportDelayTimer -= Time.deltaTime * attackRate;
-            if (teleportDelayTimer <= 0)
+            base.Update();
+            stageTimer -= Time.deltaTime;
+          
+            if (stageTimer <= 0)
             {
-                if (currentStage != Stage.Backstage)
+                teleportDelayTimer -= Time.deltaTime * attackRate;
+                if (teleportDelayTimer <= 0)
                 {
-                    stageTimer = backStageTime;
-                    teleportDelayTimer = 0;
-                    currentStage = Stage.Backstage;
-                    Shuffle();
-                }
-                else
-                {
-                    stageTimer = attackTime;
-                    teleportDelayTimer = teleportDelay;
-                    ChooseNewStage();
+                    if (currentStage != Stage.Backstage)
+                    {
+                        stageTimer = backStageTime;
+                        teleportDelayTimer = 0;
+                        currentStage = Stage.Backstage;
+                        Shuffle();
+                    }
+                    else
+                    {
+                        stageTimer = attackTime;
+                        teleportDelayTimer = teleportDelay;
+                        appearDelayTimer = 0;
+                        ChooseNewStage();
+                    }
                 }
             }
-        }
             MoveToStage();
+        }
+        else
+        {
+            appearDelayTimer += Time.deltaTime;
+        }
     }
 
     public override void SetAttackState(bool isAttacking)
