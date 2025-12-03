@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3327557453974183304, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4557611548015582227, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -298,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: currentSong
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
