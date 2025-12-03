@@ -194,24 +194,16 @@ public class Player : MonoBehaviour, IDamageable
     void PlayerInputs()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        mousePos.z = armPivot.transform.position.z;
-        Vector3 difference = armPivot.transform.position - mousePos;
-        Vector3 scale = playerTransform.localScale;
+        mousePos.z = 0f;
+        Vector3 scale = transform.localScale;
+        scale.x = mousePos.x < transform.position.x ? -1 : 1;
+        transform.localScale = scale;
 
-        bulletOrigin.right = difference;
-        if ((armPivot.transform.position - mousePos).x > 0)
-        {
-            armPivot.right = difference;
-            scale.x = 1; // Flip horizontally
-            playerTransform.localScale = scale;
-            
-        }
-        else if ((armPivot.transform.position - mousePos).x < 0)
-        {
-            armPivot.right = -difference;
-            scale.x = -1; // Flip horizontally
-            playerTransform.localScale = scale;
-        }
+        Vector3 aimDir = (mousePos - armPivot.position);
+        aimDir.z = 0;
+        aimDir.Normalize();
+        armPivot.right = aimDir;
+
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");

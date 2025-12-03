@@ -108,6 +108,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -115,12 +141,12 @@ TextureImporter:
       name: player_attack_animation_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 14
-        width: 136
-        height: 94
+        x: 0
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,12 +163,12 @@ TextureImporter:
       name: player_attack_animation_1
       rect:
         serializedVersion: 2
-        x: 213
-        y: 13
-        width: 127
-        height: 95
+        x: 170
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,12 +185,12 @@ TextureImporter:
       name: player_attack_animation_2
       rect:
         serializedVersion: 2
-        x: 398
-        y: 5
-        width: 112
-        height: 111
+        x: 340
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,12 +207,12 @@ TextureImporter:
       name: player_attack_animation_3
       rect:
         serializedVersion: 2
-        x: 553
-        y: 13
-        width: 127
-        height: 95
+        x: 510
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -203,12 +229,12 @@ TextureImporter:
       name: player_attack_animation_4
       rect:
         serializedVersion: 2
-        x: 714
-        y: 14
-        width: 136
-        height: 94
+        x: 680
+        y: 0
+        width: 170
+        height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -225,7 +251,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6535e8a8846c15c4dbefa74e3d60cc4f
     internalID: 0
     vertices: []
     indices: 
@@ -233,7 +259,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":170.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       player_attack_animation_0: 2215813446999248392
       player_attack_animation_1: -2609455011653481376
