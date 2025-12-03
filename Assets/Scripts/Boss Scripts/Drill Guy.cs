@@ -7,6 +7,7 @@ using UnityEngine.Splines;
 
 public class DrillGuy : Boss
 {
+    
     public enum State
     {
         Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting
@@ -22,6 +23,7 @@ public class DrillGuy : Boss
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
+    [SerializeField] DynamitePattern dynamitePattern;
 
     [Header("Hole Settings")]
 
@@ -59,6 +61,7 @@ public class DrillGuy : Boss
         stateTimer = walkingTime;
         isUnderground = false;
         animator = GetComponent<Animator>();
+        holes = new List<GameObject> ();
     }
 
     /// <summary>
@@ -89,7 +92,7 @@ public class DrillGuy : Boss
                 if (attackCooldown <= 0)
                 {
                     ThrowDynamiteAtPlayer(); //phase 1
-                    // ThrowDynamiteAtHoles(); //phase 2
+                    ThrowDynamiteAtHoles(); //phase 2
                     attackCooldown = dynamitePattern.cooldown;
                 }
                 break;
@@ -112,7 +115,8 @@ public class DrillGuy : Boss
     private void ThrowDynamiteAtHoles()
     {
         foreach(GameObject hole in holes)
-            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+            StartCoroutine(dynamitePattern.ThrowRoutine(bulletOrigin.position, hole.transform.position));   
+        holes.Clear();
         currentState = State.Targeting;
     }
 
@@ -170,7 +174,7 @@ public class DrillGuy : Boss
     private void UpdateEntering()
     {
         isUnderground = true;
-        Instantiate(enterHolePrefab, transform.position, Quaternion.identity);
+        holes.Add(Instantiate(enterHolePrefab, transform.position, Quaternion.identity));
 
         CreateChasePathToPlayer();
         StartCoroutine(DigPath());
@@ -192,7 +196,7 @@ public class DrillGuy : Boss
     private void UpdateExiting()
     {
         isUnderground = false;
-        Instantiate(exitHolePrefab, transform.position, Quaternion.identity);
+        holes.Add(Instantiate(exitHolePrefab, transform.position, Quaternion.identity));
 
         currentState = State.Walking;
         stateTimer = walkingTime;
