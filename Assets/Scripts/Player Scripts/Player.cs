@@ -202,7 +202,7 @@ public class Player : MonoBehaviour, IDamageable
         Vector3 aimDir = (mousePos - armPivot.position);
         aimDir.z = 0;
         aimDir.Normalize();
-        armPivot.right = aimDir;
+        armPivot.right = scale.x * aimDir;
 
 
         float horizontal = Input.GetAxisRaw("Horizontal");
