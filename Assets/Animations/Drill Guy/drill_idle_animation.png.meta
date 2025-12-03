@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: 30ddaee98c13e084786b6142aeb7b0a1
+guid: e5d3ae9746213484a86a442251399639
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5477638478301330645
-    second: drill_idle_animation_0
+      213: 8470187800557483601
+    second: drill_idle_animation_new_0
   - first:
-      213: -8547611086880171639
-    second: drill_idle_animation_1
+      213: -4050894072835844400
+    second: drill_idle_animation_new_1
   - first:
-      213: -6589896322526628104
-    second: drill_idle_animation_2
+      213: 6705858521401279841
+    second: drill_idle_animation_new_2
   - first:
-      213: 2133607901089952477
-    second: drill_idle_animation_3
+      213: 956249615754137460
+    second: drill_idle_animation_new_3
   - first:
-      213: -9052128342928725469
-    second: drill_idle_animation_4
+      213: -3703488811731447972
+    second: drill_idle_animation_new_4
   - first:
-      213: -3994799722991822395
-    second: drill_idle_animation_5
+      213: -3260014845150319495
+    second: drill_idle_animation_new_5
   - first:
-      213: -245855396612675195
-    second: drill_idle_animation_6
+      213: 2007153565283664647
+    second: drill_idle_animation_new_6
   - first:
-      213: -5547903075462833896
-    second: drill_idle_animation_7
+      213: -8365824817365524663
+    second: drill_idle_animation_new_7
   - first:
-      213: 9074768409273248461
-    second: drill_idle_animation_8
+      213: -7218114694497910315
+    second: drill_idle_animation_new_8
   - first:
-      213: -5454779387786369787
-    second: drill_idle_animation_9
+      213: -6412784685047296668
+    second: drill_idle_animation_new_9
   - first:
-      213: -1880021832591622341
-    second: drill_idle_animation_10
+      213: -8466083898789311494
+    second: drill_idle_animation_new_10
   - first:
-      213: 6428735920647740920
-    second: drill_idle_animation_11
+      213: 3271400751976224913
+    second: drill_idle_animation_new_11
   - first:
-      213: -5465961204589805210
-    second: drill_idle_animation_12
+      213: -69379387196589333
+    second: drill_idle_animation_new_12
   - first:
-      213: 8547922318015688033
-    second: drill_idle_animation_13
+      213: 4662379150671032678
+    second: drill_idle_animation_new_13
   - first:
-      213: -5211212501486576682
-    second: drill_idle_animation_14
+      213: -3054933347027498271
+    second: drill_idle_animation_new_14
   - first:
-      213: 7965590169658198848
-    second: drill_idle_animation_15
+      213: -4255533559268313762
+    second: drill_idle_animation_new_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -148,20 +148,20 @@ TextureImporter:
       name: drill_idle_animation_0
       rect:
         serializedVersion: 2
-        x: 150
-        y: 0
-        width: 214
-        height: 379
+        x: 0
+        y: 2712
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5dc792b9c2b740c40800000000000000
-      internalID: 5477638478301330645
+      spriteID: 80b72f2cae87644179da59f9751a0c82
+      internalID: 826432638
       vertices: []
       indices: 
       edges: []
@@ -170,20 +170,20 @@ TextureImporter:
       name: drill_idle_animation_1
       rect:
         serializedVersion: 2
-        x: 662
-        y: 0
-        width: 214
-        height: 379
+        x: 943
+        y: 2712
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9891150f009c06980800000000000000
-      internalID: -8547611086880171639
+      spriteID: a9f54e4debed54f629df893ae2a6aef4
+      internalID: 1996777016
       vertices: []
       indices: 
       edges: []
@@ -192,20 +192,20 @@ TextureImporter:
       name: drill_idle_animation_2
       rect:
         serializedVersion: 2
-        x: 1174
-        y: 0
-        width: 214
-        height: 379
+        x: 1886
+        y: 2712
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8f6b52d953cfb84a0800000000000000
-      internalID: -6589896322526628104
+      spriteID: 50388439ea7374b6a9781176e8a19c74
+      internalID: -1520859541
       vertices: []
       indices: 
       edges: []
@@ -214,20 +214,20 @@ TextureImporter:
       name: drill_idle_animation_3
       rect:
         serializedVersion: 2
-        x: 1686
-        y: 0
-        width: 214
-        height: 379
+        x: 2829
+        y: 2712
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dd2fe6ae4191c9d10800000000000000
-      internalID: 2133607901089952477
+      spriteID: 8f4f7f9cb4d524594b7946f877606738
+      internalID: 2007288912
       vertices: []
       indices: 
       edges: []
@@ -236,20 +236,20 @@ TextureImporter:
       name: drill_idle_animation_4
       rect:
         serializedVersion: 2
-        x: 2198
-        y: 0
-        width: 212
-        height: 380
+        x: 0
+        y: 1808
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 32aec7a7b31606280800000000000000
-      internalID: -9052128342928725469
+      spriteID: 5236b802340cf47b69fb6f0f8cf65faf
+      internalID: 1488305396
       vertices: []
       indices: 
       edges: []
@@ -258,20 +258,20 @@ TextureImporter:
       name: drill_idle_animation_5
       rect:
         serializedVersion: 2
-        x: 2710
-        y: 0
-        width: 212
-        height: 380
+        x: 943
+        y: 1808
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5c95e3a31de9f88c0800000000000000
-      internalID: -3994799722991822395
+      spriteID: 77ecc2671269240c1ac2644263398ce7
+      internalID: -1056651119
       vertices: []
       indices: 
       edges: []
@@ -280,20 +280,20 @@ TextureImporter:
       name: drill_idle_animation_6
       rect:
         serializedVersion: 2
-        x: 3220
-        y: 0
-        width: 214
-        height: 380
+        x: 1886
+        y: 1808
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 589e9c2c1db869cf0800000000000000
-      internalID: -245855396612675195
+      spriteID: 57acc1a41fde04e1293c0f42cb102ca2
+      internalID: -972571818
       vertices: []
       indices: 
       edges: []
@@ -302,20 +302,20 @@ TextureImporter:
       name: drill_idle_animation_7
       rect:
         serializedVersion: 2
-        x: 3733
-        y: 0
-        width: 214
-        height: 380
+        x: 2829
+        y: 1808
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8199db20c83e103b0800000000000000
-      internalID: -5547903075462833896
+      spriteID: 9fa378b6ae3dc411aa2cf3232880d84a
+      internalID: 1752360087
       vertices: []
       indices: 
       edges: []
@@ -324,20 +324,20 @@ TextureImporter:
       name: drill_idle_animation_8
       rect:
         serializedVersion: 2
-        x: 4242
-        y: 0
-        width: 219
-        height: 376
+        x: 0
+        y: 904
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dca2badb9cd00fd70800000000000000
-      internalID: 9074768409273248461
+      spriteID: d6e3b72a00d36469f8b9e65d6f93a6a8
+      internalID: 1447895236
       vertices: []
       indices: 
       edges: []
@@ -346,20 +346,20 @@ TextureImporter:
       name: drill_idle_animation_9
       rect:
         serializedVersion: 2
-        x: 4754
-        y: 0
-        width: 219
-        height: 376
+        x: 943
+        y: 904
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 505eed62c0bbc44b0800000000000000
-      internalID: -5454779387786369787
+      spriteID: 9160d36e5b14347e4b8e3dea9b19da12
+      internalID: 1239569805
       vertices: []
       indices: 
       edges: []
@@ -368,20 +368,20 @@ TextureImporter:
       name: drill_idle_animation_10
       rect:
         serializedVersion: 2
-        x: 5265
-        y: 0
-        width: 217
-        height: 373
+        x: 1886
+        y: 904
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b3fb562aa12d8e5e0800000000000000
-      internalID: -1880021832591622341
+      spriteID: 2f71ef9dbfad140c0a0c3afd024b9f3a
+      internalID: 1207700633
       vertices: []
       indices: 
       edges: []
@@ -390,20 +390,20 @@ TextureImporter:
       name: drill_idle_animation_11
       rect:
         serializedVersion: 2
-        x: 5777
-        y: 0
-        width: 217
-        height: 373
+        x: 2829
+        y: 904
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8fd90094245773950800000000000000
-      internalID: 6428735920647740920
+      spriteID: 3f81bef58371c43f38358dab319d647f
+      internalID: 1606127283
       vertices: []
       indices: 
       edges: []
@@ -412,20 +412,20 @@ TextureImporter:
       name: drill_idle_animation_12
       rect:
         serializedVersion: 2
-        x: 6291
+        x: 0
         y: 0
-        width: 218
-        height: 377
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 661cb5c8e310524b0800000000000000
-      internalID: -5465961204589805210
+      spriteID: bac3f22bd0f704ed183e74820dc3899d
+      internalID: 120320175
       vertices: []
       indices: 
       edges: []
@@ -434,20 +434,20 @@ TextureImporter:
       name: drill_idle_animation_13
       rect:
         serializedVersion: 2
-        x: 6803
+        x: 943
         y: 0
-        width: 218
-        height: 377
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 16d65f43f0250a670800000000000000
-      internalID: 8547922318015688033
+      spriteID: fc02f706942b94b63a8eda43f8fff9cd
+      internalID: -828105502
       vertices: []
       indices: 
       edges: []
@@ -456,20 +456,20 @@ TextureImporter:
       name: drill_idle_animation_14
       rect:
         serializedVersion: 2
-        x: 7317
+        x: 1886
         y: 0
-        width: 213
-        height: 383
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6db51df07dd0ea7b0800000000000000
-      internalID: -5211212501486576682
+      spriteID: 4635db472eea6419f8ae60e16ddcd8f8
+      internalID: 1787162987
       vertices: []
       indices: 
       edges: []
@@ -478,20 +478,20 @@ TextureImporter:
       name: drill_idle_animation_15
       rect:
         serializedVersion: 2
-        x: 7829
+        x: 2829
         y: 0
-        width: 213
-        height: 383
+        width: 943
+        height: 904
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 04b02d84e067b8e60800000000000000
-      internalID: 7965590169658198848
+      spriteID: 1648b2b7d510b49afb34de0e08965bba
+      internalID: 1070086787
       vertices: []
       indices: 
       edges: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 69b9bf3604fb6d64995af32085958ae6
     internalID: 0
     vertices: []
     indices: 
@@ -508,24 +508,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":943.0,"y":904.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      drill_idle_animation_0: 5477638478301330645
-      drill_idle_animation_1: -8547611086880171639
-      drill_idle_animation_10: -1880021832591622341
-      drill_idle_animation_11: 6428735920647740920
-      drill_idle_animation_12: -5465961204589805210
-      drill_idle_animation_13: 8547922318015688033
-      drill_idle_animation_14: -5211212501486576682
-      drill_idle_animation_15: 7965590169658198848
-      drill_idle_animation_2: -6589896322526628104
-      drill_idle_animation_3: 2133607901089952477
-      drill_idle_animation_4: -9052128342928725469
-      drill_idle_animation_5: -3994799722991822395
-      drill_idle_animation_6: -245855396612675195
-      drill_idle_animation_7: -5547903075462833896
-      drill_idle_animation_8: 9074768409273248461
-      drill_idle_animation_9: -5454779387786369787
+      drill_idle_animation_0: 826432638
+      drill_idle_animation_1: 1996777016
+      drill_idle_animation_10: 1207700633
+      drill_idle_animation_11: 1606127283
+      drill_idle_animation_12: 120320175
+      drill_idle_animation_13: -828105502
+      drill_idle_animation_14: 1787162987
+      drill_idle_animation_15: 1070086787
+      drill_idle_animation_2: -1520859541
+      drill_idle_animation_3: 2007288912
+      drill_idle_animation_4: 1488305396
+      drill_idle_animation_5: -1056651119
+      drill_idle_animation_6: -972571818
+      drill_idle_animation_7: 1752360087
+      drill_idle_animation_8: 1447895236
+      drill_idle_animation_9: 1239569805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

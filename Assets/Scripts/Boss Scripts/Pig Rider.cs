@@ -6,7 +6,7 @@ using Unity.Cinemachine;
 
 
 
-public class Pig_Rider : Boss
+public class PigRider : Boss
 {
     public enum State
     {
