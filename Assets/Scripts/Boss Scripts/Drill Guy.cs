@@ -31,6 +31,9 @@ public class DrillGuy : Boss
     [Tooltip("The drill hole prefab object that is created by Drill Guy's transition from aboveground to underground")]
     [SerializeField] private GameObject enterHolePrefab;
 
+    // my math ta says epsilon in a funny way so now i like the word, used to not magic number the z ordering
+    private float zEpsilon = 0.1f;
+
     [Header("Dig Settings")]
 
     [Tooltip("Specifies the max push strength. Increase this to cause more dispalcement from the drill dig path.")]
@@ -46,6 +49,7 @@ public class DrillGuy : Boss
 
     [Tooltip("Driller Animation Controller")]
     private Animator animator;
+    [SerializeField] DynamitePattern dynamitePattern;
 
 
 
@@ -68,6 +72,7 @@ public class DrillGuy : Boss
     {
         base.Update();
         Debug.Log(currentState);
+        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
 
@@ -123,6 +128,8 @@ public class DrillGuy : Boss
     {
         animator.SetBool("isWalking", true);
         animator.SetBool("isExiting", false);
+        currentState = State.Walking;
+        stateTimer = walkingTime;
     }
 
     /// <summary>
@@ -142,11 +149,22 @@ public class DrillGuy : Boss
         throw new NotImplementedException();
     }
 
+    private void TransitionToUGChase()
+    {
+        animator.SetBool("isUG", true);
+        animator.SetBool("isEntering", false);
+        currentState = State.Underground_Chase;
+        isUnderground = true;
+
+        CreateChasePathToPlayer();
+        StartCoroutine(DigPath());
+    }
+
     private void UpdateUG_Chase()
     {
         if (t >= 1f)
         {
-            currentState = State.Exiting;
+            TransitionToExiting();
         }
     }
 
@@ -161,7 +179,10 @@ public class DrillGuy : Boss
     private void TransitionToEntering()
     {
         animator.SetBool("isWalking", false);
-        animator.SetBool("isEntering", true); 
+        animator.SetBool("isEntering", true);
+        currentState = State.Entering;
+
+        
     }
 
     /// <summary>
@@ -169,13 +190,20 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateEntering()
     {
-        isUnderground = true;
-        Instantiate(enterHolePrefab, transform.position, Quaternion.identity);
 
-        CreateChasePathToPlayer();
-        StartCoroutine(DigPath());
-        
-        currentState = State.Underground_Chase;
+    }
+
+    /// <summary>
+    /// Drill entering finish Animation event, transitions to UG
+    /// </summary>
+    private void OnEnteringFinished()
+    {
+        isUnderground = true;
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        if (currentState == State.Entering)
+            TransitionToUGChase();
     }
 
     /// <summary>
@@ -183,7 +211,14 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToExiting()
     {
-        
+        animator.SetBool("isUG", false);
+        animator.SetBool("isExiting", true);
+        currentState = State.Exiting;
+
+        isUnderground = false;
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
     }
 
     /// <summary>
@@ -191,11 +226,15 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateExiting()
     {
-        isUnderground = false;
-        Instantiate(exitHolePrefab, transform.position, Quaternion.identity);
 
-        currentState = State.Walking;
-        stateTimer = walkingTime;
+    }
+
+    private void OnExitingFinished()
+    {
+        if (currentState == State.Exiting)
+        {
+            TransitionToWalking();
+        }
     }
 
     /// <summary>
