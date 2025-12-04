@@ -99,6 +99,7 @@ public class Player : MonoBehaviour, IDamageable
 
         whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
         bulletRight = bulletOrigin.right;
+        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
 
         // This should be set by the equipped mixer and not by the base stats
         // Introduces issue of checking equipped mixer first, then setting the player stats
@@ -198,11 +199,18 @@ public class Player : MonoBehaviour, IDamageable
         scale.x = mousePos.x < transform.position.x ? -1 : 1;
         transform.localScale = scale;
 
-        Vector3 aimDir = (mousePos - armPivot.position);
+        Vector3 aimDir = mousePos - armPivot.position;
         aimDir.z = 0;
         aimDir.Normalize();
-        armPivot.right = scale.x * aimDir;
-        bulletOrigin.right = aimDir;
+
+        // Set rotation in world space - this ignores parent flip
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        armPivot.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Counter the parent's scale flip so the arm sprite doesn't get mirrored
+        Vector3 armScale = armPivot.localScale;
+        armScale.x = scale.x; // This cancels out the parent's flip
+        armPivot.localScale = armScale;
 
 
         float horizontal = Input.GetAxisRaw("Horizontal");
