@@ -198,8 +198,6 @@ public class DrillGuy : Boss
         animator.SetBool("isWalking", false);
         animator.SetBool("isEntering", true);
         currentState = State.Entering;
-
-        
     }
 
     /// <summary>
@@ -211,14 +209,21 @@ public class DrillGuy : Boss
     }
 
     /// <summary>
+    /// Animation triggered event to spawn drill hole to match up with animation
+    /// </summary>
+    private void OnEnteredGround()
+    {
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
+    }
+
+    /// <summary>
     /// Drill entering finish Animation event, transitions to UG
     /// </summary>
     private void OnEnteringFinished()
     {
         isUnderground = true;
-        Vector3 spawnPos = transform.position;
-        spawnPos.z += zEpsilon;
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         if (currentState == State.Entering)
             TransitionToUGChase();
     }
@@ -233,9 +238,6 @@ public class DrillGuy : Boss
         currentState = State.Exiting;
 
         isUnderground = false;
-        Vector3 spawnPos = transform.position;
-        spawnPos.z += zEpsilon;
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
     }
 
     /// <summary>
@@ -246,6 +248,19 @@ public class DrillGuy : Boss
 
     }
 
+    /// <summary>
+    /// Animation triggered event to spawn exit hole to match up with animation
+    /// </summary>
+    private void OnExitedGround()
+    {
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
+    }
+
+    /// <summary>
+    /// called when exiting animation finishes, lets state machine know boss can now move on
+    /// </summary>
     private void OnExitingFinished()
     {
         if (currentState == State.Exiting)

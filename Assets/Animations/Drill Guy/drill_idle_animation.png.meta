@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,10 +148,10 @@ TextureImporter:
       name: drill_idle_animation_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2712
-        width: 943
-        height: 904
+        x: 421
+        y: 2709
+        width: 357
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,10 +170,10 @@ TextureImporter:
       name: drill_idle_animation_1
       rect:
         serializedVersion: 2
-        x: 943
-        y: 2712
-        width: 943
-        height: 904
+        x: 1364
+        y: 2709
+        width: 344
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: drill_idle_animation_2
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 2712
-        width: 943
-        height: 904
+        x: 2300
+        y: 2709
+        width: 352
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,10 +214,10 @@ TextureImporter:
       name: drill_idle_animation_3
       rect:
         serializedVersion: 2
-        x: 2829
-        y: 2712
-        width: 943
-        height: 904
+        x: 3243
+        y: 2709
+        width: 352
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: drill_idle_animation_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1808
-        width: 943
-        height: 904
+        x: 406
+        y: 1806
+        width: 352
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: drill_idle_animation_5
       rect:
         serializedVersion: 2
-        x: 943
-        y: 1808
-        width: 943
-        height: 904
+        x: 1349
+        y: 1806
+        width: 352
+        height: 595
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,10 +280,10 @@ TextureImporter:
       name: drill_idle_animation_6
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1808
-        width: 943
-        height: 904
+        x: 2294
+        y: 1806
+        width: 348
+        height: 606
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: drill_idle_animation_7
       rect:
         serializedVersion: 2
-        x: 2829
-        y: 1808
-        width: 943
-        height: 904
+        x: 3237
+        y: 1806
+        width: 348
+        height: 606
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -324,10 +324,10 @@ TextureImporter:
       name: drill_idle_animation_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 904
-        width: 943
-        height: 904
+        x: 417
+        y: 902
+        width: 346
+        height: 611
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: drill_idle_animation_9
       rect:
         serializedVersion: 2
-        x: 943
-        y: 904
-        width: 943
-        height: 904
+        x: 1360
+        y: 902
+        width: 346
+        height: 611
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,10 +368,10 @@ TextureImporter:
       name: drill_idle_animation_10
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 904
-        width: 943
-        height: 904
+        x: 2307
+        y: 902
+        width: 341
+        height: 606
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -390,10 +390,10 @@ TextureImporter:
       name: drill_idle_animation_11
       rect:
         serializedVersion: 2
-        x: 2829
-        y: 904
-        width: 943
-        height: 904
+        x: 3250
+        y: 902
+        width: 341
+        height: 606
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,10 +412,10 @@ TextureImporter:
       name: drill_idle_animation_12
       rect:
         serializedVersion: 2
-        x: 0
+        x: 426
         y: 0
-        width: 943
-        height: 904
+        width: 344
+        height: 601
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -434,10 +434,10 @@ TextureImporter:
       name: drill_idle_animation_13
       rect:
         serializedVersion: 2
-        x: 943
+        x: 1369
         y: 0
-        width: 943
-        height: 904
+        width: 344
+        height: 601
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -456,10 +456,10 @@ TextureImporter:
       name: drill_idle_animation_14
       rect:
         serializedVersion: 2
-        x: 1886
+        x: 2312
         y: 0
-        width: 943
-        height: 904
+        width: 344
+        height: 605
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,10 +478,10 @@ TextureImporter:
       name: drill_idle_animation_15
       rect:
         serializedVersion: 2
-        x: 2829
+        x: 3255
         y: 0
-        width: 943
-        height: 904
+        width: 344
+        height: 605
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -510,7 +510,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":943.0,"y":904.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       drill_idle_animation_0: 826432638
       drill_idle_animation_1: 1996777016
