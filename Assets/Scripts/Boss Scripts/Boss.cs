@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
@@ -7,9 +8,12 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Boss : MonoBehaviour, IDamageable
 {
+    [Tooltip("What the boss health bar name is set to")]
+    [SerializeField] string bossName;
     [SerializeField] protected float maxHealth;
     protected float health;
     [SerializeField] Image healthBar;
+    [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 
     [Tooltip("Specifices the number of additional boss phases (excluding the first phase)" +
@@ -26,6 +30,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void Start()
     {
+        bossNameText.text = bossName;
         health = maxHealth;
     }
 
