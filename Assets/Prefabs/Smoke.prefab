@@ -291,7 +291,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -4867654237150278327, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  m_Sprite: {fileID: 7466081048885169153, guid: e6885a527638f644ba8f63c014347eec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -315,10 +315,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   smokeSprites:
-  - {fileID: -4867654237150278327, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
-  - {fileID: -356755377443963557, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
-  - {fileID: -6902590303278265700, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
-  - {fileID: 762050836466721937, guid: b4bd0dffe0b554c35a5dcbd4e9666523, type: 3}
+  - {fileID: 7466081048885169153, guid: e6885a527638f644ba8f63c014347eec, type: 3}
+  - {fileID: 2381301540204496216, guid: e6885a527638f644ba8f63c014347eec, type: 3}
+  - {fileID: -2615295334836563686, guid: e6885a527638f644ba8f63c014347eec, type: 3}
+  - {fileID: 7654606603692555806, guid: e6885a527638f644ba8f63c014347eec, type: 3}
   dragIncrease: 1.5
   stopThreshold: 0.25
   lifetime: 8

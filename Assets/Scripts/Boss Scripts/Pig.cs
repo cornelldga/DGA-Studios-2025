@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] Pig_Rider pigRider;
+    [SerializeField] PigRider pigRider;
     [SerializeField] float ramDamage = 1f;
+    [Tooltip("The layers that represent walls for collision detection")]
+    public LayerMask wallLayers;
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -299,7 +301,7 @@ public class Pig : MonoBehaviour
         animator.SetBool("isStunned", true);
 
         // Trigger screen shake on wall hit
-        if (collision.gameObject.CompareTag("Wall") && impulseSource != null)
+        if (((1 << collision.gameObject.layer) & wallLayers) != 0 && impulseSource != null)
         {
             impulseSource.GenerateImpulse(wallShakeForce);
         }
@@ -315,7 +317,7 @@ public class Pig : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Pig_Rider pigRider = collision.gameObject.GetComponent<Pig_Rider>();
+            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
 
             if (pigRider != null)
             {
@@ -359,7 +361,7 @@ public class Pig : MonoBehaviour
             ignoredColliders.Add(collision.collider);
         }
         // Normal charge mode
-        if (currentState == State.Charging && (collision.gameObject.CompareTag("Wall") || isPlayer || isEnemy))
+        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || isPlayer || isEnemy))
         {
             HandleCharge(collision);
         }

@@ -22,7 +22,7 @@ public class MarkingBullet : Bullet
             }
         } else if (Whipped() && collision.CompareTag("Enemy"))
         {
-            Pig_Rider pigRider = collision.gameObject.GetComponent<Pig_Rider>();
+            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
             if (pigRider != null)
             {
                 pigRider.ApplyMark(markDuration);
