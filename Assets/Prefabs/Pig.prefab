@@ -203,9 +203,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pigRider: {fileID: 0}
+  ramDamage: 1
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 64
   patrolSpeed: 2
   patrolDistance: 1
   patrolElevation: 1
+  minStartDelay: 0
+  maxStartDelay: 2
   returnSpeed: 4
   arrivalThreshold: 0.1
   currentState: 0

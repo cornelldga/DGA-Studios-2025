@@ -567,10 +567,14 @@ MonoBehaviour:
   maxHealth: 50
   healthBar: {fileID: 928173876691222959}
   bulletOrigin: {fileID: 6029264802078557319}
-  phasePercents: []
+  phasePercents:
+  - 0.5
   currentPhase: 0
   attackRate: 1
   currentState: 0
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 64
   markChance: 0.3
   bounceChance: 0.2
   enragedBounceChance: 1
