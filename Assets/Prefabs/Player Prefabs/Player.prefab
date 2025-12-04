@@ -333,12 +333,12 @@ MonoBehaviour:
   maxHealth: 10
   damageTakenMultiplier: 1
   whipBaseDamageMultiplier: 1
-  changeCooldownTime: 0.5
+  changeCooldownTime: 1
   defaultEquippedBases: 0000000001000000
   defaultEquippedMixers: 0000000001000000
   whipPivot: {fileID: 2500960760742717684}
   whip: {fileID: 5585523609465621514}
-  whipCooldownTime: 1
+  whipCooldownTime: 2
   whipAnimator: {fileID: 7448286340238263503}
   whipPivotAnimator: {fileID: 2487623392595391275}
   armPivot: {fileID: 7495770454083407856}
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f5785fa3eff6c478846104a999de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whip
-  damageMultiplier: 0
+  damageMultiplier: 1
 --- !u!68 &2107606798565723772
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -727,7 +727,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392482041272648807}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -754,12 +754,12 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.7}
+  m_Offset: {x: 0.53, y: -0.49}
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.5163998, y: -0.18008739}
-  - {x: -0.1569624, y: 1.9551477}
-  - {x: 0.514513, y: -0.04824519}
+  - {x: -0.43834293, y: 1.6419327}
+  - {x: -0.20810476, y: -0.17288888}
   - {x: -0.517285, y: -0.19351292}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
