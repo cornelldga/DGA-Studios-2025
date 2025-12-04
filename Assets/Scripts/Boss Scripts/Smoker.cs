@@ -29,12 +29,16 @@ public class Smoker : MonoBehaviour
     [SerializeField] Transform doveStage;
     [SerializeField] Transform knifeStage;
 
+
     // Whether the stage has been hidden yet
     private bool hidStage;
+    // If its the first time the magician is off stage
+    private bool first;
 
     void Start()
     {
-        hidStage = false;
+        first = true;
+        hidStage = true;
         ogSpeed = spinSpeed;
     }
 
@@ -46,9 +50,9 @@ public class Smoker : MonoBehaviour
     {
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
-        if (magician.currentStage == Stage.Backstage)
+        if (magician.currentStage == Stage.Backstage )
         {
-            if(smokeTimer <= 0)
+            if(smokeTimer <= 0 & !first)
             {
                 if (!hidStage)
                 {
@@ -81,7 +85,10 @@ public class Smoker : MonoBehaviour
                 
             }
         }
-        else { hidStage = false; }
+        else { 
+            hidStage = false;
+            first = false;
+        }
 
     }
     /// <summary>

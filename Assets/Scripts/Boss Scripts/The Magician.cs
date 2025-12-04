@@ -57,6 +57,7 @@ public class TheMagician : Boss
 
 
 
+
     public override void Start()
     {   
         base.Start();
@@ -67,13 +68,17 @@ public class TheMagician : Boss
         ogCard = cardStage.position;
         ogKnife = knifeStage.position;
         ogDove = doveStage.position;
-
         appearDelayTimer = 0;
 
+        animator.SetFloat("aR", attackRate);
+        animator.SetFloat("teleportDelayTimer", teleportDelayTimer);
     }
-
+    
     public override void Update()
     {
+        animator.SetFloat("aR", attackRate);
+        animator.SetFloat("teleportDelayTimer", teleportDelayTimer);
+
         if (appearDelay / (currentPhase + 1) < appearDelayTimer)
         {
             base.Update();
