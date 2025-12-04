@@ -235,7 +235,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
+        holes.Add(Instantiate(exitHolePrefab, spawnPos, Quaternion.identity));
     }
 
     /// <summary>
