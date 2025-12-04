@@ -289,6 +289,17 @@ MonoBehaviour:
     FrequencyGain: 1
     Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &290963305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3528431065090722129, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+  m_PrefabInstance: {fileID: 309325213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &309325213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364,10 +375,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1198015392}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
 --- !u!1 &320906260
 GameObject:
@@ -506,11 +514,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!4 &363369391 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4588022867240271486, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-  m_PrefabInstance: {fileID: 309325213}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &416365286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5800,57 +5803,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
---- !u!1 &1198015381 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-  m_PrefabInstance: {fileID: 309325213}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1198015392
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198015381}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.3}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.80938417, y: 1.1914062}
-    newSize: {x: 1.59375, y: 2.46875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.6, y: 0.6}
-  m_EdgeRadius: 0
 --- !u!1 &1457449396
 GameObject:
   m_ObjectHideFlags: 0
@@ -6034,7 +5986,7 @@ PrefabInstance:
     - target: {fileID: 1268472078111149479, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 363369391}
+      objectReference: {fileID: 0}
     - target: {fileID: 2348387358040995328, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_Name
       value: Player Camera
@@ -6235,7 +6187,7 @@ PrefabInstance:
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1198015381}
+      objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: magician
       value: 
@@ -6356,6 +6308,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3791971091419183918, guid: a0c8cdae409264199be15c23fd512709, type: 3}
+      propertyPath: bossNameText
+      value: 
+      objectReference: {fileID: 290963305}
     - target: {fileID: 3791971091419183918, guid: a0c8cdae409264199be15c23fd512709, type: 3}
       propertyPath: exitHolePrefab
       value: 
