@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 /// <summary>
 /// Handles all universal game logic and game state of the scene
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    [SerializeField] public Animator transition;
     [HideInInspector] public Player player;
     
     [SerializeField] [Tooltip("Reference to the loadout UI canvas that displays equipment selection")] private GameObject loadoutCanvas; 
@@ -44,18 +45,35 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        //AudioManager.Instance.PlayMusic(currentSong);
     }
 
     /// <summary>
-    /// Load the given scene name
+    /// Load the given scene name and does the transition animation dependent on the scene.
     /// </summary>
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(TransitionAnim(sceneName));
     }
-     /// <summary>
+    /// <summary>
+    /// Animation dependent on the scene.
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <returns></returns>
+    IEnumerator TransitionAnim(string scene)
+    {
+        FreezePlayer(true); 
+        transition.SetTrigger(scene);
+        
+        yield return null;
+        
+        float animLength = transition.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animLength);
+
+        SceneManager.LoadScene(scene);
+    }
+
+    /// <summary>
     /// Load the given scene name
     /// </summary>
     /// <param name="sceneName"></param>

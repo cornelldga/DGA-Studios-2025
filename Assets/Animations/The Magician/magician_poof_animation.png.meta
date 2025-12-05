@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 697449d252802ff44901b6e8652ba54b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8871595027855238339
+    second: magician_poof_animation_0
+  - first:
+      213: 6832424876452205722
+    second: magician_poof_animation_1
+  - first:
+      213: -8863168536089892007
+    second: magician_poof_animation_2
+  - first:
+      213: -850125832314553447
+    second: magician_poof_animation_3
+  - first:
+      213: -4008467865604369997
+    second: magician_poof_animation_4
+  - first:
+      213: -1089499351860065931
+    second: magician_poof_animation_5
+  - first:
+      213: -4243296834029234507
+    second: magician_poof_animation_6
+  - first:
+      213: -4256823189010075627
+    second: magician_poof_animation_7
+  - first:
+      213: 2799039403485552169
+    second: magician_poof_animation_8
+  - first:
+      213: 5707192214511350219
+    second: magician_poof_animation_9
+  - first:
+      213: 2499953391130096515
+    second: magician_poof_animation_10
+  - first:
+      213: 3210341174482058038
+    second: magician_poof_animation_11
+  - first:
+      213: -5294263232742111438
+    second: magician_poof_animation_12
+  - first:
+      213: 2094999169254104918
+    second: magician_poof_animation_13
+  - first:
+      213: -3980823173597567095
+    second: magician_poof_animation_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 258
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: magician_poof_animation_0
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 7
+        width: 144
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c4ee629cac3e1b70800000000000000
+      internalID: 8871595027855238339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_1
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 7
+        width: 157
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a94d973b936a1de50800000000000000
+      internalID: 6832424876452205722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_2
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 7
+        width: 153
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b61fdec23bff480800000000000000
+      internalID: -8863168536089892007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_3
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 7
+        width: 154
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99bf1864f0fb334f0800000000000000
+      internalID: -850125832314553447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_4
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 2
+        width: 144
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b15519c6bf0f58c0800000000000000
+      internalID: -4008467865604369997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_5
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 4
+        width: 173
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 579cc55ac1251e0f0800000000000000
+      internalID: -1089499351860065931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_6
+      rect:
+        serializedVersion: 2
+        x: 3196
+        y: 0
+        width: 265
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b6d52be208cc15c0800000000000000
+      internalID: -4243296834029234507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_7
+      rect:
+        serializedVersion: 2
+        x: 3709
+        y: 6
+        width: 263
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510b86bfcd9bce4c0800000000000000
+      internalID: -4256823189010075627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_8
+      rect:
+        serializedVersion: 2
+        x: 4214
+        y: 5
+        width: 260
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ed31de18f28d620800000000000000
+      internalID: 2799039403485552169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_9
+      rect:
+        serializedVersion: 2
+        x: 4740
+        y: 6
+        width: 256
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc1f2d2c415043f40800000000000000
+      internalID: 5707192214511350219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_10
+      rect:
+        serializedVersion: 2
+        x: 5239
+        y: 10
+        width: 274
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 383b7592d5e91b220800000000000000
+      internalID: 2499953391130096515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_11
+      rect:
+        serializedVersion: 2
+        x: 5787
+        y: 174
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63b30d00a4c6d8c20800000000000000
+      internalID: 3210341174482058038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_12
+      rect:
+        serializedVersion: 2
+        x: 5930
+        y: 152
+        width: 87
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 237cef8d3aff686b0800000000000000
+      internalID: -5294263232742111438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_13
+      rect:
+        serializedVersion: 2
+        x: 5751
+        y: 83
+        width: 98
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65f112805aee21d10800000000000000
+      internalID: 2094999169254104918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magician_poof_animation_14
+      rect:
+        serializedVersion: 2
+        x: 5922
+        y: 15
+        width: 73
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987e2183a6641c8c0800000000000000
+      internalID: -3980823173597567095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      magician_poof_animation_0: 8871595027855238339
+      magician_poof_animation_1: 6832424876452205722
+      magician_poof_animation_10: 2499953391130096515
+      magician_poof_animation_11: 3210341174482058038
+      magician_poof_animation_12: -5294263232742111438
+      magician_poof_animation_13: 2094999169254104918
+      magician_poof_animation_14: -3980823173597567095
+      magician_poof_animation_2: -8863168536089892007
+      magician_poof_animation_3: -850125832314553447
+      magician_poof_animation_4: -4008467865604369997
+      magician_poof_animation_5: -1089499351860065931
+      magician_poof_animation_6: -4243296834029234507
+      magician_poof_animation_7: -4256823189010075627
+      magician_poof_animation_8: 2799039403485552169
+      magician_poof_animation_9: 5707192214511350219
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
