@@ -36,7 +36,7 @@ public class PigRider : Boss
     public LayerMask wallLayers;
     [Tooltip("Chance (0-1) that boss will mark instead of charge")]
     [Range(0f, 1f)]
-    [SerializeField] private float markChance = 10f;
+    [SerializeField] private float markChance = 0.3f;
 
     [Tooltip("Chance (0-1) that boss will enter bounce mode instead of normal charge")]
     [Range(0f, 1f)]
