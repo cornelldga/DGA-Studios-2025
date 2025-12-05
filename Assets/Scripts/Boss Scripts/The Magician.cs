@@ -237,6 +237,7 @@ public class TheMagician : Boss
                         break;
                     case Stage.Dove:
                         StopCoroutine(doveStageBulletPattern1.DoBulletPattern(this));
+                        StopCoroutine(doveStageBulletPattern2.DoBulletPattern(this));
 
                         break;
                     case Stage.Knife:
