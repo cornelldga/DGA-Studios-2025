@@ -225,6 +225,7 @@ public class PigRider : Boss
     private void TransitionToTargeting()
     {
         animator.SetBool("IsCharging", false);
+        animator.SetBool("IsShooting", false);
         currentState = State.Targeting;
         stateTimer = targetingTime;
         rb.linearVelocity = Vector2.zero;
@@ -248,7 +249,7 @@ public class PigRider : Boss
     /// </summary>
     private void TransitionToMarking()
     {
-        animator.SetBool("IsCharging", false);
+        animator.SetBool("IsShooting",true);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
 
