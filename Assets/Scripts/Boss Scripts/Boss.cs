@@ -72,6 +72,8 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        Debug.Log(health);
+        Debug.Log("HEALLTH");
         health -= damage;
         if(health <= 0)
         {
@@ -82,7 +84,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         else
         {
             float healthPercent = health / maxHealth;
-            healthBar.fillAmount = healthPercent;
+            // healthBar.fillAmount = healthPercent;
             CheckPhase(healthPercent);
             
         }
