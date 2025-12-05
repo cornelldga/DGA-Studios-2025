@@ -176,6 +176,7 @@ public class DrillGuy : Boss
             }
            else if (currentPhase == 1) {
                 ThrowDynamiteAtPlayer(); //phase 2
+                attackCooldown = dynamitePatternPhase1.cooldown;
  
             }
             else if (currentPhase == 2)
