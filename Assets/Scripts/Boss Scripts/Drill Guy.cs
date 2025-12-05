@@ -25,6 +25,8 @@ public class DrillGuy : Boss
     private List<GameObject> holes; //holes
     [SerializeField] DynamitePattern dynamitePattern;
 
+    [SerializeField] BulletPattern debrisPattern;
+
     [Header("Hole Settings")]
 
     [Tooltip("The drill hole prefab object that is created by Drill Guy's transition from underground to aboveground")]
@@ -229,6 +231,7 @@ public class DrillGuy : Boss
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
 
+        StartCoroutine(debrisPattern.DoBulletPattern(this));
         isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
