@@ -22,12 +22,11 @@ public class DrillGuy : Boss
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
+    private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
     [SerializeField] DynamitePattern dynamitePattern;
-
     [SerializeField] BulletPattern debrisPattern;
-
     [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
@@ -37,6 +36,12 @@ public class DrillGuy : Boss
 
     [Tooltip("The drill hole prefab object that is created by Drill Guy's transition from aboveground to underground")]
     [SerializeField] private GameObject enterHolePrefab;
+
+    // want to look to disable hurtbox if underground. we also need to make Boss.TakeDamage() overridable
+    private BoxCollider2D hurtBox;
+
+    // similarly we have a different hitbox for when it is underground
+    private CircleCollider2D pushTrigger;
 
     // my math ta says epsilon in a funny way so now i like the word, used to not magic number the z ordering
     private float zEpsilon = 0.1f;
@@ -72,6 +77,10 @@ public class DrillGuy : Boss
         animator = GetComponent<Animator>();
         holes = new List<GameObject> ();
         holes = new List<GameObject>();
+        isUnderground = false;
+        hurtBox = GetComponent<BoxCollider2D>();
+        pushTrigger = GetComponent<CircleCollider2D>();
+        pushTrigger.enabled = false;
     }
 
     /// <summary>
@@ -210,19 +219,19 @@ public class DrillGuy : Boss
                     attackCooldown = dynamitePatternPhase1.cooldown;
                     TransitionToWalking();
             }
-           else if (currentPhase == 1) {
+            else if (currentPhase == 1) {
                 ThrowDynamiteAtPlayer(); //phase 2
                 attackCooldown = dynamitePatternPhase1.cooldown;
- 
             }
-        }
-        if (currentPhase == 2)
-        {
-            // wait for all dig sequences to be over
-            if (numFrenzyDigs == 0)
+            if (currentPhase == 2)
             {
-                // BOOM!
-                ThrowDynamiteAtHoles(); 
+                // wait for all dig sequences to be over
+                if (numFrenzyDigs == 0)
+                {
+                    // BOOM!
+                    ThrowDynamiteAtHoles(); 
+                    numFrenzyDigs = 3;
+                }
             }
         }
     }
@@ -238,7 +247,6 @@ public class DrillGuy : Boss
         animator.SetBool("isUG", true);
         currentState = State.Underground_Chase;
         Debug.Log("Transitiontochase");
-        invulnerable = true;
         CreateChasePathToPlayer();
         StartCoroutine(DigPath());
     }
@@ -255,11 +263,10 @@ public class DrillGuy : Boss
         ResetAllAnimatorBools();
         animator.SetBool("isUG", true);
         currentState = State.Underground_Random;
-        if(numFrenzyDigs > 0)
-        {
-            CreateChasePathToRandom();
-            StartCoroutine(DigPath());
-        }
+        // no need to check frenzy digs here, we assume that if we got to this state that has already been =
+        // taken care of
+        CreateChasePathToRandom();
+        StartCoroutine(DigPath());
     }
 
     private void UpdateUG_Random()
@@ -297,6 +304,9 @@ public class DrillGuy : Boss
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
         holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
+        pushTrigger.enabled = true;
+        hurtBox.enabled = false;
+        isUnderground = true;
     }
 
     /// <summary>
@@ -306,6 +316,7 @@ public class DrillGuy : Boss
     {
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
+
         holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
@@ -356,6 +367,9 @@ public class DrillGuy : Boss
   
             }
             else{
+                // ideally there is a delay before first throw, or else weird stuff can happen (animation)
+                // also our current throw function its really messy can get kinda broken in animations
+                // if not careful
                 TransitionToThrowing();
             }
         }
