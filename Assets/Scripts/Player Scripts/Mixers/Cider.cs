@@ -19,6 +19,6 @@ public class Cider : Mixer
 
     public override void RemoveMixer(Player player)
     {
-        player.speed = player.baseSpeed * ciderSpeedMultiplier;
+        player.speed = player.baseSpeed;
     }
 }
