@@ -80,8 +80,8 @@ public class DrillGuy : Boss
     public override void Update()
     {
         base.Update();
-        Debug.Log(currentState);
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
+        // Debug.Log(currentState);
+        // Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
 
@@ -158,6 +158,17 @@ public class DrillGuy : Boss
         {
             TransitionToEntering();
         }
+        if (currentPhase == 1 && attackCooldown <= 0)
+        {
+            if (currentPhase == 1)
+            {
+                    ThrowDynamiteAtPlayer(); //phase 1
+                    attackCooldown = dynamitePatternPhase1.cooldown;
+            }
+        } else if (currentPhase == 2) {
+                ThrowDynamiteAtHoles(); //phase 2
+ 
+        }
     }
 
     private void UpdateTargeting()
@@ -231,10 +242,11 @@ public class DrillGuy : Boss
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
 
-        StartCoroutine(debrisPattern.DoBulletPattern(this));
+        
         isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
+        StartCoroutine(debrisPattern.DoBulletPattern(this));
         holes.Add(Instantiate(exitHolePrefab, spawnPos, Quaternion.identity));
     }
 
@@ -321,7 +333,7 @@ public class DrillGuy : Boss
             Vector2 newPos = currentPath.GetPositionForT2D(t);
             transform.position = newPos;
             yield return new WaitForEndOfFrame();
-            Debug.Log($"t={t}, position={newPos}");
+            // // Debug.Log($"t={t}, position={newPos}");
         }
         
         t = 0f;
@@ -346,7 +358,7 @@ public class DrillGuy : Boss
                 playerRb.AddForce(dir * pushForce * scale, ForceMode2D.Force);
             } else
             {
-                Debug.Log("Drill push back trigger can not find PlayerRb");
+                // Debug.Log("Drill push back trigger can not find PlayerRb");
             }
         }
     }
@@ -354,6 +366,14 @@ public class DrillGuy : Boss
 
     public override void SetPhase()
     {
-        throw new NotImplementedException();
+        switch (currentPhase)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
     }
 }
