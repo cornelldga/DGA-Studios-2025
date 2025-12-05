@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: loadoutCanvas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: transitionTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1165.8881
@@ -507,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 37853438fc9d1449c8d2cf1bc6e99560, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sceneName
-      value: Magician Building
+      value: zion-hog
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
@@ -648,7 +652,7 @@ Transform:
   m_GameObject: {fileID: 1012723034}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000440612, y: 0.00000009682148, z: -4.2660704e-15, w: 1}
-  m_LocalPosition: {x: -3.215071, y: -1.4800391, z: -10}
+  m_LocalPosition: {x: -3.2183325, y: -1.4800391, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
