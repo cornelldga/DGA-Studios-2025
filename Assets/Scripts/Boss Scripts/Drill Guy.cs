@@ -127,7 +127,7 @@ public class DrillGuy : Boss
     {
         foreach(GameObject hole in holes)
             StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
-        currentState = State.Targeting;
+        holes.Clear();
     }
 
     /// <summary>
@@ -271,6 +271,10 @@ public class DrillGuy : Boss
     /// </summary>
     private void OnEnteringFinished()
     {
+        isUnderground = true;
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         if (currentState == State.Entering)
             TransitionToUGChase();
     }
@@ -287,7 +291,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
-        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        holes.Add(Instantiate(exitHolePrefab, spawnPos, Quaternion.identity));
     }
 
     /// <summary>
