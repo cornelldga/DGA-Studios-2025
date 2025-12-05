@@ -46,7 +46,8 @@ public class TheMagician : Boss
 
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern cardStageBulletPattern;
-    [SerializeField] BulletPattern doveStageBulletPattern;
+    [SerializeField] BulletPattern doveStageBulletPattern1;
+    [SerializeField] BulletPattern doveStageBulletPattern2;
     [SerializeField] BulletPattern knifeStageBulletPattern;
     [SerializeField] BulletPattern DesperationAttack;
     [Tooltip("How long The Magician hides in the backstage")]
@@ -198,7 +199,15 @@ public class TheMagician : Boss
 
                 break;
             case Stage.Dove:
-                StartCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+                int ran = UnityEngine.Random.Range(0, 2);
+                if(ran == 0)
+                {
+                    StartCoroutine(doveStageBulletPattern1.DoBulletPattern(this));
+                }
+                else
+                {
+                    StartCoroutine(doveStageBulletPattern2.DoBulletPattern(this));
+                }
 
                 break;
             case Stage.Knife:
@@ -227,7 +236,8 @@ public class TheMagician : Boss
 
                         break;
                     case Stage.Dove:
-                        StopCoroutine(doveStageBulletPattern.DoBulletPattern(this));
+                        StopCoroutine(doveStageBulletPattern1.DoBulletPattern(this));
+                        StopCoroutine(doveStageBulletPattern2.DoBulletPattern(this));
 
                         break;
                     case Stage.Knife:
