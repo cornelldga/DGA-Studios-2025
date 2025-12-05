@@ -17,7 +17,7 @@ public class DrillGuy : Boss
     [Header("State Timing")]
     //How much time to get a lock on player.
     [SerializeField] float targetingTime = 1f;
-    [SerializeField] float initialThrowTime = 7.2f;
+    [SerializeField] float initialThrowTime = 7.3f;
     [SerializeField] float walkingTime = 4f;
     //Time until we should change states.
     private float stateTimer;
@@ -92,8 +92,6 @@ public class DrillGuy : Boss
     public override void Update()
     {
         base.Update();
-        Debug.Log(currentState);
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
 
@@ -123,7 +121,6 @@ public class DrillGuy : Boss
         }
     }
 
-
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
@@ -143,8 +140,9 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToWalking()
     {
+        Debug.Log("transition to walking");
+        ResetAllAnimatorBools();
         animator.SetBool("isWalking", true);
-        animator.SetBool("isThrowing", false);
         currentState = State.Walking;
         stateTimer = walkingTime;
     }
@@ -192,10 +190,18 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToThrowing()
     {
+        Debug.Log("transition to throwing");
+        ResetAllAnimatorBools();
         animator.SetBool("isThrowing", true);
-        animator.SetBool("isExiting", false);
         currentState = State.Throwing;
-        stateTimer = initialThrowTime;
+        if (currentPhase != 2)
+        {
+            stateTimer = initialThrowTime;
+        }
+        else
+        {
+            stateTimer = 1f;
+        }
     }
 
     /// <summary>
@@ -214,20 +220,21 @@ public class DrillGuy : Boss
             {
                     ThrowDynamiteAtHoles(); //phase 1
                     attackCooldown = dynamitePatternPhase1.cooldown;
+                    TransitionToWalking();
             }
            else if (currentPhase == 1) {
                 ThrowDynamiteAtPlayer(); //phase 2
                 attackCooldown = dynamitePatternPhase1.cooldown;
  
             }
-            else if (currentPhase == 2)
+        }
+        if (currentPhase == 2)
+        {
+            // wait for all dig sequences to be over
+            if (numFrenzyDigs == 0)
             {
-                // wait for all dig sequences to be over
-                if (numFrenzyDigs == 0)
-                {
-                    // BOOM!
-                    ThrowDynamiteAtHoles(); 
-                }
+                // BOOM!
+                ThrowDynamiteAtHoles(); 
             }
         }
     }
@@ -239,8 +246,8 @@ public class DrillGuy : Boss
 
     private void TransitionToUGChase()
     {
+        ResetAllAnimatorBools();
         animator.SetBool("isUG", true);
-        animator.SetBool("isEntering", false);
         currentState = State.Underground_Chase;
         hurtBox.enabled = false;
         pushTrigger.enabled = true;
@@ -258,8 +265,8 @@ public class DrillGuy : Boss
     }
     private void TransitionToUGRandom()
     {
+        ResetAllAnimatorBools();
         animator.SetBool("isUG", true);
-        animator.SetBool("isEntering", false);
         currentState = State.Underground_Random;
         isUnderground = true;
         if(numFrenzyDigs > 0)
@@ -283,7 +290,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToEntering()
     {
-        animator.SetBool("isWalking", false);
+        ResetAllAnimatorBools();
         animator.SetBool("isEntering", true);
         currentState = State.Entering;
     }
@@ -327,7 +334,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToExiting()
     {
-        animator.SetBool("isUG", false);
+        ResetAllAnimatorBools();
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
 
@@ -365,6 +372,8 @@ public class DrillGuy : Boss
         hurtBox.enabled = true;
         pushTrigger.enabled = false;
         isUnderground = false;
+        Debug.Log("exit event trigger");
+        Debug.Log(currentState);
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
@@ -496,9 +505,19 @@ public class DrillGuy : Boss
         }
     }
 
+    private void ResetAllAnimatorBools()
+    {
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isThrowing", false);
+        animator.SetBool("isExiting", false);
+        animator.SetBool("isEntering", false);
+        animator.SetBool("isUG", false);
+    }
+
     public override void TakeDamage(float damage)
     {
         if (!isUnderground) base.TakeDamage(damage);
+        Debug.Log(health);
     }
 
     public override void SetPhase()

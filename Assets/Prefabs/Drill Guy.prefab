@@ -474,20 +474,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfaca095e88b40dfbf4145e25126707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drill_Guy
+  bossName: 
   maxHealth: 85
   healthBar: {fileID: 5083919977580830469}
+  bossNameText: {fileID: 0}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
   - 0.8
-  currentPhase: 1
+  currentPhase: 0
   attackRate: 1
   currentState: 0
   targetingTime: 1
   initialThrowTime: 5
   walkingTime: 4
+  dynamitePattern: {fileID: 0}
+  debrisPattern: {fileID: 0}
+  numFrenzyDigs: 0
   exitHolePrefab: {fileID: 6583115881950436634, guid: abf724d3357484374a775ab932ed3528, type: 3}
   enterHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
-  zEpsilon: 0.1
   pushForce: 30
   speedModifier: 0.5
   pushRadius: 1
