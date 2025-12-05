@@ -369,6 +369,11 @@ public class PigRider : Boss
         // Reflect the charge direction off the wall Increase our speed.
         Vector2 wallNormal = collision.contacts[0].normal;
         chargeDirection = Vector2.Reflect(chargeDirection, wallNormal);
+
+        // Zero velocity and apply impulse to ensure clean separation from wall
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(chargeDirection.normalized * bounceSpeed, ForceMode2D.Impulse);
+
         bounceSpeed += 1;
         bouncesRemaining--;
 
