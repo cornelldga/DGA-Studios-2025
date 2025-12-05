@@ -890,9 +890,25 @@ PrefabInstance:
       value: 1.0664062
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: sceneName
+      value: Magician Duo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: happySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
       value: 
       objectReference: {fileID: 4900000, guid: bea203d4ea1ab437b8e8b1fed8f7497a, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: neutralSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
@@ -1029,11 +1045,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2038791840 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4588022867240271486, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-  m_PrefabInstance: {fileID: 264821123}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2063537417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1064,30 @@ PrefabInstance:
     - target: {fileID: 3868355705443199317, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033198116382116301, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_fontSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033198116382116301, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 680.1505
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 292.2542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 178
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 177
       objectReference: {fileID: 0}
     - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20069,7 +20104,7 @@ PrefabInstance:
     - target: {fileID: 1268472078111149479, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 2038791840}
+      objectReference: {fileID: 0}
     - target: {fileID: 2348387358040995328, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_Name
       value: Player Camera

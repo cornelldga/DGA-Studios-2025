@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        AudioManager.Instance.PlayMusic(currentSong);
+        //AudioManager.Instance.PlayMusic(currentSong);
     }
 
     /// <summary>
