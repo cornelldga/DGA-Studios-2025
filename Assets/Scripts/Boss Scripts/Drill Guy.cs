@@ -217,7 +217,6 @@ public class DrillGuy : Boss
             {
                     ThrowDynamiteAtHoles(); //phase 1
                     attackCooldown = dynamitePatternPhase1.cooldown;
-                    TransitionToWalking();
             }
             else if (currentPhase == 1) {
                 ThrowDynamiteAtPlayer(); //phase 2
