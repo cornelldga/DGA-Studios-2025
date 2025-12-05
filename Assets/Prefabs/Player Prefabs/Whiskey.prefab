@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4458053370082309061}
   - component: {fileID: -2511277341272750638}
   - component: {fileID: 6757635485101326290}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Whiskey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.421875, y: 0.40625}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.25, y: 0.77734375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
