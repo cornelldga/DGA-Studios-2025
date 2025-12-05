@@ -9,17 +9,16 @@ public class Cider : Mixer
     [SerializeField] float ciderAccuracyDecrease;
     public override void ApplyMixer(Base baseDrink)
     {
-        baseDrink.speed *= ciderSpeedMultiplier;
         baseDrink.accuracy += ciderAccuracyDecrease;
     }
 
     public override void ApplyMixer(Player player)
     {
-        
+        player.speed = player.baseSpeed * ciderSpeedMultiplier;
     }
 
     public override void RemoveMixer(Player player)
     {
-        
+        player.speed = player.baseSpeed * ciderSpeedMultiplier;
     }
 }
