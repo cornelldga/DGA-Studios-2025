@@ -22,7 +22,6 @@ public class DrillGuy : Boss
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
-    private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
     [SerializeField] DynamitePattern dynamitePattern;
@@ -54,18 +53,14 @@ public class DrillGuy : Boss
     [SerializeField] float speedModifier = 0.5f;
     [SerializeField] float pushRadius = 1f;
 
-    // want to look to disable hurtbox if underground. we also need to make Boss.TakeDamage() overridable
-    private BoxCollider2D hurtBox;
-
-    // similarly we have a different hitbox for when it is underground
-    private CircleCollider2D pushTrigger;
-
     [Tooltip("Driller Animation Controller")]
     private Animator animator;
 
     //Time until we should change states.
     [SerializeField] DynamitePattern dynamitePatternPhase1;
     [SerializeField] DynamitePattern dynamitePatternPhase2;
+
+    bool invulnerable;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,14 +71,9 @@ public class DrillGuy : Boss
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Walking;
         stateTimer = walkingTime;
-        isUnderground = false;
         animator = GetComponent<Animator>();
         holes = new List<GameObject> ();
         holes = new List<GameObject>();
-        hurtBox = GetComponent<BoxCollider2D>();
-        pushTrigger = GetComponent<CircleCollider2D>();
-        pushTrigger.enabled = false;
-        // holes.Add(Instantiate(EnterHolePrefab, GameManager.Instance.player.transform.position,  Quaternion.identity)); //for testing throwing at holes
     }
 
     /// <summary>
@@ -92,8 +82,6 @@ public class DrillGuy : Boss
     public override void Update()
     {
         base.Update();
-        Debug.Log(currentState);
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
 
@@ -230,7 +218,7 @@ public class DrillGuy : Boss
         {
             TransitionToWalking();
         }
-        if (attackCooldown <= 0)
+        else if (attackCooldown <= 0)
         {
             if (currentPhase == 1)
             {
@@ -254,9 +242,8 @@ public class DrillGuy : Boss
         animator.SetBool("isUG", true);
         animator.SetBool("isEntering", false);
         currentState = State.Underground_Chase;
-        hurtBox.enabled = false;
-        pushTrigger.enabled = true;
-        isUnderground = true;
+        Debug.Log("Transitiontochase");
+        invulnerable = true;
         CreateChasePathToPlayer();
         StartCoroutine(DigPath());
     }
@@ -273,7 +260,6 @@ public class DrillGuy : Boss
         animator.SetBool("isUG", true);
         animator.SetBool("isEntering", false);
         currentState = State.Underground_Random;
-        isUnderground = true;
         if(numFrenzyDigs > 0)
         {
             CreateChasePathToRandom();
@@ -311,7 +297,7 @@ public class DrillGuy : Boss
     /// <summary>
     /// Animation triggered event to spawn drill hole to match up with animation
     /// </summary>
-    private void OnEnteredGround()
+    public void AnimationOnEnteredGround()
     {
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
@@ -321,9 +307,8 @@ public class DrillGuy : Boss
     /// <summary>
     /// Drill entering finish Animation event, transitions to UG
     /// </summary>
-    private void OnEnteringFinished()
+    public void AnimationOnEnteringFinished()
     {
-        isUnderground = true;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
         holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
@@ -343,8 +328,6 @@ public class DrillGuy : Boss
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
 
-        
-        isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
@@ -360,33 +343,21 @@ public class DrillGuy : Boss
     }
 
     /// <summary>
-    /// Animation triggered event to spawn exit hole to match up with animation
-    /// </summary>
-    private void OnExitedGround()
-    {
-        Vector3 spawnPos = transform.position;
-        spawnPos.z += zEpsilon;
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
-    }
-
-    /// <summary>
     /// called when exiting animation finishes, lets state machine know boss can now move on
     /// </summary>
-    private void OnExitingFinished()
+    public void AnimationOnExitingFinished()
     {
-        hurtBox.enabled = true;
-        pushTrigger.enabled = false;
-        isUnderground = false;
+        invulnerable = false;
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
                 // if it's desperation phase and there's more to dig
                 numFrenzyDigs-=1;
-                TransitionToWalking();
+                TransitionToEntering();
   
             }
             else{
-                TransitionToWalking();
+                TransitionToThrowing();
             }
         }
     }
@@ -510,7 +481,10 @@ public class DrillGuy : Boss
 
     public override void TakeDamage(float damage)
     {
-        if (!isUnderground) base.TakeDamage(damage);
+        if (!invulnerable)
+        {
+            base.TakeDamage(damage);
+        }
     }
 
     public override void SetPhase()
