@@ -15,7 +15,7 @@ public class DrillGuy : Boss
     [Header("State Timing")]
     //How much time to get a lock on player.
     [SerializeField] float targetingTime = 1f;
-    [SerializeField] float initialThrowTime = 5f;
+    [SerializeField] float initialThrowTime = 7.2f;
     [SerializeField] float walkingTime = 4f;
     //Time until we should change states.
     private float stateTimer;
@@ -139,9 +139,28 @@ public class DrillGuy : Boss
     private void TransitionToWalking()
     {
         animator.SetBool("isWalking", true);
-        animator.SetBool("isExiting", false);
+        animator.SetBool("isThrowing", false);
         currentState = State.Walking;
         stateTimer = walkingTime;
+    }
+
+    /// <summary>
+    /// helper function to face player lolz
+    /// </summary>
+    private void FacePlayer()
+    {
+        Vector2 playerPos = GameManager.Instance.player.transform.position;
+        Vector2 currentPos = transform.position;
+        Vector2 direction = (playerPos - currentPos).normalized;
+        
+        if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1); 
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1); 
+        }
     }
 
     /// <summary>
@@ -150,6 +169,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateWalking()
     {
+        FacePlayer();
         if (stateTimer <= 0)
         {
             TransitionToEntering();
@@ -161,11 +181,10 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToThrowing()
     {
-        animator.SetBool("isWalking", true);
+        animator.SetBool("isThrowing", true);
         animator.SetBool("isExiting", false);
         currentState = State.Throwing;
         stateTimer = initialThrowTime;
-        // do animation stuff here when its in
     }
 
     /// <summary>
@@ -173,6 +192,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateThrowing()
     {
+        FacePlayer();
         if (stateTimer <= 0)
         {
             TransitionToWalking();
