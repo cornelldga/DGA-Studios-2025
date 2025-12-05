@@ -70,7 +70,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
             - bulletOrigin.transform.position;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         if(health <= 0)

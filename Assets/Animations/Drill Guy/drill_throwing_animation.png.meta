@@ -1,55 +1,52 @@
 fileFormatVersion: 2
-guid: e5d3ae9746213484a86a442251399639
+guid: 9c73953508a2a4291a5d1ebc08d8104c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8470187800557483601
-    second: drill_idle_animation_new_0
+      213: 9163792659705019460
+    second: drill_throwing_animation_0
   - first:
-      213: -4050894072835844400
-    second: drill_idle_animation_new_1
+      213: 783477961830469283
+    second: drill_throwing_animation_1
   - first:
-      213: 6705858521401279841
-    second: drill_idle_animation_new_2
+      213: 3264127437503304045
+    second: drill_throwing_animation_2
   - first:
-      213: 956249615754137460
-    second: drill_idle_animation_new_3
+      213: -7257910220026884887
+    second: drill_throwing_animation_3
   - first:
-      213: -3703488811731447972
-    second: drill_idle_animation_new_4
+      213: -7672006502495540809
+    second: drill_throwing_animation_4
   - first:
-      213: -3260014845150319495
-    second: drill_idle_animation_new_5
+      213: 3447762445376597251
+    second: drill_throwing_animation_5
   - first:
-      213: 2007153565283664647
-    second: drill_idle_animation_new_6
+      213: 5662327681534990638
+    second: drill_throwing_animation_6
   - first:
-      213: -8365824817365524663
-    second: drill_idle_animation_new_7
+      213: 8235300465669491935
+    second: drill_throwing_animation_7
   - first:
-      213: -7218114694497910315
-    second: drill_idle_animation_new_8
+      213: -6053997816340022362
+    second: drill_throwing_animation_8
   - first:
-      213: -6412784685047296668
-    second: drill_idle_animation_new_9
+      213: -8467280561739778056
+    second: drill_throwing_animation_9
   - first:
-      213: -8466083898789311494
-    second: drill_idle_animation_new_10
+      213: 1610780514341359402
+    second: drill_throwing_animation_10
   - first:
-      213: 3271400751976224913
-    second: drill_idle_animation_new_11
+      213: 6976829577739677934
+    second: drill_throwing_animation_11
   - first:
-      213: -69379387196589333
-    second: drill_idle_animation_new_12
+      213: 7046678425192432023
+    second: drill_throwing_animation_12
   - first:
-      213: 4662379150671032678
-    second: drill_idle_animation_new_13
+      213: -7358613499145381564
+    second: drill_throwing_animation_13
   - first:
-      213: -3054933347027498271
-    second: drill_idle_animation_new_14
-  - first:
-      213: -4255533559268313762
-    second: drill_idle_animation_new_15
+      213: -8298848626266729942
+    second: drill_throwing_animation_14
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -145,321 +142,277 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drill_idle_animation_0
+      name: drill_throwing_animation_0
       rect:
         serializedVersion: 2
-        x: 421
-        y: 2709
-        width: 357
-        height: 595
+        x: 0
+        y: 1260
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 80b72f2cae87644179da59f9751a0c82
-      internalID: 826432638
+      spriteID: 44cbc054fd45c2f70800000000000000
+      internalID: 9163792659705019460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_1
+      name: drill_throwing_animation_1
       rect:
         serializedVersion: 2
-        x: 1364
-        y: 2709
-        width: 344
-        height: 595
+        x: 436
+        y: 1260
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a9f54e4debed54f629df893ae2a6aef4
-      internalID: 1996777016
+      spriteID: 3ae80442e097fda00800000000000000
+      internalID: 783477961830469283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_2
+      name: drill_throwing_animation_2
       rect:
         serializedVersion: 2
-        x: 2300
-        y: 2709
-        width: 352
-        height: 595
+        x: 872
+        y: 1260
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 50388439ea7374b6a9781176e8a19c74
-      internalID: -1520859541
+      spriteID: d619dfd3c928c4d20800000000000000
+      internalID: 3264127437503304045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_3
+      name: drill_throwing_animation_3
       rect:
         serializedVersion: 2
-        x: 3243
-        y: 2709
-        width: 352
-        height: 595
+        x: 1308
+        y: 1260
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8f4f7f9cb4d524594b7946f877606738
-      internalID: 2007288912
+      spriteID: 9ecce93eb19b64b90800000000000000
+      internalID: -7257910220026884887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_4
+      name: drill_throwing_animation_4
       rect:
         serializedVersion: 2
-        x: 406
-        y: 1806
-        width: 352
-        height: 595
+        x: 1744
+        y: 1260
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5236b802340cf47b69fb6f0f8cf65faf
-      internalID: 1488305396
+      spriteID: 7b92448ebbe878590800000000000000
+      internalID: -7672006502495540809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_5
+      name: drill_throwing_animation_5
       rect:
         serializedVersion: 2
-        x: 1349
-        y: 1806
-        width: 352
-        height: 595
+        x: 0
+        y: 630
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 77ecc2671269240c1ac2644263398ce7
-      internalID: -1056651119
+      spriteID: 30daa925da9e8df20800000000000000
+      internalID: 3447762445376597251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_6
+      name: drill_throwing_animation_6
       rect:
         serializedVersion: 2
-        x: 2294
-        y: 1806
-        width: 348
-        height: 606
+        x: 436
+        y: 630
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 57acc1a41fde04e1293c0f42cb102ca2
-      internalID: -972571818
+      spriteID: e2911cba601a49e40800000000000000
+      internalID: 5662327681534990638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_7
+      name: drill_throwing_animation_7
       rect:
         serializedVersion: 2
-        x: 3237
-        y: 1806
-        width: 348
-        height: 606
+        x: 872
+        y: 630
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9fa378b6ae3dc411aa2cf3232880d84a
-      internalID: 1752360087
+      spriteID: fdcc6da142aa94270800000000000000
+      internalID: 8235300465669491935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_8
+      name: drill_throwing_animation_8
       rect:
         serializedVersion: 2
-        x: 417
-        y: 902
-        width: 346
-        height: 611
+        x: 1308
+        y: 630
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d6e3b72a00d36469f8b9e65d6f93a6a8
-      internalID: 1447895236
+      spriteID: 6abff0ebf01ebfba0800000000000000
+      internalID: -6053997816340022362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_9
+      name: drill_throwing_animation_9
       rect:
         serializedVersion: 2
-        x: 1360
-        y: 902
-        width: 346
-        height: 611
+        x: 1744
+        y: 630
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9160d36e5b14347e4b8e3dea9b19da12
-      internalID: 1239569805
+      spriteID: 8f73eefc03d2e7a80800000000000000
+      internalID: -8467280561739778056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_10
+      name: drill_throwing_animation_10
       rect:
         serializedVersion: 2
-        x: 2307
-        y: 902
-        width: 341
-        height: 606
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f71ef9dbfad140c0a0c3afd024b9f3a
-      internalID: 1207700633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_idle_animation_11
-      rect:
-        serializedVersion: 2
-        x: 3250
-        y: 902
-        width: 341
-        height: 606
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f81bef58371c43f38358dab319d647f
-      internalID: 1606127283
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_idle_animation_12
-      rect:
-        serializedVersion: 2
-        x: 426
+        x: 0
         y: 0
-        width: 344
-        height: 601
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bac3f22bd0f704ed183e74820dc3899d
-      internalID: 120320175
+      spriteID: a2f0070f754aa5610800000000000000
+      internalID: 1610780514341359402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_13
+      name: drill_throwing_animation_11
       rect:
         serializedVersion: 2
-        x: 1369
+        x: 436
         y: 0
-        width: 344
-        height: 601
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: fc02f706942b94b63a8eda43f8fff9cd
-      internalID: -828105502
+      spriteID: ee0bc9f398da2d060800000000000000
+      internalID: 6976829577739677934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_14
+      name: drill_throwing_animation_12
       rect:
         serializedVersion: 2
-        x: 2312
+        x: 872
         y: 0
-        width: 344
-        height: 605
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,20 +421,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4635db472eea6419f8ae60e16ddcd8f8
-      internalID: 1787162987
+      spriteID: 54115117c5679475eaa49e94790f69f9
+      internalID: 7046678425192432023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_idle_animation_15
+      name: drill_throwing_animation_13
       rect:
         serializedVersion: 2
-        x: 3255
+        x: 1308
         y: 0
-        width: 344
-        height: 605
+        width: 436
+        height: 630
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,8 +443,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1648b2b7d510b49afb34de0e08965bba
-      internalID: 1070086787
+      spriteID: 9836d5c9308ce4c84b9c394f8a093047
+      internalID: -7358613499145381564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_throwing_animation_14
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 0
+        width: 436
+        height: 630
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac736b01a9c564a029f5765393b96151
+      internalID: -8298848626266729942
       vertices: []
       indices: 
       edges: []
@@ -500,7 +475,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 69b9bf3604fb6d64995af32085958ae6
+    spriteID: a28a9fd7bf5964673b793691bb07f31b
     internalID: 0
     vertices: []
     indices: 
@@ -510,24 +485,23 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":3.0},"gridSpriteSize":{"x":436.0,"y":630.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      drill_idle_animation_0: 826432638
-      drill_idle_animation_1: 1996777016
-      drill_idle_animation_10: 1207700633
-      drill_idle_animation_11: 1606127283
-      drill_idle_animation_12: 120320175
-      drill_idle_animation_13: -828105502
-      drill_idle_animation_14: 1787162987
-      drill_idle_animation_15: 1070086787
-      drill_idle_animation_2: -1520859541
-      drill_idle_animation_3: 2007288912
-      drill_idle_animation_4: 1488305396
-      drill_idle_animation_5: -1056651119
-      drill_idle_animation_6: -972571818
-      drill_idle_animation_7: 1752360087
-      drill_idle_animation_8: 1447895236
-      drill_idle_animation_9: 1239569805
+      drill_throwing_animation_0: 9163792659705019460
+      drill_throwing_animation_1: 783477961830469283
+      drill_throwing_animation_10: 1610780514341359402
+      drill_throwing_animation_11: 6976829577739677934
+      drill_throwing_animation_12: 7046678425192432023
+      drill_throwing_animation_13: -7358613499145381564
+      drill_throwing_animation_14: -8298848626266729942
+      drill_throwing_animation_2: 3264127437503304045
+      drill_throwing_animation_3: -7257910220026884887
+      drill_throwing_animation_4: -7672006502495540809
+      drill_throwing_animation_5: 3447762445376597251
+      drill_throwing_animation_6: 5662327681534990638
+      drill_throwing_animation_7: 8235300465669491935
+      drill_throwing_animation_8: -6053997816340022362
+      drill_throwing_animation_9: -8467280561739778056
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
