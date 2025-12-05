@@ -185,28 +185,6 @@ public class DrillGuy : Boss
             else
                 TransitionToEntering();
         }
-        if (attackCooldown <= 0)
-        {
-            if (currentPhase == 0)
-            {
-                    ThrowDynamiteAtHoles(); //phase 1
-                    attackCooldown = dynamitePatternPhase1.cooldown;
-            }
-           else if (currentPhase == 1) {
-                ThrowDynamiteAtPlayer(); //phase 2
-                attackCooldown = dynamitePatternPhase1.cooldown;
- 
-            }
-            else if (currentPhase == 2)
-            {
-                // wait for all dig sequences to be over
-                if (numFrenzyDigs == 0)
-                {
-                    // BOOM!
-                    ThrowDynamiteAtHoles(); 
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -232,14 +210,24 @@ public class DrillGuy : Boss
         }
         if (attackCooldown <= 0)
         {
-            if (currentPhase == 1)
+            if (currentPhase == 0)
             {
-                ThrowDynamiteAtPlayer(); //phase 1
-                attackCooldown = dynamitePatternPhase1.cooldown;
+                    ThrowDynamiteAtHoles(); //phase 1
+                    attackCooldown = dynamitePatternPhase1.cooldown;
             }
-            else if (currentPhase == 2) {
-                ThrowDynamiteAtHoles(); //phase 2
-                currentState = State.Walking;
+           else if (currentPhase == 1) {
+                ThrowDynamiteAtPlayer(); //phase 2
+                attackCooldown = dynamitePatternPhase1.cooldown;
+ 
+            }
+            else if (currentPhase == 2)
+            {
+                // wait for all dig sequences to be over
+                if (numFrenzyDigs == 0)
+                {
+                    // BOOM!
+                    ThrowDynamiteAtHoles(); 
+                }
             }
         }
     }
@@ -382,11 +370,11 @@ public class DrillGuy : Boss
             if (currentPhase == 2 && numFrenzyDigs > 0){
                 // if it's desperation phase and there's more to dig
                 numFrenzyDigs-=1;
-                TransitionToWalking();
+                TransitionToThrowing();
   
             }
             else{
-                TransitionToWalking();
+                TransitionToThrowing();
             }
         }
     }
