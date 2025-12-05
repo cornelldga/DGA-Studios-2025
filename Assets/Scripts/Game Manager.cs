@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] public Animator transition;
-    public float transitionTime = 2f;
-
     [HideInInspector] public Player player;
     
     [SerializeField] [Tooltip("Reference to the loadout UI canvas that displays equipment selection")] private GameObject loadoutCanvas; 
@@ -68,7 +66,10 @@ public class GameManager : MonoBehaviour
         FreezePlayer(true); 
         transition.SetTrigger(scene);
         
-        yield return new WaitForSeconds(transitionTime);
+        yield return null;
+        
+        float animLength = transition.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animLength);
 
         SceneManager.LoadScene(scene);
     }
