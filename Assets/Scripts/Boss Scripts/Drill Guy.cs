@@ -33,7 +33,7 @@ public class DrillGuy : Boss
     [SerializeField] private GameObject enterHolePrefab;
 
     // my math ta says epsilon in a funny way so now i like the word, used to not magic number the z ordering
-    [SerializeField] float zEpsilon = 0.1f;
+    private float zEpsilon = 0.1f;
 
     [Header("Dig Settings")]
 
@@ -126,11 +126,8 @@ public class DrillGuy : Boss
     private void ThrowDynamiteAtHoles()
     {
         foreach(GameObject hole in holes)
-        {
-            Debug.Log("hi");
             StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
-        }
-        holes.Clear();
+        currentState = State.Targeting;
     }
 
     /// <summary>
@@ -287,6 +284,10 @@ public class DrillGuy : Boss
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
 
+        isUnderground = false;
+        Vector3 spawnPos = transform.position;
+        spawnPos.z += zEpsilon;
+        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
     }
 
     /// <summary>
