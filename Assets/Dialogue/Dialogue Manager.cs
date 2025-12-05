@@ -259,7 +259,6 @@ public class DialogueManager : MonoBehaviour
         {
             GameManager.Instance.LoadScene(sceneName);
         }
-        EndDialogue();
     }
 
     /// <summary>
