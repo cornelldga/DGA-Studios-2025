@@ -1,0 +1,500 @@
+fileFormatVersion: 2
+guid: 26476a9f2a5ff8f40bfa9bc54cea31f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4043201350447439366
+    second: bull_attack_animation_0
+  - first:
+      213: -6003913413851678261
+    second: bull_attack_animation_1
+  - first:
+      213: 2661987863078911680
+    second: bull_attack_animation_2
+  - first:
+      213: 3347917767839552318
+    second: bull_attack_animation_3
+  - first:
+      213: -8002703877253624642
+    second: bull_attack_animation_4
+  - first:
+      213: 4910728452106651097
+    second: bull_attack_animation_5
+  - first:
+      213: -7392493541124209899
+    second: bull_attack_animation_6
+  - first:
+      213: 5016142887628111354
+    second: bull_attack_animation_7
+  - first:
+      213: -4014034963340795233
+    second: bull_attack_animation_8
+  - first:
+      213: 3233863913088050867
+    second: bull_attack_animation_9
+  - first:
+      213: 3903109153317324975
+    second: bull_attack_animation_10
+  - first:
+      213: -6475033538204059960
+    second: bull_attack_animation_11
+  - first:
+      213: 4705329241661491242
+    second: bull_attack_animation_12
+  - first:
+      213: -4086504761057863264
+    second: bull_attack_animation_13
+  - first:
+      213: -327877301563146432
+    second: bull_attack_animation_14
+  - first:
+      213: -6142183488467276788
+    second: bull_attack_animation_15
+  - first:
+      213: 3399407353581314754
+    second: bull_attack_animation_16
+  - first:
+      213: -4453213307794341411
+    second: bull_attack_animation_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bull_attack_animation_0
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 1617
+        width: 454
+        height: 466
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e9cc8d4365c1830800000000000000
+      internalID: 4043201350447439366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_2
+      rect:
+        serializedVersion: 2
+        x: 1669
+        y: 1615
+        width: 452
+        height: 458
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce383f8bd741f420800000000000000
+      internalID: 2661987863078911680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_3
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 1624
+        width: 485
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e339b49c871367e20800000000000000
+      internalID: 3347917767839552318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_4
+      rect:
+        serializedVersion: 2
+        x: 3449
+        y: 1634
+        width: 415
+        height: 455
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebc08a9493fa0f090800000000000000
+      internalID: -8002703877253624642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 1617
+        width: 457
+        height: 310
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d588305289662440800000000000000
+      internalID: 4910728452106651097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 834
+        width: 458
+        height: 460
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afdfcaf216bec9540800000000000000
+      internalID: 5016142887628111354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_8
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 824
+        width: 471
+        height: 462
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f92e216d7784b48c0800000000000000
+      internalID: -4014034963340795233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_9
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 835
+        width: 477
+        height: 446
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b6619f581ef0ec20800000000000000
+      internalID: 3233863913088050867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_10
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 835
+        width: 417
+        height: 464
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa80e0b6811aa2630800000000000000
+      internalID: 3903109153317324975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_11
+      rect:
+        serializedVersion: 2
+        x: 3391
+        y: 836
+        width: 396
+        height: 525
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c63b9e9d4f0426a0800000000000000
+      internalID: -6475033538204059960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_13
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 36
+        width: 326
+        height: 501
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a914303291d947c0800000000000000
+      internalID: -4086504761057863264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_14
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 0
+        width: 358
+        height: 484
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f3a66d455237bf0800000000000000
+      internalID: -327877301563146432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_15
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 23
+        width: 481
+        height: 440
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c63a0f8a492caa0800000000000000
+      internalID: -6142183488467276788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bull_attack_animation_16
+      rect:
+        serializedVersion: 2
+        x: 2429
+        y: 27
+        width: 454
+        height: 412
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c2a01d2afe1d2f20800000000000000
+      internalID: 3399407353581314754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fa29698aa0255d34f821970d2fc826ee
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      bull_attack_animation: 4910728452106651097
+      bull_attack_animation_0: 4043201350447439366
+      bull_attack_animation_1: -6003913413851678261
+      bull_attack_animation_10: 3903109153317324975
+      bull_attack_animation_11: -6475033538204059960
+      bull_attack_animation_12: 4705329241661491242
+      bull_attack_animation_13: -4086504761057863264
+      bull_attack_animation_14: -327877301563146432
+      bull_attack_animation_15: -6142183488467276788
+      bull_attack_animation_16: 3399407353581314754
+      bull_attack_animation_17: -4453213307794341411
+      bull_attack_animation_18: 1115089012
+      bull_attack_animation_2: 2661987863078911680
+      bull_attack_animation_3: 3347917767839552318
+      bull_attack_animation_4: -8002703877253624642
+      bull_attack_animation_6: -7392493541124209899
+      bull_attack_animation_7: 5016142887628111354
+      bull_attack_animation_8: -4014034963340795233
+      bull_attack_animation_9: 3233863913088050867
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -36,7 +36,7 @@ public class PigRider : Boss
     public LayerMask wallLayers;
     [Tooltip("Chance (0-1) that boss will mark instead of charge")]
     [Range(0f, 1f)]
-    [SerializeField] private float markChance = 0.3f;
+    [SerializeField] private float markChance = 10f;
 
     [Tooltip("Chance (0-1) that boss will enter bounce mode instead of normal charge")]
     [Range(0f, 1f)]
@@ -225,6 +225,7 @@ public class PigRider : Boss
     private void TransitionToTargeting()
     {
         animator.SetBool("IsCharging", false);
+        animator.SetBool("IsShooting", false);
         currentState = State.Targeting;
         stateTimer = targetingTime;
         rb.linearVelocity = Vector2.zero;
@@ -248,7 +249,7 @@ public class PigRider : Boss
     /// </summary>
     private void TransitionToMarking()
     {
-        animator.SetBool("IsCharging", false);
+        animator.SetBool("IsShooting",true);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
 
