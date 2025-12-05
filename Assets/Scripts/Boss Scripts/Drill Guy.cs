@@ -98,18 +98,18 @@ public class DrillGuy : Boss
                 UpdateUG_Random();
                 break;
             case State.Throwing:
-                if (attackCooldown <= 0)
+                if (currentPhase == 1 && attackCooldown <= 0)
                 {
                     if (currentPhase == 1)
                     {
                          ThrowDynamiteAtPlayer(); //phase 1
                          attackCooldown = dynamitePatternPhase1.cooldown;
                     }
-                    else if (currentPhase == 2) {
+                } else if (currentPhase == 2) {
                         ThrowDynamiteAtHoles(); //phase 2
                         currentState = State.Walking;
-                    }
                 }
+
                 break;
             case State.Entering:
                 UpdateEntering();
@@ -132,7 +132,7 @@ public class DrillGuy : Boss
     {
         foreach(GameObject hole in holes)
             StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
-        currentState = State.Targeting;
+        holes.Clear();
     }
 
     /// <summary>
@@ -156,9 +156,6 @@ public class DrillGuy : Boss
         {
             TransitionToEntering();
         }
-        foreach(GameObject hole in holes)
-            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
-        holes.Clear();
     }
 
     private void UpdateTargeting()
@@ -218,7 +215,7 @@ public class DrillGuy : Boss
         isUnderground = true;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
-        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         if (currentState == State.Entering)
             TransitionToUGChase();
     }
@@ -235,7 +232,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
-        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        holes.Add(Instantiate(exitHolePrefab, spawnPos, Quaternion.identity));
     }
 
     /// <summary>
