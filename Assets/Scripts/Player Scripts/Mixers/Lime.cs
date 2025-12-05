@@ -8,7 +8,6 @@ public class Lime : Mixer
     [SerializeField] float limeJuiceValue;
     public override void ApplyMixer(Base baseDrink)
     {
-        baseDrink.speed *= limeJuiceValue;
         baseDrink.cooldown *= limeJuiceValue;
     }
     public override void ApplyMixer(Player player)
