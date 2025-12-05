@@ -504,7 +504,6 @@ public class DrillGuy : Boss
     public override void TakeDamage(float damage)
     {
         if (!isUnderground) base.TakeDamage(damage);
-        Debug.Log(health);
     }
 
     public override void SetPhase()
