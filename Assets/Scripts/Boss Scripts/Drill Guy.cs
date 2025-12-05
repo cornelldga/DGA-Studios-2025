@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Splines;
+using Unity.Collections;
 
 public class DrillGuy : Boss
 {
@@ -26,6 +27,8 @@ public class DrillGuy : Boss
     [SerializeField] DynamitePattern dynamitePattern;
 
     [SerializeField] BulletPattern debrisPattern;
+
+    [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
 
@@ -80,8 +83,8 @@ public class DrillGuy : Boss
     public override void Update()
     {
         base.Update();
-        // Debug.Log(currentState);
-        // Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
+        Debug.Log(currentState);
+        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
 
@@ -156,18 +159,34 @@ public class DrillGuy : Boss
     {
         if (stateTimer <= 0)
         {
-            TransitionToEntering();
-        }
-        if (currentPhase == 1 && attackCooldown <= 0)
-        {
-            if (currentPhase == 1)
+            if (currentPhase == 2 && numFrenzyDigs == 0)
             {
-                    ThrowDynamiteAtPlayer(); //phase 1
+                // stunned
+
+            }
+            else
+                TransitionToEntering();
+        }
+        if (attackCooldown <= 0)
+        {
+            if (currentPhase == 0)
+            {
+                    ThrowDynamiteAtHoles(); //phase 1
                     attackCooldown = dynamitePatternPhase1.cooldown;
             }
-        } else if (currentPhase == 2) {
-                ThrowDynamiteAtHoles(); //phase 2
+           else if (currentPhase == 1) {
+                ThrowDynamiteAtPlayer(); //phase 2
  
+            }
+            else if (currentPhase == 2)
+            {
+                // wait for all dig sequences to be over
+                if (numFrenzyDigs == 0)
+                {
+                    // BOOM!
+                    ThrowDynamiteAtHoles(); 
+                }
+            }
         }
     }
 
@@ -194,10 +213,26 @@ public class DrillGuy : Boss
             TransitionToExiting();
         }
     }
+    private void TransitionToUGRandom()
+    {
+        animator.SetBool("isUG", true);
+        animator.SetBool("isEntering", false);
+        currentState = State.Underground_Random;
+        isUnderground = true;
+        if(numFrenzyDigs > 0)
+        {
+            CreateChasePathToRandom();
+            StartCoroutine(DigPath());
+        }
+    }
 
     private void UpdateUG_Random()
     {
-        throw new NotImplementedException();
+        if (t >= 1f)
+        {
+            TransitionToExiting();
+        }
+
     }
 
     /// <summary>
@@ -229,8 +264,11 @@ public class DrillGuy : Boss
         Vector3 spawnPos = transform.position;
         spawnPos.z += zEpsilon;
         holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
-        if (currentState == State.Entering)
+        if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
+        else
+            TransitionToUGRandom();
+
     }
 
     /// <summary>
@@ -262,7 +300,15 @@ public class DrillGuy : Boss
     {
         if (currentState == State.Exiting)
         {
-            TransitionToWalking();
+            if (currentPhase == 2 && numFrenzyDigs > 0){
+                // if it's desperation phase and there's more to dig
+                numFrenzyDigs-=1;
+                TransitionToWalking();
+  
+            }
+            else{
+                TransitionToWalking();
+            }
         }
     }
 
@@ -284,6 +330,26 @@ public class DrillGuy : Boss
         Vector2 p2 = GenerateControlPoint(p0, p3, directionToPlayer, distanceToPlayer, 0.85f);
         
         currentPath = new DrillPath(p0, p1, p2, p3);
+        t = 0f;
+    }
+
+    /// <summary>
+    /// Generates a random path for the boss
+    /// Gets current location and generates 3 random points (currently limited by test screensizing)
+    /// admittedly just using the above as a template for now until i figure out how
+    /// to actually do this
+    /// </summary>
+    private void CreateChasePathToRandom()
+    {
+        List<Vector2> pathLocations = new List<Vector2>
+        {
+            transform.position,
+            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f))),
+            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f))),
+            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f)))
+        };
+        
+        currentPath = new DrillPath(pathLocations[0],pathLocations[1],pathLocations[2],pathLocations[3]);
         t = 0f;
     }
 
@@ -333,7 +399,7 @@ public class DrillGuy : Boss
             Vector2 newPos = currentPath.GetPositionForT2D(t);
             transform.position = newPos;
             yield return new WaitForEndOfFrame();
-            // // Debug.Log($"t={t}, position={newPos}");
+            // Debug.Log($"t={t}, position={newPos}");
         }
         
         t = 0f;
@@ -358,7 +424,7 @@ public class DrillGuy : Boss
                 playerRb.AddForce(dir * pushForce * scale, ForceMode2D.Force);
             } else
             {
-                // Debug.Log("Drill push back trigger can not find PlayerRb");
+                Debug.Log("Drill push back trigger can not find PlayerRb");
             }
         }
     }
@@ -373,6 +439,7 @@ public class DrillGuy : Boss
             case 1:
                 break;
             case 2:
+                stateTimer = 0.1f;
                 break;
         }
     }

@@ -6321,6 +6321,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
     - target: {fileID: 3791971091419183918, guid: a0c8cdae409264199be15c23fd512709, type: 3}
+      propertyPath: numFrenzyDigs
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791971091419183918, guid: a0c8cdae409264199be15c23fd512709, type: 3}
       propertyPath: exitHolePrefab
       value: 
       objectReference: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
