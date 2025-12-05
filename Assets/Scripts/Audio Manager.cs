@@ -3,13 +3,15 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [Header("Music")]
+    [Tooltip("The music that should be played in this scene")]
+    [SerializeField] MusicType sceneMusic;
     [SerializeField] private AudioSource saloonMusic;
     [SerializeField] private AudioSource hogMusic;
 
     [Header("Sound Effects")]
     
     private AudioSource[] songs;
-    private MusicType currentMusic;
+    private MusicType currentMusic = MusicType.None;
     
     public static AudioManager Instance;
     
@@ -20,28 +22,20 @@ public class AudioManager : MonoBehaviour
         ignoreNextMusicChange = true;
     }
 
-    public void Start()
+    private void Start()
     {
-        if (saloonMusic != null)
-        {
-            Debug.Log("Attempting to play saloon music");
-            saloonMusic.Play();
-        }
-        else
-        {
-            Debug.LogError("Saloon music AudioSource is null!");
-        }
+        PlayMusic(sceneMusic);
     }
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance != null)
         {
+            Instance.PlayMusic(sceneMusic);
             Destroy(this.gameObject);
             return;
         }
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
-
         songs = new AudioSource[] { saloonMusic, hogMusic };
         foreach (AudioSource song in songs)
         {
@@ -50,25 +44,31 @@ public class AudioManager : MonoBehaviour
                 song.loop = true;
             }
         }
-        Debug.Log("Audio Manager Set Up");
     }
 
     public void PlayMusic(MusicType musicType)
     {
-        
+        if(musicType == MusicType.None)
+        {
+            StopAllMusic();
+            return;
+        }
         if (ignoreNextMusicChange)
         {
             ignoreNextMusicChange = false;
             Debug.Log("Ignoring music change due to reset");
             return;
         }
-        
-        if (musicType != currentMusic && !songs[(int)musicType].isPlaying)
+        if(musicType == MusicType.None)
+        {
+            songs[(int)musicType].Play();
+        }
+        else if (musicType != currentMusic && !songs[(int)musicType-1].isPlaying)
         {
             StopAllMusic();
-            if (songs[(int)musicType] != null)
+            if (songs[(int)musicType-1] != null)
             {
-                songs[(int)musicType].Play();
+                songs[(int)musicType-1].Play();
                 currentMusic = musicType;
             }
         }
@@ -83,10 +83,5 @@ public class AudioManager : MonoBehaviour
                 song.Stop();
             }
         }
-    }
-
-    private void OnDestroy()
-    {
-        Debug.Log($"audio manager destoryed, ID: {GetInstanceID()}");
     }
 }
