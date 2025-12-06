@@ -54,6 +54,13 @@ public class PigRider : Boss
     //The marking bullet pattern.
     [SerializeField] private BulletPattern markingBulletPattern;
 
+    [Header("Bounce Safety Settings")]
+    [Tooltip("Maximum time boss can have near-zero velocity in bounce state before transitioning to stunned")]
+    [SerializeField] private float maxZeroVelocityTime = 2f;
+    [Tooltip("Velocity threshold below which boss is considered stuck")]
+    [SerializeField] private float velocityThreshold = 0.5f;
+    private float zeroVelocityTimer = 0f;
+
     [Header("Bounce Mode Settings")]
     [Tooltip("Minimum number of bounces in bounce mode")]
     [SerializeField] private int minBounces = 3;
@@ -201,6 +208,25 @@ public class PigRider : Boss
         rb.linearVelocity = chargeDirection * currentSpeed;
         if (chargeDirection.x > 0) { sprite.flipX = true; }
         else if (chargeDirection.x < 0) { sprite.flipX = false; }
+
+        // Check if velocity is too low (boss is stuck)
+        if (rb.linearVelocity.magnitude < velocityThreshold)
+        {
+            zeroVelocityTimer += Time.deltaTime;
+
+            if (zeroVelocityTimer >= maxZeroVelocityTime)
+            {
+                // Boss has been stuck for too long, transition to stunned
+                rb.linearVelocity = Vector2.zero;
+                bounceSpeed = baseBounceSpeed;
+                zeroVelocityTimer = 0f;
+                TransitionToStunned();
+            }
+        }
+        else
+        {
+            zeroVelocityTimer = 0f;
+        }
     }
 
 
@@ -287,6 +313,7 @@ public class PigRider : Boss
         currentState = State.Bouncing;
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         bouncesRemaining = Random.Range(minBounces, maxBounces);
+        zeroVelocityTimer = 0f; 
     }
 
     /// <summary>
