@@ -21,9 +21,12 @@ public class PigRider : Boss
     [SerializeField] float acceleration = 6f;
     //Maximum speed to cap given acceleration.
     [SerializeField] float maxChargeSpeed = 10f;
-    // Length of raycast that checks for collisions
-    [SerializeField] float collisionDistanceCheck;
-    [Tooltip("Collision layers to check for")]
+    // the circle collider for the pig rider
+    [SerializeField] CircleCollider2D circleCollider;
+    // check distance of circle cast
+    [SerializeField] float checkDistance;
+    float radius;
+    [Tooltip("Collision layers to check for collisions")]
     [SerializeField] LayerMask collisionLayerMask;
 
 
@@ -96,6 +99,7 @@ public class PigRider : Boss
     public override void Start()
     {
         base.Start();
+        radius = circleCollider.radius;
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         animator = GetComponent<Animator>();
@@ -195,7 +199,8 @@ public class PigRider : Boss
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection, collisionDistanceCheck, collisionLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection,
+            checkDistance, collisionLayerMask);
         if (hit)
         {
             HandleCharge(hit);
@@ -212,7 +217,8 @@ public class PigRider : Boss
         rb.linearVelocity = chargeDirection * currentSpeed;
         if (chargeDirection.x > 0) { sprite.flipX = true; }
         else if (chargeDirection.x < 0) { sprite.flipX = false; }
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection, collisionDistanceCheck, collisionLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection,
+            checkDistance, collisionLayerMask);
         if (hit)
         {
             HandleBounce(hit);
