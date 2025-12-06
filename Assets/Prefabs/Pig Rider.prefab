@@ -329,7 +329,7 @@ MonoBehaviour:
   baseSpeed: 5
   acceleration: 6
   maxChargeSpeed: 10
-  circleCollider: {fileID: 2749185905236100922}
+  collisionRadius: 0.75
   checkDistance: 0.1
   collisionLayerMask:
     serializedVersion: 2
