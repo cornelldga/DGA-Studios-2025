@@ -39,14 +39,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Will trigger dialogue when interacted.
-    /// </summary>
-    public void Interact()
-    {
-        TriggerDialogue();
-    }
-
-    /// <summary>
     /// Triggers start dialogue in dialogue manager with the correct dialogue ID given by the button.
     /// </summary>
     public void TriggerDialogue()
@@ -57,5 +49,12 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
 
+    }
+    /// <summary>
+    /// Will trigger dialogue when interacted.
+    /// </summary>
+    public void Interact()
+    {
+        TriggerDialogue();
     }
 }

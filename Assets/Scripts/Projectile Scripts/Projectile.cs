@@ -38,7 +38,6 @@ public abstract class Projectile : MonoBehaviour
     /// </summary>
     public virtual void OnProjectileHit(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (Physics2D.Raycast(transform.position, transform.right, 
             transform.localScale.magnitude, collisionLayers))
         {

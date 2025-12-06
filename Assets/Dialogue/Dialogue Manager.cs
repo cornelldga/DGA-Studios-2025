@@ -254,6 +254,7 @@ public class DialogueManager : MonoBehaviour
         noButton.gameObject.SetActive(false);
         if (nameText.text == "Loadout"){
             GameManager.Instance.ToggleLoadoutManager(true);
+            EndDialogue();
         }
         else
         {
@@ -262,12 +263,17 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the "No" choice, ending dialogue without taking action.
+    /// Handles the "No" choice, ending dialogue without taking action. Retriggers nearby interaction zones
     /// </summary>
     public void NoChoice()
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+        foreach(Collider2D collider in Physics2D.OverlapCircleAll(GameManager.Instance.player.transform.position, 1.5f))
+        {
+            Debug.Log(collider.gameObject.name);
+            collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);
+        }
         EndDialogue();
     }
 }

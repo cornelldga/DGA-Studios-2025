@@ -10,19 +10,18 @@ public class InteractionZone : MonoBehaviour
     [SerializeField] SpriteRenderer InteractionIndicator;
     [SerializeField] GameObject interactable;
 
-    bool canInteract = false;
+    [SerializeField] bool canInteract;
 
     private void Start()
     {
-        InteractionIndicator.gameObject.SetActive(canInteract);
+        SetCanInteract(canInteract);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            canInteract = true;
-            InteractionIndicator.gameObject.SetActive(canInteract);
+            SetCanInteract(true);
         }
     }
 
@@ -30,8 +29,7 @@ public class InteractionZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            canInteract= false;
-            InteractionIndicator.gameObject.SetActive(canInteract);
+            SetCanInteract(false);
         }
     }
 
@@ -47,15 +45,16 @@ public class InteractionZone : MonoBehaviour
     {
         if (canInteract)
         {
-            Interact();
+            interactable.GetComponent<IInteractable>().Interact();
             canInteract = false;
             InteractionIndicator.gameObject.SetActive(false);
         }
     }
 
-    void Interact()
+    public void SetCanInteract(bool canInteract)
     {
-        interactable.GetComponent<IInteractable>().Interact();
+        this.canInteract = canInteract;
+        InteractionIndicator.gameObject.SetActive(canInteract);
     }
 
 

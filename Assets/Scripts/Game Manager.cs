@@ -16,12 +16,10 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Sets the loadout manager to active.
     /// </summary>
-    public void ToggleLoadoutManager(bool open)
+    public void ToggleLoadoutManager(bool isOpen)
     {
-        if (loadoutCanvas != null)
-        {
-            loadoutCanvas.SetActive(open);
-        }
+        FreezePlayer(isOpen);
+        loadoutCanvas.SetActive(isOpen);
     }
 
 
