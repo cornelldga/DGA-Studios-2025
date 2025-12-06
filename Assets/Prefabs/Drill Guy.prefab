@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515949229096953911}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,9 +155,8 @@ MonoBehaviour:
   currentPhase: 0
   attackRate: 1
   currentState: 0
-  initialThrowTime: 5
-  walkingTime: 4
-  dynamitePattern: {fileID: 0}
+  initialThrowTime: 2
+  walkingTime: 2
   debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
   numFrenzyDigs: 3
   exitHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
@@ -167,6 +166,9 @@ MonoBehaviour:
   pushRadius: 1
   dynamitePatternPhase1: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
   dynamitePatternPhase2: {fileID: 9129332198681593025, guid: 02d0c0a1c64759c45aea006e67751d0c, type: 3}
+  dynamiteLandingIndicatorPrefab: {fileID: 3983551256958522771, guid: a791f15ea9f4c9e499b73d42193f628c, type: 3}
+  indicatorTime: 0.5
+  throwInnacuracy: 1.25
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7

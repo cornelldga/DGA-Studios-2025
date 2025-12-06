@@ -24,7 +24,6 @@ public class DrillGuy : Boss
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<GameObject> holes; //holes
-    [SerializeField] DynamitePattern dynamitePattern;
     [SerializeField] BulletPattern debrisPattern;
     [SerializeField] int numFrenzyDigs;
 
@@ -63,6 +62,11 @@ public class DrillGuy : Boss
     //Time until we should change states.
     [SerializeField] DynamitePattern dynamitePatternPhase1;
     [SerializeField] DynamitePattern dynamitePatternPhase2;
+
+    [Header("Throwing Settings")]
+    [SerializeField] GameObject dynamiteLandingIndicatorPrefab;
+    [Tooltip("How innacurate a dynamite throw is")]
+    [SerializeField] float throwInnacuracy;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -120,14 +124,23 @@ public class DrillGuy : Boss
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
-        StartCoroutine(dynamitePatternPhase1.ThrowRoutine(bulletOrigin.position, GameManager.Instance.player.transform.position));
+        Vector3 landingPos = GameManager.Instance.player.transform.position +
+            new Vector3(UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy),
+            UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy));
+        GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, landingPos, Quaternion.identity);
+        Destroy(landingIndicator, dynamitePatternPhase1.duration);
+        StartCoroutine(dynamitePatternPhase1.ThrowRoutine(bulletOrigin.position, landingPos));
     }
 
      //Throws Dynamite at the holes (phase 2)
     private void ThrowDynamiteAtHoles()
     {
         foreach(GameObject hole in holes)
+        {
+            GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, hole.transform.position, Quaternion.identity);
+            Destroy(landingIndicator, dynamitePatternPhase2.duration);
             StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+        }
         holes.Clear();
     }
 
@@ -297,7 +310,7 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteredGround()
     {
-        Vector3 spawnPos = transform.position;
+        Vector3 spawnPos = bulletOrigin.position;
         spawnPos.z += zEpsilon;
         holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         pushTrigger.enabled = true;
@@ -310,10 +323,6 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteringFinished()
     {
-        Vector3 spawnPos = transform.position;
-        spawnPos.z += zEpsilon;
-
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
         if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
         else

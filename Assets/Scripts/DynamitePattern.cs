@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class DynamitePattern : Projectile
 {
-    [SerializeField] float duration; //duration can be changed
+    public float duration; //duration can be changed
     [SerializeField] float heightY;
     [SerializeField] GameObject dynamitePrefab;
     [SerializeField] GameObject explosionPrefab;
