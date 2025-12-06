@@ -16,11 +16,15 @@ public class PigRider : Boss
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
-    private float baseSpeed = 5f;
+    [SerializeField] float baseSpeed = 5f;
     //Acceleration amount for charging (accelerating while charging).
-    private float acceleration = 6f;
+    [SerializeField] float acceleration = 6f;
     //Maximum speed to cap given acceleration.
-    private float maxChargeSpeed = 10f;
+    [SerializeField] float maxChargeSpeed = 10f;
+    // Length of raycast that checks for collisions
+    [SerializeField] float collisionDistanceCheck;
+    [Tooltip("Collision layers to check for")]
+    [SerializeField] LayerMask collisionLayerMask;
 
 
     [Header("State Timing")]
@@ -185,12 +189,19 @@ public class PigRider : Boss
         }
     }
     /// <summary>
-    /// Boss behavior in charging mode. Accelerating to a max speed.
+    /// Boss behavior in charging mode
     /// </summary>
     private void UpdateCharging()
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection, collisionDistanceCheck, collisionLayerMask);
+        if (hit)
+        {
+            HandleCharge(hit);
+            TransitionToStunned();
+        }
+
     }
     /// <summary>
     /// Boss behavior in bouncing mode.
@@ -201,6 +212,11 @@ public class PigRider : Boss
         rb.linearVelocity = chargeDirection * currentSpeed;
         if (chargeDirection.x > 0) { sprite.flipX = true; }
         else if (chargeDirection.x < 0) { sprite.flipX = false; }
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, chargeDirection, collisionDistanceCheck, collisionLayerMask);
+        if (hit)
+        {
+            HandleBounce(hit);
+        }
     }
 
 
@@ -323,41 +339,38 @@ public class PigRider : Boss
         // After marking (and spinning), return to targeting
         TransitionToTargeting();
     }
-    private void HandleCharge(Collision2D collision)
+    private void HandleCharge(RaycastHit2D hit)
     {
         // Stop current velocity first
         rb.linearVelocity = Vector2.zero;
 
         // Calculate recoil direction (bounce back from the surface)
-        Vector2 collisionNormal = collision.contacts[0].normal;
+        Vector2 collisionNormal = hit.normal;
         Vector2 recoilDirection = collisionNormal;
 
         // Apply recoil impulse
         rb.AddForce(recoilDirection * recoilForce, ForceMode2D.Impulse);
 
         // Trigger screen shake on wall hit
-        if (((1 << collision.gameObject.layer) & wallLayers) != 0 && impulseSource != null)
+        if (((1 << hit.collider.gameObject.layer) & wallLayers) != 0)
         {
             impulseSource.GenerateImpulse(wallShakeForce);
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (hit.collider.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-            if (impulseSource != null)
-            {
-                impulseSource.GenerateImpulse(playersShakeForce);
-            }
+            hit.collider.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            impulseSource.GenerateImpulse(playersShakeForce);
         }
     }
-    private void HandleBounce(Collision2D collision)
+    private void HandleBounce(RaycastHit2D hit)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (hit.collider.gameObject.CompareTag("Player"))
         {
             impulseSource.GenerateImpulse(playersShakeForce);
             // Stop and recoil when hitting player
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            hit.collider.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
             rb.linearVelocity = Vector2.zero;
-            Vector2 collisionNormal = collision.contacts[0].normal;
+            Vector2 collisionNormal = hit.normal;
             rb.AddForce(collisionNormal * recoilForce, ForceMode2D.Impulse);
             bounceSpeed = baseBounceSpeed;
             TransitionToStunned();
@@ -368,7 +381,7 @@ public class PigRider : Boss
         impulseSource.GenerateImpulse(shakeIntensity);
 
         // Reflect the charge direction off the wall Increase our speed.
-        Vector2 wallNormal = collision.contacts[0].normal;
+        Vector2 wallNormal = hit.normal;
         chargeDirection = Vector2.Reflect(chargeDirection, wallNormal);
 
         // Zero velocity and apply impulse to ensure clean separation from wall
@@ -389,23 +402,6 @@ public class PigRider : Boss
 
             bounceSpeed = baseBounceSpeed;
             TransitionToStunned();
-        }
-    }
-    /// <summary>
-    /// Decides what should happen depending on state and if collision is with wal or player.
-    /// </summary>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Normal charge mode - get stunned on collision
-        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || collision.gameObject.CompareTag("Player")
-            || collision.gameObject.CompareTag("Enemy")))
-        {
-            HandleCharge(collision);
-            TransitionToStunned();
-        }
-        if (currentState == State.Bouncing && (((1 << collision.gameObject.layer) & wallLayers) != 0 || collision.gameObject.CompareTag("Player")))
-        {
-            HandleBounce(collision);
         }
     }
 

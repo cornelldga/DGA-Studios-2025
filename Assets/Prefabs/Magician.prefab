@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 816368028224125326}
   - component: {fileID: 6069878188257071985}
   - component: {fileID: 458241386248563458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Magician
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1209733427329219906}
   - component: {fileID: 4664525760645388512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6913094105630645781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,6 +360,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3717318877211396489}
     m_Modifications:
+    - target: {fileID: 86667809260493348, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 679403136592591396, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998426260685106248, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -444,9 +460,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7888061159898206469, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583123046418625142, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
