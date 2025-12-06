@@ -143,7 +143,6 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("1");
                 EndDialogue();
             }
             return;
@@ -208,8 +207,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        ongoingDialogue = false;
         GameManager.Instance.FreezePlayer(false);
+        ongoingDialogue = false;
         dialogueBox.SetBool("isOpen", false);
     }
 
@@ -254,8 +253,8 @@ public class DialogueManager : MonoBehaviour
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
         if (nameText.text == "Loadout"){
-            GameManager.Instance.ToggleLoadoutManager(true);
             EndDialogue();
+            GameManager.Instance.ToggleLoadoutManager(true);
         }
         else
         {

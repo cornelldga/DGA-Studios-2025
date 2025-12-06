@@ -86,11 +86,11 @@ public class GameManager : MonoBehaviour
     /// <param name="freeze"></param>
     public void FreezePlayer(bool freeze)
     {
-        player.enabled = !freeze;
         if (freeze)
         {
             player.StopPlayer();
         }
+        player.enabled = !freeze;
     }
 
     /// <summary>
