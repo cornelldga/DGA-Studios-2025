@@ -32,8 +32,6 @@ public class Player : MonoBehaviour, IDamageable
     private static MixerType[] equippedMixers;   
     PlayerBases playerBases;
     PlayerMixers playerMixers;
-    private static int lastBaseIndex = 0; 
-    private static int lastMixerIndex = 0; 
     private static bool isInitialized = false;
 
     [Header("Whip")]
@@ -164,7 +162,6 @@ public class Player : MonoBehaviour, IDamageable
     void SelectBase(int index)
     {
         baseIndex = index;
-        lastBaseIndex = index;
         selectedBase = playerBases.GetBase(equippedBases[baseIndex]);
         backupBase = playerBases.GetBase(equippedBases[(baseIndex + 1) % equippedBases.Length]);
         equippedImage.sprite = selectedBase.getSprite();

@@ -15,8 +15,6 @@ public class DrillHole : MonoBehaviour, IDamageable
     [SerializeField] private Base debrisPrefab;
     [SerializeField] private float spawnOffset = 0.2f;
 
-    // the radius of the splash attack, to be passed onto the rock debris objects
-    [SerializeField] private float maxRadius = 3f;
     [SerializeField] private int debrisCount = 10;
     [SerializeField] private float debrisSpeed = 5f;
 

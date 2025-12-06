@@ -16,7 +16,6 @@ public class DrillGuy : Boss
     public State currentState;
     [Header("State Timing")]
     //How much time to get a lock on player.
-    [SerializeField] float targetingTime = 1f;
     [SerializeField] float initialThrowTime = 7.3f;
     [SerializeField] float walkingTime = 4f;
     //Time until we should change states.
