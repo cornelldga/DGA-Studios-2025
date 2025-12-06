@@ -114,14 +114,14 @@ public class DialogueManager : MonoBehaviour
             sceneName = scene;
             dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
-            if (type == DialogueType.Boss)
+            if (type == DialogueType.Interactive)
             {
-                currentEmotions = emotionDictionary;
-                npcImg.gameObject.SetActive(true);
+                npcImg.gameObject.SetActive(false);
             }
             else
             {
-                npcImg.gameObject.SetActive(false);
+                this.currentEmotions = emotionDictionary;
+                npcImg.gameObject.SetActive(true);
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
@@ -143,6 +143,7 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("1");
                 EndDialogue();
             }
             return;
@@ -153,7 +154,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    if (currentDialogueType == DialogueType.Boss)
+                    if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.NPC)
                     {
                         npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
                     }
@@ -269,9 +270,8 @@ public class DialogueManager : MonoBehaviour
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        foreach(Collider2D collider in Physics2D.OverlapCircleAll(GameManager.Instance.player.transform.position, 1.5f))
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(GameManager.Instance.player.transform.position, 1.5f))
         {
-            Debug.Log(collider.gameObject.name);
             collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);
         }
         EndDialogue();

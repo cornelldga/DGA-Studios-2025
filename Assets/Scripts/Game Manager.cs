@@ -98,7 +98,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
-        Debug.Log("Lose Game");
         FreezePlayer(true);
         LoadScene(GetCurrentSceneName());
     }

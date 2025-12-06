@@ -137,7 +137,6 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToWalking()
     {
-        Debug.Log("transition to walking");
         ResetAllAnimatorBools();
         animator.SetBool("isWalking", true);
         currentState = State.Walking;
@@ -187,7 +186,6 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToThrowing()
     {
-        Debug.Log("transition to throwing");
         ResetAllAnimatorBools();
         animator.SetBool("isThrowing", true);
         currentState = State.Throwing;
@@ -246,7 +244,6 @@ public class DrillGuy : Boss
         ResetAllAnimatorBools();
         animator.SetBool("isUG", true);
         currentState = State.Underground_Chase;
-        Debug.Log("Transitiontochase");
         CreateChasePathToPlayer();
         StartCoroutine(DigPath());
     }
@@ -356,8 +353,6 @@ public class DrillGuy : Boss
         hurtBox.enabled = true;
         pushTrigger.enabled = false;
         isUnderground = false;
-        Debug.Log("exit event trigger");
-        Debug.Log(currentState);
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
@@ -462,7 +457,6 @@ public class DrillGuy : Boss
             Vector2 newPos = currentPath.GetPositionForT2D(t);
             transform.position = newPos;
             yield return new WaitForEndOfFrame();
-            // Debug.Log($"t={t}, position={newPos}");
         }
         
         t = 0f;
@@ -482,13 +476,7 @@ public class DrillGuy : Boss
             float t = (other.transform.position - transform.position).magnitude / pushRadius;
             float scale = Mathf.Clamp(t, 0.4f, 1f);
             scale = 1f / scale;
-            if (playerRb != null)
-            {
-                playerRb.AddForce(dir * pushForce * scale, ForceMode2D.Force);
-            } else
-            {
-                Debug.Log("Drill push back trigger can not find PlayerRb");
-            }
+            playerRb.AddForce(dir * pushForce * scale, ForceMode2D.Force);
         }
     }
 

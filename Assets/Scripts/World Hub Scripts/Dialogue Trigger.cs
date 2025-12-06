@@ -30,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     /// </summary>
     private void Start()
     {
-        if (dialogueType == DialogueType.Boss)
+        if (dialogueType == DialogueType.Boss || dialogueType == DialogueType.NPC)
         {
             emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
             emotionDictionary[DialogueEmotion.Happy] = happySprite;
