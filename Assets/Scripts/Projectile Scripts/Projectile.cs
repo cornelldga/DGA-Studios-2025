@@ -9,8 +9,7 @@ public abstract class Projectile : MonoBehaviour
 {
     [Header("Stats")]
     public float speed;
-    public float lifeDuration;
-    public float cooldown;
+    public float duration;
     public float damage;
     [Tooltip("0 is perfect accuracy")]
     [Range(0, 180)]
@@ -26,7 +25,7 @@ public abstract class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));
         rb.AddForce(transform.right * speed, ForceMode2D.Impulse);
-        Destroy(gameObject, lifeDuration);
+        Destroy(gameObject, duration);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

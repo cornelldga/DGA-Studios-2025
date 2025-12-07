@@ -140,6 +140,7 @@ public class TheMagician : Boss
                 transform.position = knifeStage.position;
                 break;
         }
+        base.Attack();
     }
     /// <summary>
     /// Choose a random stage location from knife, dove, or cards

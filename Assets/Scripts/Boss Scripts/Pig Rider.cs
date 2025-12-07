@@ -61,6 +61,8 @@ public class PigRider : Boss
     [SerializeField] private BulletPattern markingBulletPattern;
 
     [Header("Bounce Mode Settings")]
+    [SerializeField] BulletPattern bounceAttack1;
+    [SerializeField] BulletPattern bounceAttack2;
     [Tooltip("Minimum number of bounces in bounce mode")]
     [SerializeField] private int minBounces = 3;
 
@@ -136,7 +138,6 @@ public class PigRider : Boss
                 UpdateStunned();
                 break;
             case State.Marking:
-                // Handled by coroutine
                 break;
             case State.Bouncing:
                 UpdateBouncing();
@@ -176,11 +177,11 @@ public class PigRider : Boss
         {
             float randomValue = Random.value;
 
-            if (randomValue < markChance)
+            if (randomValue <= markChance)
             {
                 TransitionToMarking();
             }
-            else if (randomValue < markChance + bounceChance)
+            else if (randomValue <= markChance + bounceChance)
             {
                 TransitionToBouncing();
             }
@@ -265,23 +266,14 @@ public class PigRider : Boss
         animator.SetBool("IsCharging", true);
     }
     /// <summary>
-    /// Setting state to marking. Uses a coroutine to perform the marking attack. Handles null case.
+    /// Setting state to marking. Uses a coroutine to perform the marking attack
     /// </summary>
     private void TransitionToMarking()
     {
         animator.SetBool("IsShooting",true);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
-
-        if (markingBulletPattern != null)
-        {
-            StartCoroutine(PerformMarkingAttack());
-        }
-        else
-        {
-            // If no bullet pattern assigned, just go back to targeting
-            TransitionToTargeting();
-        }
+        StartCoroutine(PerformMarkingAttack());
     }
     /// <summary>
     /// Setting state to stunned.
@@ -328,15 +320,11 @@ public class PigRider : Boss
     private IEnumerator PerformMarkingAttack()
     {
         // Point towards player before attacking
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                 - bulletOrigin.transform.position;
 
-            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
-            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
-        }
-
+        if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
+        else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
         // Execute the bullet pattern
         yield return StartCoroutine(markingBulletPattern.DoBulletPattern(this));
 
@@ -366,8 +354,21 @@ public class PigRider : Boss
             impulseSource.GenerateImpulse(playersShakeForce);
         }
     }
+    /// <summary>
+    /// Choose a random bounce attack and check collisions
+    /// </summary>
+    /// <param name="hit">What the pig rider has collided with</param>
     private void HandleBounce(RaycastHit2D hit)
     {
+        int ran = UnityEngine.Random.Range(0, 2);
+        if(ran == 0)
+        {
+            StartCoroutine(bounceAttack1.DoBulletPattern(this));
+        }
+        else
+        {
+            StartCoroutine(bounceAttack2.DoBulletPattern(this));
+        }
         if (hit.collider.gameObject.CompareTag("Player"))
         {
             impulseSource.GenerateImpulse(playersShakeForce);

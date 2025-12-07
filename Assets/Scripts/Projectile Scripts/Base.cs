@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Base : Projectile
 {
+    public float cooldown;
     [SerializeField] Sprite baseSprite;
     public override void OnProjectileHit(Collider2D collision)
     {

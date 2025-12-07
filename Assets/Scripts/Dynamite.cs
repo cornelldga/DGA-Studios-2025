@@ -5,9 +5,8 @@ using UnityEngine;
 /// Dynamite used by Driller Boss: 
 /// Can be thrown at n targeted locations with specified path time.
 /// </summary>
-public class DynamitePattern : Projectile
+public class Dynamite : Projectile
 {
-    public float duration; //duration can be changed
     [SerializeField] float heightY;
     [SerializeField] GameObject dynamitePrefab;
     [SerializeField] GameObject explosionPrefab;

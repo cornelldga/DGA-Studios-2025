@@ -63,8 +63,7 @@ public class DrillGuy : Boss
     private Animator animator;
 
     //Time until we should change states.
-    [SerializeField] DynamitePattern dynamitePatternPhase1;
-    [SerializeField] DynamitePattern dynamitePatternPhase2;
+    [SerializeField] Dynamite dynamite;
 
     [Header("Throwing Settings")]
     [SerializeField] GameObject dynamiteLandingIndicatorPrefab;
@@ -136,8 +135,9 @@ public class DrillGuy : Boss
             new Vector3(UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy),
             UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy));
         GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, landingPos, Quaternion.identity);
-        Destroy(landingIndicator, dynamitePatternPhase1.duration);
-        StartCoroutine(dynamitePatternPhase1.ThrowRoutine(bulletOrigin.position, landingPos));
+        Destroy(landingIndicator, dynamite.duration);
+        StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, landingPos));
+        attackCooldown = dynamite.duration;
     }
 
      //Throws Dynamite at the holes (phase 2)
@@ -146,9 +146,10 @@ public class DrillGuy : Boss
         foreach(Vector3 pos in holePositions)
         {
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, pos, Quaternion.identity);
-            Destroy(landingIndicator, dynamitePatternPhase2.duration);
-            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, pos));
+            Destroy(landingIndicator, dynamite.duration);
+            StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, pos));
         }
+        attackCooldown = dynamite.duration;
         holePositions.Clear();
     }
 
@@ -236,20 +237,17 @@ public class DrillGuy : Boss
             if (currentPhase == 0)
             {
                     ThrowDynamiteAtHoles(); //phase 1
-                    attackCooldown = dynamitePatternPhase1.cooldown;
                     TransitionToWalking();
             }
             else if (currentPhase == 1) {
                 float ran = UnityEngine.Random.Range(0, 1f);
                 if(ran <= phase1ThrowChance)
                 {
-                    ThrowDynamiteAtPlayer(); //phase 2
-                    attackCooldown = dynamitePatternPhase1.cooldown;                   
+                    ThrowDynamiteAtPlayer(); //phase 2                
                 }
                 else
                 {
                     ThrowDynamiteAtHoles(); //phase 1
-                    attackCooldown = dynamitePatternPhase1.cooldown;
                 }
             }
             else

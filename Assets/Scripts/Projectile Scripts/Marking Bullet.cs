@@ -15,10 +15,10 @@ public class MarkingBullet : Bullet
     {
         if (collision.CompareTag("Player"))
         {
-            Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
+            GameObject[] pigs = GameObject.FindGameObjectsWithTag("Pig");
+            foreach(GameObject pig in pigs)
             {
-                player.ApplyMark(markDuration);
+                pig.GetComponent<Pig>().ChargeTarget(GameManager.Instance.player.transform.position);
             }
         } else if (Whipped() && collision.CompareTag("Enemy"))
         {

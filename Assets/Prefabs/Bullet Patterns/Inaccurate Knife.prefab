@@ -109,8 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   speed: 10
-  lifeDuration: 4
-  cooldown: 1
+  duration: 5
   damage: 1
   accuracy: 45
   collisionLayers:

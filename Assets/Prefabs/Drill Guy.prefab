@@ -167,8 +167,7 @@ MonoBehaviour:
   speedModifier: 0.5
   pushRadius: 1
   digRange: 4.5
-  dynamitePatternPhase1: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
-  dynamitePatternPhase2: {fileID: 9129332198681593025, guid: 02d0c0a1c64759c45aea006e67751d0c, type: 3}
+  dynamite: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
   dynamiteLandingIndicatorPrefab: {fileID: 3983551256958522771, guid: a791f15ea9f4c9e499b73d42193f628c, type: 3}
   throw1Innacuracy: 1.25
   throw2Innacuracy: 2
@@ -272,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 1998426260685106248, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_text
+      value: Tom, Manic Miner
       objectReference: {fileID: 0}
     - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer

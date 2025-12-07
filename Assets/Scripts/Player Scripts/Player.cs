@@ -24,6 +24,9 @@ public class Player : MonoBehaviour, IDamageable
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
     private bool isAlive;
+    [Tooltip("Seconds player is invulnerable after taking damage")]
+    [SerializeField] float invulnerabilityTime;
+    bool invulnerable;
 
     [Header("Player Inventory")]
     [SerializeField] private BaseType[] defaultEquippedBases;
@@ -41,8 +44,6 @@ public class Player : MonoBehaviour, IDamageable
     float whipTime; //determined by length of animation
     [SerializeField] Animator whipAnimator;
     [SerializeField] Animator whipPivotAnimator;
-    private bool isMarked;
-    private float markTimer;
 
     [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
@@ -132,27 +133,10 @@ public class Player : MonoBehaviour, IDamageable
         {
             return;
         }
-        if (isMarked)
-        {
-            markTimer -= Time.deltaTime;
-            if (markTimer <= 0)
-            {
-                removeMark();
-            }
-        }
         fireCooldown -= Time.deltaTime;
         changeCooldown -= Time.deltaTime;
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
-    }
-
-    /// <summary>
-    /// Removes mark on player.
-    /// </summary>
-    public void removeMark()
-    {
-        sprite.color = Color.white;
-        isMarked = false;
     }
 
     /// <summary>
@@ -364,36 +348,37 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        health -= damage * damageTakenMultiplier;
-        float healthRatio = health / maxHealth;
-        if (healthRatio <= midHealthThreshold)
+        if (!invulnerable && damage > 0)
         {
-            healthImage.sprite = midSprite;
-            // Should set this boolean animation to true
-        }
-        if (healthRatio <= criticalThreshold)
-        {
-            healthImage.sprite = lowHealthSprite;
-            // Should set this boolean animation to true
-        }
-        if (health <= 0)
-        {
-            GameManager.Instance.LoseGame();
+            StartCoroutine(Invulnerability());
+            health -= damage * damageTakenMultiplier;
+            float healthRatio = health / maxHealth;
+            if (healthRatio <= midHealthThreshold)
+            {
+                healthImage.sprite = midSprite;
+                // Should set this boolean animation to true
+            }
+            if (healthRatio <= criticalThreshold)
+            {
+                healthImage.sprite = lowHealthSprite;
+                // Should set this boolean animation to true
+            }
+            if (health <= 0)
+            {
+                GameManager.Instance.LoseGame();
+            }
         }
     }
-    public void ApplyMark(float markDuration)
+    /// <summary>
+    /// Makes the player invulnerable from damage for a short duration
+    /// </summary>
+    IEnumerator Invulnerability()
     {
-        isMarked = true;
-        sprite.color = new Color(1f, 0.6f, 0.6f);
-        markTimer = markDuration;
-    }
-    public bool IsMarked()
-    {
-        return isMarked;
-    }
-    public float GetHealth()
-    {
-        return health;
+        invulnerable = true;
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(invulnerabilityTime);
+        sprite.color = Color.white;
+        invulnerable = false;
     }
     public BaseType[] GetEquippedBases()
     {

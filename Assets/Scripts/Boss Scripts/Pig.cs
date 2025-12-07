@@ -26,7 +26,7 @@ public class Pig : MonoBehaviour
     //Maximum speed to cap given acceleration.
     private float maxChargeSpeed = 10f;
 
-    [Header("Patrol Settings")]
+    [Header("Movement Settings")]
     [Tooltip("Speed while patrolling side to side")]
     [SerializeField] private float patrolSpeed = 2f;
     [Tooltip("Distance to patrol left and right from starting point")]
@@ -37,6 +37,8 @@ public class Pig : MonoBehaviour
     [SerializeField] private float minStartDelay = 0f;
     [Tooltip("Maximum random delay before pig starts moving")]
     [SerializeField] private float maxStartDelay = 2f;
+    [Tooltip("Seconds pig is stunned after colliding")]
+    [SerializeField] float stunTime;
     private float patrolDirectionX = 1f; // 1 for right, -1 for left
     private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
@@ -64,7 +66,7 @@ public class Pig : MonoBehaviour
 
     public enum State
     {
-        Patrolling, Targeting, Charging, Returning, Stunned
+        Patrolling, Charging, Returning, Stunned
     }
 
     public State currentState;
@@ -116,9 +118,6 @@ public class Pig : MonoBehaviour
             case State.Patrolling:
                 UpdatePatrolling();
                 break;
-            case State.Targeting:
-                UpdateTargeting();
-                break;
             case State.Charging:
                 UpdateCharging();
                 break;
@@ -134,19 +133,6 @@ public class Pig : MonoBehaviour
     }
 
     /// <summary>
-    /// Used to clear all colliders (players, enemies) ignored while not charging.
-    /// </summary>
-    private void clearIgnoredColliders()
-    {
-        for (int i = ignoredColliders.Count - 1; i >= 0; i--)
-        {
-            // Reenables collision
-            Physics2D.IgnoreCollision(ignoredColliders[i], thisCollider, false);
-            ignoredColliders.RemoveAt(i);
-        }
-    }
-
-    /// <summary>
     /// Boss behavior in charging mode. Accelerating to a max speed.
     /// If targets lose their marks, transition to returning instead of patrolling.
     /// </summary>
@@ -154,11 +140,6 @@ public class Pig : MonoBehaviour
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
-
-        if (pigRider != null && GameManager.Instance.player != null && !pigRider.IsMarked() && !GameManager.Instance.player.IsMarked())
-        {
-            TransitionToReturning();
-        }
     }
 
     /// <summary>
@@ -167,17 +148,18 @@ public class Pig : MonoBehaviour
     /// </summary>
     private void UpdatePatrolling()
     {
-        if (pigRider != null && GameManager.Instance.player != null)
+        if(currentState == State.Charging)
         {
-            bool validTarget = pigRider.IsMarked() || GameManager.Instance.player.IsMarked();
-            if (validTarget)
-            {
-                TransitionToTargeting();
-                return;
-            }
+            return;
+        }
+        if (pigRider.IsMarked())
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+            ChargeTarget(pigRider.transform.position);
+            return;
         }
 
-        float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
+            float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
 
         Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * elevation);
         rb.linearVelocity = movement;
@@ -213,29 +195,14 @@ public class Pig : MonoBehaviour
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
     }
-
-    private void UpdateTargeting()
+    /// <summary>
+    /// Chooses the target for the pig and transitions to charging
+    /// </summary>
+    /// <param name="targetPos"></param>
+    public void ChargeTarget(Vector3 targetPos)
     {
-        // Script references are not set up properly.
-        if (pigRider == null || GameManager.Instance.player == null)
-        {
-            return;
-        }
-
-        bool validTarget = pigRider.IsMarked() || GameManager.Instance.player.IsMarked();
-        if (pigRider.IsMarked())
-        {
-            targetPosition = pigRider.transform.position;
-        }
-        else if (GameManager.Instance.player.IsMarked())
-        {
-            targetPosition = GameManager.Instance.player.transform.position;
-        }
-
-        if (validTarget)
-        {
-            TransitionToCharging();
-        }
+        targetPosition = targetPos;
+        TransitionToCharging();
     }
 
     /// <summary>
@@ -257,11 +224,6 @@ public class Pig : MonoBehaviour
         }
     }
 
-    private void TransitionToTargeting()
-    {
-        currentState = State.Targeting;
-    }
-
     private void TransitionToReturning()
     {
         currentState = State.Returning;
@@ -280,8 +242,6 @@ public class Pig : MonoBehaviour
     {
         animator.SetBool("isCharging", true);
         currentState = State.Charging;
-        // Reenable colliders when charging
-        clearIgnoredColliders();
 
         chargeDirection = (targetPosition - (Vector2)transform.position).normalized;
         currentSpeed = baseSpeed;
@@ -308,8 +268,6 @@ public class Pig : MonoBehaviour
         else if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.player.TakeDamage(ramDamage);
-            GameManager.Instance.player.removeMark();
-
             if (impulseSource != null)
             {
                 impulseSource.GenerateImpulse(playersShakeForce);
@@ -339,9 +297,7 @@ public class Pig : MonoBehaviour
     /// </summary>
     private System.Collections.IEnumerator StunCoroutine()
     {
-        GameManager.Instance.player.removeMark();
-
-        yield return new WaitForSeconds(1.09f);
+        yield return new WaitForSeconds(stunTime);
         animator.SetBool("isStunned", false);
         TransitionToReturning();
     }
@@ -364,6 +320,7 @@ public class Pig : MonoBehaviour
         if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || isPlayer || isEnemy))
         {
             HandleCharge(collision);
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
     }
 }

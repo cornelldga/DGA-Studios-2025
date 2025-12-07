@@ -202,12 +202,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dove
   speed: 3.75
-  lifeDuration: 5
-  cooldown: 1
+  duration: 5
   damage: 1
   accuracy: 0
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
   frequency: 4
-  amplitude: 4
+  amplitude: 6
