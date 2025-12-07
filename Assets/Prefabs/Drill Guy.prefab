@@ -150,8 +150,8 @@ MonoBehaviour:
   bossNameText: {fileID: 62901968422666060}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
-  - 0.75
-  - 0.25
+  - 0.8
+  - 0.3
   currentPhase: 0
   attackRate: 1
   currentState: 0
@@ -159,16 +159,20 @@ MonoBehaviour:
   walkingTime: 2
   debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
   numFrenzyDigs: 3
+  moveSpeed: 0.8
+  moveRange: 2
   exitHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
   enterHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
   pushForce: 30
   speedModifier: 0.5
   pushRadius: 1
+  digRange: 4.5
   dynamitePatternPhase1: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
   dynamitePatternPhase2: {fileID: 9129332198681593025, guid: 02d0c0a1c64759c45aea006e67751d0c, type: 3}
   dynamiteLandingIndicatorPrefab: {fileID: 3983551256958522771, guid: a791f15ea9f4c9e499b73d42193f628c, type: 3}
-  indicatorTime: 0.5
-  throwInnacuracy: 1.25
+  throw1Innacuracy: 1.25
+  throw2Innacuracy: 2
+  phase1ThrowChance: 0.8
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7

@@ -26,18 +26,30 @@ MonoBehaviour:
   - {fileID: 2660713567375334150, guid: 406d2b9e29f8d4a449b590b5969ec53f, type: 3}
   - {fileID: 2660713567375334150, guid: 406d2b9e29f8d4a449b590b5969ec53f, type: 3}
   bulletAngles:
-  - 210
   - 0
-  - 150
-  - 90
-  - 180
-  - 60
-  - 270
-  - 120
-  - 330
-  - 310
   - 30
+  - 60
+  - 90
+  - 120
+  - 150
+  - 180
+  - 210
   - 240
+  - 270
+  - 300
+  - 330
+  - 15
+  - 45
+  - 75
+  - 105
+  - 135
+  - 165
+  - 195
+  - 225
+  - 255
+  - 285
+  - 315
+  - 345
   bulletDelays:
   - 0
   - 0
@@ -51,5 +63,17 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  minAttackCooldown: 1.23
-  maxAttackCooldown: 3.51
+  - 0.5
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  minAttackCooldown: 1
+  maxAttackCooldown: 3

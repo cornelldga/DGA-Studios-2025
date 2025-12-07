@@ -23,11 +23,15 @@ public class DrillGuy : Boss
     private Rigidbody2D rb;
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
-    private List<GameObject> holes; //holes
+    private List<Vector3> holePositions = new List<Vector3>();
     [SerializeField] BulletPattern debrisPattern;
     [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
+
+    [SerializeField] float moveSpeed;
+    [Tooltip("The range in which the driller can move from a random point in world center")]
+    [SerializeField] float moveRange;
 
     [Tooltip("The drill hole prefab object that is created by Drill Guy's transition from underground to aboveground")]
     [SerializeField] private GameObject exitHolePrefab;
@@ -41,9 +45,6 @@ public class DrillGuy : Boss
     // similarly we have a different hitbox for when it is underground
     private CircleCollider2D pushTrigger;
 
-    // my math ta says epsilon in a funny way so now i like the word, used to not magic number the z ordering
-    private float zEpsilon = 0.1f;
-
     [Header("Dig Settings")]
 
     [Tooltip("Specifies the max push strength. Increase this to cause more dispalcement from the drill dig path.")]
@@ -56,6 +57,8 @@ public class DrillGuy : Boss
     [SerializeField] float speedModifier = 0.5f;
     [SerializeField] float pushRadius = 1f;
 
+    [Tooltip("The range in which the driller can dig from a random point in world center")]
+    [SerializeField] float digRange;
     [Tooltip("Driller Animation Controller")]
     private Animator animator;
 
@@ -65,8 +68,14 @@ public class DrillGuy : Boss
 
     [Header("Throwing Settings")]
     [SerializeField] GameObject dynamiteLandingIndicatorPrefab;
-    [Tooltip("How innacurate a dynamite throw is")]
-    [SerializeField] float throwInnacuracy;
+    [Tooltip("How innacurate a dynamite throw is during phase 1")]
+    [SerializeField] float throw1Innacuracy;
+    [Tooltip("How innacurate a dynamite throw is during phase 2")]
+    [SerializeField] float throw2Innacuracy;
+    [Tooltip("Percent chance that throwing will be chosen phase 1")]
+    [SerializeField] float phase1ThrowChance;
+
+    Vector3 movePosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,8 +87,6 @@ public class DrillGuy : Boss
         currentState = State.Walking;
         stateTimer = walkingTime;
         animator = GetComponent<Animator>();
-        holes = new List<GameObject> ();
-        holes = new List<GameObject>();
         isUnderground = false;
         hurtBox = GetComponent<BoxCollider2D>();
         pushTrigger = GetComponent<CircleCollider2D>();
@@ -124,6 +131,7 @@ public class DrillGuy : Boss
     //Throws Dynamite at the player (phase 1)
     private void ThrowDynamiteAtPlayer()
     {
+        float throwInnacuracy = currentPhase == 1 ? throw1Innacuracy : throw2Innacuracy;
         Vector3 landingPos = GameManager.Instance.player.transform.position +
             new Vector3(UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy),
             UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy));
@@ -135,13 +143,13 @@ public class DrillGuy : Boss
      //Throws Dynamite at the holes (phase 2)
     private void ThrowDynamiteAtHoles()
     {
-        foreach(GameObject hole in holes)
+        foreach(Vector3 pos in holePositions)
         {
-            GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, hole.transform.position, Quaternion.identity);
+            GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, pos, Quaternion.identity);
             Destroy(landingIndicator, dynamitePatternPhase2.duration);
-            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, hole.transform.position));
+            StartCoroutine(dynamitePatternPhase2.ThrowRoutine(bulletOrigin.position, pos));
         }
-        holes.Clear();
+        holePositions.Clear();
     }
 
     /// <summary>
@@ -153,6 +161,9 @@ public class DrillGuy : Boss
         animator.SetBool("isWalking", true);
         currentState = State.Walking;
         stateTimer = walkingTime;
+        movePosition =
+            new Vector3(UnityEngine.Random.Range(-moveRange, moveRange),
+            UnityEngine.Random.Range(-moveRange, moveRange));
     }
 
     /// <summary>
@@ -183,13 +194,19 @@ public class DrillGuy : Boss
         FacePlayer();
         if (stateTimer <= 0)
         {
-            if (currentPhase == 2 && numFrenzyDigs == 0)
+            TransitionToEntering();
+        }
+        else
+        {
+            Vector3 moveVector = movePosition - transform.position;
+            if(moveVector.magnitude <= .1f)
             {
-                // stunned
-
+                movePosition =
+                new Vector3(UnityEngine.Random.Range(-moveRange, moveRange),
+                UnityEngine.Random.Range(-moveRange, moveRange));
             }
-            else
-                TransitionToEntering();
+            moveVector = moveVector.normalized * moveSpeed;
+            rb.linearVelocity = new Vector2(moveVector.x, moveVector.y);
         }
     }
 
@@ -201,14 +218,7 @@ public class DrillGuy : Boss
         ResetAllAnimatorBools();
         animator.SetBool("isThrowing", true);
         currentState = State.Throwing;
-        if (currentPhase != 2)
-        {
-            stateTimer = initialThrowTime;
-        }
-        else
-        {
-            stateTimer = 1f;
-        }
+        stateTimer = initialThrowTime;
     }
 
     /// <summary>
@@ -230,17 +240,30 @@ public class DrillGuy : Boss
                     TransitionToWalking();
             }
             else if (currentPhase == 1) {
-                ThrowDynamiteAtPlayer(); //phase 2
-                attackCooldown = dynamitePatternPhase1.cooldown;
+                float ran = UnityEngine.Random.Range(0, 1f);
+                if(ran <= phase1ThrowChance)
+                {
+                    ThrowDynamiteAtPlayer(); //phase 2
+                    attackCooldown = dynamitePatternPhase1.cooldown;                   
+                }
+                else
+                {
+                    ThrowDynamiteAtHoles(); //phase 1
+                    attackCooldown = dynamitePatternPhase1.cooldown;
+                }
             }
-            if (currentPhase == 2)
+            else
             {
-                // wait for all dig sequences to be over
                 if (numFrenzyDigs == 0)
                 {
                     // BOOM!
-                    ThrowDynamiteAtHoles(); 
                     numFrenzyDigs = 3;
+                    ThrowDynamiteAtPlayer();
+                    ThrowDynamiteAtPlayer();
+                    ThrowDynamiteAtPlayer();
+                    ThrowDynamiteAtPlayer();
+                    ThrowDynamiteAtPlayer();
+                    ThrowDynamiteAtHoles();
                 }
             }
         }
@@ -292,6 +315,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToEntering()
     {
+        rb.linearVelocity = Vector2.zero;
         ResetAllAnimatorBools();
         animator.SetBool("isEntering", true);
         currentState = State.Entering;
@@ -311,8 +335,8 @@ public class DrillGuy : Boss
     public void AnimationOnEnteredGround()
     {
         Vector3 spawnPos = bulletOrigin.position;
-        spawnPos.z += zEpsilon;
-        holes.Add(Instantiate(enterHolePrefab, spawnPos, Quaternion.identity));
+        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        holePositions.Add(spawnPos);
         pushTrigger.enabled = true;
         hurtBox.enabled = false;
         isUnderground = true;
@@ -340,9 +364,9 @@ public class DrillGuy : Boss
         currentState = State.Exiting;
 
         Vector3 spawnPos = transform.position;
-        spawnPos.z += zEpsilon;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
-        holes.Add(Instantiate(exitHolePrefab, spawnPos, Quaternion.identity));
+        Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
+        holePositions.Add(spawnPos);
     }
 
     /// <summary>
@@ -365,9 +389,8 @@ public class DrillGuy : Boss
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
                 // if it's desperation phase and there's more to dig
-                numFrenzyDigs-=1;
+                numFrenzyDigs -= 1;
                 TransitionToEntering();
-  
             }
             else{
                 // ideally there is a delay before first throw, or else weird stuff can happen (animation)
@@ -410,9 +433,9 @@ public class DrillGuy : Boss
         List<Vector2> pathLocations = new List<Vector2>
         {
             transform.position,
-            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f))),
-            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f))),
-            new Vector2(UnityEngine.Random.Range(Mathf.Max(1,transform.position.x-15f), Mathf.Min(14f,transform.position.x+15f)),UnityEngine.Random.Range(Mathf.Max(1,transform.position.y-5f), Mathf.Min(3.5f,transform.position.y+5f)))
+            new Vector2(UnityEngine.Random.Range(-digRange, digRange), UnityEngine.Random.Range(-digRange, digRange)),
+            new Vector2(UnityEngine.Random.Range(-digRange, digRange), UnityEngine.Random.Range(-digRange, digRange)),
+            new Vector2(UnityEngine.Random.Range(-digRange, digRange), UnityEngine.Random.Range(-digRange, digRange))
         };
         
         currentPath = new DrillPath(pathLocations[0],pathLocations[1],pathLocations[2],pathLocations[3]);
@@ -504,15 +527,6 @@ public class DrillGuy : Boss
 
     public override void SetPhase()
     {
-        switch (currentPhase)
-        {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                stateTimer = 0.1f;
-                break;
-        }
+
     }
 }
