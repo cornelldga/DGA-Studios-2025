@@ -34,7 +34,6 @@ public class Player : MonoBehaviour, IDamageable
     MixerType[] equippedMixers;
     PlayerBases playerBases;
     PlayerMixers playerMixers;
-    private static bool isInitialized = false;
 
     [Header("Whip")]
     [SerializeField] Transform whipPivot;
@@ -84,12 +83,6 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
-
-    private void Awake()
-    {
-        GameManager.Instance.player = this;
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -119,6 +112,7 @@ public class Player : MonoBehaviour, IDamageable
         mixerBackupImage.sprite = backupMixer.getSprite();
 
         isAlive = true;
+        GameManager.Instance.player = this;
     }
 
     void Update()

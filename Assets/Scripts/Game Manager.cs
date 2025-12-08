@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] LoadoutManager loadoutManager;
-    [SerializeField] public Animator transition;
+    [SerializeField] Animator animator;
     [HideInInspector] public Player player;
 
 
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -62,16 +63,22 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator TransitionAnim(string scene)
     {
-        FreezePlayer(true); 
-        transition.SetTrigger(scene);
+        FreezePlayer(true);
+        animator.SetTrigger(scene);
         
         yield return null;
         
-        float animLength = transition.GetCurrentAnimatorStateInfo(0).length;
+        float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
-
+        animator.ResetTrigger("Scene Loaded");
         SceneManager.LoadScene(scene);
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        animator.SetTrigger("Scene Loaded");
+    }
+
 
     /// <summary>
     /// Load the given scene name
