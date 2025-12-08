@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -29,10 +30,8 @@ public class Player : MonoBehaviour, IDamageable
     bool invulnerable;
 
     [Header("Player Inventory")]
-    [SerializeField] private BaseType[] defaultEquippedBases;
-    [SerializeField] private MixerType[] defaultEquippedMixers;
-    private static BaseType[] equippedBases;      
-    private static MixerType[] equippedMixers;   
+    BaseType[] equippedBases;
+    MixerType[] equippedMixers;
     PlayerBases playerBases;
     PlayerMixers playerMixers;
     private static bool isInitialized = false;
@@ -86,6 +85,11 @@ public class Player : MonoBehaviour, IDamageable
     Mixer backupMixer;
 
 
+    private void Awake()
+    {
+        GameManager.Instance.player = this;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -100,11 +104,10 @@ public class Player : MonoBehaviour, IDamageable
         bulletRight = bulletOrigin.right;
         whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
 
-        // This should be set by the equipped mixer and not by the base stats
-        // Introduces issue of checking equipped mixer first, then setting the player stats
         speed = baseSpeed;
         health = maxHealth;
         whip.damageMultiplier = whipBaseDamageMultiplier;
+        GameManager.Instance.GetLoadout(ref equippedBases, ref equippedMixers);
         selectedBase = playerBases.GetBase(equippedBases[0]);
         selectedMixer = playerMixers.GetMixer(equippedMixers[0]);
         SelectBase(0);
@@ -116,15 +119,6 @@ public class Player : MonoBehaviour, IDamageable
         mixerBackupImage.sprite = backupMixer.getSprite();
 
         isAlive = true;
-    }
-    void Awake()
-    {
-        if (!isInitialized)
-        {
-            equippedBases = (BaseType[])defaultEquippedBases.Clone();
-            equippedMixers = (MixerType[])defaultEquippedMixers.Clone();
-            isInitialized = true;
-        }
     }
 
     void Update()
@@ -138,6 +132,7 @@ public class Player : MonoBehaviour, IDamageable
         whipCooldown -= Time.deltaTime;
         PlayerInputs();
     }
+
 
     /// <summary>
     /// Selects the base using the current baseIndex and swaps out the secondary base
@@ -301,6 +296,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         MixerType lastEquippedMixer = equippedMixers[slotIndex];
         equippedMixers[slotIndex] = mixer;
+        SelectMixer(slotIndex);
         return lastEquippedMixer;
     }
     /// <summary>
@@ -313,6 +309,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         BaseType lastEquippedBase = equippedBases[slotIndex];
         equippedBases[slotIndex] = baseDrink;
+        SelectBase(slotIndex);
         return lastEquippedBase;
     }
     
@@ -379,25 +376,6 @@ public class Player : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(invulnerabilityTime);
         sprite.color = Color.white;
         invulnerable = false;
-    }
-    public BaseType[] GetEquippedBases()
-    {
-        return equippedBases;
-    }
-
-    public MixerType[] GetEquippedMixers()
-    {
-        return equippedMixers;
-    } 
-
-    public int GetCurrentBaseIndex()
-    {
-        return baseIndex;
-    }
-
-    public int GetCurrentMixerIndex()
-    {
-        return mixerIndex;
     }
     
     /// <summary>

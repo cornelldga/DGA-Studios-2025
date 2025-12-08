@@ -8,10 +8,10 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    [SerializeField] LoadoutManager loadoutManager;
     [SerializeField] public Animator transition;
     [HideInInspector] public Player player;
-    
-    [SerializeField] [Tooltip("Reference to the loadout UI canvas that displays equipment selection")] private GameObject loadoutCanvas; 
+
 
     /// <summary>
     /// Sets the loadout manager to active.
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public void ToggleLoadoutManager(bool isOpen)
     {
         FreezePlayer(isOpen);
-        loadoutCanvas.SetActive(isOpen);
+        loadoutManager.gameObject.SetActive(isOpen);
     }
 
 
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
@@ -40,9 +41,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Start()
+    public void GetLoadout(ref BaseType[] equippedBases, ref MixerType[] equippedMixers)
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        equippedBases = loadoutManager.GetEquippedBases();
+        equippedMixers = loadoutManager.GetEquippedMixers();
     }
 
     /// <summary>
