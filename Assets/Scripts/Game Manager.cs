@@ -54,7 +54,14 @@ public class GameManager : MonoBehaviour
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
+        if (GetCurrentSceneName() == "Saloon")
+        {
+            StartCoroutine(TransitionAnim("Saloon Exit"));
+        }
+        else
+        {
         StartCoroutine(TransitionAnim(sceneName));
+        }
     }
     /// <summary>
     /// Animation dependent on the scene.
@@ -71,7 +78,15 @@ public class GameManager : MonoBehaviour
         float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
         animator.ResetTrigger("Scene Loaded");
-        SceneManager.LoadScene(scene);
+
+        if (scene == "Saloon Exit")
+        {
+            SceneManager.LoadScene("World Hub");
+        }
+        else
+        {
+            SceneManager.LoadScene(scene);
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
