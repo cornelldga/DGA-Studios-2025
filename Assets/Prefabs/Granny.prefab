@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8739514375221353489}
   - component: {fileID: 2208494978383391363}
   - component: {fileID: 4023565153802643386}
+  - component: {fileID: -6339375347697020272}
   m_Layer: 0
   m_Name: Granny
   m_TagString: Enemy
@@ -156,6 +157,31 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.34
+--- !u!114 &-6339375347697020272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623469587559007986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Granny
+  bossName: 
+  maxHealth: 0
+  healthBar: {fileID: 0}
+  bossNameText: {fileID: 0}
+  bulletOrigin: {fileID: 0}
+  phasePercents: []
+  currentPhase: 0
+  attackRate: 1
+  bosses:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8238466242085916958
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9145479497837789828}
-  - component: {fileID: 7467732589882995426}
+  - component: {fileID: 7300613964166001267}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -188,7 +214,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4393157315117623910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7467732589882995426
+--- !u!212 &7300613964166001267
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
