@@ -8,6 +8,7 @@ public class Granny : Boss
     {
         Idle, Out, Scavange
     }
+    private State currentState;
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
@@ -44,7 +45,7 @@ public class Granny : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        //currentState = State.Idle;
+        currentState = State.Idle;
         stateTimer = idleTime;
         
     }
@@ -52,6 +53,22 @@ public class Granny : Boss
     // Update is called once per frame
     public override void Update()
     {
+        base.Update();
+
+        stateTimer -= Time.deltaTime;
+
+        switch (currentState)
+        {
+            case State.Idle:
+                //UpdateIdle();
+                break;
+            case State.Out:
+                //UpdateOut();
+                break;
+            case State.Scavange:
+                //UpdateScavenge();
+                break;
+        }
         
     }
 
