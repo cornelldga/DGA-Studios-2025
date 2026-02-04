@@ -8,6 +8,7 @@ public class Ginger : Mixer
 {
     [SerializeField] float gingerValueProjDamage;
     [SerializeField] float gingerWhipDamageMultiplier;
+    [SerializeField] Color gingerColor;
     public override void ApplyMixer(Base baseDrink)
     {
         baseDrink.damage *= gingerValueProjDamage;
@@ -16,6 +17,7 @@ public class Ginger : Mixer
     public override void ApplyMixer(Player player)
     {
         player.whip.damageMultiplier = gingerWhipDamageMultiplier;
+        player.ChangeMixerEffect(gingerColor);
     }
 
     public override void RemoveMixer(Player player)
