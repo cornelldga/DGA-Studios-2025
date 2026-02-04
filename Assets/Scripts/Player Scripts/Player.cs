@@ -64,6 +64,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float midHealthThreshold;
     [SerializeField] float criticalThreshold;
 
+    [Header("Mixer Effect")]
+    [SerializeField] ParticleSystem mixerEffect;
+
     Animator animationControl;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -381,5 +384,11 @@ public class Player : MonoBehaviour, IDamageable
         animationControl.SetFloat("Speed", 0);
         this.enabled = false;
         
+    }
+
+    public void ChangeMixerEffect(Color mixerColor)
+    {
+        var main = mixerEffect.main;
+        main.startColor = mixerColor;
     }
 }
