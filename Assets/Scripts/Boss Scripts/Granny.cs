@@ -6,7 +6,7 @@ public class Granny : Boss
 {
     public enum State
     {
-        Idle, Out, Scavange
+        Idle, HoldingContract, ContractDropped, Scavange
     }
     private State currentState;
 
@@ -32,13 +32,14 @@ public class Granny : Boss
     private int contracts = 4;
 
     private float currentSpeed;
+    // Contracts currently dropped by Granny
+    public List<GameObject> currentDroppedContracts;
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();
@@ -47,7 +48,6 @@ public class Granny : Boss
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.Idle;
         stateTimer = idleTime;
-        
     }
 
     // Update is called once per frame
@@ -62,18 +62,59 @@ public class Granny : Boss
             case State.Idle:
                 //UpdateIdle();
                 break;
-            case State.Out:
-                //UpdateOut();
+            case State.HoldingContract:
+                //UpdateHoldingContract();
+                break;
+            case State.ContractDropped:
+                //UpdateContractDropped();
                 break;
             case State.Scavange:
-                //UpdateScavenge();
+                UpdateScavenge();
                 break;
         }
-        
+
+    }
+
+    private void TransitionToIdle()
+    {
+        currentState = State.Idle;
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    private void UpdateScavenge()
+    {
+        GameObject nearestContract = null;
+        foreach (GameObject contract in currentDroppedContracts)
+        {
+            if (nearestContract == null || Vector2.Distance(rb.position, contract.transform.position)
+                < Vector2.Distance(rb.position, nearestContract.transform.position))
+            {
+                nearestContract = contract;
+            }
+        }
+        Vector2 contractPosition = nearestContract.transform.position;
+        rb.linearVelocity = (contractPosition - rb.position).normalized * baseSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision)
+        {
+            if (currentState == State.Scavange && currentDroppedContracts.Contains(collision.gameObject))
+            {
+                Destroy(collision.gameObject); // TODO Handle contract disappearance, destroy for now
+                currentDroppedContracts.Remove(collision.gameObject);
+                if (currentDroppedContracts.Count <= 0)
+                {
+                    // TODO Handle phase change
+                    TransitionToIdle();
+                }
+            }
+        }
     }
 
     public override void SetPhase()
     {
-        
+
     }
 }
