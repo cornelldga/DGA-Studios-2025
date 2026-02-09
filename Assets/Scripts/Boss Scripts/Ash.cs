@@ -285,7 +285,7 @@ public class Ash : Boss
     }
     private float GetHealthPercent()
     {
-        return (float)currentHealth / maxHealth;
+        return (float)health / maxHealth;
     }
 
     public override void Attack()
