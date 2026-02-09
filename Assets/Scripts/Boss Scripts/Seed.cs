@@ -39,16 +39,17 @@ public class Seed : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
+    /// <summary>
+    /// When called, will spawn given plant then be destroyed
+    /// </summary>
     public void Blossom()
     {
         //Spawn Flower
         GameObject.Destroy(this.gameObject);
     }
 
-
+    public void Whipped()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }
