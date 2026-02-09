@@ -6,6 +6,7 @@ using UnityEngine;
 public class Pimiento : Mixer
 {
     [SerializeField] float pimientoValue;
+    [SerializeField] Color pimientoColor;
     public override void ApplyMixer(Base baseDrink)
     {
         baseDrink.damage *= pimientoValue;
@@ -14,6 +15,7 @@ public class Pimiento : Mixer
     public override void ApplyMixer(Player player)
     {
         player.damageTakenMultiplier *= pimientoValue;
+        player.ChangeMixerEffect(pimientoColor);
     }
 
     public override void RemoveMixer(Player player)

@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 722755417629996029}
   - component: {fileID: 26987428809012855}
   - component: {fileID: 8931499830204347460}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Inaccurate Knife
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,7 @@ MonoBehaviour:
   duration: 5
   damage: 1
   accuracy: 45
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 64
+  impactSprite: {fileID: 0}
 --- !u!50 &5139313081211936209
 Rigidbody2D:
   serializedVersion: 5
@@ -180,7 +178,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5625, y: 1.015625}
+    oldSize: {x: 0.78125, y: 0.5078125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

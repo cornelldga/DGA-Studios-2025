@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3613087850028754368}
   - component: {fileID: 5159407548821138802}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hole_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8001844031148053685}
   - component: {fileID: 6111358976018266998}
   - component: {fileID: 3919762760526736359}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DrillHole
   m_TagString: Hole
   m_Icon: {fileID: 0}
@@ -141,7 +141,6 @@ MonoBehaviour:
   emersionHole: 0
   debrisPrefab: {fileID: 3814195944134518128, guid: 1f4e940ca32413b4e8e1ef74aba45be7, type: 3}
   spawnOffset: 0.2
-  maxRadius: 3
   debrisCount: 10
   debrisSpeed: 5
 --- !u!50 &6111358976018266998
@@ -227,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3353535338080097857}
   - component: {fileID: 871683741165286901}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hole_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
