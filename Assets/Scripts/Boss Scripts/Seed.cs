@@ -40,7 +40,7 @@ public class Seed : MonoBehaviour
     }
 
     /// <summary>
-    /// When called, will spawn given plant then be destroyed
+    /// When called, will spawn "flower" then destroy seed
     /// </summary>
     public void Blossom()
     {
