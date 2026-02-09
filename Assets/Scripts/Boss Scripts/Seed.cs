@@ -6,12 +6,12 @@ public class Seed : MonoBehaviour
     public Vector2 target;
     [SerializeField] float landingTime;
     [SerializeField] float arcHeight;
-    [SerializeField] float gravity;
     [Header("Flower Variables")]
     public bool planted;
     [SerializeField] GameObject flower;
     private float maxHeight;
     private Rigidbody2D rb;
+    private float startVel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,26 +19,24 @@ public class Seed : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocityX = (target.x - this.transform.position.x) /landingTime;
         maxHeight = (arcHeight + target.y);
-        rb.linearVelocityY = maxHeight/(landingTime/2) + gravity * landingTime;
+        startVel = maxHeight / (landingTime / 2) + arcHeight * (landingTime / 2);
+        rb.linearVelocityY = startVel;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocityY -= gravity *Time.deltaTime;
-        if(target.y > this.transform.position.y & !planted)
-        {
-            gravity = 0;
-            rb.linearVelocity = new Vector2(0, 0);
-            //Plant seed when it reaches its target
-            planted = true;
-            
-        }
-        if(this.transform.position.y >= maxHeight & rb.linearVelocityY>=0)
-        {
-            rb.linearVelocityY = -rb.linearVelocity.y;
-        }
+        if (!planted) { 
+            if(target.y > this.transform.position.y )
+            {
+                rb.linearVelocity = new Vector2(0, 0);
+                //Plant seed when it reaches its target
+                planted = true;
+            }
+        else { rb.linearVelocityY -= ((2*startVel) / landingTime )* Time.deltaTime; }
+         }
+
     }
 
     private void FixedUpdate()
