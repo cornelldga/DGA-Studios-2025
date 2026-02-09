@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4e9193058ee8e184b9f2775d7bb43224
+guid: 471a4df1738cb0e4f8664fa890951f2a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6305901574975757550
-    second: hole_back_0
+      213: 1717581299317099736
+    second: hole_front_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hole_back_0
+      name: hole_front_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 116
-        width: 447
-        height: 140
+        x: 1
+        y: 0
+        width: 459
+        height: 118
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eec91058210138750800000000000000
-      internalID: 6305901574975757550
+      spriteID: 8dc46a2771316d710800000000000000
+      internalID: 1717581299317099736
       vertices: []
       indices: 
       edges: []
@@ -135,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hole_back_0: 6305901574975757550
+      hole_front_0: 1717581299317099736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
