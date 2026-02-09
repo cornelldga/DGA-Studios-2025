@@ -576,7 +576,7 @@ MonoBehaviour:
   m_text: 'Fire rate +
 
 
-    Decreases movement speed -'
+    Movement speed -'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2906,8 +2906,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4853042727723977588}
   - {fileID: 8888577777583183823}
+  - {fileID: 4853042727723977588}
   - {fileID: 2111448843727233425}
   - {fileID: 7162199228690795412}
   - {fileID: 3500352808804248816}
