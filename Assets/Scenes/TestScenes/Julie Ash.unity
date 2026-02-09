@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2392482041272648807, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_TagString
+      value: Whip
+      objectReference: {fileID: 0}
     - target: {fileID: 4557611548015582227, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -13580,7 +13584,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
       propertyPath: m_Name
-      value: Seed
+      value: BaseSeed
       objectReference: {fileID: 0}
     - target: {fileID: 5215806282487740966, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
       propertyPath: gravity
@@ -13604,7 +13608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6225564288120195804, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
       propertyPath: m_ContactCaptureLayers.m_Bits
-      value: 128
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6520698574103519192, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
       propertyPath: m_LocalPosition.x

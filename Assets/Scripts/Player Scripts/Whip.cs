@@ -15,5 +15,5 @@ public class Whip : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().linearVelocity = -4 * collision.GetComponent<Rigidbody2D>().linearVelocity;
             }
         }
-    }
+        }
 }

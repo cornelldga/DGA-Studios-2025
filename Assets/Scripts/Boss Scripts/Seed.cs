@@ -48,8 +48,12 @@ public class Seed : MonoBehaviour
         GameObject.Destroy(this.gameObject);
     }
 
-    public void Whipped()
+ 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject.Destroy(this.gameObject);
+        if (collision.gameObject.CompareTag("Whip"))
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }
