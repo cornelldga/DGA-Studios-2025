@@ -6,7 +6,7 @@ public class GrannyPhase2 : Boss
 {
     public enum State
     {
-        Target, Lazer, MachineGun
+        Target, Lazer, MachineGun, Punch
     }
     private State currentState;
 
@@ -17,6 +17,8 @@ public class GrannyPhase2 : Boss
     [SerializeField] float collisionRadius;
     // check distance of circle cast
     [SerializeField] float checkDistance;
+
+    private Vector2 targetPosition;
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
@@ -66,6 +68,9 @@ public class GrannyPhase2 : Boss
             case State.MachineGun: 
                 UpdateMachineGun();
                 break;
+            case State.Punch:
+                UpdatePunch();
+                break;
         }
     }
 
@@ -99,6 +104,12 @@ public class GrannyPhase2 : Boss
     {
         //track the player location as you shoot out bullets
         //granny moves as she shoots machine gun
+    }
+
+    private void PunchUpdate()
+    {
+        //move granny towards the player while using her punch move that is 
+        //maybe make the punch a separate hitbox
     }
 
     public override void SetPhase()
