@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2887997795932678023}
   - component: {fileID: 6745913855671810240}
   - component: {fileID: 3901314618630575797}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2620647822268028384}
   - component: {fileID: 6038771693700848012}
   - component: {fileID: 6327618435373640108}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,9 +256,17 @@ PrefabInstance:
       propertyPath: interactable
       value: 
       objectReference: {fileID: 7080179304938087386}
+    - target: {fileID: 1505873925251226982, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1685251416819008211, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: m_Name
       value: Interaction Zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685251416819008211, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2468923325834611986, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -299,6 +307,10 @@ PrefabInstance:
     - target: {fileID: 2468923325834611986, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6113878696277516140, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6992958495683222956, guid: c9a5afc2618d8f4488cd855e6ae841bb, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
