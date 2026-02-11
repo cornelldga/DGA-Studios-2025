@@ -3,7 +3,7 @@ using UnityEngine;
 public class Cactus : MonoBehaviour, IDamageable
 {
     [SerializeField] private float fireRate;
-    [SerializeField] private Bullet spine;
+    [SerializeField] private GameObject spine;
     [SerializeField] private int spineCount;
     [SerializeField] private int maxHealth;
     private float timer;
@@ -31,7 +31,7 @@ public class Cactus : MonoBehaviour, IDamageable
    
         for (int i = 0; i < spineCount; i++)
         {
-            Bullet bullet = Instantiate(spine, this.transform.position, this.transform.rotation);
+            GameObject bullet = Instantiate(spine, this.transform.position, this.transform.rotation);
             bullet.transform.Rotate(0, 0, (360/spineCount) * i, Space.Self);
         }
     }
