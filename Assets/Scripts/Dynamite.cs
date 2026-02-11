@@ -20,7 +20,6 @@ public class Dynamite : Projectile
     /// <param name="boss"></param>
     /// <returns></returns>
     public IEnumerator ThrowRoutine (Vector3 start, Vector3 target)
-
     {
         //spawns dynamite object
         GameObject dynamite = Instantiate(dynamitePrefab, start, Quaternion.identity);
