@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 7448286340238263503}
   m_Layer: 7
   m_Name: Whip
-  m_TagString: Untagged
+  m_TagString: Whip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -799,6 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f5785fa3eff6c478846104a999de26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whip
+  whipSpeedMultiplier: 4
   damageMultiplier: 1
 --- !u!68 &2107606798565723772
 EdgeCollider2D:

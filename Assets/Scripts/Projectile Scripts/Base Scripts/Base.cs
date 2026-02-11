@@ -7,15 +7,6 @@ public class Base : Projectile
 {
     public float cooldown;
     [SerializeField] Sprite baseSprite;
-    public override void OnProjectileHit(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<IDamageable>()?.TakeDamage(damage);
-            Destroy(gameObject);
-        }
-        base.OnProjectileHit(collision);
-    }
 
     public Sprite getSprite()
     {

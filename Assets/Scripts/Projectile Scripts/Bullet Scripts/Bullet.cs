@@ -8,16 +8,16 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-    [Tooltip("True if the player whipped this projectile")]
     bool whipped;
+    [Tooltip("True if the player whipped this projectile")]
 
     /// <summary>
     /// Sets this projectile as 'whipped' to reverse collision logic
     /// and sets its damage based on the whipDamageMultiplier
     /// </summary>
-    public void WhipProjectile(float whipDamageMultiplier)
+    public void WhipBullet(float whipDamageMultiplier)
     {
-        whipped = true;
+        gameObject.layer = LayerMask.NameToLayer("Base");
         damage *= whipDamageMultiplier;
 
         // Stop from homing to player if reflected
@@ -35,18 +35,12 @@ public class Bullet : Projectile
     {
         return whipped;
     }
+
     public override void OnProjectileHit(Collider2D collision)
     {
-        if(whipped && collision.CompareTag("Enemy"))
+        if (!collision.CompareTag("Whip"))
         {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-            Destroy(gameObject);
+            base.OnProjectileHit(collision);
         }
-        if (collision.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-            Destroy(gameObject);
-        }
-        base.OnProjectileHit(collision);
     }
 }
