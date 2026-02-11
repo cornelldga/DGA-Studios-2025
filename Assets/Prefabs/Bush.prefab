@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Flower
   isOnFire: 0
   damage: 0
-  fireSpreadCooldown: 0.2
+  fireSpreadCooldown: 1
   fireSpreadRadius: 0.5
 --- !u!50 &3931169507723427740
 Rigidbody2D:
