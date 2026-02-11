@@ -31,7 +31,11 @@ public class Granny : Boss
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
-    [SerializeField] List<GameObject> contracts = new List<GameObject>();
+    [Tooltip("Spawn bounds, from bottom left to top right")]
+    [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
+    [Tooltip("Contract prefab to instantiate")]
+    [SerializeField] GameObject contractTemplate;
+
     private int initialBossCount;
 
     [Header("Return Settings")]
@@ -102,7 +106,7 @@ public class Granny : Boss
             rb.linearVelocity = Vector2.zero;
             transform.position = startingPoint;
         }
-        
+
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
     }
@@ -184,6 +188,36 @@ public class Granny : Boss
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Creates a new contract, connects it with the boss, 
+    /// </summary>
+    /// <param name="bossType"></param>
+    private void dropNewContract(GameObject bossType)
+    {
+        Vector2 randomPos = new Vector2(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
+            Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y));
+        GameObject newContract = Instantiate(contractTemplate, randomPos, Quaternion.identity);
+
+        Contract contractScript = newContract.GetComponent<Contract>();
+        contractScript.boss = bossType;
+        contractScript.granny = this;
+
+        currentDroppedContracts.Add(newContract);
+    }
+
+    /// <summary>
+    /// Drops contract when taking any damage instead of dying
+    /// </summary>
+    /// <param name="damage">Only drops contract if > 0</param>
+    public override void TakeDamage(float damage)
+    {
+        if (damage <= 0)
+        {
+            return;
+        }
+        // TODO dropNewContract([correct boss object here]) 
     }
 
     public override void SetPhase()
