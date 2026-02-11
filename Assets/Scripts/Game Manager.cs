@@ -82,7 +82,19 @@ public class GameManager : MonoBehaviour
     IEnumerator TransitionAnim(string scene)
     {
         FreezePlayer(true);
-        animator.SetTrigger(scene);
+
+        // If scene doesnt have a transition animation, use World Hub transition
+        for (int triggerIndex = 0; triggerIndex < animator.parameterCount; triggerIndex++)
+        {
+            if (animator.parameters[triggerIndex].name == scene)
+            {
+                animator.SetTrigger(scene);
+            }
+            else
+            {
+                animator.SetTrigger("World Hub");
+            }
+        }
         
         yield return null;
         
