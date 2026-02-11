@@ -29,7 +29,7 @@ public class Granny : Boss
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
-    private int contracts = 4;
+    private int initialBossCount;
 
     private float currentSpeed;
     // Contracts currently dropped by Granny
@@ -46,6 +46,7 @@ public class Granny : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
     }
@@ -63,7 +64,7 @@ public class Granny : Boss
                 //UpdateIdle();
                 break;
             case State.HoldingContract:
-                //UpdateHoldingContract();
+                UpdateHoldingContract();
                 break;
             case State.ContractDropped:
                 //UpdateContractDropped();
@@ -79,6 +80,45 @@ public class Granny : Boss
     {
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
+    }
+
+    private void TransitionToHoldingContract()
+    {
+        currentState = State.HoldingContract;
+        stateTimer = outTime;
+    }
+
+    private void UpdateHoldingContract()
+    {
+        if (stateTimer <= 0)
+        {
+            EnableRandomBosses();
+            TransitionToIdle();
+        }
+    }
+
+    private void EnableRandomBosses()
+    {
+        if (bosses.Exists(b => b.activeInHierarchy)) return;
+
+        List<GameObject> availableBosses = bosses.FindAll(b => !b.activeInHierarchy);
+
+        if (availableBosses.Count == 0) return;
+
+        if (bosses.Count <= initialBossCount / 2 && availableBosses.Count >= 2)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                int index = Random.Range(0, availableBosses.Count);
+                availableBosses[index].SetActive(true);
+                availableBosses.RemoveAt(index);
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, availableBosses.Count);
+            availableBosses[index].SetActive(true);
+        }
     }
 
     private void UpdateScavenge()
