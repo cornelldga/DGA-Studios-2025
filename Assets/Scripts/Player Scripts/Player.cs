@@ -41,7 +41,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float whipCooldownTime;
     float whipTime; //determined by length of animation
     [SerializeField] Animator whipAnimator;
-    [SerializeField] Animator whipPivotAnimator;
 
     [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
@@ -98,8 +97,6 @@ public class Player : MonoBehaviour, IDamageable
         animationControl = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
-
-        whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
         bulletRight = bulletOrigin.right;
         whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
         whipUI.SetActive(false);
@@ -265,7 +262,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         whipping = true;
         whip.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-        whipPivotAnimator.Play("Whip Rotate", 0, 0f);
         whipAnimator.Play("Whip", 0, 0f);
         StartCoroutine(nameof(WhipTime));
         StartCoroutine(nameof(ToggleWhipUI));

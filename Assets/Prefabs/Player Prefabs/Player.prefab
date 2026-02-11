@@ -416,7 +416,7 @@ MonoBehaviour:
   whip: {fileID: 5585523609465621514}
   whipCooldownTime: 2
   whipAnimator: {fileID: 7448286340238263503}
-  whipPivotAnimator: {fileID: 2487623392595391275}
+  whipPivotAnimator: {fileID: 0}
   armPivot: {fileID: 7495770454083407856}
   armAnimator: {fileID: 3302916461375407511}
   bulletOrigin: {fileID: 9051408035631985386}
@@ -780,10 +780,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392482041272648807}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: 0.6163487, w: -0.7874734}
-  m_LocalPosition: {x: 0.699, y: -0.287, z: 0}
-  m_LocalScale: {x: 0.90791667, y: 0.90791667, z: 0.90791667}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2500960760742717684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -893,7 +893,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 2394273617515671053, guid: e5644ee425b810e408b6b3a39f2eb4bc, type: 3}
+  m_Sprite: {fileID: 343834117074378269, guid: b86e801ca8f078140bfcb72f540b6f2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -935,7 +935,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2500960760742717684}
-  - component: {fileID: 2487623392595391275}
   m_Layer: 7
   m_Name: Whip Pivot
   m_TagString: Untagged
@@ -951,36 +950,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2766676586853759827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.091, y: -0.029, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1514714248572482037}
   m_Father: {fileID: 871742177484969984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
---- !u!95 &2487623392595391275
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2766676586853759827}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 805bbb38eca38a7438e3e26942832999, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2998741706069753985
 GameObject:
   m_ObjectHideFlags: 0
