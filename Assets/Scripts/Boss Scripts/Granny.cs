@@ -31,6 +31,7 @@ public class Granny : Boss
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
+    [SerializeField] List<GameObject> contracts = new List<GameObject>();
     private int initialBossCount;
 
     [Header("Return Settings")]
