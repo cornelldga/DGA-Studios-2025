@@ -35,6 +35,8 @@ public class Granny : Boss
     [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
+    // Contracts currently dropped by Granny
+    public List<GameObject> currentDroppedContracts;
 
     private int initialBossCount;
 
@@ -45,8 +47,6 @@ public class Granny : Boss
     [SerializeField] private float arrivalThreshold = 0.1f;
 
     private float currentSpeed;
-    // Contracts currently dropped by Granny
-    public List<GameObject> currentDroppedContracts;
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
