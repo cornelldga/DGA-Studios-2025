@@ -55,6 +55,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Image mixerEquippedImage;
     [SerializeField] Image mixerBackupImage;
     [SerializeField] Image healthImage;
+    [SerializeField] GameObject whipUI;
+    [SerializeField] Image whipFillImage;
+    [SerializeField] TMP_Text whipCooldownText;
 
     // Sprite fields temporary. These should be removed and change the health animator
     // [SerializeField] Animator healthAnimator;
@@ -96,6 +99,7 @@ public class Player : MonoBehaviour, IDamageable
         whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
         bulletRight = bulletOrigin.right;
         whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        whipUI.SetActive(false);
 
         speed = baseSpeed;
         health = maxHealth;
@@ -124,6 +128,10 @@ public class Player : MonoBehaviour, IDamageable
         fireCooldown -= Time.deltaTime;
         changeCooldown -= Time.deltaTime;
         whipCooldown -= Time.deltaTime;
+        if (whipCooldown > 0)
+        {
+            UpdateWhipUI();
+        }
         PlayerInputs();
     }
 
@@ -257,6 +265,7 @@ public class Player : MonoBehaviour, IDamageable
         whipPivotAnimator.Play("Whip Rotate", 0, 0f);
         whipAnimator.Play("Whip", 0, 0f);
         StartCoroutine(nameof(WhipTime));
+        StartCoroutine(nameof(ToggleWhipUI));
     }
 
     IEnumerator WhipTime()
@@ -264,6 +273,23 @@ public class Player : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(whipTime);
         whipping = false;
         whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+    }
+    /// <summary>
+    /// Toggles the whip UI on when the player whips and off when the cooldown is complete
+    /// </summary>
+    IEnumerator ToggleWhipUI()
+    {
+        whipUI.SetActive(true);
+        yield return new WaitForSeconds(whipCooldownTime);
+        whipUI.SetActive(false);
+    }
+    /// <summary>
+    /// Fill the whip cooldown indicator image as the whip is on cooldown
+    /// </summary>
+    void UpdateWhipUI()
+    {
+        whipFillImage.fillAmount = 1 - whipCooldown / whipCooldownTime;
+        whipCooldownText.text = whipCooldown.ToString("F1");
     }
     private void FixedUpdate()
     {
