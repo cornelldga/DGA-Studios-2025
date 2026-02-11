@@ -14,6 +14,7 @@ public class Ash : Boss
         SeedScatter,
         MolotovAttack,
         TumbleweedSummon,
+        Stomping,
         Desperation
     }
     public State currentState;
@@ -28,11 +29,19 @@ public class Ash : Boss
     [SerializeField] float scatterTime = 1.5f;
     [SerializeField] float molotovTime = 2f;
     [SerializeField] float tumbleweedTime = 2f;
+    [Tooltip("Duration of stomp animation that grows flowers")]
+    [SerializeField] float stompTime = 1.5f;
 
     [Space(5)]
     [Header("Tumbleweed Summon Timing")]
     [SerializeField] float tumbleweedCooldownMin = 10f;
     [SerializeField] float tumbleweedCooldownMax = 15f;
+
+    [Space(5)]
+    [Header("Stomp Settings")]
+    [Tooltip("Radius around Ash to detect seeds for stomping")]
+    [SerializeField] float stompRadius = 3f;
+
     private float stateTimer;
     private float tumbleweedCooldownTimer;
     private Rigidbody2D rb;
@@ -87,6 +96,9 @@ public class Ash : Boss
             case State.TumbleweedSummon:
                 UpdateTumbleweedSummon();
                 break;
+            case State.Stomping:  
+                UpdateStomping();
+                break;
             case State.Desperation:
                 UpdateDesperation();
                 break;
@@ -94,10 +106,28 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Handles logic for wandering mode.
+    /// Handles logic for wandering mode. Checks for nearby seeds to stomp, otherwise moves towards a target point. If it reaches the target or the timer runs out, it chooses the next attack.
     /// </summary>
     private void UpdateWandering()
-    {
+        {
+            GameObject[] nearbySeeds = GameObject.FindGameObjectsWithTag("Seed");
+        bool seedsInRange = false;
+        
+        foreach (GameObject seed in nearbySeeds)
+        {
+            if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
+            {
+                seedsInRange = true;
+                break;
+            }
+        }
+        
+        if (seedsInRange)
+        {
+            TransitionToStomping();
+            return;
+        }
+        
         Vector2 direction = (wanderTarget - (Vector2)transform.position).normalized;
         rb.linearVelocity = direction * wanderSpeed;
 
@@ -138,6 +168,18 @@ public class Ash : Boss
     /// Handles logic for summoning tumbleweeds mode.
     /// </summary>
     private void UpdateTumbleweedSummon()
+    {
+        rb.linearVelocity = Vector2.zero;
+        if (stateTimer <= 0)
+        {
+            TransitionToWandering();
+        }
+    }
+
+    /// <summary>
+    /// Handles logic for stomping mode.
+    /// </summary>
+    private void UpdateStomping()
     {
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
@@ -209,6 +251,17 @@ public class Ash : Boss
         StartCoroutine(SummonTumbleweeds());
     }
 
+
+    /// <summary>
+    /// Setting state to Stomping. Uses a coroutine to perform the stomping attack
+    /// </summary>
+    private void TransitionToStomping()
+    {
+        currentState = State.Stomping;
+        stateTimer = stompTime;
+        StartCoroutine(StompAndGrowFlowers());
+    }
+
     /// <summary>
     /// Setting state to Desperation. Uses a coroutine to perform the desperation attack
     /// </summary>
@@ -249,7 +302,7 @@ public class Ash : Boss
     /// </summary>
     public override void SetPhase()
     {
-        // Placeholder
+       // Placeholder
     }
 
     /// <summary>
@@ -278,6 +331,12 @@ public class Ash : Boss
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
+    private IEnumerator StompAndGrowFlowers()
+    {
+        //Placeholder
+        
+        yield return new WaitForSeconds(stompTime);
+    }
     private IEnumerator DesperationAttack()
     {
         // Placeholder
