@@ -37,7 +37,6 @@ public abstract class Projectile : MonoBehaviour
     /// </summary>
     public virtual void OnProjectileHit(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (impactSprite != null)
         {
             Instantiate(impactSprite, transform.position, transform.rotation);
