@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,11 +11,16 @@ public class AudioManager : MonoBehaviour
 
     [Header("Sound Effects")]
     
+    [Tooltip("list of all SFX in the game")]
+    [SerializeField] private Sound[] sounds;
+
+    [SerializeField] private AudioMixerGroup musicGroup;
+    [SerializeField] private AudioMixerGroup sfxGroup;
     private AudioSource[] songs;
     private MusicType currentMusic = MusicType.None;
+
     
     public static AudioManager Instance;
-    
     private bool ignoreNextMusicChange = false;
 
     public void SetIgnoreNextMusicChange()
@@ -43,6 +49,16 @@ public class AudioManager : MonoBehaviour
             {
                 song.loop = true;
             }
+            song.outputAudioMixerGroup = musicGroup;
+        }
+
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.audioClip;
+            s.source.loop = s.isLoop;
+            s.source.volume = s.volume;
+            s.source.outputAudioMixerGroup = sfxGroup;
         }
     }
 

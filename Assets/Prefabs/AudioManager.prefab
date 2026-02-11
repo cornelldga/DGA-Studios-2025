@@ -78,8 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38490c0365beb46f1a156ef96682f8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sceneMusic: 0
   saloonMusic: {fileID: 2883716215566334450}
   hogMusic: {fileID: 1625788575435399617}
+  sounds: []
+  musicGroup: {fileID: 898037753239958536, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
+  sfxGroup: {fileID: -3908983327557864445, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
 --- !u!1 &1814903278115915233
 GameObject:
   m_ObjectHideFlags: 0
