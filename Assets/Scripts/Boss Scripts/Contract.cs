@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Contract : MonoBehaviour, IDamageable
 {
-    public GameObject bossPrefab;
+    public GameObject boss;
+    public Granny granny;
+
     public float maxHealth = 0;
 
     private float health;
@@ -11,7 +13,7 @@ public class Contract : MonoBehaviour, IDamageable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        Boss bossScript = bossPrefab.GetComponent<Boss>();
+        Boss bossScript = boss.GetComponent<Boss>();
         // Set text to 
         bossScript.getName();
         
