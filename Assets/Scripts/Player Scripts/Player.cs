@@ -58,6 +58,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] GameObject whipUI;
     [SerializeField] Image whipFillImage;
     [SerializeField] TMP_Text whipCooldownText;
+    [SerializeField] Animator playerHealthAnimator;
+    [SerializeField] TMP_Text playerHealthText;
 
     // Sprite fields temporary. These should be removed and change the health animator
     // [SerializeField] Animator healthAnimator;
@@ -117,6 +119,9 @@ public class Player : MonoBehaviour, IDamageable
         backupImage.sprite = backupBase.getSprite();
         mixerEquippedImage.sprite = selectedMixer.getSprite();
         mixerBackupImage.sprite = backupMixer.getSprite();
+
+        playerHealthAnimator.SetFloat("Health", health);
+        playerHealthText.SetText(health.ToString());
 
         isAlive = true;
         GameManager.Instance.player = this;
@@ -373,20 +378,12 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
-            if (healthRatio <= midHealthThreshold)
-            {
-                healthImage.sprite = midSprite;
-                // Should set this boolean animation to true
-            }
-            if (healthRatio <= criticalThreshold)
-            {
-                healthImage.sprite = lowHealthSprite;
-                // Should set this boolean animation to true
-            }
             if (health <= 0)
             {
                 GameManager.Instance.LoseGame();
             }
+            playerHealthAnimator.SetFloat("Health", health);
+            playerHealthText.SetText(health.ToString());
         }
     }
     /// <summary>
