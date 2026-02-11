@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b7808cb2c1a641447b755501b44d7a1b
+guid: 3397da3226a18477db5eaf8537bd46a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6566884440867809062
-    second: mixer_ui_apple_cider_0
+      213: -8361557087315738457
+    second: arrows_neutral_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mixer_ui_apple_cider_0
+      name: arrows_neutral_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 380
-        height: 439
+        x: 12
+        y: 37
+        width: 75
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad8d805d46dbdd4a0800000000000000
-      internalID: -6566884440867809062
+      spriteID: 7a045696128c5fb80800000000000000
+      internalID: -8361557087315738457
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mixer_ui_apple_cider_0: -6566884440867809062
+      arrows_neutral_0: -8361557087315738457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

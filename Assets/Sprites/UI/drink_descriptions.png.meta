@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f9c2b8c80610db44586c4eeafd5675ad
+guid: 7978a80140f934d96a4c579682372b2f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1524800773749400306
-    second: mixer_ui_lime_0
+      213: 4561002758698543633
+    second: drink_descriptions_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mixer_ui_lime_0
+      name: drink_descriptions_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 380
-        height: 439
+        width: 366
+        height: 364
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f2e298993e292510800000000000000
-      internalID: 1524800773749400306
+      spriteID: 11aadc308dfeb4f30800000000000000
+      internalID: 4561002758698543633
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mixer_ui_lime_0: 1524800773749400306
+      drink_descriptions_0: 4561002758698543633
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

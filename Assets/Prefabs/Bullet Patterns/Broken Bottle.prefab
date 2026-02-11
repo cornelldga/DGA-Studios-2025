@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8926973389419442618}
   - component: {fileID: 8289671478656028152}
   - component: {fileID: 7001986623597971458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,9 +125,9 @@ GameObject:
   - component: {fileID: 153594912465882492}
   - component: {fileID: 3882891152182835804}
   - component: {fileID: 7488581864160058526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Broken Bottle
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,9 +191,7 @@ MonoBehaviour:
   duration: 3
   damage: 1
   accuracy: 5
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  impactSprite: {fileID: 0}
 --- !u!58 &7488581864160058526
 CircleCollider2D:
   m_ObjectHideFlags: 0

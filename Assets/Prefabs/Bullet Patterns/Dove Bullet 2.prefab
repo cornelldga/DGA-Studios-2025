@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7029770135339947437}
   - component: {fileID: 722755417629996029}
   - component: {fileID: 1633624123496950494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dove Bullet 2
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,8 +205,6 @@ MonoBehaviour:
   duration: 5
   damage: 1
   accuracy: 0
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  impactSprite: {fileID: 0}
   frequency: -6
   amplitude: 3
