@@ -330,18 +330,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   baseSpeed: 4
   speed: 0
-  maxHealth: 10
+  maxHealth: 1
   damageTakenMultiplier: 1
   whipBaseDamageMultiplier: 1
   changeCooldownTime: 1
   invulnerabilityTime: 1
-  equippedBases: 0000000001000000
-  equippedMixers: 0000000001000000
   whipPivot: {fileID: 2500960760742717684}
   whip: {fileID: 5585523609465621514}
   whipCooldownTime: 2
   whipAnimator: {fileID: 7448286340238263503}
   whipPivotAnimator: {fileID: 2487623392595391275}
+  arm: {fileID: 1964051108754214412}
   armPivot: {fileID: 7495770454083407856}
   armAnimator: {fileID: 3302916461375407511}
   bulletOrigin: {fileID: 9051408035631985386}
@@ -351,8 +350,11 @@ MonoBehaviour:
   mixerBackupImage: {fileID: 5468450954564599229}
   healthImage: {fileID: 5517751001461648016}
   healthySprite: {fileID: -5550154393050170253, guid: 588c2a81a4acd4bc0a4c4577d0ec659a, type: 3}
-  midSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
-  lowHealthSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
+  eightySprite: {fileID: 0}
+  sixtySprite: {fileID: 0}
+  fourtySprite: {fileID: 0}
+  twentySprite: {fileID: 0}
+  zeroSprite: {fileID: 0}
   midHealthThreshold: 0.6
   criticalThreshold: 0.2
 --- !u!114 &7699641391322968756

@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Animator whipPivotAnimator;
 
     [Header("Gun Arm")]
+    [SerializeField] GameObject arm;
     [SerializeField] Transform armPivot;
     [SerializeField] Animator armAnimator;
     [SerializeField] Transform bulletOrigin;
@@ -59,8 +60,14 @@ public class Player : MonoBehaviour, IDamageable
     // Sprite fields temporary. These should be removed and change the health animator
     // [SerializeField] Animator healthAnimator;
     [SerializeField] Sprite healthySprite;
-    [SerializeField] Sprite midSprite;
-    [SerializeField] Sprite lowHealthSprite;
+    [SerializeField] Sprite eightySprite;
+    [SerializeField] Sprite sixtySprite;
+    [SerializeField] Sprite fourtySprite;
+
+    [SerializeField] Sprite twentySprite;
+    [SerializeField] Sprite zeroSprite;
+
+
     [SerializeField] float midHealthThreshold;
     [SerializeField] float criticalThreshold;
 
@@ -112,6 +119,7 @@ public class Player : MonoBehaviour, IDamageable
         mixerBackupImage.sprite = backupMixer.getSprite();
 
         isAlive = true;
+        rb.simulated = true;
         GameManager.Instance.player = this;
     }
 
@@ -339,24 +347,41 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        if (!invulnerable && damage > 0)
+        if (!invulnerable && damage > 0 && isAlive)
         {
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
+            animationControl.SetTrigger("Hit");
             float healthRatio = health / maxHealth;
-            if (healthRatio <= midHealthThreshold)
+            if (healthRatio <= 0.8)
             {
-                healthImage.sprite = midSprite;
+                healthImage.sprite = eightySprite;
                 // Should set this boolean animation to true
             }
-            if (healthRatio <= criticalThreshold)
+            // if (healthRatio <= 0.6)
+            // {
+            //     healthImage.sprite = sixtySprite;
+            //     // Should set this boolean animation to true
+            // }
+            // if (healthRatio <= 0.4)
+            // {
+            //     healthImage.sprite = fourtySprite;
+            //     // Should set this boolean animation to true
+            // }
+            // if (healthRatio <= 0.2)
+            // {
+            //     healthImage.sprite = twentySprite;
+            //     // Should set this boolean animation to true
+            // }
+            if (health <= 0 && isAlive)
             {
-                healthImage.sprite = lowHealthSprite;
-                // Should set this boolean animation to true
-            }
-            if (health <= 0)
-            {
+                isAlive = false;
+                StopPlayer();
+
                 GameManager.Instance.LoseGame();
+                whip.gameObject.SetActive(false);
+                arm.SetActive(false);
+                animationControl.SetTrigger("Die");
             }
         }
     }
@@ -378,6 +403,7 @@ public class Player : MonoBehaviour, IDamageable
     public void StopPlayer()
     {
         rb.linearVelocity = Vector2.zero;
+        rb.simulated = false;
         animationControl.SetFloat("Speed", 0);
         this.enabled = false;
         

@@ -108,6 +108,11 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         FreezePlayer(true);
+        StartCoroutine(ReloadAfterDelay(1));
+    }
+    private IEnumerator ReloadAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         LoadScene(GetCurrentSceneName());
     }
     public void BossDefeated(string nextSceneName)
