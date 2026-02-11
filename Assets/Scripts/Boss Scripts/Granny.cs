@@ -110,7 +110,7 @@ public class Granny : Boss
     {
         if (stateTimer <= 0)
         {
-            currentState = State.HoldingContract;
+            TransitionToHoldingContract();
         }
     }
 
