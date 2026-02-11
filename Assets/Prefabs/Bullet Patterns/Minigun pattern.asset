@@ -12,8 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
   m_Name: Minigun pattern
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
-  bullets: []
-  bulletAngles: []
+  bullets:
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  - {fileID: 2660713567375334150, guid: cc8cd2995edb0354bbfb5ecab17df1b0, type: 3}
+  bulletAngles:
+  - 0
+  - -10
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   bulletDelays: []
   minAttackCooldown: 0
   maxAttackCooldown: 0

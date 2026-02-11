@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GrannyPhase2 : Boss
 {
@@ -104,11 +105,18 @@ public class GrannyPhase2 : Boss
     {
         //track the player location as you shoot out bullets
         //granny moves as she shoots machine gun
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                - bulletOrigin.transform.position;
+
+        if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
+        else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
+        StartCoroutine(machineGun.DoBulletPattern(this));
     }
 
     private void  UpdatePunch(){
         //move granny towards the player while using her punch move that is 
         //maybe make the punch a separate hitbox
+
     }
 
     public override void SetPhase()
