@@ -289,7 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -322,6 +322,22 @@ PrefabInstance:
     - target: {fileID: 7623469587559007986, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_Name
       value: Granny Phase 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_Enabled

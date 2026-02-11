@@ -106,8 +106,7 @@ public class GrannyPhase2 : Boss
         //granny moves as she shoots machine gun
     }
 
-    private void PunchUpdate()
-    {
+    private void  UpdatePunch(){
         //move granny towards the player while using her punch move that is 
         //maybe make the punch a separate hitbox
     }
