@@ -12,6 +12,7 @@ public class Seed : MonoBehaviour
     private float maxHeight;
     private Rigidbody2D rb;
     private float startVel;
+    private float timer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,14 +22,15 @@ public class Seed : MonoBehaviour
         maxHeight = (arcHeight + target.y);
         startVel = maxHeight / (landingTime / 2) + arcHeight * (landingTime / 2);
         rb.linearVelocityY = startVel;
-
+        timer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if (!planted) { 
-            if(target.y > this.transform.position.y )
+            if( timer >= landingTime )
             {
                 rb.linearVelocity = new Vector2(0, 0);
                 //Plant seed when it reaches its target
