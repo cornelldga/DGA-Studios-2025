@@ -25,11 +25,19 @@ public class Granny : Boss
     [SerializeField] private float scavengeTime = 1f;
     //Length of time to pull out contracts.
     [SerializeField] private float outTime = 1f;
+    [SerializeField] private float droppedTime = 1f;
+
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
     private int initialBossCount;
+
+    [Header("Return Settings")]
+    [Tooltip("Speed when returning to starting point")]
+    [SerializeField] private float returnSpeed = 4f;
+    [Tooltip("Distance threshold to consider pig has arrived at starting point")]
+    [SerializeField] private float arrivalThreshold = 0.1f;
 
     private float currentSpeed;
     // Contracts currently dropped by Granny
@@ -39,6 +47,7 @@ public class Granny : Boss
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
+    private Vector2 startingPoint;
 
     public override void Start()
     {
@@ -49,6 +58,9 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
+        currentSpeed = baseSpeed;
+
+        startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
 
     // Update is called once per frame
@@ -78,13 +90,28 @@ public class Granny : Boss
 
     private void TransitionToIdle()
     {
+
+        Vector2 directionToStart = (startingPoint - (Vector2)transform.position).normalized;
+
+        rb.linearVelocity = directionToStart * returnSpeed;
+
+        float distanceToStart = Vector2.Distance(transform.position, startingPoint);
+        if (distanceToStart <= arrivalThreshold)
+        {
+            rb.linearVelocity = Vector2.zero;
+            transform.position = startingPoint;
+        }
+        
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
     }
 
     private void UpdateIdle()
     {
-        
+        if (stateTimer <= 0)
+        {
+            currentState = State.HoldingContract;
+        }
     }
 
     private void TransitionToHoldingContract()
