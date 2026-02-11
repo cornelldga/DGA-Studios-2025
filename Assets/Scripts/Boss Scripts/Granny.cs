@@ -20,11 +20,11 @@ public class Granny : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
-    private float idleTime = 1f;
+    [SerializeField] private float idleTime = 1f;
     //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
+    [SerializeField] private float scavengeTime = 1f;
     //Length of time to pull out contracts.
-    private float outTime = 1f;
+    [SerializeField] private float outTime = 1f;
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
@@ -61,7 +61,7 @@ public class Granny : Boss
         switch (currentState)
         {
             case State.Idle:
-                //UpdateIdle();
+                UpdateIdle();
                 break;
             case State.HoldingContract:
                 UpdateHoldingContract();
@@ -80,6 +80,11 @@ public class Granny : Boss
     {
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
+    }
+
+    private void UpdateIdle()
+    {
+        
     }
 
     private void TransitionToHoldingContract()
