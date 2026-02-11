@@ -20,16 +20,24 @@ public class Granny : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
-    private float idleTime = 1f;
+    [SerializeField] private float idleTime = 1f;
     //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
+    [SerializeField] private float scavengeTime = 1f;
     //Length of time to pull out contracts.
-    private float outTime = 1f;
+    [SerializeField] private float outTime = 1f;
+    [SerializeField] private float droppedTime = 1f;
+
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
-    private int contracts = 4;
+    private int initialBossCount;
+
+    [Header("Return Settings")]
+    [Tooltip("Speed when returning to starting point")]
+    [SerializeField] private float returnSpeed = 4f;
+    [Tooltip("Distance threshold to consider pig has arrived at starting point")]
+    [SerializeField] private float arrivalThreshold = 0.1f;
 
     private float currentSpeed;
     // Contracts currently dropped by Granny
@@ -39,6 +47,7 @@ public class Granny : Boss
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
+    private Vector2 startingPoint;
 
     public override void Start()
     {
@@ -46,8 +55,12 @@ public class Granny : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
+        currentSpeed = baseSpeed;
+
+        startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
 
     // Update is called once per frame
@@ -60,10 +73,10 @@ public class Granny : Boss
         switch (currentState)
         {
             case State.Idle:
-                //UpdateIdle();
+                UpdateIdle();
                 break;
             case State.HoldingContract:
-                //UpdateHoldingContract();
+                UpdateHoldingContract();
                 break;
             case State.ContractDropped:
                 //UpdateContractDropped();
@@ -77,8 +90,67 @@ public class Granny : Boss
 
     private void TransitionToIdle()
     {
+
+        Vector2 directionToStart = (startingPoint - (Vector2)transform.position).normalized;
+
+        rb.linearVelocity = directionToStart * returnSpeed;
+
+        float distanceToStart = Vector2.Distance(transform.position, startingPoint);
+        if (distanceToStart <= arrivalThreshold)
+        {
+            rb.linearVelocity = Vector2.zero;
+            transform.position = startingPoint;
+        }
+        
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
+    }
+
+    private void UpdateIdle()
+    {
+        if (stateTimer <= 0)
+        {
+            currentState = State.HoldingContract;
+        }
+    }
+
+    private void TransitionToHoldingContract()
+    {
+        currentState = State.HoldingContract;
+        stateTimer = outTime;
+    }
+
+    private void UpdateHoldingContract()
+    {
+        if (stateTimer <= 0)
+        {
+            EnableRandomBosses();
+            TransitionToIdle();
+        }
+    }
+
+    private void EnableRandomBosses()
+    {
+        if (bosses.Exists(b => b.activeInHierarchy)) return;
+
+        List<GameObject> availableBosses = bosses.FindAll(b => !b.activeInHierarchy);
+
+        if (availableBosses.Count == 0) return;
+
+        if (bosses.Count <= initialBossCount / 2 && availableBosses.Count >= 2)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                int index = Random.Range(0, availableBosses.Count);
+                availableBosses[index].SetActive(true);
+                availableBosses.RemoveAt(index);
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, availableBosses.Count);
+            availableBosses[index].SetActive(true);
+        }
     }
 
     private void UpdateScavenge()

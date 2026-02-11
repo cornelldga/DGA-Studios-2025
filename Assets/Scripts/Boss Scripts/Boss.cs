@@ -74,7 +74,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             
             healthBar.fillAmount = 0;
