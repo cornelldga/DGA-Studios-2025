@@ -1,73 +1,44 @@
+using System;
 using UnityEngine;
 
-public class Tumbleweed : MonoBehaviour 
+public class Tumbleweed : Bullet
 {
-    // once done
-    // [SerializeField] Ash ash;
 
+    // stats 
 
-    // initialization
-    private bool isInitialized = false;
-    private bool orbitState = false;
+    [SerializeField] private float fireDamage = 5f;
+    [SerializeField] private float fireDuration = 3f;
 
-
-    private Rigidbody2D rb;
-    private CircleCollider2D thisCollider;
-    private Animator animator;
     
 
-    // Movement
-    private float moveDirectionX = 1f; // -1/1, left to right 
 
-    [SerializeField] private float damageDealt = 1f; // fix this
-    public enum State
+    // sets the current tumbleweed to be on fire (increased damage decreased duration)
+    private void setFire()
     {
-        Orbiting, 
+        damage = fireDamage;
+        duration = fireDuration;
+        GetComponent<Animator>().SetBool("onFire", true); 
     }
 
-    private void Start()
+
+public void OnTriggerEnter2D(Collider2D collision)
+{
+    OnProjectileHit(collision);
+}
+
+// <summary>
+// collision handling, if interacts with fire should be set on fire, should damage player
+//</summary>
+public override void OnProjectileHit(Collider2D collision)
+{
+    if (collision.gameObject.CompareTag("onFire"))
     {
-        rb = GetComponent<Rigidbody2D>();
-        thisCollider = GetComponent<CircleCollider2D>();
-       
-        
+        setFire();
     }
-
-    // <summary>
-    // Initializes tumbleweed with delay (time for Ash to point)
-    // </summary>
-    private System.Collections.IEnumerator InitializeWithDelay(float delay, bool state)
+    if (collision.gameObject.CompareTag("Player"))
     {
-        yield return new WaitForSeconds(delay);
-        isInitialized = true;
-        orbitState = state;
+        collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+     
     }
-
-    private void Update()
-    {
-        // do nothing if not initialized
-        if (!isInitialized)
-        {
-            return;
-        }
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        bool isPlayer = collision.gameObject.CompareTag("Player"); // make sure not whip
-        bool isBullet = collision.gameObject.CompareTag("Bullet"); // check that this tag actually exists
-        bool isWhip = false; // figure this one out b/c it's on playertag
-
-
-        if (isPlayer) {
-            // damage the player somehow idk figure it out
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-            Destroy(gameObject);
-        }
-        if (isBullet) {
-            // get rid of tumbleweed
-            //Destroy();
-        }
-    }
+}
 }
