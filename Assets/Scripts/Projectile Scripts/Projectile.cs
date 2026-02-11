@@ -14,8 +14,8 @@ public abstract class Projectile : MonoBehaviour
     [Tooltip("0 is perfect accuracy")]
     [Range(0, 180)]
     public float accuracy;
-    [Tooltip("The layers that the projectiles will destroy themselves on impact")]
-    public LayerMask collisionLayers;
+    [Tooltip("The sprite that's created on impact")]
+    [SerializeField] ImpactSprite impactSprite;
 
 
 
@@ -37,10 +37,11 @@ public abstract class Projectile : MonoBehaviour
     /// </summary>
     public virtual void OnProjectileHit(Collider2D collision)
     {
-        if (Physics2D.Raycast(transform.position, transform.right, 
-            transform.localScale.magnitude, collisionLayers))
+        if (impactSprite != null)
         {
-            Destroy(gameObject);
+            Instantiate(impactSprite, transform.position, transform.rotation);
         }
+        collision.GetComponent<IDamageable>()?.TakeDamage(damage);
+        Destroy(gameObject);
     }
 }
