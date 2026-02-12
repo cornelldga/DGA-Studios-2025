@@ -15,4 +15,11 @@ public class Whip : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Ends the whip
+    /// </summary>
+    public void EndWhip()
+    {
+        GameManager.Instance.player.AnimationEndWhip();
+    }
 }
