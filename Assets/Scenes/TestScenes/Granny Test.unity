@@ -19247,6 +19247,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractTemplate
+      value: 
+      objectReference: {fileID: 1756325054254676256, guid: d8ceb90f922d3fe43840117063f8c190, type: 3}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: bosses.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: 'bosses.Array.data[0]'
       value: 
       objectReference: {fileID: 1078675784}
@@ -19258,6 +19266,10 @@ PrefabInstance:
       propertyPath: 'bosses.Array.data[2]'
       value: 
       objectReference: {fileID: 1122912503}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractSpawnBounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.88
