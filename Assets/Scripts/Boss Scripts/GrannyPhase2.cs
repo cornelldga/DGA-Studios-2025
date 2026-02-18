@@ -47,7 +47,7 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.Target;
+        currentState = State.MachineGun;
         stateTimer = idleTime;
     }
 
@@ -111,6 +111,7 @@ public class GrannyPhase2 : Boss
         if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
         else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
         StartCoroutine(machineGun.DoBulletPattern(this));
+        currentState = State.Target;
     }
 
     private void  UpdatePunch(){

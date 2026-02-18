@@ -34,6 +34,16 @@ MonoBehaviour:
   - 10
   - 20
   - 30
-  bulletDelays: []
-  minAttackCooldown: 0
-  maxAttackCooldown: 0
+  bulletDelays:
+  - 0
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.8
+  - 0.9
+  minAttackCooldown: 0.51
+  maxAttackCooldown: 1.46

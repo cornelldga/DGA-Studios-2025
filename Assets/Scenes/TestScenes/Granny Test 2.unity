@@ -279,6 +279,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1491101662092809894, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023565153802643386, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -322,6 +330,14 @@ PrefabInstance:
     - target: {fileID: 7623469587559007986, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_Name
       value: Granny Phase 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623469587559007986, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238466242085916958, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8739514375221353489, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_Color.a
@@ -452,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   bossName: Granny, Mechanzied Menace
-  maxHealth: 0
+  maxHealth: 100
   healthBar: {fileID: 1494144198}
   bossNameText: {fileID: 1494144197}
   bulletOrigin: {fileID: 272861911}
