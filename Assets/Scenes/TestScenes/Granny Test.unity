@@ -18757,6 +18757,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: backStage
+      value: 
+      objectReference: {fileID: 717211469}
+    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: cardStage
+      value: 
+      objectReference: {fileID: 1457449397}
+    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: doveStage
+      value: 
+      objectReference: {fileID: 11705904}
+    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: knifeStage
+      value: 
+      objectReference: {fileID: 116850635}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
