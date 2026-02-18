@@ -369,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3009582985005188905, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4058868743232993516, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 64

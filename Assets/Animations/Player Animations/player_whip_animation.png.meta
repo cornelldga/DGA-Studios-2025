@@ -23,6 +23,12 @@ TextureImporter:
   - first:
       213: 4198703041921750701
     second: player_whip_animation_6
+  - first:
+      213: 7554036761936103650
+    second: player_whip_animation_7
+  - first:
+      213: 1506587254196393084
+    second: player_whip_animation_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -93,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,8 +155,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +175,10 @@ TextureImporter:
       name: player_whip_animation_1
       rect:
         serializedVersion: 2
-        x: 339
+        x: 725
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,10 +197,10 @@ TextureImporter:
       name: player_whip_animation_2
       rect:
         serializedVersion: 2
-        x: 678
+        x: 1450
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +219,10 @@ TextureImporter:
       name: player_whip_animation_3
       rect:
         serializedVersion: 2
-        x: 1017
+        x: 2175
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,10 +241,10 @@ TextureImporter:
       name: player_whip_animation_4
       rect:
         serializedVersion: 2
-        x: 1356
+        x: 2900
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +263,10 @@ TextureImporter:
       name: player_whip_animation_5
       rect:
         serializedVersion: 2
-        x: 1695
+        x: 3625
         y: 0
-        width: 339
-        height: 450
+        width: 725
+        height: 726
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,33 +281,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: player_whip_animation_6
-      rect:
-        serializedVersion: 2
-        x: 2034
-        y: 0
-        width: 339
-        height: 450
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: da61913cb2ac44a30800000000000000
-      internalID: 4198703041921750701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0b9d9bf9b62379442ab93721aba2ea24
+    spriteID: 81158af35f906254e8bc9ec323b967ba
     internalID: 0
     vertices: []
     indices: 
@@ -311,7 +295,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":1.0},"gridSpriteSize":{"x":339.0,"y":450.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":725.0,"y":726.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       player_whip_animation_0: 343834117074378269
       player_whip_animation_1: -5794710771108566917
@@ -319,7 +303,6 @@ TextureImporter:
       player_whip_animation_3: 8058957941837406301
       player_whip_animation_4: 7308946961223572432
       player_whip_animation_5: -1328146289896676534
-      player_whip_animation_6: 4198703041921750701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
