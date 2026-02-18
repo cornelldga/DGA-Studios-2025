@@ -95,6 +95,7 @@ public class Granny : Boss
 
     private void TransitionToIdle()
     {
+        if (rb == null) return;
 
         Vector2 directionToStart = (startingPoint - (Vector2)transform.position).normalized;
 
@@ -130,7 +131,6 @@ public class Granny : Boss
         if (stateTimer <= 0)
         {
             EnableRandomBosses();
-            TransitionToIdle();
         }
     }
 
@@ -138,23 +138,22 @@ public class Granny : Boss
     {
         if (bosses.Exists(b => b.activeInHierarchy)) return;
 
-        List<GameObject> availableBosses = bosses.FindAll(b => !b.activeInHierarchy);
+        if (bosses.Count == 0) return; //TODO Phase 2 Switch
 
-        if (availableBosses.Count == 0) return;
-
-        if (bosses.Count <= initialBossCount / 2 && availableBosses.Count >= 2)
+        if (bosses.Count <= initialBossCount / 2)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < bosses.Count; i++)
             {
-                int index = Random.Range(0, availableBosses.Count);
-                availableBosses[index].SetActive(true);
-                availableBosses.RemoveAt(index);
+                int index = Random.Range(0, bosses.Count);
+                bosses[index].SetActive(true);
+                bosses.RemoveAt(index);
             }
         }
         else
         {
-            int index = Random.Range(0, availableBosses.Count);
-            availableBosses[index].SetActive(true);
+            int index = Random.Range(0, bosses.Count);
+            bosses[index].SetActive(true);
+            bosses.RemoveAt(index);
         }
     }
 
@@ -194,7 +193,7 @@ public class Granny : Boss
     /// Creates a new contract, connects it with the boss, 
     /// </summary>
     /// <param name="bossType"></param>
-    private void dropNewContract(GameObject bossType)
+    private void DropNewContract(GameObject bossType)
     {
         Vector2 randomPos = new Vector2(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
             Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y));
@@ -213,15 +212,20 @@ public class Granny : Boss
     /// <param name="damage">Only drops contract if > 0</param>
     public override void TakeDamage(float damage)
     {
-        if (damage <= 0)
+        if (damage <= 0 || currentState != State.HoldingContract)
         {
             return;
         }
-        // TODO dropNewContract([correct boss object here]) 
+       // DropNewContract()
+    }
+
+    public override void Attack()
+    {
+        // Granny does not shoot — skip base bullet logic
     }
 
     public override void SetPhase()
     {
-
+        // Could maube put when contracts are zero here but probably not
     }
 }
