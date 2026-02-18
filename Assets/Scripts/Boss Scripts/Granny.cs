@@ -85,7 +85,7 @@ public class Granny : Boss
                 UpdateHoldingContract();
                 break;
             case State.ContractDropped:
-                //UpdateContractDropped();
+                UpdateContractDropped();
                 break;
             case State.Scavange:
                 UpdateScavenge();
@@ -158,6 +158,20 @@ public class Granny : Boss
         }
     }
 
+    private void TransitionToContractDropped()
+    {
+        stateTimer = droppedTime;
+    }
+
+    private void UpdateContractDropped()
+    {
+        if (stateTimer <= 0)
+        {
+            currentState = State.Scavange;
+            stateTimer = scavengeTime;
+        }
+    }
+
     private void UpdateScavenge()
     {
         GameObject nearestContract = null;
@@ -190,7 +204,6 @@ public class Granny : Boss
         }
     }
 
-
     /// <summary>
     /// Creates a new contract, connects it with the boss, 
     /// </summary>
@@ -206,6 +219,7 @@ public class Granny : Boss
         contractScript.granny = this;
 
         currentDroppedContracts.Add(newContract);
+        TransitionToContractDropped();
     }
 
     /// <summary>
