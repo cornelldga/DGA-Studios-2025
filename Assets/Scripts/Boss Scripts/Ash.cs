@@ -358,10 +358,11 @@ public class Ash : Boss
     {
         GameObject[] seeds = GameObject.FindGameObjectsWithTag("Seed");
         foreach (GameObject seed in seeds)
-        {
+        {       
             if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
             {
-                Destroy(seed);
+                Seed s = seed.GetComponent<Seed>();
+                s.Blossom();
             }
         }
         

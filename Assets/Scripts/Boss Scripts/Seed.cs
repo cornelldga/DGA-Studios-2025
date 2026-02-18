@@ -49,6 +49,7 @@ public class Seed : MonoBehaviour
     public void Blossom()
     {
         //Spawn Flower
+        Instantiate(flower, this.transform.position, this.transform.rotation);
         GameObject.Destroy(this.gameObject);
     }
 
