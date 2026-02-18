@@ -197,8 +197,8 @@ public class Granny : Boss
     /// <param name="bossType"></param>
     private void DropNewContract(GameObject bossType)
     {
-        Vector2 randomPos = new Vector2(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
-            Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y));
+        Vector3 randomPos = new Vector3(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
+            Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y), -1);
         GameObject newContract = Instantiate(contractTemplate, randomPos, Quaternion.identity);
 
         Contract contractScript = newContract.GetComponent<Contract>();
