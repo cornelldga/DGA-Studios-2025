@@ -288,6 +288,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 4.64
       objectReference: {fileID: 0}
+    - target: {fileID: 871742177484969984, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2241333523866175095, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_Name
       value: Player
@@ -18614,7 +18618,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.639553, y: 0.3354298, z: -10}
+  m_LocalPosition: {x: 4.6396065, y: 0.3354298, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19361,6 +19365,26 @@ PrefabInstance:
       objectReference: {fileID: 1122912503}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: contractSpawnBounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractSpawnBounds.Array.data[0].x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractSpawnBounds.Array.data[0].y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractSpawnBounds.Array.data[1].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: contractSpawnBounds.Array.data[1].y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208494978383391363, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}

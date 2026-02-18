@@ -33,6 +33,7 @@ public class Granny : Boss
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
     [Tooltip("Spawn bounds, from bottom left to top right")]
     [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
+    [SerializeField] List<GameObject> availableBosses = new List<GameObject>();
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
     // Contracts currently dropped by Granny
@@ -153,6 +154,7 @@ public class Granny : Boss
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
+            availableBosses.Add(bosses[index]);
         }
     }
 
@@ -188,6 +190,7 @@ public class Granny : Boss
         }
     }
 
+
     /// <summary>
     /// Creates a new contract, connects it with the boss, 
     /// </summary>
@@ -214,8 +217,15 @@ public class Granny : Boss
         if (damage <= 0 || currentState != State.HoldingContract)
         {
             return;
+        } else
+        {
+            if (availableBosses == null)
+            {
+                return;
+            }
+            int index = Random.Range(0, availableBosses.Count);
+            DropNewContract(availableBosses[index]);
         }
-       // DropNewContract()
     }
 
     public override void Attack()
