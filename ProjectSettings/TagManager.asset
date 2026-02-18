@@ -4,10 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
-  - EnemyBullet
-  - Hole
   - Pig
+  - Hole
+  - Whip
   layers:
   - Default
   - TransparentFX
@@ -18,10 +17,10 @@ TagManager:
   - Wall
   - Player
   - Enemy
-  - 
-  - 
-  - 
-  - 
+  - Bullet
+  - Base
+  - Camera Bounds
+  - NPC
   - 
   - 
   - 

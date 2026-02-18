@@ -7,6 +7,7 @@ public class Cider : Mixer
 {
     [SerializeField] float ciderSpeedMultiplier;
     [SerializeField] float ciderAccuracyDecrease;
+    [SerializeField] Color ciderColor;
     public override void ApplyMixer(Base baseDrink)
     {
         baseDrink.accuracy += ciderAccuracyDecrease;
@@ -15,6 +16,7 @@ public class Cider : Mixer
     public override void ApplyMixer(Player player)
     {
         player.speed = player.baseSpeed * ciderSpeedMultiplier;
+        player.ChangeMixerEffect(ciderColor);
     }
 
     public override void RemoveMixer(Player player)
