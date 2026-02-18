@@ -9,6 +9,7 @@ public class Fire_Flower : MonoBehaviour, IDamageable
     private float timer;
     private float health;
     private float totalRotation;
+    private int ogOrder;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +17,7 @@ public class Fire_Flower : MonoBehaviour, IDamageable
         health = maxHealth;
         totalRotation = 0;
         fireRenderer = fireLine.GetComponent<SpriteRenderer>();
+        ogOrder = fireRenderer.sortingOrder;
     }
 
     // Update is called once per frame
@@ -28,11 +30,11 @@ public class Fire_Flower : MonoBehaviour, IDamageable
 
         if (totalRotation <90 || totalRotation > 270)
         {
-            fireRenderer.sortingOrder = 1;
+            fireRenderer.sortingOrder = ogOrder;
         }
         else
         {
-            fireRenderer.sortingOrder = 2;
+            fireRenderer.sortingOrder = ogOrder + 1;
         }
     }
 
