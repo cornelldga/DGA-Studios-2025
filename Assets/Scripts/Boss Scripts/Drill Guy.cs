@@ -357,6 +357,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToExiting()
     {
+        isUnderground = false;
         ResetAllAnimatorBools();
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
@@ -382,7 +383,6 @@ public class DrillGuy : Boss
     {
         hurtBox.enabled = true;
         pushTrigger.enabled = false;
-        isUnderground = false;
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
