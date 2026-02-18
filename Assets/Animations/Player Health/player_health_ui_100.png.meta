@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 87205f73fd60940c888cff5fc839b871
+guid: 29b64fe8a71dd6f4486455a85542b1a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4487798715212166321
-    second: player_health_ui_20_0
+      213: -1853159757663264873
+    second: player_health_ui_100_0
+  - first:
+      213: -5515114130909986609
+    second: player_health_ui_100_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,43 +99,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_health_ui_20_0
+      name: player_health_ui_100_0
       rect:
         serializedVersion: 2
-        x: 98
-        y: 138
-        width: 331
-        height: 345
+        x: 79
+        y: 133
+        width: 341
+        height: 337
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1b4fca3772dd74e30800000000000000
-      internalID: 4487798715212166321
+      spriteID: 79f9e64d4014846e0800000000000000
+      internalID: -1853159757663264873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_health_ui_100_1
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 136
+        width: 345
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc08f531be06673b0800000000000000
+      internalID: -5515114130909986609
       vertices: []
       indices: 
       edges: []
@@ -161,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_health_ui_20_0: 4487798715212166321
+      player_health_ui_100_0: -1853159757663264873
+      player_health_ui_100_1: -5515114130909986609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

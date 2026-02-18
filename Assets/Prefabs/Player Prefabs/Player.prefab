@@ -427,6 +427,8 @@ MonoBehaviour:
   whipUI: {fileID: 7614821760927813731}
   whipFillImage: {fileID: 5758782405452190823}
   whipCooldownText: {fileID: 8628185682646421342}
+  playerHealthAnimator: {fileID: 6241168830098142482}
+  playerHealthText: {fileID: 7346367196814204511}
   healthySprite: {fileID: -5550154393050170253, guid: 588c2a81a4acd4bc0a4c4577d0ec659a, type: 3}
   midSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
   lowHealthSprite: {fileID: 4487798715212166321, guid: 87205f73fd60940c888cff5fc839b871, type: 3}
@@ -6853,6 +6855,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1019870705248411054}
     m_Modifications:
+    - target: {fileID: 672825786310081605, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1853159757663264873, guid: 29b64fe8a71dd6f4486455a85542b1a1, type: 3}
     - target: {fileID: 1361313923297079561, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
       propertyPath: m_Name
       value: HealthUI
@@ -6952,14 +6958,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1645668935709248834, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6241168830098142482}
   m_SourcePrefab: {fileID: 100100000, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
+--- !u!1 &3109478956233654461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1645668935709248834, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
+  m_PrefabInstance: {fileID: 4463491158022311423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6241168830098142482
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3109478956233654461}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e10b2c9f74b67c45958fcb07aca885b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3794241950991282618 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 672825786310081605, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
   m_PrefabInstance: {fileID: 4463491158022311423}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3109478956233654461}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -6970,3 +7006,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9049800572228070969, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
   m_PrefabInstance: {fileID: 4463491158022311423}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7346367196814204511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6341643894231733152, guid: 902e25d5a7318444aab5f2c79846d186, type: 3}
+  m_PrefabInstance: {fileID: 4463491158022311423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
