@@ -2,22 +2,19 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 
 public class GrannyPhase2 : Boss
 {
     public enum State
     {
-        Target, Lazer, MachineGun, Punch
+        Idle, Lazer, MachineGun, Punch
     }
     private State currentState;
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
     [SerializeField] float baseSpeed = 5f;
-    // collision radius when charging and bouncing
-    [SerializeField] float collisionRadius;
-    // check distance of circle cast
-    [SerializeField] float checkDistance;
 
     private Vector2 targetPosition;
 
@@ -32,6 +29,7 @@ public class GrannyPhase2 : Boss
     private float currentSpeed;
     //Time until we should change states.
     private float stateTimer;
+    private float firingCooldown;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -39,6 +37,10 @@ public class GrannyPhase2 : Boss
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern machineGun;
     [SerializeField] BulletPattern lazerShot;
+
+    [Header("Attack Constants")]
+    [SerializeField] private float machineCooldownConstant;
+    private float machineTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -49,6 +51,7 @@ public class GrannyPhase2 : Boss
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.MachineGun;
         stateTimer = idleTime;
+        machineTimer = 0;
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class GrannyPhase2 : Boss
 
         switch (currentState)
         {
-            case State.Target:
+            case State.Idle:
                 UpdateTargeting();
                 break;
             case State.Lazer:
@@ -103,15 +106,24 @@ public class GrannyPhase2 : Boss
 
     private void UpdateMachineGun()
     {
-        //track the player location as you shoot out bullets
-        //granny moves as she shoots machine gun
-        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                - bulletOrigin.transform.position;
+        if(machineTimer == 0)
+        {
+            //track the player location as you shoot out bullets
+            //granny moves as she shoots machine gun
+            bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                    - bulletOrigin.transform.position;
 
-        if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
-        else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
-        StartCoroutine(machineGun.DoBulletPattern(this));
-        currentState = State.Target;
+            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
+            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
+            StartCoroutine(machineGun.DoBulletPattern(this));
+            machineTimer += Time.deltaTime;
+        } else if(machineTimer >= machineCooldownConstant)
+        {
+            machineTimer = 0;
+        } else
+        {
+            machineTimer += Time.deltaTime;
+        }
     }
 
     private void  UpdatePunch(){

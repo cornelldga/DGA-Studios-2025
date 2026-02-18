@@ -476,10 +476,9 @@ MonoBehaviour:
   currentPhase: 0
   attackRate: 1
   baseSpeed: 5
-  collisionRadius: 0
-  checkDistance: 0
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 0}
+  machineCooldownConstant: 2
 --- !u!1001 &416365286
 PrefabInstance:
   m_ObjectHideFlags: 0
