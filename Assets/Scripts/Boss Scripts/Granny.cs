@@ -204,6 +204,7 @@ public class Granny : Boss
         Contract contractScript = newContract.GetComponent<Contract>();
         contractScript.boss = bossType;
         contractScript.granny = this;
+        availableBosses.Remove(bossType);
 
         currentDroppedContracts.Add(newContract);
     }
