@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e5644ee425b810e408b6b3a39f2eb4bc
+guid: ee63d62cf2080d44c9e41c15e93218ec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2394273617515671053
-    second: player_whip_arm_0
+      213: 5972140380756631857
+    second: health_bar_0
+  - first:
+      213: -6905963577513531043
+    second: health_bar_1
+  - first:
+      213: -2484030861835244207
+    second: health_bar_2
+  - first:
+      213: -2826812978284380995
+    second: health_bar_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +55,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +135,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_whip_arm_0
+      name: health_bar_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 340
-        height: 450
+        y: 4
+        width: 1044
+        height: 319
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d0e6c137b2b2a3120800000000000000
-      internalID: 2394273617515671053
+      spriteID: 131e3c7d80e41e250800000000000000
+      internalID: 5972140380756631857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 207
+        width: 786
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d59258237b61920a0800000000000000
+      internalID: -6905963577513531043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_2
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 31
+        width: 1056
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15de3359713f68dd0800000000000000
+      internalID: -2484030861835244207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_3
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 34
+        width: 786
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbc35e6c29425c8d0800000000000000
+      internalID: -2826812978284380995
       vertices: []
       indices: 
       edges: []
@@ -151,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4b673cf3eeacd404ab815b2eb5b49838
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -159,12 +234,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":340.0,"y":450.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      player_whip_arm_0: 2394273617515671053
-      player_whip_arm_1: -571000036
+      health_bar_0: 5972140380756631857
+      health_bar_1: -6905963577513531043
+      health_bar_2: -2484030861835244207
+      health_bar_3: -2826812978284380995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
