@@ -204,7 +204,6 @@ public class Granny : Boss
         Contract contractScript = newContract.GetComponent<Contract>();
         contractScript.boss = bossType;
         contractScript.granny = this;
-        availableBosses.Remove(bossType);
 
         currentDroppedContracts.Add(newContract);
     }
@@ -224,6 +223,7 @@ public class Granny : Boss
             {
                 return;
             }
+            currentState = State.ContractDropped;
             int index = Random.Range(0, availableBosses.Count);
             DropNewContract(availableBosses[index]);
         }
