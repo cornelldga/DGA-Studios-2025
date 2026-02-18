@@ -153,7 +153,6 @@ public class Granny : Boss
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
-            bosses.RemoveAt(index);
         }
     }
 
