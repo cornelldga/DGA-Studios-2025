@@ -73,6 +73,7 @@ public class Ash : Boss
         base.Update();
         stateTimer -= Time.deltaTime;
         tumbleweedCooldownTimer -= Time.deltaTime;
+        animator.SetBool("isWalking", rb.linearVelocity.magnitude > 0.1f);
 
         if (tumbleweedCooldownTimer <= 0f && currentState != State.Desperation)
         {
@@ -109,34 +110,34 @@ public class Ash : Boss
     /// Handles logic for wandering mode. Checks for nearby seeds to stomp, otherwise moves towards a target point. If it reaches the target or the timer runs out, it chooses the next attack.
     /// </summary>
     private void UpdateWandering()
-        {
-            GameObject[] nearbySeeds = GameObject.FindGameObjectsWithTag("Seed");
-        bool seedsInRange = false;
-        
-        foreach (GameObject seed in nearbySeeds)
-        {
-            if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
-            {
-                seedsInRange = true;
-                break;
-            }
-        }
-        
-        if (seedsInRange)
-        {
-            TransitionToStomping();
-            return;
-        }
-        
+    {
         Vector2 direction = (wanderTarget - (Vector2)transform.position).normalized;
         rb.linearVelocity = direction * wanderSpeed;
 
         if (direction.x > 0) sprite.flipX = true;
         else if (direction.x < 0) sprite.flipX = false;
 
-        if (Vector2.Distance(transform.position, wanderTarget) < 0.5f || stateTimer <= 0)
+        if (Vector2.Distance(transform.position, wanderTarget) < 0.5f)
         {
-            ChooseNextAttack();
+            GameObject[] nearbySeeds = GameObject.FindGameObjectsWithTag("Seed");
+            bool seedsNearby = false;
+            foreach (GameObject seed in nearbySeeds)
+            {
+                if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
+                {
+                    seedsNearby = true;
+                    break;
+                }
+            }
+
+            if (seedsNearby)
+                TransitionToStomping();
+            else
+                ChooseNextAttack(); 
+        }
+        else if (stateTimer <= 0)
+        {
+            ChooseNextAttack(); 
         }
     }
 
@@ -306,11 +307,32 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Sets the new location to wander to. Later update this to be wherever the most seeds are planted to then have it be where they stomp.
+    /// Sets the new location to wander to. If there are seeds in the scene, it will target the nearest seed. Otherwise, it will pick a random point within a certain radius.
     /// </summary>
     private void SetNewWanderTarget()
     {
-        wanderTarget = (Vector2)transform.position + Random.insideUnitCircle * wanderRadius;
+        GameObject[] seeds = GameObject.FindGameObjectsWithTag("Seed");
+        
+        if (seeds.Length == 0)
+        {
+            wanderTarget = (Vector2)transform.position + Random.insideUnitCircle * wanderRadius;
+            return;
+        }
+
+        GameObject nearest = null;
+        float closestDist = Mathf.Infinity;
+
+        foreach (GameObject seed in seeds)
+        {
+            float dist = Vector2.Distance(transform.position, seed.transform.position);
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                nearest = seed;
+            }
+        }
+
+        wanderTarget = nearest.transform.position;
     }
 
     private IEnumerator ScatterSeeds()
@@ -331,9 +353,17 @@ public class Ash : Boss
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
+    // Stomps on nearby seeds, destroying them. No animation yet. eventually will grow them into flowers.
     private IEnumerator StompAndGrowFlowers()
     {
-        //Placeholder
+        GameObject[] seeds = GameObject.FindGameObjectsWithTag("Seed");
+        foreach (GameObject seed in seeds)
+        {
+            if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
+            {
+                Destroy(seed);
+            }
+        }
         
         yield return new WaitForSeconds(stompTime);
     }
