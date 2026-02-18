@@ -186,7 +186,7 @@ public class Granny : Boss
                     // TODO Handle phase change
                     TransitionToIdle();
                 }
-            }
+            } 
         }
     }
 
