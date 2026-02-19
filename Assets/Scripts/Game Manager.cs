@@ -83,18 +83,20 @@ public class GameManager : MonoBehaviour
     {
         FreezePlayer(true);
 
-        // If scene doesnt have a transition animation, use World Hub transition
+        bool hasSpecificTransition = false;
         for (int triggerIndex = 0; triggerIndex < animator.parameterCount; triggerIndex++)
         {
-            if (animator.parameters[triggerIndex].name == scene || (scene == "Saloon Exit"))
+            if (animator.parameters[triggerIndex].name == scene || scene == "Saloon Exit")
             {
-                animator.SetTrigger(scene);
-            }
-            else
-            {
-                animator.SetTrigger("World Hub");
+                hasSpecificTransition = true;
+                break;
             }
         }
+
+        if (hasSpecificTransition)
+            animator.SetTrigger(scene);
+        else
+            animator.SetTrigger("World Hub");
         
         yield return null;
         
