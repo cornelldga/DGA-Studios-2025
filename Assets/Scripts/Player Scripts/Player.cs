@@ -39,9 +39,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] Transform whipPivot;
     public Whip whip;
     [SerializeField] float whipCooldownTime;
-    float whipTime; //determined by length of animation
     [SerializeField] Animator whipAnimator;
-    [SerializeField] Animator whipPivotAnimator;
 
     [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
@@ -58,6 +56,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] GameObject whipUI;
     [SerializeField] Image whipFillImage;
     [SerializeField] TMP_Text whipCooldownText;
+    [SerializeField] Animator playerHealthAnimator;
+    [SerializeField] TMP_Text playerHealthText;
 
     // Sprite fields temporary. These should be removed and change the health animator
     // [SerializeField] Animator healthAnimator;
@@ -98,10 +98,8 @@ public class Player : MonoBehaviour, IDamageable
         animationControl = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
-
-        whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
         bulletRight = bulletOrigin.right;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         whipUI.SetActive(false);
 
         speed = baseSpeed;
@@ -117,6 +115,9 @@ public class Player : MonoBehaviour, IDamageable
         backupImage.sprite = backupBase.getSprite();
         mixerEquippedImage.sprite = selectedMixer.getSprite();
         mixerBackupImage.sprite = backupMixer.getSprite();
+
+        playerHealthAnimator.SetFloat("Health", health);
+        playerHealthText.SetText(health.ToString());
 
         isAlive = true;
         GameManager.Instance.player = this;
@@ -264,18 +265,24 @@ public class Player : MonoBehaviour, IDamageable
     public void OnWhip()
     {
         whipping = true;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-        whipPivotAnimator.Play("Whip Rotate", 0, 0f);
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        Vector3 mouse = Mouse.current.position.ReadValue();
+        mouse.z = Mathf.Abs(Camera.main.transform.position.z);
+        Vector3 world = Camera.main.ScreenToWorldPoint(mouse);
+
+        Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
+        whipPivot.right = dir;
         whipAnimator.Play("Whip", 0, 0f);
-        StartCoroutine(nameof(WhipTime));
         StartCoroutine(nameof(ToggleWhipUI));
     }
-
-    IEnumerator WhipTime()
+    /// <summary>
+    /// Function called by Animator to end the whip
+    /// </summary>
+    public void AnimationEndWhip()
     {
-        yield return new WaitForSeconds(whipTime);
         whipping = false;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whipPivot.transform.localEulerAngles = Vector3.zero;
     }
     /// <summary>
     /// Toggles the whip UI on when the player whips and off when the cooldown is complete
@@ -373,20 +380,12 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
-            if (healthRatio <= midHealthThreshold)
-            {
-                healthImage.sprite = midSprite;
-                // Should set this boolean animation to true
-            }
-            if (healthRatio <= criticalThreshold)
-            {
-                healthImage.sprite = lowHealthSprite;
-                // Should set this boolean animation to true
-            }
             if (health <= 0)
             {
                 GameManager.Instance.LoseGame();
             }
+            playerHealthAnimator.SetFloat("Health", health);
+            playerHealthText.SetText(health.ToString());
         }
     }
     /// <summary>
