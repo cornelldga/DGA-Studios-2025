@@ -338,6 +338,11 @@ public class Ash : Boss
     private IEnumerator ScatterSeeds()
     {
         // Placeholder
+        int[,] seedField =  new int[20 , 10];
+        foreach (int seed in seedField) 
+        { 
+            //seed
+        }
         yield return new WaitForSeconds(scatterTime);
     }
 
