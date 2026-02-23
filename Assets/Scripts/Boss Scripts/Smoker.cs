@@ -8,6 +8,18 @@ public class Smoker : MonoBehaviour
     [SerializeField] float spinSpeed = 50;
 
     private float ogSpeed;
+    private SpriteRenderer spriteRenderer;
+
+    [Header("Movement")]
+    [Tooltip("Reference to the player transform to move towards")]
+    [SerializeField] Transform player;
+    [Tooltip("How strongly the smoker is turns towards the player")]
+    [SerializeField] float turnSpeed = 2f;
+    [Tooltip("How quickly the smoker moves to the player")]
+    [SerializeField] float speed = 3f;
+
+    private Vector2 currentVelocity;
+    private Rigidbody2D rb;
 
     //How fast should smoke be shot out of smoker pipe.
     [SerializeField] float pelletSpeed = 3;
@@ -40,7 +52,43 @@ public class Smoker : MonoBehaviour
         first = true;
         hidStage = true;
         ogSpeed = spinSpeed;
+        player = GameManager.Instance.player.transform;
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.flipX = false;
+
+
+        // Make rigidbody kinematic so player cannot push it
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 0;
+        }
     }
+
+    void FixedUpdate()
+{
+    if (player != null)
+    {
+        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+        Vector2 desiredVelocity = direction * speed;
+        currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
+        rb.linearVelocity = currentVelocity;
+
+        // Flip sprite based on player position
+        if (spriteRenderer != null)
+        {
+            if (player.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = false; // Player is to the left
+            }
+            else
+            {
+                spriteRenderer.flipX = true; // Player is to the right
+            }
+        }
+    }
+}
 
     // Update is called once per frame
     /// <summary>
@@ -48,8 +96,11 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void Update()
     {
+
+
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
+        
         if (magician.currentStage == Stage.Backstage )
         {
             if(smokeTimer <= 0 & !first)
@@ -75,7 +126,6 @@ public class Smoker : MonoBehaviour
 
                         break;
                     }
-                        
                 
                     ObscureStage();
                 }
@@ -180,4 +230,6 @@ public class Smoker : MonoBehaviour
         hidStage = true;
     }
 
+
 }
+
