@@ -6,7 +6,7 @@ public class Contract : MonoBehaviour, IDamageable
     public GameObject boss;
     public Granny granny;
 
-    public float maxHealth = 0;
+    public float maxHealth = 10f;
 
     private float health;
 
@@ -25,7 +25,9 @@ public class Contract : MonoBehaviour, IDamageable
         health -= damage;
         if(health <= 0)
         {
-            // TODO Destroy contract logic here
+            Destroy(gameObject);
+            boss.SetActive(false);
+            granny.TransitionToIdle();
         }
     }   
 }

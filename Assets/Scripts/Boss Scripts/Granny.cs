@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditorInternal;
 
 public class Granny : Boss
 {
@@ -8,11 +9,11 @@ public class Granny : Boss
     {
         Idle, HoldingContract, ContractDropped, Scavange
     }
-    private State currentState;
+   [SerializeField] private State currentState; //TODO  de cereal
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
-    [SerializeField] float baseSpeed = 5f;
+    [SerializeField] float baseSpeed;
     // collision radius when charging and bouncing
     [SerializeField] float collisionRadius;
     // check distance of circle cast
@@ -20,12 +21,12 @@ public class Granny : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
-    [SerializeField] private float idleTime = 1f;
+    [SerializeField] private float idleTime;
     //How long we should scavenge for contracts.
-    [SerializeField] private float scavengeTime = 1f;
+    [SerializeField] private float scavengeTime;
     //Length of time to pull out contracts.
-    [SerializeField] private float outTime = 1f;
-    [SerializeField] private float droppedTime = 1f;
+    [SerializeField] private float outTime;
+    [SerializeField] private float droppedTime;
 
 
     [Header("Contracts Settings")]
@@ -94,7 +95,7 @@ public class Granny : Boss
 
     }
 
-    private void TransitionToIdle()
+    public void TransitionToIdle()
     {
         if (rb == null) return;
 
@@ -161,15 +162,21 @@ public class Granny : Boss
     private void TransitionToContractDropped()
     {
         stateTimer = droppedTime;
+        currentState = State.ContractDropped;
     }
 
     private void UpdateContractDropped()
     {
         if (stateTimer <= 0)
         {
-            currentState = State.Scavange;
-            stateTimer = scavengeTime;
+            TransitionToScavange();
         }
+    }
+
+    private void TransitionToScavange()
+    {
+        stateTimer = scavengeTime;
+        currentState = State.Scavange;
     }
 
     private void UpdateScavenge()
@@ -237,7 +244,7 @@ public class Granny : Boss
             {
                 return;
             }
-            currentState = State.ContractDropped;
+            TransitionToContractDropped();
             int index = Random.Range(0, availableBosses.Count);
             DropNewContract(availableBosses[index]);
         }
