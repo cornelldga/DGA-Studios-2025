@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3814195944134518128}
   - component: {fileID: 3301654434265093489}
   - component: {fileID: 3145207849952410808}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Beer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,9 +125,7 @@ MonoBehaviour:
   duration: 1
   damage: 0.5
   accuracy: 3
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 64
+  impactSprite: {fileID: 4035374750506144467, guid: 241e6041b86860346b334fa62245ef39, type: 3}
   cooldown: 0.25
   baseSprite: {fileID: 21300000, guid: 28b87faa36f294b4e9ef6959a573cc9c, type: 3}
 --- !u!212 &3301654434265093489
