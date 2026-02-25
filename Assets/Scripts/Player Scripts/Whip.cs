@@ -14,5 +14,12 @@ public class Whip : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().linearVelocity = -whipSpeedMultiplier * collision.GetComponent<Rigidbody2D>().linearVelocity;
             }
         }
-        }
+    }
+    /// <summary>
+    /// Ends the whip
+    /// </summary>
+    public void EndWhip()
+    {
+        GameManager.Instance.player.AnimationEndWhip();
+    }
 }

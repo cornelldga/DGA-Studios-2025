@@ -82,7 +82,21 @@ public class GameManager : MonoBehaviour
     IEnumerator TransitionAnim(string scene)
     {
         FreezePlayer(true);
-        animator.SetTrigger(scene);
+
+        bool hasSpecificTransition = false;
+        for (int triggerIndex = 0; triggerIndex < animator.parameterCount; triggerIndex++)
+        {
+            if (animator.parameters[triggerIndex].name == scene || scene == "Saloon Exit")
+            {
+                hasSpecificTransition = true;
+                break;
+            }
+        }
+
+        if (hasSpecificTransition)
+            animator.SetTrigger(scene);
+        else
+            animator.SetTrigger("World Hub");
         
         yield return null;
         
