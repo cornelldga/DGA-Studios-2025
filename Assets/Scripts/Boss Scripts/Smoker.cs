@@ -18,6 +18,10 @@ public class Smoker : MonoBehaviour
     [Tooltip("How quickly the smoker moves to the player")]
     [SerializeField] float speed = 3f;
 
+    [Tooltip("The player object layer")]
+    [SerializeField] LayerMask playerMask;
+
+    private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
 
@@ -56,6 +60,7 @@ public class Smoker : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.flipX = false;
+        collidedWithPlayer = false;
 
 
         // Make rigidbody kinematic so player cannot push it
@@ -66,29 +71,44 @@ public class Smoker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Physics update for following the player
+    /// </summary>
     void FixedUpdate()
-{
-    if (player != null)
     {
-        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-        Vector2 desiredVelocity = direction * speed;
-        currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
-        rb.linearVelocity = currentVelocity;
-
-        // Flip sprite based on player position
-        if (spriteRenderer != null)
+        if (player != null)
         {
-            if (player.position.x < transform.position.x)
+            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+            Vector2 desiredVelocity = direction * speed;
+            currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = currentVelocity;
+
+            // Flip sprite based on player position
+            if (spriteRenderer != null)
             {
-                spriteRenderer.flipX = false; // Player is to the left
-            }
-            else
-            {
-                spriteRenderer.flipX = true; // Player is to the right
+                if (player.position.x < transform.position.x)
+                {
+                    spriteRenderer.flipX = false; // Player is to the left
+                }
+                else
+                {
+                    spriteRenderer.flipX = true; // Player is to the right
+                }
             }
         }
     }
-}
+    
+    /// <summary>
+    /// If there is a collision with the player, will activate punch
+    /// </summary>
+    void OnCollisionEnter(Collision other)
+    {
+        int otherLayer = other.gameObject.layer;
+        if (playerMask.value & (otherLayer << 1) > 0)
+        {
+            // call Punch coroutine
+        }
+    }
 
     // Update is called once per frame
     /// <summary>
