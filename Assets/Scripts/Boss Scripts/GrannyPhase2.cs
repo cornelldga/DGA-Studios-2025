@@ -93,7 +93,6 @@ public class GrannyPhase2 : Boss
         if (stateTimer <= 0)
         {
             //decide which mode to swap to based on some randomization
-            currentState = State.MachineGun;
         }
     }
 
