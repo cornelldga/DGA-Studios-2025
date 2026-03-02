@@ -76,7 +76,7 @@ public class LoadoutManager : MonoBehaviour
     /// Highlights the slot that is being changed
     /// </summary>
     /// <param name="slot"></param>
-    public void SelectSlot(Image slot)
+    public void SelectBaseSlot(Image slot)
     {
         if (highlighted==null)
         {
