@@ -81,7 +81,13 @@ MonoBehaviour:
   sceneMusic: 0
   saloonMusic: {fileID: 2883716215566334450}
   hogMusic: {fileID: 1625788575435399617}
-  sounds: []
+  sounds:
+  - source: {fileID: 0}
+    name: gin
+    audioClip: {fileID: 8300000, guid: cc1a57a1ee4654201978d4b9bea5c577, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
   musicGroup: {fileID: 898037753239958536, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
   sfxGroup: {fileID: -3908983327557864445, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
 --- !u!1 &1814903278115915233

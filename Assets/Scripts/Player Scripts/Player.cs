@@ -245,6 +245,7 @@ public class Player : MonoBehaviour, IDamageable
         Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, bulletOrigin.rotation);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;
+        AudioManager.Instance.PlaySFX(0, true);
     }
 
     /// <summary>
