@@ -11,7 +11,6 @@ public class LoadoutManager : MonoBehaviour
     int index;
     [SerializeField] List<Button> baseButtons;
     [SerializeField] List<Button> mixerButtons;
-    
 
 
     [Tooltip("Equipped slots")]
@@ -20,7 +19,8 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] GameObject mixerSlotOne;
     [SerializeField] GameObject mixerSlotTwo;
 
-
+    private GameObject lastUnchangedBase;
+    private GameObject lastUnchangedMixer;
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -72,6 +72,8 @@ public class LoadoutManager : MonoBehaviour
             }
             index++;
         }
+        lastUnchangedBase = baseSlotOne;
+        lastUnchangedMixer = mixerSlotOne;
     }
     /// <summary>
     /// Sets the index of where bases and mixers will be swapped with the loadout
@@ -99,6 +101,14 @@ public class LoadoutManager : MonoBehaviour
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
+        lastUnchangedBase.GetComponent<Image>().sprite = baseToButton[(BaseType)baseType].image.sprite;
+        if (lastUnchangedBase==baseSlotOne)
+        {
+            lastUnchangedBase = baseSlotTwo;
+        } else
+        {
+            lastUnchangedBase = baseSlotOne;
+        }
     }
 
     /// <summary>
@@ -109,5 +119,13 @@ public class LoadoutManager : MonoBehaviour
         MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
         mixerToButton[swappedMixer].interactable = true;
         mixerToButton[(MixerType)mixerType].interactable = false;
+        lastUnchangedMixer.GetComponent<Image>().sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+        if (lastUnchangedMixer==mixerSlotOne)
+        {
+            lastUnchangedMixer = mixerSlotTwo;
+        } else
+        {
+            lastUnchangedMixer = mixerSlotOne;
+        }
     }
 }
