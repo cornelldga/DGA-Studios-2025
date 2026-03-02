@@ -27,8 +27,6 @@ public class Contract : MonoBehaviour, IDamageable
         {
             Destroy(gameObject);
             boss.SetActive(false);
-            granny.availableBosses.Remove(boss);
-            granny.bossActive = false;
             granny.TransitionToIdle();
         }
     }   
