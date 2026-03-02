@@ -14,13 +14,14 @@ public class LoadoutManager : MonoBehaviour
 
 
     [Tooltip("Equipped slots")]
-    [SerializeField] GameObject baseSlotOne;
-    [SerializeField] GameObject baseSlotTwo;
-    [SerializeField] GameObject mixerSlotOne;
-    [SerializeField] GameObject mixerSlotTwo;
+    [SerializeField] Image baseSlotOne;
+    [SerializeField] Image baseSlotTwo;
+    [SerializeField] Image mixerSlotOne;
+    [SerializeField] Image mixerSlotTwo;
 
-    private GameObject lastUnchangedBase;
-    private GameObject lastUnchangedMixer;
+    private Image lastUnchangedBase;
+    private Image lastUnchangedMixer;
+    private Image highlighted;
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -51,10 +52,10 @@ public class LoadoutManager : MonoBehaviour
             // set base slot images
             if (index==0)
             {
-                baseSlotOne.GetComponent<Image>().sprite = baseToButton[baseType].image.sprite;
+                baseSlotOne.sprite = baseToButton[baseType].image.sprite;
             } else
             {
-                baseSlotTwo.GetComponent<Image>().sprite = baseToButton[baseType].image.sprite;
+                baseSlotTwo.sprite = baseToButton[baseType].image.sprite;
             }
             index++;
         }
@@ -65,24 +66,44 @@ public class LoadoutManager : MonoBehaviour
             // set mixer slot images
             if (index==0)
             {
-                mixerSlotOne.GetComponent<Image>().sprite = mixerToButton[mixerType].image.sprite;
+                mixerSlotOne.sprite = mixerToButton[mixerType].image.sprite;
             } else
             {
-                mixerSlotTwo.GetComponent<Image>().sprite = mixerToButton[mixerType].image.sprite;
+                mixerSlotTwo.sprite = mixerToButton[mixerType].image.sprite;
             }
             index++;
         }
         lastUnchangedBase = baseSlotOne;
         lastUnchangedMixer = mixerSlotOne;
     }
+
     /// <summary>
-    /// Sets the index of where bases and mixers will be swapped with the loadout
+    /// Highlights the slot that is being changed
     /// </summary>
-    /// <param name="index"></param>
-    public void SelectSlot(int index)
+    /// <param name="slot"></param>
+    public void SelectSlot(Image slot)
     {
-        this.index = index;
-        
+        if (highlighted==null)
+        {
+            // nothing selected
+            slot.color = Color.lightGreen;
+            highlighted = slot;
+        } else
+        {
+            // something selected
+            highlighted.color = Color.white;
+            if (highlighted == slot)
+            {
+                // they are the same, then unselect
+                highlighted = null;
+            } else
+            {
+                // they are different
+                slot.color = Color.lightGreen;
+                highlighted = slot;
+
+            }
+        }
     }
 
     /// <summary>
@@ -102,7 +123,7 @@ public class LoadoutManager : MonoBehaviour
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
-        lastUnchangedBase.GetComponent<Image>().sprite = baseToButton[(BaseType)baseType].image.sprite;
+        lastUnchangedBase.sprite = baseToButton[(BaseType)baseType].image.sprite;
         if (lastUnchangedBase==baseSlotOne)
         {
             lastUnchangedBase = baseSlotTwo;
@@ -120,7 +141,7 @@ public class LoadoutManager : MonoBehaviour
         MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
         mixerToButton[swappedMixer].interactable = true;
         mixerToButton[(MixerType)mixerType].interactable = false;
-        lastUnchangedMixer.GetComponent<Image>().sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+        lastUnchangedMixer.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
         if (lastUnchangedMixer==mixerSlotOne)
         {
             lastUnchangedMixer = mixerSlotTwo;

@@ -937,10 +937,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
         m_MethodName: SelectSlot
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3468619177495131284}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1896,10 +1896,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
         m_MethodName: SelectSlot
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4002582751203022200}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2249,10 +2249,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
         m_MethodName: SelectSlot
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8639577754586494954}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3997,10 +3997,10 @@ MonoBehaviour:
   - {fileID: 6493053261974851131}
   - {fileID: 2964581144172474156}
   - {fileID: 9169486998936200450}
-  baseSlotOne: {fileID: 647239551182751850}
-  baseSlotTwo: {fileID: 2194438514011131621}
-  mixerSlotOne: {fileID: 1992524661526773449}
-  mixerSlotTwo: {fileID: 7035368791022838466}
+  baseSlotOne: {fileID: 3468619177495131284}
+  baseSlotTwo: {fileID: 8639577754586494954}
+  mixerSlotOne: {fileID: 4002582751203022200}
+  mixerSlotTwo: {fileID: 7921015534663967858}
 --- !u!222 &3231970282301270771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4277,10 +4277,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
         m_MethodName: SelectSlot
-        m_Mode: 3
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7921015534663967858}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
