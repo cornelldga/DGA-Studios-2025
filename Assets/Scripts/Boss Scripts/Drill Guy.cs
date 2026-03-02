@@ -28,7 +28,7 @@ public class DrillGuy : Boss
     [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
-
+    [SerializeField] Transform holeOrigin;
     [SerializeField] float moveSpeed;
     [Tooltip("The range in which the driller can move from a random point in world center")]
     [SerializeField] float moveRange;
@@ -332,9 +332,8 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteredGround()
     {
-        Vector3 spawnPos = bulletOrigin.position;
-        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
-        holePositions.Add(spawnPos);
+        Instantiate(enterHolePrefab, holeOrigin.position, Quaternion.identity);
+        holePositions.Add(holeOrigin.position);
         pushTrigger.enabled = true;
         hurtBox.enabled = false;
         isUnderground = true;
@@ -364,8 +363,8 @@ public class DrillGuy : Boss
 
         Vector3 spawnPos = transform.position;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
-        Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
-        holePositions.Add(spawnPos);
+        Instantiate(exitHolePrefab, holeOrigin.position, Quaternion.identity);
+        holePositions.Add(holeOrigin.position);
     }
 
     /// <summary>
