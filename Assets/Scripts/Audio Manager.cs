@@ -76,14 +76,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(int index, bool random)
+    public void PlaySFX(int index, bool random = false)
     {
         if (index < 0 || index >= sounds.Length)
         {
             Debug.Log("Sound index out of bounds, refer to Audio Manager object");
             return;
         }
-        sounds[index].source.pitch = pitches[Random.Range(0, pitches.Length)];
+        if (random)
+        {
+            sounds[index].source.pitch = pitches[Random.Range(0, pitches.Length)];
+        }
         sounds[index].source.PlayOneShot(sounds[index].audioClip);
     }
 

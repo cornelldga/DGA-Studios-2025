@@ -84,7 +84,19 @@ MonoBehaviour:
   sounds:
   - source: {fileID: 0}
     name: gin
-    audioClip: {fileID: 8300000, guid: cc1a57a1ee4654201978d4b9bea5c577, type: 3}
+    audioClip: {fileID: 8300000, guid: 3480c81cbf15344ac941150147175276, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: beer
+    audioClip: {fileID: 8300000, guid: 2a18970c274de4a9594ed37869a69c31, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Base Swap
+    audioClip: {fileID: 8300000, guid: aa2b98bf5de8e4bdb83ecb03f77e5e77, type: 3}
     isLoop: 0
     playOnAwake: 0
     volume: 1
