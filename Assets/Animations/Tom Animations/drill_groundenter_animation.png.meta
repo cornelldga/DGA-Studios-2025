@@ -487,7 +487,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -525,7 +525,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1143,94 +1143,6 @@ TextureImporter:
       bones: []
       spriteID: 5d99dd2e6a09a4f3bbdb3f2aecfbd732
       internalID: -821867458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_groundenter_animation_26
-      rect:
-        serializedVersion: 2
-        x: 1248
-        y: 0
-        width: 624
-        height: 624
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e42232a60bef4b6fb702b73bc238e04
-      internalID: 2138317731
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_groundenter_animation_27
-      rect:
-        serializedVersion: 2
-        x: 1872
-        y: 0
-        width: 624
-        height: 624
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 193ccacd154e44c4db6f893b6ee2ce6e
-      internalID: 737311051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_groundenter_animation_28
-      rect:
-        serializedVersion: 2
-        x: 2496
-        y: 0
-        width: 624
-        height: 624
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d72ff31b3ce24bd2b8657d3a9ad29c5
-      internalID: -1945651603
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_groundenter_animation_29
-      rect:
-        serializedVersion: 2
-        x: 3120
-        y: 0
-        width: 624
-        height: 624
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8eddd49d408844ec38e75e88057d1385
-      internalID: -874963837
       vertices: []
       indices: 
       edges: []

@@ -12,29 +12,33 @@ public class Seed : MonoBehaviour
     private float maxHeight;
     private Rigidbody2D rb;
     private float startVel;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float timer;
+    private float startHeight;
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         planted = false;
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocityX = (target.x - this.transform.position.x) /landingTime;
         maxHeight = (arcHeight + target.y);
-        startVel = maxHeight / (landingTime / 2) + arcHeight * (landingTime / 2);
-        rb.linearVelocityY = startVel;
-
+        startVel = maxHeight / (landingTime / 2);
+        rb.linearVelocityY = startVel + (target.y - this.transform.position.y) / landingTime; ;
+        timer = 0;
+        startHeight = this.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if (!planted) { 
-            if(target.y > this.transform.position.y )
+            if( timer >= landingTime )
             {
                 rb.linearVelocity = new Vector2(0, 0);
                 //Plant seed when it reaches its target
                 planted = true;
             }
-        else { rb.linearVelocityY -= ((2*startVel) / landingTime )* Time.deltaTime; }
+        else { rb.linearVelocityY -= ((2*startVel)/landingTime) * Time.deltaTime; }
          }
 
     }
@@ -45,6 +49,7 @@ public class Seed : MonoBehaviour
     public void Blossom()
     {
         //Spawn Flower
+        Instantiate(flower, this.transform.position, this.transform.rotation);
         GameObject.Destroy(this.gameObject);
     }
 

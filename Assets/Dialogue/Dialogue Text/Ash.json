@@ -2,7 +2,12 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "You're not ready",
+            "dialogueText": "Hey! Watch there, buddy! You almost knocked over my plant!",
+            "emotion": 0,
+            "nextDialogueID": "0_fight"
+        }, {
+            "dialogueID": "0_fight",
+            "dialogueText": "You wanna go? I'll show you who's boss around here!",
             "emotion": 0,
             "nextDialogueID": ""
         }
