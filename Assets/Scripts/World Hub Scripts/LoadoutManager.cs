@@ -119,18 +119,12 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseBase(int baseType)
     {
-
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
-        lastUnchangedBase.sprite = baseToButton[(BaseType)baseType].image.sprite;
-        if (lastUnchangedBase==baseSlotOne)
-        {
-            lastUnchangedBase = baseSlotTwo;
-        } else
-        {
-            lastUnchangedBase = baseSlotOne;
-        }
+        highlighted.color = Color.white;
+        highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
+        highlighted = null;
     }
 
     /// <summary>
@@ -141,13 +135,8 @@ public class LoadoutManager : MonoBehaviour
         MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
         mixerToButton[swappedMixer].interactable = true;
         mixerToButton[(MixerType)mixerType].interactable = false;
-        lastUnchangedMixer.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-        if (lastUnchangedMixer==mixerSlotOne)
-        {
-            lastUnchangedMixer = mixerSlotTwo;
-        } else
-        {
-            lastUnchangedMixer = mixerSlotOne;
-        }
+        highlighted.color = Color.white;
+        highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+        highlighted = null;
     }
 }
