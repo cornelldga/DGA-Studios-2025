@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Rendering;
 
 public class GrannyPhase2 : Boss
 {
