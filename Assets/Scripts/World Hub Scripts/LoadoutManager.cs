@@ -79,9 +79,10 @@ public class LoadoutManager : MonoBehaviour
     /// Sets the index of where bases and mixers will be swapped with the loadout
     /// </summary>
     /// <param name="index"></param>
-    public void SelectIndex(int index)
+    public void SelectSlot(int index)
     {
         this.index = index;
+        
     }
 
     /// <summary>
@@ -101,7 +102,6 @@ public class LoadoutManager : MonoBehaviour
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
-        baseToButton[(BaseType)baseType].GetComponent<Image>().color = Color.green;
         lastUnchangedBase.GetComponent<Image>().sprite = baseToButton[(BaseType)baseType].image.sprite;
         if (lastUnchangedBase==baseSlotOne)
         {
