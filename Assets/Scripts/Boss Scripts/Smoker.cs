@@ -104,7 +104,7 @@ public class Smoker : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         int otherLayer = other.gameObject.layer;
-        if (playerMask.value & (otherLayer << 1) > 0)
+        if ((playerMask.value & (otherLayer << 1)) > 0)
         {
             // call Punch coroutine
         }
