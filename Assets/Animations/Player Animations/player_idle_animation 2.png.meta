@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -147,7 +147,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_idle_animation 1_0
+      name: player_idle_animation 2_0
       rect:
         serializedVersion: 2
         x: 152
@@ -155,21 +155,21 @@ TextureImporter:
         width: 207
         height: 318
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a8220411fa4a01c50800000000000000
-      internalID: 6633983322932388490
+      spriteID: b2bdd46ed6387784ab18c4ae481a7129
+      internalID: 633351780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_1
+      name: player_idle_animation 2_1
       rect:
         serializedVersion: 2
         x: 664
@@ -177,65 +177,43 @@ TextureImporter:
         width: 207
         height: 316
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4fe2dd7ff75da59d0800000000000000
-      internalID: -2784678673979199756
+      spriteID: 9d9dc2cf9110f1c4e89495cf097dcea8
+      internalID: 1183167594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_2
+      name: player_idle_animation 2_2
       rect:
         serializedVersion: 2
-        x: 1176
+        x: 1175
         y: 1
-        width: 208
+        width: 210
         height: 315
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9a69f9de8e7dc9c60800000000000000
-      internalID: 7826367647882122921
+      spriteID: 1091cd09baf238f44b463ac562ec4af8
+      internalID: 1986606260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_3
-      rect:
-        serializedVersion: 2
-        x: 1379
-        y: 187
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fc1c536ca51eb2bd0800000000000000
-      internalID: -2653779775416057393
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_idle_animation 1_4
+      name: player_idle_animation 2_3
       rect:
         serializedVersion: 2
         x: 1688
@@ -243,21 +221,21 @@ TextureImporter:
         width: 207
         height: 315
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 76b264941a7d54eb0800000000000000
-      internalID: -4736142345391166617
+      spriteID: df4cce7a8b9a19947a4f8d5c381e0b95
+      internalID: -1266837951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_5
+      name: player_idle_animation 2_4
       rect:
         serializedVersion: 2
         x: 2200
@@ -265,59 +243,59 @@ TextureImporter:
         width: 208
         height: 315
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 657676ae500184750800000000000000
-      internalID: 6289294497216423766
+      spriteID: 311df9c690789284d8c752fd539a697c
+      internalID: 1591289178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_6
+      name: player_idle_animation 2_5
       rect:
         serializedVersion: 2
-        x: 2403
+        x: 2404
         y: 187
         width: 6
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ebd334890c551cc70800000000000000
-      internalID: 8989560616884846014
+      spriteID: a6d3694b08600d34f9d6570fdf17f116
+      internalID: -2093145380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_animation 1_7
+      name: player_idle_animation 2_6
       rect:
         serializedVersion: 2
-        x: 2712
+        x: 2711
         y: 1
-        width: 207
+        width: 209
         height: 316
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b95cd7a5c94b5c380800000000000000
-      internalID: -8951550100702902885
+      spriteID: 5e90eb9625eed7c4cbeb3eaccd495051
+      internalID: 925038259
       vertices: []
       indices: 
       edges: []
@@ -326,7 +304,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7994c0c44b5fb46488b57232293af4d1
     internalID: 0
     vertices: []
     indices: 
@@ -334,16 +312,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      player_idle_animation 1_0: 6633983322932388490
-      player_idle_animation 1_1: -2784678673979199756
-      player_idle_animation 1_2: 7826367647882122921
-      player_idle_animation 1_3: -2653779775416057393
-      player_idle_animation 1_4: -4736142345391166617
-      player_idle_animation 1_5: 6289294497216423766
-      player_idle_animation 1_6: 8989560616884846014
-      player_idle_animation 1_7: -8951550100702902885
+      player_idle_animation 2_0: 633351780
+      player_idle_animation 2_1: 1183167594
+      player_idle_animation 2_2: 1986606260
+      player_idle_animation 2_3: -1266837951
+      player_idle_animation 2_4: 1591289178
+      player_idle_animation 2_5: -2093145380
+      player_idle_animation 2_6: 925038259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
