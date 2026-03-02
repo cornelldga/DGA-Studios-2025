@@ -19,6 +19,15 @@ public class Ash : Boss
     }
     public State currentState;
 
+    public enum SeedAttack
+    {
+        XAttack,
+        CrossAttack,
+        StarAttack,
+        DiamondAttack
+    }
+    public SeedAttack currentSeedPattern;
+
     [Header("Movement Settings")]
     [SerializeField] float wanderSpeed = 2f;
     [SerializeField] float wanderRadius = 5f;
