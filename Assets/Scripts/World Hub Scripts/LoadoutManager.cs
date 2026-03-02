@@ -11,6 +11,16 @@ public class LoadoutManager : MonoBehaviour
     int index;
     [SerializeField] List<Button> baseButtons;
     [SerializeField] List<Button> mixerButtons;
+    
+
+
+    [Tooltip("Equipped slots")]
+    [SerializeField] GameObject baseSlotOne;
+    [SerializeField] GameObject baseSlotTwo;
+    [SerializeField] GameObject mixerSlotOne;
+    [SerializeField] GameObject mixerSlotTwo;
+
+
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -34,13 +44,33 @@ public class LoadoutManager : MonoBehaviour
             mixerToButton[(MixerType)index] = button;
             index++;
         }
+        index = 0;
         foreach (BaseType baseType in equippedBases)
         {
             baseToButton[baseType].interactable = false;
+            // set base slot images
+            if (index==0)
+            {
+                baseSlotOne.GetComponent<Image>().sprite = baseToButton[baseType].image.sprite;
+            } else
+            {
+                baseSlotTwo.GetComponent<Image>().sprite = baseToButton[baseType].image.sprite;
+            }
+            index++;
         }
+        index = 0;
         foreach (MixerType mixerType in equippedMixers)
         {
             mixerToButton[mixerType].interactable = false;
+            // set mixer slot images
+            if (index==0)
+            {
+                mixerSlotOne.GetComponent<Image>().sprite = mixerToButton[mixerType].image.sprite;
+            } else
+            {
+                mixerSlotTwo.GetComponent<Image>().sprite = mixerToButton[mixerType].image.sprite;
+            }
+            index++;
         }
     }
     /// <summary>
