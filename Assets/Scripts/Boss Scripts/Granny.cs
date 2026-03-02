@@ -34,7 +34,8 @@ public class Granny : Boss
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
     [Tooltip("Spawn bounds, from bottom left to top right")]
     [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
-    [SerializeField] List<GameObject> availableBosses = new List<GameObject>();
+    [SerializeField] public List<GameObject> availableBosses = new List<GameObject>();
+    public bool bossActive;
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
     // Contracts currently dropped by Granny
@@ -132,10 +133,10 @@ public class Granny : Boss
 
     private void EnableRandomBosses()
     {
-        if (bosses.Exists(b => b.activeInHierarchy)) return;
+        if (bossActive) return;
 
         if (bosses.Count == 0) return; //TODO Phase 2 Switch
-
+/**
         if (bosses.Count <= initialBossCount / 2)
         {
             for (int i = 0; i < bosses.Count; i++)
@@ -145,11 +146,14 @@ public class Granny : Boss
                 bosses.RemoveAt(index);
             }
         }
+        */
         else
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
+            bossActive = true;
             availableBosses.Add(bosses[index]);
+            bosses.RemoveAt(index);
         }
     }
 
@@ -268,7 +272,6 @@ public class Granny : Boss
             {
                 return;
             }
-            TransitionToContractDropped();
             int index = Random.Range(0, availableBosses.Count);
             DropNewContract(availableBosses[index]);
         }

@@ -19493,7 +19493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: outTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: baseTime
@@ -19505,7 +19505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: idleTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: baseSpeed
@@ -19517,7 +19517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: droppedTime
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: returnSpeed
@@ -19529,7 +19529,7 @@ PrefabInstance:
       objectReference: {fileID: 720682150}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: scavengeTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: contractTemplate
