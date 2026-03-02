@@ -101,6 +101,7 @@ public class LoadoutManager : MonoBehaviour
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
+        baseToButton[(BaseType)baseType].GetComponent<Image>().color = Color.green;
         lastUnchangedBase.GetComponent<Image>().sprite = baseToButton[(BaseType)baseType].image.sprite;
         if (lastUnchangedBase==baseSlotOne)
         {
