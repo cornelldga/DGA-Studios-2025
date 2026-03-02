@@ -18,9 +18,6 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] Image baseSlotTwo;
     [SerializeField] Image mixerSlotOne;
     [SerializeField] Image mixerSlotTwo;
-
-    private Image lastUnchangedBase;
-    private Image lastUnchangedMixer;
     private Image highlighted;
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
@@ -73,8 +70,6 @@ public class LoadoutManager : MonoBehaviour
             }
             index++;
         }
-        lastUnchangedBase = baseSlotOne;
-        lastUnchangedMixer = mixerSlotOne;
     }
 
     /// <summary>
@@ -119,6 +114,13 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseBase(int baseType)
     {
+        if (highlighted==baseSlotOne)
+        {
+            index = 0;
+        } else
+        {
+            index = 1;
+        }
         BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
         baseToButton[swappedBase].interactable = true;
         baseToButton[(BaseType)baseType].interactable = false;
@@ -132,6 +134,13 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseMixer(int mixerType)
     {
+        if (highlighted==mixerSlotOne)
+        {
+            index = 0;
+        } else
+        {
+            index = 1;
+        }
         MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
         mixerToButton[swappedMixer].interactable = true;
         mixerToButton[(MixerType)mixerType].interactable = false;
