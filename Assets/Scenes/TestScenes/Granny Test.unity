@@ -19496,6 +19496,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: baseTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: bossName
       value: Granny
       objectReference: {fileID: 0}
@@ -19504,8 +19508,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: baseSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: returnTime
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: droppedTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
+      propertyPath: returnSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -6339375347697020272, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: bossNameText
@@ -19561,11 +19577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.88
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 099a5c3b2b00b460eb41b4b109567476, type: 3}
       propertyPath: m_LocalPosition.z

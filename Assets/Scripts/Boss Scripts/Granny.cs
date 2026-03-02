@@ -7,13 +7,13 @@ public class Granny : Boss
 {
     public enum State
     {
-        Idle, HoldingContract, ContractDropped, Scavange
+        Idle, HoldingContract, ContractDropped, Scavange, Returning
     }
    [SerializeField] private State currentState; //TODO  de cereal
 
     [Header("Movement Settings")]
-    //Base speed when charging (regular)
-    [SerializeField] float baseSpeed;
+    //Base time to reach target while charging (regular)
+    [SerializeField] float baseTime;
     // collision radius when charging and bouncing
     [SerializeField] float collisionRadius;
     // check distance of circle cast
@@ -43,19 +43,18 @@ public class Granny : Boss
     private int initialBossCount;
 
     [Header("Return Settings")]
-    [Tooltip("Speed when returning to starting point")]
-    [SerializeField] private float returnSpeed = 4f;
+    [Tooltip("Time to return to starting point")]
+    [SerializeField] private float returnTime = 4f;
     [Tooltip("Distance threshold to consider pig has arrived at starting point")]
     [SerializeField] private float arrivalThreshold = 0.1f;
 
-    private float currentSpeed;
     //Time until we should change states.
     private float stateTimer;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
-
+    private float currentSpeed;
     public override void Start()
     {
         base.Start();
@@ -65,7 +64,6 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
-        currentSpeed = baseSpeed;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -82,6 +80,9 @@ public class Granny : Boss
             case State.Idle:
                 UpdateIdle();
                 break;
+            case State.Returning:
+                UpdateReturning();
+                break;
             case State.HoldingContract:
                 UpdateHoldingContract();
                 break;
@@ -97,19 +98,6 @@ public class Granny : Boss
 
     public void TransitionToIdle()
     {
-        if (rb == null) return;
-
-        Vector2 directionToStart = (startingPoint - (Vector2)transform.position).normalized;
-
-        rb.linearVelocity = directionToStart * returnSpeed;
-
-        float distanceToStart = Vector2.Distance(transform.position, startingPoint);
-        if (distanceToStart <= arrivalThreshold)
-        {
-            rb.linearVelocity = Vector2.zero;
-            transform.position = startingPoint;
-        }
-
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
     }
@@ -126,6 +114,12 @@ public class Granny : Boss
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
+    }
+    private void TransitionToReturning()
+    {
+        // Speed to reach distance in time is dist/time
+        currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
+        currentState = State.Returning;
     }
 
     private void UpdateHoldingContract()
@@ -175,11 +169,29 @@ public class Granny : Boss
 
     private void TransitionToScavange()
     {
+        GameObject nearestContract = FindNearestContract();
+        // Speed to reach distance in time is dist/time
+        currentSpeed = (rb.position - new Vector2(nearestContract.transform.position.x, nearestContract.transform.position.y)).magnitude / baseTime;
         stateTimer = scavengeTime;
         currentState = State.Scavange;
     }
 
     private void UpdateScavenge()
+    {
+        GameObject nearestContract = FindNearestContract();
+        if (nearestContract != null)
+        {
+            Vector2 contractPosition = nearestContract.transform.position;
+            Vector2 dist = contractPosition - rb.position;
+            rb.linearVelocity = dist.normalized * currentSpeed;
+        }
+    }
+    
+    /// <summary>
+    /// Finds the nearest currently dropped contract by distance, null if none.
+    /// </summary>
+    /// <returns>Contract GameObject or null if no dropped contracts</returns>
+    private GameObject FindNearestContract()
     {
         GameObject nearestContract = null;
         foreach (GameObject contract in currentDroppedContracts)
@@ -190,8 +202,20 @@ public class Granny : Boss
                 nearestContract = contract;
             }
         }
-        Vector2 contractPosition = nearestContract.transform.position;
-        rb.linearVelocity = (contractPosition - rb.position).normalized * baseSpeed;
+        return nearestContract;
+    }
+
+    private void UpdateReturning()
+    {
+        Vector2 dist = startingPoint - rb.position;
+        if (dist.magnitude < 0.1)
+        {
+            TransitionToIdle();
+        } else
+        {
+            rb.position = new Vector3(rb.position.x, rb.position.y, -1);
+            rb.linearVelocity = dist.normalized * currentSpeed;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -205,7 +229,7 @@ public class Granny : Boss
                 if (currentDroppedContracts.Count <= 0)
                 {
                     // TODO Handle phase change
-                    TransitionToIdle();
+                    TransitionToReturning();
                 }
             } 
         }
