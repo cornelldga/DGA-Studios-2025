@@ -87,7 +87,7 @@ public class LoadoutManager : MonoBehaviour
         {
             // something selected
             highlighted.color = Color.white;
-            if (highlighted == slot)
+            if (highlighted != slot)
             {
                 // they are the same, then unselect
                 highlighted = null;
@@ -98,6 +98,7 @@ public class LoadoutManager : MonoBehaviour
                 highlighted = slot;
 
             }
+            highlighted = null;
         }
     }
 
