@@ -39,7 +39,12 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
+    [SerializeField] private float punchCooldownConstant;
+    [SerializeField] private float punchSpeed;
     private float machineTimer;
+
+    [Header("Attack Objects")]
+    [SerializeField] GameObject punch;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -48,7 +53,7 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.MachineGun;
+        currentState = State.Punch;
         stateTimer = idleTime;
         machineTimer = 0;
     }
@@ -72,6 +77,7 @@ public class GrannyPhase2 : Boss
                 UpdateMachineGun();
                 break;
             case State.Punch:
+                TransitionToPunch();
                 UpdatePunch();
                 break;
         }
@@ -125,12 +131,18 @@ public class GrannyPhase2 : Boss
         }
     }
 
-    private void  UpdatePunch(){
+    private void UpdatePunch(){
         //move granny towards the player while using her punch move that is 
         //maybe make the punch a separate hitbox
-
+        Vector2 player = new Vector2(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y);
+        Vector2 move = rb.position - player;
+        rb.position += move.normalized * punchSpeed;
     }
 
+    private void TransitionToPunch()
+    {
+        punch.SetActive(true);
+    }
     public override void SetPhase()
     {
         
