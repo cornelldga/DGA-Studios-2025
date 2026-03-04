@@ -519,12 +519,13 @@ public class Ash : Boss
     {
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         Debug.Log(bushes.Length);
-        foreach(GameObject bush in bushes)
+        StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, bushes[(int)UnityEngine.Random.Range(0,bushes.Length)].transform.position));
+       /* foreach (GameObject bush in bushes)
         {
             if (UnityEngine.Random.value > randomPercentageToThrowMolotov) continue; 
             if (bush.GetComponent<Bush>().isFire()) continue; //skip if bush is already on fire
             StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, bush.transform.position));
-        }
+        } */
         attackCooldown = molotov.duration;
     }
 

@@ -13500,6 +13500,10 @@ PrefabInstance:
       propertyPath: basicSeedArcHeight
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: randomPercentageToThrowMolotov
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_Name
       value: Ash
