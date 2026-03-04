@@ -8,7 +8,6 @@ using Unity.Collections;
 
 public class DrillGuy : Boss
 {
-    
     public enum State
     {
         Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting
@@ -28,7 +27,7 @@ public class DrillGuy : Boss
     [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
-    [SerializeField] Transform holeOrigin;
+
     [SerializeField] float moveSpeed;
     [Tooltip("The range in which the driller can move from a random point in world center")]
     [SerializeField] float moveRange;
@@ -42,8 +41,6 @@ public class DrillGuy : Boss
     // want to look to disable hurtbox if underground. we also need to make Boss.TakeDamage() overridable
     private BoxCollider2D hurtBox;
 
-    // similarly we have a different hitbox for when it is underground
-    private CircleCollider2D pushTrigger;
 
     [Header("Dig Settings")]
 
@@ -88,8 +85,7 @@ public class DrillGuy : Boss
         animator = GetComponent<Animator>();
         isUnderground = false;
         hurtBox = GetComponent<BoxCollider2D>();
-        pushTrigger = GetComponent<CircleCollider2D>();
-        pushTrigger.enabled = false;
+
     }
 
     /// <summary>
@@ -332,10 +328,9 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteredGround()
     {
-        Instantiate(enterHolePrefab, holeOrigin.position, Quaternion.identity);
-        holePositions.Add(holeOrigin.position);
-        pushTrigger.enabled = true;
-        hurtBox.enabled = false;
+        Vector3 spawnPos = bulletOrigin.position;
+        Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
+        holePositions.Add(spawnPos);
         isUnderground = true;
     }
 
@@ -344,6 +339,7 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteringFinished()
     {
+        hurtBox.enabled = false;
         if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
         else
@@ -363,8 +359,8 @@ public class DrillGuy : Boss
 
         Vector3 spawnPos = transform.position;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
-        Instantiate(exitHolePrefab, holeOrigin.position, Quaternion.identity);
-        holePositions.Add(holeOrigin.position);
+        Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
+        holePositions.Add(spawnPos);
     }
 
     /// <summary>
@@ -372,7 +368,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateExiting()
     {
-        
+        hurtBox.enabled = true;
     }
 
     /// <summary>
@@ -380,8 +376,6 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnExitingFinished()
     {
-        hurtBox.enabled = true;
-        pushTrigger.enabled = false;
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){
