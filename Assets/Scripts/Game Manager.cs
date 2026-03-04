@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [Tooltip("Reference to the LoadoutManager.")]
     [SerializeField] private LoadoutManager loadoutManager;
+    [SerializeField] private DialogueManager dialogueManager;
     [Header("Pause Menu")]
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
@@ -82,10 +83,11 @@ public class GameManager : MonoBehaviour
     /// <param name="isActive"></param>
     public void TogglePauseMenu(bool isActive)
     {
-        if (!isActive && volumeOpened)
+        if (!isActive && volumeOpened && loadoutManager.gameObject.activeSelf == false && dialogueManager.OngoingDialogue() == false)
             CloseVolumePanel();
 
         pauseMenu.SetActive(isActive);
+        Time.timeScale = isActive ? 0 : 1;
         FreezePlayer(isActive);
     }
 
