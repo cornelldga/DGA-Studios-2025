@@ -278,6 +278,7 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     public void OnWhip()
     {
+        whip.gameObject.SetActive(true);
         whipping = true;
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         Vector3 mouse = Mouse.current.position.ReadValue();
@@ -296,6 +297,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         whipping = false;
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whip.gameObject.SetActive(false);
+
         whipPivot.transform.localEulerAngles = Vector3.zero;
     }
     /// <summary>
