@@ -386,24 +386,45 @@ public class Ash : Boss
                 break;
         }
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
-        currentSeedPattern = SeedAttack.XAttack;
-        
+        Vector2 point1;
+        Vector2 point2;
+
         switch (currentSeedPattern)
         {
             case SeedAttack.XAttack:
 
-                Vector2 upperCorner = new Vector2(1, 1);
-                upperCorner = upperCorner.normalized * stageRadius;
-                seedInLine(upperCorner, -upperCorner,seedRows);
-                upperCorner = (new Vector2(-1, 1)).normalized * stageRadius;
-                seedInLine(upperCorner, -upperCorner, seedRows);
+                point1 = new Vector2(1, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(-1, 1)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
 
                 break;
             case SeedAttack.CrossAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(1, 0)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+
                 break;
             case SeedAttack.DiamondAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0);
+                point2 = point1.normalized * stageRadius;
+                seedInLine(point1, point2, seedRows);
+                seedInLine(-point1, -point2, seedRows);
+                seedInLine(point1, -point2, seedRows);
+                seedInLine(-point1, point2, seedRows);
+                
                 break;
             case SeedAttack.StarAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0)  ;
+                point2 = point1.normalized * stageRadius;
+
                 break;
             default:
                 break;
