@@ -19,6 +19,7 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] Image mixerSlotOne;
     [SerializeField] Image mixerSlotTwo;
     private Image highlighted;
+    private bool mixer;
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -73,10 +74,10 @@ public class LoadoutManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Highlights the slot that is being changed
+    /// Swaps the item out in a slot
     /// </summary>
     /// <param name="slot"></param>
-    public void SelectBaseSlot(Image slot)
+    private void SelectSlot(Image slot)
     {
         if (highlighted==null)
         {
@@ -103,6 +104,40 @@ public class LoadoutManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Highlights the base slot that is being changed and the available bases
+    /// </summary>
+    /// <param name="slot"></param>
+    public void SelectBase(Image slot)
+    {
+        foreach (var button in baseButtons)
+        {
+            if (button.interactable==true)
+            {
+                button.image.color = Color.lightGreen;
+            }
+        }
+        SelectSlot(slot);
+        mixer = false;
+    }
+
+    /// <summary>
+    /// Highlights the mixer slot that is being changed and the available mixers
+    /// </summary>
+    /// <param name="slot"></param>
+    public void SelectMixer(Image slot)
+    {
+        foreach (var button in mixerButtons)
+        {
+            if (button.interactable==true)
+            {
+                button.image.color = Color.lightGreen;
+            }
+        }
+        SelectSlot(slot);
+        mixer = true;
+    }
+
+    /// <summary>
     /// Close the loadout manager
     /// </summary>
     public void Close()
@@ -115,19 +150,26 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseBase(int baseType)
     {
-        if (highlighted==baseSlotOne)
+        if (highlighted!=null & !mixer)
         {
-            index = 0;
-        } else
-        {
-            index = 1;
+            if (highlighted==baseSlotOne)
+            {
+                index = 0;
+            } else
+            {
+                index = 1;
+            }
+            BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
+            baseToButton[swappedBase].interactable = true;
+            baseToButton[(BaseType)baseType].interactable = false;
+            highlighted.color = Color.white;
+            highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
+            highlighted = null;
+            foreach (var button in baseButtons)
+            {
+                button.image.color = Color.white;
+            }
         }
-        BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
-        baseToButton[swappedBase].interactable = true;
-        baseToButton[(BaseType)baseType].interactable = false;
-        highlighted.color = Color.white;
-        highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
-        highlighted = null;
     }
 
     /// <summary>
@@ -135,18 +177,25 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseMixer(int mixerType)
     {
-        if (highlighted==mixerSlotOne)
+        if (highlighted!=null && mixer)
         {
-            index = 0;
-        } else
-        {
-            index = 1;
+            if (highlighted==mixerSlotOne)
+            {
+                index = 0;
+            } else
+            {
+                index = 1;
+            }
+            MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
+            mixerToButton[swappedMixer].interactable = true;
+            mixerToButton[(MixerType)mixerType].interactable = false;
+            highlighted.color = Color.white;
+            highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+            highlighted = null;
+            foreach (var button in mixerButtons)
+            {
+                button.image.color = Color.white;
+            }
         }
-        MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
-        mixerToButton[swappedMixer].interactable = true;
-        mixerToButton[(MixerType)mixerType].interactable = false;
-        highlighted.color = Color.white;
-        highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-        highlighted = null;
     }
 }

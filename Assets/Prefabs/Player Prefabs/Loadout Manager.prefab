@@ -329,7 +329,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -124}
+  m_AnchoredPosition: {x: -41.000034, y: -124}
   m_SizeDelta: {x: 0, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8536567183656903961
@@ -396,7 +396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 667, y: 170.86}
+  m_AnchoredPosition: {x: 667, y: -247}
   m_SizeDelta: {x: 523.291, y: 418.722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2430308327867378855
@@ -938,7 +938,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectSlot
+        m_MethodName: SelectBase
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3468619177495131284}
@@ -1897,7 +1897,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectSlot
+        m_MethodName: SelectMixer
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4002582751203022200}
@@ -2250,7 +2250,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectSlot
+        m_MethodName: SelectBase
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8639577754586494954}
@@ -4428,7 +4428,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5153365188570109463}
         m_TargetAssemblyTypeName: LoadoutManager, Assembly-CSharp
-        m_MethodName: SelectSlot
+        m_MethodName: SelectMixer
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7921015534663967858}
@@ -4845,7 +4845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -329.50003}
+  m_AnchoredPosition: {x: -41.000034, y: -329.50003}
   m_SizeDelta: {x: 0, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3307649791671382447
