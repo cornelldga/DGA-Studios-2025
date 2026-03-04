@@ -101,11 +101,12 @@ public class Smoker : MonoBehaviour
     /// <summary>
     /// If there is a collision with the player, will activate punch
     /// </summary>
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         int otherLayer = other.gameObject.layer;
-        if ((playerMask.value & (otherLayer << 1)) > 0)
+        if ((playerMask.value & (1 << otherLayer)) > 0)
         {
+            Debug.Log("Close enough to initiate punch");
             // call Punch coroutine
         }
     }
