@@ -17,8 +17,6 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         OnStart();
-        OnMove();
-        OnShoot();
         OnWhip();
     }
 
@@ -30,17 +28,14 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    void OnMove()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue() && !playerRB.linearVelocity.Equals(new Vector2(0, 0)))
+        if (collision.CompareTag("Player") && TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
-    }
 
-    void OnShoot()
-    {
-        if (TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue() && Input.GetMouseButtonDown(0))
+        if (collision.CompareTag("Base") && TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
