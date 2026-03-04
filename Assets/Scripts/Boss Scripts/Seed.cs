@@ -4,8 +4,8 @@ public class Seed : MonoBehaviour
 {
     [Header("Targeting")]
     public Vector2 target;
-    [SerializeField] float landingTime;
-    [SerializeField] float arcHeight;
+    public float landingTime;
+    public float arcHeight;
     [Header("Flower Variables")]
     public bool planted;
     [SerializeField] GameObject flower;
