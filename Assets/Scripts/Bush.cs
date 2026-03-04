@@ -31,6 +31,11 @@ public class Bush : MonoBehaviour
         }
     }
 
+    public bool isFire()
+    {
+        return isOnFire;
+    }
+
 /// <summary>
 /// For every firespreadcooldown time that passes, the fire spreads from one bush to another within fire spreadradius.
 /// </summary>
@@ -51,6 +56,7 @@ public class Bush : MonoBehaviour
                 {
                     if (collider.CompareTag("Bush") && collider.gameObject != this.gameObject)
                     {
+
                         Bush bush = collider.GetComponent<Bush>();
                         if (!bush.isOnFire) bush.setFire(true);
                     }

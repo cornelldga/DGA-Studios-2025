@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -41,6 +42,11 @@ public class Ash : Boss
     [Header("Stomp Settings")]
     [Tooltip("Radius around Ash to detect seeds for stomping")]
     [SerializeField] float stompRadius = 3f;
+
+    //molotov + bush stuff
+    [SerializeField] Molotov molotov;
+    [SerializeField] GameObject bushPrefab;
+    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
@@ -161,6 +167,8 @@ public class Ash : Boss
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
         {
+            Debug.Log("throwing molotovs");
+            ThrowMolotovAtBushes();
             TransitionToWandering();
         }
     }
@@ -386,6 +394,21 @@ public class Ash : Boss
     public override void Attack()
     {
         // Uses state machine instead of base attack
+    }
+
+      //Throws Dynamite at the holes (phase 2)
+    private void ThrowMolotovAtBushes()
+    
+    {
+        GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
+        Debug.Log(bushes.Length);
+        foreach(GameObject bush in bushes)
+        {
+            if (UnityEngine.Random.value > randomPercentageToThrowMolotov) continue; 
+            if (bush.GetComponent<Bush>().isFire()) continue; //skip if bush is already on fire
+            StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, bush.transform.position));
+        }
+        attackCooldown = molotov.duration;
     }
 
 }
