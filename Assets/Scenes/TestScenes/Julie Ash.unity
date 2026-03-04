@@ -13408,6 +13408,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14ceff74b37988469b4d231a039046c, type: 3}
+--- !u!4 &1817843884 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4606974957378827531, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+  m_PrefabInstance: {fileID: 1850428917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1850428917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13456,6 +13461,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: molotov
+      value: 
+      objectReference: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: bushPrefab
+      value: 
+      objectReference: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: bulletOrigin
+      value: 
+      objectReference: {fileID: 1817843884}
     - target: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_Name
       value: Ash
