@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine;
+using Unity.VisualScripting;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -320,7 +321,7 @@ public class Ash : Boss
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
 
-        if (attackChoice < 9) //setting to 9 for testing
+        if (attackChoice < 4) 
         {
             TransitionToSeedScatter();
         }
@@ -495,7 +496,7 @@ public class Ash : Boss
         {
             for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
             {
-                th = new Vector2(0, t * fireRadius);
+                th = seedStep.Perpendicular1().normalized * fireRadius * t;
                 seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
