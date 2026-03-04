@@ -502,7 +502,7 @@ public class Ash : Boss
         {
             for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
             {
-                th = seedStep.Perpendicular1().normalized * fireRadius * t;
+                th = Vector2.Perpendicular(seedStep).normalized * fireRadius * t;
                 seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
