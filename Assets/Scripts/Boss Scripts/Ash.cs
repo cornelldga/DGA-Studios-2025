@@ -70,7 +70,8 @@ public class Ash : Boss
     [SerializeField] private GameObject cactusSeedPrefab;
     [Tooltip("Fire Flower Seed Prefab")]
     [SerializeField] private GameObject fireFlowerSeedPrefab;
-    
+    [SerializeField] int seedRows;
+
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
@@ -393,9 +394,9 @@ public class Ash : Boss
 
                 Vector2 upperCorner = new Vector2(1, 1);
                 upperCorner = upperCorner.normalized * stageRadius;
-                seedInLine(upperCorner, -upperCorner,3);
+                seedInLine(upperCorner, -upperCorner,seedRows);
                 upperCorner = (new Vector2(-1, 1)).normalized * stageRadius;
-                seedInLine(upperCorner, -upperCorner, 3);
+                seedInLine(upperCorner, -upperCorner, seedRows);
 
                 break;
             case SeedAttack.CrossAttack:
@@ -468,16 +469,18 @@ public class Ash : Boss
         GameObject seed;
         Seed seedScript;
         Vector2 th;
+        float randStep = UnityEngine.Random.value/2 +.5f;
         for (int i = 0; i <= (point2 - point1).magnitude / fireRadius; i++)
         {
-            for (int t = 0- (thickness/2); t < thickness; t++)
+            for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
             {
                 th = new Vector2(0, t * fireRadius);
                 seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
-                seedScript.target = currentSeedLocation + th;
+                seedScript.target = currentSeedLocation + th*randStep;
+                randStep = UnityEngine.Random.value / 2 + .5f;
             }
             currentSeedLocation += seedStep;
         }
