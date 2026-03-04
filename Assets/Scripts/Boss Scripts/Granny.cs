@@ -116,7 +116,7 @@ public class Granny : Boss
         currentState = State.HoldingContract;
         stateTimer = outTime;
     }
-    private void TransitionToReturning()
+    public void TransitionToReturning()
     {
         // Speed to reach distance in time is dist/time
         currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
