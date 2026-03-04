@@ -178,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sadSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
+      objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sceneName
       value: Mirage & Ace Scene
@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
+      objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
@@ -198,7 +198,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6b94948ac9f314949affe9a8b15aaa63, type: 3}
+      objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28fa78c253999124f8c839024db2cdd2, type: 3}
     - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.5859375
@@ -501,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sadSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
+      objectReference: {fileID: 21300000, guid: a1a631efb1a30cf4eaf1ca786fd234ad, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sceneName
       value: Ash Scene
@@ -509,7 +513,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
+      objectReference: {fileID: 21300000, guid: a1a631efb1a30cf4eaf1ca786fd234ad, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
       value: 
@@ -517,7 +525,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
+      objectReference: {fileID: 21300000, guid: a1a631efb1a30cf4eaf1ca786fd234ad, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ec6a9f64e639cf94dbbf4bf4ca268899, type: 3}
     - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2
@@ -599,7 +611,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sadSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
+      objectReference: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sceneName
       value: Drover Scene
@@ -607,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
-      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
+      objectReference: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
@@ -619,7 +631,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b44afcb4a801e48f99f4430c6d41cbc8, type: 3}
+      objectReference: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ea34efae5c21844d8edc179bd881fce, type: 3}
     - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.3945312
@@ -701,7 +717,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sadSprite
       value: 
-      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
+      objectReference: {fileID: 21300000, guid: fe016b3dcfb466a4593a291c5a64fd2d, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: sceneName
       value: Tom Scene
@@ -709,7 +725,7 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: happySprite
       value: 
-      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
+      objectReference: {fileID: 21300000, guid: fe016b3dcfb466a4593a291c5a64fd2d, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
@@ -721,7 +737,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 21300000, guid: ead13fdcae29d4eeb83f7060ee84f466, type: 3}
+      objectReference: {fileID: 21300000, guid: fe016b3dcfb466a4593a291c5a64fd2d, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dafd266a6ac4dd3488c5abd8e014c647, type: 3}
     - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2
@@ -995,6 +1015,10 @@ PrefabInstance:
       propertyPath: jsonTextFile
       value: 
       objectReference: {fileID: 4900000, guid: 3c80a8213e3264e5b86f71ff37504381, type: 3}
+    - target: {fileID: 3350857357429987495, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
     - target: {fileID: 6770842795922722231, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
       propertyPath: m_Name
       value: Saloon Door
@@ -1009,6 +1033,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2374065731416743144, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
   m_PrefabInstance: {fileID: 1056260242}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1186670317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1079.0325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 503.9214
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956884972056103369, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_Name
+      value: DialogueManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956884972056103369, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
 --- !u!1001 &1296715385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1070,138 +1155,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
---- !u!114 &1361889747 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3451329333804367418, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-  m_PrefabInstance: {fileID: 2063537417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!4 &1470206664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 871742177484969984, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
   m_PrefabInstance: {fileID: 264821123}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1697416236 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7106785672312963615, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-  m_PrefabInstance: {fileID: 2063537417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!1001 &2063537417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1913475837648329706, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3451329333804367418, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NoChoice
-      objectReference: {fileID: 0}
-    - target: {fileID: 3868355705443199317, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033198116382116301, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_fontSize
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033198116382116301, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 680.1505
-      objectReference: {fileID: 0}
-    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 292.2542
-      objectReference: {fileID: 0}
-    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 178
-      objectReference: {fileID: 0}
-    - target: {fileID: 5889659671287058270, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 177
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.3351
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.9372
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6956884972056103369, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_Name
-      value: DialogueManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7106785672312963615, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: YesChoice
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: noButton
-      value: 
-      objectReference: {fileID: 1361889747}
-    - target: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
-      propertyPath: yesButton
-      value: 
-      objectReference: {fileID: 1697416236}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
 --- !u!1 &2101290617
 GameObject:
   m_ObjectHideFlags: 0
@@ -29766,7 +29724,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1012723037}
   - {fileID: 7115981717209479595}
-  - {fileID: 2063537417}
+  - {fileID: 1186670317}
   - {fileID: 235870873}
   - {fileID: 2390142266443859913}
   - {fileID: 264821123}
