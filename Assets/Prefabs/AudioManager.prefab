@@ -78,8 +78,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38490c0365beb46f1a156ef96682f8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sceneMusic: 0
   saloonMusic: {fileID: 2883716215566334450}
   hogMusic: {fileID: 1625788575435399617}
+  sounds:
+  - source: {fileID: 0}
+    name: gin
+    audioClip: {fileID: 8300000, guid: 3480c81cbf15344ac941150147175276, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: beer
+    audioClip: {fileID: 8300000, guid: 2a18970c274de4a9594ed37869a69c31, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Base Swap
+    audioClip: {fileID: 8300000, guid: aa2b98bf5de8e4bdb83ecb03f77e5e77, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  musicGroup: {fileID: 898037753239958536, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
+  sfxGroup: {fileID: -3908983327557864445, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
 --- !u!1 &1814903278115915233
 GameObject:
   m_ObjectHideFlags: 0

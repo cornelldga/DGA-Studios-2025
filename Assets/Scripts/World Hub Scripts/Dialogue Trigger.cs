@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(PlayerInput))]
+using UnityEngine.UI;
 
 /// <summary>
 /// Triggers dialogue sequences when interacted with for all dialogue types.

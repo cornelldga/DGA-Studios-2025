@@ -8,7 +8,6 @@ using Unity.Collections;
 
 public class DrillGuy : Boss
 {
-    
     public enum State
     {
         Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting
@@ -42,8 +41,6 @@ public class DrillGuy : Boss
     // want to look to disable hurtbox if underground. we also need to make Boss.TakeDamage() overridable
     private BoxCollider2D hurtBox;
 
-    // similarly we have a different hitbox for when it is underground
-    private CircleCollider2D pushTrigger;
 
     [Header("Dig Settings")]
 
@@ -88,8 +85,7 @@ public class DrillGuy : Boss
         animator = GetComponent<Animator>();
         isUnderground = false;
         hurtBox = GetComponent<BoxCollider2D>();
-        pushTrigger = GetComponent<CircleCollider2D>();
-        pushTrigger.enabled = false;
+
     }
 
     /// <summary>
@@ -335,8 +331,6 @@ public class DrillGuy : Boss
         Vector3 spawnPos = bulletOrigin.position;
         Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
         holePositions.Add(spawnPos);
-        pushTrigger.enabled = true;
-        hurtBox.enabled = false;
         isUnderground = true;
     }
 
@@ -345,6 +339,7 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnEnteringFinished()
     {
+        hurtBox.enabled = false;
         if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
         else
@@ -357,6 +352,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToExiting()
     {
+        isUnderground = false;
         ResetAllAnimatorBools();
         animator.SetBool("isExiting", true);
         currentState = State.Exiting;
@@ -372,7 +368,7 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateExiting()
     {
-        
+        hurtBox.enabled = true;
     }
 
     /// <summary>
@@ -380,9 +376,6 @@ public class DrillGuy : Boss
     /// </summary>
     public void AnimationOnExitingFinished()
     {
-        hurtBox.enabled = true;
-        pushTrigger.enabled = false;
-        isUnderground = false;
         if (currentState == State.Exiting)
         {
             if (currentPhase == 2 && numFrenzyDigs > 0){

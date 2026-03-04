@@ -308,16 +308,15 @@ public class Pig : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool isPlayer = collision.gameObject.CompareTag("Player");
-        bool isEnemy = collision.gameObject.CompareTag("Enemy");
 
         // When not charging, ignore collisions with player or other enemies.
-        if (currentState != State.Charging && (isPlayer || isEnemy))
+        if (currentState != State.Charging && (isPlayer))
         {
             Physics2D.IgnoreCollision(collision.collider, thisCollider);
             ignoredColliders.Add(collision.collider);
         }
         // Normal charge mode
-        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || isPlayer || isEnemy))
+        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || isPlayer))
         {
             HandleCharge(collision);
             gameObject.layer = LayerMask.NameToLayer("Enemy");
