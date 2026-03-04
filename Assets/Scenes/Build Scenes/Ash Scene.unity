@@ -13416,6 +13416,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 62901968422666060, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 62901968422666060, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5002965962069388933, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.95
@@ -13457,9 +13465,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: molotov
+      value: 
+      objectReference: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: seedRows
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: bushPrefab
+      value: 
+      objectReference: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: fireRadius
       value: 0.5
