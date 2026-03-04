@@ -18,6 +18,8 @@ public class TutorialManager : MonoBehaviour
     {
         OnStart();
         OnMove();
+        OnShoot();
+        OnWhip();
     }
 
     void OnStart()
@@ -31,6 +33,22 @@ public class TutorialManager : MonoBehaviour
     void OnMove()
     {
         if (TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue() && !playerRB.linearVelocity.Equals(new Vector2(0, 0)))
+        {
+            OnInteract();
+        }
+    }
+
+    void OnShoot()
+    {
+        if (TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue() && Input.GetMouseButtonDown(0))
+        {
+            OnInteract();
+        }
+    }
+
+    void OnWhip()
+    {
+        if (TutorialTrigger.Equals("Whip") && !DialogueManager.Instance.OngoingDialogue() && Input.GetMouseButtonDown(1))
         {
             OnInteract();
         }
