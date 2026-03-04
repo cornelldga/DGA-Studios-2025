@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
+using UnityEngine;
+using Unity.VisualScripting;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -23,10 +26,10 @@ public class Ash : Boss
     {
         XAttack,
         CrossAttack,
-        StarAttack,
-        DiamondAttack
+        DiamondAttack,
+        StarAttack
     }
-    public SeedAttack currentSeedPattern;
+    private SeedAttack currentSeedPattern;
 
     [Header("Movement Settings")]
     [SerializeField] float wanderSpeed = 2f;
@@ -51,12 +54,33 @@ public class Ash : Boss
     [Tooltip("Radius around Ash to detect seeds for stomping")]
     [SerializeField] float stompRadius = 3f;
 
+    [Space(5)]
+    [Header("Stage Data")]
+    [Tooltip("Circular Stages Center (UPDATE AND REMOVE SEED LOGIC IF STAGE IS NOT CIRCULAR)")]
+    [SerializeField] private Vector2 stageCenter;
+    [SerializeField] private float stageRadius;
+    [SerializeField] private float fireRadius;
+
+    [Space(5)]
+    [Header("Seed Settings")]
+    [Tooltip("Bush Seed Prefab")]
+    [SerializeField] private GameObject basicSeedPrefab;
+    [SerializeField] private float basicSeedArcHeight;
+    [SerializeField] private float basicSeedLandTime;
+    [Tooltip("Cactus Seed Prefab")]
+    [SerializeField] private GameObject cactusSeedPrefab;
+    [Tooltip("Fire Flower Seed Prefab")]
+    [SerializeField] private GameObject fireFlowerSeedPrefab;
+    [SerializeField] int seedRows;
+
+
     private float stateTimer;
     private float tumbleweedCooldownTimer;
     private Rigidbody2D rb;
     private Vector2 wanderTarget;
     private Animator animator;
     private SpriteRenderer sprite;
+    
 
     /// <summary>
     /// On start, we set the rigid body, and change its attributes. Immediately enter wandering and spawning her shield.
@@ -71,7 +95,7 @@ public class Ash : Boss
         currentState = State.Wandering;
         stateTimer = wanderTime;
         SetNewWanderTarget();
-        tumbleweedCooldownTimer = Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
+        tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
     }
 
     /// <summary>
@@ -249,7 +273,7 @@ public class Ash : Boss
         currentState = State.TumbleweedSummon;
         stateTimer = tumbleweedTime;
 
-        float cooldownTime = Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
+        float cooldownTime = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
 
         if (GetHealthPercent() <= 0.2f)
         {
@@ -295,9 +319,9 @@ public class Ash : Boss
             return;
         }
 
-        int attackChoice = Random.Range(0, 10);
+        int attackChoice = UnityEngine.Random.Range(0, 10);
 
-        if (attackChoice < 4)
+        if (attackChoice < 4) 
         {
             TransitionToSeedScatter();
         }
@@ -324,7 +348,7 @@ public class Ash : Boss
         
         if (seeds.Length == 0)
         {
-            wanderTarget = (Vector2)transform.position + Random.insideUnitCircle * wanderRadius;
+            wanderTarget = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * wanderRadius;
             return;
         }
 
@@ -347,6 +371,67 @@ public class Ash : Boss
     private IEnumerator ScatterSeeds()
     {
         // Placeholder
+        Array values = Enum.GetValues(typeof(SeedAttack));
+        //UnityEngine.Random
+        System.Random random = new System.Random();
+        switch(currentPhase)
+        {
+            case 0:
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(1)); // First 2
+                break;
+            case 1:
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 3
+                break;
+            case 2:
+                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(1)); //Last 2
+                break;
+        }
+        //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
+        Vector2 point1;
+        Vector2 point2;
+
+        switch (currentSeedPattern)
+        {
+            case SeedAttack.XAttack:
+
+                point1 = new Vector2(1, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(-1, 1)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+
+                break;
+            case SeedAttack.CrossAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(1, 0)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+
+                break;
+            case SeedAttack.DiamondAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0);
+                point2 = point1.normalized * stageRadius;
+                seedInLine(point1, point2, seedRows);
+                seedInLine(-point1, -point2, seedRows);
+                seedInLine(point1, -point2, seedRows);
+                seedInLine(-point1, point2, seedRows);
+                
+                break;
+            case SeedAttack.StarAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0)  ;
+                point2 = point1.normalized * stageRadius;
+
+                break;
+            default:
+                break;
+        }
+
+
         int[,] seedField =  new int[20 , 10];
         foreach (int seed in seedField) 
         { 
@@ -397,4 +482,29 @@ public class Ash : Boss
         // Uses state machine instead of base attack
     }
 
+    private void seedInLine(Vector2 point1, Vector2 point2, int thickness)
+    {
+
+        
+        Vector2 seedStep = (point2-point1).normalized * fireRadius;
+        Vector2 currentSeedLocation = point1;
+        GameObject seed;
+        Seed seedScript;
+        Vector2 th;
+        float randStep = UnityEngine.Random.value/2 +.5f;
+        for (int i = 0; i <= (point2 - point1).magnitude / fireRadius; i++)
+        {
+            for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
+            {
+                th = seedStep.Perpendicular1().normalized * fireRadius * t;
+                seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seedScript = seed.GetComponent<Seed>();
+                seedScript.landingTime = basicSeedLandTime;
+                seedScript.arcHeight = basicSeedArcHeight;
+                seedScript.target = currentSeedLocation + th*randStep;
+                randStep = UnityEngine.Random.value / 2 + .5f;
+            }
+            currentSeedLocation += seedStep;
+        }
+    }    
 }

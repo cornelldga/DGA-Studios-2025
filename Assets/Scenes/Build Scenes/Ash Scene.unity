@@ -13456,6 +13456,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: seedRows
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: fireRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: stageRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: bulletOrigin
+      value: 
+      objectReference: {fileID: 1916358624}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: basicSeedPrefab
+      value: 
+      objectReference: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: basicSeedLandTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: basicSeedArcHeight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_Name
       value: Ash
@@ -13465,6 +13493,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+--- !u!4 &1916358624 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4606974957378827531, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+  m_PrefabInstance: {fileID: 1850428917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1958840266
 PrefabInstance:
   m_ObjectHideFlags: 0
