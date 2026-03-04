@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 8739514375221353489}
   - component: {fileID: 2208494978383391363}
   - component: {fileID: 4023565153802643386}
-  - component: {fileID: -6339375347697020272}
+  - component: {fileID: 2933082142316285255}
   m_Layer: 0
   m_Name: Granny Phase 2
   m_TagString: Enemy
@@ -265,7 +265,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e419ab20c9f22ab4ebc1dd34af4d6fce, type: 3}
   m_Color: {r: 1, g: 0, b: 0.71683025, a: 1}
   m_FlipX: 0
@@ -340,7 +340,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.34
---- !u!114 &-6339375347697020272
+--- !u!114 &2933082142316285255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,9 +349,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7623469587559007986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
+  m_Script: {fileID: 11500000, guid: bef2e79e96235e64fa9d635e8ea15908, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Granny
+  m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   bossName: 
   maxHealth: 0
   healthBar: {fileID: 0}
@@ -361,13 +361,12 @@ MonoBehaviour:
   currentPhase: 0
   attackRate: 1
   baseSpeed: 5
-  collisionRadius: 0
-  checkDistance: 0
-  bosses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
+  lazerShot: {fileID: 0}
+  machineCooldownConstant: 0
+  punchCooldownConstant: 0
+  punchSpeed: 0
+  punch: {fileID: 6076711696642910301}
 --- !u!1 &8238466242085916958
 GameObject:
   m_ObjectHideFlags: 0
