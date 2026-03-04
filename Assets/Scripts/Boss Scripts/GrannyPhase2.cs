@@ -135,8 +135,8 @@ public class GrannyPhase2 : Boss
         //move granny towards the player while using her punch move that is 
         //maybe make the punch a separate hitbox
         Vector2 player = new Vector2(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y);
-        Vector2 move = rb.position - player;
-        rb.position += move.normalized * punchSpeed;
+        Vector2 move = player - rb.position;
+        rb.position += move.normalized * punchSpeed * Time.deltaTime;
     }
 
     private void TransitionToPunch()
