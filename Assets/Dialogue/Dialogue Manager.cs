@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The types of dialogue
@@ -21,7 +22,8 @@ public enum DialogueType
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    [SerializeField] private Animator dialogueBox;
+    [SerializeField] private Animator dialogueAnim;
+    [SerializeField] Image dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] private TextMeshProUGUI nameText;
@@ -44,6 +46,9 @@ public class DialogueManager : MonoBehaviour
     private DialogueType currentDialogueType;
     private string sceneName;
 
+    [Header("Input Controls")]
+    [SerializeField] InputActionReference continueDialogueAction;
+
     /// <summary>
     /// Initializes the singleton, hides choices at start up.
     /// </summary>
@@ -61,6 +66,21 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        continueDialogueAction.action.performed += ContinueDialogue;
+    }
+
+    private void OnDisable()
+    {
+        continueDialogueAction.action.performed -= ContinueDialogue;
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// Returns if there is ongoing dialouge
     /// </summary>
@@ -72,9 +92,9 @@ public class DialogueManager : MonoBehaviour
     /// <summary>
     /// Finishes the dialogue line if not finished yet, goes to next line otherwise.
     /// </summary>
-    public void OnContinueDialogue()
+    void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (ongoingDialogue)
+        if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
             if (isTyping)
             {
@@ -104,15 +124,16 @@ public class DialogueManager : MonoBehaviour
     {
         if (file != null)
         {
+            gameObject.SetActive(true);
             nameText.text = file.name;
             ongoingDialogue = true;
-            dialogueBox.SetBool("isOpen", true);
+            dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
             currentDialogueID = progress.ToString() + "_" + "start";
             currentDialogueType = type;
             sceneName = scene;
-            dialogueBox.GetComponent<Image>().sprite = dialogueBoxSprite;
+            dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
             if (type == DialogueType.Interactive)
             {
@@ -209,7 +230,14 @@ public class DialogueManager : MonoBehaviour
     {
         GameManager.Instance.FreezePlayer(false);
         ongoingDialogue = false;
-        dialogueBox.SetBool("isOpen", false);
+        dialogueAnim.SetBool("isOpen", false);
+    }
+    /// <summary>
+    /// Animation trigger that closes the dialogue completely
+    /// </summary>
+    public void AnimationCloseDialogue()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -235,8 +263,8 @@ public class DialogueManager : MonoBehaviour
 
         if (currentDialogueType == DialogueType.Boss)
         {
-            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Let's Fight!";
-            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Not Yet";
+            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Fight!";
+            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
         }
         else if (currentDialogueType == DialogueType.Interactive)
         {
