@@ -79,28 +79,27 @@ public class LoadoutManager : MonoBehaviour
     /// <param name="slot"></param>
     private void SelectSlot(Image slot)
     {
-        if (highlighted==null)
+        if (highlighted!=null)
         {
-            // nothing selected
-            slot.color = Color.lightGreen;
-            highlighted = slot;
-        } else
-        {
-            // something selected
+            // something already selected
             highlighted.color = Color.white;
-            if (highlighted != slot)
+            foreach (var button in mixerButtons)
+            {
+                button.image.color = Color.white;
+            }
+            foreach (var button in baseButtons)
+            {
+                button.image.color = Color.white;
+            }
+            if (highlighted == slot)
             {
                 // they are the same, then unselect
                 highlighted = null;
-            } else
-            {
-                // they are different
-                slot.color = Color.lightGreen;
-                highlighted = slot;
-
+                return;
             }
-            highlighted = null;
         }
+        slot.color = Color.lightGreen;
+        highlighted = slot;
     }
 
     /// <summary>
