@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LoadoutManager loadoutManager;
     [SerializeField] private DialogueManager dialogueManager;
     [Header("Pause Menu")]
+    [Tooltip("Reference to the pause button")]
+    [SerializeField] private GameObject pauseButton;
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && loadoutManager.gameObject.activeSelf == false && dialogueManager.OngoingDialogue() == false && GetCurrentSceneName() != "Main Menu")
         {
             if (pauseMenu.activeSelf && volumeOpened)
             {
@@ -75,6 +77,11 @@ public class GameManager : MonoBehaviour
                 TogglePauseMenu(!pauseMenu.activeSelf);
             }
         }
+
+        if (GetCurrentSceneName() != "Main Menu" && player != null)
+        {
+            pauseButton.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -83,7 +90,7 @@ public class GameManager : MonoBehaviour
     /// <param name="isActive"></param>
     public void TogglePauseMenu(bool isActive)
     {
-        if (!isActive && volumeOpened && loadoutManager.gameObject.activeSelf == false && dialogueManager.OngoingDialogue() == false)
+        if (!isActive && volumeOpened)
             CloseVolumePanel();
 
         pauseMenu.SetActive(isActive);
@@ -126,10 +133,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onVolumeClicked()
     {
-        // Hide Resume/Quit, show sliders — mirrors Snoopy implementation
+        // Hide Resume/Quit, show sliders 
         pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
         pauseMenu.transform.Find("Quit").gameObject.SetActive(false);
         pauseMenu.transform.Find("Volume").gameObject.SetActive(false);
+        pauseMenu.transform.Find("Back").gameObject.SetActive(true);
         sliders.SetActive(true);
         volumeOpened = true;
     }
