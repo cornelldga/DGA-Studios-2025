@@ -82,6 +82,10 @@ public class GameManager : MonoBehaviour
         {
             pauseButton.SetActive(true);
         }
+        else
+        {
+            pauseButton.SetActive(false);
+        }
     }
 
     /// <summary>
