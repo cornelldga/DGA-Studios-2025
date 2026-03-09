@@ -81,6 +81,7 @@ public class Player : MonoBehaviour, IDamageable
     float changeCooldown;
     float whipCooldown;
     private bool whipping;
+    [HideInInspector] public bool knockedBack;
 
     int baseIndex;
     int mixerIndex;
@@ -120,6 +121,7 @@ public class Player : MonoBehaviour, IDamageable
         playerHealthText.SetText(health.ToString());
 
         isAlive = true;
+        knockedBack = false;
         GameManager.Instance.player = this;
     }
 
@@ -325,6 +327,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Move()
     {
+        if (knockedBack) return;
         Vector2 direction = new(moveDirection.x, moveDirection.y);
         direction = direction.normalized;
         rb.linearVelocity = direction * speed;

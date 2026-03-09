@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Smoker : MonoBehaviour
@@ -12,7 +13,7 @@ public class Smoker : MonoBehaviour
 
     [Header("Movement")]
     [Tooltip("Reference to the player transform to move towards")]
-    [SerializeField] Transform player;
+    [HideInInspector] Transform player;
     [Tooltip("How strongly the smoker is turns towards the player")]
     [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
@@ -38,6 +39,16 @@ public class Smoker : MonoBehaviour
     [SerializeField] Transform pivot;
     [SerializeField] TheMagician magician;
 
+    [Header("Punch Settings")]
+    [Tooltip("How long must pass before this can perform another punch")]
+    [SerializeField] float cooldown;
+    [SerializeField] float knockTime;
+    [SerializeField] float punchDist;
+    [SerializeField] float punchMagnitude;
+
+    private bool isPunching;
+
+
 
     [Header("Stages")]
     [SerializeField] Transform backStage;
@@ -62,6 +73,8 @@ public class Smoker : MonoBehaviour
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
 
+        if (rb == null) Debug.Log("skibidi");
+
 
         // Make rigidbody kinematic so player cannot push it
         if (rb != null)
@@ -76,7 +89,7 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (player != null)
+        if (rb != null && player != null && !isPunching)
         {
             Vector2 direction = ((Vector2)player.position - rb.position).normalized;
             Vector2 desiredVelocity = direction * speed;
@@ -97,7 +110,39 @@ public class Smoker : MonoBehaviour
             }
         }
     }
-    
+
+    /// <summary>
+    /// waits for cooldown seconds then attempts punch
+    /// </summary>
+    IEnumerator PunchRoutine(GameObject target)
+    {
+        isPunching = true;
+        rb.linearVelocity = Vector2.zero;
+
+        // TODO get le punch animation
+
+        Player playerScript = target.GetComponent<Player>();
+
+        yield return new WaitForSeconds(cooldown);
+
+        if (target != null)
+        {
+            Vector2 dist2D = (Vector2)(target.transform.position - transform.position);
+            Debug.Log($"Distance to player: {dist2D.magnitude}, punchDist: {punchDist}");
+            if (dist2D.magnitude < punchDist)
+            {
+                Vector2 direction = dist2D.normalized;
+                playerScript.knockedBack = true;
+                Rigidbody2D playerBody = target.GetComponent<Rigidbody2D>();
+                playerBody.AddForce(direction * punchMagnitude, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(knockTime);
+                playerScript.knockedBack = false;
+            }
+        }
+
+        isPunching = false;
+    }
+
     /// <summary>
     /// If there is a collision with the player, will activate punch
     /// </summary>
@@ -107,7 +152,8 @@ public class Smoker : MonoBehaviour
         if ((playerMask.value & (1 << otherLayer)) > 0)
         {
             Debug.Log("Close enough to initiate punch");
-            // call Punch coroutine
+            Debug.Log(other.gameObject);
+            StartCoroutine(PunchRoutine(other.gameObject));
         }
     }
 
