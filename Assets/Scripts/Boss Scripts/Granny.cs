@@ -147,8 +147,13 @@ public class Granny : Boss
                 bosses[i].SetActive(true);
                 bossActive = true;
                 availableBosses.Add(bosses[i]);
+            }
+
+            for (int i = 0; i < availableBosses.Count; i++)
+            {
                 bosses.RemoveAt(i);
             }
+
         }
         else
         {
