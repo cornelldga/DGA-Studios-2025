@@ -367,7 +367,8 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 0}
   machineCooldownConstant: 0
-  punchCooldownConstant: 0
+  punchingTime: 1
+  disappearTime: 3
   punchSpeed: 2
   punch: {fileID: 6076711696642910301}
 --- !u!1 &8238466242085916958

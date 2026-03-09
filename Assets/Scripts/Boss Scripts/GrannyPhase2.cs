@@ -39,12 +39,19 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
-    [SerializeField] private float punchCooldownConstant;
-    [SerializeField] private float punchSpeed;
     private float machineTimer;
 
-    [Header("Attack Objects")]
+    [Header("Punch Move")]
+    //how long granny is punching for
+    [SerializeField] private float punchingTime;
+    //how long granny disppears for
+    [SerializeField] private float disappearTime;
+    [SerializeField] private float punchSpeed;
     [SerializeField] GameObject punch;
+
+    //vector to remember how we were moving after determining punch move direction
+    private Vector2 punchMove;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -132,16 +139,27 @@ public class GrannyPhase2 : Boss
     }
 
     private void UpdatePunch(){
-        //move granny towards the player while using her punch move that is 
-        //maybe make the punch a separate hitbox
-        Vector2 player = new Vector2(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y);
-        Vector2 move = player - rb.position;
-        rb.position += move.normalized * punchSpeed * Time.deltaTime;
+        stateTimer -= Time.deltaTime;
+
+        if(stateTimer < punchingTime)
+        {
+            Vector2 player = new Vector2(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y);
+            Vector2 move = new Vector2(player.x - rb.position.x, 0);
+            rb.position += move.normalized * punchSpeed * Time.deltaTime;
+        } else if(stateTimer < punchingTime + disappearTime) {
+            
+        }
+        //drop a smoke
+        //wait on a timer
+        //teleport some amount of distance to the left of the player and hit the punch horizontally
+
     }
 
     private void TransitionToPunch()
     {
         punch.SetActive(true);
+        stateTimer = disappearTime + punchingTime;
+        //play the animation for granny disappearing
     }
     public override void SetPhase()
     {
