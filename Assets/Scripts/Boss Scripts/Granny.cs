@@ -144,9 +144,10 @@ public class Granny : Boss
         {
             for (int i = 0; i < bosses.Count; i++)
             {
-                int index = Random.Range(0, bosses.Count);
-                bosses[index].SetActive(true);
-                bosses.RemoveAt(index);
+                bosses[i].SetActive(true);
+                bossActive = true;
+                availableBosses.Add(bosses[i]);
+                bosses.RemoveAt(i);
             }
         }
         else
