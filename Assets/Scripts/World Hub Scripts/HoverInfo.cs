@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject info;
+    public string name;
+    public TextMeshProUGUI text;
 
     /// <summary>
     /// Sets info to active when the object is hovered over.
@@ -11,6 +14,7 @@ public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         info.SetActive(true);
+        text.text = name;
     }
 
     /// <summary>
@@ -19,5 +23,6 @@ public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         info.SetActive(false);
+        text.text = "Item";
     }
 }
