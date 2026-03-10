@@ -20,6 +20,7 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] Image mixerSlotTwo;
     private Image highlighted;
     private bool mixer;
+    private 
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -149,21 +150,42 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseBase(int baseType)
     {
-        if (highlighted!=null & !mixer)
+        if (highlighted==null || !mixer)
         {
-            if (highlighted==baseSlotOne)
+            if (highlighted==null)
             {
-                index = 0;
+                if (baseToButton[(BaseType)baseType].image.sprite==baseSlotOne.sprite)
+                {
+                    index=0;
+                } else
+                {
+                    index=1;
+                }
+            } else if (highlighted==baseSlotOne)
+            {
+               index = 0; 
             } else
             {
                 index = 1;
             }
-            BaseType swappedBase  = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
+            BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
             baseToButton[swappedBase].interactable = true;
             baseToButton[(BaseType)baseType].interactable = false;
-            highlighted.color = Color.white;
-            highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
-            highlighted = null;
+            if (highlighted!=null)
+            {
+                highlighted.color = Color.white;
+                highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
+                highlighted = null;
+            } else
+            {
+                if (index==0)
+                {
+                    baseSlotOne.sprite = baseToButton[(BaseType)baseType].image.sprite;
+                } else
+                {
+                    baseSlotTwo.sprite = baseToButton[(BaseType)baseType].image.sprite;
+                }
+            }
             foreach (var button in baseButtons)
             {
                 button.image.color = Color.white;
@@ -176,11 +198,20 @@ public class LoadoutManager : MonoBehaviour
     /// </summary>
     public void ChooseMixer(int mixerType)
     {
-        if (highlighted!=null && mixer)
+        if (highlighted==null || mixer)
         {
-            if (highlighted==mixerSlotOne)
+            if (highlighted==null)
             {
-                index = 0;
+                if (mixerToButton[(MixerType)mixerType].image.sprite==mixerSlotOne.sprite)
+                {
+                    index=0;
+                } else
+                {
+                    index=1;
+                }
+            } else if (highlighted==mixerSlotOne)
+            {
+               index = 0; 
             } else
             {
                 index = 1;
@@ -188,9 +219,21 @@ public class LoadoutManager : MonoBehaviour
             MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
             mixerToButton[swappedMixer].interactable = true;
             mixerToButton[(MixerType)mixerType].interactable = false;
-            highlighted.color = Color.white;
-            highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-            highlighted = null;
+            if (highlighted!=null)
+            {
+                highlighted.color = Color.white;
+                highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+                highlighted = null;
+            } else
+            {
+                if (index==0)
+                {
+                    mixerSlotOne.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+                } else
+                {
+                    mixerSlotTwo.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
+                }
+            }
             foreach (var button in mixerButtons)
             {
                 button.image.color = Color.white;
