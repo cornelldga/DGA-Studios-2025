@@ -449,95 +449,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
---- !u!1001 &389527788
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2390142266443859914}
-    m_Modifications:
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887997795932678023, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7a6078dddbf29ff4b9329d5065a9eb92, type: 3}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: sadSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: sceneName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: happySprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: jsonTextFile
-      value: 
-      objectReference: {fileID: 4900000, guid: 2dcdbc8431ad1914485b6126bfeae134, type: 3}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: neutralSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8dd07d182e2a144c08c937f8bf36d572, type: 3}
-    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.1796875
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745913855671810240, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.5234375
-      objectReference: {fileID: 0}
-    - target: {fileID: 7080179304938087386, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: m_Name
-      value: Ash
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
 --- !u!1 &476971536 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2348387358040995328, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
@@ -835,11 +746,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.2992881, y: 0}
   m_Radius: 0.25059327
---- !u!4 &604656382 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-  m_PrefabInstance: {fileID: 389527788}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &715180376
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +866,10 @@ PrefabInstance:
       propertyPath: jsonTextFile
       value: 
       objectReference: {fileID: 4900000, guid: fc7ae177335f7423796a961c84b9e334, type: 3}
+    - target: {fileID: 3350857357429987495, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
     - target: {fileID: 5550809489384604678, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
       propertyPath: m_Size.x
       value: 3
@@ -1038,6 +948,10 @@ PrefabInstance:
       propertyPath: jsonTextFile
       value: 
       objectReference: {fileID: 4900000, guid: 002f1890678da4b98b779034b033e8de, type: 3}
+    - target: {fileID: 3350857357429987495, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
+      propertyPath: dialogueBoxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
     - target: {fileID: 6770842795922722231, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
       propertyPath: m_Name
       value: Door
@@ -1392,9 +1306,17 @@ PrefabInstance:
       value: 0.765625
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: happySprite
+      propertyPath: sadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: sceneName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: happySprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: jsonTextFile
       value: 
@@ -1402,11 +1324,11 @@ PrefabInstance:
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: neutralSprite
       value: 
-      objectReference: {fileID: 21300000, guid: e419ab20c9f22ab4ebc1dd34af4d6fce, type: 3}
+      objectReference: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
-      objectReference: {fileID: 3877369958027668088, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+      objectReference: {fileID: 21300000, guid: fec09dac9d0ddcf43a80ad1dbf1262a1, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: emotionSprites.Array.size
       value: 3
@@ -1854,11 +1776,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6956884972056103369, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7106785672312963615, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: YesChoice
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7375129459638127692, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -40796,9 +40723,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6335452180919716698, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       insertIndex: -1
       addedObject: {fileID: 806850865}
-    - targetCorrespondingSourceObject: {fileID: 6335452180919716698, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 604656382}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
 --- !u!4 &2390142266443859914 stripped

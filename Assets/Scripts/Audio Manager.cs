@@ -17,12 +17,26 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixerGroup musicGroup;
     [SerializeField] private AudioMixerGroup sfxGroup;
+
+
+    // private fields
     private AudioSource[] songs;
     private MusicType currentMusic = MusicType.None;
-
     
     public static AudioManager Instance;
     private bool ignoreNextMusicChange = false;
+
+    private static readonly float[] pitches = new float[]
+    {
+        0.875f,
+        0.9375f,
+        1.0f,
+        1.0625f,
+        1.125f,  
+    };
+
+
+    // Audio configuration and playback functions
 
     public void SetIgnoreNextMusicChange()
     {
@@ -73,6 +87,20 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.outputAudioMixerGroup = sfxGroup;
         }
+    }
+
+    public void PlaySFX(int index, bool random = false)
+    {
+        if (index < 0 || index >= sounds.Length)
+        {
+            Debug.Log("Sound index out of bounds, refer to Audio Manager object");
+            return;
+        }
+        if (random)
+        {
+            sounds[index].source.pitch = pitches[Random.Range(0, pitches.Length)];
+        }
+        sounds[index].source.PlayOneShot(sounds[index].audioClip);
     }
 
     public void PlayMusic(MusicType musicType)

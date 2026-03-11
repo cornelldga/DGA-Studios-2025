@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
@@ -101,6 +102,11 @@ public abstract class Boss : MonoBehaviour, IDamageable
                 SetPhase();
             }
         }
+    }
+
+    public String getName()
+    {
+        return bossName;
     }
 
     /// <summary>

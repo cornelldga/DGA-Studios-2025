@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4606974957378827531}
   m_Layer: 8
-  m_Name: BulletOrigin
+  m_Name: Bullet Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,6 +26,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5002965962069388933}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5354167746282428215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5800447950608822647}
+  m_Layer: 8
+  m_Name: Hole Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5800447950608822647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354167746282428215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67,6 +98,7 @@ Transform:
   m_Children:
   - {fileID: 5489353766401137639}
   - {fileID: 4606974957378827531}
+  - {fileID: 5800447950608822647}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7197086526577444502
@@ -159,6 +191,7 @@ MonoBehaviour:
   walkingTime: 2
   debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
   numFrenzyDigs: 3
+  holeOrigin: {fileID: 5800447950608822647}
   moveSpeed: 0.8
   moveRange: 2
   exitHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
