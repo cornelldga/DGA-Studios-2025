@@ -355,7 +355,7 @@ PrefabInstance:
     - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: dialogueManager
       value: 
-      objectReference: {fileID: 2052565135}
+      objectReference: {fileID: 383745641}
     - target: {fileID: 7671218348317390961, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -768,6 +768,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
   m_PrefabInstance: {fileID: 351155202}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &383745641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+  m_PrefabInstance: {fileID: 1186670317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff50e3918234410945057e8f748a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
 --- !u!1001 &403988317
 PrefabInstance:
   m_ObjectHideFlags: 0
