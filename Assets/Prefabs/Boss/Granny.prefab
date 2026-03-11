@@ -338,8 +338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   bossName: Granny
   maxHealth: 5
-  healthBar: {fileID: 0}
-  bossNameText: {fileID: 0}
+  healthBar: {fileID: 2861438271388821434}
+  bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
   - 50
@@ -463,6 +463,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
   m_PrefabInstance: {fileID: 6383838750220342359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2861438271388821434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9160934584145638381, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 6383838750220342359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &4274816176931949744 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7189083303274518759, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}

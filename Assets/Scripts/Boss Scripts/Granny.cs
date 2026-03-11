@@ -161,7 +161,9 @@ public class Granny : Boss
         if (bosses.Count == 0)
         {
             Debug.Log("Contracts Done!");
-            return; //TODO Phase 2 Switch
+            gameObject.GetComponent<GrannyPhase2>().enabled = true;
+            gameObject.GetComponent<Granny>().enabled = false;
+            return;
         }
 
         if (bosses.Count ==  initialBossCount / 2 )
