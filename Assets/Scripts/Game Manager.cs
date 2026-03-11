@@ -178,6 +178,16 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Check if on pause button
+    /// </summary>
+    public bool PointerOnPause()
+    {
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            pauseButton.GetComponent<RectTransform>(), 
+            Input.mousePosition);
+    }
+
+    /// <summary>
     /// Sets the loadout manager to active.
     /// </summary>
     /// <param name="isOpen">If the loadout manager should be open</param>
