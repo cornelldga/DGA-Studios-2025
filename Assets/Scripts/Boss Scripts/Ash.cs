@@ -383,13 +383,13 @@ public class Ash : Boss
         switch(currentPhase)
         {
             case 0:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(1)); // First 2
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
                 break;
             case 1:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 3
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
                 break;
             case 2:
-                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(1)); //Last 2
+                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
                 break;
         }
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
@@ -419,7 +419,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0);
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
                 seedInLine(point1, point2, seedRows);
                 seedInLine(-point1, -point2, seedRows);
                 seedInLine(point1, -point2, seedRows);
@@ -430,7 +430,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0)  ;
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
 
                 break;
             default:
