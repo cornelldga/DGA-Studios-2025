@@ -508,7 +508,7 @@ public class Ash : Boss
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
                 seedScript.target = currentSeedLocation + th*randStep;
-                randStep = UnityEngine.Random.value / 2 + .5f;
+                randStep = UnityEngine.Random.value/2 + .5f;
             }
             currentSeedLocation += seedStep;
         }
