@@ -147,6 +147,24 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Mutes the music.
+    /// </summary>
+    public void onMuteMusicClicked()
+    {
+        AudioManager.Instance.SetMusicVolume(0);
+        musicSlider.value = 0;
+    }
+
+    /// <summary>
+    /// Mutes the SFX.
+    /// </summary>
+    public void onMuteSFXClicked()
+    {
+        AudioManager.Instance.SetSFXVolume(0);
+        sfxSlider.value = 0;
+    }
+
+    /// <summary>
     /// Closes the volume panel and shows the main pause menu options. Called when the Back button in the volume panel is clicked or when the Escape key is pressed while the volume panel is open.
     /// </summary>
     private void CloseVolumePanel()
@@ -155,6 +173,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.transform.Find("Resume").gameObject.SetActive(true);
         pauseMenu.transform.Find("Quit").gameObject.SetActive(true);
         pauseMenu.transform.Find("Volume").gameObject.SetActive(true);
+        pauseMenu.transform.Find("Back").gameObject.SetActive(false);
         volumeOpened = false;
     }
 
