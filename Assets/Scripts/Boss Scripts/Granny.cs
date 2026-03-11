@@ -6,7 +6,7 @@ public class Granny : Boss
 {
     public enum State
     {
-        Idle, HoldingContract, ContractDropped, Scavange, Returning
+        Idle, Invincible, HoldingContract, ContractDropped, Scavange, Returning
     }
     [SerializeField] private State currentState; //TODO  de cereal
 
@@ -25,6 +25,8 @@ public class Granny : Boss
     [SerializeField] private float scavengeTime;
     //Length of time to pull out contracts.
     [SerializeField] private float outTime;
+    //Length of time to stay invincble after pulling out contract
+    [SerializeField] private float invincibleTime;
     [SerializeField] private float droppedTime;
 
 
@@ -86,6 +88,9 @@ public class Granny : Boss
             case State.HoldingContract:
                 UpdateHoldingContract();
                 break;
+            case State.Invincible:
+                UpdateInvincible();
+                break;
             case State.ContractDropped:
                 UpdateContractDropped();
                 break;
@@ -106,20 +111,39 @@ public class Granny : Boss
     {
         if (stateTimer <= 0)
         {
-            TransitionToHoldingContract();
+            TransitionToInvincible();
         }
+    }
+
+    private void TransitionToInvincible()
+    {
+        currentState = State.Invincible;
+        stateTimer = invincibleTime;
+        EnableRandomBosses();
+        // TODO replace with animation, color for temp for now
+        sprite.color = Color.purple;
     }
 
     private void TransitionToHoldingContract()
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
+        // TODO replace with animation, color for temp for now
+        sprite.color = Color.white;
     }
     public void TransitionToReturning()
     {
         // Speed to reach distance in time is dist/time
         currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
         currentState = State.Returning;
+    }
+
+    private void UpdateInvincible()
+    {
+        if (stateTimer <= 0)
+        {
+            TransitionToHoldingContract();
+        }
     }
 
     private void UpdateHoldingContract()
@@ -159,7 +183,6 @@ public class Granny : Boss
             availableBosses.Add(bosses[index]);
             bosses.Remove(bosses[index]);
         }
-
         return; 
     }
 
