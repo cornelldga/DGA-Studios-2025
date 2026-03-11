@@ -14,6 +14,15 @@ public class Whip : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().linearVelocity = -whipSpeedMultiplier * collision.GetComponent<Rigidbody2D>().linearVelocity;
             }
         }
+
+        else if(collision.gameObject.TryGetComponent<Bush>(out Bush bush))
+        {
+           if(bush.isFire())
+            {
+                bush.setFire(false);
+            }
+        }
+        
     }
     /// <summary>
     /// Ends the whip
