@@ -19,6 +19,7 @@ public class Bush : MonoBehaviour
     public void setFire(bool isOnFire)
     {
         this.isOnFire = isOnFire;
+        Debug.Log(" " + isOnFire);
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     
         if (isOnFire) {
