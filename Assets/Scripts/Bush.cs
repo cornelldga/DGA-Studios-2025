@@ -12,16 +12,44 @@ public class Bush : MonoBehaviour
     [SerializeField] float witherDuration = 3f;
     private float witherTimer = 0f;
 
+    private GameObject ash;
+
+    private float dukeY;
+
+    private SpriteRenderer sr;
 
     public void Start()
     {
         setFire(isOnFire);
+        ash = GameObject.Find("Ash");
+        sr = GetComponent<SpriteRenderer>();
+
+
     }
 
     public void Update()
     {
         if (witherTimer >= witherDuration) Destroy(gameObject);
         if (isOnFire) witherTimer += Time.deltaTime;
+        //GameManager.Instance.transform.position).magnitude
+        if (ash.transform.position.y <=  transform.position.y & (ash.transform.position - this.transform.position).magnitude < 1)
+        {
+            sr.sortingOrder = 3;
+        }
+        else
+        {
+            sr.sortingOrder = 1;
+        }
+
+        if (GameManager.Instance.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
+        {
+            sr.sortingOrder = 3;
+        }
+        else
+        {
+            sr.sortingOrder = 1;
+        }
+
     }
 
     /**
