@@ -10,6 +10,7 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
+    [SerializeField] Animator animator;
     private float witherTimer = 0f;
 
 
