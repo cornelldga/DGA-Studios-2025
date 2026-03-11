@@ -158,7 +158,7 @@ public class Granny : Boss
     {
         if (bossActive) return;
 
-        if (bosses.Count == 0)
+        if (bosses.Count == 0 && availableBosses.Count == 0)
         {
             Debug.Log("Contracts Done!");
             gameObject.GetComponent<GrannyPhase2>().enabled = true;
