@@ -48,9 +48,9 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.MachineGun;
+        currentState = State.Idle;
         stateTimer = idleTime;
-        machineTimer = 0;
+        machineTimer = 10;
     }
 
     // Update is called once per frame
@@ -93,6 +93,7 @@ public class GrannyPhase2 : Boss
         if (stateTimer <= 0)
         {
             //decide which mode to swap to based on some randomization
+            currentState = State.MachineGun;
         }
     }
 
@@ -113,12 +114,21 @@ public class GrannyPhase2 : Boss
         {
             //track the player location as you shoot out bullets
             //granny moves as she shoots machine gun
+            //if player enters region above or below granny, she stops firing and repositions
             bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                     - bulletOrigin.transform.position; 
 
             if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
             else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
             StartCoroutine(machineGun.DoBulletPattern(this));
+            float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
+            print(angle);
+            if (angle < 20 || angle > 170)
+            {
+                StopCoroutine(machineGun.DoBulletPattern(this));
+                currentState = State.Idle;
+                return;
+            }
             machineTimer += Time.deltaTime;
             
         } else if(machineTimer >= machineCooldownConstant)

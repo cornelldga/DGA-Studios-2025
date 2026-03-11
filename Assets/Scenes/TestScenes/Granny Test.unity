@@ -18853,6 +18853,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: bosses.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -18915,6 +18919,14 @@ PrefabInstance:
     - target: {fileID: 6479919401018217479, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: machineCooldownConstant
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
