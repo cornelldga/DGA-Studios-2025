@@ -8,7 +8,7 @@ public class Granny : Boss
     {
         Idle, HoldingContract, ContractDropped, Scavange, Returning
     }
-   [SerializeField] private State currentState; //TODO  de cereal
+    [SerializeField] private State currentState; //TODO  de cereal
 
     [Header("Movement Settings")]
     //Base time to reach target while charging (regular)
@@ -134,26 +134,33 @@ public class Granny : Boss
     {
         if (bossActive) return;
 
-        if (bosses.Count == 0) return; //TODO Phase 2 Switch
-/**
-        if (bosses.Count <= initialBossCount / 2)
+        if (bosses.Count == 0)
         {
-            for (int i = 0; i < bosses.Count; i++)
+            Debug.Log("Contracts Done!");
+            return; //TODO Phase 2 Switch
+        }
+
+        if (bosses.Count ==  initialBossCount / 2 )
+        {
+            Debug.Log("Double Contract"); 
+            bossActive = true;
+            for (int i = 1; i >= 0; i--)
             {
-                int index = Random.Range(0, bosses.Count);
-                bosses[index].SetActive(true);
-                bosses.RemoveAt(index);
+                bosses[i].SetActive(true);
+                availableBosses.Add(bosses[i]);
+                bosses.Remove(bosses[i]);
             }
         }
-        */
-        else
+        else if (bosses.Count > 0)
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
             bossActive = true;
             availableBosses.Add(bosses[index]);
-            bosses.RemoveAt(index);
+            bosses.Remove(bosses[index]);
         }
+
+        return; 
     }
 
     private void TransitionToContractDropped()
@@ -188,8 +195,12 @@ public class Granny : Boss
             Vector2 dist = contractPosition - rb.position;
             rb.linearVelocity = dist.normalized * currentSpeed;
         }
+        else
+        {
+            currentState = State.Returning;
+        }
     }
-    
+
     /// <summary>
     /// Finds the nearest currently dropped contract by distance, null if none.
     /// </summary>
@@ -214,7 +225,8 @@ public class Granny : Boss
         if (dist.magnitude < 0.1)
         {
             TransitionToIdle();
-        } else
+        }
+        else
         {
             rb.position = new Vector3(rb.position.x, rb.position.y, -1);
             rb.linearVelocity = dist.normalized * currentSpeed;
@@ -227,14 +239,14 @@ public class Granny : Boss
         {
             if (currentState == State.Scavange && currentDroppedContracts.Contains(collision.gameObject))
             {
-                Destroy(collision.gameObject); // TODO Handle contract disappearance, destroy for now
                 currentDroppedContracts.Remove(collision.gameObject);
+                Destroy(collision.gameObject); // TODO Handle contract disappearance, destroy for now
                 if (currentDroppedContracts.Count <= 0)
                 {
                     // TODO Handle phase change
                     TransitionToReturning();
                 }
-            } 
+            }
         }
     }
 
@@ -265,7 +277,8 @@ public class Granny : Boss
         if (damage <= 0 || currentState != State.HoldingContract)
         {
             return;
-        } else
+        }
+        else
         {
             if (availableBosses == null)
             {
