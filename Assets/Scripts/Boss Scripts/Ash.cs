@@ -522,7 +522,7 @@ public class Ash : Boss
         List<GameObject> validBushes = new List<GameObject>();
         foreach (GameObject b in bushes) if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
         int index = (int)(UnityEngine.Random.value * validBushes.Count);
-        if (index > 0)
+        if (index >= 0)
         {
             StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, validBushes[index].transform.position));
             attackCooldown = molotov.duration;

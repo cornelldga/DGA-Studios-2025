@@ -9,6 +9,8 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadCooldown;
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
+    [SerializeField] float witherDuration = 3f;
+    private float witherTimer = 0f;
 
 
     public void Start()
@@ -16,6 +18,16 @@ public class Bush : MonoBehaviour
         setFire(isOnFire);
     }
 
+    public void Update()
+    {
+        if (witherTimer >= witherDuration) Destroy(gameObject);
+        if (isOnFire) witherTimer += Time.deltaTime;
+    }
+
+    /**
+    isOnFire setter. 
+    Changes sprite color and starts/stops firespreading coroutine
+    */
     public void setFire(bool isOnFire)
     {
         this.isOnFire = isOnFire;
@@ -23,6 +35,7 @@ public class Bush : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     
         if (isOnFire) {
+            witherTimer = 0f; //reset timer
             spriteRenderer.color = Color.orange;
             fireCoroutine = StartCoroutine(fireSpreadRoutine());
         } else {
@@ -68,6 +81,9 @@ public class Bush : MonoBehaviour
         }
     }
 
+    /**
+    If collides with player and is on fire, deal damage
+    */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isOnFire && collision.CompareTag("Player"))
