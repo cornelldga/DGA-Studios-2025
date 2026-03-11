@@ -140,29 +140,27 @@ public class Granny : Boss
             return; //TODO Phase 2 Switch
         }
 
-        if (bosses.Count <= initialBossCount / 2)
+        if (bosses.Count ==  initialBossCount / 2 )
         {
-            for (int i = 0; i < bosses.Count; i++)
+            Debug.Log("Double Contract"); 
+            bossActive = true;
+            for (int i = 1; i >= 0; i--)
             {
                 bosses[i].SetActive(true);
-                bossActive = true;
                 availableBosses.Add(bosses[i]);
+                bosses.Remove(bosses[i]);
             }
-
-            for (int i = 0; i < availableBosses.Count; i++)
-            {
-                bosses.RemoveAt(i);
-            }
-
         }
-        else
+        else if (bosses.Count > 0)
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
             bossActive = true;
             availableBosses.Add(bosses[index]);
-            bosses.RemoveAt(index);
+            bosses.Remove(bosses[index]);
         }
+
+        return; 
     }
 
     private void TransitionToContractDropped()
@@ -196,6 +194,10 @@ public class Granny : Boss
             Vector2 contractPosition = nearestContract.transform.position;
             Vector2 dist = contractPosition - rb.position;
             rb.linearVelocity = dist.normalized * currentSpeed;
+        }
+        else
+        {
+            currentState = State.Returning;
         }
     }
 
