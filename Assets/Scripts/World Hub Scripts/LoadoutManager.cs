@@ -114,6 +114,7 @@ public class LoadoutManager : MonoBehaviour
             if (button.interactable==true)
             {
                 button.image.color = Color.lightGreen;
+                button.transform.localScale = Vector3.one * 1.2f;
             }
         }
         SelectSlot(slot);
@@ -131,6 +132,7 @@ public class LoadoutManager : MonoBehaviour
             if (button.interactable==true)
             {
                 button.image.color = Color.lightGreen;
+                button.transform.localScale = Vector3.one * 1.2f;
             }
         }
         SelectSlot(slot);
@@ -189,6 +191,7 @@ public class LoadoutManager : MonoBehaviour
             foreach (var button in baseButtons)
             {
                 button.image.color = Color.white;
+                button.transform.localScale = Vector3.one;
             }
         }
     }
@@ -237,6 +240,7 @@ public class LoadoutManager : MonoBehaviour
             foreach (var button in mixerButtons)
             {
                 button.image.color = Color.white;
+                button.transform.localScale = Vector3.one;
             }
         }
     }
