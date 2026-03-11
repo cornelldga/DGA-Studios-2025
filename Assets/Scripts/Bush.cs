@@ -10,6 +10,7 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
+    [SerializeField] bool whipped;
     private float witherTimer = 0f;
 
     private GameObject ash;
@@ -116,5 +117,14 @@ public class Bush : MonoBehaviour
     {
         if (isOnFire && collision.CompareTag("Player"))
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+    }
+    
+    /// <summary>
+    /// Sets this projectile as 'whipped' to reverse collision logic
+    /// and sets its damage based on the whipDamageMultiplier
+    /// </summary>
+    public void WhipBush()
+    {
+        setFire(false);
     }
 }
