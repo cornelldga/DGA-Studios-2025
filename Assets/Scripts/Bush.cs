@@ -42,7 +42,7 @@ public class Bush : MonoBehaviour
             sr.sortingOrder = 1;
         }
 
-        if (GameManager.Instance.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
+        if (GameManager.Instance.player.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
         {
             sr.sortingOrder = 3;
         }
