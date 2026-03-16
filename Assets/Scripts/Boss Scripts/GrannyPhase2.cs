@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GrannyPhase2 : Boss
@@ -9,7 +10,7 @@ public class GrannyPhase2 : Boss
     /// </summary>
     public enum State
     {
-        Targeting, Lazer, MachineGun, Punch, ComboAttack
+        Lazer, MachineGun, Punch, ComboAttack
     }
     private State currentState;
 
@@ -44,7 +45,9 @@ public class GrannyPhase2 : Boss
         sprite = GetComponent<SpriteRenderer>();
         stateTimer = 0;
         machineTimer = 10;
-        TransitionToTargeting(); // Set current state to targeting
+        // TODO remove later. For now, start with machine gun
+        TransitionToMachineGun();
+        // TransitionToLazer(); // Set starting state to lazer
     }
 
     // Update is called once per frame
@@ -56,9 +59,6 @@ public class GrannyPhase2 : Boss
 
         switch (currentState)
         {
-            case State.Targeting:
-                UpdateTargeting();
-                break;
             case State.Lazer:
                 UpdateLazer();
                 break;
@@ -71,32 +71,9 @@ public class GrannyPhase2 : Boss
         }
     }
 
-
-    /// <summary>
-    /// Handles logic for targeting mode.
-    /// </summary>
-    private void UpdateTargeting()
-    {
-        // Track the player's position
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            targetPosition = GameManager.Instance.player.transform.position;
-        }
-
-        // When targeting time is up, decide what to do
-        if (stateTimer <= 0)
-        {
-            TransitionToMachineGun();
-        }
-    }
-
     private void UpdateLazer()
     {
-        //showcase the lazer tuning on and honing in on the player
-        //shoot the lazer for the 1 shot hit
-        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position;
-        StartCoroutine(lazerShot.DoBulletPattern(this));
+        // Shouldn't need to do anything
     }
 
     private void UpdateMachineGun()
@@ -117,7 +94,7 @@ public class GrannyPhase2 : Boss
             if (angle < 20 || angle > 170)
             {
                 StopCoroutine(machineGun.DoBulletPattern(this));
-                TransitionToTargeting();
+                TransitionToComboAttack();
                 return;
             }
             machineTimer += Time.deltaTime;
@@ -137,7 +114,7 @@ public class GrannyPhase2 : Boss
     {
         // TODO move granny towards the player while using her punch move that is 
         // maybe make the punch a separate hitbox
-
+        TransitionToMachineGun();
     }
 
     private void UpdateComboAttacks()
@@ -145,19 +122,30 @@ public class GrannyPhase2 : Boss
         // TODO: Cycle through 6 combo attacks from design document
     }
 
-    private void TransitionToTargeting()
-    {
-        currentState = State.Targeting;
-    }
-
     private void TransitionToMachineGun()
     {
         currentState = State.MachineGun;
     }
 
-    private void TransitionToLazer()
+    private void TransitionToComboAttack()
+    {
+        currentState = State.ComboAttack;
+    }
+
+    private IEnumerator TransitionToLazer()
     {
         currentState = State.Lazer;
+        //showcase the lazer tuning on and honing in on the player
+        //shoot the lazer for the 1 shot hit
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                    - bulletOrigin.transform.position;
+        yield return StartCoroutine(lazerShot.DoBulletPattern(this));
+        TransitionToPunch();
+    }
+
+    private void TransitionToPunch()
+    {
+        currentState = State.Punch;
     }
 
     public override void SetPhase()
