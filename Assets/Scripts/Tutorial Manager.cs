@@ -11,8 +11,6 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] bool canInteract;
 
-    [SerializeField] Rigidbody2D playerRB;
-
     // Update is called once per frame
     void Update()
     {
