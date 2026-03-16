@@ -228,7 +228,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        GameManager.Instance.FreezePlayer(false);
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
     }
@@ -238,6 +237,7 @@ public class DialogueManager : MonoBehaviour
     public void AnimationCloseDialogue()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.FreezePlayer(false);
     }
 
     /// <summary>

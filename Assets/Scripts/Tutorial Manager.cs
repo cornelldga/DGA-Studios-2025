@@ -11,13 +11,10 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] bool canInteract;
 
-    [SerializeField] Rigidbody2D playerRB;
-
     // Update is called once per frame
     void Update()
     {
         OnStart();
-        OnWhip();
     }
 
     void OnStart()
@@ -30,20 +27,17 @@ public class TutorialManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue())
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
 
-        if (collision.CompareTag("Base") && TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue())
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
-    }
 
-    void OnWhip()
-    {
-        if (TutorialTrigger.Equals("Whip") && !DialogueManager.Instance.OngoingDialogue() && Input.GetMouseButtonDown(1))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Whip") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
