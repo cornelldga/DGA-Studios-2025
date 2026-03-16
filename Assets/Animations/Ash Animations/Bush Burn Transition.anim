@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: notOnFire
+  m_Name: Bush Burn Transition
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -5160374881734522752, guid: e76e6350aada2474d94ff878106d6358, type: 3}
+      value: {fileID: -8869266406541195664, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
     - time: 0.083333336
-      value: {fileID: -4563802121783965559, guid: e76e6350aada2474d94ff878106d6358, type: 3}
+      value: {fileID: 2992174095447277993, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
+    - time: 0.16666667
+      value: {fileID: 6021739726304761271, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
+    - time: 0.25
+      value: {fileID: -3295011550874494296, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,14 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -5160374881734522752, guid: e76e6350aada2474d94ff878106d6358, type: 3}
-    - {fileID: -4563802121783965559, guid: e76e6350aada2474d94ff878106d6358, type: 3}
+    - {fileID: -8869266406541195664, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
+    - {fileID: 2992174095447277993, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
+    - {fileID: 6021739726304761271, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
+    - {fileID: -3295011550874494296, guid: 22b3bf65e2bc19c4da22117868cf05e4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.16666667
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

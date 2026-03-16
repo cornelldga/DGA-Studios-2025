@@ -467,12 +467,12 @@ public class Ash : Boss
         for (int i = 0; i < UnityEngine.Random.Range(5, 10); i++) {
             Vector3 tumblePosition = new Vector3(0, 0, 0);
             if (i % 2 == 0) { // left
-                tumblePosition = new Vector3((float)-10.5, Random.Range((float)-5.0,(float)4.0), 0);
+                tumblePosition = new Vector3((float)-10.5, UnityEngine.Random.Range((float)-5.0,(float)4.0), 0);
                 Instantiate(tumbleweedPrefab, tumblePosition, Quaternion.identity);
             }
             else // right
             {
-                tumblePosition = new Vector3((float)10.5,Random.Range((float) - 5.0, (float)4.0) , 0);
+                tumblePosition = new Vector3((float)10.5,UnityEngine.Random.Range((float) - 5.0, (float)4.0) , 0);
                 Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0));
             }
 

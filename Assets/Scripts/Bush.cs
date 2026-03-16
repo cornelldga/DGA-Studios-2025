@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Bush : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
-    [SerializeField] Animator animator;
+    private Animator animator;
     [SerializeField] bool whipped;
     private float witherTimer = 0f;
 
@@ -22,6 +23,7 @@ public class Bush : MonoBehaviour
 
     public void Start()
     {
+        animator = GetComponent<Animator>();
         setFire(isOnFire);
         ash = GameObject.Find("Ash");
         sr = GetComponent<SpriteRenderer>();
@@ -31,32 +33,39 @@ public class Bush : MonoBehaviour
 
     public void Update()
     {
+        
+        // start bush death animation
+        if (witherDuration - witherTimer <= 0.5f && !animator.GetBool("isDying")) {
+            animator.SetBool("isBurning", false);
+            animator.SetBool("isDying", true);
+        }
+
         if (witherTimer >= witherDuration) Destroy(gameObject);
         if (isOnFire) witherTimer += Time.deltaTime;
         //GameManager.Instance.transform.position).magnitude
-        if (ash.transform.position.y <=  transform.position.y & (ash.transform.position - this.transform.position).magnitude < 1)
-        {
-            sr.sortingOrder = 3;
-        }
-        else
-        {
-            sr.sortingOrder = 1;
-        }
+        //if (ash.transform.position.y <=  transform.position.y & (ash.transform.position - this.transform.position).magnitude < 1)
+        //{
+        //    sr.sortingOrder = 3;
+        //}
+        //else
+        //{
+        //    sr.sortingOrder = 1;
+        //}
 
-        if (GameManager.Instance.player.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
-        {
-            sr.sortingOrder = 3;
-        }
-        else
-        {
-            sr.sortingOrder = 1;
-        }
+        //if (GameManager.Instance.player.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
+        //{
+        //    sr.sortingOrder = 3;
+        //}
+        //else
+        //{
+        //    sr.sortingOrder = 1;
+        //}
 
     }
 
     /**
     isOnFire setter. 
-    Changes sprite color and starts/stops firespreading coroutine
+    Changes sprite animation and starts/stops firespreading coroutine
     */
     public void setFire(bool isOnFire)
     {
@@ -66,10 +75,10 @@ public class Bush : MonoBehaviour
     
         if (isOnFire) {
             witherTimer = 0f; //reset timer
-            spriteRenderer.color = Color.orange;
+            animator.SetBool("isBurning", true);
             fireCoroutine = StartCoroutine(fireSpreadRoutine());
         } else {
-            spriteRenderer.color = Color.white;
+            animator.SetBool("isBurning", false);
             if (fireCoroutine != null)
                 StopCoroutine(fireCoroutine);
         }
