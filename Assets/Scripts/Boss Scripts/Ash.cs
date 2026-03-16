@@ -386,13 +386,13 @@ public class Ash : Boss
         switch(currentPhase)
         {
             case 0:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(1)); // First 2
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
                 break;
             case 1:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 3
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
                 break;
             case 2:
-                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(1)); //Last 2
+                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
                 break;
         }
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
@@ -422,7 +422,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0);
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
                 seedInLine(point1, point2, seedRows);
                 seedInLine(-point1, -point2, seedRows);
                 seedInLine(point1, -point2, seedRows);
@@ -433,7 +433,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0)  ;
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
 
                 break;
             default:
@@ -535,7 +535,7 @@ public class Ash : Boss
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
                 seedScript.target = currentSeedLocation + th*randStep;
-                randStep = UnityEngine.Random.value / 2 + .5f;
+                randStep = UnityEngine.Random.value/2 + .5f;
             }
             currentSeedLocation += seedStep;
         }
@@ -548,9 +548,9 @@ public class Ash : Boss
         //filter out bushes that are already on fire
         List<GameObject> validBushes = new List<GameObject>();
         foreach (GameObject b in bushes) if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
-        int index = (int)(UnityEngine.Random.value * validBushes.Count);
-        if (index >= 0)
+        if (validBushes.Count>0)
         {
+            int index = (int)(UnityEngine.Random.value * validBushes.Count);
             StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, validBushes[index].transform.position));
             attackCooldown = molotov.duration;
         }

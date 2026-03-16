@@ -156,6 +156,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &3070000242549314754
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -201,6 +202,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7528028149110291506, guid: 194e7f7a4f6d41548a6bead748fd7c09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -210,7 +212,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8078844864008200868
 MonoBehaviour:
@@ -228,8 +229,10 @@ MonoBehaviour:
   maxHealth: 10
   healthBar: {fileID: 159719163656866947}
   bossNameText: {fileID: 62901968422666060}
-  bulletOrigin: {fileID: 0}
-  phasePercents: []
+  bulletOrigin: {fileID: 4606974957378827531}
+  phasePercents:
+  - 50
+  - 25
   currentPhase: 0
   attackRate: 1
   currentState: 0
@@ -243,6 +246,18 @@ MonoBehaviour:
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
   stompRadius: 3
+  stageCenter: {x: 0, y: 0}
+  stageRadius: 0
+  fireRadius: 0
+  basicSeedPrefab: {fileID: 0}
+  basicSeedArcHeight: 0
+  basicSeedLandTime: 0
+  cactusSeedPrefab: {fileID: 0}
+  fireFlowerSeedPrefab: {fileID: 0}
+  seedRows: 0
+  molotov: {fileID: 0}
+  bushPrefab: {fileID: 0}
+  randomPercentageToThrowMolotov: 0.5
 --- !u!1001 &2116001527165509890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +282,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Ash
       objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8
