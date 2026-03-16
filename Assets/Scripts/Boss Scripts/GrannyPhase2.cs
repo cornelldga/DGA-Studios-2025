@@ -1,13 +1,15 @@
-using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class GrannyPhase2 : Boss
 {
+    /// <summary>
+    /// Granny will start Phase 2 with Lazer, then cycle between
+    /// (1) Punch -> (4s) MachineGun -> (1) ComboAttack -> Loop
+    /// Until desperation, where she does another lazer then goes back to loop
+    /// </summary>
     public enum State
     {
-        Idle, Lazer, MachineGun, Punch
+        Targeting, Lazer, MachineGun, Punch, ComboAttack
     }
     private State currentState;
 
@@ -19,14 +21,6 @@ public class GrannyPhase2 : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
-    private float idleTime = 1f;
-    //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
-    //Length of time to pull out contracts.
-    private float outTime = 1f;
-
-    private float currentSpeed;
-    //Time until we should change states.
     private float stateTimer;
     private float firingCooldown;
     private Rigidbody2D rb;
@@ -48,9 +42,9 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.Idle;
-        stateTimer = idleTime;
+        stateTimer = 0;
         machineTimer = 10;
+        TransitionToTargeting(); // Set current state to targeting
     }
 
     // Update is called once per frame
@@ -62,13 +56,13 @@ public class GrannyPhase2 : Boss
 
         switch (currentState)
         {
-            case State.Idle:
+            case State.Targeting:
                 UpdateTargeting();
                 break;
             case State.Lazer:
                 UpdateLazer();
                 break;
-            case State.MachineGun: 
+            case State.MachineGun:
                 UpdateMachineGun();
                 break;
             case State.Punch:
@@ -92,8 +86,7 @@ public class GrannyPhase2 : Boss
         // When targeting time is up, decide what to do
         if (stateTimer <= 0)
         {
-            //decide which mode to swap to based on some randomization
-            currentState = State.MachineGun;
+            TransitionToMachineGun();
         }
     }
 
@@ -104,19 +97,17 @@ public class GrannyPhase2 : Boss
         bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                     - bulletOrigin.transform.position;
         StartCoroutine(lazerShot.DoBulletPattern(this));
-
     }
-
 
     private void UpdateMachineGun()
     {
-        if(machineTimer == 0)
+        if (machineTimer == 0)
         {
             //track the player location as you shoot out bullets
             //granny moves as she shoots machine gun
             //if player enters region above or below granny, she stops firing and repositions
             bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position; 
+                    - bulletOrigin.transform.position;
 
             if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
             else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
@@ -126,24 +117,47 @@ public class GrannyPhase2 : Boss
             if (angle < 20 || angle > 170)
             {
                 StopCoroutine(machineGun.DoBulletPattern(this));
-                currentState = State.Idle;
+                TransitionToTargeting();
                 return;
             }
             machineTimer += Time.deltaTime;
-            
-        } else if(machineTimer >= machineCooldownConstant)
+
+        }
+        else if (machineTimer >= machineCooldownConstant)
         {
             machineTimer = 0;
-        } else
+        }
+        else
         {
             machineTimer += Time.deltaTime;
         }
     }
 
-    private void  UpdatePunch(){
-        //move granny towards the player while using her punch move that is 
-        //maybe make the punch a separate hitbox
+    private void UpdatePunch()
+    {
+        // TODO move granny towards the player while using her punch move that is 
+        // maybe make the punch a separate hitbox
 
+    }
+
+    private void UpdateComboAttacks()
+    {
+        // TODO: Cycle through 6 combo attacks from design document
+    }
+
+    private void TransitionToTargeting()
+    {
+        currentState = State.Targeting;
+    }
+
+    private void TransitionToMachineGun()
+    {
+        currentState = State.MachineGun;
+    }
+
+    private void TransitionToLazer()
+    {
+        currentState = State.Lazer;
     }
 
     public override void SetPhase()
@@ -153,7 +167,7 @@ public class GrannyPhase2 : Boss
             case 1:
                 break;
             case 2:
-                currentState = State.Lazer;
+                TransitionToLazer();
                 break;
         }
     }
