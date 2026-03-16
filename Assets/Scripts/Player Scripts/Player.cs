@@ -237,7 +237,7 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
