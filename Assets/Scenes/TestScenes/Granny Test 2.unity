@@ -479,6 +479,9 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 0}
   machineCooldownConstant: 2
+  flamingBullsCount: 8
+  flamingBullsTime: 5
+  bullPrefab: {fileID: 8163625670582276357, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
 --- !u!1001 &416365286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19012,6 +19015,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Granny, Mechanized Menace
       objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8

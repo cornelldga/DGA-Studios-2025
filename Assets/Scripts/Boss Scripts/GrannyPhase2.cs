@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GrannyPhase2 : Boss
@@ -34,6 +35,13 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
+    [Header("Combo Attack Constants")]
+    [SerializeField] private float flamingBullsCount;
+    [SerializeField] private float flamingBullsTime;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject bullPrefab;
+
     private float machineTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,8 +53,8 @@ public class GrannyPhase2 : Boss
         sprite = GetComponent<SpriteRenderer>();
         stateTimer = 0;
         machineTimer = 10;
-        // TODO remove later. For now, start with machine gun
-        TransitionToMachineGun();
+        // TODO remove later. For now, start with Combo Attack
+        TransitionToComboAttack();
         // TransitionToLazer(); // Set starting state to lazer
     }
 
@@ -119,7 +127,7 @@ public class GrannyPhase2 : Boss
 
     private void UpdateComboAttacks()
     {
-        // TODO: Cycle through 6 combo attacks from design document
+        // Shouldn't need to do anything here
     }
 
     private void TransitionToMachineGun()
@@ -130,13 +138,37 @@ public class GrannyPhase2 : Boss
     private void TransitionToComboAttack()
     {
         currentState = State.ComboAttack;
+        // TODO: Cycle through 6 combo attacks from design document
+        StartCoroutine(FlamingBullsAttack());
     }
 
-    private IEnumerator TransitionToLazer()
+    private IEnumerator FlamingBullsAttack()
+    {
+        List<GameObject> bulls = new List<GameObject>();
+        for (int i = 0; i < flamingBullsCount; i++)
+        {
+            bulls.Add(Instantiate(bullPrefab, new Vector3(3, 0, -1), Quaternion.identity));
+            Pig bullScript = bulls[i].GetComponent<Pig>();
+            bullScript.ChargeSpecificDirection(Random.insideUnitCircle);
+        }
+        yield return new WaitForSeconds(flamingBullsTime);
+        for (int i = bulls.Count - 1; i >= 0; i--)
+        {
+            Destroy(bulls[i]);
+            bulls.RemoveAt(i);
+        }
+    }
+
+    private void TransitionToLazer()
     {
         currentState = State.Lazer;
         //showcase the lazer tuning on and honing in on the player
         //shoot the lazer for the 1 shot hit
+        StartCoroutine(ShootLazer());
+    }
+
+    private IEnumerator ShootLazer()
+    {
         bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                     - bulletOrigin.transform.position;
         yield return StartCoroutine(lazerShot.DoBulletPattern(this));
