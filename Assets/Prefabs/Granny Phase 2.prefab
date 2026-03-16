@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4331629968573797009
 Transform:
   m_ObjectHideFlags: 0
@@ -367,10 +367,10 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 0}
   machineCooldownConstant: 0
-  punchingTime: 1
+  punchingTime: 0.5
   disappearTime: 0.5
-  punchRepositionOffset: 10
-  punchSpeed: 2
+  punchRepositionOffset: 3
+  punchSpeed: 5
   punch: {fileID: 6076711696642910301}
 --- !u!1 &8238466242085916958
 GameObject:
@@ -487,6 +487,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Granny, Mechanized Menace
       objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3132241524330314494, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8

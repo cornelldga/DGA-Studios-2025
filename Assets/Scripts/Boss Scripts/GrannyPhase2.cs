@@ -57,19 +57,16 @@ public class GrannyPhase2 : Boss
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<CircleCollider2D>();
-        currentState = State.Punch;
-        stateTimer = disappearTime + punchingTime;
         machineTimer = 0;
-        stateTimer = 0;
         machineTimer = 10;
-        TransitionToTargeting(); // Set current state to targeting
+        TransitionToPunch();
     }
 
     // Update is called once per frame
     public override void Update()
     {
         base.Update();
-
+        Debug.Log("The state timer is " + stateTimer);
         stateTimer -= Time.deltaTime;
 
         switch (currentState)
@@ -84,7 +81,6 @@ public class GrannyPhase2 : Boss
                 UpdateMachineGun();
                 break;
             case State.Punch:
-                TransitionToPunch();
                 UpdatePunch();
                 break;
         }
@@ -105,7 +101,7 @@ public class GrannyPhase2 : Boss
         // When targeting time is up, decide what to do
         if (stateTimer <= 0)
         {
-            TransitionToMachineGun();
+            TransitionToPunch();
         }
     }
 
@@ -154,25 +150,28 @@ public class GrannyPhase2 : Boss
 
     private void UpdatePunch()
     {
-        stateTimer -= Time.deltaTime;
         // TODO move granny towards the player while using her punch move that is 
         // maybe make the punch a separate hitbox
 
         // Phase 1: Disappear and snap to left of player
         if (stateTimer > punchingTime)
         {
-                // TODO: Instantiate smoke VFX here
-                sprite.enabled = false;
-                collider.enabled = false;
-                punch.SetActive(false);
+            Debug.Log("im gone");
+            Debug.Log("The state timer is " + stateTimer);
+            Debug.Log("The punch time is " + punchingTime);
+            // TODO: Instantiate smoke VFX here
+            sprite.enabled = false;
+            collider.enabled = false;
+            punch.SetActive(false);
 
-                // Snap to left of player, aligned horizontally
-                Vector2 playerPos = GameManager.Instance.player.transform.position;
-                rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
+            // Snap to left of player, aligned horizontally
+            Vector2 playerPos = GameManager.Instance.player.transform.position;
+            rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
         }
         // Phase 2: Reappear and lunge horizontally
         else if (stateTimer > 0)
         {
+            Debug.Log("I'm here");
             sprite.enabled = true;
             collider.enabled = true;
             punch.SetActive(true);
@@ -185,16 +184,17 @@ public class GrannyPhase2 : Boss
         else
         {
             punch.SetActive(false);
-            // TODO: transition to next state, e.g. ChangeState(State.Idle);
+            TransitionToPunch();    
         }
     }
 
     private void TransitionToPunch()
     {
-        punch.SetActive(true);
+        currentState = State.Punch;
         stateTimer = disappearTime + punchingTime;
         //play the animation for granny disappearing
     }
+
     private void UpdateComboAttacks()
     {
         // TODO: Cycle through 6 combo attacks from design document
