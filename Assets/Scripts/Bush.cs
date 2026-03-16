@@ -18,13 +18,24 @@ public class Bush : MonoBehaviour
     private float dukeY;
 
     private SpriteRenderer sr;
+    private SpriteRenderer ashSR;
+    private SpriteRenderer plyrSR;
+
+    private bool frontOfDuke;
+    private bool frontOfAsh;
+    //[Header("Numbers for bush layer rendering")]
+    private float  dukeFootOffset = .3f;
+    private float ashFootOffset = .7f;
 
     public void Start()
     {
         setFire(isOnFire);
         ash = GameObject.Find("Ash");
         sr = GetComponent<SpriteRenderer>();
-
+        ashSR = ash.GetComponent<SpriteRenderer>();
+        plyrSR = GameManager.Instance.player.GetComponent<SpriteRenderer>();
+        frontOfDuke = false;
+        frontOfAsh = false;
 
     }
 
@@ -33,24 +44,53 @@ public class Bush : MonoBehaviour
         if (witherTimer >= witherDuration) Destroy(gameObject);
         if (isOnFire) witherTimer += Time.deltaTime;
         //GameManager.Instance.transform.position).magnitude
-        if (ash.transform.position.y <=  transform.position.y & (ash.transform.position - this.transform.position).magnitude < 1)
+        //& ((ash.transform.position - .7f*Vector3.up) - this.transform.position).magnitude < 2
+        if ((ash.transform.position.y - ashFootOffset) >=  transform.position.y )
         {
-            sr.sortingOrder = 3;
+            frontOfAsh = true;
         }
         else
         {
-            sr.sortingOrder = 1;
+            frontOfAsh = false;
         }
-
-        if (GameManager.Instance.player.transform.position.y <= transform.position.y & (GameManager.Instance.transform.position - this.transform.position).magnitude < 1)
+        //& ((GameManager.Instance.player.transform.position - .3f * Vector3.up)  - this.transform.position).magnitude < 2)
+        if ((GameManager.Instance.player.transform.position.y - dukeFootOffset) >= transform.position.y )
         {
-            sr.sortingOrder = 3;
+            frontOfDuke = true;
         }
         else
         {
-            sr.sortingOrder = 1;
+            frontOfDuke = false;
         }
 
+        if (frontOfDuke)
+        {
+            if (frontOfAsh)
+            {
+                sr.sortingOrder = 5;
+            }
+            else
+            {
+                sr.sortingOrder = 3;
+                ashSR.sortingOrder = 4;
+                plyrSR.sortingOrder = 2;
+            }
+
+        }
+        else
+        {
+            if (frontOfAsh)
+            {
+                sr.sortingOrder = 3;
+                ashSR.sortingOrder = 2;
+                plyrSR.sortingOrder = 4;
+            }
+            else
+            {
+                
+                sr.sortingOrder = 1;
+            }
+        }
     }
 
     /**
@@ -60,7 +100,7 @@ public class Bush : MonoBehaviour
     public void setFire(bool isOnFire)
     {
         this.isOnFire = isOnFire;
-        Debug.Log(" " + isOnFire);
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     
         if (isOnFire) {
