@@ -59,7 +59,7 @@ public class GrannyPhase2 : Boss
         base.Update();
 
         stateTimer -= Time.deltaTime;
-
+        Debug.Log(currentState);
         switch (currentState)
         {
             case State.Idle:
@@ -127,7 +127,8 @@ public class GrannyPhase2 : Boss
             {
                 StopCoroutine(machineGun.DoBulletPattern(this));
                 currentState = State.Idle;
-                return;
+                stateTimer = idleTime;
+                Debug.Log("Stop");
             }
             machineTimer += Time.deltaTime;
             
