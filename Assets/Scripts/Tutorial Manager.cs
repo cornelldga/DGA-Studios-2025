@@ -37,7 +37,7 @@ public class TutorialManager : MonoBehaviour
             OnInteract();
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Whip") && canInteract && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Whip") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
         {
             OnInteract();
         }
