@@ -166,9 +166,9 @@ public class Granny : Boss
             return;
         }
 
-        if (bosses.Count ==  initialBossCount / 2 )
+        if (bosses.Count == initialBossCount / 2)
         {
-            Debug.Log("Double Contract"); 
+            Debug.Log("Double Contract");
             bossActive = true;
             for (int i = 1; i >= 0; i--)
             {
@@ -185,7 +185,7 @@ public class Granny : Boss
             availableBosses.Add(bosses[index]);
             bosses.Remove(bosses[index]);
         }
-        return; 
+        return;
     }
 
     private void TransitionToContractDropped()
