@@ -368,7 +368,8 @@ MonoBehaviour:
   lazerShot: {fileID: 0}
   machineCooldownConstant: 0
   punchingTime: 1
-  disappearTime: 3
+  disappearTime: 0.5
+  punchRepositionOffset: 10
   punchSpeed: 2
   punch: {fileID: 6076711696642910301}
 --- !u!1 &8238466242085916958

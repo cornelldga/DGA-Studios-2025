@@ -32,6 +32,7 @@ public class GrannyPhase2 : Boss
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
+    private Collider2D collider;
 
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern machineGun;
@@ -46,6 +47,7 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float punchingTime;
     //how long granny disppears for
     [SerializeField] private float disappearTime;
+    [SerializeField] private float punchRepositionOffset;
     [SerializeField] private float punchSpeed;
     [SerializeField] GameObject punch;
 
@@ -60,8 +62,9 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponent<CircleCollider2D>();
         currentState = State.Punch;
-        stateTimer = idleTime;
+        stateTimer = disappearTime + punchingTime;
         machineTimer = 0;
     }
 
@@ -138,21 +141,39 @@ public class GrannyPhase2 : Boss
         }
     }
 
-    private void UpdatePunch(){
+    private void UpdatePunch()
+    {
         stateTimer -= Time.deltaTime;
 
-        if(stateTimer < punchingTime)
+        // Phase 1: Disappear and snap to left of player
+        if (stateTimer > punchingTime)
         {
-            Vector2 player = new Vector2(GameManager.Instance.player.transform.position.x, GameManager.Instance.player.transform.position.y);
-            Vector2 move = new Vector2(player.x - rb.position.x, 0);
-            rb.position += move.normalized * punchSpeed * Time.deltaTime;
-        } else if(stateTimer < punchingTime + disappearTime) {
-            
-        }
-        //drop a smoke
-        //wait on a timer
-        //teleport some amount of distance to the left of the player and hit the punch horizontally
+                // TODO: Instantiate smoke VFX here
+                sprite.enabled = false;
+                collider.enabled = false;
+                punch.SetActive(false);
 
+                // Snap to left of player, aligned horizontally
+                Vector2 playerPos = GameManager.Instance.player.transform.position;
+                rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
+        }
+        // Phase 2: Reappear and lunge horizontally
+        else if (stateTimer > 0)
+        {
+            sprite.enabled = true;
+            collider.enabled = true;
+            punch.SetActive(true);
+
+            Vector2 playerPos = GameManager.Instance.player.transform.position;
+            Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
+            rb.position += direction * punchSpeed * Time.deltaTime;
+        }
+        // Phase 3: Done
+        else
+        {
+            punch.SetActive(false);
+            // TODO: transition to next state, e.g. ChangeState(State.Idle);
+        }
     }
 
     private void TransitionToPunch()
