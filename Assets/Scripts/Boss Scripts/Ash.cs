@@ -16,6 +16,7 @@ public class Ash : Boss
     {
         Wandering,
         SeedScatter,
+        TurretScatter,
         MolotovAttack,
         TumbleweedSummon,
         Stomping,
@@ -72,11 +73,17 @@ public class Ash : Boss
     [SerializeField] private float basicSeedLandTime;
     [Tooltip("Cactus Seed Prefab")]
     [SerializeField] private GameObject cactusSeedPrefab;
+    [SerializeField] private float cactusSeedArcHeight;
+    [SerializeField] private float cactusSeedLandTime;
     [Tooltip("Fire Flower Seed Prefab")]
     [SerializeField] private GameObject fireFlowerSeedPrefab;
+    [SerializeField] private float fireSeedArcHeight;
+    [SerializeField] private float fireSeedLandTime;
     [SerializeField] int seedRows;
 
     //molotov + bush stuff
+    [Space(5)]
+    [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
     [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
@@ -264,6 +271,19 @@ public class Ash : Boss
         StartCoroutine(ScatterSeeds());
     }
 
+
+    /// <summary>
+    /// Setting state to Turret Scatter. Uses a coroutine to perform the Turret scattering attack
+    /// </summary>
+    private void TransitionToTurretSeed()
+    {
+        currentState = State.TurretScatter;
+        stateTimer = scatterTime;
+        rb.linearVelocity = Vector2.zero;
+        StartCoroutine(TurretSeeds());
+    }
+
+
     /// <summary>
     /// Setting state to Molotov Attack. Uses a coroutine to perform the molotov throwing attack
     /// </summary>
@@ -322,7 +342,7 @@ public class Ash : Boss
     private void ChooseNextAttack()
     {
         // check for desperation
-        if (GetHealthPercent() <= 0.2f && currentState != State.Desperation)
+        if (currentPhase == 2 && currentState != State.Desperation)
         {
             TransitionToDesperation();
             return;
@@ -332,11 +352,19 @@ public class Ash : Boss
 
         if (attackChoice < 4) 
         {
-            TransitionToSeedScatter();
+            if (GameObject.FindAnyObjectByType<Bush>() != null)
+            {
+                TransitionToMolotovAttack();
+            }
+            else
+            {
+                TransitionToSeedScatter();
+            }
+            
         }
         else
         {
-            TransitionToMolotovAttack();
+            TransitionToTurretSeed();
         }
     }
 
@@ -441,13 +469,37 @@ public class Ash : Boss
         }
 
 
-        int[,] seedField =  new int[20 , 10];
-        foreach (int seed in seedField) 
-        { 
-            //seed
-        }
+        
         yield return new WaitForSeconds(scatterTime);
     }
+
+
+    private IEnumerator TurretSeeds()
+    {
+        GameObject seed;
+        Seed seedScript;
+        if (UnityEngine.Random.value < .5f)
+        {
+            seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+            seedScript = seed.GetComponent<Seed>();
+            seedScript.landingTime = fireSeedLandTime;
+            seedScript.arcHeight = fireSeedArcHeight;
+        }
+        else 
+        {
+            seed = Instantiate(cactusSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+            seedScript = seed.GetComponent<Seed>();
+            seedScript.landingTime = cactusSeedLandTime;
+            seedScript.arcHeight = cactusSeedArcHeight;
+        }
+
+        //seedScript.target = ;
+
+
+        yield return new WaitForSeconds(scatterTime);
+    }
+
+
 
     private IEnumerator ThrowMolotovs()
     {
