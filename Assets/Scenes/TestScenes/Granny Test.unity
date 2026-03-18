@@ -189,6 +189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
+      propertyPath: maxHealth
+      value: 999999
+      objectReference: {fileID: 0}
     - target: {fileID: 3727136509390142719, guid: 5a81611296a39884bb65787665492c64, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -18865,6 +18869,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: invincibleTime
       value: 3
       objectReference: {fileID: 0}
@@ -18939,6 +18947,10 @@ PrefabInstance:
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: maxHealth
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: machineCooldownConstant
@@ -19038,6 +19050,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1872980312}
     - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
+      propertyPath: maxHealth
+      value: 999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069878188257071985, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
@@ -19058,6 +19074,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3791971091419183918, guid: a0c8cdae409264199be15c23fd512709, type: 3}
+      propertyPath: maxHealth
+      value: 999999
+      objectReference: {fileID: 0}
     - target: {fileID: 5002965962069388933, guid: a0c8cdae409264199be15c23fd512709, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -19489,6 +19509,10 @@ PrefabInstance:
     - target: {fileID: 5002965962069388933, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: maxHealth
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 8368315387811350196, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_IsActive
