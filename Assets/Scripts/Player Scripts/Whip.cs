@@ -19,7 +19,7 @@ public class Whip : MonoBehaviour
         {
            if(bush.isFire())
             {
-                bush.setFire(false);
+                bush.WhipBush();
             }
         }
         
