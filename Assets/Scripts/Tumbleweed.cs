@@ -35,10 +35,5 @@ public override void OnProjectileHit(Collider2D collision)
     {
         setFire();
     }
-    if (collision.gameObject.CompareTag("Player"))
-    {
-        collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-     
-    }
 }
 }

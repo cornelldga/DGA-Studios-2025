@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -116,7 +117,7 @@ public class Ash : Boss
         {
             if (currentState == State.Wandering)
             {
-                TransitionToTumbleweedSummon();
+                TransitionToTumbleweedSummon(direction);
             }
         }
 
@@ -274,7 +275,7 @@ public class Ash : Boss
     /// <summary>
     /// Setting state to Tumbleweed Summon. Uses a coroutine to perform the tumbleweed summoning attack
     /// </summary>
-    private void TransitionToTumbleweedSummon()
+    private void TransitionToTumbleweedSummon(int direction)
     {
         currentState = State.TumbleweedSummon;
         stateTimer = tumbleweedTime;
@@ -452,9 +453,24 @@ public class Ash : Boss
         yield return new WaitForSeconds(molotovTime);
     }
 
-    private IEnumerator SummonTumbleweeds()
+    private IEnumerator SummonTumbleweeds(int direction)
     {
         // Placeholder
+        // bulletpattern coroutine
+        // 5.5 , -5.5 (10/12) * pos
+        // get health percent , spawn however many depending on the health percent
+        // direction = point dir
+
+        //
+        for (int i = 0; i <= (int)10*(1-GetHealthPercent()); i++) {
+            float posY = -5.5f + (10 / 12) * Random.Range(0, 12); ; // placeholder
+            Vector3 tumbleweedPos = new((float)10.5 * direction, posY, 0);
+            Tumbleweed tumbleweed = Instantiate(tumbleweedPrefab, tumbleweedPos, new Quaternion(0, 0, 0, 0));
+            // delay maybe 
+        }
+        
+ 
+        
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
