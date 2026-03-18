@@ -189,6 +189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3727136509390142719, guid: 5a81611296a39884bb65787665492c64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.17718
@@ -18884,6 +18888,10 @@ PrefabInstance:
       propertyPath: 'bosses.Array.data[3]'
       value: 
       objectReference: {fileID: 1886488103}
+    - target: {fileID: 3596200352137737185, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4556595847925104010, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_Name
       value: Granny
@@ -19035,7 +19043,7 @@ PrefabInstance:
       objectReference: {fileID: 116850635}
     - target: {fileID: 7724136464445650741, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19100,6 +19108,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5002965962069388933, guid: a0c8cdae409264199be15c23fd512709, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368315387811350196, guid: a0c8cdae409264199be15c23fd512709, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8649009401034233054, guid: a0c8cdae409264199be15c23fd512709, type: 3}
@@ -19476,6 +19488,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5002965962069388933, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368315387811350196, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
