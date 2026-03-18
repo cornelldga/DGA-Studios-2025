@@ -100,6 +100,10 @@ public class GrannyPhase2 : Boss
     {
         //showcase the lazer tuning on and honing in on the player
         //shoot the lazer for the 1 shot hit
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                    - bulletOrigin.transform.position;
+        StartCoroutine(lazerShot.DoBulletPattern(this));
+
     }
 
 
@@ -110,12 +114,13 @@ public class GrannyPhase2 : Boss
             //track the player location as you shoot out bullets
             //granny moves as she shoots machine gun
             bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position;
+                    - bulletOrigin.transform.position; 
 
             if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
             else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
             StartCoroutine(machineGun.DoBulletPattern(this));
             machineTimer += Time.deltaTime;
+            
         } else if(machineTimer >= machineCooldownConstant)
         {
             machineTimer = 0;
@@ -133,6 +138,13 @@ public class GrannyPhase2 : Boss
 
     public override void SetPhase()
     {
-        
+        switch (currentPhase)
+        {
+            case 1:
+                break;
+            case 2:
+                currentState = State.Lazer;
+                break;
+        }
     }
 }

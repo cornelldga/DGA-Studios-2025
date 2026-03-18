@@ -35,13 +35,12 @@ public class Player : MonoBehaviour, IDamageable
     PlayerBases playerBases;
     PlayerMixers playerMixers;
 
-    [Header("Whip")]
+    [Header("Player Body")]
+    [SerializeField] GameObject limbs;
     [SerializeField] Transform whipPivot;
     public Whip whip;
     [SerializeField] float whipCooldownTime;
     [SerializeField] Animator whipAnimator;
-
-    [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
     [SerializeField] Animator armAnimator;
     [SerializeField] Transform bulletOrigin;
@@ -240,7 +239,7 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
@@ -280,6 +279,7 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     public void OnWhip()
     {
+        whip.gameObject.SetActive(true);
         whipping = true;
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         Vector3 mouse = Mouse.current.position.ReadValue();
@@ -298,6 +298,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         whipping = false;
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whip.gameObject.SetActive(false);
+
         whipPivot.transform.localEulerAngles = Vector3.zero;
     }
     /// <summary>
@@ -399,7 +401,7 @@ public class Player : MonoBehaviour, IDamageable
             float healthRatio = health / maxHealth;
             if (health <= 0)
             {
-                GameManager.Instance.LoseGame();
+                Die();
             }
             playerHealthAnimator.SetFloat("Health", health);
             playerHealthText.SetText(health.ToString());
@@ -426,6 +428,22 @@ public class Player : MonoBehaviour, IDamageable
         animationControl.SetFloat("Speed", 0);
         this.enabled = false;
         
+    }
+    /// <summary>
+    /// Triggers a death animation and stops the player controls
+    /// </summary>
+    public void Die()
+    {
+        StopPlayer();
+        limbs.SetActive(false);
+        animationControl.SetBool("Dead", true);
+    }
+    /// <summary>
+    /// Function called by death animation that triggers the lose game function
+    /// </summary>
+    public void AnimationDeathComplete()
+    {
+        GameManager.Instance.LoseGame();
     }
 
     public void ChangeMixerEffect(Color mixerColor)

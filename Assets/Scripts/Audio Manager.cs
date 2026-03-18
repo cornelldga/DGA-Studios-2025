@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -46,6 +47,18 @@ public class AudioManager : MonoBehaviour
     {
         PlayMusic(sceneMusic);
     }
+
+    /// <summary>
+    /// Hooks up volume sliders from the pause menu. Called by GameManager on initialization.
+    /// </summary>
+    /// <param name="musicSlider">Slider controlling music volume</param>
+    /// <param name="sfxSlider">Slider controlling SFX volume</param>
+    public void InitVolumeSliders(Slider musicSlider, Slider sfxSlider)
+    {
+        if (musicSlider != null) musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        if (sfxSlider != null) sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -62,8 +75,8 @@ public class AudioManager : MonoBehaviour
             if (song != null)
             {
                 song.loop = true;
+                song.outputAudioMixerGroup = musicGroup;
             }
-            song.outputAudioMixerGroup = musicGroup;
         }
 
         foreach (Sound s in sounds)
@@ -129,9 +142,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void UpdateVolumeLevelTo(float musicVol, float sfxVol)
+    /// <summary>
+    /// Sets the volume of all music tracks.
+    /// </summary>
+    /// <param name="value">Volume between 0 and 1</param>
+    public void SetMusicVolume(float value)
     {
-        musicGroup.audioMixer.SetFloat("Music Volume", Mathf.Log10(musicVol) * 20);
-        sfxGroup.audioMixer.SetFloat("Music Volume", Mathf.Log10(sfxVol) * 20);
+        foreach (AudioSource song in songs)
+        {
+            if (song != null)
+                song.volume = value;
+        }
+    }
+
+    /// <summary>
+    /// Sets the volume of all SFX sources.
+    /// </summary>
+    /// <param name="value">Volume between 0 and 1</param>
+    public void SetSFXVolume(float value)
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source != null)
+                s.source.volume = value;
+        }
     }
 }
