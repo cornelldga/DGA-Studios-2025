@@ -14,6 +14,7 @@ public class Bush : MonoBehaviour
     private Animator animator;
     [SerializeField] bool whipped;
     private float witherTimer = 0f;
+    private float deathAnimTime = 0.5f;
 
     private GameObject ash;
 
@@ -46,7 +47,7 @@ public class Bush : MonoBehaviour
     {
         
         // start bush death animation
-        if (witherDuration - witherTimer <= 0.5f && !animator.GetBool("isDying")) {
+        if (witherDuration - witherTimer <= deathAnimTime && !animator.GetBool("isDying")) {
             animator.SetBool("isBurning", false);
             animator.SetBool("isDying", true);
         }
