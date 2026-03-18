@@ -50,8 +50,7 @@ public class Ash : Boss
     [SerializeField] float tumbleweedCooldownMax = 15f;
     [Header("Tumbleweed Spawn")]
     [SerializeField] GameObject tumbleweedPrefab;
-    [SerializeField] GameObject spawnPoint;
-
+ 
     [Space(5)]
     [Header("Stomp Settings")]
     [Tooltip("Radius around Ash to detect seeds for stomping")]
