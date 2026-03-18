@@ -23,6 +23,7 @@ public class BushTrail : MonoBehaviour
         {
             GameObject bush = Instantiate(bushPrefab, transform.position, Quaternion.identity);
             bush.GetComponent<Bush>().setFire(true);
+            Destroy(bush, 10f);
             distSinceLastBush -= bushSpawnInterval;
         }
     }
