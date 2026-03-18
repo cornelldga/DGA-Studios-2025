@@ -520,7 +520,10 @@ public class Ash : Boss
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         //filter out bushes that are already on fire
         List<GameObject> validBushes = new List<GameObject>();
-        foreach (GameObject b in bushes) if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
+        foreach (GameObject b in bushes) {
+            if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
+        }
+
         if (validBushes.Count>0)
         {
             int index = (int)(UnityEngine.Random.value * validBushes.Count);
