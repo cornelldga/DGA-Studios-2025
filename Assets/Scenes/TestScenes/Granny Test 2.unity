@@ -18929,16 +18929,12 @@ PrefabInstance:
       objectReference: {fileID: 1163281163}
     - target: {fileID: 2933082142316285255, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: punchSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2933082142316285255, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: rightBound
       value: 
       objectReference: {fileID: 387934856}
-    - target: {fileID: 2933082142316285255, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
-      propertyPath: punchingTime
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 4393157315117623910, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.59
