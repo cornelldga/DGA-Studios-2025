@@ -57,9 +57,9 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.Idle;
         machineTimer = 0;
         stateTimer = 0;
+        currentState = State.ComboAttack; // TODO Change
         // TODO remove later. For now, start with Combo Attack
         TransitionToComboAttack();
         // TransitionToLazer(); // Set starting state to lazer
