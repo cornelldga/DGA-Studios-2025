@@ -19,11 +19,12 @@ public class GrannyPhase2 : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
-    private float idleTime = 20f;
+    private float idleTime = 1f;
     //How long we should scavenge for contracts.
     private float scavengeTime = 1f;
     //Length of time to pull out contracts.
     private float outTime = 1f;
+    
 
     private float currentSpeed;
     //Time until we should change states.
@@ -39,7 +40,8 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
-    private float machineTimer;
+    //Cooldown on MachineGun bullet waves.
+    private float machineTimer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -114,21 +116,31 @@ public class GrannyPhase2 : Boss
             //granny moves as she shoots machine gun
             //if player enters region above or below granny, she stops firing and repositions
             bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position; 
+                    - bulletOrigin.transform.position;
 
-            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
-            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
+        if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
+        else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
+        if (machineTimer == 0)
+        {
             StartCoroutine(machineGun.DoBulletPattern(this));
-            float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
-            print(angle);
-            if (angle < 20 || angle > 170)
-            {
-                StopCoroutine(machineGun.DoBulletPattern(this));
-                currentState = State.Idle;
-                stateTimer = idleTime;
-                SetAttackState(false);            
-                Debug.Log("Stop");
-            }
+        }
+        float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
+        print(angle);
+        if (angle < 50 || angle > 120)
+        {
+            StopCoroutine(machineGun.DoBulletPattern(this));
+            currentState = State.Idle;
+            stateTimer = idleTime;
+            SetAttackState(false);           
+        }
+        if (machineTimer >= machineCooldownConstant)
+        {
+            machineTimer = 0;
+        } else
+        {
+            machineTimer += Time.deltaTime;
+        }
+
           
     }
 
