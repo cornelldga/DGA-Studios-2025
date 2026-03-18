@@ -41,6 +41,7 @@ public class GrannyPhase2 : Boss
 
     [Header("Prefabs")]
     [SerializeField] private GameObject bullPrefab;
+    [SerializeField] private GameObject bushPrefab;
 
     private float machineTimer;
 
@@ -138,8 +139,17 @@ public class GrannyPhase2 : Boss
     private void TransitionToComboAttack()
     {
         currentState = State.ComboAttack;
+        StartCoroutine(selectComboAttack());
+    }
+
+    private IEnumerator selectComboAttack()
+    {
         // TODO: Cycle through 6 combo attacks from design document
-        StartCoroutine(FlamingBullsAttack());
+        yield return StartCoroutine(FlamingBullsAttack());
+
+        yield return new WaitForSeconds(0.25f);
+        Debug.Log("Transitioning from combo to punch");
+        // TransitionToPunch(); TODO uncomment
     }
 
     private IEnumerator FlamingBullsAttack()
@@ -147,9 +157,14 @@ public class GrannyPhase2 : Boss
         List<GameObject> bulls = new List<GameObject>();
         for (int i = 0; i < flamingBullsCount; i++)
         {
-            bulls.Add(Instantiate(bullPrefab, new Vector3(3, 0, -1), Quaternion.identity));
+            bulls.Add(Instantiate(bullPrefab, this.transform.position, Quaternion.identity));
+
             Pig bullScript = bulls[i].GetComponent<Pig>();
-            bullScript.ChargeSpecificDirection(Random.insideUnitCircle);
+            bullScript.ChargeSpecificDirection(Random.onUnitCircle);
+            bullScript.setSummoned();
+            
+            BushTrail bushTrail = bulls[i].AddComponent<BushTrail>();
+            bushTrail.SetBushPrefab(bushPrefab);
         }
         yield return new WaitForSeconds(flamingBullsTime);
         for (int i = bulls.Count - 1; i >= 0; i--)
