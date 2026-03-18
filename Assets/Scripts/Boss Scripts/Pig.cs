@@ -71,8 +71,7 @@ public class Pig : MonoBehaviour
 
     public State currentState;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -80,7 +79,9 @@ public class Pig : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         ignoredColliders = new List<Collider2D>();
-
+    }
+    void Start()
+    {
         startingPoint = new Vector2(transform.position.x, transform.position.y);
         leftBoundary = startingPoint.x - patrolDistance;
         rightBoundary = startingPoint.x + patrolDistance;
@@ -152,7 +153,7 @@ public class Pig : MonoBehaviour
         {
             return;
         }
-        if (pigRider.IsMarked())
+        if (pigRider != null && pigRider.IsMarked())
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
             ChargeTarget(pigRider.transform.position);
@@ -202,6 +203,12 @@ public class Pig : MonoBehaviour
     public void ChargeTarget(Vector3 targetPos)
     {
         targetPosition = targetPos;
+        TransitionToCharging();
+    }
+
+    public void ChargeSpecificDirection(Vector2 chargeDir)
+    {
+        this.chargeDirection = chargeDir.normalized;
         TransitionToCharging();
     }
 
