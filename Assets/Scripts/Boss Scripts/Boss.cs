@@ -13,7 +13,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] string bossName;
     [SerializeField] protected float maxHealth;
     protected float health;
-    [SerializeField] Image healthBar;
+    [SerializeField] protected Image healthBar;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 

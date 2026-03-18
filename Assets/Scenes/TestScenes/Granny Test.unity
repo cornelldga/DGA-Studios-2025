@@ -18861,6 +18861,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: bossName
+      value: Granny, The Mogul
+      objectReference: {fileID: 0}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: idleTime
       value: 5
       objectReference: {fileID: 0}
@@ -18879,6 +18883,10 @@ PrefabInstance:
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: bosses.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: contractDestroyed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: 'bosses.Array.data[0]'
