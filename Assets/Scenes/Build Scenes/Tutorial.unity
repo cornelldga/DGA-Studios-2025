@@ -837,7 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fba54ebf5cb2946bf7333bf0d77461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialShooter
-  bullet: {fileID: 3882891152182835804, guid: 1df66645b2882234299044fa9e0f8b3f, type: 3}
+  bullet: {fileID: 8527111017688567629, guid: ecd9ea2c45a160347a3f8dd000f8b672, type: 3}
 --- !u!4 &1818851896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3817138322889638663, guid: a8f1b1c6a0b3dde4ca59bf2ea248716d, type: 3}
@@ -31983,7 +31983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4891224942967603714, guid: fead391d7c1c2e2458eec0c56dcbdcf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.51
+      value: 16.53
       objectReference: {fileID: 0}
     - target: {fileID: 4891224942967603714, guid: fead391d7c1c2e2458eec0c56dcbdcf3, type: 3}
       propertyPath: m_LocalPosition.z
