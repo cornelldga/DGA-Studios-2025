@@ -44,6 +44,17 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float punchRepositionOffset;
     [SerializeField] private float punchSpeed;
     [SerializeField] GameObject punch;
+    [SerializeField] Transform punchPivot;
+
+    //left and right bound essentially tell us how far left/right is
+    //"too far". This is used to prevent granny from trying to teleport 
+    // left if the player is hugging the left wall for example
+    [SerializeField] Transform leftBound;
+    [SerializeField] Transform rightBound;
+
+    //if false, we punching from the right
+    //if true, we punching from the left
+    bool leftPunch;
 
     //vector to remember how we were moving after determining punch move direction
     private Vector2 punchMove;
@@ -66,9 +77,8 @@ public class GrannyPhase2 : Boss
     public override void Update()
     {
         base.Update();
-        Debug.Log("The state timer is " + stateTimer);
         stateTimer -= Time.deltaTime;
-
+        UpdateFlip();
         switch (currentState)
         {
             case State.Targeting:
@@ -86,6 +96,25 @@ public class GrannyPhase2 : Boss
         }
     }
 
+    /// <summary>
+    /// Checks if the player sprite needs to update and updates the bullet origin
+    /// </summary>
+    private void UpdateFlip(){
+        //track the player location as you shoot out bullets
+        //granny moves as she shoots machine gun
+        //if player enters region above or below granny, she stops firing and repositions
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                - bulletOrigin.transform.position;
+
+        if (bulletOrigin.transform.right.x > 0) { 
+            sprite.flipX = true;
+            punchPivot.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (bulletOrigin.right.x < 0) { 
+            sprite.flipX = false; 
+            punchPivot.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
 
     /// <summary>
     /// Handles logic for targeting mode.
@@ -118,14 +147,7 @@ public class GrannyPhase2 : Boss
     {
         if (machineTimer == 0)
         {
-            //track the player location as you shoot out bullets
-            //granny moves as she shoots machine gun
-            //if player enters region above or below granny, she stops firing and repositions
-            bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position;
-
-            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
-            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
+            
             StartCoroutine(machineGun.DoBulletPattern(this));
             float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
             print(angle);
@@ -156,22 +178,48 @@ public class GrannyPhase2 : Boss
         // Phase 1: Disappear and snap to left of player
         if (stateTimer > punchingTime)
         {
-            Debug.Log("im gone");
-            Debug.Log("The state timer is " + stateTimer);
-            Debug.Log("The punch time is " + punchingTime);
-            // TODO: Instantiate smoke VFX here
-            sprite.enabled = false;
-            collider.enabled = false;
-            punch.SetActive(false);
+            if (sprite.enabled)
+            {
+                // TODO: Instantiate smoke VFX here
+                sprite.enabled = false;
+                collider.enabled = false;
+                punch.SetActive(false);   
+                //randomly pick left or right
+                bool leftPunch = Random.value > 0.5f;
+                if (leftPunch)
+                {
+                    punchRepositionOffset = -punchRepositionOffset;
+                } else
+                {
+                    
+                }
+            }
+            
+            //continually check if the player location goes over the preferred bounds in case we need to change direction
+            if (leftPunch)
+            {
+                //check if we should change because the player is too left
 
-            // Snap to left of player, aligned horizontally
+            } else
+            {
+                //check if we should change because the player is too right
+
+            }
+
+            // Snap to right/left of player, aligned horizontally
             Vector2 playerPos = GameManager.Instance.player.transform.position;
-            rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
+            if (leftPunch)
+            {
+                 rb.position = new Vector2(punchRepositionOffset - playerPos.x , playerPos.y);
+            } else
+            {
+                rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
+            }
+            
         }
         // Phase 2: Reappear and lunge horizontally
         else if (stateTimer > 0)
         {
-            Debug.Log("I'm here");
             sprite.enabled = true;
             collider.enabled = true;
             punch.SetActive(true);
