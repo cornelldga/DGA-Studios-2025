@@ -35,15 +35,12 @@ public class Player : MonoBehaviour, IDamageable
     PlayerBases playerBases;
     PlayerMixers playerMixers;
 
-    [Header("Whip")]
+    [Header("Player Body")]
+    [SerializeField] GameObject limbs;
     [SerializeField] Transform whipPivot;
     public Whip whip;
     [SerializeField] float whipCooldownTime;
-    float whipTime; //determined by length of animation
     [SerializeField] Animator whipAnimator;
-    [SerializeField] Animator whipPivotAnimator;
-
-    [Header("Gun Arm")]
     [SerializeField] Transform armPivot;
     [SerializeField] Animator armAnimator;
     [SerializeField] Transform bulletOrigin;
@@ -58,6 +55,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] GameObject whipUI;
     [SerializeField] Image whipFillImage;
     [SerializeField] TMP_Text whipCooldownText;
+    [SerializeField] Animator playerHealthAnimator;
+    [SerializeField] TMP_Text playerHealthText;
 
     // Sprite fields temporary. These should be removed and change the health animator
     // [SerializeField] Animator healthAnimator;
@@ -98,10 +97,8 @@ public class Player : MonoBehaviour, IDamageable
         animationControl = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerTransform = GetComponent<Transform>();
-
-        whipTime = whipPivotAnimator.runtimeAnimatorController.animationClips[0].length;
         bulletRight = bulletOrigin.right;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         whipUI.SetActive(false);
 
         speed = baseSpeed;
@@ -117,6 +114,9 @@ public class Player : MonoBehaviour, IDamageable
         backupImage.sprite = backupBase.getSprite();
         mixerEquippedImage.sprite = selectedMixer.getSprite();
         mixerBackupImage.sprite = backupMixer.getSprite();
+
+        playerHealthAnimator.SetFloat("Health", health);
+        playerHealthText.SetText(health.ToString());
 
         isAlive = true;
         GameManager.Instance.player = this;
@@ -151,6 +151,7 @@ public class Player : MonoBehaviour, IDamageable
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
         changeCooldown = changeCooldownTime;
+        AudioManager.Instance.PlaySFX(2); // i will remove magic numbers in the future :D
     }
 
     /// <summary>
@@ -256,6 +257,19 @@ public class Player : MonoBehaviour, IDamageable
         Base baseDrink = Instantiate(selectedBase, bulletOrigin.position, bulletOrigin.rotation);
         selectedMixer.ApplyMixer(baseDrink);
         fireCooldown = baseDrink.cooldown;
+
+        // gonna fix the magic numbers soon... for now while i continue to add sfx
+        // its gonna just use magic numbers but once im done it'll be an enum
+        switch (equippedBases[baseIndex])
+        {
+            case BaseType.Gin:
+                AudioManager.Instance.PlaySFX(0, true);
+                break;
+            case BaseType.Beer:
+                AudioManager.Instance.PlaySFX(1, true);
+                break;
+        }
+        
     }
 
     /// <summary>
@@ -263,19 +277,28 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     public void OnWhip()
     {
+        whip.gameObject.SetActive(true);
         whipping = true;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
-        whipPivotAnimator.Play("Whip Rotate", 0, 0f);
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        Vector3 mouse = Mouse.current.position.ReadValue();
+        mouse.z = Mathf.Abs(Camera.main.transform.position.z);
+        Vector3 world = Camera.main.ScreenToWorldPoint(mouse);
+
+        Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
+        whipPivot.right = dir;
         whipAnimator.Play("Whip", 0, 0f);
-        StartCoroutine(nameof(WhipTime));
         StartCoroutine(nameof(ToggleWhipUI));
     }
-
-    IEnumerator WhipTime()
+    /// <summary>
+    /// Function called by Animator to end the whip
+    /// </summary>
+    public void AnimationEndWhip()
     {
-        yield return new WaitForSeconds(whipTime);
         whipping = false;
-        whip.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+        whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whip.gameObject.SetActive(false);
+
+        whipPivot.transform.localEulerAngles = Vector3.zero;
     }
     /// <summary>
     /// Toggles the whip UI on when the player whips and off when the cooldown is complete
@@ -373,20 +396,12 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
-            if (healthRatio <= midHealthThreshold)
-            {
-                healthImage.sprite = midSprite;
-                // Should set this boolean animation to true
-            }
-            if (healthRatio <= criticalThreshold)
-            {
-                healthImage.sprite = lowHealthSprite;
-                // Should set this boolean animation to true
-            }
             if (health <= 0)
             {
-                GameManager.Instance.LoseGame();
+                Die();
             }
+            playerHealthAnimator.SetFloat("Health", health);
+            playerHealthText.SetText(health.ToString());
         }
     }
     /// <summary>
@@ -410,6 +425,22 @@ public class Player : MonoBehaviour, IDamageable
         animationControl.SetFloat("Speed", 0);
         this.enabled = false;
         
+    }
+    /// <summary>
+    /// Triggers a death animation and stops the player controls
+    /// </summary>
+    public void Die()
+    {
+        StopPlayer();
+        limbs.SetActive(false);
+        animationControl.SetBool("Dead", true);
+    }
+    /// <summary>
+    /// Function called by death animation that triggers the lose game function
+    /// </summary>
+    public void AnimationDeathComplete()
+    {
+        GameManager.Instance.LoseGame();
     }
 
     public void ChangeMixerEffect(Color mixerColor)

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 
 /// <summary>
@@ -15,9 +18,19 @@ public class Ash : Boss
         SeedScatter,
         MolotovAttack,
         TumbleweedSummon,
+        Stomping,
         Desperation
     }
     public State currentState;
+
+    public enum SeedAttack
+    {
+        XAttack,
+        CrossAttack,
+        DiamondAttack,
+        StarAttack
+    }
+    private SeedAttack currentSeedPattern;
 
     [Header("Movement Settings")]
     [SerializeField] float wanderSpeed = 2f;
@@ -29,14 +42,44 @@ public class Ash : Boss
     [SerializeField] float scatterTime = 1.5f;
     [SerializeField] float molotovTime = 2f;
     [SerializeField] float tumbleweedTime = 2f;
+    [Tooltip("Duration of stomp animation that grows flowers")]
+    [SerializeField] float stompTime = 1.5f;
 
     [Space(5)]
     [Header("Tumbleweed Summon Timing")]
     [SerializeField] float tumbleweedCooldownMin = 10f;
     [SerializeField] float tumbleweedCooldownMax = 15f;
-    [Header("Tumbleweed")]
-    [SerializeField] int direction = 1; // -1 or 1 L/R
-    [SerializeField] Tumbleweed tumbleweedPrefab;
+    [Header("Tumbleweed Spawn")]
+    [SerializeField] GameObject tumbleweedPrefab;
+ 
+    [Space(5)]
+    [Header("Stomp Settings")]
+    [Tooltip("Radius around Ash to detect seeds for stomping")]
+    [SerializeField] float stompRadius = 3f;
+
+    [Space(5)]
+    [Header("Stage Data")]
+    [Tooltip("Circular Stages Center (UPDATE AND REMOVE SEED LOGIC IF STAGE IS NOT CIRCULAR)")]
+    [SerializeField] private Vector2 stageCenter;
+    [SerializeField] private float stageRadius;
+    [SerializeField] private float fireRadius;
+
+    [Space(5)]
+    [Header("Seed Settings")]
+    [Tooltip("Bush Seed Prefab")]
+    [SerializeField] private GameObject basicSeedPrefab;
+    [SerializeField] private float basicSeedArcHeight;
+    [SerializeField] private float basicSeedLandTime;
+    [Tooltip("Cactus Seed Prefab")]
+    [SerializeField] private GameObject cactusSeedPrefab;
+    [Tooltip("Fire Flower Seed Prefab")]
+    [SerializeField] private GameObject fireFlowerSeedPrefab;
+    [SerializeField] int seedRows;
+
+    //molotov + bush stuff
+    [SerializeField] Molotov molotov;
+    [SerializeField] GameObject bushPrefab;
+    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
@@ -44,6 +87,7 @@ public class Ash : Boss
     private Vector2 wanderTarget;
     private Animator animator;
     private SpriteRenderer sprite;
+    
 
     /// <summary>
     /// On start, we set the rigid body, and change its attributes. Immediately enter wandering and spawning her shield.
@@ -58,7 +102,7 @@ public class Ash : Boss
         currentState = State.Wandering;
         stateTimer = wanderTime;
         SetNewWanderTarget();
-        tumbleweedCooldownTimer = Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
+        tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
     }
 
     /// <summary>
@@ -69,12 +113,13 @@ public class Ash : Boss
         base.Update();
         stateTimer -= Time.deltaTime;
         tumbleweedCooldownTimer -= Time.deltaTime;
+        animator.SetBool("isWalking", rb.linearVelocity.magnitude > 0.1f);
 
         if (tumbleweedCooldownTimer <= 0f && currentState != State.Desperation)
         {
             if (currentState == State.Wandering)
             {
-                TransitionToTumbleweedSummon(direction);
+                TransitionToTumbleweedSummon();
             }
         }
 
@@ -92,6 +137,9 @@ public class Ash : Boss
             case State.TumbleweedSummon:
                 UpdateTumbleweedSummon();
                 break;
+            case State.Stomping:  
+                UpdateStomping();
+                break;
             case State.Desperation:
                 UpdateDesperation();
                 break;
@@ -99,7 +147,7 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Handles logic for wandering mode.
+    /// Handles logic for wandering mode. Checks for nearby seeds to stomp, otherwise moves towards a target point. If it reaches the target or the timer runs out, it chooses the next attack.
     /// </summary>
     private void UpdateWandering()
     {
@@ -109,9 +157,27 @@ public class Ash : Boss
         if (direction.x > 0) sprite.flipX = true;
         else if (direction.x < 0) sprite.flipX = false;
 
-        if (Vector2.Distance(transform.position, wanderTarget) < 0.5f || stateTimer <= 0)
+        if (Vector2.Distance(transform.position, wanderTarget) < 0.5f)
         {
-            ChooseNextAttack();
+            GameObject[] nearbySeeds = GameObject.FindGameObjectsWithTag("Seed");
+            bool seedsNearby = false;
+            foreach (GameObject seed in nearbySeeds)
+            {
+                if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
+                {
+                    seedsNearby = true;
+                    break;
+                }
+            }
+
+            if (seedsNearby)
+                TransitionToStomping();
+            else
+                ChooseNextAttack(); 
+        }
+        else if (stateTimer <= 0)
+        {
+            ChooseNextAttack(); 
         }
     }
 
@@ -135,6 +201,8 @@ public class Ash : Boss
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
         {
+            Debug.Log("throwing molotovs");
+            ThrowMolotovAtBushes();
             TransitionToWandering();
         }
     }
@@ -143,6 +211,18 @@ public class Ash : Boss
     /// Handles logic for summoning tumbleweeds mode.
     /// </summary>
     private void UpdateTumbleweedSummon()
+    {
+        rb.linearVelocity = Vector2.zero;
+        if (stateTimer <= 0)
+        {
+            TransitionToWandering();
+        }
+    }
+
+    /// <summary>
+    /// Handles logic for stomping mode.
+    /// </summary>
+    private void UpdateStomping()
     {
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
@@ -197,12 +277,12 @@ public class Ash : Boss
     /// <summary>
     /// Setting state to Tumbleweed Summon. Uses a coroutine to perform the tumbleweed summoning attack
     /// </summary>
-    private void TransitionToTumbleweedSummon(int direction)
+    private void TransitionToTumbleweedSummon()
     {
         currentState = State.TumbleweedSummon;
         stateTimer = tumbleweedTime;
 
-        float cooldownTime = Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
+        float cooldownTime = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
 
         if (GetHealthPercent() <= 0.2f)
         {
@@ -211,7 +291,18 @@ public class Ash : Boss
 
         tumbleweedCooldownTimer = cooldownTime;
 
-        StartCoroutine(SummonTumbleweeds(direction));
+        StartCoroutine(SummonTumbleweeds());
+    }
+
+
+    /// <summary>
+    /// Setting state to Stomping. Uses a coroutine to perform the stomping attack
+    /// </summary>
+    private void TransitionToStomping()
+    {
+        currentState = State.Stomping;
+        stateTimer = stompTime;
+        StartCoroutine(StompAndGrowFlowers());
     }
 
     /// <summary>
@@ -237,9 +328,9 @@ public class Ash : Boss
             return;
         }
 
-        int attackChoice = Random.Range(0, 10);
+        int attackChoice = UnityEngine.Random.Range(0, 10);
 
-        if (attackChoice < 4)
+        if (attackChoice < 4) 
         {
             TransitionToSeedScatter();
         }
@@ -254,20 +345,107 @@ public class Ash : Boss
     /// </summary>
     public override void SetPhase()
     {
-        // Placeholder
+       // Placeholder
     }
 
     /// <summary>
-    /// Sets the new location to wander to. Later update this to be wherever the most seeds are planted to then have it be where they stomp.
+    /// Sets the new location to wander to. If there are seeds in the scene, it will target the nearest seed. Otherwise, it will pick a random point within a certain radius.
     /// </summary>
     private void SetNewWanderTarget()
     {
-        wanderTarget = (Vector2)transform.position + Random.insideUnitCircle * wanderRadius;
+        GameObject[] seeds = GameObject.FindGameObjectsWithTag("Seed");
+        
+        if (seeds.Length == 0)
+        {
+            wanderTarget = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * wanderRadius;
+            return;
+        }
+
+        GameObject nearest = null;
+        float closestDist = Mathf.Infinity;
+
+        foreach (GameObject seed in seeds)
+        {
+            float dist = Vector2.Distance(transform.position, seed.transform.position);
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                nearest = seed;
+            }
+        }
+
+        wanderTarget = nearest.transform.position;
     }
 
     private IEnumerator ScatterSeeds()
     {
         // Placeholder
+        Array values = Enum.GetValues(typeof(SeedAttack));
+        //UnityEngine.Random
+        System.Random random = new System.Random();
+        switch(currentPhase)
+        {
+            case 0:
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
+                break;
+            case 1:
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
+                break;
+            case 2:
+                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
+                break;
+        }
+        //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
+        Vector2 point1;
+        Vector2 point2;
+
+        switch (currentSeedPattern)
+        {
+            case SeedAttack.XAttack:
+
+                point1 = new Vector2(1, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(-1, 1)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+
+                break;
+            case SeedAttack.CrossAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+                point1 = (new Vector2(1, 0)).normalized * stageRadius;
+                seedInLine(point1, -point1, seedRows);
+
+                break;
+            case SeedAttack.DiamondAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0);
+                point2 = point2.normalized * stageRadius;
+                seedInLine(point1, point2, seedRows);
+                seedInLine(-point1, -point2, seedRows);
+                seedInLine(point1, -point2, seedRows);
+                seedInLine(-point1, point2, seedRows);
+                
+                break;
+            case SeedAttack.StarAttack:
+                point1 = new Vector2(0, 1);
+                point1 = point1.normalized * stageRadius;
+                point2 = new Vector2(1, 0)  ;
+                point2 = point2.normalized * stageRadius;
+
+                break;
+            default:
+                break;
+        }
+
+
+        int[,] seedField =  new int[20 , 10];
+        foreach (int seed in seedField) 
+        { 
+            //seed
+        }
         yield return new WaitForSeconds(scatterTime);
     }
 
@@ -277,7 +455,7 @@ public class Ash : Boss
         yield return new WaitForSeconds(molotovTime);
     }
 
-    private IEnumerator SummonTumbleweeds(int direction)
+    private IEnumerator SummonTumbleweeds()
     {
         // Placeholder
         // bulletpattern coroutine
@@ -286,18 +464,42 @@ public class Ash : Boss
         // direction = point dir
 
         //
-        for (int i = 0; i <= (int)10*(1-GetHealthPercent()); i++) {
-            float posY = -5.5f + (10 / 12) * Random.Range(0, 12); ; // placeholder
-            Vector3 tumbleweedPos = new((float)10.5 * direction, posY, 0);
-            Tumbleweed tumbleweed = Instantiate(tumbleweedPrefab, tumbleweedPos, new Quaternion(0, 0, 0, 0));
-            // delay maybe 
+        for (int i = 0; i < UnityEngine.Random.Range(5, 10); i++) {
+            Vector3 tumblePosition = new Vector3(0, 0, 0);
+            if (i % 2 == 0) { // left
+                tumblePosition = new Vector3((float)-10.5, UnityEngine.Random.Range((float)-5.0,(float)4.0), 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, Quaternion.identity);
+            }
+            else // right
+            {
+                tumblePosition = new Vector3((float)10.5,UnityEngine.Random.Range((float) - 5.0, (float)4.0) , 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0));
+            }
+
+               
         }
+
         
- 
         
+         
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
+    // Stomps on nearby seeds, destroying them. No animation yet. eventually will grow them into flowers.
+    private IEnumerator StompAndGrowFlowers()
+    {
+        GameObject[] seeds = GameObject.FindGameObjectsWithTag("Seed");
+        foreach (GameObject seed in seeds)
+        {       
+            if (Vector2.Distance(transform.position, seed.transform.position) <= stompRadius)
+            {
+                Seed s = seed.GetComponent<Seed>();
+                s.Blossom();
+            }
+        }
+        
+        yield return new WaitForSeconds(stompTime);
+    }
     private IEnumerator DesperationAttack()
     {
         // Placeholder
@@ -311,6 +513,47 @@ public class Ash : Boss
     public override void Attack()
     {
         // Uses state machine instead of base attack
+    }
+
+    private void seedInLine(Vector2 point1, Vector2 point2, int thickness)
+    {
+
+        
+        Vector2 seedStep = (point2-point1).normalized * fireRadius;
+        Vector2 currentSeedLocation = point1;
+        GameObject seed;
+        Seed seedScript;
+        Vector2 th;
+        float randStep = UnityEngine.Random.value/2 +.5f;
+        for (int i = 0; i <= (point2 - point1).magnitude / fireRadius; i++)
+        {
+            for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
+            {
+                th = Vector2.Perpendicular(seedStep).normalized * fireRadius * t;
+                seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seedScript = seed.GetComponent<Seed>();
+                seedScript.landingTime = basicSeedLandTime;
+                seedScript.arcHeight = basicSeedArcHeight;
+                seedScript.target = currentSeedLocation + th*randStep;
+                randStep = UnityEngine.Random.value/2 + .5f;
+            }
+            currentSeedLocation += seedStep;
+        }
+    }    
+      //Throws Dynamite at the holes (phase 2)
+    private void ThrowMolotovAtBushes()
+    
+    {
+        GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
+        //filter out bushes that are already on fire
+        List<GameObject> validBushes = new List<GameObject>();
+        foreach (GameObject b in bushes) if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
+        if (validBushes.Count>0)
+        {
+            int index = (int)(UnityEngine.Random.value * validBushes.Count);
+            StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, validBushes[index].transform.position));
+            attackCooldown = molotov.duration;
+        }
     }
 
 }

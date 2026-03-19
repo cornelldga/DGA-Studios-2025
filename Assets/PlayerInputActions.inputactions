@@ -61,15 +61,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Continue Dialogue",
-                    "type": "Button",
-                    "id": "5ec10639-93ea-4f37-87f0-79c7d0ecb69f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Whip",
                     "type": "Button",
                     "id": "b577d048-3fde-47ab-804e-a867dd36b004",
@@ -341,17 +332,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Mixer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0ae0b04c-561b-4c79-bb7f-91e64fd2a69b",
-                    "path": "<Mouse>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Continue Dialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
