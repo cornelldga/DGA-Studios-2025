@@ -51,6 +51,13 @@ public class Ash : Boss
     [SerializeField] float tumbleweedCooldownMax = 15f;
     [Header("Tumbleweed Spawn")]
     [SerializeField] GameObject tumbleweedPrefab;
+    [SerializeField] float lowestSpawnPoint;
+    [SerializeField] float highestSpawnPoint;
+    [SerializeField] float leftBoundary;
+    [SerializeField] float rightBoundary;
+
+  
+    private int numTumbleweeds = 5; // will eventually be based on what phase it is
  
     [Space(5)]
     [Header("Stomp Settings")]
@@ -455,33 +462,28 @@ public class Ash : Boss
         yield return new WaitForSeconds(molotovTime);
     }
 
+    // Summons 'numTumbleweeds' amount of tumbleweeds on either side of the field.
     private IEnumerator SummonTumbleweeds()
     {
-        // Placeholder
-        // bulletpattern coroutine
-        // 5.5 , -5.5 (10/12) * pos
-        // get health percent , spawn however many depending on the health percent
-        // direction = point dir
-
-        //
-        for (int i = 0; i < UnityEngine.Random.Range(5, 10); i++) {
-            Vector3 tumblePosition = new Vector3(0, 0, 0);
+        
+        for (int i = 0; i < numTumbleweeds; i++) {
+            Vector3 tumblePosition = new(0, 0, 0);
             if (i % 2 == 0) { // left
-                tumblePosition = new Vector3((float)-10.5, UnityEngine.Random.Range((float)-5.0,(float)4.0), 0);
+                tumblePosition = new Vector3(leftBoundary, UnityEngine.Random.Range(lowestSpawnPoint,highestSpawnPoint), 0);
                 Instantiate(tumbleweedPrefab, tumblePosition, Quaternion.identity);
             }
             else // right
             {
-                tumblePosition = new Vector3((float)10.5,UnityEngine.Random.Range((float) - 5.0, (float)4.0) , 0);
-                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0));
-            }
-
-               
+                tumblePosition = new Vector3(rightBoundary,UnityEngine.Random.Range(lowestSpawnPoint, highestSpawnPoint) , 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0)); // would go in reverse direction
+            }               
         }
 
-        
-        
-         
+        yield return new WaitForSeconds(tumbleweedTime);
+    }
+
+    private IEnumerator SummonOrbitingTumbleweeds() {
+        // placeholder
         yield return new WaitForSeconds(tumbleweedTime);
     }
 

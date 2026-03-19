@@ -13135,7 +13135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.7496738
+      value: -4.48
       objectReference: {fileID: 0}
     - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13412,12 +13412,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1916358624}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: leftBoundary
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: rightBoundary
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: basicSeedPrefab
       value: 
       objectReference: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: lowestSpawnPoint
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: tumbleweedPrefab
+      value: 
+      objectReference: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: basicSeedLandTime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: highestSpawnPoint
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: basicSeedArcHeight

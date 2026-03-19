@@ -16,7 +16,7 @@ public class Tumbleweed : Bullet
     {
         damage = fireDamage;
         duration = fireDuration;
-        GetComponent<Animator>().SetBool("onFire", true); 
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
 
@@ -30,8 +30,9 @@ public void OnTriggerEnter2D(Collider2D collision)
 //</summary>
 public override void OnProjectileHit(Collider2D collision)
 {
-    //base.OnProjectileHit(collision);
-    if (collision.gameObject.CompareTag("onFire"))
+        Debug.Log(collision.gameObject.GetType());
+        Debug.Log("COLLISION");
+        if (false) 
     {
         setFire();
     }

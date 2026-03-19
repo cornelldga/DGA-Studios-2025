@@ -11,7 +11,6 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
-    private Animator animator;
     [SerializeField] bool whipped;
     private float witherTimer = 0f;
     private float deathAnimTime = 0.5f;
@@ -19,6 +18,8 @@ public class Bush : MonoBehaviour
     private GameObject ash;
 
     private float dukeY;
+
+    private Animator animator;
 
     private SpriteRenderer sr;
     private SpriteRenderer ashSR;
@@ -111,12 +112,14 @@ public class Bush : MonoBehaviour
     public void setFire(bool isOnFire)
     {
         this.isOnFire = isOnFire;
+        
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     
         if (isOnFire) {
             witherTimer = 0f; //reset timer
             animator.SetBool("isBurning", true);
+
             fireCoroutine = StartCoroutine(fireSpreadRoutine());
         } else {
             animator.SetBool("isBurning", false);
