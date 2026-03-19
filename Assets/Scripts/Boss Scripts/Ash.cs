@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -138,6 +139,9 @@ public class Ash : Boss
             case State.SeedScatter:
                 UpdateSeedScatter();
                 break;
+            case State.TurretScatter:
+                UpdateTurretScatter();
+                break;
             case State.MolotovAttack:
                 UpdateMolotovAttack();
                 break;
@@ -189,7 +193,7 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Handles logic for seed scatter mode.
+    /// Handles logic for seed scatter mode. 
     /// </summary>
     private void UpdateSeedScatter()
     {
@@ -199,6 +203,22 @@ public class Ash : Boss
             TransitionToWandering();
         }
     }
+
+
+    /// <summary>
+    /// Handles logic for Turret scatter mode. 
+    /// </summary>
+    private void UpdateTurretScatter()
+    {
+        rb.linearVelocity = Vector2.zero;
+        if (stateTimer <= 0)
+        {
+            TransitionToWandering();
+        }
+    }
+
+
+
 
     /// <summary>
     /// Handles logic for molotov attack mode.
@@ -493,8 +513,12 @@ public class Ash : Boss
             seedScript.arcHeight = cactusSeedArcHeight;
         }
 
-        //seedScript.target = ;
-
+        Vector2 vec = Vector2.zero;
+        while (vec == Vector2.zero)
+        {
+            vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2)) ;
+        }
+        seedScript.target= vec.normalized * (stageRadius/2);
 
         yield return new WaitForSeconds(scatterTime);
     }

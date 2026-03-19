@@ -13,6 +13,8 @@ public class Bush : MonoBehaviour
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
     [SerializeField] bool isWhipped; //can't be set on fire again
+    private float deathAnimTime = .5f;
+
     [SerializeField] float whippedCooldown = 3f;
     private float witherTimer = 0f;
     private float whippedTimer = 0f;
@@ -20,6 +22,8 @@ public class Bush : MonoBehaviour
     private GameObject ash;
 
     private float dukeY;
+
+    private Animator animator;
 
     private SpriteRenderer sr;
     private SpriteRenderer ashSR;
