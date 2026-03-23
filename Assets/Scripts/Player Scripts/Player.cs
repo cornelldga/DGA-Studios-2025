@@ -88,6 +88,8 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
+    public int progression;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -450,4 +452,23 @@ public class Player : MonoBehaviour, IDamageable
         var main = mixerEffect.main;
         main.startColor = mixerColor;
     }
+
+    /// <summary>
+    /// Save player data
+    /// </summary>
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+
+    /// <summary>
+    /// Load player data
+    /// </summary>
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        progression = data.progression;
+    }
+
 }
