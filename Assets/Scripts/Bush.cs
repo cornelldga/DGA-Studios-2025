@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -11,9 +12,12 @@ public class Bush : MonoBehaviour
     [SerializeField] float fireSpreadRadius;
     private Coroutine fireCoroutine;
     [SerializeField] float witherDuration = 3f;
-    [SerializeField] bool whipped;
+    [SerializeField] bool isWhipped; //can't be set on fire again
+    private float deathAnimTime = .5f;
+
+    [SerializeField] float whippedCooldown = 3f;
     private float witherTimer = 0f;
-    private float deathAnimTime = 0.5f;
+    private float whippedTimer = 0f;
 
     private GameObject ash;
 
@@ -54,6 +58,11 @@ public class Bush : MonoBehaviour
         }
 
         if (witherTimer >= witherDuration) Destroy(gameObject);
+        if (whippedTimer >= whippedCooldown)
+        {
+            setWhipped(false);
+            whippedTimer = 0f;
+        }
         if (isOnFire) witherTimer += Time.deltaTime;
         //GameManager.Instance.transform.position).magnitude
         //& ((ash.transform.position - .7f*Vector3.up) - this.transform.position).magnitude < 2
@@ -103,6 +112,7 @@ public class Bush : MonoBehaviour
                 sr.sortingOrder = 1;
             }
         }
+        if (isWhipped) whippedTimer += Time.deltaTime;
     }
 
     /**
@@ -141,25 +151,19 @@ public class Bush : MonoBehaviour
 /// <returns></returns>
     public IEnumerator fireSpreadRoutine ()
     {
-        float fireSpreadCooldownTimer = 0;
         while (true)
         {
-            if (fireSpreadCooldownTimer >= fireSpreadCooldown)
+            yield return new WaitForSeconds(Random.Range(0f, fireSpreadCooldown));
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireSpreadRadius);
+            
+            foreach (Collider2D collider in colliders)
             {
-                fireSpreadCooldownTimer = 0;
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireSpreadRadius);
-                
-                foreach (Collider2D collider in colliders)
+                if (collider.CompareTag("Bush") && collider.gameObject != this.gameObject)
                 {
-                    if (collider.CompareTag("Bush") && collider.gameObject != this.gameObject)
-                    {
-
-                        Bush bush = collider.GetComponent<Bush>();
-                        if (!bush.isOnFire) bush.setFire(true);
-                    }
+                    Bush bush = collider.GetComponent<Bush>();
+                    if (!bush.isOnFire && !bush.isWhipped) bush.setFire(true);
                 }
             }
-            fireSpreadCooldownTimer += Time.deltaTime;
             yield return null;
         }
     }
@@ -179,6 +183,13 @@ public class Bush : MonoBehaviour
     /// </summary>
     public void WhipBush()
     {
+        whippedTimer = 0f;
         setFire(false);
+        setWhipped(true);
+    }
+
+    public void setWhipped(bool whipped)
+    {
+        this.isWhipped = whipped;
     }
 }
