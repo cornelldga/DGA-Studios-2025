@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Trail : MonoBehaviour
 {
-    public GameObject trailPrefab;
+    private GameObject trailPrefab;
+    // Lifetime of trail objects, negative to not destroy.
+    private float trailLifetime = 0;
     [SerializeField] private float spawnInterval = 0.7f;
 
     private float distSinceLastSpawn = 0f;
@@ -23,7 +25,10 @@ public class Trail : MonoBehaviour
         {
             GameObject spawnedObject = Instantiate(trailPrefab, transform.position, Quaternion.identity);
             SetPrefabSettings(spawnedObject);
-            Destroy(spawnedObject, 10f);
+            if (trailLifetime >= 0)
+            {
+                Destroy(spawnedObject, trailLifetime);
+            }
             distSinceLastSpawn -= spawnInterval;
         }
     }
@@ -31,14 +36,26 @@ public class Trail : MonoBehaviour
     private void SetPrefabSettings(GameObject obj)
     {
         Bush bushScript = obj.GetComponent<Bush>();
+        SmokePellet smokeScript = obj.GetComponent<SmokePellet>();
+        DynamiteExplosion dynamiteScript = obj.GetComponent<DynamiteExplosion>();
         if (bushScript)
         {
             bushScript.setFire(true);
+        } else if (smokeScript)
+        {
+            smokeScript.setSmokeLength(14, 2.5f);
+        } else if (dynamiteScript)
+        {
+            dynamiteScript.changeImpulse(0.1f);
         }
     }
 
     public void SetTrailPrefab(GameObject prefab)
     {
         this.trailPrefab = prefab;
+    }
+    public void SetTrailLifetime(float lifetime)
+    {
+        this.trailLifetime = lifetime;
     }
 }

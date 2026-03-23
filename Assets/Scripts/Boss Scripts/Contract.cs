@@ -31,7 +31,7 @@ public class Contract : MonoBehaviour, IDamageable
             granny.availableBosses.Remove(boss);
             granny.TransitionToReturning();
             granny.contractDestroyed = true;
-            granny.TakeDamage(1);
+            granny.TakeDamageFromContract();
         }
     }
 }

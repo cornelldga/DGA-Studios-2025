@@ -112,4 +112,10 @@ public class SmokePellet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void setSmokeLength(float lifetime, float fadeStartTime)
+    {
+        this.lifetime = lifetime;
+        this.fadeStartTime = fadeStartTime;
+    }
 }

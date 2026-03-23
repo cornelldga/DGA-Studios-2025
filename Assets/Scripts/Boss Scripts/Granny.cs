@@ -58,6 +58,8 @@ public class Granny : Boss
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
     private float currentSpeed;
+    public float gHealth;
+
     public override void Start()
     {
         base.Start();
@@ -67,6 +69,7 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
+        gHealth = base.health;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -75,17 +78,8 @@ public class Granny : Boss
     public override void Update()
     {
         base.Update();
-
+        healthBar.fillAmount = 0.5f;
         stateTimer -= Time.deltaTime;
-
-        if (contractDestroyed)
-        {
-            Debug.Log("CONTRATC THIGIEHGIEHGEI");
-            health--;
-            float healthPercent = health / maxHealth;
-            healthBar.fillAmount = healthPercent;
-            contractDestroyed = false;
-        }
 
         switch (currentState)
         {
@@ -303,6 +297,14 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
+    public void TakeDamageFromContract()
+    {
+        base.health--;
+        Debug.Log(gHealth);
+        float healthPercent = 0.5f;
+        base.healthBar.fillAmount = healthPercent;
+    }
+
     /// <summary>
     /// Drops contract when taking any damage instead of dying
     /// </summary>
@@ -313,23 +315,13 @@ public class Granny : Boss
         {
             return;
         }
-        else if (contractDestroyed)
+
+        if (availableBosses == null)
         {
-            Debug.Log("CONTRATC THIGIEHGIEHGEI");
-            health--;
-            float healthPercent = health / maxHealth;
-            healthBar.fillAmount = healthPercent;
-            contractDestroyed = false;
+            return;
         }
-        else
-        {
-            if (availableBosses == null)
-            {
-                return;
-            }
-            int index = Random.Range(0, availableBosses.Count);
-            DropNewContract(availableBosses[index]);
-        }
+        int index = Random.Range(0, availableBosses.Count);
+        DropNewContract(availableBosses[index]);
     }
 
     public override void Attack()

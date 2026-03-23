@@ -44,12 +44,16 @@ public class GrannyPhase2 : Boss
     //Cooldown on MachineGun bullet waves.
     private float machineTimer = 0f;
     [Header("Combo Attack Constants")]
-    [SerializeField] private float flamingBullsCount;
-    [SerializeField] private float flamingBullsTime;
+    [SerializeField] private int fireBullsCount;
+    [SerializeField] private int smokeBullsCount;
+    [SerializeField] private int dynamiteBullsCount;
+    [SerializeField] private float bullsTime;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject bullPrefab;
-    [SerializeField] private GameObject bushPrefab;
+    [SerializeField] private GameObject flamingBushPrefab;
+    [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private GameObject dynamitePrefab;
 
     [Header("Punch Move")]
     //how long granny is punching for
@@ -102,6 +106,9 @@ public class GrannyPhase2 : Boss
         Debug.Log(currentState);
         switch (currentState)
         {
+            case State.ComboAttack:
+                UpdateComboAttacks();
+                break;
             case State.Lazer:
                 UpdateLazer();
                 break;
@@ -255,35 +262,41 @@ public class GrannyPhase2 : Boss
     private IEnumerator selectComboAttack()
     {
         // TODO: Cycle through 6 combo attacks from design document
-        yield return StartCoroutine(FlamingBullsAttack());
+        yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
+        yield return new WaitForSeconds(1.00f);
+        yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
+        yield return new WaitForSeconds(1.00f);
+        yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
 
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Transitioning from combo to punch");
         TransitionToPunch();
     }
 
-    private IEnumerator FlamingBullsAttack()
+    private IEnumerator TrailAttack(GameObject prefab, int bullsCount, float trailLifeTime)
     {
-        List<GameObject> bulls = new List<GameObject>();
-        for (int i = 0; i < flamingBullsCount; i++)
+        for (int i = 0; i < bullsCount; i++)
         {
-            bulls.Add(Instantiate(bullPrefab, this.transform.position, Quaternion.identity));
+            GameObject bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
 
-            Pig bullScript = bulls[i].GetComponent<Pig>();
+            Pig bullScript = bull.GetComponent<Pig>();
             bullScript.ChargeSpecificDirection(Random.onUnitCircle);
             bullScript.setSummoned();
             
-            Trail bushTrail = bulls[i].AddComponent<Trail>();
-            bushTrail.SetTrailPrefab(bushPrefab);
+            Trail trail = bull.AddComponent<Trail>();
+            trail.SetTrailPrefab(prefab);
+            trail.SetTrailLifetime(trailLifeTime);
+
+            Destroy(bull, bullsTime);
         }
-        yield return new WaitForSeconds(flamingBullsTime);
-        for (int i = bulls.Count - 1; i >= 0; i--)
-        {
-            Destroy(bulls[i]);
-            bulls.RemoveAt(i);
-        }
+
+        yield return new WaitForSeconds(bullsTime);
     }
 
+    private void PointlAttacks()
+    {
+        
+    }
     private void TransitionToLazer()
     {
         currentState = State.Lazer;
