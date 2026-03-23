@@ -169,8 +169,8 @@ public class GrannyPhase2 : Boss
             bullScript.ChargeSpecificDirection(Random.onUnitCircle);
             bullScript.setSummoned();
             
-            Trail bushTrail = bulls[i].AddComponent<Trail>();
-            bushTrail.SetTrailPrefab(bushPrefab);
+            BushTrail bushTrail = bulls[i].AddComponent<BushTrail>();
+            bushTrail.SetBushPrefab(bushPrefab);
         }
         yield return new WaitForSeconds(flamingBullsTime);
         for (int i = bulls.Count - 1; i >= 0; i--)
@@ -180,6 +180,10 @@ public class GrannyPhase2 : Boss
         }
     }
 
+    private void PointlAttacks()
+    {
+        
+    }
     private void TransitionToLazer()
     {
         currentState = State.Lazer;
