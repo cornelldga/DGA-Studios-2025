@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4255247459537241945
+--- !u!1 &4938585760505481446
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4078484133594979496}
-  - component: {fileID: 2471678766117094049}
-  - component: {fileID: 7296617842044260755}
-  m_Layer: 8
+  - component: {fileID: 6572988366039875905}
+  - component: {fileID: 3905919191860444925}
+  - component: {fileID: 2371858081553892320}
+  m_Layer: 0
   m_Name: Tutorial Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4078484133594979496
+--- !u!4 &6572988366039875905
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4255247459537241945}
+  m_GameObject: {fileID: 4938585760505481446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3817138322889638663}
+  m_Father: {fileID: 1126433974906357711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2471678766117094049
+--- !u!114 &3905919191860444925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4255247459537241945}
+  m_GameObject: {fileID: 4938585760505481446}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 284ef88eb3fc63343bfca29d9a137f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  TutorialTrigger: Shoot
-  interactable: {fileID: 5915130407298326636}
+  TutorialTrigger: Whiskey
+  interactable: {fileID: 4966676590127381742}
   canInteract: 1
---- !u!61 &7296617842044260755
+--- !u!61 &2371858081553892320
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4255247459537241945}
+  m_GameObject: {fileID: 4938585760505481446}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -92,9 +92,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
---- !u!1 &5915130407298326636
+--- !u!1 &4966676590127381742
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,44 +102,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3817138322889638663}
-  - component: {fileID: 5058382871305209665}
+  - component: {fileID: 1126433974906357711}
+  - component: {fileID: 3873301633678431235}
   m_Layer: 0
-  m_Name: Shoot
+  m_Name: Whiskey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3817138322889638663
+--- !u!4 &1126433974906357711
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5915130407298326636}
+  m_GameObject: {fileID: 4966676590127381742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4078484133594979496}
+  - {fileID: 6572988366039875905}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5058382871305209665
+--- !u!114 &3873301633678431235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5915130407298326636}
+  m_GameObject: {fileID: 4966676590127381742}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 210622398acbc450f826856914321c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  jsonTextFile: {fileID: 4900000, guid: 6850b8d726c0fce4fae30c1141a4c5f6, type: 3}
+  jsonTextFile: {fileID: 4900000, guid: f372c66d4366f9440a768c56b01d7e8c, type: 3}
   dialogueBoxSprite: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
   dialogueType: 0
   neutralSprite: {fileID: 0}

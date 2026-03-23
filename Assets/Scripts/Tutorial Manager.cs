@@ -27,19 +27,34 @@ public class TutorialManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue())
+        switch (TutorialTrigger)
         {
-            OnInteract();
-        }
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue())
-        {
-            OnInteract();
-        }
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && TutorialTrigger.Equals("Whip") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
-        {
-            OnInteract();
+            case ("Move"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Shoot"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Whip"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Whiskey"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Whiskey>() != null && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            default:
+                break;
         }
     }
 
