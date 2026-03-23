@@ -78,7 +78,6 @@ public class Granny : Boss
     public override void Update()
     {
         base.Update();
-        healthBar.fillAmount = 0.5f;
         stateTimer -= Time.deltaTime;
 
         switch (currentState)
@@ -301,7 +300,7 @@ public class Granny : Boss
     {
         base.health--;
         Debug.Log(gHealth);
-        float healthPercent = 0.5f;
+        float healthPercent = base.health / base.maxHealth;
         base.healthBar.fillAmount = healthPercent;
     }
 
