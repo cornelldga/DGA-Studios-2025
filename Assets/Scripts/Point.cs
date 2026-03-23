@@ -5,27 +5,21 @@ public class Point : MonoBehaviour
     public GameObject pointPrefab;
 
     //private float distSinceLastSpawn = 0f;
-    //private Vector3 lastPos;
+    private Vector3 SpawnPos;
 
     private void Start()
     {
-        lastPos = transform.position;
+        //SpawnPos = transform.position;
     }
 
     private void Update()
     {
-        float distTravelled = Vector3.Distance(transform.position, lastPos);
-        distSinceLastSpawn += distTravelled;
-        lastPos = transform.position;
-
-        while (distSinceLastSpawn >= spawnInterval)
-        {
-            GameObject spawnedObject = Instantiate(trailPrefab, transform.position, Quaternion.identity);
+           /* GameObject spawnedObject = Instantiate(pointPrefab, SpawnPos, Quaternion.identity);
             SetPrefabSettings(spawnedObject);
             Destroy(spawnedObject, 10f);
-            distSinceLastSpawn -= spawnInterval;
-        }
+            distSinceLastSpawn -= spawnInterval; */
     }
+    
 
     private void SetPrefabSettings(GameObject obj)
     {
