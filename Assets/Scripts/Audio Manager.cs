@@ -1,9 +1,23 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections.Generic;
 using UnityEngine.UI;
+
+public enum SFXKey
+{
+    GIN = 0, BEER = 1, 
+
+    BASESWAP = 2, MIXERSWAP = 3,
+
+    WHIPHIT = 4,  WHIPEMPTY = 5, WHIPCRACK = 6
+}
+
 
 public class AudioManager : MonoBehaviour
 {
+        
+    public static AudioManager Instance;
+
     [Header("Music")]
     [Tooltip("The music that should be played in this scene")]
     [SerializeField] MusicType sceneMusic;
@@ -11,20 +25,17 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource hogMusic;
 
     [Header("Sound Effects")]
-    
-    [Tooltip("list of all SFX in the game")]
+    [Tooltip("configure list here for all SFX in the game")]
     [SerializeField] private Sound[] sounds;
-
-    [SerializeField] private AudioMixerGroup musicGroup;
-    [SerializeField] private AudioMixerGroup sfxGroup;
+    [SerializeField] AudioMixerGroup musicGroup;
+    [SerializeField] AudioMixerGroup sfxGroup;
 
 
     // private fields
     private AudioSource[] songs;
     private MusicType currentMusic = MusicType.None;
-    
-    public static AudioManager Instance;
     private bool ignoreNextMusicChange = false;
+
 
     private static readonly float[] pitches = new float[]
     {
@@ -35,13 +46,6 @@ public class AudioManager : MonoBehaviour
         1.125f,  
     };
 
-
-    // Audio configuration and playback functions
-
-    public void SetIgnoreNextMusicChange()
-    {
-        ignoreNextMusicChange = true;
-    }
 
     private void Start()
     {
@@ -89,8 +93,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(int index, bool random = false)
+    public void Update()
     {
+        
+    }
+
+
+    // Audio configuration and playback functions
+    public void SetIgnoreNextMusicChange()
+    {
+        ignoreNextMusicChange = true;
+    }
+
+    public void PlaySFX(SFXKey key, bool random = false)
+    {
+        int index = (int) key;
         if (index < 0 || index >= sounds.Length)
         {
             Debug.Log("Sound index out of bounds, refer to Audio Manager object");
