@@ -370,7 +370,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spinSpeed: 50
-  player: {fileID: 0}
   turnSpeed: 2
   speed: 2
   playerMask:
@@ -385,7 +384,7 @@ MonoBehaviour:
   cooldown: 1
   knockTime: 1
   punchDist: 2
-  punchMagnitude: 2
+  punchMagnitude: 4
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
   doveStage: {fileID: 0}

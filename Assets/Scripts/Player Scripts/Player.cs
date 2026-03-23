@@ -290,6 +290,7 @@ public class Player : MonoBehaviour, IDamageable
         whipPivot.right = dir;
         whipAnimator.Play("Whip", 0, 0f);
         StartCoroutine(nameof(ToggleWhipUI));
+        if (SmokePool.Instance != null) SmokePool.Instance.OnWhip(gameObject.transform);
     }
     /// <summary>
     /// Function called by Animator to end the whip

@@ -73,7 +73,8 @@ public class Smoker : MonoBehaviour
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
 
-        if (rb == null) Debug.Log("skibidi");
+        if (rb == null) Debug.Log("player body is null for some reason");
+
 
 
         // Make rigidbody kinematic so player cannot push it
@@ -134,8 +135,11 @@ public class Smoker : MonoBehaviour
                 Vector2 direction = dist2D.normalized;
                 playerScript.knockedBack = true;
                 Rigidbody2D playerBody = target.GetComponent<Rigidbody2D>();
+                float pastDamping = playerBody.linearDamping;
+                playerBody.linearDamping = 3f;
                 playerBody.AddForce(direction * punchMagnitude, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(knockTime);
+                playerBody.linearDamping = pastDamping;
                 playerScript.knockedBack = false;
             }
         }
@@ -224,6 +228,7 @@ public class Smoker : MonoBehaviour
                 rb.linearVelocity = direction * pelletSpeed * UnityEngine.Random.Range(0.7f, 1.0f) / (i+1);
                 rb.angularVelocity = UnityEngine.Random.Range(-30f, 30f);
             }
+            SmokePool.Instance.AddToPool(pellet);
         }
     }
 
