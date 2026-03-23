@@ -13,7 +13,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] string bossName;
     [SerializeField] protected float maxHealth;
     protected float health;
-    [SerializeField] Image healthBar;
+    [SerializeField] protected Image healthBar;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 
@@ -76,7 +76,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0)
         {
-            
+
             healthBar.fillAmount = 0;
             GameManager.Instance.BossDefeated("World Hub");
         }
@@ -85,7 +85,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
             float healthPercent = health / maxHealth;
             healthBar.fillAmount = healthPercent;
             CheckPhase(healthPercent);
-            
+
         }
     }
     /// <summary>
@@ -98,7 +98,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         {
             if (healthPercent <= phasePercents[i])
             {
-                currentPhase = i+1;
+                currentPhase = i + 1;
                 SetPhase();
             }
         }

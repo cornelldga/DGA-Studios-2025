@@ -42,6 +42,7 @@ public class Granny : Boss
     // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
 
+    public bool contractDestroyed = false;
     private int initialBossCount;
 
     [Header("Return Settings")]
@@ -76,6 +77,15 @@ public class Granny : Boss
         base.Update();
 
         stateTimer -= Time.deltaTime;
+
+        if (contractDestroyed)
+        {
+            Debug.Log("CONTRATC THIGIEHGIEHGEI");
+            health--;
+            float healthPercent = health / maxHealth;
+            healthBar.fillAmount = healthPercent;
+            contractDestroyed = false;
+        }
 
         switch (currentState)
         {
@@ -166,9 +176,9 @@ public class Granny : Boss
             return;
         }
 
-        if (bosses.Count ==  initialBossCount / 2 )
+        if (bosses.Count == initialBossCount / 2)
         {
-            Debug.Log("Double Contract"); 
+            Debug.Log("Double Contract");
             bossActive = true;
             for (int i = 1; i >= 0; i--)
             {
@@ -185,7 +195,7 @@ public class Granny : Boss
             availableBosses.Add(bosses[index]);
             bosses.Remove(bosses[index]);
         }
-        return; 
+        return;
     }
 
     private void TransitionToContractDropped()
@@ -302,6 +312,14 @@ public class Granny : Boss
         if (damage <= 0 || currentState != State.HoldingContract)
         {
             return;
+        }
+        else if (contractDestroyed)
+        {
+            Debug.Log("CONTRATC THIGIEHGIEHGEI");
+            health--;
+            float healthPercent = health / maxHealth;
+            healthBar.fillAmount = healthPercent;
+            contractDestroyed = false;
         }
         else
         {

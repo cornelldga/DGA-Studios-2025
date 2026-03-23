@@ -11,7 +11,7 @@ public class Bush : MonoBehaviour
     private Coroutine fireCoroutine;
 
 
-    public void Start()
+    public void Awake()
     {
         setFire(isOnFire);
     }

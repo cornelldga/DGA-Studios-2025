@@ -1,15 +1,13 @@
+using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GrannyPhase2 : Boss
 {
-    /// <summary>
-    /// Granny will start Phase 2 with Lazer, then cycle between
-    /// (1) Punch -> (4s) MachineGun -> (1) ComboAttack -> Loop
-    /// Until desperation, where she does another lazer then goes back to loop
-    /// </summary>
     public enum State
     {
-        Targeting, Lazer, MachineGun, Punch, ComboAttack
+        Lazer, MachineGun, Punch, ComboAttack
     }
     private State currentState;
 
@@ -21,6 +19,15 @@ public class GrannyPhase2 : Boss
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
+    private float idleTime = 1f;
+    //How long we should scavenge for contracts.
+    private float scavengeTime = 1f;
+    //Length of time to pull out contracts.
+    private float outTime = 1f;
+    
+
+    private float currentSpeed;
+    //Time until we should change states.
     private float stateTimer;
     private float firingCooldown;
     private Rigidbody2D rb;
@@ -34,7 +41,15 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
-    private float machineTimer;
+    //Cooldown on MachineGun bullet waves.
+    private float machineTimer = 0f;
+    [Header("Combo Attack Constants")]
+    [SerializeField] private float flamingBullsCount;
+    [SerializeField] private float flamingBullsTime;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject bullPrefab;
+    [SerializeField] private GameObject bushPrefab;
 
     [Header("Punch Move")]
     //how long granny is punching for
@@ -67,10 +82,14 @@ public class GrannyPhase2 : Boss
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+
         collider = GetComponent<CircleCollider2D>();
         machineTimer = 0;
-        machineTimer = 10;
-        TransitionToPunch();
+        stateTimer = 0;
+        currentState = State.ComboAttack; // TODO Change
+        // TODO remove later. For now, start with Combo Attack
+        TransitionToComboAttack();
+        // TransitionToLazer(); // Set starting state to lazer
     }
 
     // Update is called once per frame
@@ -79,15 +98,13 @@ public class GrannyPhase2 : Boss
         base.Update();
         stateTimer -= Time.deltaTime;
         UpdateFlip();
+        Debug.Log(currentState);
         switch (currentState)
         {
-            case State.Targeting:
-                UpdateTargeting();
-                break;
             case State.Lazer:
                 UpdateLazer();
                 break;
-            case State.MachineGun:
+            case State.MachineGun: 
                 UpdateMachineGun();
                 break;
             case State.Punch:
@@ -136,38 +153,36 @@ public class GrannyPhase2 : Boss
 
     private void UpdateLazer()
     {
-        //showcase the lazer tuning on and honing in on the player
-        //shoot the lazer for the 1 shot hit
-        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position;
-        StartCoroutine(lazerShot.DoBulletPattern(this));
+        // Shouldn't need to do anything
     }
+
 
     private void UpdateMachineGun()
     {
+        //track the player location as you shoot out bullets
+        //granny moves as she shoots machine gun
+        //if player enters region above or below granny, she stops firing and repositions
         if (machineTimer == 0)
         {
-            
             StartCoroutine(machineGun.DoBulletPattern(this));
-            float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
-            print(angle);
-            if (angle < 20 || angle > 170)
-            {
-                StopCoroutine(machineGun.DoBulletPattern(this));
-                TransitionToTargeting();
-                return;
-            }
-            machineTimer += Time.deltaTime;
-
         }
-        else if (machineTimer >= machineCooldownConstant)
+        float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
+        print(angle);
+        if (angle < 50 || angle > 120)
+        {
+            StopCoroutine(machineGun.DoBulletPattern(this));
+            TransitionToComboAttack();
+            SetAttackState(false);           
+        }
+        if (machineTimer >= machineCooldownConstant)
         {
             machineTimer = 0;
-        }
-        else
+        } else
         {
             machineTimer += Time.deltaTime;
         }
+
+          
     }
 
     private void UpdatePunch()
@@ -225,7 +240,6 @@ public class GrannyPhase2 : Boss
         else
         {
             punch.SetActive(false);
-            TransitionToPunch();    
         }
     }
 
@@ -238,12 +252,7 @@ public class GrannyPhase2 : Boss
 
     private void UpdateComboAttacks()
     {
-        // TODO: Cycle through 6 combo attacks from design document
-    }
-
-    private void TransitionToTargeting()
-    {
-        currentState = State.Targeting;
+        // Shouldn't need to do anything here
     }
 
     private void TransitionToMachineGun()
@@ -251,9 +260,58 @@ public class GrannyPhase2 : Boss
         currentState = State.MachineGun;
     }
 
+    private void TransitionToComboAttack()
+    {
+        currentState = State.ComboAttack;
+        StartCoroutine(selectComboAttack());
+    }
+
+    private IEnumerator selectComboAttack()
+    {
+        // TODO: Cycle through 6 combo attacks from design document
+        yield return StartCoroutine(FlamingBullsAttack());
+
+        yield return new WaitForSeconds(0.25f);
+        Debug.Log("Transitioning from combo to punch");
+        // TransitionToPunch(); TODO uncomment
+    }
+
+    private IEnumerator FlamingBullsAttack()
+    {
+        List<GameObject> bulls = new List<GameObject>();
+        for (int i = 0; i < flamingBullsCount; i++)
+        {
+            bulls.Add(Instantiate(bullPrefab, this.transform.position, Quaternion.identity));
+
+            Pig bullScript = bulls[i].GetComponent<Pig>();
+            bullScript.ChargeSpecificDirection(Random.onUnitCircle);
+            bullScript.setSummoned();
+            
+            Trail bushTrail = bulls[i].AddComponent<Trail>();
+            bushTrail.SetTrailPrefab(bushPrefab);
+        }
+        yield return new WaitForSeconds(flamingBullsTime);
+        for (int i = bulls.Count - 1; i >= 0; i--)
+        {
+            Destroy(bulls[i]);
+            bulls.RemoveAt(i);
+        }
+    }
+
     private void TransitionToLazer()
     {
         currentState = State.Lazer;
+        //showcase the lazer tuning on and honing in on the player
+        //shoot the lazer for the 1 shot hit
+        StartCoroutine(ShootLazer());
+    }
+
+    private IEnumerator ShootLazer()
+    {
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                    - bulletOrigin.transform.position;
+        yield return StartCoroutine(lazerShot.DoBulletPattern(this));
+        TransitionToPunch();
     }
 
     public override void SetPhase()
@@ -263,7 +321,7 @@ public class GrannyPhase2 : Boss
             case 1:
                 break;
             case 2:
-                TransitionToLazer();
+                currentState = State.Lazer;
                 break;
         }
     }
