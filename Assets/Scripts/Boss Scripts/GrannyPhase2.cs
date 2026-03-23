@@ -73,7 +73,8 @@ public class GrannyPhase2 : Boss
 
     //vector to remember how we were moving after determining punch move direction
     private Vector2 punchMove;
-    
+
+    private Coroutine machineGunRoutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -104,7 +105,7 @@ public class GrannyPhase2 : Boss
             case State.Lazer:
                 UpdateLazer();
                 break;
-            case State.MachineGun: 
+            case State.MachineGun:
                 UpdateMachineGun();
                 break;
             case State.Punch:
@@ -133,24 +134,6 @@ public class GrannyPhase2 : Boss
         }
     }
 
-    /// <summary>
-    /// Handles logic for targeting mode.
-    /// </summary>
-    private void UpdateTargeting()
-    {
-        // Track the player's position
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            targetPosition = GameManager.Instance.player.transform.position;
-        }
-
-        // When targeting time is up, decide what to do
-        if (stateTimer <= 0)
-        {
-            TransitionToPunch();
-        }
-    }
-
     private void UpdateLazer()
     {
         // Shouldn't need to do anything
@@ -164,19 +147,20 @@ public class GrannyPhase2 : Boss
         //if player enters region above or below granny, she stops firing and repositions
         if (machineTimer == 0)
         {
-            StartCoroutine(machineGun.DoBulletPattern(this));
+            machineGunRoutine = StartCoroutine(machineGun.DoBulletPattern(this));
         }
         float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
         print(angle);
-        if (angle < 50 || angle > 120)
+        if (false)
         {
-            StopCoroutine(machineGun.DoBulletPattern(this));
+            StopCoroutine(machineGunRoutine);
             TransitionToComboAttack();
-            SetAttackState(false);           
+            SetAttackState(false);
         }
         if (machineTimer >= machineCooldownConstant)
         {
             machineTimer = 0;
+            TransitionToComboAttack();
         } else
         {
             machineTimer += Time.deltaTime;
@@ -234,12 +218,13 @@ public class GrannyPhase2 : Boss
             punch.SetActive(true);
             Vector2 playerPos = GameManager.Instance.player.transform.position;
             Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
-            rb.position += direction * punchSpeed * Time.deltaTime;
+            rb.linearVelocity = direction * punchSpeed;
         }
         // Phase 3: Done
         else
         {
             punch.SetActive(false);
+            TransitionToMachineGun();
         }
     }
 
@@ -258,6 +243,7 @@ public class GrannyPhase2 : Boss
     private void TransitionToMachineGun()
     {
         currentState = State.MachineGun;
+        machineTimer = 0;
     }
 
     private void TransitionToComboAttack()
@@ -273,7 +259,7 @@ public class GrannyPhase2 : Boss
 
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Transitioning from combo to punch");
-        // TransitionToPunch(); TODO uncomment
+        TransitionToPunch();
     }
 
     private IEnumerator FlamingBullsAttack()
