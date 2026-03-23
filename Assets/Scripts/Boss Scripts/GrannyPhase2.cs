@@ -188,34 +188,28 @@ public class GrannyPhase2 : Boss
                 bool leftPunch = Random.value > 0.5f;
                 if (leftPunch)
                 {
-                    punchRepositionOffset = -punchRepositionOffset;
+                    punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
                 } else
                 {
-                    
+                    punchRepositionOffset = Mathf.Abs(punchRepositionOffset); 
                 }
+                
             }
             
-            //continually check if the player location goes over the preferred bounds in case we need to change direction
-            if (leftPunch)
-            {
-                //check if we should change because the player is too left
-
-            } else
-            {
-                //check if we should change because the player is too right
-
-            }
-
-            // Snap to right/left of player, aligned horizontally
             Vector2 playerPos = GameManager.Instance.player.transform.position;
-            if (leftPunch)
-            {
-                 rb.position = new Vector2(punchRepositionOffset - playerPos.x , playerPos.y);
-            } else
-            {
-                rb.position = new Vector2(playerPos.x - punchRepositionOffset, playerPos.y);
-            }
             
+            if (playerPos.x + punchRepositionOffset < leftBound.transform.position.x)
+            {
+                // Player too far left, switch to attacking from the right instead
+                punchRepositionOffset = Mathf.Abs(punchRepositionOffset);
+            } else if (playerPos.x + punchRepositionOffset > rightBound.transform.position.x)
+            {
+                // Player too far right, switch to attacking from the left instead
+                punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
+            }
+
+            rb.position = new Vector2(playerPos.x + punchRepositionOffset, playerPos.y);
+    
         }
         // Phase 2: Reappear and lunge horizontally
         else if (stateTimer > 0)
@@ -223,7 +217,6 @@ public class GrannyPhase2 : Boss
             sprite.enabled = true;
             collider.enabled = true;
             punch.SetActive(true);
-
             Vector2 playerPos = GameManager.Instance.player.transform.position;
             Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
             rb.position += direction * punchSpeed * Time.deltaTime;

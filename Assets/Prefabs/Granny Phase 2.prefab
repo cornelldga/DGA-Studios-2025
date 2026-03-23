@@ -405,8 +405,8 @@ MonoBehaviour:
   punchSpeed: 5
   punch: {fileID: 6076711696642910301}
   punchPivot: {fileID: 5258860961200570859}
-  leftBound: 0
-  rightBound: 0
+  leftBound: {fileID: 0}
+  rightBound: {fileID: 0}
 --- !u!1 &8238466242085916958
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class GrannyPunchZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().TakeDamage(10);
+            collision.GetComponent<Player>().TakeDamage(3);
         }
     }
 }
