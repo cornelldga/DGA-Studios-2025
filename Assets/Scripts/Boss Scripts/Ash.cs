@@ -51,13 +51,20 @@ public class Ash : Boss
     [SerializeField] float tumbleweedCooldownMax = 15f;
     [Header("Tumbleweed Spawn")]
     [SerializeField] GameObject tumbleweedPrefab;
+    [SerializeField] GameObject orbitingTumbleweedPrefab;
+    [Header("Tumbleweed Spawn Boundaries")]
     [SerializeField] float lowestSpawnPoint;
     [SerializeField] float highestSpawnPoint;
     [SerializeField] float leftBoundary;
     [SerializeField] float rightBoundary;
+    [Header("Orbiting Tumbleweed Phases")]
+    [SerializeField] int numOrbitingPhaseOne =2;
+    [SerializeField] int numOrbitingPhaseTwo=3;
+    [SerializeField] int numOrbitingPhaseThree=4;
 
-  
+
     private int numTumbleweeds = 5; // will eventually be based on what phase it is
+    private GameObject[] orbitingTumbleweeds = new GameObject[5]; // size should be maximum spawned in phase 3
  
     [Space(5)]
     [Header("Stomp Settings")]
@@ -484,6 +491,24 @@ public class Ash : Boss
 
     private IEnumerator SummonOrbitingTumbleweeds() {
         // placeholder
+        for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
+            if (orbitingTumbleweeds[i] == null) {
+                // set it to be an orbiting tumbleweed
+                if (currentPhase == 1 && i < numOrbitingPhaseOne)
+                {
+                    // add an orbiting tumbleweed to that position
+                }
+                else if (currentPhase == 2 && i < numOrbitingPhaseTwo)
+                {
+                    // add an orbiting tumbleweed to that position
+                }
+                else if (currentPhase == 3 && i < numOrbitingPhaseThree)
+                {
+                    // add an orbiting tumbleweed to that position
+                }
+                
+            }
+        }
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
