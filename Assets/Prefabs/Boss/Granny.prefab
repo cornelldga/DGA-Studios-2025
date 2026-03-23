@@ -299,6 +299,7 @@ MonoBehaviour:
   bossName: Granny
   maxHealth: 0
   healthBar: {fileID: 4274816176931949744}
+  healthBarAnimator: {fileID: 8633898269983300228}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents: []
@@ -340,6 +341,7 @@ MonoBehaviour:
   bossName: Granny
   maxHealth: 5
   healthBar: {fileID: 0}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 0}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
@@ -508,3 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!95 &8633898269983300228 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 6383838750220342359}
+  m_PrefabAsset: {fileID: 0}
