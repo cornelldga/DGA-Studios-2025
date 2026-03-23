@@ -283,6 +283,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2208494978383391363, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
+      propertyPath: m_Mass
+      value: 9999
+      objectReference: {fileID: 0}
     - target: {fileID: 4023565153802643386, guid: 527ea9c3732a0124d990a63a5b38993b, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -479,9 +483,10 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 0}
   machineCooldownConstant: 2
-  flamingBullsCount: 8
+  flamingBullsCount: 5
   flamingBullsTime: 5
   bullPrefab: {fileID: 8163625670582276357, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+  bushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
 --- !u!1001 &416365286
 PrefabInstance:
   m_ObjectHideFlags: 0

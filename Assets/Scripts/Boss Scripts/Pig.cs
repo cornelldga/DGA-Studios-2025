@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pig : MonoBehaviour
 {
     [SerializeField] PigRider pigRider;
+    [Header("Bush prefab only needed for granny fight")]
+    [SerializeField] GameObject bush;
     [SerializeField] float ramDamage = 1f;
     [Tooltip("The layers that represent walls for collision detection")]
     public LayerMask wallLayers;
@@ -57,6 +59,8 @@ public class Pig : MonoBehaviour
     private Vector2 chargeDirection;
     private Vector2 startingPoint;
     private float currentSpeed;
+    // Whether summoned in granny fight or not
+    private bool summoned;
     private Rigidbody2D rb;
     private Collider2D thisCollider;
     private List<Collider2D> ignoredColliders;
@@ -91,8 +95,16 @@ public class Pig : MonoBehaviour
         FlipSprite();
 
         // Start with a random delay
-        float randomDelay = Random.Range(minStartDelay, maxStartDelay);
-        StartCoroutine(InitializeWithDelay(randomDelay));
+        if (!summoned)
+        {
+            float randomDelay = Random.Range(minStartDelay, maxStartDelay);
+            StartCoroutine(InitializeWithDelay(randomDelay));
+        }
+    }
+
+    public void setSummoned()
+    {
+        summoned = true;
     }
 
     /// <summary>
@@ -208,8 +220,8 @@ public class Pig : MonoBehaviour
 
     public void ChargeSpecificDirection(Vector2 chargeDir)
     {
-        this.chargeDirection = chargeDir.normalized;
         TransitionToCharging();
+        this.chargeDirection = chargeDir.normalized;
     }
 
     /// <summary>
@@ -261,12 +273,6 @@ public class Pig : MonoBehaviour
     /// <param name="collision">The collision data from OnCollisionEnter2D</param>
     private void HandleCharge(Collision2D collision)
     {
-        currentState = State.Stunned;
-        rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0f;
-
-        animator.SetBool("isStunned", true);
-
         // Trigger screen shake on wall hit
         if (((1 << collision.gameObject.layer) & wallLayers) != 0 && impulseSource != null)
         {
@@ -296,7 +302,22 @@ public class Pig : MonoBehaviour
             }
         }
 
-        StartCoroutine(StunCoroutine());
+        // Set to stunned state is bull not in bouncy mode
+        if (!summoned)
+        {
+            currentState = State.Stunned;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            animator.SetBool("isStunned", true);
+
+            StartCoroutine(StunCoroutine());
+        } else
+        {
+            // Recharge on bounce
+            TransitionToCharging();
+            ChargeSpecificDirection(Random.onUnitCircle);
+        }
     }
 
     /// <summary>
