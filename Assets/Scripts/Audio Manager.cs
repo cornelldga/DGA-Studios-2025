@@ -1,8 +1,23 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+public enum SFXKey
+{
+    GIN = 0, BEER = 1, 
+
+    BASESWAP = 2, MIXERSWAP = 3,
+
+    WHIPHIT = 4,  WHIPEMPTY = 5, WHIPCRACK = 6
+}
+
 
 public class AudioManager : MonoBehaviour
 {
+        
+    public static AudioManager Instance;
+
     [Header("Music")]
     [Tooltip("The music that should be played in this scene")]
     [SerializeField] MusicType sceneMusic;
@@ -10,20 +25,17 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource hogMusic;
 
     [Header("Sound Effects")]
-    
-    [Tooltip("list of all SFX in the game")]
+    [Tooltip("configure list here for all SFX in the game")]
     [SerializeField] private Sound[] sounds;
-
-    [SerializeField] private AudioMixerGroup musicGroup;
-    [SerializeField] private AudioMixerGroup sfxGroup;
+    [SerializeField] AudioMixerGroup musicGroup;
+    [SerializeField] AudioMixerGroup sfxGroup;
 
 
     // private fields
     private AudioSource[] songs;
     private MusicType currentMusic = MusicType.None;
-    
-    public static AudioManager Instance;
     private bool ignoreNextMusicChange = false;
+
 
     private static readonly float[] pitches = new float[]
     {
@@ -35,17 +47,22 @@ public class AudioManager : MonoBehaviour
     };
 
 
-    // Audio configuration and playback functions
-
-    public void SetIgnoreNextMusicChange()
-    {
-        ignoreNextMusicChange = true;
-    }
-
     private void Start()
     {
         PlayMusic(sceneMusic);
     }
+
+    /// <summary>
+    /// Hooks up volume sliders from the pause menu. Called by GameManager on initialization.
+    /// </summary>
+    /// <param name="musicSlider">Slider controlling music volume</param>
+    /// <param name="sfxSlider">Slider controlling SFX volume</param>
+    public void InitVolumeSliders(Slider musicSlider, Slider sfxSlider)
+    {
+        if (musicSlider != null) musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        if (sfxSlider != null) sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -62,8 +79,8 @@ public class AudioManager : MonoBehaviour
             if (song != null)
             {
                 song.loop = true;
+                song.outputAudioMixerGroup = musicGroup;
             }
-            song.outputAudioMixerGroup = musicGroup;
         }
 
         foreach (Sound s in sounds)
@@ -76,8 +93,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(int index, bool random = false)
+    public void Update()
     {
+        
+    }
+
+
+    // Audio configuration and playback functions
+    public void SetIgnoreNextMusicChange()
+    {
+        ignoreNextMusicChange = true;
+    }
+
+    public void PlaySFX(SFXKey key, bool random = false)
+    {
+        int index = (int) key;
         if (index < 0 || index >= sounds.Length)
         {
             Debug.Log("Sound index out of bounds, refer to Audio Manager object");
@@ -129,9 +159,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void UpdateVolumeLevelTo(float musicVol, float sfxVol)
+    /// <summary>
+    /// Sets the volume of all music tracks.
+    /// </summary>
+    /// <param name="value">Volume between 0 and 1</param>
+    public void SetMusicVolume(float value)
     {
-        musicGroup.audioMixer.SetFloat("Music Volume", Mathf.Log10(musicVol) * 20);
-        sfxGroup.audioMixer.SetFloat("Music Volume", Mathf.Log10(sfxVol) * 20);
+        foreach (AudioSource song in songs)
+        {
+            if (song != null)
+                song.volume = value;
+        }
+    }
+
+    /// <summary>
+    /// Sets the volume of all SFX sources.
+    /// </summary>
+    /// <param name="value">Volume between 0 and 1</param>
+    public void SetSFXVolume(float value)
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source != null)
+                s.source.volume = value;
+        }
     }
 }

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6487454584791642420}
   - component: {fileID: 591620562845585178}
   - component: {fileID: 7540226778721594879}
+  - component: {fileID: 3893037239640246396}
   m_Layer: 8
   m_Name: Granny
   m_TagString: Enemy
@@ -349,6 +350,28 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 11400000, guid: db008a601788e3943927a1a525d107b9, type: 2}
   machineCooldownConstant: 0
+--- !u!95 &3893037239640246396
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4556595847925104010}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8066534216a124c029d41e25259ac13d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6383838750220342359
 PrefabInstance:
   m_ObjectHideFlags: 0
