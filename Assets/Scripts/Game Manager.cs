@@ -270,6 +270,18 @@ public class GameManager : MonoBehaviour
     /// <param name="mode">The scene load mode</param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "World Hub")
+        {
+            PlayerData data = SaveSystem.LoadPlayer();
+            if (data == null || data.progression == 0)
+            {
+                CutsceneManager.Instance.PlayIntroCutscene(() =>
+                {
+                    animator.SetTrigger("Scene Loaded"); 
+                });
+                return;
+            }
+        }
         animator.SetTrigger("Scene Loaded");
     }
 
@@ -289,6 +301,7 @@ public class GameManager : MonoBehaviour
     /// <param name="freeze">Whether to freeze the player</param>
     public void FreezePlayer(bool freeze)
     {
+        if (player == null) return;
         if (freeze)
         {
             player.StopPlayer();
