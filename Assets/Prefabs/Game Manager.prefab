@@ -2118,8 +2118,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -25}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 25, y: -20}
+  m_SizeDelta: {x: 225, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3710214210112321967
 MonoBehaviour:
@@ -3449,6 +3449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   loadoutManager: {fileID: 7282277730799968065}
   dialogueManager: {fileID: 0}
+  cutsceneManager: {fileID: 2510207786204155417}
   pauseButton: {fileID: 4848582181561740900}
   pauseMenu: {fileID: 542832412437548967}
   sliders: {fileID: 8268307897409646456}

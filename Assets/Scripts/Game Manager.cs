@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [Tooltip("Reference to the LoadoutManager.")]
     [SerializeField] private LoadoutManager loadoutManager;
+    [Tooltip("Reference to the DialogueManager.")]
     [SerializeField] private DialogueManager dialogueManager;
+    [Tooltip("Reference to the CutsceneManager.")]
+    [SerializeField] private CutsceneManager cutsceneManager;
     [Header("Pause Menu")]
     [Tooltip("Reference to the pause button")]
     [SerializeField] private GameObject pauseButton;
@@ -137,7 +140,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onVolumeClicked()
     {
-        // Hide Resume/Quit, show sliders 
         pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
         pauseMenu.transform.Find("Quit").gameObject.SetActive(false);
         pauseMenu.transform.Find("Volume").gameObject.SetActive(false);
@@ -275,16 +277,21 @@ public class GameManager : MonoBehaviour
             PlayerData data = SaveSystem.LoadPlayer();
             if (data == null || data.progression == 0)
             {
-                CutsceneManager.Instance.PlayIntroCutscene(() =>
-                {
-                    animator.SetTrigger("Scene Loaded"); 
-                });
+                StartCoroutine(WaitAndPlay());
                 return;
             }
         }
         animator.SetTrigger("Scene Loaded");
     }
 
+    /// <summary>
+    /// Activates the CutsceneManager and waits until it is ready before playing the intro cutscene.
+    /// </summary>
+    IEnumerator WaitAndPlay()
+    {
+        yield return new WaitUntil(() => CutsceneManager.Instance != null);
+        CutsceneManager.Instance.PlayIntroCutscene(() => animator.SetTrigger("Scene Loaded"));
+    }
 
     /// <summary>
     /// Load the given scene name

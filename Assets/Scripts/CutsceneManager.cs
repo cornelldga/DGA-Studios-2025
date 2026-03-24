@@ -9,7 +9,9 @@ public class CutsceneManager : MonoBehaviour
 {
     public static CutsceneManager Instance;
 
+    [Tooltip("Input to advance the cutscene")]
     [SerializeField] InputActionReference continueAction;
+    [Tooltip("Animator for the cutscene")]
     [SerializeField] Animator cutsceneAnimator;
     private float[] frameTimestamps;
     private float clipLength;
