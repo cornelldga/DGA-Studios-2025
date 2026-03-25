@@ -272,6 +272,7 @@ public class GameManager : MonoBehaviour
     /// <param name="mode">The scene load mode</param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        player = null;
         if (scene.name == "World Hub")
         {
             PlayerData data = SaveSystem.LoadPlayer();
