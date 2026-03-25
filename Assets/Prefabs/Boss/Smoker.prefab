@@ -301,7 +301,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 505483f1aed711244bd42f5973591501, type: 3}
+  m_Sprite: {fileID: -2491103210591063447, guid: 6cd733e0b211c3f4e8dabee7684c1395, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -349,7 +349,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.125, y: 1.5234375}
+    oldSize: {x: 1.1523438, y: 1.5171051}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -375,7 +375,6 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  animator: {fileID: 1139465785436433671}
   pelletSpeed: 3
   smokeRate: 0
   smokePelletPrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
