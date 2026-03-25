@@ -1274,6 +1274,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1569581582677404518, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569581582677404518, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -1314,6 +1322,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2887997795932678023, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2887997795932678023, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2978460229572663735, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1332,7 +1348,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
   m_PrefabInstance: {fileID: 8458750320392526318}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5861420130469071467
+--- !u!114 &2322813812610469489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
