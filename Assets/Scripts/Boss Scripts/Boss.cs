@@ -14,6 +14,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] protected float maxHealth;
     protected float health;
     [SerializeField] Image healthBar;
+    [SerializeField] protected Animator healthBarAnimator;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 

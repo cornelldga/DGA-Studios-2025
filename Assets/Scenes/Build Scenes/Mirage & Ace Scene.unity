@@ -314,6 +314,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 5510623586176508219, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510623586176508219, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
       propertyPath: sceneMusic
       value: 2
       objectReference: {fileID: 0}
@@ -633,6 +637,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &779541903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 779541904}
+  - component: {fileID: 779541905}
+  m_Layer: 0
+  m_Name: SmokePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &779541904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779541903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.42156, y: 2.413, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779541905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779541903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d498c67e819408486cd326fe08425e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmokePool
 --- !u!1 &843690088
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +769,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2920572, y: -0.00057, z: -10}
+  m_LocalPosition: {x: 1.286746, y: -0.00057, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19229,6 +19277,14 @@ PrefabInstance:
       propertyPath: pelletSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4717738528911940266, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0674487
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717738528911940266, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4492188
+      objectReference: {fileID: 0}
     - target: {fileID: 7071902628436390820, guid: 789cde7518e5040f29d425672c5d49b2, type: 3}
       propertyPath: m_Name
       value: Smoker
@@ -19361,3 +19417,4 @@ SceneRoots:
   - {fileID: 1306603024}
   - {fileID: 1344857223}
   - {fileID: 203842130}
+  - {fileID: 779541904}

@@ -221,6 +221,7 @@ public class TheMagician : Boss
 
     public override void SetPhase()
     {
+        healthBarAnimator.SetTrigger("PhaseChange");
         switch (currentPhase)
         {
             case 1:
