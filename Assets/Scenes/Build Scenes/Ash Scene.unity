@@ -13207,6 +13207,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: bushPrefab
       value: 
       objectReference: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
@@ -13220,7 +13224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: stompRadius
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: bulletOrigin
