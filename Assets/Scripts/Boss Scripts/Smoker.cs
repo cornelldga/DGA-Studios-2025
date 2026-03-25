@@ -67,7 +67,6 @@ public class Smoker : MonoBehaviour
         first = true;
         hidStage = true;
         ogSpeed = spinSpeed;
-        player = GameManager.Instance.player.transform;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.flipX = false;
@@ -90,6 +89,9 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        if (player == null && GameManager.Instance?.player != null)
+            player = GameManager.Instance.player.transform;
+
         if (rb != null && player != null && !isPunching)
         {
             Vector2 direction = ((Vector2)player.position - rb.position).normalized;
