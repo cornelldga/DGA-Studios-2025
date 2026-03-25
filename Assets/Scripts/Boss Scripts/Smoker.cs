@@ -25,6 +25,7 @@ public class Smoker : MonoBehaviour
     private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
+    private Animator animator;
 
     //How fast should smoke be shot out of smoker pipe.
     [SerializeField] float pelletSpeed = 3;
@@ -69,6 +70,7 @@ public class Smoker : MonoBehaviour
         ogSpeed = spinSpeed;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
 
@@ -173,6 +175,7 @@ public class Smoker : MonoBehaviour
 
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
+        animator.SetBool("Walking", rb.linearVelocity.magnitude > 0.1f);
         
         if (magician.currentStage == Stage.Backstage )
         {
