@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Bounces objects and projectiles off of the cactus
 /// </summary>
-public class BouncyCactus : MonoBehaviour
+public class BouncyCactus : MonoBehaviour, IProjectileInteractable
 {
 
     Animator animator;
@@ -18,17 +18,51 @@ public class BouncyCactus : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Flips the rigidbody of the colliding object away from the cactus at a specified bounce force
+    /// </summary>
+    void Bounce(Rigidbody2D rb)
+    {
+        Vector2 bounceDir = (rb.position - new Vector2(transform.position.x, transform.position.y)).normalized;
+        Debug.Log(rb.linearVelocity);
+        rb.linearVelocity = bounceDir * bounceForceStrength;
+        Debug.Log(rb.linearVelocity);
+    }
+    /// <summary>
+    /// Starts the bounce animation and resets the animation timer
+    /// </summary>
+    void SetBounceAnimation()
     {
         animator.SetBool("Bounce", true);
         bounceTimeLeft = bounceWaitTime;
+    }
+
+    public bool ProjectileInteraction(Projectile projectile)
+    {
+        SetBounceAnimation();
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        Vector2 bounceDir = (rb.position - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+        float angle = Mathf.Atan2(bounceDir.y, bounceDir.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        rb.linearVelocity = bounceDir * rb.linearVelocity.magnitude;
+        return false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(nameof(BouncePlayer));
         }
-        Vector2 bounceForce = (collision.rigidbody.position - new Vector2(transform.position.x, transform.position.y)).normalized;
-        collision.rigidbody.AddForce(bounceForce * bounceForceStrength, ForceMode2D.Impulse);
+        if (collision.gameObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+            Bounce(rb);
+            SetBounceAnimation();
+        }
     }
+
 
     IEnumerator BouncePlayer()
     {
@@ -37,11 +71,6 @@ public class BouncyCactus : MonoBehaviour
         GameManager.Instance.FreezePlayer(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        animator.SetBool("Bounce", true);
-        bounceTimeLeft = bounceWaitTime;
-    }
 
     private void Update()
     {
@@ -55,5 +84,4 @@ public class BouncyCactus : MonoBehaviour
             animator.SetBool("Bounce", false);
         }
     }
-
 }
