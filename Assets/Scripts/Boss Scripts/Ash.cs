@@ -342,7 +342,7 @@ public class Ash : Boss
     /// </summary>
     public override void SetPhase()
     {
-       // Placeholder
+       healthBarAnimator.SetTrigger("PhaseChange");
     }
 
     /// <summary>

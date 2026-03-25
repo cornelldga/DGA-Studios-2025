@@ -89,6 +89,8 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
+    public int progression;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -153,7 +155,7 @@ public class Player : MonoBehaviour, IDamageable
         equippedImage.sprite = selectedBase.getSprite();
         backupImage.sprite = backupBase.getSprite();
         changeCooldown = changeCooldownTime;
-        AudioManager.Instance.PlaySFX(2); // i will remove magic numbers in the future :D
+        AudioManager.Instance.PlaySFX(SFXKey.BASESWAP, true); // i will remove magic numbers in the future :D
     }
 
     /// <summary>
@@ -170,6 +172,7 @@ public class Player : MonoBehaviour, IDamageable
         mixerEquippedImage.sprite = selectedMixer.getSprite();
         mixerBackupImage.sprite = backupMixer.getSprite();
         changeCooldown = changeCooldownTime;
+        AudioManager.Instance.PlaySFX(SFXKey.MIXERSWAP, true);
     }
 
     /// <summary>
@@ -265,10 +268,10 @@ public class Player : MonoBehaviour, IDamageable
         switch (equippedBases[baseIndex])
         {
             case BaseType.Gin:
-                AudioManager.Instance.PlaySFX(0, true);
+                AudioManager.Instance.PlaySFX(SFXKey.GIN, true);
                 break;
             case BaseType.Beer:
-                AudioManager.Instance.PlaySFX(1, true);
+                AudioManager.Instance.PlaySFX(SFXKey.BEER, true);
                 break;
         }
         
@@ -289,6 +292,7 @@ public class Player : MonoBehaviour, IDamageable
         Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
         whipPivot.right = dir;
         whipAnimator.Play("Whip", 0, 0f);
+        AudioManager.Instance.PlaySFX(SFXKey.WHIPHIT, true);
         StartCoroutine(nameof(ToggleWhipUI));
         if (SmokePool.Instance != null) SmokePool.Instance.OnWhip(gameObject.transform);
     }
@@ -452,4 +456,23 @@ public class Player : MonoBehaviour, IDamageable
         var main = mixerEffect.main;
         main.startColor = mixerColor;
     }
+
+    /// <summary>
+    /// Save player data
+    /// </summary>
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+
+    /// <summary>
+    /// Load player data
+    /// </summary>
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        progression = data.progression;
+    }
+
 }
