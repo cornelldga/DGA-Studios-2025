@@ -27,7 +27,6 @@ public class Granny : Boss
     [SerializeField] private float outTime;
     [SerializeField] private float droppedTime;
 
-
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
     [SerializeField] List<GameObject> bosses = new List<GameObject>();
@@ -283,6 +282,6 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
-        // Could maube put when contracts are zero here but probably not
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

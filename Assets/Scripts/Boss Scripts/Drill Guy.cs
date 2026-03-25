@@ -518,6 +518,6 @@ public class DrillGuy : Boss
 
     public override void SetPhase()
     {
-
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }
