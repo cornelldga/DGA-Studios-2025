@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3003094146673404491}
   - component: {fileID: 1446831194491569228}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Molotov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Molotov
   speed: 0.5
-  duration: 0.8
+  duration: 1
   damage: 0
   accuracy: 0
   impactSprite: {fileID: 0}
-  heightY: 1
+  heightY: 0.3
   molotovPrefab: {fileID: 22424145506181957, guid: cb28fd8fd430e434aab328888143fc08, type: 3}
   curve:
     serializedVersion: 2
@@ -84,3 +84,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  collisionRadius: 0.5

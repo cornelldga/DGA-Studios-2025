@@ -230,8 +230,10 @@ MonoBehaviour:
   healthBar: {fileID: 159719163656866947}
   healthBarAnimator: {fileID: 3610685219928371153}
   bossNameText: {fileID: 62901968422666060}
-  bulletOrigin: {fileID: 0}
-  phasePercents: []
+  bulletOrigin: {fileID: 4606974957378827531}
+  phasePercents:
+  - 50
+  - 25
   currentPhase: 0
   attackRate: 1
   currentState: 0
@@ -281,6 +283,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Ash
       objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8
