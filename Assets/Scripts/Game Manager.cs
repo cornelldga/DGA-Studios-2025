@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && loadoutManager.gameObject.activeSelf == false && dialogueManager.OngoingDialogue() == false && GetCurrentSceneName() != "Main Menu")
+        if (Input.GetKeyDown(KeyCode.Escape) && (loadoutManager == null || !loadoutManager.gameObject.activeSelf) && GetCurrentSceneName() != "Main Menu")
         {
             if (pauseMenu.activeSelf && volumeOpened)
             {
