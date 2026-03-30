@@ -629,7 +629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79.439, y: -160}
+  m_AnchoredPosition: {x: -71, y: -187}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6616403972950947380
@@ -704,7 +704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78.00001, y: -63}
+  m_AnchoredPosition: {x: -71, y: -89}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &907690241105588891
@@ -1494,7 +1494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: 76}
+  m_AnchoredPosition: {x: 141, y: 95.91401}
   m_SizeDelta: {x: 478.5, y: 67.008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2060127632283667466
@@ -1527,14 +1527,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Damage
 
+    Fire
 
-    Fire rate
-
+    rate
 
     Range'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 549a66e175df4ec45b6992aba98a9c34, type: 2}
-  m_sharedMaterial: {fileID: -3937638206297145906, guid: dac92ad5e897e4e36b34bebdb81a1d5e, type: 2}
+  m_sharedMaterial: {fileID: 4998859932963649083, guid: 549a66e175df4ec45b6992aba98a9c34, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1989749256403690500
@@ -2123,7 +2123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: 76}
+  m_AnchoredPosition: {x: 141, y: 85.95701}
   m_SizeDelta: {x: 478.5, y: 67.008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2701364697654240598
@@ -2156,14 +2156,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Damage
 
+    Fire
 
-    Fire rate
-
+    rate
 
     Range'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 549a66e175df4ec45b6992aba98a9c34, type: 2}
-  m_sharedMaterial: {fileID: -3937638206297145906, guid: dac92ad5e897e4e36b34bebdb81a1d5e, type: 2}
+  m_sharedMaterial: {fileID: 4998859932963649083, guid: 549a66e175df4ec45b6992aba98a9c34, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2730505106772970343
@@ -2342,7 +2342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78, y: 13}
+  m_AnchoredPosition: {x: -71, y: 0.000015736}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3658125372322050382
@@ -2417,7 +2417,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79.438, y: 22}
+  m_AnchoredPosition: {x: -69, y: 10}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4299897878541811224
@@ -2495,7 +2495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: 76}
+  m_AnchoredPosition: {x: 141, y: 95.91401}
   m_SizeDelta: {x: 478.5, y: 67.008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &552073469964169214
@@ -2528,9 +2528,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Damage
 
+    Fire
 
-    Fire rate
-
+    rate
 
     Range'
   m_isRightToLeft: 0
@@ -2601,7 +2601,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3548250005488011943
@@ -3591,7 +3591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78, y: 23}
+  m_AnchoredPosition: {x: -71, y: 7}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6499088734006015269
@@ -3666,7 +3666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78.00003, y: -159}
+  m_AnchoredPosition: {x: -71, y: -188}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &109531094038932546
@@ -3873,7 +3873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78.99996, y: -72}
+  m_AnchoredPosition: {x: -69, y: -93}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &28762492593591748
@@ -5104,7 +5104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79.439, y: -148}
+  m_AnchoredPosition: {x: -69.00001, y: -174}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2013804959490261837
@@ -5553,7 +5553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -77.99994, y: -73.123}
+  m_AnchoredPosition: {x: -71, y: -108}
   m_SizeDelta: {x: 158.877, y: 158.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3644232183493535670
