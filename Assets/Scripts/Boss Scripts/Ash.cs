@@ -95,6 +95,8 @@ public class Ash : Boss
     private Vector2 wanderTarget;
     private Animator animator;
     private SpriteRenderer sprite;
+
+    private bool[] deployedSeeds;
     
 
     /// <summary>
@@ -111,6 +113,7 @@ public class Ash : Boss
         stateTimer = wanderTime;
         SetNewWanderTarget();
         tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
+        deployedSeeds = new bool[8];
     }
 
     /// <summary>
@@ -181,7 +184,7 @@ public class Ash : Boss
                 }
             }
 
-            if (seedsNearby)
+            if (seedsNearby && UnityEngine.Random.Range(0, 10) < 8)
                 TransitionToStomping();
             else
                 ChooseNextAttack(); 
@@ -514,12 +517,29 @@ public class Ash : Boss
         }
 
         Vector2 vec = Vector2.zero;
-        while (vec == Vector2.zero)
+        int r = UnityEngine.Random.Range(0, 9);
+        while (vec == Vector2.zero || deployedSeeds[r] || deployedSeeds.Equals(new bool[] { true, true, true, true, true, true, true, true, }))
         {
-            vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2)) ;
-        }
-        seedScript.target= vec.normalized * (stageRadius/2);
+            switch (r)
+            {
+                case 0:
+                    vec = new Vector2(0, 1);
+                    deployedSeeds[r] = true;
+                    break;
+                case 1:
+                    vec = new Vector2(1, 1);
+                    break;
+                case 2:
+                    vec = new Vector2(1, 0);
+                    break;
+            }
+            r = UnityEngine.Random.Range(0, 9);
 
+            //vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2));
+        }
+        
+        seedScript.target = vec.normalized * (stageRadius / 2);
+        
         yield return new WaitForSeconds(scatterTime);
     }
 
