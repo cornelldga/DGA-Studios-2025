@@ -517,14 +517,15 @@ public class Ash : Boss
         }
 
         Vector2 vec = Vector2.zero;
-        int r = UnityEngine.Random.Range(0, 9);
-        while (vec == Vector2.zero || deployedSeeds[r] || deployedSeeds.Equals(new bool[] { true, true, true, true, true, true, true, true, }))
+        int r = UnityEngine.Random.Range(0, 8);
+        int pr = -1;
+        // if extra time, check only false entries
+        while (vec == Vector2.zero || deployedSeeds[pr] && !deployedSeeds.Equals(new bool[] { true, true, true, true, true, true, true, true }))
         {
             switch (r)
             {
                 case 0:
                     vec = new Vector2(0, 1);
-                    deployedSeeds[r] = true;
                     break;
                 case 1:
                     vec = new Vector2(1, 1);
@@ -532,12 +533,32 @@ public class Ash : Boss
                 case 2:
                     vec = new Vector2(1, 0);
                     break;
+                case 3:
+                    vec = new Vector2(1, -1);
+                    break;
+                case 4:
+                    vec = new Vector2(0, -1); 
+                    break;
+                case 5:
+                    vec = new Vector2(-1, -1);
+                    break;
+                case 6:
+                    vec = new Vector2(-1, 0);
+                    break;
+                case 7:
+                    vec = new Vector2(-1, 1);
+                    break;
             }
-            r = UnityEngine.Random.Range(0, 9);
+            pr = r;
+            if (deployedSeeds[r])
+            { 
+                r = UnityEngine.Random.Range(0, 8);
+            }
 
             //vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2));
         }
-        
+
+        deployedSeeds[r] = true;
         seedScript.target = vec.normalized * (stageRadius / 2);
         
         yield return new WaitForSeconds(scatterTime);
