@@ -13,7 +13,7 @@ public class Smoker : MonoBehaviour
 
     [Header("Movement")]
     [Tooltip("Reference to the player transform to move towards")]
-    [HideInInspector] Transform player;
+    [SerializeField] Transform player;
     [Tooltip("How strongly the smoker is turns towards the player")]
     [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
@@ -155,6 +155,7 @@ public class Smoker : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         int otherLayer = other.gameObject.layer;
+        Debug.Log("h");
         if ((playerMask.value & (1 << otherLayer)) > 0)
         {
             Debug.Log("Close enough to initiate punch");
