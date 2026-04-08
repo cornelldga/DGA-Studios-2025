@@ -518,6 +518,11 @@ public class Ash : Boss
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        for (int i = 0; i < 8; i++)
+        {
+
+        }
+
 
         Vector2 vec = Vector2.zero;
         int r = UnityEngine.Random.Range(0, 8);
