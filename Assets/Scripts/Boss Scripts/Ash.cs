@@ -516,6 +516,9 @@ public class Ash : Boss
             seedScript.arcHeight = cactusSeedArcHeight;
         }
 
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+
         Vector2 vec = Vector2.zero;
         int r = UnityEngine.Random.Range(0, 8);
         int pr = -1;
