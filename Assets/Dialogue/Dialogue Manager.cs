@@ -146,6 +146,10 @@ public class DialogueManager : MonoBehaviour
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
+        } else
+        {
+            // Automatic entry into the saloon
+            GameManager.Instance.LoadScene(scene);
         }
     }
 
