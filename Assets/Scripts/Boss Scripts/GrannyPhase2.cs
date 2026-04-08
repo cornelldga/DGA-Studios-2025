@@ -91,7 +91,7 @@ public class GrannyPhase2 : Boss
         collider = GetComponent<CircleCollider2D>();
         machineTimer = 0;
         stateTimer = 0;
-        currentState = State.ComboAttack; // TODO Change
+        currentState = State.MachineGun; // TODO Change
         // TODO remove later. For now, start with Combo Attack
         TransitionToComboAttack();
         // TransitionToLazer(); // Set starting state to lazer
@@ -292,6 +292,23 @@ public class GrannyPhase2 : Boss
 
         yield return new WaitForSeconds(bullsTime);
     }
+
+    private IEnumerator PointAttack(GameObject prefab, GameObject SecondaryPrefab, int ProjectileCount, float ProjectileLifeTime)
+    {
+        for (int i = 0; i < ProjectileCount; i++)
+        {
+            GameObject Primary = Instantiate(prefab, this.transform.position, Quaternion.identity);
+
+            Point Secondary = Primary.AddComponent<Point>();
+            Secondary.SetSecondaryPrefab(SecondaryPrefab);
+            
+            Secondary.DropSecondaryProjectile();
+
+            Destroy(Primary, ProjectileLifeTime);
+        }
+        yield return new WaitForSeconds(2f); 
+    }
+    
 
     private void PointlAttacks()
     {
