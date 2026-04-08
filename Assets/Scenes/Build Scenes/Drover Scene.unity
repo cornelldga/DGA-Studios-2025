@@ -18802,6 +18802,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
+      propertyPath: bounceChance
+      value: 0.601
+      objectReference: {fileID: 0}
+    - target: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
       propertyPath: collisionDistanceCheck
       value: 0.85
       objectReference: {fileID: 0}
