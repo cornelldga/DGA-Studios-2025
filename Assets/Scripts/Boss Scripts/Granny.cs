@@ -298,10 +298,7 @@ public class Granny : Boss
 
     public void TakeDamageFromContract()
     {
-        base.health--;
-        Debug.Log(gHealth);
-        float healthPercent = base.health / base.maxHealth;
-        base.healthBar.fillAmount = healthPercent;
+        TakeDamage(1);
     }
 
     /// <summary>
