@@ -226,19 +226,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
   bossName: Ash
-  maxHealth: 10
+  maxHealth: 120
   healthBar: {fileID: 159719163656866947}
   healthBarAnimator: {fileID: 3610685219928371153}
   bossNameText: {fileID: 62901968422666060}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
-  - 50
-  - 25
+  - 0.5
+  - 0.25
   currentPhase: 0
   attackRate: 1
   currentState: 0
-  wanderSpeed: 2
-  wanderRadius: 5
+  wanderSpeed: 3
+  wanderRadius: 4
   wanderTime: 3
   scatterTime: 1.5
   molotovTime: 2
@@ -246,19 +246,24 @@ MonoBehaviour:
   stompTime: 1.5
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
-  stompRadius: 3
+  tumbleweedPrefab: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+  stompRadius: 12
   stageCenter: {x: 0, y: 0}
-  stageRadius: 0
-  fireRadius: 0
-  basicSeedPrefab: {fileID: 0}
-  basicSeedArcHeight: 0
-  basicSeedLandTime: 0
-  cactusSeedPrefab: {fileID: 0}
-  fireFlowerSeedPrefab: {fileID: 0}
-  seedRows: 0
-  molotov: {fileID: 0}
-  bushPrefab: {fileID: 0}
-  randomPercentageToThrowMolotov: 0.5
+  stageRadius: 6
+  fireRadius: 0.6
+  basicSeedPrefab: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
+  basicSeedArcHeight: 5
+  basicSeedLandTime: 1.5
+  cactusSeedPrefab: {fileID: 933965916132446560, guid: 75c4cf5baf32fac41b01aa40b7ddeb22, type: 3}
+  cactusSeedArcHeight: 2
+  cactusSeedLandTime: 2
+  fireFlowerSeedPrefab: {fileID: 933965916132446560, guid: 48d81145ff9c71245890f981936d17f7, type: 3}
+  fireSeedArcHeight: 4
+  fireSeedLandTime: 1
+  seedRows: 4
+  molotov: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
+  bushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
+  randomPercentageToThrowMolotov: 0.1
 --- !u!1001 &2116001527165509890
 PrefabInstance:
   m_ObjectHideFlags: 0
