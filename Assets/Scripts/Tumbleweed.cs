@@ -9,7 +9,6 @@ public class Tumbleweed : Bullet
     [SerializeField] private float fireDamage = 5f;
     [SerializeField] private float fireDuration = 3f;
 
-    
 
 
     // sets the current tumbleweed to be on fire (increased damage decreased duration)
@@ -31,14 +30,12 @@ public void OnTriggerEnter2D(Collider2D collision)
 //</summary>
 public override void OnProjectileHit(Collider2D collision)
 {
+    //base.OnProjectileHit(collision);
     if (collision.gameObject.CompareTag("onFire"))
     {
         setFire();
     }
-    if (collision.gameObject.CompareTag("Player"))
-    {
-        collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
-     
-    }
+    // check if collides w bush and that bush is on fire.
+   
 }
 }
