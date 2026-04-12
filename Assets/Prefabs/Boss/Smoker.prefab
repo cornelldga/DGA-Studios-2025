@@ -370,12 +370,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spinSpeed: 50
+  player: {fileID: 0}
   turnSpeed: 2
   speed: 3
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  animator: {fileID: 1139465785436433671}
   pelletSpeed: 3
   smokeRate: 0
   smokePelletPrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
@@ -424,7 +424,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
