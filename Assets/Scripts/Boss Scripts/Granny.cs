@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Granny : Boss
 {
@@ -297,10 +298,7 @@ public class Granny : Boss
 
     public void TakeDamageFromContract()
     {
-        base.health--;
-        Debug.Log(gHealth);
-        float healthPercent = base.health / base.maxHealth;
-        base.healthBar.fillAmount = healthPercent;
+        base.TakeDamage(1);
     }
 
     /// <summary>
