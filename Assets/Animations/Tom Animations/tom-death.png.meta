@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 88800eb58b3b1e744bbef21067537771
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7754773876455238069
+    second: tom-death_0
+  - first:
+      213: -8927690977119797808
+    second: tom-death_1
+  - first:
+      213: 2886246365838104818
+    second: tom-death_2
+  - first:
+      213: -4999064474564643445
+    second: tom-death_3
+  - first:
+      213: -4685929698324728405
+    second: tom-death_4
+  - first:
+      213: -8617354963530030655
+    second: tom-death_5
+  - first:
+      213: 3250712510548910037
+    second: tom-death_6
+  - first:
+      213: 1879472013907314192
+    second: tom-death_7
+  - first:
+      213: -7551128591572731394
+    second: tom-death_8
+  - first:
+      213: -2837617484131990224
+    second: tom-death_9
+  - first:
+      213: -6664146246080207455
+    second: tom-death_10
+  - first:
+      213: -8548642001578224453
+    second: tom-death_11
+  - first:
+      213: 4785887839754761503
+    second: tom-death_12
+  - first:
+      213: 8296771075717884814
+    second: tom-death_13
+  - first:
+      213: -2078790956149175702
+    second: tom-death_14
+  - first:
+      213: 8238508792968500226
+    second: tom-death_15
+  - first:
+      213: 3920632675324038345
+    second: tom-death_16
+  - first:
+      213: 451495662892541931
+    second: tom-death_17
+  - first:
+      213: -75265555854958915
+    second: tom-death_18
+  - first:
+      213: -1722515548234272480
+    second: tom-death_19
+  - first:
+      213: 409484549383811986
+    second: tom-death_20
+  - first:
+      213: 2932430675814800572
+    second: tom-death_21
+  - first:
+      213: 8827999781435311982
+    second: tom-death_22
+  - first:
+      213: 7521871345900810255
+    second: tom-death_23
+  - first:
+      213: 1299988176596658547
+    second: tom-death_24
+  - first:
+      213: -53002641203539798
+    second: tom-death_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tom-death_0
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 1535
+        width: 173
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b461864fe32816490800000000000000
+      internalID: -7754773876455238069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_1
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 1536
+        width: 178
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dd70547b587a1480800000000000000
+      internalID: -8927690977119797808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_2
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 1536
+        width: 178
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8da0a17c10e0820800000000000000
+      internalID: 2886246365838104818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_3
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 1535
+        width: 179
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b85bc48b851cf9ab0800000000000000
+      internalID: -4999064474564643445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_4
+      rect:
+        serializedVersion: 2
+        x: 2278
+        y: 1535
+        width: 171
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5b6e834cb38feb0800000000000000
+      internalID: -4685929698324728405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_5
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 1023
+        width: 176
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c1e75f3151096880800000000000000
+      internalID: -8617354963530030655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_6
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 1025
+        width: 173
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5df9f2a2ec9dc1d20800000000000000
+      internalID: 3250712510548910037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_7
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 1027
+        width: 174
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 016cb3ab6d9351a10800000000000000
+      internalID: 1879472013907314192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_8
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 1025
+        width: 176
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9f206bd80053790800000000000000
+      internalID: -7551128591572731394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_9
+      rect:
+        serializedVersion: 2
+        x: 2279
+        y: 1023
+        width: 172
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03500e9bee1ce98d0800000000000000
+      internalID: -2837617484131990224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_10
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 512
+        width: 179
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a5e22f1c423483a0800000000000000
+      internalID: -6664146246080207455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_11
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 512
+        width: 217
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb412f7646f1d5980800000000000000
+      internalID: -8548642001578224453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_12
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 512
+        width: 222
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f15b17f22a3ea6240800000000000000
+      internalID: 4785887839754761503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_13
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 511
+        width: 222
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8b66eec55d042370800000000000000
+      internalID: 8296771075717884814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_14
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 511
+        width: 222
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6a0f68a3a6a623e0800000000000000
+      internalID: -2078790956149175702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_15
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 689
+        width: 25
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 204d1d30910155270800000000000000
+      internalID: 8238508792968500226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_16
+      rect:
+        serializedVersion: 2
+        x: 2452
+        y: 607
+        width: 26
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc8a7355a2e86630800000000000000
+      internalID: 3920632675324038345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_17
+      rect:
+        serializedVersion: 2
+        x: 2456
+        y: 650
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be7e65cc9e8044600800000000000000
+      internalID: 451495662892541931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_18
+      rect:
+        serializedVersion: 2
+        x: 2259
+        y: 511
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe517f206a94fef0800000000000000
+      internalID: -75265555854958915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_19
+      rect:
+        serializedVersion: 2
+        x: 2467
+        y: 516
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 021b8633c356818e0800000000000000
+      internalID: -1722515548234272480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_20
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 217
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29378033708cea500800000000000000
+      internalID: 409484549383811986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 0
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc5668b92612b820800000000000000
+      internalID: 2932430675814800572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_22
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 0
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e678da9470b538a70800000000000000
+      internalID: 8827999781435311982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_23
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 0
+        width: 206
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f007b92f22e036860800000000000000
+      internalID: 7521871345900810255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_24
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 0
+        width: 206
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3796046eb5c7a0210800000000000000
+      internalID: 1299988176596658547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tom-death_25
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 0
+        width: 206
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0d7eee062b34ff0800000000000000
+      internalID: -53002641203539798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      tom-death_0: -7754773876455238069
+      tom-death_1: -8927690977119797808
+      tom-death_10: -6664146246080207455
+      tom-death_11: -8548642001578224453
+      tom-death_12: 4785887839754761503
+      tom-death_13: 8296771075717884814
+      tom-death_14: -2078790956149175702
+      tom-death_15: 8238508792968500226
+      tom-death_16: 3920632675324038345
+      tom-death_17: 451495662892541931
+      tom-death_18: -75265555854958915
+      tom-death_19: -1722515548234272480
+      tom-death_2: 2886246365838104818
+      tom-death_20: 409484549383811986
+      tom-death_21: 2932430675814800572
+      tom-death_22: 8827999781435311982
+      tom-death_23: 7521871345900810255
+      tom-death_24: 1299988176596658547
+      tom-death_25: -53002641203539798
+      tom-death_3: -4999064474564643445
+      tom-death_4: -4685929698324728405
+      tom-death_5: -8617354963530030655
+      tom-death_6: 3250712510548910037
+      tom-death_7: 1879472013907314192
+      tom-death_8: -7551128591572731394
+      tom-death_9: -2837617484131990224
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -385,2113 +385,1695 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drill_death_animation (1)_0
+      name: drill_death_animation_0
       rect:
         serializedVersion: 2
-        x: 229
-        y: 5119
-        width: 173
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f733abcac5539e8f0800000000000000
-      internalID: -510818410578693249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_1
-      rect:
-        serializedVersion: 2
-        x: 740
+        x: 0
         y: 5120
-        width: 178
-        height: 307
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 24069e7adf3c242d0800000000000000
-      internalID: -3295856483070549950
+      spriteID: a30153c2de51a034db38cca339bf610d
+      internalID: -1395606715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_2
+      name: drill_death_animation_1
       rect:
         serializedVersion: 2
-        x: 1250
+        x: 512
         y: 5120
-        width: 176
-        height: 303
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9f6be78b920fd4670800000000000000
-      internalID: 8524733731661854457
+      spriteID: 7b7079e2c1110684086389e3a92879ce
+      internalID: -839479051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_3
+      name: drill_death_animation_2
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 5123
-        width: 174
-        height: 304
+        x: 1024
+        y: 5120
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 63252c86d4e165210800000000000000
-      internalID: 1321276858498699830
+      spriteID: 5b32c9cff427d4841ba89e5e7b9d6e09
+      internalID: -1441421476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_4
+      name: drill_death_animation_3
       rect:
         serializedVersion: 2
-        x: 2277
-        y: 5121
-        width: 173
-        height: 308
+        x: 1536
+        y: 5120
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c0244ce95c0e35a90800000000000000
-      internalID: -7326265029424823796
+      spriteID: 054931307aa4b0340a38b66dab445417
+      internalID: 323039061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_5
+      name: drill_death_animation_4
       rect:
         serializedVersion: 2
-        x: 2790
-        y: 5124
-        width: 171
-        height: 306
+        x: 2048
+        y: 5120
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 848d7d474c4885b90800000000000000
-      internalID: -7252901220571424696
+      spriteID: b56dca9c43ed8394386de4d7d4e84cf7
+      internalID: 1451436913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_6
+      name: drill_death_animation_5
       rect:
         serializedVersion: 2
-        x: 3302
-        y: 5119
-        width: 171
-        height: 311
+        x: 2560
+        y: 5120
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c957a90daa748b750800000000000000
-      internalID: 6320880875984287132
+      spriteID: 7176ca9e96892d64d93327cd26e6e528
+      internalID: -461730439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_7
+      name: drill_death_animation_6
       rect:
         serializedVersion: 2
-        x: 231
-        y: 4607
-        width: 172
-        height: 310
+        x: 3072
+        y: 5120
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ac5dce892a2397a50800000000000000
-      internalID: 6519297609527252426
+      spriteID: 4524a7a89463d6e4a94d661a17f55628
+      internalID: 1068208358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_8
+      name: drill_death_animation_7
       rect:
         serializedVersion: 2
-        x: 741
-        y: 4607
-        width: 173
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8b8ee08cdfabe8400800000000000000
-      internalID: 328405421990537400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_9
-      rect:
-        serializedVersion: 2
-        x: 1252
+        x: 0
         y: 4608
-        width: 178
-        height: 307
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2aad782aab1f8f190800000000000000
-      internalID: -7928321360092734814
+      spriteID: de56860b651e21f47b71e6158bb312db
+      internalID: -711846996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_10
+      name: drill_death_animation_8
       rect:
         serializedVersion: 2
-        x: 1762
+        x: 512
         y: 4608
-        width: 176
-        height: 303
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6996e225365526b60800000000000000
-      internalID: 7737840994844830102
+      spriteID: bdbc8c3d6ba2cfc4db81d585d90f905d
+      internalID: -1838906987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_11
+      name: drill_death_animation_9
       rect:
         serializedVersion: 2
-        x: 2274
-        y: 4611
-        width: 174
-        height: 304
+        x: 1024
+        y: 4608
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7ae3e3d22c48e0820800000000000000
-      internalID: 2886390380708642471
+      spriteID: 59be3167f6a823a4684dcce741e013a3
+      internalID: -419507084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_12
+      name: drill_death_animation_10
       rect:
         serializedVersion: 2
-        x: 2789
-        y: 4609
-        width: 173
-        height: 308
+        x: 1536
+        y: 4608
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 86f3d8d2554bcd3b0800000000000000
-      internalID: -5486311968114655384
+      spriteID: 4ea61908b95a3164389a92986cefac6a
+      internalID: 2001984262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_13
+      name: drill_death_animation_11
       rect:
         serializedVersion: 2
-        x: 3298
-        y: 4612
-        width: 175
-        height: 306
+        x: 2048
+        y: 4608
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5a67d9158e60b51d0800000000000000
-      internalID: -3361085102030489947
+      spriteID: f6787187a118dc14ca17c9fc2e54558b
+      internalID: 1214342999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_14
+      name: drill_death_animation_12
       rect:
         serializedVersion: 2
-        x: 226
-        y: 4095
-        width: 175
-        height: 311
+        x: 2560
+        y: 4608
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 37d8ac009425eb630800000000000000
-      internalID: 3944680797122497907
+      spriteID: 2a00dafa31b42924abecd68b9cedbff1
+      internalID: 653126442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_15
+      name: drill_death_animation_13
       rect:
         serializedVersion: 2
-        x: 738
-        y: 4095
-        width: 177
-        height: 310
+        x: 3072
+        y: 4608
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 27e4c15e860f7e600800000000000000
-      internalID: 497630617158831730
+      spriteID: 5542d96695ddf0d4a889b0b22bc51c35
+      internalID: -222286008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_16
+      name: drill_death_animation_14
       rect:
         serializedVersion: 2
-        x: 1253
-        y: 4095
-        width: 173
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6da34edabdf62a190800000000000000
-      internalID: -7952671002676938026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_17
-      rect:
-        serializedVersion: 2
-        x: 1764
+        x: 0
         y: 4096
-        width: 178
-        height: 307
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 627befacd96839da0800000000000000
-      internalID: -5939255471297874138
+      spriteID: e4a3adb631735f841be22a694e49b1e1
+      internalID: -2031911500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_18
+      name: drill_death_animation_15
       rect:
         serializedVersion: 2
-        x: 2274
+        x: 512
         y: 4096
-        width: 176
-        height: 303
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d669ec25b29709db0800000000000000
-      internalID: -4787193176915011987
+      spriteID: 054d7841f42b6014a9f9b836a7dd2c16
+      internalID: -1348776753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_19
+      name: drill_death_animation_16
       rect:
         serializedVersion: 2
-        x: 2786
-        y: 4099
-        width: 177
-        height: 304
+        x: 1024
+        y: 4096
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9141c661d9635f8a0800000000000000
-      internalID: -6272046857729600487
+      spriteID: f2504b787ccf61b478d75b156cfc2a68
+      internalID: -1216242063
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_20
+      name: drill_death_animation_17
       rect:
         serializedVersion: 2
-        x: 3301
-        y: 4097
-        width: 173
-        height: 308
+        x: 1536
+        y: 4096
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0188df4cfb321f290800000000000000
-      internalID: -7858460568234129392
+      spriteID: b8d885daac0479949ad61a5a6dd2f5e8
+      internalID: -671105186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_21
+      name: drill_death_animation_18
       rect:
         serializedVersion: 2
-        x: 229
-        y: 3588
-        width: 172
-        height: 306
+        x: 2048
+        y: 4096
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7a071bed92ac42930800000000000000
-      internalID: 4117638240502116519
+      spriteID: 8a606c2be269a924f92c6665074fd8e9
+      internalID: -459328307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_22
+      name: drill_death_animation_19
       rect:
         serializedVersion: 2
-        x: 739
-        y: 3583
-        width: 178
-        height: 311
+        x: 2560
+        y: 4096
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cf1f8554373983dc0800000000000000
-      internalID: -3659012573944548868
+      spriteID: d54cf01f92ded894b9341773577f86ff
+      internalID: -1352942278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_23
+      name: drill_death_animation_20
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 3583
-        width: 178
-        height: 310
+        x: 3072
+        y: 4096
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 03191c4dc204603e0800000000000000
-      internalID: -2087910815947452112
+      spriteID: 03bcde67e0421d64f9133d4deddb267a
+      internalID: -1517078789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_24
+      name: drill_death_animation_21
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 3583
-        width: 179
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 768791ee29e11d5b0800000000000000
-      internalID: -5345457666303362969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_25
-      rect:
-        serializedVersion: 2
-        x: 2274
+        x: 0
         y: 3584
-        width: 180
-        height: 307
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0fddde24c821b9820800000000000000
-      internalID: 2925952776534875632
+      spriteID: c94e856bffa714445be640b1c3969de3
+      internalID: 662207462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_26
+      name: drill_death_animation_22
       rect:
         serializedVersion: 2
-        x: 2786
+        x: 512
         y: 3584
-        width: 184
-        height: 303
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2a43fe022103f8160800000000000000
-      internalID: 7029890397768725666
+      spriteID: a6353ce7bc6ec87458a2d7fa5f1ca2ac
+      internalID: 1883558309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_27
+      name: drill_death_animation_23
       rect:
         serializedVersion: 2
-        x: 3298
-        y: 3587
-        width: 174
-        height: 304
+        x: 1024
+        y: 3584
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ac9f8f2d17c70a0f0800000000000000
-      internalID: -1107748680020461110
+      spriteID: b5680ea536fb3f1419017c8647c5a9fb
+      internalID: 2008717005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_28
+      name: drill_death_animation_24
       rect:
         serializedVersion: 2
-        x: 229
-        y: 3073
-        width: 173
-        height: 308
+        x: 1536
+        y: 3584
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d59e837bf093284d0800000000000000
-      internalID: -3133879651035190947
+      spriteID: a8a89a988f8a8c34ea3a5a890ea9938e
+      internalID: -139468404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_29
+      name: drill_death_animation_25
       rect:
         serializedVersion: 2
-        x: 742
-        y: 3076
-        width: 171
-        height: 306
+        x: 2048
+        y: 3584
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3cc5e41e3ad31b750800000000000000
-      internalID: 6318899526246489283
+      spriteID: a528b74db3cf7a54d91bc7083b3142bb
+      internalID: -1965172901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_30
+      name: drill_death_animation_26
       rect:
         serializedVersion: 2
-        x: 1254
-        y: 3071
-        width: 171
-        height: 311
+        x: 2560
+        y: 3584
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 890c7a2d1c8b5df80800000000000000
-      internalID: -8082350813644078952
+      spriteID: b9b461b407867dc44b860cb69022591e
+      internalID: -795244574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_31
+      name: drill_death_animation_27
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 3071
-        width: 177
-        height: 313
+        x: 3072
+        y: 3584
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d45168d5ed9542610800000000000000
-      internalID: 1595498979582678349
+      spriteID: 0184746151657e34996ab3a4b1740334
+      internalID: -1519928029
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_32
+      name: drill_death_animation_28
       rect:
         serializedVersion: 2
-        x: 2274
-        y: 3071
-        width: 176
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e06d7e3ad75a7e210800000000000000
-      internalID: 1362239371342239246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_33
-      rect:
-        serializedVersion: 2
-        x: 2788
+        x: 0
         y: 3072
-        width: 178
-        height: 307
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ab85ecdc699ed9880800000000000000
-      internalID: -8602462879300560710
+      spriteID: 7f3759f3ce5219c4d9cccb3799c226c1
+      internalID: 1289982711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_34
+      name: drill_death_animation_29
       rect:
         serializedVersion: 2
-        x: 3298
+        x: 512
         y: 3072
-        width: 176
-        height: 303
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 74eb907c8bb5f1540800000000000000
-      internalID: 4980800562066472519
+      spriteID: 48869b40942bb7f48a45dbc34a29b636
+      internalID: -717734631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_35
+      name: drill_death_animation_30
       rect:
         serializedVersion: 2
-        x: 226
-        y: 2563
-        width: 174
-        height: 304
+        x: 1024
+        y: 3072
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9f1ee714eb1114460800000000000000
-      internalID: 7224074786119279097
+      spriteID: ac6b984b1ffdfe747b78f77c5703e726
+      internalID: -268586027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_36
+      name: drill_death_animation_31
       rect:
         serializedVersion: 2
-        x: 741
-        y: 2561
-        width: 173
-        height: 308
+        x: 1536
+        y: 3072
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2797693b19a3b9e70800000000000000
-      internalID: 9122949867626723698
+      spriteID: 8de4023c6defb4249b8068a123cff137
+      internalID: 1150096273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_37
+      name: drill_death_animation_32
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 2564
-        width: 174
-        height: 306
+        x: 2048
+        y: 3072
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b8014dae20ed84a80800000000000000
-      internalID: -8482285794041261941
+      spriteID: c09feea30108b6f4d8bcb32a95a9fbcd
+      internalID: -462775932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_38
+      name: drill_death_animation_33
       rect:
         serializedVersion: 2
-        x: 1763
-        y: 2559
-        width: 174
-        height: 311
+        x: 2560
+        y: 3072
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 599fea01ae68c7b30800000000000000
-      internalID: 4286449285210241429
+      spriteID: 2827af87c6de8cc41b2ef7c9afc2f4db
+      internalID: 659677945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_39
+      name: drill_death_animation_34
       rect:
         serializedVersion: 2
-        x: 2274
-        y: 2559
-        width: 177
-        height: 310
+        x: 3072
+        y: 3072
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e9816a749a3e33340800000000000000
-      internalID: 4842464340544460958
+      spriteID: 8e90a0bcae8a3eb4aaaf6e8665875fe6
+      internalID: 1143433862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_40
+      name: drill_death_animation_35
       rect:
         serializedVersion: 2
-        x: 2786
-        y: 2559
-        width: 176
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c36f77881b354c850800000000000000
-      internalID: 6396329392736826940
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_41
-      rect:
-        serializedVersion: 2
-        x: 3300
+        x: 0
         y: 2560
-        width: 178
-        height: 311
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 75f010988433f6320800000000000000
-      internalID: 2553315900371570519
+      spriteID: 8402dfbdb7668834f9cb3058242e6dba
+      internalID: -143145270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_42
+      name: drill_death_animation_36
       rect:
         serializedVersion: 2
-        x: 226
+        x: 512
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b757fb536aece87438cc6bd16de5cbae
+      internalID: -343121576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_37
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9c8c652a519814592cbcbb7d54a5b8
+      internalID: -1634865903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_38
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e2c148551bcbb747b778444ddb99694
+      internalID: 504631510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_39
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c51b97ac9ab0034a8cd3e2825469a04
+      internalID: 1106808547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_40
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b2475ae6a98c04abd217906723b15b
+      internalID: 1476525865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_41
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c7b96266be989e40946f7d7f941cd45
+      internalID: -1493316140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_42
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 2048
-        width: 176
-        height: 311
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8a611362ad8c07f0800000000000000
-      internalID: -644984918034519411
+      spriteID: b0963d3d34ff8d74bbb4df4d9e0a40ea
+      internalID: -706708398
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_43
+      name: drill_death_animation_43
       rect:
         serializedVersion: 2
-        x: 738
-        y: 2051
-        width: 174
-        height: 304
+        x: 512
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0452d75bdb0a74a20800000000000000
-      internalID: 3046580409593570624
+      spriteID: f8765d530c811f44588efdd2cc1e6411
+      internalID: 1009406326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_44
+      name: drill_death_animation_44
       rect:
         serializedVersion: 2
-        x: 1250
-        y: 2049
-        width: 176
-        height: 308
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98ea26ac729badb30800000000000000
-      internalID: 4312963173710999177
+      spriteID: 17e30e89adac418468c587bd382c8e39
+      internalID: -183810918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_45
+      name: drill_death_animation_45
       rect:
         serializedVersion: 2
-        x: 1762
-        y: 2052
-        width: 175
-        height: 306
+        x: 1536
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c2de63222c6adf2e0800000000000000
-      internalID: -2090331299302150868
+      spriteID: aa8b124a14b21c54082be439bc12f4df
+      internalID: 1122791056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_46
+      name: drill_death_animation_46
       rect:
         serializedVersion: 2
-        x: 2274
-        y: 2047
-        width: 175
-        height: 311
+        x: 2048
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dc02774898c8b4050800000000000000
-      internalID: 5785872668548341965
+      spriteID: 3887a2728d3e1044187cf13c90b65554
+      internalID: -1945290685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_47
+      name: drill_death_animation_47
       rect:
         serializedVersion: 2
-        x: 2791
-        y: 2047
-        width: 172
-        height: 310
+        x: 2560
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 07cb0aae4e29b7490800000000000000
-      internalID: -7747437222074205072
+      spriteID: dfa5e5c64ca1430428e1b6808fa79c95
+      internalID: -456624953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_48
+      name: drill_death_animation_48
       rect:
         serializedVersion: 2
-        x: 3303
-        y: 2047
-        width: 174
-        height: 313
+        x: 3072
+        y: 2048
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 039c9a0b47c076fa0800000000000000
-      internalID: -5807659499151308496
+      spriteID: 82c9e7ed7b5f0ab42998ad380100d82c
+      internalID: -449526851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_49
+      name: drill_death_animation_49
       rect:
         serializedVersion: 2
-        x: 228
+        x: 0
         y: 1536
-        width: 179
-        height: 315
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5c1b76e8be2249200800000000000000
-      internalID: 185811879730852293
+      spriteID: 2a35d242fa639f947983d09a7dd96f28
+      internalID: 891554585
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_50
+      name: drill_death_animation_50
       rect:
         serializedVersion: 2
-        x: 725
+        x: 512
         y: 1536
-        width: 217
-        height: 320
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7a9c4907a1279780800000000000000
-      internalID: -8676429155806700932
+      spriteID: 939806369da20684a833965af5fca43f
+      internalID: -448144111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_51
+      name: drill_death_animation_51
       rect:
         serializedVersion: 2
-        x: 1232
+        x: 1024
         y: 1536
-        width: 222
-        height: 320
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c859ac367a7a79da0800000000000000
-      internalID: -5938093246289111668
+      spriteID: 7e99c58b978a917438fbe028866d7b9a
+      internalID: -1552380691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_52
+      name: drill_death_animation_52
       rect:
         serializedVersion: 2
-        x: 1744
-        y: 1535
-        width: 222
-        height: 321
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1891734aaf5089780800000000000000
-      internalID: -8676178108074223231
+      spriteID: d161ce441107ffe41ba0b2fe4f996809
+      internalID: -2003899567
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_53
+      name: drill_death_animation_53
       rect:
         serializedVersion: 2
-        x: 2256
-        y: 1535
-        width: 222
-        height: 321
+        x: 2048
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6614b00fe3f8d4b50800000000000000
-      internalID: 6579072131136176486
+      spriteID: a99d5e2c16f6ae64f8cccc348abfeb26
+      internalID: 482440592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_54
+      name: drill_death_animation_54
       rect:
         serializedVersion: 2
-        x: 2768
-        y: 1535
-        width: 222
-        height: 301
+        x: 2560
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d0420b480a3bb78a0800000000000000
-      internalID: -6306249351199972339
+      spriteID: 3e3be89b4c9305747b25c3bfc5570e79
+      internalID: -382814772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_55
+      name: drill_death_animation_55
       rect:
         serializedVersion: 2
-        x: 2962
-        y: 1713
-        width: 25
-        height: 81
+        x: 3072
+        y: 1536
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 113688aa170942080800000000000000
-      internalID: -9213080119826423023
+      spriteID: 2c717ff872d414b4bb3c82250c64667b
+      internalID: -274537030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_56
+      name: drill_death_animation_56
       rect:
         serializedVersion: 2
-        x: 3280
-        y: 1535
-        width: 222
-        height: 301
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 13e0e2a4a974ce1c0800000000000000
-      internalID: -4473121601890677199
+      spriteID: ebebe250d041fea428b056cb46c5d72c
+      internalID: -1784753619
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_57
+      name: drill_death_animation_57
       rect:
         serializedVersion: 2
-        x: 3474
-        y: 1713
-        width: 25
-        height: 81
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7a518350c2de84a30800000000000000
-      internalID: 4199867425844893095
+      spriteID: 54e2e90dede71bd4781e88c517e8df32
+      internalID: -1166080715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_58
+      name: drill_death_animation_58
       rect:
         serializedVersion: 2
-        x: 2964
-        y: 1631
-        width: 26
-        height: 44
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 439e261144e5cb3e0800000000000000
-      internalID: -2036649285035824844
+      spriteID: 4bd49711b6431954a939efbe8248c8c6
+      internalID: 712100845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_59
+      name: drill_death_animation_59
       rect:
         serializedVersion: 2
-        x: 2968
-        y: 1674
-        width: 19
-        height: 28
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d9700671f1f9e0180800000000000000
-      internalID: -9147198837257926755
+      spriteID: b3f52abd47f55eb40bf38e53601f8141
+      internalID: -1449192395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_60
+      name: drill_death_animation_60
       rect:
         serializedVersion: 2
-        x: 3476
-        y: 1631
-        width: 26
-        height: 44
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 73e680573b8f4a4d0800000000000000
-      internalID: -3124098791841960393
+      spriteID: 1f97a59f950ce3642b2b42617b3ad62a
+      internalID: -1021172647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_61
+      name: drill_death_animation_61
       rect:
         serializedVersion: 2
-        x: 3480
-        y: 1674
-        width: 19
-        height: 28
+        x: 2560
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cc10a608de3e48c10800000000000000
-      internalID: 2055017939188974028
+      spriteID: 2fa07728025a0754bb20ae56fcf48070
+      internalID: -292801206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_62
+      name: drill_death_animation_62
       rect:
         serializedVersion: 2
-        x: 2771
-        y: 1535
-        width: 13
-        height: 12
+        x: 3072
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c61872c6ef9c90d30800000000000000
-      internalID: 4398268605677404524
+      spriteID: 8f511347ad1c0144c898f8c71fae72b8
+      internalID: 460313647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_63
+      name: drill_death_animation_63
       rect:
         serializedVersion: 2
-        x: 2979
-        y: 1540
-        width: 8
-        height: 6
+        x: 0
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5da524b2d8b9c8930800000000000000
-      internalID: 4146860387519847125
+      spriteID: 199829af409025f44864ee63112c6137
+      internalID: 302559644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_64
+      name: drill_death_animation_64
       rect:
         serializedVersion: 2
-        x: 3283
-        y: 1535
-        width: 13
-        height: 12
+        x: 512
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 201bb1d3529462640800000000000000
-      internalID: 5054808056057803010
+      spriteID: 53f66938c2d0eff43a4fd004301668dd
+      internalID: -1211229551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_65
+      name: drill_death_animation_65
       rect:
         serializedVersion: 2
-        x: 3491
-        y: 1540
-        width: 8
-        height: 6
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f2ae6c158a588c300800000000000000
-      internalID: 272614735428905519
+      spriteID: ea7e62b5f9be4604aa53dde094f8e0d5
+      internalID: -1063350054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_66
+      name: drill_death_animation_66
       rect:
         serializedVersion: 2
-        x: 208
-        y: 1023
-        width: 222
-        height: 301
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 90835ecbb5807cb60800000000000000
-      internalID: 7766185272527894537
+      spriteID: 07fb3b32cd001284b977ca67fc996508
+      internalID: 2104725492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_67
+      name: drill_death_animation_67
       rect:
         serializedVersion: 2
-        x: 402
-        y: 1201
-        width: 25
-        height: 81
+        x: 2048
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0d7204699d31b54e0800000000000000
-      internalID: -1991976584931694640
+      spriteID: 636475ce88c92a94598986727ecd45cc
+      internalID: 1440922184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_68
+      name: drill_death_animation_68
       rect:
         serializedVersion: 2
-        x: 720
-        y: 1023
-        width: 219
-        height: 296
+        x: 2560
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2c145eb2aa36b2c30800000000000000
-      internalID: 4335668648806269378
+      spriteID: bae01b793252d2c4dadd105f6dca8a24
+      internalID: -2034164693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_69
+      name: drill_death_animation_69
       rect:
         serializedVersion: 2
-        x: 725
-        y: 1222
-        width: 10
-        height: 14
+        x: 3072
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f20d9542aee2b2440800000000000000
-      internalID: 4912071401744748591
+      spriteID: 126083c32102b7649922516c5cb9ba87
+      internalID: 1768089319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: drill_death_animation (1)_70
+      name: drill_death_animation_70
       rect:
         serializedVersion: 2
-        x: 915
-        y: 1204
-        width: 24
-        height: 78
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6b93ae55b172880c0800000000000000
-      internalID: -4573362423235724874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_71
-      rect:
-        serializedVersion: 2
-        x: 1232
-        y: 1023
-        width: 219
-        height: 296
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 76d4a166abc527420800000000000000
-      internalID: 2626263488357092711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_72
-      rect:
-        serializedVersion: 2
-        x: 1237
-        y: 1222
-        width: 10
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf06bc7f580a1ae30800000000000000
-      internalID: 4513064798850343163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_73
-      rect:
-        serializedVersion: 2
-        x: 1427
-        y: 1204
-        width: 24
-        height: 78
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a6d3799e5f2233520800000000000000
-      internalID: 2680524642796911978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_74
-      rect:
-        serializedVersion: 2
-        x: 1744
-        y: 1023
-        width: 217
-        height: 266
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4503e6a110e090a70800000000000000
-      internalID: 8793575145318789204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_75
-      rect:
-        serializedVersion: 2
-        x: 2256
-        y: 1023
-        width: 217
-        height: 266
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 92056cc4e5a6aa3b0800000000000000
-      internalID: -5500467041632104407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_76
-      rect:
-        serializedVersion: 2
-        x: 2771
-        y: 1023
-        width: 214
-        height: 246
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89b30ddadef8d1e90800000000000000
-      internalID: -7053323190406202472
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_77
-      rect:
-        serializedVersion: 2
-        x: 3283
-        y: 1023
-        width: 214
-        height: 246
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 05206cc74e5ac14a0800000000000000
-      internalID: -6621234951376993712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_78
-      rect:
-        serializedVersion: 2
-        x: 404
-        y: 1119
-        width: 26
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b5290ded94da99d30800000000000000
-      internalID: 4438769440532763227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_79
-      rect:
-        serializedVersion: 2
-        x: 408
-        y: 1162
-        width: 19
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d1fb8b606720d0e70800000000000000
-      internalID: 9082918729418325789
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_80
-      rect:
-        serializedVersion: 2
-        x: 921
-        y: 1119
-        width: 21
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b1a984bba851670d0800000000000000
-      internalID: -3425526780976915941
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_81
-      rect:
-        serializedVersion: 2
-        x: 1433
-        y: 1119
-        width: 21
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6f38d1a819a7fb360800000000000000
-      internalID: 7187598295812637686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_82
-      rect:
-        serializedVersion: 2
-        x: 211
-        y: 1023
-        width: 13
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 71fff74e69d1a3260800000000000000
-      internalID: 7078002298282049303
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_83
-      rect:
-        serializedVersion: 2
-        x: 419
-        y: 1028
-        width: 8
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 184bda64c9488a370800000000000000
-      internalID: 8334056917184656513
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_84
-      rect:
-        serializedVersion: 2
-        x: 1238
-        y: 1023
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2523b9b97bac600e0800000000000000
-      internalID: -2303931269414964654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_85
-      rect:
-        serializedVersion: 2
-        x: 1750
-        y: 1023
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 087e964283f065de0800000000000000
-      internalID: -1344870704920008832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_86
-      rect:
-        serializedVersion: 2
-        x: 2262
-        y: 1023
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7bc1e956d1f2fe670800000000000000
-      internalID: 8570120419214761143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_87
-      rect:
-        serializedVersion: 2
-        x: 211
-        y: 511
-        width: 214
-        height: 246
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fc7003bbb5bd7d320800000000000000
-      internalID: 2582774098349262799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_88
-      rect:
-        serializedVersion: 2
-        x: 723
-        y: 511
-        width: 9
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d14ec6fcbccf4aa20800000000000000
-      internalID: 3072858798062101533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_89
-      rect:
-        serializedVersion: 2
-        x: 731
-        y: 511
-        width: 206
-        height: 237
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5eac693a57eca7dd0800000000000000
-      internalID: -2487448839517713691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_90
-      rect:
-        serializedVersion: 2
-        x: 1243
-        y: 511
-        width: 206
-        height: 204
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e5d3c52073ffc34a0800000000000000
-      internalID: -6612129541158847138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_91
-      rect:
-        serializedVersion: 2
-        x: 1755
-        y: 511
-        width: 206
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 433f5bd4e14605e80800000000000000
-      internalID: -8191937640871365836
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_92
-      rect:
-        serializedVersion: 2
-        x: 2267
-        y: 511
-        width: 206
-        height: 164
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5afc256c9a552db00800000000000000
-      internalID: 851837467191594917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_93
-      rect:
-        serializedVersion: 2
-        x: 2779
-        y: 511
-        width: 206
-        height: 111
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b833305a80d881f30800000000000000
-      internalID: 4546538892098220939
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_94
-      rect:
-        serializedVersion: 2
-        x: 3291
-        y: 511
-        width: 206
-        height: 111
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 11ac97796837ed1a0800000000000000
-      internalID: -6782856966869235183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drill_death_animation (1)_95
-      rect:
-        serializedVersion: 2
-        x: 219
+        x: 0
         y: 0
-        width: 206
-        height: 110
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f545d5ca80d0b4800800000000000000
-      internalID: 597585706459419743
+      spriteID: b1c92c9a981d2e94c9ec8ba383e0d0bc
+      internalID: -1588594206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_71
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884a3e03f63f34a4aa1668f638c29562
+      internalID: -1410174914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_72
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487982210c8be9140b00cba9ebbd65f1
+      internalID: 1039506426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_73
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b8bbbca767823c4ca7e3da171847fc5
+      internalID: 1844733405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_74
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 843d7c99d1c0cbd40bfbac3f65de3b85
+      internalID: 76034011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_75
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95771b7c644565c46946a79cd53fe751
+      internalID: 1699826784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_death_animation_76
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e452ec4a483aca348a4fcaae7eea2a37
+      internalID: 1525160733
       vertices: []
       indices: 
       edges: []
@@ -2500,7 +2082,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2c44de88e8d8d0b44842650e3facd299
     internalID: 0
     vertices: []
     indices: 
@@ -2508,104 +2090,87 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":11.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      drill_death_animation (1)_0: -510818410578693249
-      drill_death_animation (1)_1: -3295856483070549950
-      drill_death_animation (1)_10: 7737840994844830102
-      drill_death_animation (1)_11: 2886390380708642471
-      drill_death_animation (1)_12: -5486311968114655384
-      drill_death_animation (1)_13: -3361085102030489947
-      drill_death_animation (1)_14: 3944680797122497907
-      drill_death_animation (1)_15: 497630617158831730
-      drill_death_animation (1)_16: -7952671002676938026
-      drill_death_animation (1)_17: -5939255471297874138
-      drill_death_animation (1)_18: -4787193176915011987
-      drill_death_animation (1)_19: -6272046857729600487
-      drill_death_animation (1)_2: 8524733731661854457
-      drill_death_animation (1)_20: -7858460568234129392
-      drill_death_animation (1)_21: 4117638240502116519
-      drill_death_animation (1)_22: -3659012573944548868
-      drill_death_animation (1)_23: -2087910815947452112
-      drill_death_animation (1)_24: -5345457666303362969
-      drill_death_animation (1)_25: 2925952776534875632
-      drill_death_animation (1)_26: 7029890397768725666
-      drill_death_animation (1)_27: -1107748680020461110
-      drill_death_animation (1)_28: -3133879651035190947
-      drill_death_animation (1)_29: 6318899526246489283
-      drill_death_animation (1)_3: 1321276858498699830
-      drill_death_animation (1)_30: -8082350813644078952
-      drill_death_animation (1)_31: 1595498979582678349
-      drill_death_animation (1)_32: 1362239371342239246
-      drill_death_animation (1)_33: -8602462879300560710
-      drill_death_animation (1)_34: 4980800562066472519
-      drill_death_animation (1)_35: 7224074786119279097
-      drill_death_animation (1)_36: 9122949867626723698
-      drill_death_animation (1)_37: -8482285794041261941
-      drill_death_animation (1)_38: 4286449285210241429
-      drill_death_animation (1)_39: 4842464340544460958
-      drill_death_animation (1)_4: -7326265029424823796
-      drill_death_animation (1)_40: 6396329392736826940
-      drill_death_animation (1)_41: 2553315900371570519
-      drill_death_animation (1)_42: -644984918034519411
-      drill_death_animation (1)_43: 3046580409593570624
-      drill_death_animation (1)_44: 4312963173710999177
-      drill_death_animation (1)_45: -2090331299302150868
-      drill_death_animation (1)_46: 5785872668548341965
-      drill_death_animation (1)_47: -7747437222074205072
-      drill_death_animation (1)_48: -5807659499151308496
-      drill_death_animation (1)_49: 185811879730852293
-      drill_death_animation (1)_5: -7252901220571424696
-      drill_death_animation (1)_50: -8676429155806700932
-      drill_death_animation (1)_51: -5938093246289111668
-      drill_death_animation (1)_52: -8676178108074223231
-      drill_death_animation (1)_53: 6579072131136176486
-      drill_death_animation (1)_54: -6306249351199972339
-      drill_death_animation (1)_55: -9213080119826423023
-      drill_death_animation (1)_56: -4473121601890677199
-      drill_death_animation (1)_57: 4199867425844893095
-      drill_death_animation (1)_58: -2036649285035824844
-      drill_death_animation (1)_59: -9147198837257926755
-      drill_death_animation (1)_6: 6320880875984287132
-      drill_death_animation (1)_60: -3124098791841960393
-      drill_death_animation (1)_61: 2055017939188974028
-      drill_death_animation (1)_62: 4398268605677404524
-      drill_death_animation (1)_63: 4146860387519847125
-      drill_death_animation (1)_64: 5054808056057803010
-      drill_death_animation (1)_65: 272614735428905519
-      drill_death_animation (1)_66: 7766185272527894537
-      drill_death_animation (1)_67: -1991976584931694640
-      drill_death_animation (1)_68: 4335668648806269378
-      drill_death_animation (1)_69: 4912071401744748591
-      drill_death_animation (1)_7: 6519297609527252426
-      drill_death_animation (1)_70: -4573362423235724874
-      drill_death_animation (1)_71: 2626263488357092711
-      drill_death_animation (1)_72: 4513064798850343163
-      drill_death_animation (1)_73: 2680524642796911978
-      drill_death_animation (1)_74: 8793575145318789204
-      drill_death_animation (1)_75: -5500467041632104407
-      drill_death_animation (1)_76: -7053323190406202472
-      drill_death_animation (1)_77: -6621234951376993712
-      drill_death_animation (1)_78: 4438769440532763227
-      drill_death_animation (1)_79: 9082918729418325789
-      drill_death_animation (1)_8: 328405421990537400
-      drill_death_animation (1)_80: -3425526780976915941
-      drill_death_animation (1)_81: 7187598295812637686
-      drill_death_animation (1)_82: 7078002298282049303
-      drill_death_animation (1)_83: 8334056917184656513
-      drill_death_animation (1)_84: -2303931269414964654
-      drill_death_animation (1)_85: -1344870704920008832
-      drill_death_animation (1)_86: 8570120419214761143
-      drill_death_animation (1)_87: 2582774098349262799
-      drill_death_animation (1)_88: 3072858798062101533
-      drill_death_animation (1)_89: -2487448839517713691
-      drill_death_animation (1)_9: -7928321360092734814
-      drill_death_animation (1)_90: -6612129541158847138
-      drill_death_animation (1)_91: -8191937640871365836
-      drill_death_animation (1)_92: 851837467191594917
-      drill_death_animation (1)_93: 4546538892098220939
-      drill_death_animation (1)_94: -6782856966869235183
-      drill_death_animation (1)_95: 597585706459419743
+      drill_death_animation_0: -1395606715
+      drill_death_animation_1: -839479051
+      drill_death_animation_10: 2001984262
+      drill_death_animation_11: 1214342999
+      drill_death_animation_12: 653126442
+      drill_death_animation_13: -222286008
+      drill_death_animation_14: -2031911500
+      drill_death_animation_15: -1348776753
+      drill_death_animation_16: -1216242063
+      drill_death_animation_17: -671105186
+      drill_death_animation_18: -459328307
+      drill_death_animation_19: -1352942278
+      drill_death_animation_2: -1441421476
+      drill_death_animation_20: -1517078789
+      drill_death_animation_21: 662207462
+      drill_death_animation_22: 1883558309
+      drill_death_animation_23: 2008717005
+      drill_death_animation_24: -139468404
+      drill_death_animation_25: -1965172901
+      drill_death_animation_26: -795244574
+      drill_death_animation_27: -1519928029
+      drill_death_animation_28: 1289982711
+      drill_death_animation_29: -717734631
+      drill_death_animation_3: 323039061
+      drill_death_animation_30: -268586027
+      drill_death_animation_31: 1150096273
+      drill_death_animation_32: -462775932
+      drill_death_animation_33: 659677945
+      drill_death_animation_34: 1143433862
+      drill_death_animation_35: -143145270
+      drill_death_animation_36: -343121576
+      drill_death_animation_37: -1634865903
+      drill_death_animation_38: 504631510
+      drill_death_animation_39: 1106808547
+      drill_death_animation_4: 1451436913
+      drill_death_animation_40: 1476525865
+      drill_death_animation_41: -1493316140
+      drill_death_animation_42: -706708398
+      drill_death_animation_43: 1009406326
+      drill_death_animation_44: -183810918
+      drill_death_animation_45: 1122791056
+      drill_death_animation_46: -1945290685
+      drill_death_animation_47: -456624953
+      drill_death_animation_48: -449526851
+      drill_death_animation_49: 891554585
+      drill_death_animation_5: -461730439
+      drill_death_animation_50: -448144111
+      drill_death_animation_51: -1552380691
+      drill_death_animation_52: -2003899567
+      drill_death_animation_53: 482440592
+      drill_death_animation_54: -382814772
+      drill_death_animation_55: -274537030
+      drill_death_animation_56: -1784753619
+      drill_death_animation_57: -1166080715
+      drill_death_animation_58: 712100845
+      drill_death_animation_59: -1449192395
+      drill_death_animation_6: 1068208358
+      drill_death_animation_60: -1021172647
+      drill_death_animation_61: -292801206
+      drill_death_animation_62: 460313647
+      drill_death_animation_63: 302559644
+      drill_death_animation_64: -1211229551
+      drill_death_animation_65: -1063350054
+      drill_death_animation_66: 2104725492
+      drill_death_animation_67: 1440922184
+      drill_death_animation_68: -2034164693
+      drill_death_animation_69: 1768089319
+      drill_death_animation_7: -711846996
+      drill_death_animation_70: -1588594206
+      drill_death_animation_71: -1410174914
+      drill_death_animation_72: 1039506426
+      drill_death_animation_73: 1844733405
+      drill_death_animation_74: 76034011
+      drill_death_animation_75: 1699826784
+      drill_death_animation_76: 1525160733
+      drill_death_animation_8: -1838906987
+      drill_death_animation_9: -419507084
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

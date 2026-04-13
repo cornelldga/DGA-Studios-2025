@@ -736,7 +736,7 @@ TextureImporter:
         x: 624
         y: 1872
         width: 624
-        height: 624
+        height: 620
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -846,7 +846,7 @@ TextureImporter:
         x: 0
         y: 1248
         width: 624
-        height: 624
+        height: 620
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -868,7 +868,7 @@ TextureImporter:
         x: 624
         y: 1248
         width: 624
-        height: 624
+        height: 620
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1132,7 +1132,7 @@ TextureImporter:
         x: 624
         y: 0
         width: 624
-        height: 624
+        height: 620
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1143,6 +1143,94 @@ TextureImporter:
       bones: []
       spriteID: 5d99dd2e6a09a4f3bbdb3f2aecfbd732
       internalID: -821867458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_groundenter_animation_26
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 0
+        width: 624
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d53aee2699d8a81499019f6208e35fbb
+      internalID: 2138317731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_groundenter_animation_27
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 0
+        width: 624
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c059cc3e9513f243a5348c352a4e17c
+      internalID: 737311051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_groundenter_animation_28
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 624
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74599e812f3f1be42854c7304769bd52
+      internalID: -1945651603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_groundenter_animation_29
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 0
+        width: 624
+        height: 624
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e4e2a01a0b0a344968f071013e350f
+      internalID: -874963837
       vertices: []
       indices: 
       edges: []
@@ -1161,7 +1249,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":5.0},"gridSpriteSize":{"x":624.0,"y":624.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":624.0,"y":624.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       drill_groundenter_animation_0: -1935735231
       drill_groundenter_animation_1: -1391096098
