@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && loadoutManager.gameObject.activeSelf == false && dialogueManager.OngoingDialogue() == false && GetCurrentSceneName() != "Main Menu")
+        if (Input.GetKeyDown(KeyCode.Escape) && (loadoutManager == null || !loadoutManager.gameObject.activeSelf) && GetCurrentSceneName() != "Main Menu")
         {
             if (pauseMenu.activeSelf && volumeOpened)
             {
@@ -272,6 +272,7 @@ public class GameManager : MonoBehaviour
     /// <param name="mode">The scene load mode</param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        player = null;
         if (scene.name == "World Hub")
         {
             PlayerData data = SaveSystem.LoadPlayer();

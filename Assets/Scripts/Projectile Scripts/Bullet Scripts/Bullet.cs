@@ -19,6 +19,7 @@ public class Bullet : Projectile
     {
         gameObject.layer = LayerMask.NameToLayer("Base");
         damage *= whipDamageMultiplier;
+        whipped = true;
 
         // Stop from homing to player if reflected
         Homing homingScript = this.GetComponent<Homing>();

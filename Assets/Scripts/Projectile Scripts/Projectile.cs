@@ -30,7 +30,18 @@ public abstract class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnProjectileHit(collision);
+        if(collision.TryGetComponent<IProjectileInteractable>(out IProjectileInteractable interactable))
+        {
+            if (interactable.ProjectileInteraction(this))
+            {
+                OnProjectileHit(collision);
+            }
+            
+        }
+        else
+        {
+            OnProjectileHit(collision);
+        }
     }
     /// <summary>
     /// Logic for when a projectile hits an object with a collider
