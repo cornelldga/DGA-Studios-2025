@@ -517,12 +517,41 @@ public class Ash : Boss
         }
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
+        /*
         for (int i = 0; i < 8; i++)
         {
-
+            foreach (GameObject en in enemies)
+            {
+                switch (i)
+                {
+                    case 0:
+                        deployedSeeds[i] = (en.transform);
+                        break;
+                    case 1:
+                        vec = new Vector2(1, 1);
+                        break;
+                    case 2:
+                        vec = new Vector2(1, 0);
+                        break;
+                    case 3:
+                        vec = new Vector2(1, -1);
+                        break;
+                    case 4:
+                        vec = new Vector2(0, -1);
+                        break;
+                    case 5:
+                        vec = new Vector2(-1, -1);
+                        break;
+                    case 6:
+                        vec = new Vector2(-1, 0);
+                        break;
+                    case 7:
+                        vec = new Vector2(-1, 1);
+                        break;
+                }
+            }
         }
-
+        */
 
         Vector2 vec = Vector2.zero;
         int r = UnityEngine.Random.Range(0, 8);
