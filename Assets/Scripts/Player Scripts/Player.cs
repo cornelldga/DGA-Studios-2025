@@ -401,6 +401,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!invulnerable && damage > 0)
         {
+            invulnerable = true;
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
@@ -417,7 +418,6 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     IEnumerator Invulnerability()
     {
-        invulnerable = true;
         sprite.color = Color.red;
         yield return new WaitForSeconds(invulnerabilityTime);
         sprite.color = Color.white;
