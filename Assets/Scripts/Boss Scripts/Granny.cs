@@ -156,6 +156,9 @@ public class Granny : Boss
         }
     }
 
+    /// <summary>
+    /// Enables random bosses. Enables the last two bosses when contract list is down to 2.
+    /// </summary>
     private void EnableRandomBosses()
     {
         if (bossActive) return;
@@ -292,6 +295,9 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
+    /// <summary>
+    /// When contract dies, granny takes 1/4 of health
+    /// </summary>
     public void TakeDamageFromContract()
     {
         base.TakeDamage(1);

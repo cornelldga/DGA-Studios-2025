@@ -24,13 +24,16 @@ public class Contract : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0)
         {
+            // Destroys contract and disables boss
             Destroy(gameObject);
             granny.bossActive = false;
             boss.SetActive(false);
 
+            // Removes boss from Granny contracts
             granny.availableBosses.Remove(boss);
             granny.contractDestroyed = true;
 
+            // Transitions and granny takes damage
             granny.TransitionToReturning();
             granny.TakeDamageFromContract();
         }
