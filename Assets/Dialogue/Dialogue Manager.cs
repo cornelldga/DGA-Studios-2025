@@ -127,6 +127,13 @@ public class DialogueManager : MonoBehaviour
         {
             gameObject.SetActive(true);
             nameText.text = file.name;
+            if (nameText.text=="Mirage & Ace")
+            {
+                dialogueText.color = Color.white;
+            } else
+            {
+                dialogueText.color = new Color(0.5f, 0.35f, 0.05f, 1.0f);
+            }
             ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
