@@ -96,7 +96,8 @@ public class Ash : Boss
     private Animator animator;
     private SpriteRenderer sprite;
 
-    private bool[] deployedSeeds;
+    [HideInInspector]
+    public bool[] deployedSeeds;
     
 
     /// <summary>
@@ -497,35 +498,52 @@ public class Ash : Boss
     }
 
 
+    //throws turret seed to one of six locations, and tranfers to scatter seed instead if there are already six deployed turrets
     private IEnumerator TurretSeeds()
     {
-        GameObject seed;
-        Seed seedScript;
-        if (UnityEngine.Random.value < .5f)
+        bool cont = false;
+        foreach (var b in deployedSeeds)
         {
-            seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
-            seedScript = seed.GetComponent<Seed>();
-            seedScript.landingTime = fireSeedLandTime;
-            seedScript.arcHeight = fireSeedArcHeight;
-        }
-        else 
-        {
-            seed = Instantiate(cactusSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
-            seedScript = seed.GetComponent<Seed>();
-            seedScript.landingTime = cactusSeedLandTime;
-            seedScript.arcHeight = cactusSeedArcHeight;
-        }
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        /*
-        for (int i = 0; i < 8; i++)
-        {
-            foreach (GameObject en in enemies)
+            if (!b)
             {
-                switch (i)
+                cont = true;
+            }
+
+        }
+        if (cont)
+        {
+            GameObject seed;
+            Seed seedScript;
+            if (UnityEngine.Random.value < .5f)
+            {
+                seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seedScript = seed.GetComponent<Seed>();
+                seedScript.landingTime = fireSeedLandTime;
+                seedScript.arcHeight = fireSeedArcHeight;
+            }
+            else 
+            {
+                seed = Instantiate(cactusSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seedScript = seed.GetComponent<Seed>();
+                seedScript.landingTime = cactusSeedLandTime;
+                seedScript.arcHeight = cactusSeedArcHeight;
+            }
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+       
+    
+            Vector2 vec = Vector2.zero;
+            int r = UnityEngine.Random.Range(0, 8);
+            int pr = -1;
+        // if extra time, check only false entries
+        
+        
+            while (vec == Vector2.zero || deployedSeeds[pr])
+            {
+                switch (r)
                 {
                     case 0:
-                        deployedSeeds[i] = (en.transform);
+                        vec = new Vector2(0, 1);
                         break;
                     case 1:
                         vec = new Vector2(1, 1);
@@ -549,55 +567,20 @@ public class Ash : Boss
                         vec = new Vector2(-1, 1);
                         break;
                 }
+                pr = r;
+                if (deployedSeeds[r])
+                {
+                    r = UnityEngine.Random.Range(0, 8);
+                }
+
+                //vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2));
             }
+
+            deployedSeeds[r] = true;
+            seedScript.locationID = r;
+            seedScript.target = vec.normalized * (stageRadius / 2);
         }
-        */
-
-        Vector2 vec = Vector2.zero;
-        int r = UnityEngine.Random.Range(0, 8);
-        int pr = -1;
-        // if extra time, check only false entries
-        while (vec == Vector2.zero || deployedSeeds[pr] && !deployedSeeds.Equals(new bool[] { true, true, true, true, true, true, true, true }))
-        {
-            switch (r)
-            {
-                case 0:
-                    vec = new Vector2(0, 1);
-                    break;
-                case 1:
-                    vec = new Vector2(1, 1);
-                    break;
-                case 2:
-                    vec = new Vector2(1, 0);
-                    break;
-                case 3:
-                    vec = new Vector2(1, -1);
-                    break;
-                case 4:
-                    vec = new Vector2(0, -1); 
-                    break;
-                case 5:
-                    vec = new Vector2(-1, -1);
-                    break;
-                case 6:
-                    vec = new Vector2(-1, 0);
-                    break;
-                case 7:
-                    vec = new Vector2(-1, 1);
-                    break;
-            }
-            pr = r;
-            if (deployedSeeds[r])
-            { 
-                r = UnityEngine.Random.Range(0, 8);
-            }
-
-            //vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2));
-        }
-
-        deployedSeeds[r] = true;
-        seedScript.target = vec.normalized * (stageRadius / 2);
-        
+        else { TransitionToSeedScatter(); }
         yield return new WaitForSeconds(scatterTime);
     }
 
@@ -669,6 +652,7 @@ public class Ash : Boss
         // Uses state machine instead of base attack
     }
 
+    //Helper method that throws seed in a line from world coord to world coord, of given thickness
     private void seedInLine(Vector2 point1, Vector2 point2, int thickness)
     {
 
