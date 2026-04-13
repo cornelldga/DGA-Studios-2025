@@ -42,7 +42,6 @@ public class Molotov : Projectile
         {
             if (collider.CompareTag("Bush"))
             {
-                Debug.Log("Molotov hit a bush!");
                 Bush bush = collider.GetComponent<Bush>();
                 bush.setFire(true);
             }

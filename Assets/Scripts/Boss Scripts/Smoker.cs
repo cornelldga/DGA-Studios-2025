@@ -75,8 +75,6 @@ public class Smoker : MonoBehaviour
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
 
-        if (rb == null) Debug.Log("player body is null for some reason");
-
 
 
         // Make rigidbody kinematic so player cannot push it
@@ -135,7 +133,6 @@ public class Smoker : MonoBehaviour
         if (target != null && playerInRange)
         {
             Vector2 dist2D = (Vector2)(target.transform.position - transform.position);
-            Debug.Log($"Distance to player: {dist2D.magnitude}, punchDist: {punchDist}");
             if (dist2D.magnitude < punchDist)
             {
                 Vector2 direction = dist2D.normalized;

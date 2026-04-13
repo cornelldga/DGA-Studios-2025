@@ -228,7 +228,6 @@ public class Ash : Boss
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
         {
-            Debug.Log("throwing molotovs");
             ThrowMolotovAtBushes();
             TransitionToWandering();
         }
