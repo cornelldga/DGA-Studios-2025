@@ -68,11 +68,13 @@ public class DialogueManager : MonoBehaviour
 
     private void OnEnable()
     {
+        continueDialogueAction.action.Enable();
         continueDialogueAction.action.performed += ContinueDialogue;
     }
 
     private void OnDisable()
     {
+        continueDialogueAction.action.Disable();
         continueDialogueAction.action.performed -= ContinueDialogue;
     }
 
