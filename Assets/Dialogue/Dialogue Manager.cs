@@ -132,7 +132,7 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.color = Color.white;
             } else
             {
-                dialogueText.color = new Color(0.5f, 0.35f, 0.05f, 1.0f);
+                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
             }
             ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
