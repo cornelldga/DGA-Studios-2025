@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fire_Flower : MonoBehaviour, IDamageable
@@ -5,6 +6,7 @@ public class Fire_Flower : MonoBehaviour, IDamageable
     [SerializeField] private float rotationRate;
     [SerializeField] private int maxHealth;
     [SerializeField] private GameObject fireLine;
+    [SerializeField] private int damage;
     private SpriteRenderer fireRenderer;
     private float timer;
     private float health;
@@ -17,6 +19,7 @@ public class Fire_Flower : MonoBehaviour, IDamageable
         health = maxHealth;
         totalRotation = 0;
         fireRenderer = fireLine.GetComponent<SpriteRenderer>();
+        fireLine.GetComponent<Spine>().damage = damage;
         ogOrder = fireRenderer.sortingOrder;
     }
 
@@ -46,4 +49,11 @@ public class Fire_Flower : MonoBehaviour, IDamageable
             GameObject.Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+    }
+
 }

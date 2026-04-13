@@ -67,6 +67,7 @@ public class Pig : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    BoxCollider2D pigCollider;
 
     public enum State
     {
@@ -77,6 +78,7 @@ public class Pig : MonoBehaviour
 
     void Awake()
     {
+        pigCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         thisCollider = GetComponent<Collider2D>();
@@ -245,6 +247,7 @@ public class Pig : MonoBehaviour
 
     private void TransitionToReturning()
     {
+        pigCollider.enabled = false;
         currentState = State.Returning;
 
         rb.linearVelocity = Vector2.zero;
@@ -253,12 +256,14 @@ public class Pig : MonoBehaviour
 
     private void TransitionToPatrolling()
     {
+        pigCollider.enabled = true;
         currentState = State.Patrolling;
         animator.SetBool("isCharging", false);
     }
 
     private void TransitionToCharging()
     {
+        pigCollider.enabled = true;
         animator.SetBool("isCharging", true);
         currentState = State.Charging;
 
@@ -280,26 +285,23 @@ public class Pig : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
+            currentState = State.Stunned;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            animator.SetBool("isStunned", true);
+        }
+        
+        if (collision.gameObject.CompareTag("Player")){
             GameManager.Instance.player.TakeDamage(ramDamage);
             if (impulseSource != null)
             {
                 impulseSource.GenerateImpulse(playersShakeForce);
             }
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        else
         {
-            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
-
-            if (pigRider != null)
-            {
-                pigRider.TakeDamage(ramDamage);
-                pigRider.removeMark();
-            }
-
-            if (impulseSource != null)
-            {
-                impulseSource.GenerateImpulse(enemyShakeForce);
-            }
+            impulseSource.GenerateImpulse(wallShakeForce);
         }
 
         // Set to stunned state is bull not in bouncy mode
@@ -335,19 +337,9 @@ public class Pig : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool isPlayer = collision.gameObject.CompareTag("Player");
-
-        // When not charging, ignore collisions with player or other enemies.
-        if (currentState != State.Charging && (isPlayer))
-        {
-            Physics2D.IgnoreCollision(collision.collider, thisCollider);
-            ignoredColliders.Add(collision.collider);
-        }
-        // Normal charge mode
-        if (currentState == State.Charging && (((1 << collision.gameObject.layer) & wallLayers) != 0 || isPlayer))
+        if(currentState == State.Charging)
         {
             HandleCharge(collision);
-            gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
     }
 }

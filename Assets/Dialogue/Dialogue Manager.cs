@@ -68,11 +68,13 @@ public class DialogueManager : MonoBehaviour
 
     private void OnEnable()
     {
+        continueDialogueAction.action.Enable();
         continueDialogueAction.action.performed += ContinueDialogue;
     }
 
     private void OnDisable()
     {
+        continueDialogueAction.action.Disable();
         continueDialogueAction.action.performed -= ContinueDialogue;
     }
 
@@ -228,7 +230,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        GameManager.Instance.FreezePlayer(false);
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
     }
@@ -238,6 +239,7 @@ public class DialogueManager : MonoBehaviour
     public void AnimationCloseDialogue()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.FreezePlayer(false);
     }
 
     /// <summary>

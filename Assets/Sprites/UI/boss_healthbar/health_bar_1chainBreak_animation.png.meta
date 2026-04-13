@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: c9d049012a29442c39eb014f12b5dbd2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5599106944788883991
+    second: health_bar_1chainBreak_animation_0
+  - first:
+      213: -5785143732788101585
+    second: health_bar_1chainBreak_animation_1
+  - first:
+      213: 905509351914066362
+    second: health_bar_1chainBreak_animation_2
+  - first:
+      213: 9144534954915312633
+    second: health_bar_1chainBreak_animation_3
+  - first:
+      213: 1928304936175672295
+    second: health_bar_1chainBreak_animation_4
+  - first:
+      213: -5731706295636330091
+    second: health_bar_1chainBreak_animation_5
+  - first:
+      213: 8862837096497373467
+    second: health_bar_1chainBreak_animation_6
+  - first:
+      213: 4757043254370514714
+    second: health_bar_1chainBreak_animation_7
+  - first:
+      213: -6907137498670988552
+    second: health_bar_1chainBreak_animation_8
+  - first:
+      213: -23812432104551367
+    second: health_bar_1chainBreak_animation_9
+  - first:
+      213: 2400210309058972268
+    second: health_bar_1chainBreak_animation_10
+  - first:
+      213: -5190075950685290198
+    second: health_bar_1chainBreak_animation_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_0
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 164
+        width: 284
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e59f6826e9fb42b0800000000000000
+      internalID: -5599106944788883991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_1
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 164
+        width: 299
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2e76901d6a07bfa0800000000000000
+      internalID: -5785143732788101585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_2
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 417
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab1d1ad35f3019c00800000000000000
+      internalID: 905509351914066362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_3
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 161
+        width: 335
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f3bed7771ae7ee70800000000000000
+      internalID: 9144534954915312633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_4
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 144
+        width: 389
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb12637f17b2ca10800000000000000
+      internalID: 1928304936175672295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_5
+      rect:
+        serializedVersion: 2
+        x: 2074
+        y: 82
+        width: 359
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 599f9b3fd73e470b0800000000000000
+      internalID: -5731706295636330091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_6
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 9
+        width: 291
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1161e6c16f1ffa70800000000000000
+      internalID: 8862837096497373467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_7
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 115
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a173cedc2a9640240800000000000000
+      internalID: 4757043254370514714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_8
+      rect:
+        serializedVersion: 2
+        x: 2747
+        y: 104
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f28fe06a0be420a0800000000000000
+      internalID: -6907137498670988552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_9
+      rect:
+        serializedVersion: 2
+        x: 2773
+        y: 105
+        width: 28
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c8b2b18b66baff0800000000000000
+      internalID: -23812432104551367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_10
+      rect:
+        serializedVersion: 2
+        x: 2782
+        y: 107
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ac0b92f824f4120800000000000000
+      internalID: 2400210309058972268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: health_bar_1chainBreak_animation_11
+      rect:
+        serializedVersion: 2
+        x: 2778
+        y: 104
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a210b1acb6529f7b0800000000000000
+      internalID: -5190075950685290198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      health_bar_1chainBreak_animation_0: -5599106944788883991
+      health_bar_1chainBreak_animation_1: -5785143732788101585
+      health_bar_1chainBreak_animation_10: 2400210309058972268
+      health_bar_1chainBreak_animation_11: -5190075950685290198
+      health_bar_1chainBreak_animation_2: 905509351914066362
+      health_bar_1chainBreak_animation_3: 9144534954915312633
+      health_bar_1chainBreak_animation_4: 1928304936175672295
+      health_bar_1chainBreak_animation_5: -5731706295636330091
+      health_bar_1chainBreak_animation_6: 8862837096497373467
+      health_bar_1chainBreak_animation_7: 4757043254370514714
+      health_bar_1chainBreak_animation_8: -6907137498670988552
+      health_bar_1chainBreak_animation_9: -23812432104551367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
