@@ -381,9 +381,9 @@ MonoBehaviour:
   releasePoint: {fileID: 410701497520239722}
   pivot: {fileID: 8547894485091812972}
   magician: {fileID: 0}
-  cooldown: 1
-  knockTime: 1.5
-  punchDist: 3
+  cooldown: 0.5
+  knockTime: 1
+  punchDist: 4
   punchMagnitude: 5
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
@@ -419,9 +419,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7071902628436390820}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
