@@ -21,8 +21,6 @@ public class Smoker : MonoBehaviour
 
     [Tooltip("The player object layer")]
     [SerializeField] LayerMask playerMask;
-
-    private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
     private Animator animator;
@@ -72,7 +70,6 @@ public class Smoker : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
-        collidedWithPlayer = false;
 
         if (rb == null) Debug.Log("player body is null for some reason");
 
