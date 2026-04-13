@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -500, y: 60}
+  m_AnchoredPosition: {x: -1220, y: 60}
   m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3268559691105146711
@@ -420,7 +420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 500, y: 60}
+  m_AnchoredPosition: {x: 1220, y: 60}
   m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8802390223141728779
@@ -665,7 +665,7 @@ MonoBehaviour:
     psi more random
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
-  m_sharedMaterial: {fileID: 282036201269063609, guid: d37196e00db7146fb9d53bd70e9ca471, type: 2}
+  m_sharedMaterial: {fileID: -8123450956610158057, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_text: Fight!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
-  m_sharedMaterial: {fileID: 282036201269063609, guid: d37196e00db7146fb9d53bd70e9ca471, type: 2}
+  m_sharedMaterial: {fileID: -8123450956610158057, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_text: Mirage & Ace
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
-  m_sharedMaterial: {fileID: 282036201269063609, guid: d37196e00db7146fb9d53bd70e9ca471, type: 2}
+  m_sharedMaterial: {fileID: -8123450956610158057, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_text: Back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
-  m_sharedMaterial: {fileID: 282036201269063609, guid: d37196e00db7146fb9d53bd70e9ca471, type: 2}
+  m_sharedMaterial: {fileID: -8123450956610158057, guid: 6874fcbc51a1e40ba9e7967b0eadb435, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
