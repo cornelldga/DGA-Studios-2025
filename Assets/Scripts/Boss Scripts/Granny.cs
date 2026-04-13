@@ -9,7 +9,7 @@ public class Granny : Boss
     {
         Idle, Invincible, HoldingContract, ContractDropped, Scavange, Returning
     }
-    [SerializeField] private State currentState; //TODO  de cereal
+    private State currentState;
 
     [Header("Movement Settings")]
     //Base time to reach target while charging (regular)
@@ -123,7 +123,7 @@ public class Granny : Boss
         currentState = State.Invincible;
         stateTimer = invincibleTime;
         EnableRandomBosses();
-        // TODO replace with animation, color for temp for now
+        // Purple until animation
         sprite.color = Color.purple;
     }
 
@@ -131,7 +131,6 @@ public class Granny : Boss
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
-        // TODO replace with animation, color for temp for now
         sprite.color = Color.white;
     }
     public void TransitionToReturning()
@@ -163,7 +162,6 @@ public class Granny : Boss
 
         if (bosses.Count == 0 && availableBosses.Count == 0)
         {
-            Debug.Log("Contracts Done!");
             gameObject.GetComponent<GrannyPhase2>().enabled = true;
             gameObject.GetComponent<Granny>().enabled = false;
             return;
@@ -171,7 +169,6 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
-            Debug.Log("Double Contract");
             bossActive = true;
             for (int i = 1; i >= 0; i--)
             {
@@ -268,10 +265,9 @@ public class Granny : Boss
             if (currentState == State.Scavange && currentDroppedContracts.Contains(collision.gameObject))
             {
                 currentDroppedContracts.Remove(collision.gameObject);
-                Destroy(collision.gameObject); // TODO Handle contract disappearance, destroy for now
+                Destroy(collision.gameObject);
                 if (currentDroppedContracts.Count <= 0)
                 {
-                    // TODO Handle phase change
                     TransitionToReturning();
                 }
             }
