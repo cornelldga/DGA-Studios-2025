@@ -408,6 +408,7 @@ MonoBehaviour:
   baseSpeed: 4
   speed: 0
   maxHealth: 10
+  baseDamageTakenMultiplier: 1
   damageTakenMultiplier: 1
   whipBaseDamageMultiplier: 1
   changeCooldownTime: 1
@@ -436,6 +437,8 @@ MonoBehaviour:
   midHealthThreshold: 0.6
   criticalThreshold: 0.2
   mixerEffect: {fileID: 2368722963072355761}
+  knockedBack: 0
+  progression: 0
 --- !u!114 &7699641391322968756
 MonoBehaviour:
   m_ObjectHideFlags: 0

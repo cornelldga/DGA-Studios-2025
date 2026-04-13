@@ -4,6 +4,8 @@ using UnityEngine;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -15,6 +17,7 @@ public class Ash : Boss
     {
         Wandering,
         SeedScatter,
+        TurretScatter,
         MolotovAttack,
         TumbleweedSummon,
         Stomping,
@@ -48,7 +51,9 @@ public class Ash : Boss
     [Header("Tumbleweed Summon Timing")]
     [SerializeField] float tumbleweedCooldownMin = 10f;
     [SerializeField] float tumbleweedCooldownMax = 15f;
-
+    [Header("Tumbleweed Spawn")]
+    [SerializeField] GameObject tumbleweedPrefab;
+ 
     [Space(5)]
     [Header("Stomp Settings")]
     [Tooltip("Radius around Ash to detect seeds for stomping")]
@@ -69,11 +74,17 @@ public class Ash : Boss
     [SerializeField] private float basicSeedLandTime;
     [Tooltip("Cactus Seed Prefab")]
     [SerializeField] private GameObject cactusSeedPrefab;
+    [SerializeField] private float cactusSeedArcHeight;
+    [SerializeField] private float cactusSeedLandTime;
     [Tooltip("Fire Flower Seed Prefab")]
     [SerializeField] private GameObject fireFlowerSeedPrefab;
+    [SerializeField] private float fireSeedArcHeight;
+    [SerializeField] private float fireSeedLandTime;
     [SerializeField] int seedRows;
 
     //molotov + bush stuff
+    [Space(5)]
+    [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
     [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
@@ -128,6 +139,9 @@ public class Ash : Boss
             case State.SeedScatter:
                 UpdateSeedScatter();
                 break;
+            case State.TurretScatter:
+                UpdateTurretScatter();
+                break;
             case State.MolotovAttack:
                 UpdateMolotovAttack();
                 break;
@@ -179,7 +193,7 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Handles logic for seed scatter mode.
+    /// Handles logic for seed scatter mode. 
     /// </summary>
     private void UpdateSeedScatter()
     {
@@ -190,6 +204,22 @@ public class Ash : Boss
         }
     }
 
+
+    /// <summary>
+    /// Handles logic for Turret scatter mode. 
+    /// </summary>
+    private void UpdateTurretScatter()
+    {
+        rb.linearVelocity = Vector2.zero;
+        if (stateTimer <= 0)
+        {
+            TransitionToWandering();
+        }
+    }
+
+
+
+
     /// <summary>
     /// Handles logic for molotov attack mode.
     /// </summary>
@@ -198,7 +228,6 @@ public class Ash : Boss
         rb.linearVelocity = Vector2.zero;
         if (stateTimer <= 0)
         {
-            Debug.Log("throwing molotovs");
             ThrowMolotovAtBushes();
             TransitionToWandering();
         }
@@ -261,6 +290,19 @@ public class Ash : Boss
         StartCoroutine(ScatterSeeds());
     }
 
+
+    /// <summary>
+    /// Setting state to Turret Scatter. Uses a coroutine to perform the Turret scattering attack
+    /// </summary>
+    private void TransitionToTurretSeed()
+    {
+        currentState = State.TurretScatter;
+        stateTimer = scatterTime;
+        rb.linearVelocity = Vector2.zero;
+        StartCoroutine(TurretSeeds());
+    }
+
+
     /// <summary>
     /// Setting state to Molotov Attack. Uses a coroutine to perform the molotov throwing attack
     /// </summary>
@@ -319,7 +361,7 @@ public class Ash : Boss
     private void ChooseNextAttack()
     {
         // check for desperation
-        if (GetHealthPercent() <= 0.2f && currentState != State.Desperation)
+        if (currentPhase == 2 && currentState != State.Desperation)
         {
             TransitionToDesperation();
             return;
@@ -329,11 +371,19 @@ public class Ash : Boss
 
         if (attackChoice < 4) 
         {
-            TransitionToSeedScatter();
+            if (GameObject.FindAnyObjectByType<Bush>() != null)
+            {
+                TransitionToMolotovAttack();
+            }
+            else
+            {
+                TransitionToSeedScatter();
+            }
+            
         }
         else
         {
-            TransitionToMolotovAttack();
+            TransitionToTurretSeed();
         }
     }
 
@@ -383,13 +433,13 @@ public class Ash : Boss
         switch(currentPhase)
         {
             case 0:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(1)); // First 2
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
                 break;
             case 1:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 3
+                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
                 break;
             case 2:
-                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(1)); //Last 2
+                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
                 break;
         }
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
@@ -419,7 +469,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0);
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
                 seedInLine(point1, point2, seedRows);
                 seedInLine(-point1, -point2, seedRows);
                 seedInLine(point1, -point2, seedRows);
@@ -430,7 +480,7 @@ public class Ash : Boss
                 point1 = new Vector2(0, 1);
                 point1 = point1.normalized * stageRadius;
                 point2 = new Vector2(1, 0)  ;
-                point2 = point1.normalized * stageRadius;
+                point2 = point2.normalized * stageRadius;
 
                 break;
             default:
@@ -438,13 +488,41 @@ public class Ash : Boss
         }
 
 
-        int[,] seedField =  new int[20 , 10];
-        foreach (int seed in seedField) 
-        { 
-            //seed
-        }
+        
         yield return new WaitForSeconds(scatterTime);
     }
+
+
+    private IEnumerator TurretSeeds()
+    {
+        GameObject seed;
+        Seed seedScript;
+        if (UnityEngine.Random.value < .5f)
+        {
+            seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+            seedScript = seed.GetComponent<Seed>();
+            seedScript.landingTime = fireSeedLandTime;
+            seedScript.arcHeight = fireSeedArcHeight;
+        }
+        else 
+        {
+            seed = Instantiate(cactusSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+            seedScript = seed.GetComponent<Seed>();
+            seedScript.landingTime = cactusSeedLandTime;
+            seedScript.arcHeight = cactusSeedArcHeight;
+        }
+
+        Vector2 vec = Vector2.zero;
+        while (vec == Vector2.zero)
+        {
+            vec = new Vector2(UnityEngine.Random.Range(-1,2), UnityEngine.Random.Range(-1, 2)) ;
+        }
+        seedScript.target= vec.normalized * (stageRadius/2);
+
+        yield return new WaitForSeconds(scatterTime);
+    }
+
+
 
     private IEnumerator ThrowMolotovs()
     {
@@ -455,6 +533,30 @@ public class Ash : Boss
     private IEnumerator SummonTumbleweeds()
     {
         // Placeholder
+        // bulletpattern coroutine
+        // 5.5 , -5.5 (10/12) * pos
+        // get health percent , spawn however many depending on the health percent
+        // direction = point dir
+
+        //
+        for (int i = 0; i < UnityEngine.Random.Range(5, 10); i++) {
+            Vector3 tumblePosition = new Vector3(0, 0, 0);
+            if (i % 2 == 0) { // left
+                tumblePosition = new Vector3((float)-10.5, UnityEngine.Random.Range((float)-5.0,(float)4.0), 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, Quaternion.identity);
+            }
+            else // right
+            {
+                tumblePosition = new Vector3((float)10.5,UnityEngine.Random.Range((float) - 5.0, (float)4.0) , 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0));
+            }
+
+               
+        }
+
+        
+        
+         
         yield return new WaitForSeconds(tumbleweedTime);
     }
 
@@ -508,7 +610,7 @@ public class Ash : Boss
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
                 seedScript.target = currentSeedLocation + th*randStep;
-                randStep = UnityEngine.Random.value / 2 + .5f;
+                randStep = UnityEngine.Random.value/2 + .5f;
             }
             currentSeedLocation += seedStep;
         }
@@ -518,15 +620,18 @@ public class Ash : Boss
     
     {
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
-        Debug.Log(bushes.Length);
-        StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, bushes[(int)UnityEngine.Random.Range(0,bushes.Length)].transform.position));
-       /* foreach (GameObject bush in bushes)
+        //filter out bushes that are already on fire
+        List<GameObject> validBushes = new List<GameObject>();
+        foreach (GameObject b in bushes) {
+            if (!b.GetComponent<Bush>().isFire()) validBushes.Add(b);
+        }
+
+        if (validBushes.Count>0)
         {
-            if (UnityEngine.Random.value > randomPercentageToThrowMolotov) continue; 
-            if (bush.GetComponent<Bush>().isFire()) continue; //skip if bush is already on fire
-            StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, bush.transform.position));
-        } */
-        attackCooldown = molotov.duration;
+            int index = (int)(UnityEngine.Random.value * validBushes.Count);
+            StartCoroutine(molotov.ThrowRoutine(bulletOrigin.position, validBushes[index].transform.position));
+            attackCooldown = molotov.duration;
+        }
     }
 
 }

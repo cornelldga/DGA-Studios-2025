@@ -36,7 +36,6 @@ public class SmokePool : MonoBehaviour
             {
                 Vector2 dir = o.transform.position - playerTransform.position;
                 o.GetComponent<SmokePellet>().Push(dir);
-                Debug.Log((o.transform.position - playerTransform.position).magnitude);
             }
         }
     }

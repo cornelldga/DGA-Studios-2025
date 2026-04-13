@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6679712294362491381}
   - component: {fileID: 5877226256571060791}
   - component: {fileID: 4556636638349663938}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tumbleweed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8636136779359343990
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,7 +83,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +94,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2316961693413251591
 Rigidbody2D:
@@ -137,7 +138,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -173,12 +174,9 @@ MonoBehaviour:
   duration: 0
   damage: 0
   accuracy: 0
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  impactSprite: {fileID: 0}
   fireDamage: 5
   fireDuration: 3
-  animator: {fileID: 0}
 --- !u!95 &4556636638349663938
 Animator:
   serializedVersion: 7
