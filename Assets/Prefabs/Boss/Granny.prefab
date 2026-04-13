@@ -296,27 +296,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granny
-  bossName: Granny
-  maxHealth: 0
-  healthBar: {fileID: 4274816176931949744}
-  healthBarAnimator: {fileID: 8633898269983300228}
+  bossName: Granny, The Mogul
+  maxHealth: 4
+  healthBar: {fileID: 0}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents: []
   currentPhase: 0
   attackRate: 1
-  currentState: 0
   baseTime: 0.8
   collisionRadius: 0
   checkDistance: 0
-  idleTime: 5
-  scavengeTime: 5
-  outTime: 5
-  droppedTime: 5
+  idleTime: 3
+  scavengeTime: 3
+  outTime: 3
+  invincibleTime: 2
+  droppedTime: 3
   bosses:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
   contractSpawnBounds:
   - {x: -5, y: -4}
   - {x: 5, y: 4}
@@ -324,8 +325,10 @@ MonoBehaviour:
   bossActive: 0
   contractTemplate: {fileID: 1756325054254676256, guid: d8ceb90f922d3fe43840117063f8c190, type: 3}
   currentDroppedContracts: []
+  contractDestroyed: 0
   returnTime: 1.5
   arrivalThreshold: 0.1
+  gHealth: 0
 --- !u!114 &7540226778721594879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,9 +343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   bossName: Granny
   maxHealth: 5
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 2861438271388821434}
   healthBarAnimator: {fileID: 0}
-  bossNameText: {fileID: 0}
+  bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
   - 50
@@ -476,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -488,9 +491,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
   m_PrefabInstance: {fileID: 6383838750220342359}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4274816176931949744 stripped
+--- !u!114 &2861438271388821434 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7189083303274518759, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9160934584145638381, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
   m_PrefabInstance: {fileID: 6383838750220342359}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -510,8 +513,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!95 &8633898269983300228 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
-  m_PrefabAsset: {fileID: 0}
