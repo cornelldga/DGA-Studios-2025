@@ -5,12 +5,23 @@ public class Whip : MonoBehaviour, IProjectileInteractable
     [SerializeField] float whipSpeedMultiplier;
     public float damageMultiplier;
     public bool reflecting = false;
+    public int frameNumber = 0;
     /// <summary>
     /// Ends the whip
     /// </summary>
     public void EndWhip()
     {
         GameManager.Instance.player.AnimationEndWhip();
+    }
+
+    public void EnableReflect()
+    {
+        reflecting = true;
+    }
+
+    public void DisableReflect()
+    {
+        reflecting = false;
     }
 
     public bool ProjectileInteraction(Projectile projectile)
