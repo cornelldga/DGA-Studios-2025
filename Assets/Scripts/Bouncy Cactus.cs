@@ -9,6 +9,8 @@ public class BouncyCactus : MonoBehaviour, IProjectileInteractable
     Animator animator;
     [SerializeField] float bounceWaitTime;
     [SerializeField] float bounceForceStrength;
+    [Tooltip("random rotation of applied force")]
+    [SerializeField] float ranDeflectionRange;
 
     [SerializeField] float playerFreezeTime;
 
@@ -19,14 +21,28 @@ public class BouncyCactus : MonoBehaviour, IProjectileInteractable
     }
 
     /// <summary>
+    /// Vector2 rotate function found on Unity forum
+    /// </summary>
+    /// <param name="v">The vector to be rotated</param>
+    /// <param name="delta">The rotation amount</param>
+    /// <returns></returns>
+    public static Vector2 Rotate(Vector2 v, float delta)
+    {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
+    }
+
+    /// <summary>
     /// Flips the rigidbody of the colliding object away from the cactus at a specified bounce force
     /// </summary>
     void Bounce(Rigidbody2D rb)
     {
         Vector2 bounceDir = (rb.position - new Vector2(transform.position.x, transform.position.y)).normalized;
-        Debug.Log(rb.linearVelocity);
+        bounceDir = Rotate(bounceDir, Random.Range(-ranDeflectionRange, ranDeflectionRange));
         rb.linearVelocity = bounceDir * bounceForceStrength;
-        Debug.Log(rb.linearVelocity);
+
     }
     /// <summary>
     /// Starts the bounce animation and resets the animation timer
@@ -44,8 +60,8 @@ public class BouncyCactus : MonoBehaviour, IProjectileInteractable
         Vector2 bounceDir = (rb.position - new Vector2(transform.position.x, transform.position.y)).normalized;
 
         float angle = Mathf.Atan2(bounceDir.y, bounceDir.x) * Mathf.Rad2Deg;
-        projectile.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        rb.linearVelocity = bounceDir * rb.linearVelocity.magnitude;
+        projectile.transform.rotation = Quaternion.Euler(0f, 0f, angle + Random.Range(-ranDeflectionRange, ranDeflectionRange));
+        rb.linearVelocity = rb.linearVelocity.magnitude * projectile.transform.right;
         return false;
     }
 

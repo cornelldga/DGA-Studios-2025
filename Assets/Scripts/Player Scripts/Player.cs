@@ -20,7 +20,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float maxHealth;
     private float health;
     [Tooltip("Multiplier for damage taken")]
-    public float damageTakenMultiplier;
+    public float baseDamageTakenMultiplier;
+    [HideInInspector] public float damageTakenMultiplier;
     [Tooltip("Percent damage dealt back from an enemy projectile")]
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
@@ -401,6 +402,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!invulnerable && damage > 0)
         {
+            invulnerable = true;
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
@@ -417,7 +419,6 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     IEnumerator Invulnerability()
     {
-        invulnerable = true;
         sprite.color = Color.red;
         yield return new WaitForSeconds(invulnerabilityTime);
         sprite.color = Color.white;
