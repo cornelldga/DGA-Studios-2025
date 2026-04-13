@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Diagnostics;
 
 /// <summary>
 /// The types of dialogue
@@ -148,8 +149,16 @@ public class DialogueManager : MonoBehaviour
             DisplayNextLine();
         } else
         {
-            // Automatic entry into the saloon
-            GameManager.Instance.LoadScene(scene);
+            // Automatic player loadout
+            if (scene=="Loadout")
+            {
+                EndDialogue();
+                GameManager.Instance.ToggleLoadoutManager(true);
+            } else
+            {
+                // Automatic entry/exit for the saloon
+                GameManager.Instance.LoadScene(scene); 
+            }
         }
     }
 
@@ -284,14 +293,7 @@ public class DialogueManager : MonoBehaviour
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        if (nameText.text == "Loadout"){
-            EndDialogue();
-            GameManager.Instance.ToggleLoadoutManager(true);
-        }
-        else
-        {
-            GameManager.Instance.LoadScene(sceneName);
-        }
+         GameManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>
