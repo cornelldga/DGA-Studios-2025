@@ -2,12 +2,17 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "Hey! Watch it, buddy! You almost knocked over my plant!",
+            "dialogueText": "Hey! Watch it, buddy! You almost knocked over Granny's favorite plant!",
             "emotion": 0,
             "nextDialogueID": "0_fight"
         }, {
             "dialogueID": "0_fight",
-            "dialogueText": "You wanna go? I'll show you who's boss around here!",
+            "dialogueText": "As if you're not causing enough problems in this town. You're nothing but a no-good troublemaker.",
+            "emotion": 0,
+            "nextDialogueID": "1_fight"
+        }, {
+            "dialogueID": "1_fight",
+            "dialogueText": "I oughta kick you out of this town once and for all. You gonna face me or what?",
             "emotion": 0,
             "nextDialogueID": ""
         }
