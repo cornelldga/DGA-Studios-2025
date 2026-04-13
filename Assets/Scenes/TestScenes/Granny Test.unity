@@ -348,6 +348,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+--- !u!1 &406298984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+  m_PrefabInstance: {fileID: 755719333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &416365286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18924,7 +18929,11 @@ PrefabInstance:
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 1357121535}
+      objectReference: {fileID: 1314371906}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: bosses.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: healthBarAnimator
       value: 
@@ -18932,19 +18941,19 @@ PrefabInstance:
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: 'bosses.Array.data[0]'
       value: 
-      objectReference: {fileID: 1122912503}
+      objectReference: {fileID: 2083734773}
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: 'bosses.Array.data[1]'
       value: 
-      objectReference: {fileID: 2083734773}
+      objectReference: {fileID: 1884702794}
     - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: 'bosses.Array.data[2]'
       value: 
-      objectReference: {fileID: 1884702794}
-    - target: {fileID: 3596200352137737185, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1122912503}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: 'bosses.Array.data[3]'
+      value: 
+      objectReference: {fileID: 406298984}
     - target: {fileID: 4556595847925104010, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_Name
       value: Granny
@@ -19222,10 +19231,10 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.89263654, y: 1.4875001}
   m_EdgeRadius: 0
---- !u!114 &1357121535 stripped
+--- !u!114 &1314371906 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2100067247850913026, guid: b5df1dfad98579142aaceedcc604cb03, type: 3}
-  m_PrefabInstance: {fileID: 1078675783}
+  m_CorrespondingSourceObject: {fileID: 5187320019946879446, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+  m_PrefabInstance: {fileID: 1074874789}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
