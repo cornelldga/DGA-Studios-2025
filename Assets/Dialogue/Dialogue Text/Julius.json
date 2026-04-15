@@ -2,18 +2,18 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "You're the new bar owner, right? Trying to encroach on our turf or something?",
+            "dialogueText": "Hey, kid! You think you can just waltz in here and challenge us old-timers?",
             "emotion": 0,
             "nextDialogueID": "1_start"
         },
         {
             "dialogueID": "1_start",
-            "dialogueText": "I like what you've done with the place, but I can't let you take our customers.",
+            "dialogueText": "We were here before you and we'll be here long after you're gone.",
             "emotion": 0,
             "nextDialogueID": "2_start"
         }, {
             "dialogueID": "2_start",
-            "dialogueText": "So what's it gonna be, lad?",
+            "dialogueText": "Just 'cause I'm old doesn't mean I can't fend off you young up-and-comers.",
             "emotion": 0,
             "nextDialogueID": ""
         }

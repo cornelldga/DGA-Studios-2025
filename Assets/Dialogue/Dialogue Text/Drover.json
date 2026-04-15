@@ -2,17 +2,17 @@
     "dialogueLines": [
         {
             "dialogueID": "0_start",
-            "dialogueText": "Hey, kid. Feel like gambling?",
+            "dialogueText": "You're the new bar owner, eh? Trying to encroach on our turf?",
             "emotion": 0,
             "nextDialogueID": "0_pay"
         }, {
             "dialogueID": "0_pay",
-            "dialogueText": "Let's say you and I have a little scuffle. If I win, I get unlimited drinks.",
+            "dialogueText": "Nice place and all, but can't let you take our customers. She'll throw a fit.",
             "emotion": 0,
             "nextDialogueID": "0_fight"
         }, {
             "dialogueID": "0_fight",
-            "dialogueText": "If you win ... well, you can pick. What do you say?",
+            "dialogueText": "So what's it gonna be, lad? We gonna hash it out?",
             "emotion": 0,
             "nextDialogueID": ""
         }
