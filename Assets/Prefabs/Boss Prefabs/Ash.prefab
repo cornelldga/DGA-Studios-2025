@@ -236,8 +236,8 @@ MonoBehaviour:
   - 0.25
   currentPhase: 0
   attackRate: 1
-  currentState: 0
-  wanderSpeed: 4
+  currentState: 1
+  wanderSpeed: 3
   wanderRadius: 4
   wanderTime: 3
   scatterTime: 1.5
@@ -247,6 +247,15 @@ MonoBehaviour:
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
   tumbleweedPrefab: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+  orbitingTumbleweedPrefab: {fileID: 8745428492163385535, guid: 66f52a1be1b372e45a0fe1f1390e8ba5, type: 3}
+  lowestSpawnPoint: -4.5
+  highestSpawnPoint: 4.5
+  leftBoundary: -10.5
+  rightBoundary: 10.5
+  numOrbitingPhaseOne: 2
+  numOrbitingPhaseTwo: 3
+  numOrbitingPhaseThree: 4
+  orbitRadius: 2
   stompRadius: 50
   stageCenter: {x: 0, y: 0}
   stageRadius: 6

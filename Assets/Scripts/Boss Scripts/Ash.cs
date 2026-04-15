@@ -66,7 +66,7 @@ public class Ash : Boss
     [SerializeField] private float orbitRadius = 1f;
 
 
-    private int numTumbleweeds = 2; // will eventually be based on what phase it is
+    [SerializeField] int numTumbleweeds = 2; // will eventually be based on what phase it is
     private GameObject[] orbitingTumbleweeds = new GameObject[5]; // size should be maximum spawned in phase 3
  
     [Space(5)]
@@ -110,6 +110,7 @@ public class Ash : Boss
     private Vector2 wanderTarget;
     private Animator animator;
     private SpriteRenderer sprite;
+    private int scatterCount;
 
     [HideInInspector]
     public bool[] deployedSeeds;
@@ -130,6 +131,7 @@ public class Ash : Boss
         SetNewWanderTarget();
         tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
         deployedSeeds = new bool[8];
+        scatterCount = 0;
     }
 
     /// <summary>
@@ -392,18 +394,21 @@ public class Ash : Boss
         } */
 
         // check for all tumbleweeds destroyed
+
         
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
 
         if (attackChoice < 4) 
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null && UnityEngine.Random.value < .5f)
+            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount == currentPhase + 1)
             {
                 TransitionToMolotovAttack();
+                scatterCount = 0;
             }
             else
             {
+                scatterCount++;
                 TransitionToSeedScatter();
             }
             
