@@ -13130,6 +13130,14 @@ PrefabInstance:
       value: Tumbleweed
       objectReference: {fileID: 0}
     - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.4128814
       objectReference: {fileID: 0}
@@ -13168,6 +13176,10 @@ PrefabInstance:
     - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679712294362491381, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8636136779359343990, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_SortingOrder
@@ -13400,6 +13412,10 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: orbitRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: stageRadius
       value: 5
       objectReference: {fileID: 0}
@@ -13411,6 +13427,10 @@ PrefabInstance:
       propertyPath: bulletOrigin
       value: 
       objectReference: {fileID: 1916358624}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: currentState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: leftBoundary
       value: -10.5
@@ -13443,6 +13463,18 @@ PrefabInstance:
       propertyPath: basicSeedArcHeight
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: tumbleweedCooldownMax
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: tumbleweedCooldownMin
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: orbitingTumbleweedPrefab
+      value: 
+      objectReference: {fileID: 8745428492163385535, guid: 66f52a1be1b372e45a0fe1f1390e8ba5, type: 3}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: randomPercentageToThrowMolotov
       value: 0.1
