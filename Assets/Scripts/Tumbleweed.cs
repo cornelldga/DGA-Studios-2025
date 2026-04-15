@@ -9,10 +9,6 @@ public class Tumbleweed : Bullet
     [SerializeField] private float fireDamage = 5f;
     [SerializeField] private float fireDuration = 1f;
 
-    
-
-
-
     // sets the current tumbleweed to be on fire (increased damage decreased duration)
     private void setFire()
     {
@@ -33,9 +29,6 @@ public class Tumbleweed : Bullet
     {
         transform.Rotate(Vector3.back * 360f * Time.deltaTime);
     }
-
-
-
 
     // <summary>
     // collision handling, if interacts with fire should be set on fire

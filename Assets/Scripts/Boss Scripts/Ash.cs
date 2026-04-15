@@ -51,6 +51,7 @@ public class Ash : Boss
     [Header("Tumbleweed Summon Timing")]
     [SerializeField] float tumbleweedCooldownMin = 10f;
     [SerializeField] float tumbleweedCooldownMax = 15f;
+    [SerializeField] private int numTumbleweeds = 2; // will eventually be based on what phase it is
     [Header("Tumbleweed Spawn")]
     [SerializeField] GameObject tumbleweedPrefab;
     [SerializeField] GameObject orbitingTumbleweedPrefab;
