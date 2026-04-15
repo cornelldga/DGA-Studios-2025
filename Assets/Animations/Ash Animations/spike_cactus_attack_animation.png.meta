@@ -1,0 +1,377 @@
+fileFormatVersion: 2
+guid: 5a0d1394b7fadff43bdbe2e594f3f8eb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1282900901681734209
+    second: spike_cactus_attack_animation_0
+  - first:
+      213: 1231816137771107128
+    second: spike_cactus_attack_animation_1
+  - first:
+      213: 5956742605186050467
+    second: spike_cactus_attack_animation_2
+  - first:
+      213: 1430392386455725000
+    second: spike_cactus_attack_animation_3
+  - first:
+      213: -2007070141443472441
+    second: spike_cactus_attack_animation_4
+  - first:
+      213: 6476032509120782716
+    second: spike_cactus_attack_animation_5
+  - first:
+      213: 3192039394151623340
+    second: spike_cactus_attack_animation_6
+  - first:
+      213: 7397321551660868776
+    second: spike_cactus_attack_animation_7
+  - first:
+      213: 5570522236054583009
+    second: spike_cactus_attack_animation_8
+  - first:
+      213: 6236699949191875422
+    second: spike_cactus_attack_animation_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 10
+        width: 225
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbd5b315d68323ee0800000000000000
+      internalID: -1282900901681734209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 6
+        width: 149
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 833c078304a481110800000000000000
+      internalID: 1231816137771107128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_2
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 11
+        width: 254
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a9ac88d6d99aa250800000000000000
+      internalID: 5956742605186050467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_3
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 16
+        width: 186
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c3ed140c46c9d310800000000000000
+      internalID: 1430392386455725000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_4
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 127
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c308fb17547524e0800000000000000
+      internalID: -2007070141443472441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_5
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 17
+        width: 156
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71a60c614d7fd950800000000000000
+      internalID: 6476032509120782716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_6
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 129
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caae575bae66c4c20800000000000000
+      internalID: 3192039394151623340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_7
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 16
+        width: 178
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a4661032c098a660800000000000000
+      internalID: 7397321551660868776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_8
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 110
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e6b275b5787e4d40800000000000000
+      internalID: 5570522236054583009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spike_cactus_attack_animation_9
+      rect:
+        serializedVersion: 2
+        x: 1496
+        y: 108
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b47427f853d8650800000000000000
+      internalID: 6236699949191875422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spike_cactus_attack_animation_0: -1282900901681734209
+      spike_cactus_attack_animation_1: 1231816137771107128
+      spike_cactus_attack_animation_2: 5956742605186050467
+      spike_cactus_attack_animation_3: 1430392386455725000
+      spike_cactus_attack_animation_4: -2007070141443472441
+      spike_cactus_attack_animation_5: 6476032509120782716
+      spike_cactus_attack_animation_6: 3192039394151623340
+      spike_cactus_attack_animation_7: 7397321551660868776
+      spike_cactus_attack_animation_8: 5570522236054583009
+      spike_cactus_attack_animation_9: 6236699949191875422
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

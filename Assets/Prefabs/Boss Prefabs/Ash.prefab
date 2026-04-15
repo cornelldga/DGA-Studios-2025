@@ -156,6 +156,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &3070000242549314754
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -201,6 +202,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7528028149110291506, guid: 194e7f7a4f6d41548a6bead748fd7c09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -210,7 +212,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8078844864008200868
 MonoBehaviour:
@@ -225,16 +226,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
   bossName: Ash
-  maxHealth: 10
+  maxHealth: 120
   healthBar: {fileID: 159719163656866947}
+  healthBarAnimator: {fileID: 3610685219928371153}
   bossNameText: {fileID: 62901968422666060}
-  bulletOrigin: {fileID: 0}
-  phasePercents: []
+  bulletOrigin: {fileID: 4606974957378827531}
+  phasePercents:
+  - 0.5
+  - 0.25
   currentPhase: 0
   attackRate: 1
   currentState: 0
-  wanderSpeed: 2
-  wanderRadius: 5
+  wanderSpeed: 3
+  wanderRadius: 4
   wanderTime: 3
   scatterTime: 1.5
   molotovTime: 2
@@ -242,7 +246,25 @@ MonoBehaviour:
   stompTime: 1.5
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
-  stompRadius: 3
+  tumbleweedPrefab: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+  stompRadius: 12
+  stageCenter: {x: 0, y: 0}
+  stageRadius: 9
+  fireRadius: 0.6
+  basicSeedPrefab: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
+  basicSeedArcHeight: 5
+  basicSeedLandTime: 1.5
+  cactusSeedPrefab: {fileID: 933965916132446560, guid: 75c4cf5baf32fac41b01aa40b7ddeb22, type: 3}
+  cactusSeedArcHeight: 2
+  cactusSeedLandTime: 2
+  fireFlowerSeedPrefab: {fileID: 933965916132446560, guid: 48d81145ff9c71245890f981936d17f7, type: 3}
+  fireSeedArcHeight: 4
+  fireSeedLandTime: 1
+  seedRows: 4
+  molotov: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
+  bushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
+  randomPercentageToThrowMolotov: 0.1
+  deployedSeeds: 
 --- !u!1001 &2116001527165509890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +289,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Ash
       objectReference: {fileID: 0}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -390,6 +420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!95 &3610685219928371153 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 2116001527165509890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5489353766401137639 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}

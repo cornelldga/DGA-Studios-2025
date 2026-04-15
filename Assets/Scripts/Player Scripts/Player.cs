@@ -20,7 +20,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float maxHealth;
     private float health;
     [Tooltip("Multiplier for damage taken")]
-    public float damageTakenMultiplier;
+    public float baseDamageTakenMultiplier;
+    [HideInInspector] public float damageTakenMultiplier;
     [Tooltip("Percent damage dealt back from an enemy projectile")]
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour, IDamageable
     float changeCooldown;
     float whipCooldown;
     private bool whipping;
+    [HideInInspector] public bool knockedBack;
 
     int baseIndex;
     int mixerIndex;
@@ -87,6 +89,8 @@ public class Player : MonoBehaviour, IDamageable
     Base backupBase;
     Mixer selectedMixer;
     Mixer backupMixer;
+
+    public int progression;
 
     void Start()
     {
@@ -119,6 +123,7 @@ public class Player : MonoBehaviour, IDamageable
         playerHealthText.SetText(health.ToString());
 
         isAlive = true;
+        knockedBack = false;
         GameManager.Instance.player = this;
     }
 
@@ -290,6 +295,7 @@ public class Player : MonoBehaviour, IDamageable
         whipAnimator.Play("Whip", 0, 0f);
         AudioManager.Instance.PlaySFX(SFXKey.WHIPHIT, true);
         StartCoroutine(nameof(ToggleWhipUI));
+        if (SmokePool.Instance != null) SmokePool.Instance.OnWhip(gameObject.transform);
     }
     /// <summary>
     /// Function called by Animator to end the whip
@@ -329,6 +335,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Move()
     {
+        if (knockedBack) return;
         Vector2 direction = new(moveDirection.x, moveDirection.y);
         direction = direction.normalized;
         rb.linearVelocity = direction * speed;
@@ -395,6 +402,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!invulnerable && damage > 0)
         {
+            invulnerable = true;
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
@@ -411,7 +419,6 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     IEnumerator Invulnerability()
     {
-        invulnerable = true;
         sprite.color = Color.red;
         yield return new WaitForSeconds(invulnerabilityTime);
         sprite.color = Color.white;
@@ -450,4 +457,23 @@ public class Player : MonoBehaviour, IDamageable
         var main = mixerEffect.main;
         main.startColor = mixerColor;
     }
+
+    /// <summary>
+    /// Save player data
+    /// </summary>
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+
+    /// <summary>
+    /// Load player data
+    /// </summary>
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        progression = data.progression;
+    }
+
 }

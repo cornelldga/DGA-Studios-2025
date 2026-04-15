@@ -37,7 +37,7 @@ public class DrillHole : MonoBehaviour, IDamageable
         if (deleteTime <= 0)
         {
             Destroy(gameObject);
-        }  
+        }
     }
 
     public void TakeDamage(float damage)
@@ -49,7 +49,7 @@ public class DrillHole : MonoBehaviour, IDamageable
     {
         return rb.position;
     }
-    
+
     /// <summary>
     /// Initializes debris projectiles evenly in a ring around the hole that damage player
     /// Should use maxRadius to specify how far projectiles will travel

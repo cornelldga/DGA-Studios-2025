@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Diagnostics;
 
 /// <summary>
 /// The types of dialogue
@@ -68,11 +69,13 @@ public class DialogueManager : MonoBehaviour
 
     private void OnEnable()
     {
+        continueDialogueAction.action.Enable();
         continueDialogueAction.action.performed += ContinueDialogue;
     }
 
     private void OnDisable()
     {
+        continueDialogueAction.action.Disable();
         continueDialogueAction.action.performed -= ContinueDialogue;
     }
 
@@ -126,6 +129,13 @@ public class DialogueManager : MonoBehaviour
         {
             gameObject.SetActive(true);
             nameText.text = file.name;
+            if (nameText.text=="Mirage & Ace")
+            {
+                dialogueText.color = Color.white;
+            } else
+            {
+                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
+            }
             ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
@@ -146,6 +156,18 @@ public class DialogueManager : MonoBehaviour
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
+        } else
+        {
+            // Automatic player loadout
+            if (scene=="Loadout")
+            {
+                EndDialogue();
+                GameManager.Instance.ToggleLoadoutManager(true);
+            } else
+            {
+                // Automatic entry/exit for the saloon
+                GameManager.Instance.LoadScene(scene); 
+            }
         }
     }
 
@@ -228,7 +250,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        GameManager.Instance.FreezePlayer(false);
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
     }
@@ -238,6 +259,7 @@ public class DialogueManager : MonoBehaviour
     public void AnimationCloseDialogue()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.FreezePlayer(false);
     }
 
     /// <summary>
@@ -280,14 +302,7 @@ public class DialogueManager : MonoBehaviour
     {
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
-        if (nameText.text == "Loadout"){
-            EndDialogue();
-            GameManager.Instance.ToggleLoadoutManager(true);
-        }
-        else
-        {
-            GameManager.Instance.LoadScene(sceneName);
-        }
+         GameManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>

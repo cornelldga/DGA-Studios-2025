@@ -408,6 +408,7 @@ MonoBehaviour:
   baseSpeed: 4
   speed: 0
   maxHealth: 10
+  baseDamageTakenMultiplier: 1
   damageTakenMultiplier: 1
   whipBaseDamageMultiplier: 1
   changeCooldownTime: 1
@@ -436,6 +437,8 @@ MonoBehaviour:
   midHealthThreshold: 0.6
   criticalThreshold: 0.2
   mixerEffect: {fileID: 2368722963072355761}
+  knockedBack: 0
+  progression: 0
 --- !u!114 &7699641391322968756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +510,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 589cd4a0bc13d5e4fbcf4d1c2b8d906f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

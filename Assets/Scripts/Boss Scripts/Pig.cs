@@ -274,9 +274,8 @@ public class Pig : MonoBehaviour
         }
         else
         {
-<<<<<<< Updated upstream
             impulseSource.GenerateImpulse(wallShakeForce);
-=======
+
             PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
 
             if (pigRider != null)
@@ -306,7 +305,6 @@ public class Pig : MonoBehaviour
             // Recharge on bounce
             TransitionToCharging();
             ChargeSpecificDirection(Random.onUnitSphere);
->>>>>>> Stashed changes
         }
         StartCoroutine(StunCoroutine());
     }

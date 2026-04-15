@@ -12,8 +12,9 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [Tooltip("What the boss health bar name is set to")]
     [SerializeField] string bossName;
     [SerializeField] protected float maxHealth;
-    [SerializeField] public float health;
-    [SerializeField] protected Image healthBar;
+    protected float health;
+    [SerializeField] Image healthBar;
+    [SerializeField] protected Animator healthBarAnimator;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 

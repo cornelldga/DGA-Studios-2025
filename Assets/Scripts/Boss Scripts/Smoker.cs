@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Smoker : MonoBehaviour
@@ -8,6 +9,23 @@ public class Smoker : MonoBehaviour
     [SerializeField] float spinSpeed = 50;
 
     private float ogSpeed;
+    private SpriteRenderer spriteRenderer;
+
+    [Header("Movement")]
+    [Tooltip("Reference to the player transform to move towards")]
+    [HideInInspector] Transform player;
+    [Tooltip("How strongly the smoker is turns towards the player")]
+    [SerializeField] float turnSpeed = 2f;
+    [Tooltip("How quickly the smoker moves to the player")]
+    [SerializeField] float speed = 3f;
+
+    [Tooltip("The player object layer")]
+    [SerializeField] LayerMask playerMask;
+
+    private bool collidedWithPlayer;
+    private Vector2 currentVelocity;
+    private Rigidbody2D rb;
+    private Animator animator;
 
     //How fast should smoke be shot out of smoker pipe.
     [SerializeField] float pelletSpeed = 3;
@@ -21,6 +39,17 @@ public class Smoker : MonoBehaviour
     //A transform centered on the smoker to allow for 360 smoking.
     [SerializeField] Transform pivot;
     [SerializeField] TheMagician magician;
+
+    [Header("Punch Settings")]
+    [Tooltip("How long must pass before this can perform another punch")]
+    private bool playerInRange = false;
+    [SerializeField] float cooldown;
+    [SerializeField] float knockTime;
+    [SerializeField] float punchDist;
+    [SerializeField] float punchMagnitude;
+
+    private bool isPunching;
+
 
 
     [Header("Stages")]
@@ -40,6 +69,118 @@ public class Smoker : MonoBehaviour
         first = true;
         hidStage = true;
         ogSpeed = spinSpeed;
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        spriteRenderer.flipX = false;
+        collidedWithPlayer = false;
+
+
+
+        // Make rigidbody kinematic so player cannot push it
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0;
+        }
+    }
+
+    /// <summary>
+    /// Physics update for following the player
+    /// </summary>
+    void FixedUpdate()
+    {
+        if (player == null && GameManager.Instance?.player != null)
+            player = GameManager.Instance.player.transform;
+
+        if (rb != null && player != null && !isPunching)
+        {
+            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+            Vector2 desiredVelocity = direction * speed;
+            currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+
+            // Flip sprite based on player position
+            if (spriteRenderer != null)
+            {
+                if (player.position.x < transform.position.x)
+                {
+                    spriteRenderer.flipX = false; // Player is to the left
+                }
+                else
+                {
+                    spriteRenderer.flipX = true; // Player is to the right
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// waits for cooldown seconds then attempts punch
+    /// </summary>
+    IEnumerator PunchRoutine(GameObject target)
+    {
+        isPunching = true;
+        rb.linearVelocity = Vector2.zero;
+        currentVelocity = Vector2.zero;
+        animator.SetBool("Walking", false);
+
+        Player playerScript = target.GetComponent<Player>();
+        if (playerScript == null) { isPunching = false; yield break; }
+
+        yield return new WaitForSeconds(cooldown);
+
+        if (target != null && playerInRange)
+        {
+            Vector2 dist2D = (Vector2)(target.transform.position - transform.position);
+            if (dist2D.magnitude < punchDist)
+            {
+                Vector2 direction = dist2D.normalized;
+                playerScript.knockedBack = true;
+                Rigidbody2D playerBody = target.GetComponent<Rigidbody2D>();
+                float pastDamping = playerBody.linearDamping;
+                playerBody.linearDamping = 3f;
+                playerBody.AddForce(direction * punchMagnitude, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(knockTime);
+                playerBody.linearDamping = pastDamping;
+                playerScript.knockedBack = false;
+            }
+        }
+
+        isPunching = false;
+    }
+
+    /// <summary>
+    /// If there is a collision with the player, will activate punch
+    /// </summary>
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            playerInRange = true;
+            StartCoroutine(PunchRoutine(other.gameObject));
+        }
+    }
+
+    /// <summary>
+    /// While colliding with the player, starts the punch. Can punch again.
+    /// </summary>
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            playerInRange = true;
+            StartCoroutine(PunchRoutine(other.gameObject));
+        }
+    }
+
+    /// <summary>
+    /// Cant punch until player is in the range again.
+    /// </summary>
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if ((playerMask.value & (1 << other.gameObject.layer)) > 0)
+            playerInRange = false;
     }
 
     // Update is called once per frame
@@ -48,8 +189,12 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void Update()
     {
+
+
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
+        animator.SetBool("Walking", currentVelocity.magnitude > 0.1f);
+        
         if (magician.currentStage == Stage.Backstage )
         {
             if(smokeTimer <= 0 & !first)
@@ -75,7 +220,6 @@ public class Smoker : MonoBehaviour
 
                         break;
                     }
-                        
                 
                     ObscureStage();
                 }
@@ -107,6 +251,7 @@ public class Smoker : MonoBehaviour
                 rb.linearVelocity = direction * pelletSpeed * UnityEngine.Random.Range(0.7f, 1.0f) / (i+1);
                 rb.angularVelocity = UnityEngine.Random.Range(-30f, 30f);
             }
+            SmokePool.Instance.AddToPool(pellet);
         }
     }
 
@@ -180,4 +325,6 @@ public class Smoker : MonoBehaviour
         hidStage = true;
     }
 
+
 }
+
