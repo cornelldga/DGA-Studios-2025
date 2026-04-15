@@ -1,22 +1,28 @@
 fileFormatVersion: 2
-guid: dbc9a525cad9a464492a435d211717cc
+guid: a029393db4be14618a3cd16088e732bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8479846847533919887
-    second: granny_idle_animation_0
+      213: -1855828157407608993
+    second: single_sheet_0
   - first:
-      213: 6832567034247790384
-    second: granny_idle_animation_1
+      213: -6875741327010385854
+    second: single_sheet_1
   - first:
-      213: 6895579504248709044
-    second: granny_idle_animation_2
+      213: -808683969346787223
+    second: single_sheet_2
   - first:
-      213: 2142427443755984031
-    second: granny_idle_animation_3
+      213: 66312669870901474
+    second: single_sheet_3
   - first:
-      213: 4587086844368294202
-    second: granny_idle_animation_4
+      213: 2265503136695756585
+    second: single_sheet_4
+  - first:
+      213: -2736807465886627211
+    second: single_sheet_5
+  - first:
+      213: 6492216993889900894
+    second: single_sheet_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,106 +114,159 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: granny_idle_animation_1
+      name: single_sheet_0
       rect:
         serializedVersion: 2
-        x: 183
+        x: 187
         y: 0
-        width: 146
-        height: 178
+        width: 139
+        height: 171
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 03f3264648722de50800000000000000
-      internalID: 6832567034247790384
+      spriteID: f5f3d899f16ce36e0800000000000000
+      internalID: -1855828157407608993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: granny_idle_animation_2
+      name: single_sheet_1
       rect:
         serializedVersion: 2
-        x: 694
+        x: 699
         y: 0
-        width: 148
-        height: 178
+        width: 139
+        height: 170
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4bf5537560502bf50800000000000000
-      internalID: 6895579504248709044
+      spriteID: 240b21c31b57490a0800000000000000
+      internalID: -6875741327010385854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: granny_idle_animation_3
+      name: single_sheet_2
       rect:
         serializedVersion: 2
-        x: 1206
+        x: 1211
         y: 0
-        width: 148
-        height: 176
+        width: 139
+        height: 173
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f94af16b86e6bbd10800000000000000
-      internalID: 2142427443755984031
+      spriteID: 9682887e63af6c4f0800000000000000
+      internalID: -808683969346787223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: granny_idle_animation_4
+      name: single_sheet_3
       rect:
         serializedVersion: 2
-        x: 1719
+        x: 1723
         y: 0
-        width: 146
+        width: 139
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e843cb95079be000800000000000000
+      internalID: 66312669870901474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: single_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 2235
+        y: 0
+        width: 139
         height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3190787e2b98af30800000000000000
-      internalID: 4587086844368294202
+      spriteID: 927a844891fa07f10800000000000000
+      internalID: 2265503136695756585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: single_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2747
+        y: 0
+        width: 139
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57ac0392c18e40ad0800000000000000
+      internalID: -2736807465886627211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: single_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 3259
+        y: 0
+        width: 139
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59df8d65fcf81a50800000000000000
+      internalID: 6492216993889900894
       vertices: []
       indices: 
       edges: []
@@ -216,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 443d7aedfed7a46249bb76b77c857085
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -226,11 +285,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      granny_idle_animation_0: 8479846847533919887
-      granny_idle_animation_1: 6832567034247790384
-      granny_idle_animation_2: 6895579504248709044
-      granny_idle_animation_3: 2142427443755984031
-      granny_idle_animation_4: 4587086844368294202
+      single_sheet_0: -1855828157407608993
+      single_sheet_1: -6875741327010385854
+      single_sheet_2: -808683969346787223
+      single_sheet_3: 66312669870901474
+      single_sheet_4: 2265503136695756585
+      single_sheet_5: -2736807465886627211
+      single_sheet_6: 6492216993889900894
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

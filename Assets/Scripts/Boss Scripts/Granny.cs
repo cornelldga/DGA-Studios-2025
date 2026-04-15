@@ -212,6 +212,9 @@ public class Granny : Boss
         currentSpeed = (rb.position - new Vector2(nearestContract.transform.position.x, nearestContract.transform.position.y)).magnitude / baseTime;
         stateTimer = scavengeTime;
         currentState = State.Scavange;
+
+        ResetAnimations();
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateScavenge()
@@ -301,6 +304,17 @@ public class Granny : Boss
     public void TakeDamageFromContract()
     {
         base.TakeDamage(1);
+    }
+
+    private void ResetAnimations()
+    {
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isSingle", false);
+        animator.SetBool("isSingleIdle", false);
+        animator.SetBool("isDouble", false);
+        animator.SetBool("isDoubleIdle", false);
+        animator.SetBool("isFalling", false);
+        animator.SetBool("isDead", false);
     }
 
     /// <summary>
