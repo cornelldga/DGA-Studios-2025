@@ -306,12 +306,13 @@ public class PigRider : Boss
     /// </summary>
     public override void SetPhase()
     {
-
         if (currentPhase == 1 && !isEnraged)
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
         }
+
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 
     /// <summary>

@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Granny : Boss
 {
     public enum State
     {
-        Idle, HoldingContract, ContractDropped, Scavange, Returning
+        Idle, Invincible, HoldingContract, ContractDropped, Scavange, Returning
     }
-   [SerializeField] private State currentState; //TODO  de cereal
+    private State currentState;
 
     [Header("Movement Settings")]
     //Base time to reach target while charging (regular)
@@ -25,8 +26,9 @@ public class Granny : Boss
     [SerializeField] private float scavengeTime;
     //Length of time to pull out contracts.
     [SerializeField] private float outTime;
+    //Length of time to stay invincble after pulling out contract
+    [SerializeField] private float invincibleTime;
     [SerializeField] private float droppedTime;
-
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
@@ -40,6 +42,7 @@ public class Granny : Boss
     // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
 
+    public bool contractDestroyed = false;
     private int initialBossCount;
 
     [Header("Return Settings")]
@@ -55,6 +58,8 @@ public class Granny : Boss
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
     private float currentSpeed;
+    public float gHealth;
+
     public override void Start()
     {
         base.Start();
@@ -64,6 +69,7 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
+        gHealth = base.health;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -72,7 +78,6 @@ public class Granny : Boss
     public override void Update()
     {
         base.Update();
-
         stateTimer -= Time.deltaTime;
 
         switch (currentState)
@@ -85,6 +90,9 @@ public class Granny : Boss
                 break;
             case State.HoldingContract:
                 UpdateHoldingContract();
+                break;
+            case State.Invincible:
+                UpdateInvincible();
                 break;
             case State.ContractDropped:
                 UpdateContractDropped();
@@ -106,20 +114,38 @@ public class Granny : Boss
     {
         if (stateTimer <= 0)
         {
-            TransitionToHoldingContract();
+            TransitionToInvincible();
         }
+    }
+
+    private void TransitionToInvincible()
+    {
+        currentState = State.Invincible;
+        stateTimer = invincibleTime;
+        EnableRandomBosses();
+        // Purple until animation
+        sprite.color = Color.purple;
     }
 
     private void TransitionToHoldingContract()
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
+        sprite.color = Color.white;
     }
     public void TransitionToReturning()
     {
         // Speed to reach distance in time is dist/time
         currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
         currentState = State.Returning;
+    }
+
+    private void UpdateInvincible()
+    {
+        if (stateTimer <= 0)
+        {
+            TransitionToHoldingContract();
+        }
     }
 
     private void UpdateHoldingContract()
@@ -130,30 +156,39 @@ public class Granny : Boss
         }
     }
 
+    /// <summary>
+    /// Enables random bosses. Enables the last two bosses when contract list is down to 2.
+    /// </summary>
     private void EnableRandomBosses()
     {
         if (bossActive) return;
 
-        if (bosses.Count == 0) return; //TODO Phase 2 Switch
-/**
-        if (bosses.Count <= initialBossCount / 2)
+        if (bosses.Count == 0 && availableBosses.Count == 0)
         {
-            for (int i = 0; i < bosses.Count; i++)
+            gameObject.GetComponent<GrannyPhase2>().enabled = true;
+            gameObject.GetComponent<Granny>().enabled = false;
+            return;
+        }
+
+        if (bosses.Count == initialBossCount / 2)
+        {
+            bossActive = true;
+            for (int i = 1; i >= 0; i--)
             {
-                int index = Random.Range(0, bosses.Count);
-                bosses[index].SetActive(true);
-                bosses.RemoveAt(index);
+                bosses[i].SetActive(true);
+                availableBosses.Add(bosses[i]);
+                bosses.Remove(bosses[i]);
             }
         }
-        */
-        else
+        else if (bosses.Count > 0)
         {
             int index = Random.Range(0, bosses.Count);
             bosses[index].SetActive(true);
             bossActive = true;
             availableBosses.Add(bosses[index]);
-            bosses.RemoveAt(index);
+            bosses.Remove(bosses[index]);
         }
+        return;
     }
 
     private void TransitionToContractDropped()
@@ -188,8 +223,12 @@ public class Granny : Boss
             Vector2 dist = contractPosition - rb.position;
             rb.linearVelocity = dist.normalized * currentSpeed;
         }
+        else
+        {
+            currentState = State.Returning;
+        }
     }
-    
+
     /// <summary>
     /// Finds the nearest currently dropped contract by distance, null if none.
     /// </summary>
@@ -214,7 +253,8 @@ public class Granny : Boss
         if (dist.magnitude < 0.1)
         {
             TransitionToIdle();
-        } else
+        }
+        else
         {
             rb.position = new Vector3(rb.position.x, rb.position.y, -1);
             rb.linearVelocity = dist.normalized * currentSpeed;
@@ -227,19 +267,18 @@ public class Granny : Boss
         {
             if (currentState == State.Scavange && currentDroppedContracts.Contains(collision.gameObject))
             {
-                Destroy(collision.gameObject); // TODO Handle contract disappearance, destroy for now
                 currentDroppedContracts.Remove(collision.gameObject);
+                Destroy(collision.gameObject);
                 if (currentDroppedContracts.Count <= 0)
                 {
-                    // TODO Handle phase change
                     TransitionToReturning();
                 }
-            } 
+            }
         }
     }
 
     /// <summary>
-    /// Creates a new contract, connects it with the boss, 
+    /// Creates a new contract, connects it with the boss,
     /// </summary>
     /// <param name="bossType"></param>
     private void DropNewContract(GameObject bossType)
@@ -257,6 +296,14 @@ public class Granny : Boss
     }
 
     /// <summary>
+    /// When contract dies, granny takes 1/4 of health
+    /// </summary>
+    public void TakeDamageFromContract()
+    {
+        base.TakeDamage(1);
+    }
+
+    /// <summary>
     /// Drops contract when taking any damage instead of dying
     /// </summary>
     /// <param name="damage">Only drops contract if > 0</param>
@@ -265,15 +312,14 @@ public class Granny : Boss
         if (damage <= 0 || currentState != State.HoldingContract)
         {
             return;
-        } else
-        {
-            if (availableBosses == null)
-            {
-                return;
-            }
-            int index = Random.Range(0, availableBosses.Count);
-            DropNewContract(availableBosses[index]);
         }
+
+        if (availableBosses == null)
+        {
+            return;
+        }
+        int index = Random.Range(0, availableBosses.Count);
+        DropNewContract(availableBosses[index]);
     }
 
     public override void Attack()
@@ -283,6 +329,6 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
-        // Could maube put when contracts are zero here but probably not
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

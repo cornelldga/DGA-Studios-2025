@@ -18,6 +18,11 @@ public class SmokePellet : MonoBehaviour
     public float maxScale;
     [Tooltip("How fast should the cloud expand")]
     [SerializeField] float expansionSpeed;
+    [Tooltip("How far away before player whip no longer affects this pellet")]
+    [SerializeField] public float effectiveDist;
+
+    [SerializeField] public float pushForce;
+    [SerializeField] float multiplier = 2.0f;
 
     private Rigidbody2D rb;
     //A cloud is composed of 3 seperate circle sprites. They are children, and so need to be treated differently.
@@ -28,6 +33,9 @@ public class SmokePellet : MonoBehaviour
     private float aliveTime;
     //The initial scales of each circle
     private Vector2[] childStartScales;
+    //If the whip pushed this cloud away
+    private bool whipped = false;
+    
 
     /// <summary>
     /// On start, the colors of each cloud piece are stored, as well as their scales. Dambing is set to zero to allow for complete velocity.
@@ -74,13 +82,17 @@ public class SmokePellet : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        aliveTime += Time.deltaTime;
+        aliveTime += !whipped ? Time.deltaTime : Time.deltaTime * multiplier;
 
         if (rb != null)
         {
             rb.linearDamping += dragIncrease * Time.deltaTime;
 
-            if (rb.linearVelocity.magnitude <= stopThreshold)
+            if (whipped)
+            {
+                
+            }
+            else if (rb.linearVelocity.magnitude <= stopThreshold)
             {
                 rb.linearVelocity = Vector2.zero;
                 rb.bodyType = RigidbodyType2D.Kinematic;
@@ -103,13 +115,23 @@ public class SmokePellet : MonoBehaviour
                     Color newColor = startColors[i];
                     newColor.a = Mathf.Lerp(startColors[i].a, 0f, fadeProgress);
                     spriteRenderers[i].color = newColor;
-
                 }
             }
         }
         if (aliveTime >= lifetime)
         {
+            SmokePool.Instance.RemoveFromPool(gameObject);
             Destroy(gameObject);
+        }
+    }
+
+    public void Push(Vector2 angle)
+    {
+        if (rb != null && !whipped)
+        {
+            whipped = true;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.AddForce(angle * pushForce);
         }
     }
 }
