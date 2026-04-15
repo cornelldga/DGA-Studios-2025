@@ -25,7 +25,8 @@ public class TumbleweedOrbit : Bullet
     {
         Debug.Log(ash.transform.position);
         transform.RotateAround(ash.transform.position, Vector3.back, orbitingSpeed);
-        if(isOnFire) Destroy(gameObject, fireDuration);
+        transform.Rotate(Vector3.back * 360f * Time.deltaTime);
+        if (isOnFire) Destroy(gameObject, fireDuration);
     }
 
     private void setFire()
