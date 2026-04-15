@@ -20,7 +20,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float maxHealth;
     private float health;
     [Tooltip("Multiplier for damage taken")]
-    public float damageTakenMultiplier;
+    public float baseDamageTakenMultiplier;
+    [HideInInspector] public float damageTakenMultiplier;
     [Tooltip("Percent damage dealt back from an enemy projectile")]
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;

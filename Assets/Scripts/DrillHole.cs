@@ -18,6 +18,9 @@ public class DrillHole : MonoBehaviour, IDamageable
     [SerializeField] private int debrisCount = 10;
     [SerializeField] private float debrisSpeed = 5f;
 
+    [Tooltip("The amount of time it takes for the hole to dissapear by itself")]
+    [SerializeField] private float deleteTime = 7f;
+
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,7 +33,11 @@ public class DrillHole : MonoBehaviour, IDamageable
 
     public void Update()
     {
-        
+        deleteTime -= Time.deltaTime;
+        if (deleteTime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -42,7 +49,7 @@ public class DrillHole : MonoBehaviour, IDamageable
     {
         return rb.position;
     }
-    
+
     /// <summary>
     /// Initializes debris projectiles evenly in a ring around the hole that damage player
     /// Should use maxRadius to specify how far projectiles will travel

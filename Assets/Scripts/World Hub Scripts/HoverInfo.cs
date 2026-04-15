@@ -5,7 +5,7 @@ using TMPro;
 public class HoverInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject info;
-    public string name;
+    public new string name;
     public TextMeshProUGUI text;
     public GameObject background;
 
