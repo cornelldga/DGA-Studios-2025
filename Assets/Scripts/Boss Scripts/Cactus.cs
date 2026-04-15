@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Cactus : MonoBehaviour, IDamageable
 {
@@ -8,11 +9,16 @@ public class Cactus : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth;
     private float timer;
     private float health;
+    [HideInInspector]
+    public int locationID = -1;
+    private Ash ash;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         timer = 0;
         health=maxHealth;
+        ash = FindAnyObjectByType<Ash>();
     }
 
     // Update is called once per frame
@@ -42,5 +48,10 @@ public class Cactus : MonoBehaviour, IDamageable
         {
             GameObject.Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        ash.deployedSeeds[locationID] = false;
     }
 }
