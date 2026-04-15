@@ -111,6 +111,7 @@ public class Ash : Boss
     private Animator animator;
     private SpriteRenderer sprite;
     private int scatterCount;
+    private bool[] scatterTracking;
 
     [HideInInspector]
     public bool[] deployedSeeds;
@@ -132,6 +133,7 @@ public class Ash : Boss
         tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
         deployedSeeds = new bool[8];
         scatterCount = 0;
+        scatterTracking = new bool[4];
     }
 
     /// <summary>
@@ -405,6 +407,7 @@ public class Ash : Boss
             {
                 TransitionToMolotovAttack();
                 scatterCount = 0;
+                scatterTracking = new bool[4];
             }
             else
             {
@@ -462,18 +465,24 @@ public class Ash : Boss
         Array values = Enum.GetValues(typeof(SeedAttack));
         //UnityEngine.Random
         System.Random random = new System.Random();
-        switch(currentPhase)
+        int i = 0;
+        while (i == 0 || scatterTracking[(int) currentSeedPattern])
         {
-            case 0:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
-                break;
-            case 1:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
-                break;
-            case 2:
-                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
-                break;
+            switch (currentPhase)
+            {
+                case 0:
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
+                    break;
+                case 1:
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
+                    break;
+                case 2:
+                    currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 3) + random.Next(3)); //Last 2
+                    break;
+            }
+            i++;
         }
+        scatterTracking[ (int) currentSeedPattern] = true;
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
         Vector2 point1;
         Vector2 point2;
