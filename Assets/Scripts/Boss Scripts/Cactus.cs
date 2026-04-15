@@ -19,7 +19,6 @@ public class Cactus : MonoBehaviour, IDamageable
     private Vector3[] spinesSpawnPos;
     private Quaternion[] spinesSpawnRot;
 
-    private Coroutine attackCoroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,20 +45,23 @@ public class Cactus : MonoBehaviour, IDamageable
         if (timer > fireRate)
         {
             timer = 0;
-            SetAttackingAnimation();
+            EnterAttackingAnimation();
         }
     }
 
-    public void spawnSpines()
+    public void SpawnSpines()
     {
         for (int i = 0; i < spineCount; i++)
-        {
             Instantiate(spine, spinesSpawnPos[i], spinesSpawnRot[i]);
-        }   
     }
-     void SetAttackingAnimation()
+     void EnterAttackingAnimation()
     {
         animator.SetBool("isAttacking", true);
+    }
+
+    public void ExitAttackingAnimation()
+    {
+        animator.SetBool("isAttacking", false);
     }
 
     public void TakeDamage(float damage)
