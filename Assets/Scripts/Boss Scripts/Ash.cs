@@ -374,9 +374,9 @@ public class Ash : Boss
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
 
-        if (attackChoice < 3) 
+        if (attackChoice < 4) 
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null)
+            if (GameObject.FindAnyObjectByType<Bush>() != null && UnityEngine.Random.value < .5f)
             {
                 TransitionToMolotovAttack();
             }
