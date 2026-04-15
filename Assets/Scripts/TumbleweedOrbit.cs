@@ -3,8 +3,9 @@ using UnityEngine;
 public class TumbleweedOrbit : Bullet
 {
 
-   
-  
+
+    [SerializeField] private float fireDamage = 5f;
+    [SerializeField] private float fireDuration = 1f;
     [SerializeField] private float orbitingSpeed = 360f;
     private GameObject ash;
 
@@ -19,11 +20,41 @@ public class TumbleweedOrbit : Bullet
 
 
 
+
     private void FixedUpdate()
 
     {
         Debug.Log(ash.transform.position);
         transform.RotateAround(ash.transform.position, Vector3.back, orbitingSpeed);
 
+    }
+
+    private void setFire()
+    {
+        damage = fireDamage;
+        duration = fireDuration;
+        //placeholder until animation set
+        GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        OnProjectileHit(collision);
+    }
+
+    public override void OnProjectileHit(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.GetType());
+        if (collision.CompareTag("Bush"))
+        {
+            Bush bush = collision.gameObject.GetComponent<Bush>();
+            if (bush.isOnFire) setFire();
+
+        }
+        else
+        {
+            base.OnProjectileHit(collision);
+        }
     }
 }
