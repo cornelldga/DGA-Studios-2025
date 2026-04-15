@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 public class Bush : MonoBehaviour
 {
 
-    [SerializeField] bool isOnFire;
+    [SerializeField] public bool isOnFire;
     [SerializeField] float damage;
     [SerializeField] float fireSpreadCooldown;
     [SerializeField] float fireSpreadRadius;

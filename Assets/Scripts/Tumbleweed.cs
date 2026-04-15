@@ -7,7 +7,7 @@ public class Tumbleweed : Bullet
     // stats 
 
     [SerializeField] private float fireDamage = 5f;
-    [SerializeField] private float fireDuration = 3f;
+    [SerializeField] private float fireDuration = 1f;
 
     
 
@@ -18,6 +18,7 @@ public class Tumbleweed : Bullet
     {
         damage = fireDamage;
         duration = fireDuration;
+        //placeholder until animation set
         GetComponent<SpriteRenderer>().color = Color.red;
     }
 
@@ -37,17 +38,19 @@ public class Tumbleweed : Bullet
 
 
     // <summary>
-    // collision handling, if interacts with fire should be set on fire, should damage player
+    // collision handling, if interacts with fire should be set on fire
     //</summary>
     public override void OnProjectileHit(Collider2D collision)
     {
-            Debug.Log(collision.gameObject.GetType());
-            base.OnProjectileHit(collision);
-            if (false) 
+        Debug.Log(collision.gameObject.GetType());
+        if (collision.CompareTag("Bush"))
         {
-            setFire();
+            Bush bush = collision.gameObject.GetComponent<Bush>();
+            if (bush.isOnFire) setFire();
+
         }
-        // check if collides w bush and that bush is on fire.
-   
+        else { 
+            base.OnProjectileHit(collision);
+        }
     }
 }

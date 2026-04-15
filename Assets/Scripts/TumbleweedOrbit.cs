@@ -4,23 +4,26 @@ public class TumbleweedOrbit : Bullet
 {
 
    
-    [SerializeField] private GameObject ash;
-    [SerializeField] private float orbitingSpeed = 1f;
+  
+    [SerializeField] private float orbitingSpeed = 360f;
+    private GameObject ash;
 
 
     public override void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ash = GameObject.Find("Ash");
+
         Destroy(gameObject, duration);
     }
 
 
 
-    private void Update()
+    private void FixedUpdate()
 
     {
-        Debug.Log("updating something");
-        rb.transform.RotateAround(ash.transform.position, Vector3.up, orbitingSpeed * Time.deltaTime);
+        Debug.Log(ash.transform.position);
+        transform.RotateAround(ash.transform.position, Vector3.back, orbitingSpeed);
 
     }
 }
