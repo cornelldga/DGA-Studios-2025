@@ -19,8 +19,13 @@ public class CutsceneManager : MonoBehaviour
     private int currentFrame;
     private bool active;
     private System.Action onComplete;
-    private static float[] IntroTimestamps = { 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f };
-    private const float IntroClipLength = 45f;
+    private static float[] introTimestamps = { 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f };
+    private const float introClipLength = 45f;
+    private float lastInputTime;
+    private const float inputCooldown = 0.4f; 
+    private bool isOnLastFrame = false;
+    private float endTimer = 0f;
+    private const float autoEndDuration = 5f;
 
     void Awake()
     {
@@ -37,11 +42,17 @@ public class CutsceneManager : MonoBehaviour
     /// <param name="onComplete">action to execute when the cutscene completes</param>
     public void PlayIntroCutscene(System.Action onComplete = null)
     {
-        StartCutscene("intro_cutscene", IntroTimestamps, IntroClipLength, () =>
+        StartCutscene("intro_cutscene", introTimestamps, introClipLength, () =>
         {
-            GameManager.Instance.player.progression++;
-            GameManager.Instance.player.SavePlayer();
-            onComplete?.Invoke();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.player.progression++;
+                GameManager.Instance.player.SavePlayer();
+                onComplete?.Invoke();
+                
+                /// Transition into saloon for the first dialogue to begin.
+                GameManager.Instance.LoadScene("Saloon");
+            }
         });
     }
 
@@ -61,45 +72,103 @@ public class CutsceneManager : MonoBehaviour
         this.onComplete = onComplete;
         active = true;
 
+        continueAction.action.Enable();
         cutsceneAnimator.gameObject.SetActive(true);
         cutsceneAnimator.Play(stateName, 0, 0f);
-        cutsceneAnimator.speed = 0f;
+        cutsceneAnimator.speed = 1f;
 
         GameManager.Instance.FreezePlayer(true);
     }
 
     /// <summary>
-    /// Listens for the continue action to advance the cutscene.
+    /// Listens to advance cutscene input. This is in case input actions fails.
     /// </summary>
-    /// <param name="context">Check if action was pressed</param>
+    /// <param name="context"></param>
     void ContinueCutscene(InputAction.CallbackContext context)
     {
-        if (context.action.WasPressedThisFrame() && active)
-            DisplayNextFrame();
+        if (active && Time.time > lastInputTime + inputCooldown)
+        {
+            lastInputTime = Time.time;
+            SkipToNextTimestamp();
+        }
     }
 
     /// <summary>
-    /// Goes to the next frame, or ends the cutscene if on the last frame.
+    /// Listens to advance cutscene via space or enter key. This is incase input actions fails.
     /// </summary>
-    public void DisplayNextFrame()
+    void Update()
     {
-        currentFrame++;
-        if (currentFrame >= frameTimestamps.Length)
+        if (!active) return;
+
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        {
+            if (Time.time > lastInputTime + inputCooldown)
+            {
+                lastInputTime = Time.time;
+                SkipToNextTimestamp();
+            }
+        }
+
+        if (isOnLastFrame)
+        {
+            endTimer += Time.deltaTime;
+            if (endTimer >= autoEndDuration)
+            {
+                EndCutscene();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Skips to the next timestamp in the cutscene. If on the last frame, ends the cutscene.
+    /// </summary>
+    public void SkipToNextTimestamp()
+    {
+        if (isOnLastFrame)
         {
             EndCutscene();
             return;
         }
-        float normalized = frameTimestamps[currentFrame] / clipLength;
-        cutsceneAnimator.Play(stateName, 0, normalized);
-        cutsceneAnimator.speed = 0f;
+
+        AnimatorStateInfo stateInfo = cutsceneAnimator.GetCurrentAnimatorStateInfo(0);
+        float currentTime = (stateInfo.normalizedTime % 1f) * clipLength;
+
+        int nextIndex = -1;
+
+        for (int i = 0; i < frameTimestamps.Length; i++)
+        {
+            if (frameTimestamps[i] > currentTime + 0.5f) 
+            {
+                nextIndex = i;
+                break;
+            }
+        }
+
+        if (nextIndex != -1)
+        {
+            float targetNormalized = frameTimestamps[nextIndex] / clipLength;
+            cutsceneAnimator.Play(stateName, 0, targetNormalized);
+            cutsceneAnimator.speed = 1f; 
+            cutsceneAnimator.Update(0f); 
+
+            if (nextIndex == frameTimestamps.Length - 1)
+            {
+                isOnLastFrame = true;
+                endTimer = 0f;
+            }
+        }
+        else
+        {
+            EndCutscene();
+        }
     }
 
     /// <summary>
-    /// Ends the cutscene and fires onComplete which triggers the Scene Loaded
-    /// transition in GameManager, fading out into the world.
+    /// Ends the cutscene, hides the cutscene animator, unfreezes the player, and invokes the onComplete action.
     /// </summary>
     public void EndCutscene()
     {
+        if (!active) return;
         active = false;
         cutsceneAnimator.gameObject.SetActive(false);
         GameManager.Instance.FreezePlayer(false);

@@ -82,6 +82,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Listens to advance dialogue via space or enter key. This is incase input actions fails.
+    /// </summary>
+    void Update()
+    {
+        if (!ongoingDialogue) return;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (isTyping) CompleteCurrentLine();
+            else DisplayNextLine();
+        }
+    }
+
+    /// <summary>
     /// Returns if there is ongoing dialouge
     /// </summary>
     public bool OngoingDialogue()
@@ -94,7 +108,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (context.action.WasPressedThisFrame() && ongoingDialogue)
+        if (ongoingDialogue)
         {
             if (isTyping)
             {
@@ -124,6 +138,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (file != null)
         {
+            continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             nameText.text = file.name;
             ongoingDialogue = true;
@@ -231,6 +246,7 @@ public class DialogueManager : MonoBehaviour
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
     }
+
     /// <summary>
     /// Animation trigger that closes the dialogue completely
     /// </summary>

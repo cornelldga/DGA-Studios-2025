@@ -118,6 +118,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onExitClicked()
     {
+        if (player != null)
+        {
+            SaveSystem.SavePlayer(player);
+        }
+        else
+        {
+            Debug.LogWarning("Cannot save");
+        }
         TogglePauseMenu(false);
         LoadScene("Main Menu");
     }
@@ -282,7 +290,11 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        animator.SetTrigger("Scene Loaded");
+        
+        if (animator != null)
+        {
+            animator.SetTrigger("Scene Loaded");
+        }
     }
 
     /// <summary>
