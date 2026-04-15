@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Point : MonoBehaviour
@@ -9,18 +10,17 @@ public class Point : MonoBehaviour
 
     private void Start()
     {
-        //SpawnPos = transform.position;
+       
     }
 
-    private void Update()
+    public void DropSecondaryProjectile()
     {
-           /* GameObject spawnedObject = Instantiate(pointPrefab, SpawnPos, Quaternion.identity);
-            SetPrefabSettings(spawnedObject);
-            Destroy(spawnedObject, 10f);
-            distSinceLastSpawn -= spawnInterval; */
+        SpawnPos = this.transform.position;
+        GameObject spawnedObject = Instantiate(pointPrefab, SpawnPos, Quaternion.identity);
+        SetPrefabSettings(spawnedObject);
+        Destroy(spawnedObject, 20f);
     }
     
-
     private void SetPrefabSettings(GameObject obj)
     {
         Bush bushScript = obj.GetComponent<Bush>();
@@ -28,9 +28,16 @@ public class Point : MonoBehaviour
         {
             bushScript.setFire(true);
         }
+
+        /*Dynamite DynaScript = obj.GetComponent<Dynamite>();
+        if (DynaScript)
+        {
+            
+        }
+        */
     }
 
-    public void SetPointPrefab(GameObject prefab)
+    public void SetSecondaryPrefab(GameObject prefab)
     {
         this.pointPrefab = prefab;
     }

@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Granny
   bossName: Granny
   maxHealth: 0
+  health: 0
   healthBar: {fileID: 4274816176931949744}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
@@ -311,6 +312,7 @@ MonoBehaviour:
   idleTime: 3
   scavengeTime: 3
   outTime: 3
+  invincibleTime: 0
   droppedTime: 3
   bosses:
   - {fileID: 0}
@@ -323,8 +325,10 @@ MonoBehaviour:
   bossActive: 0
   contractTemplate: {fileID: 1756325054254676256, guid: d8ceb90f922d3fe43840117063f8c190, type: 3}
   currentDroppedContracts: []
+  contractDestroyed: 0
   returnTime: 1.5
   arrivalThreshold: 0.1
+  gHealth: 0
 --- !u!114 &7540226778721594879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   bossName: Granny
   maxHealth: 5
+  health: 0
   healthBar: {fileID: 2861438271388821434}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
@@ -350,6 +355,25 @@ MonoBehaviour:
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 11400000, guid: db008a601788e3943927a1a525d107b9, type: 2}
   machineCooldownConstant: 0
+  fireBullsCount: 0
+  smokeBullsCount: 0
+  dynamiteBullsCount: 0
+  fireSmokeCount: 0
+  fireDynamiteCount: 0
+  smokeDynamiteCount: 0
+  bullsTime: 0
+  bullPrefab: {fileID: 8163625670582276357, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+  flamingBushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
+  smokePrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
+  dynamitePrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
+  punchingTime: 0
+  disappearTime: 0
+  punchRepositionOffset: 0
+  punchSpeed: 0
+  punch: {fileID: 0}
+  punchPivot: {fileID: 0}
+  leftBound: {fileID: 0}
+  rightBound: {fileID: 0}
 --- !u!95 &3893037239640246396
 Animator:
   serializedVersion: 7

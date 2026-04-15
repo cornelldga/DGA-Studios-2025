@@ -274,7 +274,39 @@ public class Pig : MonoBehaviour
         }
         else
         {
+<<<<<<< Updated upstream
             impulseSource.GenerateImpulse(wallShakeForce);
+=======
+            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
+
+            if (pigRider != null)
+            {
+                pigRider.TakeDamage(ramDamage);
+                pigRider.removeMark();
+            }
+
+            if (impulseSource != null)
+            {
+                impulseSource.GenerateImpulse(enemyShakeForce);
+            }
+        }
+
+        // Set to stunned state is bull not in bouncy mode
+        if (!summoned)
+        {
+            currentState = State.Stunned;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            animator.SetBool("isStunned", true);
+
+            StartCoroutine(StunCoroutine());
+        } else
+        {
+            // Recharge on bounce
+            TransitionToCharging();
+            ChargeSpecificDirection(Random.onUnitSphere);
+>>>>>>> Stashed changes
         }
         StartCoroutine(StunCoroutine());
     }

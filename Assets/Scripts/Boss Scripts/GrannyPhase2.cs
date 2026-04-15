@@ -47,6 +47,9 @@ public class GrannyPhase2 : Boss
     [SerializeField] private int fireBullsCount;
     [SerializeField] private int smokeBullsCount;
     [SerializeField] private int dynamiteBullsCount;
+    [SerializeField] private int fireSmokeCount;
+    [SerializeField] private int fireDynamiteCount;
+    [SerializeField] private int smokeDynamiteCount;
     [SerializeField] private float bullsTime;
 
     [Header("Prefabs")]
@@ -91,7 +94,7 @@ public class GrannyPhase2 : Boss
         collider = GetComponent<CircleCollider2D>();
         machineTimer = 0;
         stateTimer = 0;
-        currentState = State.MachineGun; // TODO Change
+        currentState = State.ComboAttack; // TODO Change
         // TODO remove later. For now, start with Combo Attack
         TransitionToComboAttack();
         // TransitionToLazer(); // Set starting state to lazer
@@ -158,7 +161,7 @@ public class GrannyPhase2 : Boss
         }
         float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
         print(angle);
-        if (false)
+        if (angle > 150 || angle < 30)
         {
             StopCoroutine(machineGunRoutine);
             TransitionToComboAttack();
@@ -182,8 +185,6 @@ public class GrannyPhase2 : Boss
         // maybe make the punch a separate hitbox
 
         // Phase 1: Disappear and snap to left of player
-        if (stateTimer > punchingTime)
-        {
             if (sprite.enabled)
             {
                 // TODO: Instantiate smoke VFX here
@@ -216,23 +217,16 @@ public class GrannyPhase2 : Boss
 
             rb.position = new Vector2(playerPos.x + punchRepositionOffset, playerPos.y);
     
-        }
+
         // Phase 2: Reappear and lunge horizontally
-        else if (stateTimer > 0)
-        {
             sprite.enabled = true;
             collider.enabled = true;
             punch.SetActive(true);
-            Vector2 playerPos = GameManager.Instance.player.transform.position;
             Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
-            rb.linearVelocity = direction * punchSpeed;
-        }
+            rb.linearVelocity = direction* punchSpeed;
         // Phase 3: Done
-        else
-        {
             punch.SetActive(false);
             TransitionToMachineGun();
-        }
     }
 
     private void TransitionToPunch()
@@ -267,6 +261,12 @@ public class GrannyPhase2 : Boss
         yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
         yield return new WaitForSeconds(1.00f);
         yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
+        yield return new WaitForSeconds(1.00f);
+        yield return StartCoroutine(PointAttack(dynamitePrefab, flamingBushPrefab, fireDynamiteCount, 1));
+        yield return new WaitForSeconds(1.00f);
+        yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
 
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Transitioning from combo to punch");
@@ -280,7 +280,7 @@ public class GrannyPhase2 : Boss
             GameObject bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
 
             Pig bullScript = bull.GetComponent<Pig>();
-            bullScript.ChargeSpecificDirection(Random.onUnitCircle);
+            bullScript.ChargeSpecificDirection(Random.onUnitSphere);
             bullScript.setSummoned();
             
             Trail trail = bull.AddComponent<Trail>();
@@ -297,23 +297,17 @@ public class GrannyPhase2 : Boss
     {
         for (int i = 0; i < ProjectileCount; i++)
         {
-            GameObject Primary = Instantiate(prefab, this.transform.position, Quaternion.identity);
+            GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,5),Random.Range(-3,3),-1), Quaternion.identity);
 
             Point Secondary = Primary.AddComponent<Point>();
             Secondary.SetSecondaryPrefab(SecondaryPrefab);
-            
-            Secondary.DropSecondaryProjectile();
 
             Destroy(Primary, ProjectileLifeTime);
+            Secondary.DropSecondaryProjectile();
         }
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(1f); 
     }
     
-
-    private void PointlAttacks()
-    {
-        
-    }
     private void TransitionToLazer()
     {
         currentState = State.Lazer;
