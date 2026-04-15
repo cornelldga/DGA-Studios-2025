@@ -21,7 +21,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     [Header("Boss and interactable Fields")]
     [SerializeField] private string sceneName = "";
-    private int progressionInt;
 
 
     /// <summary>
@@ -44,8 +43,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         if (!DialogueManager.Instance.OngoingDialogue())
         {
-            DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt,
-            dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
+            DialogueManager.Instance.StartDialogue(jsonTextFile, dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
 
     }

@@ -116,7 +116,6 @@ public class DialogueManager : MonoBehaviour
     /// Changes the npcImg sprite to the correct characters sprite if a boss
     /// If an interactable or boss will change scene to what is next
     /// </summary>
-    /// <param name="progress">The progression number of the npc's dialogue</param>
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
@@ -140,7 +139,7 @@ public class DialogueManager : MonoBehaviour
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             // Format followed by DialogueEditor.BuildLine()
-            currentDialogueID = progress.ToString() + "_" + "start";
+            currentDialogueID = GameManager.Instance.player.progression + "_" + "start";
             currentDialogueType = type;
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;

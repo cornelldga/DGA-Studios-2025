@@ -1,18 +1,36 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "0_start",
-            "dialogueText": "You're the new bar owner, eh? Trying to encroach on our turf?",
+            "dialogueID": "3_start",
+            "dialogueText": "So you're the bar owner, eh? What's it called—Hero's Haven or something?",
             "emotion": 0,
-            "nextDialogueID": "0_pay"
+            "nextDialogueID": "3_next"
         }, {
-            "dialogueID": "0_pay",
-            "dialogueText": "Nice place and all, but can't let you take our customers. She'll throw a fit.",
+            "dialogueID": "3_next",
+            "dialogueText": "It's a nice place and all, but I ain't gonna let you take our customers. She'll throw another fit.",
             "emotion": 0,
-            "nextDialogueID": "0_fight"
+            "nextDialogueID": "3_fight"
         }, {
-            "dialogueID": "0_fight",
+            "dialogueID": "3_fight",
             "dialogueText": "So what's it gonna be, lad? We gonna hash it out?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+
+        {
+            "dialogueID": "4_start",
+            "dialogueText": "You got me, lad. My pigs and I are too hammered for this.",
+            "emotion": 0,
+            "nextDialogueID": "4_next"
+        }, {
+            "dialogueID": "4_next",
+            "dialogueText": "But you gotta admit I can take a punch, eh?",
+            "emotion": 0,
+            "nextDialogueID": "4_end"
+        }, {
+            "dialogueID": "4_end",
+            "dialogueText": "Yuo know what? Buy me a drink, and me and my pigs are yours.",
             "emotion": 0,
             "nextDialogueID": ""
         }
