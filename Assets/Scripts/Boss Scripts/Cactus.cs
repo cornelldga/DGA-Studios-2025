@@ -9,9 +9,7 @@ public class Cactus : MonoBehaviour, IDamageable
     [SerializeField] private GameObject spine;
     private int spineCount;
     [SerializeField] private int maxHealth;
-    [SerializeField] private Animator animator;
-    [SerializeField] private float animationTime = 5.0f;
-    [SerializeField] private float animOffsetTime = 3.0f;
+    private Animator animator;
     private float timer;
     private float health;
     [HideInInspector]
@@ -28,10 +26,11 @@ public class Cactus : MonoBehaviour, IDamageable
         timer = 0;
         health=maxHealth;
         ash = FindAnyObjectByType<Ash>();
+        animator = GetComponent<Animator>();
+
         spinesSpawnPos = new Vector3[this.transform.childCount];
         spinesSpawnRot = new Quaternion[this.transform.childCount];
         spineCount = spinesSpawnPos.Length;
-        Debug.Log(spinesSpawnPos.Length);
 
         for (int i = 0; i < this.transform.childCount; i++)
         {
@@ -44,28 +43,25 @@ public class Cactus : MonoBehaviour, IDamageable
     void Update()
     {
         timer += Time.deltaTime;
-        
         if (timer > fireRate)
         {
             timer = 0;
-            if (attackCoroutine != null) StopCoroutine(attackCoroutine);
-            attackCoroutine = StartCoroutine(SpineAttackCoroutine());
+            SetAttackingAnimation();
         }
     }
 
-    private IEnumerator SpineAttackCoroutine()
+    public void spawnSpines()
     {
-        animator.SetBool("isAttacking", true);
-        yield return new WaitForSeconds(animOffsetTime);
-
         for (int i = 0; i < spineCount; i++)
         {
-            GameObject bullet = Instantiate(spine, spinesSpawnPos[i], spinesSpawnRot[i]);
-        }
-
-        yield return new WaitForSeconds(animationTime - animOffsetTime);
-        animator.SetBool("isAttacking", false);
+            Instantiate(spine, spinesSpawnPos[i], spinesSpawnRot[i]);
+        }   
     }
+     void SetAttackingAnimation()
+    {
+        animator.SetBool("isAttacking", true);
+    }
+
     public void TakeDamage(float damage)
     {
         health --;
