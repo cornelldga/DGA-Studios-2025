@@ -23,6 +23,7 @@ public class Whip : MonoBehaviour
             }
         }
         
+        
     }
     /// <summary>
     /// Ends the whip
