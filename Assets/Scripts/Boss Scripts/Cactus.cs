@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Cactus : MonoBehaviour, IDamageable
 {
@@ -13,6 +14,10 @@ public class Cactus : MonoBehaviour, IDamageable
     [SerializeField] private float animOffsetTime = 3.0f;
     private float timer;
     private float health;
+    [HideInInspector]
+    public int locationID = -1;
+    private Ash ash;
+
     private Vector3[] spinesSpawnPos;
     private Quaternion[] spinesSpawnRot;
 
@@ -22,6 +27,7 @@ public class Cactus : MonoBehaviour, IDamageable
     {
         timer = 0;
         health=maxHealth;
+        ash = FindAnyObjectByType<Ash>();
         spinesSpawnPos = new Vector3[this.transform.childCount];
         spinesSpawnRot = new Quaternion[this.transform.childCount];
         spineCount = spinesSpawnPos.Length;
@@ -67,5 +73,10 @@ public class Cactus : MonoBehaviour, IDamageable
         {
             GameObject.Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        ash.deployedSeeds[locationID] = false;
     }
 }

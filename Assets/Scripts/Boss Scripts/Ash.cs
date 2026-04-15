@@ -365,17 +365,17 @@ public class Ash : Boss
     private void ChooseNextAttack()
     {
         // check for desperation
-        if (currentPhase == 2 && currentState != State.Desperation)
+        /*if (currentPhase == 2 && currentState != State.Desperation)
         {
             TransitionToDesperation();
             return;
-        }
+        } */
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
 
         if (attackChoice < 4) 
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null)
+            if (GameObject.FindAnyObjectByType<Bush>() != null && UnityEngine.Random.value < .5f)
             {
                 TransitionToMolotovAttack();
             }
@@ -577,7 +577,7 @@ public class Ash : Boss
 
             deployedSeeds[r] = true;
             seedScript.locationID = r;
-            seedScript.target = vec.normalized * (stageRadius / 2);
+            seedScript.target = vec.normalized * (3 * stageRadius / 4);
         }
         else { TransitionToSeedScatter(); }
         yield return new WaitForSeconds(scatterTime);
