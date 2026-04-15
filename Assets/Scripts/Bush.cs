@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 public class Bush : MonoBehaviour
 {
 
-    [SerializeField] bool isOnFire;
+    [SerializeField] public bool isOnFire;
     [SerializeField] float damage;
     [SerializeField] float fireSpreadCooldown;
     [SerializeField] float fireSpreadRadius;
@@ -122,12 +122,14 @@ public class Bush : MonoBehaviour
     public void setFire(bool isOnFire)
     {
         this.isOnFire = isOnFire;
+        
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     
         if (isOnFire) {
             witherTimer = 0f; //reset timer
             animator.SetBool("isBurning", true);
+
             fireCoroutine = StartCoroutine(fireSpreadRoutine());
         } else {
             animator.SetBool("isBurning", false);
