@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Seed : MonoBehaviour
@@ -14,7 +15,9 @@ public class Seed : MonoBehaviour
     private float startVel;
     private float timer;
     private float startHeight;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int locationID;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         planted = false;
@@ -25,6 +28,7 @@ public class Seed : MonoBehaviour
         rb.linearVelocityY = startVel + (target.y - this.transform.position.y) / landingTime; ;
         timer = 0;
         startHeight = this.transform.position.y;
+
     }
 
     // Update is called once per frame
@@ -49,8 +53,21 @@ public class Seed : MonoBehaviour
     public void Blossom()
     {
         //Spawn Flower
-        Instantiate(flower, this.transform.position, this.transform.rotation);
-        GameObject.Destroy(this.gameObject);
+        GameObject f = Instantiate(flower, this.transform.position, this.transform.rotation);
+
+        Cactus cactus = f.GetComponent<Cactus>();
+        Fire_Flower fireflower = f.GetComponent<Fire_Flower>();
+
+        if (fireflower)
+        {
+            fireflower.locationID = locationID;
+        }
+        if (cactus)
+        {
+            cactus.locationID = locationID;
+        }
+
+            GameObject.Destroy(this.gameObject);
     }
 
  
@@ -58,7 +75,11 @@ public class Seed : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Whip"))
         {
+            if(!flower.GetComponent<Bush>() )
+            { FindAnyObjectByType<Ash>().deployedSeeds[locationID] = false; }
             GameObject.Destroy(this.gameObject);
         }
     }
+
+   
 }

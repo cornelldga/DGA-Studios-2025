@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Fire_Flower : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,11 @@ public class Fire_Flower : MonoBehaviour, IDamageable
     private float health;
     private float totalRotation;
     private int ogOrder;
+
+    [HideInInspector]
+    public int locationID = -1;
+    private Ash ash;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +27,7 @@ public class Fire_Flower : MonoBehaviour, IDamageable
         fireRenderer = fireLine.GetComponent<SpriteRenderer>();
         fireLine.GetComponent<Spine>().damage = damage;
         ogOrder = fireRenderer.sortingOrder;
+        ash = FindAnyObjectByType<Ash>();
     }
 
     // Update is called once per frame
@@ -54,6 +61,12 @@ public class Fire_Flower : MonoBehaviour, IDamageable
     {
         if (collision.CompareTag("Player"))
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+    }
+
+    private void OnDestroy()
+    {
+        
+        ash.deployedSeeds[locationID] = false;
     }
 
 }
