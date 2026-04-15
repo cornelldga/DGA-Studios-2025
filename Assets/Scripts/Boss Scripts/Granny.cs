@@ -297,7 +297,7 @@ public class Granny : Boss
 
     public void TakeDamageFromContract()
     {
-        TakeDamage(1);
+        base.TakeDamage(1);
     }
 
     /// <summary>

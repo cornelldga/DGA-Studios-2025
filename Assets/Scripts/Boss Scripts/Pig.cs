@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pig : MonoBehaviour
 {
     [SerializeField] PigRider pigRider;
+    [Header("Bush prefab only needed for granny fight")]
+    [SerializeField] GameObject bush;
     [SerializeField] float ramDamage = 1f;
     [Tooltip("The layers that represent walls for collision detection")]
     public LayerMask wallLayers;
@@ -57,6 +59,8 @@ public class Pig : MonoBehaviour
     private Vector2 chargeDirection;
     private Vector2 startingPoint;
     private float currentSpeed;
+    // Whether summoned in granny fight or not
+    private bool summoned;
     private Rigidbody2D rb;
     private Collider2D thisCollider;
     private List<Collider2D> ignoredColliders;
@@ -72,8 +76,7 @@ public class Pig : MonoBehaviour
 
     public State currentState;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         pigCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -82,7 +85,9 @@ public class Pig : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         ignoredColliders = new List<Collider2D>();
-
+    }
+    void Start()
+    {
         startingPoint = new Vector2(transform.position.x, transform.position.y);
         leftBoundary = startingPoint.x - patrolDistance;
         rightBoundary = startingPoint.x + patrolDistance;
@@ -92,8 +97,16 @@ public class Pig : MonoBehaviour
         FlipSprite();
 
         // Start with a random delay
-        float randomDelay = Random.Range(minStartDelay, maxStartDelay);
-        StartCoroutine(InitializeWithDelay(randomDelay));
+        if (!summoned)
+        {
+            float randomDelay = Random.Range(minStartDelay, maxStartDelay);
+            StartCoroutine(InitializeWithDelay(randomDelay));
+        }
+    }
+
+    public void setSummoned()
+    {
+        summoned = true;
     }
 
     /// <summary>
@@ -154,7 +167,7 @@ public class Pig : MonoBehaviour
         {
             return;
         }
-        if (pigRider.IsMarked())
+        if (pigRider != null && pigRider.IsMarked())
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
             ChargeTarget(pigRider.transform.position);
@@ -205,6 +218,12 @@ public class Pig : MonoBehaviour
     {
         targetPosition = targetPos;
         TransitionToCharging();
+    }
+
+    public void ChargeSpecificDirection(Vector2 chargeDir)
+    {
+        TransitionToCharging();
+        this.chargeDirection = chargeDir.normalized;
     }
 
     /// <summary>
@@ -259,12 +278,20 @@ public class Pig : MonoBehaviour
     /// <param name="collision">The collision data from OnCollisionEnter2D</param>
     private void HandleCharge(Collision2D collision)
     {
-        currentState = State.Stunned;
-        rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0f;
+        // Trigger screen shake on wall hit
+        if (((1 << collision.gameObject.layer) & wallLayers) != 0 && impulseSource != null)
+        {
+            impulseSource.GenerateImpulse(wallShakeForce);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            currentState = State.Stunned;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
 
-        animator.SetBool("isStunned", true);
-
+            animator.SetBool("isStunned", true);
+        }
+        
         if (collision.gameObject.CompareTag("Player")){
             GameManager.Instance.player.TakeDamage(ramDamage);
             if (impulseSource != null)
@@ -306,7 +333,23 @@ public class Pig : MonoBehaviour
             TransitionToCharging();
             ChargeSpecificDirection(Random.onUnitSphere);
         }
-        StartCoroutine(StunCoroutine());
+
+        // Set to stunned state is bull not in bouncy mode
+        if (!summoned)
+        {
+            currentState = State.Stunned;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            animator.SetBool("isStunned", true);
+
+            StartCoroutine(StunCoroutine());
+        } else
+        {
+            // Recharge on bounce
+            TransitionToCharging();
+            ChargeSpecificDirection(Random.onUnitCircle);
+        }
     }
 
     /// <summary>
@@ -329,6 +372,4 @@ public class Pig : MonoBehaviour
             HandleCharge(collision);
         }
     }
-
-
 }

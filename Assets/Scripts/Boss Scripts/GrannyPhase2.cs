@@ -300,7 +300,9 @@ public class GrannyPhase2 : Boss
             GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,5),Random.Range(-3,3),-1), Quaternion.identity);
 
             Point Secondary = Primary.AddComponent<Point>();
-            Secondary.SetSecondaryPrefab(SecondaryPrefab);
+            //Secondary.SetSecondaryPrefab(SecondaryPrefab);
+            
+            //Secondary.DropSecondaryProjectile();
 
             Destroy(Primary, ProjectileLifeTime);
             Secondary.DropSecondaryProjectile();
