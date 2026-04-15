@@ -281,15 +281,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         player = null;
-        if (scene.name == "World Hub")
-        {
-            PlayerData data = SaveSystem.LoadPlayer();
-            if (data == null || data.progression == 0)
-            {
-                StartCoroutine(WaitAndPlay());
-                return;
-            }
-        }
+        StartCoroutine(WaitAndPlay());
         
         if (animator != null)
         {
@@ -298,12 +290,24 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates the CutsceneManager and waits until it is ready before playing the intro cutscene.
+    /// Activates the CutsceneManager and waits until it is ready before playing cutscenes.
     /// </summary>
     IEnumerator WaitAndPlay()
     {
         yield return new WaitUntil(() => CutsceneManager.Instance != null);
-        CutsceneManager.Instance.PlayIntroCutscene(() => animator.SetTrigger("Scene Loaded"));
+
+        PlayerData data = SaveSystem.LoadPlayer();
+        string currentScene = GetCurrentSceneName();
+
+        if (data == null || data.progression == 0)
+        {        
+            CutsceneManager.Instance.PlayBackstoryCutscene(() => animator.SetTrigger("Scene Loaded"));
+        }
+        else if (currentScene == "Saloon" && data.progression == 1)
+        {
+            CutsceneManager.Instance.PlayMeetBobbyCutscene();
+        }
+
     }
 
     /// <summary>

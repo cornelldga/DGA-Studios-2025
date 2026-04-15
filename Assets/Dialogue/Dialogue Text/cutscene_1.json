@@ -1,0 +1,54 @@
+{
+  "dialogueLines": [
+    { "dialogueID": "0_start", "speaker": "Duke", "dialogueText": "Uhh, hello there… can I get something to-", "emotion": 0, "nextDialogueID": "2_start" },
+    { "dialogueID": "2_start", "speaker": "Duke", "dialogueText": "*HUAAWRK*", "emotion": 1, "nextDialogueID": "3_start" },
+    { "dialogueID": "3_start", "speaker": "Duke", "dialogueText": "...drink?", "emotion": 0, "nextDialogueID": "4_start" },
+
+    { "dialogueID": "4_start", "speaker": "Ted", "dialogueText": "YO! Bobby! Look alive!", "emotion": 0, "nextDialogueID": "5_start" },
+    { "dialogueID": "5_start", "speaker": "Abby", "dialogueText": "See Mister? I told you someone would eventually come!", "emotion": 0, "nextDialogueID": "6_start" },
+    { "dialogueID": "6_start", "speaker": "Bobby", "dialogueText": "Oh Abby, did you drink something from the back again?", "emotion": 0, "nextDialogueID": "7_start" },
+    { "dialogueID": "7_start", "speaker": "Bobby", "dialogueText": "You really need to stop having these delus-", "emotion": 0, "nextDialogueID": "8_start" },
+
+    { "dialogueID": "8_start", "speaker": "Bobby", "dialogueText": "WHAT IN THE SAM HILL!!!", "emotion": 2, "nextDialogueID": "9_start" },
+    { "dialogueID": "9_start", "speaker": "Bobby", "dialogueText": "ANYTHING! LITERALLY ANYTHING IS YOURS!", "emotion": 2, "nextDialogueID": "10_start" },
+    { "dialogueID": "10_start", "speaker": "Bobby", "dialogueText": "LIQUOR, SPRITES, BEERS, VODKA, YOU NAME IT, WE GOT IT!!", "emotion": 2, "nextDialogueID": "11_start" },
+    { "dialogueID": "11_start", "speaker": "Bobby", "dialogueText": "ANY OF THEM FOR JUST ONE CENT!", "emotion": 2, "nextDialogueID": "12_start" },
+    { "dialogueID": "12_start", "speaker": "Bobby", "dialogueText": "WE’LL MOVE HEAVENS AND EARTH TO IMPRESS YOU!", "emotion": 2, "nextDialogueID": "13_start" },
+
+    { "dialogueID": "13_start", "speaker": "Duke", "dialogueText": ".....", "emotion": 0, "nextDialogueID": "14_start" },
+    { "dialogueID": "14_start", "speaker": "Duke", "dialogueText": "... some water please?", "emotion": 0, "nextDialogueID": "15_start" },
+
+    { "dialogueID": "15_start", "speaker": "Bobby", "dialogueText": "IT WILL BE THE GREATEST WATER OF YOUR LIFE!", "emotion": 2, "nextDialogueID": "16_start" },
+
+    { "dialogueID": "16_start", "speaker": "Ted", "dialogueText": "The funny thing’s that we didn’t even have half of those things in stock.", "emotion": 0, "nextDialogueID": "17_start" },
+    { "dialogueID": "17_start", "speaker": "Abby", "dialogueText": "Howdy traveler! What be your name?", "emotion": 0, "nextDialogueID": "18_start" },
+    { "dialogueID": "18_start", "speaker": "Duke", "dialogueText": "I’m… I’m Duke.", "emotion": 0, "nextDialogueID": "19_start" },
+
+    { "dialogueID": "19_start", "speaker": "Abby", "dialogueText": "Duke? What a colorful little name!", "emotion": 0, "nextDialogueID": "20_start" },
+    { "dialogueID": "20_start", "speaker": "Ted", "dialogueText": "Lovely is certainly a way of describing it.", "emotion": 0, "nextDialogueID": "21_start" },
+
+    { "dialogueID": "21_start", "speaker": "Abby", "dialogueText": "That bundle of joy is Ted. I’m Abby. Bobby is our fearless hero!", "emotion": 0, "nextDialogueID": "22_start" },
+    { "dialogueID": "22_start", "speaker": "Ted", "dialogueText": "Not much of a backbone if the flesh is all gone.", "emotion": 0, "nextDialogueID": "23_start" },
+
+    { "dialogueID": "23_start", "speaker": "Duke", "dialogueText": "Something happened to cause that?", "emotion": 0, "nextDialogueID": "24_start" },
+    { "dialogueID": "24_start", "speaker": "Ted", "dialogueText": "Capitalism.", "emotion": 0, "nextDialogueID": "25_start" },
+    { "dialogueID": "25_start", "speaker": "Ted", "dialogueText": "Capitalism happened.", "emotion": 0, "nextDialogueID": "26_start" },
+
+    { "dialogueID": "26_start", "speaker": "Abby", "dialogueText": "A big company came and took over everything.", "emotion": 0, "nextDialogueID": "27_start" },
+    { "dialogueID": "27_start", "speaker": "Ted", "dialogueText": "Except us. For obvious reasons.", "emotion": 0, "nextDialogueID": "28_start" },
+
+    { "dialogueID": "28_start", "speaker": "Bobby", "dialogueText": "Order Up!", "emotion": 2, "nextDialogueID": "29_start" },
+
+    { "dialogueID": "29_start", "speaker": "Bobby", "dialogueText": "So? How does the water taste?", "emotion": 0, "nextDialogueID": "30_start" },
+    { "dialogueID": "30_start", "speaker": "Duke", "dialogueText": "Just like water. Just the way I like it.", "emotion": 0, "nextDialogueID": "31_start" },
+
+    { "dialogueID": "31_start", "speaker": "Duke", "dialogueText": "Say… if I wanted a job here-", "emotion": 0, "nextDialogueID": "32_start" },
+    { "dialogueID": "32_start", "speaker": "Bobby", "dialogueText": "YOU’RE HIRED!!!", "emotion": 2, "nextDialogueID": "33_start" },
+
+    { "dialogueID": "33_start", "speaker": "Bobby", "dialogueText": "You’ll be an unpaid volunteer!", "emotion": 1, "nextDialogueID": "34_start" },
+    { "dialogueID": "34_start", "speaker": "Ted", "dialogueText": "That sounds a lot like slavery.", "emotion": 0, "nextDialogueID": "35_start" },
+
+    { "dialogueID": "35_start", "speaker": "Bobby", "dialogueText": "We offer free food!", "emotion": 2, "nextDialogueID": "36_start" },
+    { "dialogueID": "36_start", "speaker": "Duke", "dialogueText": "Sounds delicious…", "emotion": 0, "nextDialogueID": "" }
+  ]
+}

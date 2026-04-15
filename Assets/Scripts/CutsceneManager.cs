@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic; 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,13 +20,22 @@ public class CutsceneManager : MonoBehaviour
     private int currentFrame;
     private bool active;
     private System.Action onComplete;
-    private static float[] introTimestamps = { 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f };
-    private const float introClipLength = 45f;
     private float lastInputTime;
     private const float inputCooldown = 0.4f; 
     private bool isOnLastFrame = false;
     private float endTimer = 0f;
     private const float autoEndDuration = 5f;
+
+    [Header("Cutscene Details")]
+    private static float[] backstoryTimestamps = { 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f };
+    private const float backstoryClipLength = 45f;
+    private static float[] meetBobbyTimestamps = { 0f, 5f };
+    private const float meetBobbyClipLength = 5f;
+
+    [Header("Dialogue Details")]
+    [SerializeField] private TextAsset cutscene_1;
+    [SerializeField] private Sprite dialogueBoxSprite;
+    [SerializeField] private Sprite dukeSprite;
 
     void Awake()
     {
@@ -37,12 +47,12 @@ public class CutsceneManager : MonoBehaviour
     private void OnDisable() => continueAction.action.performed -= ContinueCutscene;
 
     /// <summary>
-    /// Starts the intro cutscene.
+    /// Starts the backstory cutscene.
     /// </summary>
     /// <param name="onComplete">action to execute when the cutscene completes</param>
-    public void PlayIntroCutscene(System.Action onComplete = null)
+    public void PlayBackstoryCutscene(System.Action onComplete = null)
     {
-        StartCutscene("intro_cutscene", introTimestamps, introClipLength, () =>
+        StartCutscene("backstory_cutscene", backstoryTimestamps, backstoryClipLength, () =>
         {
             if (GameManager.Instance != null)
             {
@@ -52,6 +62,25 @@ public class CutsceneManager : MonoBehaviour
                 
                 /// Transition into saloon for the first dialogue to begin.
                 GameManager.Instance.LoadScene("Saloon");
+            }
+        });
+    }
+
+    /// <summary>
+    /// Starts the meet bobby cutscene.
+    /// </summary>
+    /// <param name="onComplete">action to execute when the cutscene completes</param>
+    public void PlayMeetBobbyCutscene(System.Action onComplete = null)
+    {
+        Debug.Log("Playing Meet Bobby Cutscene");
+        DialogueManager.Instance.StartDialogue(cutscene_1, 1, dialogueBoxSprite, new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } }, "Saloon", DialogueType.NPC);
+        StartCutscene("meet_bobby_cutscene", meetBobbyTimestamps, meetBobbyClipLength, () =>
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.player.progression++;
+                GameManager.Instance.player.SavePlayer();
+                onComplete?.Invoke();
             }
         });
     }
