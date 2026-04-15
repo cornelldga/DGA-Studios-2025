@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     /// <summary>
-    /// Load the Saloon scene
+    /// Load the World Hub scene
     /// </summary>
-    public void LoadSaloon()
+    public void LoadWorldHub()
     {
-        SceneManager.LoadScene("Saloon");
+        SceneManager.LoadScene("World Hub");
     }
 
     /// <summary>
