@@ -3,6 +3,7 @@ using UnityEngine;
 public class Whip : MonoBehaviour, IProjectileInteractable
 {
     [SerializeField] float whipSpeedMultiplier;
+    [SerializeField] ParticleSystem destroyParticle;
     public float damageMultiplier;
     public bool reflecting = false;
     public int frameNumber = 0;
@@ -36,6 +37,7 @@ public class Whip : MonoBehaviour, IProjectileInteractable
             } else
             {
                 //figure out way to destroy bullets
+                destroyParticle.Play();
                 Destroy(projectile.gameObject);
             }
 

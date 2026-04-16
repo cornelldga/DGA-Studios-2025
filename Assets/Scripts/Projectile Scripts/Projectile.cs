@@ -16,7 +16,7 @@ public abstract class Projectile : MonoBehaviour
     public float accuracy;
     [Tooltip("The sprite that's created on impact")]
     [SerializeField] ImpactSprite impactSprite;
-
+    [SerializeField] ParticleSystem impactParticle;
 
 
     protected Rigidbody2D rb;
@@ -51,6 +51,12 @@ public abstract class Projectile : MonoBehaviour
         if (impactSprite != null)
         {
             Instantiate(impactSprite, transform.position, transform.rotation);
+        }
+        if (impactParticle != null)
+        {
+            impactParticle.transform.SetParent(null);
+            impactParticle.Clear();
+            impactParticle.Play();
         }
         collision.GetComponent<IDamageable>()?.TakeDamage(damage);
         Destroy(gameObject);
