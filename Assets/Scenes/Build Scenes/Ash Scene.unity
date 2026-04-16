@@ -13129,6 +13129,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tumbleweed
       objectReference: {fileID: 0}
+    - target: {fileID: 2316961693413251591, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 4804488721290506763, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25
@@ -13183,7 +13187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6679712294362491381, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
-      value: 1
+      value: 1025
       objectReference: {fileID: 0}
     - target: {fileID: 8636136779359343990, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
       propertyPath: m_SortingOrder
@@ -13466,6 +13470,14 @@ PrefabInstance:
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: basicSeedArcHeight
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: numOrbitingPhaseTwo
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: numOrbitingPhaseThree
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: tumbleweedCooldownMax

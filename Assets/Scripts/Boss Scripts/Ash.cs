@@ -67,7 +67,7 @@ public class Ash : Boss
     [SerializeField] private float orbitRadius = 1f;
 
 
-    private GameObject[] orbitingTumbleweeds = new GameObject[5]; // size should be maximum spawned in phase 3
+    private GameObject[] orbitingTumbleweeds = new GameObject[10]; // size should be maximum spawned in phase 3
  
     [Space(5)]
     [Header("Stomp Settings")]
@@ -578,13 +578,13 @@ public class Ash : Boss
     private IEnumerator SummonOrbitingTumbleweeds() {
         Debug.Log("SummonOrbitingTumbleweeds");
         for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
-            Debug.Log(orbitingTumbleweeds[i] is null);
-            if (orbitingTumbleweeds[i] is null)
+            Debug.Log(orbitingTumbleweeds[i]);
+            if (!orbitingTumbleweeds[i])
             {
                 Debug.Log(currentPhase);
                 
                 // set it to be an orbiting tumbleweed
-                if (currentPhase == 0 && i < numOrbitingPhaseOne)
+                if (currentPhase == 0 && i+1 <= numOrbitingPhaseOne)
                 {
                     Debug.Log("one something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
@@ -592,7 +592,7 @@ public class Ash : Boss
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab,spawnPos,Quaternion.identity);
                     orbitingTumbleweeds[i].transform.parent = this.transform;
                 }
-                else if (currentPhase == 1 && i < numOrbitingPhaseTwo)
+                else if (currentPhase == 1 && i+1 <= numOrbitingPhaseTwo)
                 {
 
                     Debug.Log("two something");
@@ -601,7 +601,7 @@ public class Ash : Boss
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
                     orbitingTumbleweeds[i].transform.parent = this.transform;
                 }  
-                else if (currentPhase == 2 && i < numOrbitingPhaseThree)
+                else if (currentPhase == 2 && i+1 <= numOrbitingPhaseThree)
                 {
 
                     Debug.Log("three something");

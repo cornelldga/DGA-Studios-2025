@@ -1,12 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class TumbleweedOrbit : Bullet
+public class TumbleweedOrbit : Bullet, IDamageable
 {
 
 
     [SerializeField] private float fireDamage = 5f;
     [SerializeField] private float fireDuration = 1f;
     [SerializeField] private float orbitingSpeed = 360f;
+    [SerializeField] private int maxHealth;
+    private int health;
     private bool isOnFire = false;
     private GameObject ash;
 
@@ -15,6 +18,7 @@ public class TumbleweedOrbit : Bullet
     {
         rb = GetComponent<Rigidbody2D>();
         ash = GameObject.Find("Ash");
+        health=maxHealth;
 
    
     }
@@ -23,7 +27,6 @@ public class TumbleweedOrbit : Bullet
     private void FixedUpdate()
 
     {
-        Debug.Log(ash.transform.position);
         transform.RotateAround(ash.transform.position, Vector3.back, orbitingSpeed);
         transform.Rotate(Vector3.back * 360f * Time.deltaTime);
         if (isOnFire) Destroy(gameObject, fireDuration);
@@ -46,7 +49,6 @@ public class TumbleweedOrbit : Bullet
 
     public override void OnProjectileHit(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.GetType());
         if (collision.CompareTag("Bush"))
         {
             Bush bush = collision.gameObject.GetComponent<Bush>();
@@ -56,6 +58,10 @@ public class TumbleweedOrbit : Bullet
         else if(collision.CompareTag("Whip")){
             Destroy(gameObject);
         }
+        else if (collision.CompareTag("Base"))
+        {
+            Destroy(collision.gameObject);
+        }
         else
         {
             base.OnProjectileHit(collision);
@@ -63,5 +69,14 @@ public class TumbleweedOrbit : Bullet
 
 
        
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health --;
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
