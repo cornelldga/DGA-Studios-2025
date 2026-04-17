@@ -256,7 +256,6 @@ public class GameManager : MonoBehaviour
         
         float animLength = transitions.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
-        transitions.ResetTrigger("Scene Loaded");
 
         if (scene == "Saloon Exit")
         {
@@ -276,15 +275,17 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         player = null;
-        if (scene.name == "World Hub")
-        {
-            PlayerData data = SaveSystem.LoadPlayer();
-            if (data == null || data.progression == 0)
-            {
-                StartCoroutine(WaitAndPlay());
-                return;
-            }
-        }
+        // TODO: Fix this cutscene trigger so that exiting the saloon into the World Hub does not trigger this
+
+        //if (scene.name == "World Hub")
+        //{
+        //    PlayerData data = SaveSystem.LoadPlayer();
+        //    if (data == null || data.progression == 0)
+        //    {
+        //        StartCoroutine(WaitAndPlay());
+        //        return;
+        //    }
+        //}
         transitions.SetTrigger("Scene Loaded");
     }
 
