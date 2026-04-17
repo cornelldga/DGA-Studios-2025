@@ -29,13 +29,11 @@ public class CutsceneManager : MonoBehaviour
     [Header("Cutscene Details")]
     private static float[] backstoryTimestamps = { 0f, 5f, 10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f };
     private const float backstoryClipLength = 45f;
-    private static float[] meetBobbyTimestamps = { 0f, 5f };
-    private const float meetBobbyClipLength = 5f;
 
     [Header("Dialogue Details")]
-    [SerializeField] private TextAsset cutscene_1;
-    [SerializeField] private Sprite dialogueBoxSprite;
-    [SerializeField] private Sprite dukeSprite;
+    [SerializeField] public TextAsset cutscene_1;
+    [SerializeField] public Sprite dialogueBoxSprite;
+    [SerializeField] public Sprite dukeSprite;
 
     void Awake()
     {
@@ -59,9 +57,6 @@ public class CutsceneManager : MonoBehaviour
                 GameManager.Instance.player.progression++;
                 GameManager.Instance.player.SavePlayer();
                 onComplete?.Invoke();
-                
-                /// Transition into saloon for the first dialogue to begin.
-                GameManager.Instance.LoadScene("Saloon");
             }
         });
     }
@@ -72,17 +67,11 @@ public class CutsceneManager : MonoBehaviour
     /// <param name="onComplete">action to execute when the cutscene completes</param>
     public void PlayMeetBobbyCutscene(System.Action onComplete = null)
     {
-        Debug.Log("Playing Meet Bobby Cutscene");
-        DialogueManager.Instance.StartDialogue(cutscene_1, 1, dialogueBoxSprite, new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } }, "Saloon", DialogueType.NPC);
-        StartCutscene("meet_bobby_cutscene", meetBobbyTimestamps, meetBobbyClipLength, () =>
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.player.progression++;
-                GameManager.Instance.player.SavePlayer();
-                onComplete?.Invoke();
-            }
-        });
+        GameManager.Instance.player.progression++;
+        DialogueManager.Instance.StartDialogue(cutscene_1, 1, dialogueBoxSprite, new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } }, "Tutorial", DialogueType.NPC);
+        GameManager.Instance.player.progression++;
+        GameManager.Instance.player.SavePlayer();
+        onComplete?.Invoke();
     }
 
     /// <summary>

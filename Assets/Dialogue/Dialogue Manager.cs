@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using System.Diagnostics;
 
 /// <summary>
 /// The types of dialogue
@@ -23,6 +22,7 @@ public enum DialogueType
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    private System.Action onComplete;
     [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -142,8 +142,10 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
+        Debug.Log("Starting dialogue with progress " + progress);
         if (file != null)
         {
+            Debug.Log("Dialogue file found: " + file.name);
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             isCutscene = file.name.StartsWith("cutscene");
@@ -187,7 +189,10 @@ public class DialogueManager : MonoBehaviour
             } else
             {
                 // Automatic entry/exit for the saloon
-                GameManager.Instance.LoadScene(scene); 
+                if (GameManager.Instance.player.progression != 2)
+                {
+                    GameManager.Instance.LoadScene(scene); 
+                }
             }
         }
     }
@@ -198,57 +203,57 @@ public class DialogueManager : MonoBehaviour
     /// else, sets currentDialogueID to nextDialogueID 
     /// </summary>
     public void DisplayNextLine()
-{
-    if (currentDialogueID == "")
     {
-        if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive)
+        if (currentDialogueID == "")
         {
-            DialogueChoice();
-        }
-        else
-        {
-            EndDialogue();
-        }
-        return;
-    }
-
-    if (currentDialogueData.dialogueLines.Count > 0)
-    {
-        foreach (DialogueLine line in currentDialogueData.dialogueLines)
-        {
-            if (line.dialogueID == currentDialogueID)
+            if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive)
             {
-                string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
-
-                nameText.text = speakerName;
-
-                bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
-                bool isDuke = (speakerName == "Duke");
-
-                if (isCutscene)
-                {
-                    // Hide if not Duke during cutscenes
-                    npcImg.gameObject.SetActive(isDuke && hasEmotion);
-                }
-                else
-                {
-                    npcImg.gameObject.SetActive(hasEmotion);
-                }
-
-                if (npcImg.gameObject.activeSelf)
-                {
-                    npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
-                }
-
-                StopAllCoroutines();
-                StartCoroutine(TypeSentence(line));
-                return; 
+                DialogueChoice();
             }
+            else
+            {
+                EndDialogue();
+            }
+            return;
         }
-        
-        UnityEngine.Debug.LogError("Dialogue ID " + currentDialogueID + " not found!");
+
+        if (currentDialogueData.dialogueLines.Count > 0)
+        {
+            foreach (DialogueLine line in currentDialogueData.dialogueLines)
+            {
+                if (line.dialogueID == currentDialogueID)
+                {
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+
+                    nameText.text = speakerName;
+
+                    bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
+                    bool isDuke = (speakerName == "Duke");
+
+                    if (isCutscene)
+                    {
+                        // Hide if not Duke during cutscenes
+                        npcImg.gameObject.SetActive(isDuke);
+                    }
+                    else
+                    {
+                        npcImg.gameObject.SetActive(hasEmotion);
+                    }
+
+                    if (npcImg.gameObject.activeSelf)
+                    {
+                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                    }
+
+                    StopAllCoroutines();
+                    StartCoroutine(TypeSentence(line));
+                    return; 
+                }
+            }
+            
+            UnityEngine.Debug.LogError("Dialogue ID " + currentDialogueID + " not found!");
+        }
     }
-}
 
     /// <summary>
     /// Does the animation for typing text.
