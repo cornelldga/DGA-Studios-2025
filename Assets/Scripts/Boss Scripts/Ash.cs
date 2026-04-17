@@ -578,40 +578,35 @@ public class Ash : Boss
     private IEnumerator SummonOrbitingTumbleweeds() {
         Debug.Log("SummonOrbitingTumbleweeds");
         for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
-            Debug.Log(orbitingTumbleweeds[i]);
-            if (!orbitingTumbleweeds[i])
+            if (orbitingTumbleweeds[i])
             {
-                Debug.Log(currentPhase);
-                
+                Destroy(orbitingTumbleweeds[i]);
+            }     
                 // set it to be an orbiting tumbleweed
-                if (currentPhase == 0 && i+1 <= numOrbitingPhaseOne)
+                if (currentPhase == 0 && i < numOrbitingPhaseOne)
                 {
-                    Debug.Log("one something");
+                    
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
-                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle)* orbitRadius, Mathf.Sin(angle)*orbitRadius, 0);
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab,spawnPos,Quaternion.identity);
                     orbitingTumbleweeds[i].transform.parent = this.transform;
                 }
-                else if (currentPhase == 1 && i+1 <= numOrbitingPhaseTwo)
+                else if (currentPhase == 1 && i < numOrbitingPhaseTwo)
                 {
 
-                    Debug.Log("two something");
-                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
-                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseTwo;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle)* orbitRadius, Mathf.Sin(angle)*orbitRadius, 0);
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
                     orbitingTumbleweeds[i].transform.parent = this.transform;
                 }  
-                else if (currentPhase == 2 && i+1 <= numOrbitingPhaseThree)
+                else if (currentPhase == 2 && i < numOrbitingPhaseThree)
                 {
 
-                    Debug.Log("three something");
-                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
-                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseThree;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle)* orbitRadius, Mathf.Sin(angle)*orbitRadius, 0);
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
                     orbitingTumbleweeds[i].transform.parent = this.transform;
                 }
-                
-            }
         }
         yield return new WaitForSeconds(tumbleweedTime);
     }
