@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Whip : MonoBehaviour
+public class Whip : MonoBehaviour, IProjectileInteractable
 {
     [SerializeField] float whipSpeedMultiplier;
     public float damageMultiplier;
@@ -23,6 +23,7 @@ public class Whip : MonoBehaviour
             }
         }
         
+        
     }
     /// <summary>
     /// Ends the whip
@@ -30,5 +31,19 @@ public class Whip : MonoBehaviour
     public void EndWhip()
     {
         GameManager.Instance.player.AnimationEndWhip();
+    }
+
+    public bool ProjectileInteraction(Projectile projectile)
+    {
+        if (projectile.gameObject.TryGetComponent<Bullet>(out Bullet bullet))
+        {
+            if (!bullet.Whipped())
+            {
+                bullet.WhipBullet(damageMultiplier);
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                rb.linearVelocity = -whipSpeedMultiplier * rb.linearVelocity;
+            }
+        }
+        return false;
     }
 }

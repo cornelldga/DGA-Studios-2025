@@ -100,6 +100,30 @@ MonoBehaviour:
     isLoop: 0
     playOnAwake: 0
     volume: 1
+  - source: {fileID: 0}
+    name: Mixer Swap
+    audioClip: {fileID: 8300000, guid: 0bfdaee6721d0404bb378d49c33560f1, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Whip Hit
+    audioClip: {fileID: 8300000, guid: 8ecf0c4ef52404cc3b6b2cf77cbc336e, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Whip Empty
+    audioClip: {fileID: 8300000, guid: 9ca6a8ab340a24ef1a7503ddd2711e48, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Whip Crack
+    audioClip: {fileID: 8300000, guid: 89a41c5000933420ab73c5640ce2d42d, type: 3}
+    isLoop: 0
+    playOnAwake: 0
+    volume: 1
   musicGroup: {fileID: 898037753239958536, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
   sfxGroup: {fileID: -3908983327557864445, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
 --- !u!1 &1814903278115915233

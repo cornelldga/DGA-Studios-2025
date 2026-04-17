@@ -11,13 +11,10 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] bool canInteract;
 
-    [SerializeField] Rigidbody2D playerRB;
-
     // Update is called once per frame
     void Update()
     {
         OnStart();
-        OnWhip();
     }
 
     void OnStart()
@@ -30,22 +27,34 @@ public class TutorialManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && TutorialTrigger.Equals("Move") && !DialogueManager.Instance.OngoingDialogue())
+        switch (TutorialTrigger)
         {
-            OnInteract();
-        }
-
-        if (collision.CompareTag("Base") && TutorialTrigger.Equals("Shoot") && !DialogueManager.Instance.OngoingDialogue())
-        {
-            OnInteract();
-        }
-    }
-
-    void OnWhip()
-    {
-        if (TutorialTrigger.Equals("Whip") && !DialogueManager.Instance.OngoingDialogue() && Input.GetMouseButtonDown(1))
-        {
-            OnInteract();
+            case ("Move"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Shoot"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Whip"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Whiskey"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Whiskey>() != null && !DialogueManager.Instance.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            default:
+                break;
         }
     }
 

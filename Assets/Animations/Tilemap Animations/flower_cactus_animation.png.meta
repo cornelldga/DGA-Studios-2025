@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: 242726e4b7f170a498955ad963262481
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5322407400863404445
+    second: flower_cactus_animation_0
+  - first:
+      213: -6050124450988494844
+    second: flower_cactus_animation_1
+  - first:
+      213: -5621383444108581621
+    second: flower_cactus_animation_2
+  - first:
+      213: -5705227405770220788
+    second: flower_cactus_animation_3
+  - first:
+      213: -5798325743805757453
+    second: flower_cactus_animation_4
+  - first:
+      213: -2026381195716427444
+    second: flower_cactus_animation_5
+  - first:
+      213: -233961814600237016
+    second: flower_cactus_animation_6
+  - first:
+      213: 3361107725597157778
+    second: flower_cactus_animation_7
+  - first:
+      213: -6850037649889342121
+    second: flower_cactus_animation_8
+  - first:
+      213: 1174228716954355465
+    second: flower_cactus_animation_9
+  - first:
+      213: -2631851483053555099
+    second: flower_cactus_animation_10
+  - first:
+      213: -5863384501897239415
+    second: flower_cactus_animation_11
+  - first:
+      213: -1018848809890963213
+    second: flower_cactus_animation_12
+  - first:
+      213: -4733438808129632921
+    second: flower_cactus_animation_13
+  - first:
+      213: -3421073219635194588
+    second: flower_cactus_animation_14
+  - first:
+      213: 3019636910352106674
+    second: flower_cactus_animation_15
+  - first:
+      213: 1130102415010914052
+    second: flower_cactus_animation_16
+  - first:
+      213: -1365460779646872979
+    second: flower_cactus_animation_17
+  - first:
+      213: -5767008421841331331
+    second: flower_cactus_animation_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: flower_cactus_animation_0
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 45
+        width: 459
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36e60a11ba20326b0800000000000000
+      internalID: -5322407400863404445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_1
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 29
+        width: 282
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 400fce3edd3a90ca0800000000000000
+      internalID: -6050124450988494844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_2
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 404
+        width: 51
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0565ab7a85dcf1b0800000000000000
+      internalID: -5621383444108581621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_3
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 359
+        width: 53
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b1e3ce6e5f2d0b0800000000000000
+      internalID: -5705227405770220788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_4
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 45
+        width: 483
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f78474f475388fa0800000000000000
+      internalID: -5798325743805757453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_5
+      rect:
+        serializedVersion: 2
+        x: 1706
+        y: 379
+        width: 50
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c418ac9e909d0e3e0800000000000000
+      internalID: -2026381195716427444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_6
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 45
+        width: 424
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8204fbd18fcc0ccf0800000000000000
+      internalID: -233961814600237016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_7
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 45
+        width: 459
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2992a042bad05ae20800000000000000
+      internalID: 3361107725597157778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_8
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 45
+        width: 459
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d4b4cec07cfe0a0800000000000000
+      internalID: -6850037649889342121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_9
+      rect:
+        serializedVersion: 2
+        x: 1819
+        y: 330
+        width: 36
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9078027fbc2bb4010800000000000000
+      internalID: 1174228716954355465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_10
+      rect:
+        serializedVersion: 2
+        x: 2355
+        y: 329
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56202033509c97bd0800000000000000
+      internalID: -2631851483053555099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_11
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 310
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98462ee6cd211aea0800000000000000
+      internalID: -5863384501897239415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_12
+      rect:
+        serializedVersion: 2
+        x: 2965
+        y: 311
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f0ae9ec7625cd1f0800000000000000
+      internalID: -1018848809890963213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 40
+        width: 81
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765826b9b727f4eb0800000000000000
+      internalID: -4733438808129632921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_14
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 24
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 425da094808e580d0800000000000000
+      internalID: -3421073219635194588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_15
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 40
+        width: 85
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4023075c7e7e920800000000000000
+      internalID: 3019636910352106674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_16
+      rect:
+        serializedVersion: 2
+        x: 2179
+        y: 40
+        width: 75
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40f598ea82eeeaf00800000000000000
+      internalID: 1130102415010914052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_17
+      rect:
+        serializedVersion: 2
+        x: 2784
+        y: 40
+        width: 81
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d629b6ac7a8ec0de0800000000000000
+      internalID: -1365460779646872979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower_cactus_animation_18
+      rect:
+        serializedVersion: 2
+        x: 3384
+        y: 40
+        width: 81
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b167f256877ffa0800000000000000
+      internalID: -5767008421841331331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      flower_cactus_animation_0: -5322407400863404445
+      flower_cactus_animation_1: -6050124450988494844
+      flower_cactus_animation_10: -2631851483053555099
+      flower_cactus_animation_11: -5863384501897239415
+      flower_cactus_animation_12: -1018848809890963213
+      flower_cactus_animation_13: -4733438808129632921
+      flower_cactus_animation_14: -3421073219635194588
+      flower_cactus_animation_15: 3019636910352106674
+      flower_cactus_animation_16: 1130102415010914052
+      flower_cactus_animation_17: -1365460779646872979
+      flower_cactus_animation_18: -5767008421841331331
+      flower_cactus_animation_2: -5621383444108581621
+      flower_cactus_animation_3: -5705227405770220788
+      flower_cactus_animation_4: -5798325743805757453
+      flower_cactus_animation_5: -2026381195716427444
+      flower_cactus_animation_6: -233961814600237016
+      flower_cactus_animation_7: 3361107725597157778
+      flower_cactus_animation_8: -6850037649889342121
+      flower_cactus_animation_9: 1174228716954355465
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
