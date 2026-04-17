@@ -242,7 +242,7 @@ public class DialogueManager : MonoBehaviour
 
                     if (npcImg.gameObject.activeSelf)
                     {
-                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                        npcImg.sprite = currentEmotions.ContainsKey((DialogueEmotion)line.emotion) ? currentEmotions[(DialogueEmotion)line.emotion] : currentEmotions[DialogueEmotion.Neutral];
                     }
 
                     StopAllCoroutines();
