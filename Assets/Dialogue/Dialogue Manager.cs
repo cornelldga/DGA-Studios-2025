@@ -25,11 +25,11 @@ public class DialogueManager : MonoBehaviour
     private System.Action onComplete;
     [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
-    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
-    [SerializeField] private TextMeshProUGUI nameText;
-    [Tooltip("The grey out background for when dialogue plays")]
-    [SerializeField] private Image backgroundImg;
+    [SerializeField] TextMeshProUGUI nameText;
+    [Tooltip("The gray out background for when dialogue plays")]
+    [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
     private string currentFileName;
@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button noButton;
 
     [Header("Settings")]
-    [SerializeField] private float typingSpeed;
+    [SerializeField] float typingSpeed;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     private Dictionary<DialogueEmotion, Sprite> currentEmotions;
@@ -50,25 +50,16 @@ public class DialogueManager : MonoBehaviour
     private DialogueType currentDialogueType;
     private string sceneName;
 
+    [Header("Dialogue Choices")]
+    [SerializeField] GameObject choices;
+    [SerializeField] TMP_Text yesButtonText;
+    [SerializeField] TMP_Text noButtonText;
+    [SerializeField] string bossYesText;
+    [SerializeField] string bossNoText;
+
+
     [Header("Input Controls")]
     [SerializeField] InputActionReference continueDialogueAction;
-
-    /// <summary>
-    /// Initializes the singleton, hides choices at start up.
-    /// </summary>
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            yesButton.gameObject.SetActive(false);
-            noButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void OnEnable()
     {
@@ -84,6 +75,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        choices.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -327,18 +319,17 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void DialogueChoice()
     {
-        yesButton.gameObject.SetActive(true);
-        noButton.gameObject.SetActive(true);
+        choices.SetActive(true);
 
         if (currentDialogueType == DialogueType.Boss)
         {
-            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Fight!";
-            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
+            yesButtonText.text = bossYesText;
+            noButtonText.text = bossNoText;
         }
         else if (currentDialogueType == DialogueType.Interactive)
         {
-            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Yes";
-            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "No";
+            yesButtonText.text = "Yes";
+            noButtonText.text = "No";
         }
     }
 
@@ -347,9 +338,10 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void YesChoice()
     {
-        yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
-         GameManager.Instance.LoadScene(sceneName);
+        ongoingDialogue = false;
+        choices.SetActive(false);
+        gameObject.SetActive(false);
+        GameManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>
@@ -357,8 +349,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void NoChoice()
     {
-        yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
+        ongoingDialogue = false;
+        choices.SetActive(false);
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(GameManager.Instance.player.transform.position, 1.5f))
         {
             collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);

@@ -292,7 +292,7 @@ public class Player : MonoBehaviour, IDamageable
 
         Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
         whipPivot.right = dir;
-        whipAnimator.Play("Whip", 0, 0f);
+        whipAnimator.SetTrigger("Whip");
         AudioManager.Instance.PlaySFX(SFXKey.WHIPHIT, true);
         StartCoroutine(nameof(ToggleWhipUI));
         if (SmokePool.Instance != null) SmokePool.Instance.OnWhip(gameObject.transform);

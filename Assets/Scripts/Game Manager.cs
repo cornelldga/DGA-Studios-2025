@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [Tooltip("Reference to the LoadoutManager.")]
     [SerializeField] private LoadoutManager loadoutManager;
+    public LoadoutManager GetLoadoutManager => loadoutManager;
     [Tooltip("Reference to the DialogueManager.")]
     [SerializeField] private DialogueManager dialogueManager;
+    public DialogueManager GetDialogueManager => dialogueManager;
     [Tooltip("Reference to the CutsceneManager.")]
     [SerializeField] private CutsceneManager cutsceneManager;
+    public CutsceneManager GetCutsceneManager => cutsceneManager;
     [Header("Pause Menu")]
     [Tooltip("Reference to the pause button")]
     [SerializeField] private GameObject pauseButton;
@@ -31,7 +34,7 @@ public class GameManager : MonoBehaviour
     private bool volumeOpened = false;
     
     [Tooltip("Animator for scene transitions")]
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator transitions;
     
     [HideInInspector] public Player player;
 
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
             pauseMenu.SetActive(false);
         }
@@ -243,9 +246,9 @@ public class GameManager : MonoBehaviour
         FreezePlayer(true);
 
         bool hasSpecificTransition = false;
-        for (int triggerIndex = 0; triggerIndex < animator.parameterCount; triggerIndex++)
+        for (int triggerIndex = 0; triggerIndex < transitions.parameterCount; triggerIndex++)
         {
-            if (animator.parameters[triggerIndex].name == scene || scene == "Saloon Exit")
+            if (transitions.parameters[triggerIndex].name == scene || scene == "Saloon Exit")
             {
                 hasSpecificTransition = true;
                 break;
@@ -253,15 +256,15 @@ public class GameManager : MonoBehaviour
         }
 
         if (hasSpecificTransition)
-            animator.SetTrigger(scene);
+            transitions.SetTrigger(scene);
         else
-            animator.SetTrigger("World Hub");
+            transitions.SetTrigger("World Hub");
         
         yield return null;
         
-        float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        float animLength = transitions.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
-        animator.ResetTrigger("Scene Loaded");
+        transitions.ResetTrigger("Scene Loaded");
 
         if (scene == "Saloon Exit")
         {
