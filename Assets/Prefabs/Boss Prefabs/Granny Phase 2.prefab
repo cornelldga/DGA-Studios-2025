@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 7623469587559007986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.99208, y: 0.13028, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70,6 +70,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8739514375221353489
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,6 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e419ab20c9f22ab4ebc1dd34af4d6fce, type: 3}
   m_Color: {r: 1, g: 0, b: 0.71683025, a: 1}
   m_FlipX: 0
@@ -124,7 +126,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2208494978383391363
 Rigidbody2D:
@@ -204,19 +205,34 @@ MonoBehaviour:
   bossName: 
   maxHealth: 0
   healthBar: {fileID: 0}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 0}
   bulletOrigin: {fileID: 0}
   phasePercents: []
   currentPhase: 0
   attackRate: 1
-  baseSpeed: 5
+  baseTime: 0
   collisionRadius: 0
   checkDistance: 0
+  idleTime: 0
+  scavengeTime: 0
+  outTime: 0
+  invincibleTime: 0
+  droppedTime: 0
   bosses:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  contractSpawnBounds: []
+  availableBosses: []
+  bossActive: 0
+  contractTemplate: {fileID: 0}
+  currentDroppedContracts: []
+  contractDestroyed: 0
+  returnTime: 4
+  arrivalThreshold: 0.1
+  gHealth: 0
 --- !u!1 &8238466242085916958
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +267,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8689565513718387545
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -296,6 +313,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 2045500745716955198, guid: 9b7307307e72b40838ed38f5c5337823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -305,5 +323,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0

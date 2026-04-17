@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 8649009401034233054}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -179,6 +179,7 @@ MonoBehaviour:
   bossName: Tom, Manic Miner
   maxHealth: 70
   healthBar: {fileID: 159719163656866947}
+  healthBarAnimator: {fileID: 3610685219928371153}
   bossNameText: {fileID: 62901968422666060}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
@@ -191,7 +192,6 @@ MonoBehaviour:
   walkingTime: 2
   debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
   numFrenzyDigs: 3
-  holeOrigin: {fileID: 5800447950608822647}
   moveSpeed: 0.8
   moveRange: 2
   exitHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
@@ -229,6 +229,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &3070000242549314754
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -274,6 +275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 826432638, guid: e5d3ae9746213484a86a442251399639, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -283,7 +285,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &2116001527165509890
 PrefabInstance:
@@ -432,6 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!95 &3610685219928371153 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 2116001527165509890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5489353766401137639 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}

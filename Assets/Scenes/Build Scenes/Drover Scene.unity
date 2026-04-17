@@ -150,6 +150,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &93575802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 330952381505529659, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+  m_PrefabInstance: {fileID: 708738611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &116850634
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: pigRider
       value: 
-      objectReference: {fileID: 783180771}
+      objectReference: {fileID: 93575802}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.56
@@ -18526,7 +18537,7 @@ PrefabInstance:
     - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: pigRider
       value: 
-      objectReference: {fileID: 783180771}
+      objectReference: {fileID: 93575802}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.65
@@ -18576,6 +18587,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
+--- !u!1001 &708738611
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953554823208090808, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947622557283230081, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+      propertyPath: m_Name
+      value: Drover
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
 --- !u!1 &717211468
 GameObject:
   m_ObjectHideFlags: 0
@@ -18612,17 +18680,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2156686725511599133, guid: 7ad4265f766db0146a6c3eda6198bdb9, type: 3}
   m_PrefabInstance: {fileID: 975121722}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &783180771 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
-  m_PrefabInstance: {fileID: 926295270}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &843690088
 GameObject:
   m_ObjectHideFlags: 0
@@ -18711,7 +18768,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.639553, y: 0.3354298, z: -10}
+  m_LocalPosition: {x: 4.6396203, y: 0.3354298, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18793,71 +18850,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1001 &926295270
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: bounceChance
-      value: 0.601
-      objectReference: {fileID: 0}
-    - target: {fileID: 330952381505529659, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: collisionDistanceCheck
-      value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953554823208090808, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7947622557283230081, guid: 5a81611296a39884bb65787665492c64, type: 3}
-      propertyPath: m_Name
-      value: Pig Rider
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5a81611296a39884bb65787665492c64, type: 3}
 --- !u!1001 &975121722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19457,7 +19449,7 @@ PrefabInstance:
     - target: {fileID: 1421109009983087776, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: pigRider
       value: 
-      objectReference: {fileID: 783180771}
+      objectReference: {fileID: 93575802}
     - target: {fileID: 5453936994849304166, guid: e63a31d8eaf663c4c9fea5da166f4471, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.46
@@ -19519,6 +19511,6 @@ SceneRoots:
   - {fileID: 2769844188617899369}
   - {fileID: 697161947}
   - {fileID: 477074163}
-  - {fileID: 926295270}
   - {fileID: 597873122}
   - {fileID: 2118026583}
+  - {fileID: 708738611}
