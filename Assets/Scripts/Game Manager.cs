@@ -216,6 +216,7 @@ public class GameManager : MonoBehaviour
     /// <param name="sceneName">Name of scene to transition to</param>
     public void LoadScene(string sceneName)
     {
+        player.SavePlayer();
         if (GetCurrentSceneName() == "Saloon")
         {
             StartCoroutine(TransitionAnim("Saloon Exit"));
@@ -254,7 +255,6 @@ public class GameManager : MonoBehaviour
         float animLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
         animator.ResetTrigger("Scene Loaded");
-
         if (scene == "Saloon Exit")
         {
             SceneManager.LoadScene("World Hub");

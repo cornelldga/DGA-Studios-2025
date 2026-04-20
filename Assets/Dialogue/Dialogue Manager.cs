@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using System.Diagnostics;
 
 /// <summary>
 /// The types of dialogue
@@ -121,9 +120,10 @@ public class DialogueManager : MonoBehaviour
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
-    public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
+    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
+        Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
             gameObject.SetActive(true);

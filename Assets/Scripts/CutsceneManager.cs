@@ -39,7 +39,7 @@ public class CutsceneManager : MonoBehaviour
     {
         StartCutscene("intro_cutscene", IntroTimestamps, IntroClipLength, () =>
         {
-            GameManager.Instance.player.progression++;
+            //GameManager.Instance.player.progression++;
             GameManager.Instance.player.SavePlayer();
             onComplete?.Invoke();
         });
