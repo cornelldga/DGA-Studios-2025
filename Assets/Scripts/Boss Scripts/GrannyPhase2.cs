@@ -173,6 +173,7 @@ public class GrannyPhase2 : Boss
             TransitionToComboAttack();
         } else
         {
+            Debug.Log("Firing");
             machineTimer += Time.deltaTime;
         }
 
@@ -300,14 +301,14 @@ public class GrannyPhase2 : Boss
             GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,5),Random.Range(-3,3),-1), Quaternion.identity);
 
             Point Secondary = Primary.AddComponent<Point>();
-            //Secondary.SetSecondaryPrefab(SecondaryPrefab);
+            Secondary.SetSecondaryPrefab(SecondaryPrefab);
             
             //Secondary.DropSecondaryProjectile();
 
             Destroy(Primary, ProjectileLifeTime);
             Secondary.DropSecondaryProjectile();
         }
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(3f); 
     }
     
     private void TransitionToLazer()

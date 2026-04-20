@@ -10,7 +10,7 @@ public class Point : MonoBehaviour
 
     private void Start()
     {
-       
+   
     }
 
     public void DropSecondaryProjectile()
@@ -29,12 +29,14 @@ public class Point : MonoBehaviour
             bushScript.setFire(true);
         }
 
-        /*Dynamite DynaScript = obj.GetComponent<Dynamite>();
+        Dynamite DynaScript = obj.GetComponent<Dynamite>();
         if (DynaScript)
         {
-            
+            Granny granny = GetComponent<Granny>();
+            Vector3 grannypos = granny.transform.position;
+            StartCoroutine(DynaScript.ThrowRoutine(grannypos, SpawnPos));
         }
-        */
+        
     }
 
     public void SetSecondaryPrefab(GameObject prefab)

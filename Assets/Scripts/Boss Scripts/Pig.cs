@@ -348,7 +348,7 @@ public class Pig : MonoBehaviour
         {
             // Recharge on bounce
             TransitionToCharging();
-            ChargeSpecificDirection(Random.onUnitCircle);
+            ChargeSpecificDirection(Random.onUnitSphere);
         }
     }
 
