@@ -274,7 +274,6 @@ public class GameManager : MonoBehaviour
         
         float animLength = transitions.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
-        transitions.ResetTrigger("Scene Loaded");
 
         if (scene == "Saloon Exit")
         {
