@@ -4,6 +4,6 @@ public class DialogueClose : MonoBehaviour
 {
     public void CallDialogueClose()
     {
-        DialogueManager.Instance.AnimationCloseDialogue();
+        GameManager.Instance.GetDialogueManager.AnimationCloseDialogue();
     }
 }
