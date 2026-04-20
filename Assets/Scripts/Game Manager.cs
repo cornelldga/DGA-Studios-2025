@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => CutsceneManager.Instance != null);
         
-        yield return null; 
+        yield return new WaitForEndOfFrame(); 
 
         PlayerData data = SaveSystem.LoadPlayer();
         string currentScene = GetCurrentSceneName();
@@ -306,12 +306,14 @@ public class GameManager : MonoBehaviour
         {
             playerInstance.progression = data.progression;
         }
-        
-        if (currentScene == "World Hub" && (data == null || data.progression == 0))
+        int currentProgression = (playerInstance != null) ? playerInstance.progression : (data != null ? data.progression : 0);
+
+        if (currentScene == "World Hub" && currentProgression == 0)
         {
             CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
         }
-        else if (currentScene == "Saloon" && playerInstance != null && playerInstance.progression == 1)
+
+        else if (currentScene == "Saloon" && currentProgression == 1)
         {
             CutsceneManager.Instance.PlayMeetBobbyCutscene();
         }
