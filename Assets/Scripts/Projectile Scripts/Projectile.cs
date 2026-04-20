@@ -57,6 +57,9 @@ public abstract class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Plays the particle impact animation if the player
+    /// </summary>
     public void playImpactParticle()
     {
         if (impactParticle != null)
