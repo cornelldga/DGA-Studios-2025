@@ -39,25 +39,25 @@ public class TutorialManager : MonoBehaviour
         switch (TutorialTrigger)
         {
             case ("Move"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
                 }
                 break;
             case ("Shoot"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
                 }
                 break;
             case ("Whip"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Bullet>() != null && collision.gameObject.GetComponent<Bullet>().Whipped() && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
                 }
                 break;
             case ("Whiskey"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Whiskey>() != null && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Whiskey>() != null && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
                 }
