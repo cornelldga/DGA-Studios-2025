@@ -402,7 +402,7 @@ public class Ash : Boss
 
         if (attackChoice < 4) 
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount == currentPhase + 1)
+            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase + 1)
             {
                 TransitionToMolotovAttack();
                 scatterCount = 0;
