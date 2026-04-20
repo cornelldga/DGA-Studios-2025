@@ -37,7 +37,7 @@ public class Whip : MonoBehaviour, IProjectileInteractable
             } else
             {
                 //figure out way to destroy bullets
-                destroyParticle.Play();
+                bullet.playImpactParticle();
                 Destroy(projectile.gameObject);
             }
 

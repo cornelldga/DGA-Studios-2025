@@ -52,13 +52,18 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(impactSprite, transform.position, transform.rotation);
         }
+        playImpactParticle();
+        collision.GetComponent<IDamageable>()?.TakeDamage(damage);
+        Destroy(gameObject);
+    }
+
+    public void playImpactParticle()
+    {
         if (impactParticle != null)
         {
             impactParticle.transform.SetParent(null);
             impactParticle.Clear();
             impactParticle.Play();
         }
-        collision.GetComponent<IDamageable>()?.TakeDamage(damage);
-        Destroy(gameObject);
     }
 }
