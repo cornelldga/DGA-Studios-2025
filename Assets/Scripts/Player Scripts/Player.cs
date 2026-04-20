@@ -308,6 +308,9 @@ public class Player : MonoBehaviour, IDamageable
                 gunPitchManual = startGunPitch + Mathf.Log(1 + currentShots) * 0.18f; // SOWWY MAGIC NUMBER
                 AudioManager.Instance.PlaySFX(SFXKey.WINEIN, false, gunPitchManual);
                 break;
+            case BaseType.Whiskey:
+                AudioManager.Instance.PlaySFX(SFXKey.GIN, true);
+                break;
         }
         
     }
