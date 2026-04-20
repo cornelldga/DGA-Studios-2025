@@ -55,8 +55,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Fixed Game Manager bug of multiple instances.
+    /// </summary>
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance == this) Instance = null;
     }
 
     /// <summary>
@@ -284,12 +294,12 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         player = null;
-        StartCoroutine(WaitAndPlay());
-        
-        if (animator != null)
-        {
-            animator.SetTrigger("Scene Loaded");
-        }
+
+        if (transitions != null)
+            transitions.SetTrigger("Scene Loaded");
+
+        if (scene.name == "World Hub" || scene.name == "Saloon")
+            StartCoroutine(WaitAndPlay());
     }
 
     /// <summary>
@@ -304,7 +314,7 @@ public class GameManager : MonoBehaviour
 
         if (data == null || data.progression == 0)
         {        
-            CutsceneManager.Instance.PlayBackstoryCutscene(() => animator.SetTrigger("Scene Loaded"));
+            CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
         }
         else if (currentScene == "Saloon" && data.progression == 1)
         {

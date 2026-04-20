@@ -17,7 +17,6 @@ public class CutsceneManager : MonoBehaviour
     private float[] frameTimestamps;
     private float clipLength;
     private string stateName;
-    private int currentFrame;
     private bool active;
     private System.Action onComplete;
     private float lastInputTime;
@@ -31,12 +30,13 @@ public class CutsceneManager : MonoBehaviour
     private const float backstoryClipLength = 45f;
     [SerializeField] GameObject introOverlay;
     [Tooltip("Button to skip the entire cutscene")]
-    [SerializeField] public GameObject skipButton;
+    [SerializeField] GameObject skipButton;
 
     [Header("Dialogue Details")]
-    [SerializeField] public TextAsset cutscene_1;
-    [SerializeField] public Sprite dialogueBoxSprite;
-    [SerializeField] public Sprite dukeSprite;
+    [Tooltip("Text asset for the meet bobby dialogue")]
+    [SerializeField] TextAsset cutscene_1;
+    [SerializeField] Sprite dialogueBoxSprite;
+    [SerializeField] Sprite dukeSprite;
 
     void Awake()
     {
@@ -79,10 +79,21 @@ public class CutsceneManager : MonoBehaviour
             GameManager.Instance.player.SavePlayer();
             onComplete?.Invoke();
         };
-        GameManager.Instance.player.progression++;
-        DialogueManager.Instance.StartDialogue(cutscene_1, 1, dialogueBoxSprite,
+        GameManager.Instance.GetDialogueManager.StartDialogue(cutscene_1, 1, dialogueBoxSprite,
             new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
             "Tutorial", DialogueType.NPC);
+        StartCoroutine(WaitForDialogueEnd());
+    }
+
+    /// <summary>
+    /// Waits for the dialogue to finish before ending the cutscene.
+    /// </summary>
+    IEnumerator WaitForDialogueEnd()
+    {
+        yield return null;
+        DialogueManager dialogueManager = GameManager.Instance.GetDialogueManager;
+        yield return new WaitUntil(() => !dialogueManager.OngoingDialogue());
+        EndCutscene();
     }
 
     /// <summary>
@@ -96,7 +107,6 @@ public class CutsceneManager : MonoBehaviour
     {
         frameTimestamps = timestamps;
         clipLength = length;
-        currentFrame = -1;
         stateName = state;
         this.onComplete = onComplete;
         active = true;
@@ -139,7 +149,7 @@ public class CutsceneManager : MonoBehaviour
             }
         }
 
-        if (isOnLastFrame)
+        if (isOnLastFrame && !string.IsNullOrEmpty(stateName))
         {
             endTimer += Time.deltaTime;
             if (endTimer >= autoEndDuration)
@@ -199,15 +209,19 @@ public class CutsceneManager : MonoBehaviour
     /// </summary>
     public void EndCutscene()
     {
-        if (introOverlay != null && introOverlay.activeSelf) introOverlay.SetActive(false);
         if (!active) return;
         active = false;
         isOnLastFrame = false; 
         endTimer = 0f;
         stateName = null; 
-        if (cutsceneAnimator.gameObject.activeSelf) cutsceneAnimator.gameObject.SetActive(false);
-        if (DialogueManager.Instance.OngoingDialogue()) DialogueManager.Instance.EndDialogue();
-        GameManager.Instance.FreezePlayer(false);
+        if (introOverlay != null && introOverlay.activeSelf) introOverlay.SetActive(false);
+        if (cutsceneAnimator != null && cutsceneAnimator.gameObject.activeSelf) cutsceneAnimator.gameObject.SetActive(false);
+
+        DialogueManager dialogueManager = GameManager.Instance?.GetDialogueManager;
+        if (dialogueManager != null && dialogueManager.OngoingDialogue()) 
+            dialogueManager.EndDialogue();
+
+        if (GameManager.Instance != null) GameManager.Instance.FreezePlayer(false); 
         skipButton.SetActive(false);
         onComplete?.Invoke();
     }

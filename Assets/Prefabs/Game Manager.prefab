@@ -3612,6 +3612,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1347240869844486383}
+  - {fileID: 9200420908788773099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7249711244943537642
@@ -3627,14 +3628,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   loadoutManager: {fileID: 7282277730799968065}
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 8649692416371159320}
   cutsceneManager: {fileID: 2510207786204155417}
   pauseButton: {fileID: 4848582181561740900}
   pauseMenu: {fileID: 542832412437548967}
   sliders: {fileID: 8268307897409646456}
   musicSlider: {fileID: 6171751753406527467}
   sfxSlider: {fileID: 8828301429456715035}
-  animator: {fileID: 656113217269466925}
+  transitions: {fileID: 656113217269466925}
   player: {fileID: 0}
   currentSong: 0
 --- !u!1 &7104534245899705614
@@ -4840,6 +4841,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &2277279815849016995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9073252018920763932}
+    m_Modifications:
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.55784
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.2737403
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956884972056103369, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_Name
+      value: DialogueManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+--- !u!114 &8649692416371159320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+  m_PrefabInstance: {fileID: 2277279815849016995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddff50e3918234410945057e8f748a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+--- !u!4 &9200420908788773099 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6932434004477382216, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+  m_PrefabInstance: {fileID: 2277279815849016995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2489284801237092694
 PrefabInstance:
   m_ObjectHideFlags: 0
