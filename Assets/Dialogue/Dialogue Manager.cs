@@ -128,7 +128,7 @@ public class DialogueManager : MonoBehaviour
         {
             gameObject.SetActive(true);
             nameText.text = file.name;
-            if (nameText.text=="Mirage & Ace")
+            if (nameText.text=="Ace & Mirage")
             {
                 dialogueText.color = Color.white;
             } else
