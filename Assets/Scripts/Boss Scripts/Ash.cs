@@ -66,8 +66,6 @@ public class Ash : Boss
     [SerializeField] int numOrbitingPhaseThree=4;
     [SerializeField] private float orbitRadius = 1f;
 
-
-    [SerializeField] int numTumbleweeds = 2; // will eventually be based on what phase it is
     private GameObject[] orbitingTumbleweeds = new GameObject[5]; // size should be maximum spawned in phase 3
  
     [Space(5)]
