@@ -134,10 +134,8 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
-        Debug.Log("Starting dialogue with progress " + progress);
         if (file != null)
         {
-            Debug.Log("Dialogue file found: " + file.name);
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             isCutscene = file.name.StartsWith("cutscene");
@@ -180,11 +178,8 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.ToggleLoadoutManager(true);
             } else
             {
-                // Automatic entry/exit for the saloon
-                if (GameManager.Instance.player.progression != 2)
-                {
-                    GameManager.Instance.LoadScene(scene); 
-                }
+                // Automatic entry/exit for the saloon   
+                GameManager.Instance.LoadScene(scene); 
             }
         }
     }
@@ -243,7 +238,6 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             
-            UnityEngine.Debug.LogError("Dialogue ID " + currentDialogueID + " not found!");
         }
     }
 

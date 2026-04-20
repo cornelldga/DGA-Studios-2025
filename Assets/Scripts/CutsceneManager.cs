@@ -76,7 +76,7 @@ public class CutsceneManager : MonoBehaviour
         this.onComplete = () =>
         {
             GameManager.Instance.player.progression++;
-            GameManager.Instance.player.SavePlayer();
+            SaveSystem.SavePlayer(GameManager.Instance.player);
             onComplete?.Invoke();
         };
         GameManager.Instance.GetDialogueManager.StartDialogue(cutscene_1, 1, dialogueBoxSprite,
