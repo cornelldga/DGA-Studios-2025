@@ -295,10 +295,7 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
-    public void TakeDamageFromContract()
-    {
-        base.TakeDamage(1);
-    }
+
 
     /// <summary>
     /// When contract dies, granny takes 1/4 of health
