@@ -86,44 +86,106 @@ MonoBehaviour:
     name: gin
     audioClip: {fileID: 8300000, guid: 3480c81cbf15344ac941150147175276, type: 3}
     isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
     playOnAwake: 0
     volume: 1
   - source: {fileID: 0}
-    name: beer
-    audioClip: {fileID: 8300000, guid: 2a18970c274de4a9594ed37869a69c31, type: 3}
+    name: Beer In
+    audioClip: {fileID: 8300000, guid: 153b1edcb788b4899adbd598e266c820, type: 3}
     isLoop: 0
+    maxPitch: 1.1
+    minPitch: 0.8
     playOnAwake: 0
     volume: 1
+  - source: {fileID: 0}
+    name: Beer End
+    audioClip: {fileID: 8300000, guid: 2a18970c274de4a9594ed37869a69c31, type: 3}
+    isLoop: 0
+    maxPitch: 1.1
+    minPitch: 0.8
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Wine Inter
+    audioClip: {fileID: 8300000, guid: 2b46a2182e5f244e9a70ddd1bddef6ea, type: 3}
+    isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Wine End
+    audioClip: {fileID: 8300000, guid: fff6c9b603c81498ca0b89a42e3ce37d, type: 3}
+    isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
+    playOnAwake: 0
+    volume: 0.9
   - source: {fileID: 0}
     name: Base Swap
     audioClip: {fileID: 8300000, guid: aa2b98bf5de8e4bdb83ecb03f77e5e77, type: 3}
     isLoop: 0
+    maxPitch: 0
+    minPitch: 0
     playOnAwake: 0
     volume: 1
   - source: {fileID: 0}
     name: Mixer Swap
     audioClip: {fileID: 8300000, guid: 0bfdaee6721d0404bb378d49c33560f1, type: 3}
     isLoop: 0
+    maxPitch: 0
+    minPitch: 0
     playOnAwake: 0
     volume: 1
   - source: {fileID: 0}
     name: Whip Hit
     audioClip: {fileID: 8300000, guid: 8ecf0c4ef52404cc3b6b2cf77cbc336e, type: 3}
     isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
     playOnAwake: 0
     volume: 1
   - source: {fileID: 0}
     name: Whip Empty
     audioClip: {fileID: 8300000, guid: 9ca6a8ab340a24ef1a7503ddd2711e48, type: 3}
     isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
     playOnAwake: 0
     volume: 1
   - source: {fileID: 0}
     name: Whip Crack
     audioClip: {fileID: 8300000, guid: 89a41c5000933420ab73c5640ce2d42d, type: 3}
     isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
     playOnAwake: 0
     volume: 1
+  - source: {fileID: 0}
+    name: Explosion
+    audioClip: {fileID: 8300000, guid: 8b3f2abb15526440eb0a409fbc7840bf, type: 3}
+    isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Explosion Ambience
+    audioClip: {fileID: 8300000, guid: 69023711bc8e949928d4dbb1c60014e3, type: 3}
+    isLoop: 0
+    maxPitch: 1.2
+    minPitch: 0.8
+    playOnAwake: 0
+    volume: 1
+  - source: {fileID: 0}
+    name: Smoke Ambience
+    audioClip: {fileID: 8300000, guid: 3749a73cc2e544dc2954dd3aa2d1c559, type: 3}
+    isLoop: 0
+    maxPitch: 1
+    minPitch: 1
+    playOnAwake: 0
+    volume: 0.9
   musicGroup: {fileID: 898037753239958536, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
   sfxGroup: {fileID: -3908983327557864445, guid: b75f314f69acd43148975e04bfb058a7, type: 2}
 --- !u!1 &1814903278115915233

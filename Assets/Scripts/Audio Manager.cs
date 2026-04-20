@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public enum SFXKey
 {
-    GIN = 0, BEER = 1, 
+    GIN = 0, BEERIN = 1, BEEREND = 2, WINEIN = 3, WINEEND = 4,
 
-    BASESWAP = 2, MIXERSWAP = 3,
+    BASESWAP = 5, MIXERSWAP = 6,
 
-    WHIPHIT = 4,  WHIPEMPTY = 5, WHIPCRACK = 6
+    WHIPHIT = 7,  WHIPEMPTY = 8, WHIPCRACK = 9, 
+
+    // TOM
+
+    DYNAMITE = 10, BOOM = 11,
+
+    SMOKER_AMBIANCE = 12
 }
 
 
@@ -105,18 +111,37 @@ public class AudioManager : MonoBehaviour
         ignoreNextMusicChange = true;
     }
 
-    public void PlaySFX(SFXKey key, bool random = false)
+    // Plays the sound but prevents it from being played again while the sound is still playing
+    public void PlaySFXNoLayer(SFXKey key)
     {
         int index = (int) key;
+        if (!sounds[index].source.isPlaying)
+            PlaySFX(key);
+    }
+
+    public void PlaySFX(SFXKey key, bool random = false, float pitch = 1.0f)
+    {
+        int index = (int) key;
+
         if (index < 0 || index >= sounds.Length)
         {
             Debug.Log("Sound index out of bounds, refer to Audio Manager object");
             return;
         }
+
         if (random)
         {
             sounds[index].source.pitch = pitches[Random.Range(0, pitches.Length)];
         }
+        else
+        {
+            Debug.Log($"pitch before clamp: {pitch}, min: {sounds[index].minPitch}, max: {sounds[index].maxPitch}");
+            pitch = Mathf.Clamp(pitch, sounds[index].minPitch, sounds[index].maxPitch);
+            pitch += Random.Range(-0.05f, 0.05f);
+            Debug.Log($"pitch after clamp: {pitch}");
+            sounds[index].source.pitch = pitch;
+        }
+
         sounds[index].source.PlayOneShot(sounds[index].audioClip);
     }
 
