@@ -16,13 +16,15 @@ public abstract class Projectile : MonoBehaviour
     public float accuracy;
     [Tooltip("The sprite that's created on impact")]
     [SerializeField] ImpactSprite impactSprite;
-    [SerializeField] ParticleSystem impactParticle;
+
+    ParticleSystem impactParticle;
 
 
     protected Rigidbody2D rb;
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        impactParticle = GetComponentInChildren<ParticleSystem>(true);
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));
         rb.AddForce(transform.right * speed, ForceMode2D.Impulse);
         Destroy(gameObject, duration);
