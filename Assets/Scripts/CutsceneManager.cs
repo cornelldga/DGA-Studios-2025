@@ -54,6 +54,7 @@ public class CutsceneManager : MonoBehaviour
     public void PlayBackstoryCutscene(System.Action onComplete = null)
     {
         if (introOverlay != null) introOverlay.SetActive(true);
+        continueAction.action.Enable();
         StartCutscene("backstory_cutscene", backstoryTimestamps, backstoryClipLength, () =>
         {
             if (GameManager.Instance != null)
