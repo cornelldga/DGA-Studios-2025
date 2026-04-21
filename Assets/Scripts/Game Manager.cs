@@ -286,19 +286,13 @@ public class GameManager : MonoBehaviour
         if (transitions != null)
             transitions.SetTrigger("Scene Loaded");
 
-        if (scene.name == "World Hub" || scene.name == "Saloon")
-            StartCoroutine(WaitAndPlay());
     }
 
     /// <summary>
-    /// Activates the CutsceneManager and waits until it is ready before playing cutscenes.
+    /// Checks for cutscenes to play.
     /// </summary>
-    private IEnumerator WaitAndPlay()
+    public void CheckForCutscenes()
     {
-        yield return new WaitUntil(() => CutsceneManager.Instance != null);
-        
-        yield return new WaitForEndOfFrame(); 
-
         PlayerData data = SaveSystem.LoadPlayer();
         string currentScene = GetCurrentSceneName();
 

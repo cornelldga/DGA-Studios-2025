@@ -125,6 +125,7 @@ public class Player : MonoBehaviour, IDamageable
         isAlive = true;
         knockedBack = false;
         GameManager.Instance.player = this;
+        GameManager.Instance.CheckForCutscenes();
     }
 
     void Update()
