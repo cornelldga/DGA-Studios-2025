@@ -1,17 +1,17 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "3_start",
+            "dialogueID": "0_start",
             "dialogueText": "Hey! Watch it, buddy! You almost knocked over Granny's favorite plant!",
             "emotion": 0,
-            "nextDialogueID": "3_next"
+            "nextDialogueID": "0_next"
         }, {
-            "dialogueID": "3_next",
+            "dialogueID": "0_next",
             "dialogueText": "As if you're not causing enough problems in this town. You're nothing but a no-good troublemaker.",
             "emotion": 0,
-            "nextDialogueID": "3_fight"
+            "nextDialogueID": "0_fight"
         }, {
-            "dialogueID": "3_fight",
+            "dialogueID": "0_fight",
             "dialogueText": "I oughta kick you out of this town once and for all. You gonna face me or what?",
             "emotion": 0,
             "nextDialogueID": ""
@@ -19,17 +19,17 @@
     
 
         {
-            "dialogueID": "7_start",
+            "dialogueID": "1_start",
             "dialogueText": "Duke, right? I know I'm in no position to ask for anything, but please, Granny's all I have.",
             "emotion": 0,
-            "nextDialogueID": "7_next"
+            "nextDialogueID": "1_next"
         }, {
-            "dialogueID": "7_next",
+            "dialogueID": "1_next",
             "dialogueText": "She took me in and raised me as her own. And this business means everything to her.",
             "emotion": 0,
-            "nextDialogueID": "7_fight"
+            "nextDialogueID": "1_fight"
         }, {
-            "dialogueID": "7_fight",
+            "dialogueID": "1_fight",
             "dialogueText": "If you win, could you take it easy on her? I'd owe you a life debt.",
             "emotion": 0,
             "nextDialogueID": ""
