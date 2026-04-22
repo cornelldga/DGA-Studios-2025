@@ -41,6 +41,8 @@ public class Pig : MonoBehaviour
     [SerializeField] float stunTime;
     [Tooltip("Distance at which pig registers a hit on Pig Rider")]
     [SerializeField] private float pigRiderHitDistance = 0.8f;
+    [Tooltip("Knockback force when hit by the whip")]
+    [SerializeField] private float whipKnockbackForce = 8f;
     private float patrolDirectionX = 1f; // 1 for right, -1 for left
     private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
@@ -321,6 +323,17 @@ public class Pig : MonoBehaviour
         if(currentState == State.Charging)
         {
             HandleCharge(collision);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Whip"))
+        {
+            Vector2 knockbackDir = ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
+            chargeDirection = knockbackDir;
+            rb.linearVelocity = knockbackDir * whipKnockbackForce;
+            impulseSource.GenerateImpulse(playersShakeForce);
         }
     }
 }
