@@ -29,7 +29,7 @@ public class Whip : MonoBehaviour, IProjectileInteractable
     {
         if (projectile.gameObject.TryGetComponent<Bullet>(out Bullet bullet))
         {
-            if(reflecting && !bullet.Whipped())
+            if(reflecting && bullet.CanWhip() && !bullet.Whipped())
             {
                 bullet.WhipBullet(damageMultiplier);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

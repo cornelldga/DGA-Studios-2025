@@ -4,6 +4,30 @@
             "dialogueID": "0_start",
             "dialogueText": "You just shot out the whiskey. Great Job!",
             "emotion": 0,
+            "nextDialogueID": "1_start"
+        },
+        {
+            "dialogueID": "1_start",
+            "dialogueText": "Now, to introduce the mixers. You started out this tutorial with the Ginger Ale mixer.",
+            "emotion": 0,
+            "nextDialogueID": "2_start"
+        },
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "This makes your regular attacks deal less damage and the projectiles you whip back do more damage.",
+            "emotion": 0,
+            "nextDialogueID": "3_start"
+        },
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "For this next obstacle, press Tab to switch to the Apple Cider, which makes you move faster but makes your shots less accurate.",
+            "emotion": 0,
+            "nextDialogueID": "4_start"
+        },
+        {
+            "dialogueID": "4_start",
+            "dialogueText": "If you don't get this speed boost, you won't be able to get across before the gate closes. Good luck!",
+            "emotion": 0,
             "nextDialogueID": ""
         }
     ]
