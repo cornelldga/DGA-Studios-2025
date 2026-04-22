@@ -293,6 +293,7 @@ public class Player : MonoBehaviour, IDamageable
         whip.gameObject.SetActive(true);
         whipping = true;
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        whip.EnableReflect();
         Vector3 mouse = Mouse.current.position.ReadValue();
         mouse.z = Mathf.Abs(Camera.main.transform.position.z);
         Vector3 world = Camera.main.ScreenToWorldPoint(mouse);
@@ -310,6 +311,7 @@ public class Player : MonoBehaviour, IDamageable
     public void AnimationEndWhip()
     {
         whipping = false;
+        whip.DisableReflect();
         whip.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         whip.gameObject.SetActive(false);
 

@@ -117,6 +117,11 @@ public class PigRider : Boss
 
         stateTimer -= Time.deltaTime;
 
+        if (isInvulnerable)
+        {
+            sprite.color = Color.purple;
+        }
+
         if (isMarked)
         {
             markTimer -= Time.deltaTime;
@@ -154,11 +159,13 @@ public class PigRider : Boss
     {
         isMarked = true;
         markTimer = markDuration;
+        sprite.color = Color.red;
     }
 
     public void removeMark()
     {
         isMarked = false;
+        sprite.color = Color.white;
     }
 
     /// <summary>
@@ -270,7 +277,7 @@ public class PigRider : Boss
     /// </summary>
     private void TransitionToMarking()
     {
-        animator.SetBool("IsShooting",true);
+        animator.SetBool("IsShooting", true);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
         StartCoroutine(PerformMarkingAttack());
@@ -310,6 +317,8 @@ public class PigRider : Boss
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
+
+            base.isInvulnerable = true;
         }
 
         healthBarAnimator.SetTrigger("PhaseChange");
@@ -362,7 +371,7 @@ public class PigRider : Boss
     private void HandleBounce(RaycastHit2D hit)
     {
         int ran = UnityEngine.Random.Range(0, 2);
-        if(ran == 0)
+        if (ran == 0)
         {
             StartCoroutine(bounceAttack1.DoBulletPattern(this));
         }
