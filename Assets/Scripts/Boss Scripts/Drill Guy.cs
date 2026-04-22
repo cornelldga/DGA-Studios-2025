@@ -7,6 +7,7 @@ using UnityEngine.Splines;
 using Unity.Collections;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 
 public class DrillGuy : Boss
 {
@@ -73,14 +74,17 @@ public class DrillGuy : Boss
     [Tooltip("Percent chance that throwing will be chosen phase 1")]
     [SerializeField] float phase1ThrowChance;
 
-    // dynamite
-    [SerializeField] float distanceToThrowOnMinecart = 1.0f;
-
+    [Header("Minecart Settings")]
+    [SerializeField] float distanceToThrowOnMinecart = 5.0f;
     Vector3 movePosition;
+    [SerializeField] GameObject trackTop;
+    [SerializeField] GameObject trackBot;
 
-    //rail road
-    [SerializeField] GameObject railroad;
     [SerializeField] float minecartSpeed;
+    [SerializeField] Dynamite minecartDynamite;
+    [SerializeField] float minecartDynamiteCooldown;
+    [SerializeField] int minecartCycles = 1;
+
 
 
 
@@ -162,35 +166,49 @@ public class DrillGuy : Boss
     }
 
 
-    // minecart attack
-    private void MinecartAttack()
+private void MinecartAttack()
+{
+    GameObject[] tracks = new GameObject[] {trackTop, trackBot};
+    for (int i = 0; i < minecartCycles; i++)
     {
-        // tom spawns at stsart, on the rail (can be changed later)
-
-
-        // tom moves on rails to the right  + throwing dynamite above and below itself
-        // tom reaches the end of rails, stops throwing dynamite, and appers at the other end
-        // tom moves on rails left + throwing dynamite above and below itself
-        // tom reaches end of rails, stops throwing dynamite, and spawns in the middle
-
-        Vector3 start_pos = railroad.transform.GetChild(0).position;
+        Vector3 start_pos = tracks[0].transform.GetChild(0).position;
+        Vector3 end_pos = tracks[0].transform.GetChild(1).position;
         this.transform.position = start_pos;
 
-        Vector3 end_pos = railroad.transform.GetChild(1).position;
-        Vector3 moveVector = end_pos - transform.position;
-                
-        // face movement direction
-        if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1); 
-        else transform.localScale = new Vector3(-1, 1, 1); 
-
-        // railroad movement
-        moveVector = moveVector.normalized * minecartSpeed;
-        rb.linearVelocity = new Vector2(moveVector.x, moveVector.y);
+        StartCoroutine(MoveAlongRails(end_pos));
+        StartCoroutine(throwDynamiteOffTracks(end_pos));
     }
+   
+}
 
+private IEnumerator MoveAlongRails(Vector3 end_pos)
+{
+    Vector3 moveVector = end_pos - transform.position;
 
+    // face movement direction & start moving
+    if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1);
+    else transform.localScale = new Vector3(-1, 1, 1);
 
+    Vector3 direction = moveVector.normalized;
+    rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
 
+    // keep moving until end of rails
+    while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
+
+    // stop
+    rb.linearVelocity = Vector2.zero;
+    transform.position = end_pos; // snap to exact end position
+}
+private IEnumerator throwDynamiteOffTracks(Vector3 stop_pos)
+{
+    Vector3 direction = (stop_pos - transform.position).normalized;
+    while (Vector2.Dot(stop_pos - transform.position, direction) > 0)
+    {
+        Vector3 target = new Vector3(transform.position.x, transform.position.y - distanceToThrowOnMinecart,transform.position.z);
+        StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
+        yield return new WaitForSeconds(minecartDynamiteCooldown);
+    }
+}
 
     /// <summary>
     /// Transition to walking.
