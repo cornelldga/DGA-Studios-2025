@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
     {
         string transitionTrigger = (GetCurrentSceneName() == "Saloon") ? "Saloon Exit" : sceneName;
         StartCoroutine(TransitionAnim(transitionTrigger));
+        if (playerInstance != null) playerInstance.SavePlayer();
     }
 
     /// <summary>
@@ -298,16 +299,16 @@ public class GameManager : MonoBehaviour
 
         if (playerInstance != null && data != null)
         {
-            playerInstance.progression = data.progression;
+            playerInstance.cutsceneProgression = data.cutsceneProgression;
         }
-        int currentProgression = (playerInstance != null) ? playerInstance.progression : (data != null ? data.progression : 0);
+        int currentCutsceneProgression = (playerInstance != null) ? playerInstance.cutsceneProgression : (data != null ? data.cutsceneProgression : 0);
 
-        if (currentScene == "World Hub" && currentProgression == 0)
+        if (currentScene == "World Hub" && currentCutsceneProgression == 0)
         {
             CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
         }
 
-        else if (currentScene == "Saloon" && currentProgression == 1)
+        else if (currentScene == "Saloon" && currentCutsceneProgression == 1)
         {
             CutsceneManager.Instance.PlayMeetBobbyCutscene();
         }

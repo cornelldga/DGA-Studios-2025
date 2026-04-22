@@ -121,7 +121,7 @@ public class CutsceneManager : MonoBehaviour
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.player.progression++;
+                GameManager.Instance.player.cutsceneProgression++;
                 GameManager.Instance.player.SavePlayer();
                 onComplete?.Invoke();
             }
@@ -138,7 +138,7 @@ public class CutsceneManager : MonoBehaviour
         skipButton.SetActive(true);
         this.onComplete = () =>
         {
-            GameManager.Instance.player.progression++;
+            GameManager.Instance.player.cutsceneProgression++;
             SaveSystem.SavePlayer(GameManager.Instance.player);
             onComplete?.Invoke();
         };
