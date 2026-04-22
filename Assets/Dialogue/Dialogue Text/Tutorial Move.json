@@ -1,8 +1,14 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "0_start",
+            "dialogueID": "3_start",
             "dialogueText": "You moved! Wow!",
+            "emotion": 0,
+            "nextDialogueID": "3_next"
+        },
+        {
+            "dialogueID": "3_next",
+            "dialogueText": "Try using Left Click to shoot the target up ahead!",
             "emotion": 0,
             "nextDialogueID": ""
         }

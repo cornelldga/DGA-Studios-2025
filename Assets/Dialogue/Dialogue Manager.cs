@@ -22,22 +22,28 @@ public enum DialogueType
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    private System.Action onComplete;
     [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
-    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
-    [SerializeField] private TextMeshProUGUI nameText;
-    [Tooltip("The grey out background for when dialogue plays")]
-    [SerializeField] private Image backgroundImg;
+    [SerializeField] TextMeshProUGUI nameText;
+    private Vector2 defaultNamePos;
+    private Quaternion defaultNameRot;
+    [Tooltip("The gray out background for when dialogue plays")]
+    [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
+    private string currentFileName;
+    private bool isCutscene;
+    public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
 
     [Header("Choice Buttons")]
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
     [Header("Settings")]
-    [SerializeField] private float typingSpeed;
+    [SerializeField] float typingSpeed;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
     private Dictionary<DialogueEmotion, Sprite> currentEmotions;
@@ -46,39 +52,50 @@ public class DialogueManager : MonoBehaviour
     private DialogueType currentDialogueType;
     private string sceneName;
 
+    [Header("Dialogue Choices")]
+    [SerializeField] GameObject choices;
+    [SerializeField] TMP_Text yesButtonText;
+    [SerializeField] TMP_Text noButtonText;
+    [SerializeField] string bossYesText;
+    [SerializeField] string bossNoText;
+
+
     [Header("Input Controls")]
     [SerializeField] InputActionReference continueDialogueAction;
 
-    /// <summary>
-    /// Initializes the singleton, hides choices at start up.
-    /// </summary>
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            yesButton.gameObject.SetActive(false);
-            noButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void OnEnable()
     {
+        continueDialogueAction.action.Enable();
         continueDialogueAction.action.performed += ContinueDialogue;
     }
 
     private void OnDisable()
     {
+        continueDialogueAction.action.Disable();
         continueDialogueAction.action.performed -= ContinueDialogue;
     }
 
     private void Start()
     {
+        choices.SetActive(false);
         gameObject.SetActive(false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        defaultNamePos = rect.anchoredPosition;
+        defaultNameRot = rect.localRotation;
+    }
+
+    /// <summary>
+    /// Listens to advance dialogue via space or enter key. This is incase input actions fails.
+    /// </summary>
+    void Update()
+    {
+        if (!ongoingDialogue) return;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (isTyping) CompleteCurrentLine();
+            else DisplayNextLine();
+        }
     }
 
     /// <summary>
@@ -94,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (context.action.WasPressedThisFrame() && ongoingDialogue)
+        if (ongoingDialogue)
         {
             if (isTyping)
             {
@@ -113,29 +130,48 @@ public class DialogueManager : MonoBehaviour
     /// Changes the npcImg sprite to the correct characters sprite if a boss
     /// If an interactable or boss will change scene to what is next
     /// </summary>
-    /// <param name="progress">The progression number of the npc's dialogue</param>
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
-    public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
+    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
+        Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
+            continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             nameText.text = file.name;
+            isCutscene = file.name.StartsWith("cutscene");
+            currentFileName = isCutscene ? "" : file.name;
+            nameText.text = currentFileName;   
+
+            if (file.name == "cutscene_1")
+            {
+                RectTransform rect = nameText.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(-488f, -110f);
+                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+            }
+
+            if (nameText.text=="Mirage & Ace")
+            {
+                dialogueText.color = Color.white;
+            } else
+            {
+                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
+            }
             ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
-            // Format followed by DialogueEditor.BuildLine()
-            currentDialogueID = progress.ToString() + "_" + "start";
             currentDialogueType = type;
+
+            SetDialogueStart(GameManager.Instance.player.progression);
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
-            if (type == DialogueType.Interactive)
+            if (currentDialogueType == DialogueType.Interactive)
             {
                 npcImg.gameObject.SetActive(false);
             }
@@ -146,7 +182,40 @@ public class DialogueManager : MonoBehaviour
             }
             GameManager.Instance.FreezePlayer(true);
             DisplayNextLine();
+        } else
+        {
+            // Automatic player loadout
+            if (scene=="Loadout")
+            {
+                EndDialogue();
+                GameManager.Instance.ToggleLoadoutManager(true);
+            } else
+            {
+                // Automatic entry/exit for the saloon   
+                GameManager.Instance.LoadScene(scene); 
+            }
         }
+    }
+    /// <summary>
+    /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
+    /// play the start with the closest value to the progression integer
+    /// </summary>
+    /// <param name="progression">The progression int</param>
+
+    void SetDialogueStart(int progression)
+    {
+        int current = progression;
+        while (current >= 0)
+        {
+            string candidateID = current + "_start";
+            if (currentDialogueData.dialogueLines.Exists(line => line.dialogueID == candidateID))
+            {
+                currentDialogueID = candidateID;
+                return;
+            }
+            current--;
+        }
+        currentDialogueID = "0_start";
     }
 
     /// <summary>
@@ -168,22 +237,41 @@ public class DialogueManager : MonoBehaviour
             }
             return;
         }
+
         if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.NPC)
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+
+                    nameText.text = speakerName;
+
+                    bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
+                    bool isDuke = (speakerName == "Duke");
+
+                    if (isCutscene)
                     {
-                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                        // Hide if not Duke during cutscenes
+                        npcImg.gameObject.SetActive(isDuke);
                     }
+                    else
+                    {
+                        npcImg.gameObject.SetActive(hasEmotion);
+                    }
+
+                    if (npcImg.gameObject.activeSelf)
+                    {
+                        npcImg.sprite = currentEmotions.ContainsKey((DialogueEmotion)line.emotion) ? currentEmotions[(DialogueEmotion)line.emotion] : currentEmotions[DialogueEmotion.Neutral];
+                    }
+
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    return;
+                    return; 
                 }
             }
-            throw new System.Exception("No dialogue lines found");
+            
         }
     }
 
@@ -228,16 +316,20 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void EndDialogue()
     {
-        GameManager.Instance.FreezePlayer(false);
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        rect.anchoredPosition = defaultNamePos;
+        rect.localRotation = defaultNameRot;
     }
+
     /// <summary>
     /// Animation trigger that closes the dialogue completely
     /// </summary>
     public void AnimationCloseDialogue()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.FreezePlayer(false);
     }
 
     /// <summary>
@@ -258,18 +350,17 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     private void DialogueChoice()
     {
-        yesButton.gameObject.SetActive(true);
-        noButton.gameObject.SetActive(true);
+        choices.SetActive(true);
 
         if (currentDialogueType == DialogueType.Boss)
         {
-            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Fight!";
-            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
+            yesButtonText.text = bossYesText;
+            noButtonText.text = bossNoText;
         }
         else if (currentDialogueType == DialogueType.Interactive)
         {
-            yesButton.GetComponentInChildren<TextMeshProUGUI>().text = "Yes";
-            noButton.GetComponentInChildren<TextMeshProUGUI>().text = "No";
+            yesButtonText.text = "Yes";
+            noButtonText.text = "No";
         }
     }
 
@@ -278,16 +369,10 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void YesChoice()
     {
-        yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
-        if (nameText.text == "Loadout"){
-            EndDialogue();
-            GameManager.Instance.ToggleLoadoutManager(true);
-        }
-        else
-        {
-            GameManager.Instance.LoadScene(sceneName);
-        }
+        ongoingDialogue = false;
+        choices.SetActive(false);
+        gameObject.SetActive(false);
+        GameManager.Instance.LoadScene(sceneName);
     }
 
     /// <summary>
@@ -295,8 +380,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void NoChoice()
     {
-        yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
+        ongoingDialogue = false;
+        choices.SetActive(false);
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(GameManager.Instance.player.transform.position, 1.5f))
         {
             collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);

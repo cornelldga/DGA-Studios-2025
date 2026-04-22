@@ -20,7 +20,8 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float maxHealth;
     private float health;
     [Tooltip("Multiplier for damage taken")]
-    public float damageTakenMultiplier;
+    public float baseDamageTakenMultiplier;
+    [HideInInspector] public float damageTakenMultiplier;
     [Tooltip("Percent damage dealt back from an enemy projectile")]
     public float whipBaseDamageMultiplier;
     [SerializeField] float changeCooldownTime;
@@ -94,10 +95,16 @@ public class Player : MonoBehaviour, IDamageable
     int currentShots;
     bool lastFrameWasFiring;
 
+    [Header("Progressions")]
     public int progression;
+    public int cutsceneProgression;
 
     void Start()
     {
+        // Load progression
+        PlayerData data = SaveSystem.LoadPlayer();
+        progression = data.progression;
+
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
@@ -131,6 +138,7 @@ public class Player : MonoBehaviour, IDamageable
         isAlive = true;
         knockedBack = false;
         GameManager.Instance.player = this;
+        GameManager.Instance.CheckForCutscenes();
     }
 
     void Update()
@@ -329,7 +337,7 @@ public class Player : MonoBehaviour, IDamageable
 
         Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
         whipPivot.right = dir;
-        whipAnimator.Play("Whip", 0, 0f);
+        whipAnimator.SetTrigger("Whip");
         AudioManager.Instance.PlaySFX(SFXKey.WHIPHIT, true);
         StartCoroutine(nameof(ToggleWhipUI));
         if (SmokePool.Instance != null) SmokePool.Instance.OnWhip(gameObject.transform);
@@ -439,6 +447,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (!invulnerable && damage > 0)
         {
+            invulnerable = true;
             StartCoroutine(Invulnerability());
             health -= damage * damageTakenMultiplier;
             float healthRatio = health / maxHealth;
@@ -455,7 +464,6 @@ public class Player : MonoBehaviour, IDamageable
     /// </summary>
     IEnumerator Invulnerability()
     {
-        invulnerable = true;
         sprite.color = Color.red;
         yield return new WaitForSeconds(invulnerabilityTime);
         sprite.color = Color.white;
@@ -501,16 +509,6 @@ public class Player : MonoBehaviour, IDamageable
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);
-    }
-
-
-    /// <summary>
-    /// Load player data
-    /// </summary>
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
     }
 
 }

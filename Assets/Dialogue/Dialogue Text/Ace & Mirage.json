@@ -1,0 +1,42 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Well, if it isn't the new bar owner. I'm Mirage the Marvelous, and this is my assistant, Ace.",
+            "emotion": 1,
+            "nextDialogueID": "0_next"
+        },
+        {
+            "dialogueID": "0_next",
+            "dialogueText": "I heard you're looking for entertainers, but you can't afford us. She pays us in gold.",
+            "emotion": 0,
+            "nextDialogueID": "0_fight"
+        },
+        {
+            "dialogueID": "0_fight",
+            "dialogueText": "The only magic trick you'll be seeing is us making you disappear from this town. Shall we?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "Seems like you had a few tricks up your own sleeve. Guess I undersestimated you.",
+            "emotion": 1,
+            "nextDialogueID": "3_next"
+        },
+        {
+            "dialogueID": "3_next",
+            "dialogueText": "Don't worry, we'll stay out of your way. There's no sum she could pay us to fight you again.",
+            "emotion": 0,
+            "nextDialogueID": "3_fight"
+        },
+        {
+            "dialogueID": "3_fight",
+            "dialogueText": "Come find us when you've handled your business. We're not fighters, but we can still put on a show.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}

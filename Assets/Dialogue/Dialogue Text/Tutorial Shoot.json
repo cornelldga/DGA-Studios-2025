@@ -1,8 +1,14 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "0_start",
+            "dialogueID": "3_start",
             "dialogueText": "You shot your gun! Amazing!",
+            "emotion": 0,
+            "nextDialogueID": "3_next"
+        },
+        {
+            "dialogueID": "3_next",
+            "dialogueText": "Now move up and use Right Click to whip the bullets back to the dummy that's shooting them out!",
             "emotion": 0,
             "nextDialogueID": ""
         }

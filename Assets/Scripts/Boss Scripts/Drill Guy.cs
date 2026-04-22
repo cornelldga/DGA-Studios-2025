@@ -39,7 +39,7 @@ public class DrillGuy : Boss
     [SerializeField] private GameObject enterHolePrefab;
 
     // want to look to disable hurtbox if underground. we also need to make Boss.TakeDamage() overridable
-    private BoxCollider2D hurtBox;
+    private CircleCollider2D hurtBox;
 
 
     [Header("Dig Settings")]
@@ -84,7 +84,7 @@ public class DrillGuy : Boss
         stateTimer = walkingTime;
         animator = GetComponent<Animator>();
         isUnderground = false;
-        hurtBox = GetComponent<BoxCollider2D>();
+        hurtBox = GetComponent<CircleCollider2D>();
 
     }
 
