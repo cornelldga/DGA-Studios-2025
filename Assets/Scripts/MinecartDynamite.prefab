@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124416b80c57d8b46b1cf4f808a6c740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dynamite
-  speed: 0
-  duration: 0.5
+  speed: 2
+  duration: 1
   damage: 1
   accuracy: 0
   impactSprite: {fileID: 0}
-  heightY: 0.1
+  heightY: 0
   dynamitePrefab: {fileID: 4505345824832376928, guid: 3275559c0cf96aa4b805657b724d27c2, type: 3}
   explosionPrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
   curve:

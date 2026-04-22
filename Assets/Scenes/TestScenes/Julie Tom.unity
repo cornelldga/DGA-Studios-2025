@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: trackBot
       objectReference: {fileID: 0}
+    - target: {fileID: 7347078681784440210, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.9
@@ -576,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.59
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13475,6 +13479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: trackTop
       objectReference: {fileID: 0}
+    - target: {fileID: 7347078681784440210, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.9
@@ -13485,7 +13493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.47
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.z
