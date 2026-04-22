@@ -1477,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a83d6ceba29640d0a930d530ee2a01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  continueAction: {fileID: 3001919216989983466, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   cutsceneAnimator: {fileID: 3305597293782435367}
   typingSpeed: 0.04
   autoAdvanceDelay: 2
@@ -1486,7 +1485,7 @@ MonoBehaviour:
   skipButton: {fileID: 7104534245899705614}
   cutscene_1: {fileID: 4900000, guid: 95b07264a152940dc894db0711feda68, type: 3}
   dialogueBoxSprite: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
-  dukeSprite: {fileID: 21300000, guid: 6da5a0bc8cba041d99c824153abf43ef, type: 3}
+  dukeSprite: {fileID: -766959122720910030, guid: b3c3b3e532fae4978bd30bd1e2c3992b, type: 3}
   dialogueText: {fileID: 5430162280122184799}
 --- !u!222 &8915559081453419011
 CanvasRenderer:

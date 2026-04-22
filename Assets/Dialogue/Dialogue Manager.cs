@@ -150,7 +150,7 @@ public class DialogueManager : MonoBehaviour
             if (file.name == "cutscene_1")
             {
                 RectTransform rect = nameText.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(-470f, -107f);
+                rect.anchoredPosition = new Vector2(-488f, -110f);
                 rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
             }
 
