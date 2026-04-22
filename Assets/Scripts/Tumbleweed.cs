@@ -7,35 +7,43 @@ public class Tumbleweed : Bullet
     // stats 
 
     [SerializeField] private float fireDamage = 5f;
-    [SerializeField] private float fireDuration = 3f;
-
-
+    [SerializeField] private float fireDuration = 1f;
 
     // sets the current tumbleweed to be on fire (increased damage decreased duration)
     private void setFire()
     {
         damage = fireDamage;
         duration = fireDuration;
-        GetComponent<Animator>().SetBool("onFire", true); 
+        //placeholder until animation set
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
 
-public void OnTriggerEnter2D(Collider2D collision)
-{
-    OnProjectileHit(collision);
-}
-
-// <summary>
-// collision handling, if interacts with fire should be set on fire, should damage player
-//</summary>
-public override void OnProjectileHit(Collider2D collision)
-{
-    //base.OnProjectileHit(collision);
-    if (collision.gameObject.CompareTag("onFire"))
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        setFire();
+        OnProjectileHit(collision);
     }
-    // check if collides w bush and that bush is on fire.
-   
-}
+
+
+    public void FixedUpdate()
+    {
+        transform.Rotate(Vector3.back * 360f * Time.deltaTime);
+    }
+
+    // <summary>
+    // collision handling, if interacts with fire should be set on fire
+    //</summary>
+    public override void OnProjectileHit(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.GetType());
+        if (collision.CompareTag("Bush"))
+        {
+            Bush bush = collision.gameObject.GetComponent<Bush>();
+            if (bush.isOnFire) setFire();
+
+        }
+        else { 
+            base.OnProjectileHit(collision);
+        }
+    }
 }
