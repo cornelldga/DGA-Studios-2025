@@ -164,6 +164,7 @@ public class Granny : Boss
     /// </summary>
     private void EnableRandomBosses()
     {
+        animator.SetBool("isHit", false);
         if (bossActive) return;
 
         if (bosses.Count == 0 && availableBosses.Count == 0)
@@ -175,53 +176,43 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
-            bossActive = true;
-            for (int i = 1; i >= 0; i--)
-            {
-                GameObject boss = Instantiate(bosses[i]);
-                Transform bossCanvas = boss.transform.Find("Boss Canvas");
-                if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-                boss.GetComponent<Boss>().isInvulnerable = true;
-                availableBosses.Add(boss);
-                bosses.Remove(bosses[i]);
-            }
-            StartCoroutine(PlayContractAnimation(true));
+            animator.SetBool("isDouble", true);
         }
         else if (bosses.Count > 0)
         {
-            int index = Random.Range(0, bosses.Count);
-            GameObject boss = Instantiate(bosses[index]);
-            Transform bossCanvas = boss.transform.Find("Boss Canvas");
-            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-            boss.GetComponent<Boss>().isInvulnerable = true;
-            bossActive = true;
-            availableBosses.Add(boss);
-            bosses.Remove(bosses[index]);
-
-            StartCoroutine(PlayContractAnimation(false));
+            animator.SetBool("isSingle", true);
         }
         return;
     }
 
-    IEnumerator PlayContractAnimation(bool isDouble)
+    public void SummonBoss()
     {
-        animator.SetBool("isSingleIdle", false);
-        animator.SetBool("isDoubleIdle", false);
+        if (bossActive) return;
+        int index = Random.Range(0, bosses.Count);
+        GameObject boss = Instantiate(bosses[index]);
+        Transform bossCanvas = boss.transform.Find("Boss Canvas");
+        if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+        boss.GetComponent<Boss>().isInvulnerable = true;
 
-        if (isDouble)
+        availableBosses.Add(boss);
+        bosses.Remove(bosses[index]);
+        bossActive = true;
+    }
+
+    public void SummonBosses()
+    {
+        if (bossActive) return;
+        for (int i = 1; i >= 0; i--)
         {
-            animator.SetBool("isDouble", true);
-            yield return new WaitForSeconds(0.7f);
-            animator.SetBool("isDoubleIdle", true);
-            animator.SetBool("isDouble", false);
+            GameObject boss = Instantiate(bosses[i]);
+            Transform bossCanvas = boss.transform.Find("Boss Canvas");
+            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+            boss.GetComponent<Boss>().isInvulnerable = true;
+
+            availableBosses.Add(boss);
+            bosses.Remove(bosses[i]);
         }
-        else
-        {
-            animator.SetBool("isSingle", true);
-            yield return new WaitForSeconds(0.7f);
-            animator.SetBool("isSingleIdle", true);
-            animator.SetBool("isSingle", false);
-        }
+        bossActive = true;
     }
 
     private void TransitionToContractDropped()
@@ -355,6 +346,7 @@ public class Granny : Boss
         }
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
+        animator.SetBool("isHit", true);
     }
 
     public override void Attack()

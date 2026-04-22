@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e419ab20c9f22ab4ebc1dd34af4d6fce, type: 3}
+  m_Sprite: {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -305,6 +305,7 @@ MonoBehaviour:
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents: []
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   baseTime: 0.8
   collisionRadius: 0
@@ -351,6 +352,7 @@ MonoBehaviour:
   phasePercents:
   - 50
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   baseSpeed: 5
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
