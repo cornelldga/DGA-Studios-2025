@@ -265,7 +265,13 @@ public class Pig : MonoBehaviour
 
         animator.SetBool("isStunned", true);
 
-        if (collision.gameObject.CompareTag("Player")){
+        if (collision.gameObject == pigRider.gameObject)
+        {
+            pigRider.isInvulnerable = false;
+            impulseSource.GenerateImpulse(enemyShakeForce);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
             GameManager.Instance.player.TakeDamage(ramDamage);
             if (impulseSource != null)
             {

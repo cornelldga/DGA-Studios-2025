@@ -115,9 +115,12 @@ public class PigRider : Boss
     {
         base.Update();
 
-        if (base.isInvulnerable)
+        stateTimer -= Time.deltaTime;
 
-            stateTimer -= Time.deltaTime;
+        if (isInvulnerable)
+        {
+            sprite.color = Color.purple;
+        }
 
         if (isMarked)
         {
