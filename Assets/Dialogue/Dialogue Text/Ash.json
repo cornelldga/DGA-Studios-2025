@@ -19,17 +19,17 @@
     
 
         {
-            "dialogueID": "1_start",
+            "dialogueID": "4_start",
             "dialogueText": "Duke, right? I know I'm in no position to ask for anything, but please, Granny's all I have.",
             "emotion": 0,
-            "nextDialogueID": "1_next"
+            "nextDialogueID": "4_next"
         }, {
-            "dialogueID": "1_next",
+            "dialogueID": "4_next",
             "dialogueText": "She took me in and raised me as her own. And this business means everything to her.",
             "emotion": 0,
-            "nextDialogueID": "1_fight"
+            "nextDialogueID": "4_fight"
         }, {
-            "dialogueID": "1_fight",
+            "dialogueID": "4_fight",
             "dialogueText": "If you win, could you take it easy on her? I'd owe you a life debt.",
             "emotion": 0,
             "nextDialogueID": ""
