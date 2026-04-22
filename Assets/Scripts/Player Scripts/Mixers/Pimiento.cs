@@ -20,6 +20,6 @@ public class Pimiento : Mixer
 
     public override void RemoveMixer(Player player)
     {
-        player.damageTakenMultiplier /= pimientoValue;
+        player.damageTakenMultiplier = player.baseDamageTakenMultiplier;
     }
 }

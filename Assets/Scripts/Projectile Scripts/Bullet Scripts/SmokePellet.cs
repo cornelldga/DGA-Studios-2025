@@ -127,8 +127,6 @@ public class SmokePellet : MonoBehaviour
 
     public void Push(Vector2 angle)
     {
-        Debug.Log("Pushed");
-        Debug.Log(rb);
         if (rb != null && !whipped)
         {
             whipped = true;

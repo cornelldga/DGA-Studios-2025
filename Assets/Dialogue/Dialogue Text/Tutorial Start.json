@@ -1,13 +1,13 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "0_start",
+            "dialogueID": "3_start",
             "dialogueText": "Welcome to Duke vs. The Gang!",
             "emotion": 0,
-            "nextDialogueID": "1_start"
+            "nextDialogueID": "3_next"
         },
         {
-            "dialogueID": "1_start",
+            "dialogueID": "3_next",
             "dialogueText": "To start, use WASD to walk to the table just up ahead!",
             "emotion": 0,
             "nextDialogueID": ""

@@ -13,7 +13,7 @@ public class Smoker : MonoBehaviour
 
     [Header("Movement")]
     [Tooltip("Reference to the player transform to move towards")]
-    [SerializeField] Transform player;
+    [HideInInspector] Transform player;
     [Tooltip("How strongly the smoker is turns towards the player")]
     [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
@@ -42,6 +42,7 @@ public class Smoker : MonoBehaviour
 
     [Header("Punch Settings")]
     [Tooltip("How long must pass before this can perform another punch")]
+    private bool playerInRange = false;
     [SerializeField] float cooldown;
     [SerializeField] float knockTime;
     [SerializeField] float punchDist;
@@ -74,14 +75,12 @@ public class Smoker : MonoBehaviour
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
 
-        if (rb == null) Debug.Log("player body is null for some reason");
-
 
 
         // Make rigidbody kinematic so player cannot push it
         if (rb != null)
         {
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.bodyType = RigidbodyType2D.Kinematic;
             rb.gravityScale = 0;
         }
     }
@@ -99,7 +98,7 @@ public class Smoker : MonoBehaviour
             Vector2 direction = ((Vector2)player.position - rb.position).normalized;
             Vector2 desiredVelocity = direction * speed;
             currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
-            rb.linearVelocity = currentVelocity;
+            rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
 
             // Flip sprite based on player position
             if (spriteRenderer != null)
@@ -123,17 +122,17 @@ public class Smoker : MonoBehaviour
     {
         isPunching = true;
         rb.linearVelocity = Vector2.zero;
-
-        // TODO get le punch animation
+        currentVelocity = Vector2.zero;
+        animator.SetBool("Walking", false);
 
         Player playerScript = target.GetComponent<Player>();
+        if (playerScript == null) { isPunching = false; yield break; }
 
         yield return new WaitForSeconds(cooldown);
 
-        if (target != null)
+        if (target != null && playerInRange)
         {
             Vector2 dist2D = (Vector2)(target.transform.position - transform.position);
-            Debug.Log($"Distance to player: {dist2D.magnitude}, punchDist: {punchDist}");
             if (dist2D.magnitude < punchDist)
             {
                 Vector2 direction = dist2D.normalized;
@@ -156,14 +155,32 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void OnCollisionEnter2D(Collision2D other)
     {
-        int otherLayer = other.gameObject.layer;
-        Debug.Log("h");
-        if ((playerMask.value & (1 << otherLayer)) > 0)
+        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
         {
-            Debug.Log("Close enough to initiate punch");
-            Debug.Log(other.gameObject);
+            playerInRange = true;
             StartCoroutine(PunchRoutine(other.gameObject));
         }
+    }
+
+    /// <summary>
+    /// While colliding with the player, starts the punch. Can punch again.
+    /// </summary>
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            playerInRange = true;
+            StartCoroutine(PunchRoutine(other.gameObject));
+        }
+    }
+
+    /// <summary>
+    /// Cant punch until player is in the range again.
+    /// </summary>
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if ((playerMask.value & (1 << other.gameObject.layer)) > 0)
+            playerInRange = false;
     }
 
     // Update is called once per frame
@@ -176,7 +193,7 @@ public class Smoker : MonoBehaviour
 
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
-        animator.SetBool("Walking", rb.linearVelocity.magnitude > 0.1f);
+        animator.SetBool("Walking", currentVelocity.magnitude > 0.1f);
         
         if (magician.currentStage == Stage.Backstage )
         {
