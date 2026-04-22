@@ -43,7 +43,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         if (!GameManager.Instance.GetDialogueManager.OngoingDialogue())
         {
-            DialogueManager.Instance.StartDialogue(jsonTextFile, progressionInt, dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
+            GameManager.Instance.GetDialogueManager.StartDialogue(jsonTextFile, dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
         }
 
     }
