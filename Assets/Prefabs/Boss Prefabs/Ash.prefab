@@ -77,7 +77,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649009401034233054}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6910191438371492863
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2a66fb773c643f2899bdd0c0c8d0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
+  bossProgression: 4
   bossName: Ash
   maxHealth: 120
   healthBar: {fileID: 159719163656866947}
