@@ -13,7 +13,7 @@ public class DrillGuy : Boss
 {
     public enum State
     {
-        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting
+        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Driving
     }
     public State currentState;
     [Header("State Timing")]
@@ -102,7 +102,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
 
-        MinecartAttack();
+        StartCoroutine(MinecartAttackRoutine());
     }
 
     /// <summary>
@@ -166,13 +166,14 @@ public class DrillGuy : Boss
         holePositions.Clear();
     }
 
-
-private void MinecartAttack()
+private IEnumerator MinecartAttackRoutine()
 {
-    GameObject[] tracks = {trackTop, trackBot};
+    GameObject[] tracks = { trackTop, trackBot };
     for (int i = 0; i < minecartCycles; i++)
     {
-        StartCoroutine(MoveAlongRails(tracks));
+        yield return StartCoroutine(MoveAlongRails(tracks));
+        if (i < minecartCycles - 1)
+            yield return new WaitForSeconds(transitionTimeBetweenRails);
     }
 }
 
@@ -195,7 +196,7 @@ private IEnumerator MoveAlongRails(GameObject[] tracks)
 
             // throw dynamites
             int throwDirY =  i ==  0? -1:1; //top rail throws down, bot rail throws up
-            Coroutine dynamiteRoutine = StartCoroutine(throwDynamiteOffTracks(throwDirY));
+            Coroutine dynamiteRoutine = StartCoroutine(throwDynamiteOffTracks(throwDirY, throwDirY * -1));
 
             // keep moving until end of rails
             while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
@@ -206,11 +207,11 @@ private IEnumerator MoveAlongRails(GameObject[] tracks)
             if (i == 0) yield return new WaitForSeconds(transitionTimeBetweenRails);
         }
 }
-private IEnumerator throwDynamiteOffTracks(int throwDirY)
+private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
 {
         while (true)
         {
-            Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
+            Vector3 target = new Vector3(bulletOrigin.position.x + (throwDirX*1.5f), bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
             StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
             yield return new WaitForSeconds(minecartDynamiteCooldown);
         }   

@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -2.78
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -829,19 +829,31 @@ PrefabInstance:
       objectReference: {fileID: 202699715}
     - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: minecartSpeed
-      value: 5
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
+      propertyPath: minecartCycles
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: minecartDynamite
       value: 
       objectReference: {fileID: 9129332198681593025, guid: 995b6481f49f2aa4e827e0fe875d851c, type: 3}
     - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
+      propertyPath: minecartInnacuracy
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: minecartDynamiteCooldown
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: distanceToThrowOnMinecart
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
+      propertyPath: transitionTimeBetweenRails
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5002965962069388933, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13493,7 +13505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 2.52
       objectReference: {fileID: 0}
     - target: {fileID: 8668643774102070862, guid: 969c02cbce149a448ab53b2b619280d3, type: 3}
       propertyPath: m_LocalPosition.z

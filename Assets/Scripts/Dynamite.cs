@@ -28,6 +28,7 @@ public class Dynamite : Projectile
         //parabolic path
         while (timer < duration)
         {
+            Debug.Log($"Throw on {gameObject.name} id={GetInstanceID()} heightY={heightY}");
             timer += Time.deltaTime;
             float linearT = timer/duration; // between 0 and 1
             float heightT = curve.Evaluate(linearT);//value from curve
