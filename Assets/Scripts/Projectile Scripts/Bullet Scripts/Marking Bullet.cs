@@ -16,16 +16,22 @@ public class MarkingBullet : Bullet
         if (collision.CompareTag("Player"))
         {
             GameObject[] pigs = GameObject.FindGameObjectsWithTag("Pig");
-            foreach(GameObject pig in pigs)
+            foreach (GameObject pig in pigs)
             {
                 pig.GetComponent<Pig>().ChargeTarget(GameManager.Instance.player.transform.position);
             }
-        } else if (Whipped() && collision.CompareTag("Enemy"))
+        }
+        else if (Whipped())
         {
             PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
             if (pigRider != null)
             {
                 pigRider.ApplyMark(markDuration);
+                GameObject[] pigs = GameObject.FindGameObjectsWithTag("Pig");
+                foreach (GameObject pig in pigs)
+                {
+                    pig.GetComponent<Pig>().ChargeTarget(pigRider.transform.position);
+                }
             }
         }
         base.OnProjectileHit(collision);
