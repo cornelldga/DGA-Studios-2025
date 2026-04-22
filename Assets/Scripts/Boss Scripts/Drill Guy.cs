@@ -86,6 +86,10 @@ public class DrillGuy : Boss
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweenRails = 0.3f;
     [SerializeField] float minecartInnacuracy = 1.0f;
+    private bool minecartRoutineDone = false;
+    private bool minecartRoutineStarted = false;
+
+
 
 
 
@@ -102,7 +106,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
 
-        StartCoroutine(MinecartAttackRoutine());
+        // StartCoroutine(MinecartAttackRoutine());
     }
 
     /// <summary>
@@ -110,34 +114,37 @@ public class DrillGuy : Boss
     /// </summary>
     public override void Update()
     {
-        // base.Update();
-        // stateTimer -= Time.deltaTime;
-        // attackCooldown -= Time.deltaTime * attackRate;
+        base.Update();
+        stateTimer -= Time.deltaTime;
+        attackCooldown -= Time.deltaTime * attackRate;
 
-        // switch (currentState)
-        // {
-        //     case State.Walking:
-        //         UpdateWalking();
-        //         break;
-        //     case State.Targeting:
-        //         UpdateTargeting();
-        //         break;
-        //     case State.Underground_Chase:
-        //         UpdateUG_Chase();
-        //         break;
-        //     case State.Underground_Random:
-        //         UpdateUG_Random();
-        //         break;
-        //     case State.Throwing:
-        //         UpdateThrowing();
-        //         break;
-        //     case State.Entering:
-        //         UpdateEntering();
-        //         break;
-        //     case State.Exiting:
-        //         UpdateExiting();
-        //         break;
-        // }
+        switch (currentState)
+        {
+            case State.Walking:
+                UpdateWalking();
+                break;
+            case State.Targeting:
+                UpdateTargeting();
+                break;
+            case State.Underground_Chase:
+                UpdateUG_Chase();
+                break;
+            case State.Underground_Random:
+                UpdateUG_Random();
+                break;
+            case State.Throwing:
+                UpdateThrowing();
+                break;
+            case State.Entering:
+                UpdateEntering();
+                break;
+            case State.Exiting:
+                UpdateExiting();
+                break;
+            case State.Driving:
+                UpdateDriving();
+                break;
+        }
     }
 
     //Throws Dynamite at the player (phase 1)
@@ -175,6 +182,7 @@ private IEnumerator MinecartAttackRoutine()
         if (i < minecartCycles - 1)
             yield return new WaitForSeconds(transitionTimeBetweenRails);
     }
+    minecartRoutineDone = true;
 }
 
 private IEnumerator MoveAlongRails(GameObject[] tracks)
@@ -188,8 +196,8 @@ private IEnumerator MoveAlongRails(GameObject[] tracks)
             Vector3 moveVector = end_pos - transform.position;
 
             // face correct movement direction
-            if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1);
-            else transform.localScale = new Vector3(-1, 1, 1);
+            if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+            else transform.localScale = new Vector3(1, 1, 1);
 
             Vector3 direction = moveVector.normalized;
             rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
@@ -249,6 +257,36 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
             transform.localScale = new Vector3(-1, 1, 1); 
         }
     }
+
+
+    /// <summary>
+    /// Updates actions for the drill during throw state
+    /// </summary>
+    private void UpdateDriving()
+    {
+        if (minecartRoutineDone)
+        {
+            TransitionToWalking();
+        }
+       else if (!minecartRoutineStarted){
+            StartCoroutine(MinecartAttackRoutine());
+            minecartRoutineStarted = true;
+        }
+    }
+
+    
+    /// <summary>
+    /// Transition to throwing state
+    /// </summary>
+    private void TransitionToDriving()
+    {
+        ResetAllAnimatorBools();
+        animator.SetBool("isDriving", true);
+        minecartRoutineDone = false;
+        minecartRoutineStarted = false;
+        currentState = State.Driving;
+    }
+
 
     /// <summary>
     /// What the boss does when walking around
@@ -452,10 +490,10 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
                 TransitionToEntering();
             }
             else{
-                // ideally there is a delay before first throw, or else weird stuff can happen (animation)
-                // also our current throw function its really messy can get kinda broken in animations
-                // if not careful
-                TransitionToThrowing();
+
+                if (UnityEngine.Random.value < 0.5) TransitionToThrowing();
+                else TransitionToDriving();
+                
             }
         }
     }
@@ -577,6 +615,7 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
         animator.SetBool("isExiting", false);
         animator.SetBool("isEntering", false);
         animator.SetBool("isUG", false);
+        animator.SetBool("isDriving", false);
     }
 
     public override void TakeDamage(float damage)
