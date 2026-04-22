@@ -17,12 +17,14 @@ public abstract class Projectile : MonoBehaviour
     [Tooltip("The sprite that's created on impact")]
     [SerializeField] ImpactSprite impactSprite;
 
+    ParticleSystem impactParticle;
 
 
     protected Rigidbody2D rb;
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        impactParticle = GetComponentInChildren<ParticleSystem>(true);
         transform.Rotate(0, 0, Random.Range(-accuracy, accuracy));
         rb.AddForce(transform.right * speed, ForceMode2D.Impulse);
         Destroy(gameObject, duration);
@@ -52,7 +54,21 @@ public abstract class Projectile : MonoBehaviour
         {
             Instantiate(impactSprite, transform.position, transform.rotation);
         }
+        playImpactParticle();
         collision.GetComponent<IDamageable>()?.TakeDamage(damage);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Plays the particle impact animation if the player
+    /// </summary>
+    public void playImpactParticle()
+    {
+        if (impactParticle != null)
+        {
+            impactParticle.transform.SetParent(null);
+            impactParticle.Clear();
+            impactParticle.Play();
+        }
     }
 }
