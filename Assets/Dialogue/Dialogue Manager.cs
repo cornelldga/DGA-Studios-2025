@@ -51,7 +51,6 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping;
     private DialogueType currentDialogueType;
     private string sceneName;
-    private int dialogueProgression;
 
     [Header("Dialogue Choices")]
     [SerializeField] GameObject choices;
@@ -80,7 +79,6 @@ public class DialogueManager : MonoBehaviour
     {
         choices.SetActive(false);
         gameObject.SetActive(false);
-        dialogueProgression = 0;
         RectTransform rect = nameText.GetComponent<RectTransform>();
         defaultNamePos = rect.anchoredPosition;
         defaultNameRot = rect.localRotation;
@@ -168,9 +166,8 @@ public class DialogueManager : MonoBehaviour
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
-            SetDialogueProgression(nameText.text);
-            // Format followed by DialogueEditor.BuildLine()
-            currentDialogueID = dialogueProgression + "_" + "start";
+
+            SetDialogueStart(GameManager.Instance.player.progression);
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
@@ -198,6 +195,27 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.LoadScene(scene); 
             }
         }
+    }
+    /// <summary>
+    /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
+    /// play the start with the closest value to the progression integer
+    /// </summary>
+    /// <param name="progression">The progression int</param>
+
+    void SetDialogueStart(int progression)
+    {
+        int current = progression;
+        while (current >= 0)
+        {
+            string candidateID = current + "_start";
+            if (currentDialogueData.dialogueLines.Exists(line => line.dialogueID == candidateID))
+            {
+                currentDialogueID = candidateID;
+                return;
+            }
+            current--;
+        }
+        currentDialogueID = "0_start";
     }
 
     /// <summary>
@@ -369,81 +387,5 @@ public class DialogueManager : MonoBehaviour
             collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);
         }
         EndDialogue();
-    }
-
-    /// <summary>
-    /// Sets the dialogue progression number based on name text.
-    /// </summary>
-    private void SetDialogueProgression(string name)
-    {
-        if (nameText.text=="Drover")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 4)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Julius")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 5)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Ace & Mirage")
-        {
-            dialogueText.color = Color.white;
-            Debug.Log(GameManager.Instance.player.progression);
-            if (GameManager.Instance.player.progression < 6)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Ash")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 7)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Granny")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 4)
-            {
-                dialogueProgression = 0;
-                currentDialogueType = 0;
-            } else if (GameManager.Instance.player.progression < 5)
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }  else if (GameManager.Instance.player.progression < 6)
-            {
-                dialogueProgression = 2;
-                currentDialogueType = 0;
-            } else if (GameManager.Instance.player.progression < 7)
-            {
-                dialogueProgression = 3;
-                currentDialogueType = 0;
-            } else
-            {
-                dialogueProgression = 4;
-            }
-        }
     }
 }
