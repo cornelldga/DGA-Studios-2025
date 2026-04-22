@@ -134,6 +134,7 @@ public class CutsceneManager : MonoBehaviour
     /// <param name="onComplete">action to execute when the cutscene completes</param>
     public void PlayMeetBobbyCutscene(System.Action onComplete = null)
     {
+        Debug.Log("Playing Meet Bobby Cutscene");
         isActive = true;
         skipButton.SetActive(true);
         this.onComplete = () =>

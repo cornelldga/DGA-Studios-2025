@@ -141,6 +141,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
+            Debug.Log("Starting dialogue with file: " + file.name);
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             nameText.text = file.name;
@@ -150,6 +151,7 @@ public class DialogueManager : MonoBehaviour
 
             if (file.name == "cutscene_1")
             {
+                Debug.Log("Adjusting name text for cutscene_1");
                 RectTransform rect = nameText.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2(-488f, -110f);
                 rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);

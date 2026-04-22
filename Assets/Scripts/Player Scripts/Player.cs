@@ -98,7 +98,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         // Load progression
         PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
+
+        if (data != null) progression = data.progression;
+        else progression = 0;
 
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
