@@ -100,7 +100,7 @@ public class DrillGuy : Boss
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
 
-        MinecartAttack();
+        StartCoroutine(MinecartAttack());
 
     }
 
@@ -166,26 +166,34 @@ public class DrillGuy : Boss
     }
 
 
-private void MinecartAttack()
+private IEnumerator MinecartAttack()
 {
-    // teleport Tom to top left
-    Vector3 start_pos = trackTop.transform.GetChild(0).position;
-    this.transform.position = start_pos;
-
     for (int i = 0; i < minecartCycles; i++)
     {
-        StartCoroutine(MoveAlongRails());
-        StartCoroutine(throwDynamiteOffTracks());
+        //TOP RAIL
+        StartCoroutine(MoveAlongRails(trackTop));
+        StartCoroutine(throwDynamiteOffTracks(trackTop));
+
+        //BETWEEN COOLDOWN
+        yield return new WaitForSeconds(1.0f);
+
+        //BOTTOM RAIL
+        StartCoroutine(MoveAlongRails(trackBot));
+        StartCoroutine(throwDynamiteOffTracks(trackBot));
+        yield return null;
     }
 }
 
-private IEnumerator MoveAlongRails()
+private IEnumerator MoveAlongRails(GameObject track)
 {
-    //TOP HALF
-    Vector3 end_pos = trackTop.transform.GetChild(1).position;
+
+    // init variables
+    Vector3 start_pos = track.transform.GetChild(0).position;
+    Vector3 end_pos = track.transform.GetChild(1).position;
+    this.transform.position = start_pos; // teleport to start pos
     Vector3 moveVector = end_pos - transform.position;
 
-    // face movement direction & start moving
+    // face correct movement direction
     if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1);
     else transform.localScale = new Vector3(-1, 1, 1);
 
@@ -197,35 +205,11 @@ private IEnumerator MoveAlongRails()
 
     // stop
     rb.linearVelocity = Vector2.zero;
-    transform.position = end_pos; // snap to exact end position
-
-    // COOLDOWN BETWEEN TOP AND BOTTOM
-    yield return new WaitForSeconds(1.0f);
-
-    //BOTTOM HALF
-    Vector3 start_pos = trackBot.transform.GetChild(0).position;
-    this.transform.position = start_pos;
-    end_pos = trackBot.transform.GetChild(1).position;
-    moveVector = end_pos - transform.position;
-
-    // face movement direction & start moving
-    if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1);
-    else transform.localScale = new Vector3(-1, 1, 1);
-
-    direction = moveVector.normalized;
-    rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
-
-    // keep moving until end of rails
-    while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
-
-    // stop
-    rb.linearVelocity = Vector2.zero;
-    transform.position = end_pos; // snap to exact end position
+    transform.position = end_pos; 
 }
-private IEnumerator throwDynamiteOffTracks()
+private IEnumerator throwDynamiteOffTracks(GameObject track)
 {
-    //TOP HALF
-    Vector3 end_pos = trackTop.transform.GetChild(1).position;
+    Vector3 end_pos = track.transform.GetChild(1).position;
     Vector3 direction = (end_pos - transform.position).normalized;
     while (Vector2.Dot(end_pos - transform.position, direction) > 0)
     {
@@ -233,19 +217,6 @@ private IEnumerator throwDynamiteOffTracks()
         StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
         yield return new WaitForSeconds(minecartDynamiteCooldown);
     }
-
-    yield return new WaitForSeconds(1.0f);
-
-    //BOTTOM HALF
-     end_pos = trackBot.transform.GetChild(1).position;
-     direction = (end_pos - transform.position).normalized;
-    while (Vector2.Dot(end_pos - transform.position, direction) > 0)
-    {
-        Vector3 target = new Vector3(transform.position.x, transform.position.y + distanceToThrowOnMinecart,transform.position.z);
-        StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
-        yield return new WaitForSeconds(minecartDynamiteCooldown);
-    }
-
 }
 
     /// <summary>
