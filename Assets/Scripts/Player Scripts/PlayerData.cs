@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class PlayerData
 {
    public int progression;
+   public int cutsceneProgression;
 
 
    /// <summary>
@@ -16,5 +17,6 @@ public class PlayerData
    public PlayerData (Player player)
    {
        progression = player.progression;
+       cutsceneProgression = player.cutsceneProgression;
    }
 }
