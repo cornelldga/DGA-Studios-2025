@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.37106913, g: 0.29296133, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ba5387defca51c1488e87c93e2c4300e, type: 3}
+  m_Color: {r: 0.77119076, g: 1, b: 0.76415086, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.953125, y: 1.953125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -111,6 +111,7 @@ MonoBehaviour:
   arcHeight: 3
   planted: 0
   flower: {fileID: 6878899928427170405, guid: b14ceff74b37988469b4d231a039046c, type: 3}
+  locationID: 0
 --- !u!50 &7431155059301079858
 Rigidbody2D:
   serializedVersion: 5
