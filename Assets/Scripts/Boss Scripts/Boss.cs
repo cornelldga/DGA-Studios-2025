@@ -78,6 +78,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         health -= damage;
         if (health <= 0)
         {
