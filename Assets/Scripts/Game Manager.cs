@@ -20,28 +20,45 @@ public class GameManager : MonoBehaviour
     [Tooltip("Reference to the CutsceneManager.")]
     [SerializeField] private CutsceneManager cutsceneManager;
     public CutsceneManager GetCutsceneManager => cutsceneManager;
-    [Header("Pause Menu")]
+
+    [Space(10)]
+    [Header("Pause Menu UI")]
     [Tooltip("Reference to the pause button")]
     [SerializeField] private GameObject pauseButton;
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
     [SerializeField] private GameObject sliders;
+
+    [Space(5)]
+    [Header("Audio Controls")]
     [Tooltip("Slider for controlling music volume")]
     [SerializeField] private Slider musicSlider;
     [Tooltip("Slider for controlling SFX volume")]
     [SerializeField] private Slider sfxSlider;
-    private bool volumeOpened = false;
-    
+
+    [Space(10)]
+    [Header("Transitions")]
     [Tooltip("Animator for scene transitions")]
     [SerializeField] private Animator transitions;
-    
-    [HideInInspector] public Player player;
 
     [Header("World Settings")]
     [Tooltip("The background music for the current scene")]
     [SerializeField] private MusicType currentSong;
-    
+
+    private bool volumeOpened = false;
+    private Player playerInstance;
+
+    /// <summary>
+    /// Public access to the current player instance. 
+    /// Set by the Player script in its Start or Awake method.
+    /// </summary>
+    public Player player 
+    { 
+        get => playerInstance; 
+        set => playerInstance = value; 
+    }
+
     public MusicType CurrentSong => currentSong;
 
     private void Awake()
@@ -55,8 +72,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Fixed Game Manager bug of multiple instances.
+    /// </summary>
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance == this) Instance = null;
     }
 
     /// <summary>
@@ -67,10 +94,16 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance?.InitVolumeSliders(musicSlider, sfxSlider);
     }
 
+    private void Update()
+    {
+        HandlePauseInput();
+        UpdatePauseButtonVisibility();
+    }
+
     /// <summary>
     /// Listens for the Escape key to toggle the pause menu or close the volume panel if it's open.
     /// </summary>
-    void Update()
+    private void HandlePauseInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && (loadoutManager == null || !loadoutManager.gameObject.activeSelf) && GetCurrentSceneName() != "Main Menu")
         {
@@ -83,15 +116,15 @@ public class GameManager : MonoBehaviour
                 TogglePauseMenu(!pauseMenu.activeSelf);
             }
         }
+    }
 
-        if (GetCurrentSceneName() != "Main Menu" && player != null)
-        {
-            pauseButton.SetActive(true);
-        }
-        else
-        {
-            pauseButton.SetActive(false);
-        }
+    /// <summary>
+    /// Toggles visibility of the pause button based on scene and player presence.
+    /// </summary>
+    private void UpdatePauseButtonVisibility()
+    {
+        bool isMainMenu = GetCurrentSceneName() == "Main Menu";
+        pauseButton.SetActive(!isMainMenu && playerInstance != null);
     }
 
     /// <summary>
@@ -121,26 +154,18 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onExitClicked()
     {
+        if (playerInstance != null)
+        {
+            SaveSystem.SavePlayer(playerInstance);
+        }
+        
+        if (dialogueManager.OngoingDialogue()) dialogueManager.EndDialogue();
         TogglePauseMenu(false);
         LoadScene("Main Menu");
     }
 
-    /// <summary>
-    /// Closes the volume panel and shows the main pause menu options.
-    /// </summary>
-    public void onBackClicked()
-    {
-        sliders.SetActive(false);
-        pauseMenu.transform.Find("Back").gameObject.SetActive(false);
-        pauseMenu.transform.Find("Resume").gameObject.SetActive(true);
-        pauseMenu.transform.Find("Volume").gameObject.SetActive(true);
-        pauseMenu.transform.Find("Quit").gameObject.SetActive(true);
-        volumeOpened = false;
-    }
+    public void onBackClicked() => CloseVolumePanel();
 
-    /// <summary>
-    /// Hides the main pause menu options and shows the volume sliders.
-    /// </summary>
     public void onVolumeClicked()
     {
         pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
@@ -219,14 +244,9 @@ public class GameManager : MonoBehaviour
     /// <param name="sceneName">Name of scene to transition to</param>
     public void LoadScene(string sceneName)
     {
-        if (GetCurrentSceneName() == "Saloon")
-        {
-            StartCoroutine(TransitionAnim("Saloon Exit"));
-        }
-        else
-        {
-            StartCoroutine(TransitionAnim(sceneName));
-        }
+        string transitionTrigger = (GetCurrentSceneName() == "Saloon" && sceneName == "World Hub") ? "Saloon Exit" : sceneName;
+        StartCoroutine(TransitionAnim(transitionTrigger));
+        if (playerInstance != null) playerInstance.SavePlayer();
     }
 
     /// <summary>
@@ -238,33 +258,23 @@ public class GameManager : MonoBehaviour
         FreezePlayer(true);
 
         bool hasSpecificTransition = false;
-        for (int triggerIndex = 0; triggerIndex < transitions.parameterCount; triggerIndex++)
+        foreach (var param in transitions.parameters)
         {
-            if (transitions.parameters[triggerIndex].name == scene || scene == "Saloon Exit")
+            if (param.name == scene || scene == "Saloon Exit")
             {
                 hasSpecificTransition = true;
                 break;
             }
         }
 
-        if (hasSpecificTransition)
-            transitions.SetTrigger(scene);
-        else
-            transitions.SetTrigger("World Hub");
+        transitions.SetTrigger(hasSpecificTransition ? scene : "World Hub");
         
         yield return null;
-        
         float animLength = transitions.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(animLength);
 
-        if (scene == "Saloon Exit")
-        {
-            SceneManager.LoadScene("World Hub");
-        }
-        else
-        {
-            SceneManager.LoadScene(scene);
-        }
+        string targetScene = (scene == "Saloon Exit") ? "World Hub" : scene;
+        SceneManager.LoadScene(targetScene);
     }
 
     /// <summary>
@@ -274,28 +284,35 @@ public class GameManager : MonoBehaviour
     /// <param name="mode">The scene load mode</param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        player = null;
-        // TODO: Fix this cutscene trigger so that exiting the saloon into the World Hub does not trigger this
+        if (transitions != null)
+            transitions.SetTrigger("Scene Loaded");
 
-        //if (scene.name == "World Hub")
-        //{
-        //    PlayerData data = SaveSystem.LoadPlayer();
-        //    if (data == null || data.progression == 0)
-        //    {
-        //        StartCoroutine(WaitAndPlay());
-        //        return;
-        //    }
-        //}
-        transitions.SetTrigger("Scene Loaded");
     }
 
     /// <summary>
-    /// Activates the CutsceneManager and waits until it is ready before playing the intro cutscene.
+    /// Checks for cutscenes to play.
     /// </summary>
-    IEnumerator WaitAndPlay()
+    public void CheckForCutscenes()
     {
-        yield return new WaitUntil(() => CutsceneManager.Instance != null);
-        CutsceneManager.Instance.PlayIntroCutscene(() => transitions.SetTrigger("Scene Loaded"));
+        PlayerData data = SaveSystem.LoadPlayer();
+        string currentScene = GetCurrentSceneName();
+
+        if (playerInstance != null && data != null)
+        {
+            playerInstance.cutsceneProgression = data.cutsceneProgression;
+        }
+        int currentCutsceneProgression = (playerInstance != null) ? playerInstance.cutsceneProgression : (data != null ? data.cutsceneProgression : 0);
+
+        if (currentScene == "World Hub" && currentCutsceneProgression == 0)
+        {
+            CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
+        }
+
+        else if (currentScene == "Saloon" && currentCutsceneProgression == 1)
+        {
+            CutsceneManager.Instance.PlayMeetBobbyCutscene();
+        }
+
     }
 
     /// <summary>
@@ -313,17 +330,11 @@ public class GameManager : MonoBehaviour
     /// <param name="freeze">Whether to freeze the player</param>
     public void FreezePlayer(bool freeze)
     {
-        if (player == null) return;
-        if (freeze)
-        {
-            player.StopPlayer();
-        }
-        player.enabled = !freeze;
+        if (playerInstance == null) return;
+        if (freeze) playerInstance.StopPlayer();
+        playerInstance.enabled = !freeze;
     }
 
-    /// <summary>
-    /// Makes the player lose the game and initiates a Lose Game Screen
-    /// </summary>
     public void LoseGame()
     {
         FreezePlayer(true);
@@ -336,6 +347,7 @@ public class GameManager : MonoBehaviour
     /// <param name="nextSceneName">Name of the next scene to load</param>
     public void BossDefeated(string nextSceneName)
     {
+        player.progression++;
         LoadScene(nextSceneName);
     }
 
