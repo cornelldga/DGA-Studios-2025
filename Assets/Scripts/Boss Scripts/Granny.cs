@@ -44,6 +44,7 @@ public class Granny : Boss
 
     public bool contractDestroyed = false;
     private int initialBossCount;
+    private bool doubleContract = false;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
@@ -213,6 +214,7 @@ public class Granny : Boss
             bosses.Remove(bosses[i]);
         }
         bossActive = true;
+        doubleContract = true;
     }
 
     private void TransitionToContractDropped()
@@ -346,6 +348,7 @@ public class Granny : Boss
         }
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
+
         animator.SetBool("isHit", true);
     }
 
@@ -356,6 +359,10 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
+        if (currentPhase == 1 && !doubleContract)
+        {
+            doubleContract = true;
+        }
         healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

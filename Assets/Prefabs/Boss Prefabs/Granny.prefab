@@ -303,7 +303,8 @@ MonoBehaviour:
   healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
-  phasePercents: []
+  phasePercents:
+  - 0.5
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
