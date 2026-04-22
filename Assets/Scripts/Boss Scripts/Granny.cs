@@ -295,6 +295,8 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
+
+
     /// <summary>
     /// When contract dies, granny takes 1/4 of health
     /// </summary>
