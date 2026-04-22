@@ -90,16 +90,8 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
-    [Header("Progressions")]
-    public int progression;
-    public int cutsceneProgression;
-
     void Start()
     {
-        // Load progression
-        PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
-
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
@@ -463,14 +455,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         var main = mixerEffect.main;
         main.startColor = mixerColor;
-    }
-
-    /// <summary>
-    /// Save player data
-    /// </summary>
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
     }
 
 }
