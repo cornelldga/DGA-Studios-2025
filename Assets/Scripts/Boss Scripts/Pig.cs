@@ -39,6 +39,8 @@ public class Pig : MonoBehaviour
     [SerializeField] private float maxStartDelay = 2f;
     [Tooltip("Seconds pig is stunned after colliding")]
     [SerializeField] float stunTime;
+    [Tooltip("Distance at which pig registers a hit on Pig Rider")]
+    [SerializeField] private float pigRiderHitDistance = 0.8f;
     private float patrolDirectionX = 1f; // 1 for right, -1 for left
     private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
@@ -142,6 +144,22 @@ public class Pig : MonoBehaviour
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
+
+        if (pigRider.IsMarked() && Vector2.Distance(transform.position, pigRider.transform.position) < pigRiderHitDistance)
+        {
+            HitPigRider();
+        }
+    }
+
+    private void HitPigRider()
+    {
+        currentState = State.Stunned;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        animator.SetBool("isStunned", true);
+        pigRider.isInvulnerable = false;
+        impulseSource.GenerateImpulse(enemyShakeForce);
+        StartCoroutine(StunCoroutine());
     }
 
     /// <summary>
