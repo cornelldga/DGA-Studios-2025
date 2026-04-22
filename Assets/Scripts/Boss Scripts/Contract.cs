@@ -27,7 +27,7 @@ public class Contract : MonoBehaviour, IDamageable
             // Destroys contract and disables boss
             Destroy(gameObject);
             granny.bossActive = false;
-            boss.SetActive(false);
+            Destroy(boss);
 
             // Removes boss from Granny contracts
             granny.availableBosses.Remove(boss);

@@ -314,10 +314,10 @@ MonoBehaviour:
   invincibleTime: 2
   droppedTime: 3
   bosses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3191004070358083228, guid: 5b8c2da263366f8419830d886778687c, type: 3}
+  - {fileID: 7947622557283230081, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+  - {fileID: 8649009401034233054, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
+  - {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
   contractSpawnBounds:
   - {x: -5, y: -4}
   - {x: 5, y: 4}
@@ -328,7 +328,6 @@ MonoBehaviour:
   contractDestroyed: 0
   returnTime: 1.5
   arrivalThreshold: 0.1
-  gHealth: 0
 --- !u!114 &7540226778721594879
 MonoBehaviour:
   m_ObjectHideFlags: 0

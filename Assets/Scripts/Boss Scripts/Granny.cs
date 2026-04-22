@@ -41,6 +41,7 @@ public class Granny : Boss
     [SerializeField] GameObject contractTemplate;
     // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
+    private bool doubleContract;
 
     public bool contractDestroyed = false;
     private int initialBossCount;
@@ -58,7 +59,6 @@ public class Granny : Boss
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
     private float currentSpeed;
-    public float gHealth;
 
     public override void Start()
     {
@@ -69,7 +69,7 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
-        gHealth = base.health;
+        doubleContract = false;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -108,6 +108,8 @@ public class Granny : Boss
     {
         currentState = State.Idle;
         rb.linearVelocity = Vector2.zero;
+
+        animator.SetBool("isWalking", false);
     }
 
     private void UpdateIdle()
@@ -175,20 +177,39 @@ public class Granny : Boss
             bossActive = true;
             for (int i = 1; i >= 0; i--)
             {
-                bosses[i].SetActive(true);
-                availableBosses.Add(bosses[i]);
+                GameObject instance = Instantiate(bosses[i]);
+                Transform bossCanvas = instance.transform.Find("Boss Canvas");
+                if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+                availableBosses.Add(instance);
                 bosses.Remove(bosses[i]);
+
+                animator.SetBool("isDouble", true);
+                StartCoroutine(ContractTime());
+                animator.SetBool("isDouble", false);
+                animator.SetBool("isDoubleIdle", true);
             }
         }
         else if (bosses.Count > 0)
         {
             int index = Random.Range(0, bosses.Count);
-            bosses[index].SetActive(true);
+            GameObject instance = Instantiate(bosses[index]);
+            Transform bossCanvas = instance.transform.Find("Boss Canvas");
+            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
             bossActive = true;
-            availableBosses.Add(bosses[index]);
+            availableBosses.Add(instance);
             bosses.Remove(bosses[index]);
+
+            animator.SetBool("isSingle", true);
+            StartCoroutine(ContractTime());
+            animator.SetBool("isSingle", false);
+            animator.SetBool("isSingleIdle", true);
         }
         return;
+    }
+
+    IEnumerator ContractTime()
+    {
+        yield return new WaitForSeconds(0.7f);
     }
 
     private void TransitionToContractDropped()
@@ -212,6 +233,8 @@ public class Granny : Boss
         currentSpeed = (rb.position - new Vector2(nearestContract.transform.position.x, nearestContract.transform.position.y)).magnitude / baseTime;
         stateTimer = scavengeTime;
         currentState = State.Scavange;
+
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateScavenge()
