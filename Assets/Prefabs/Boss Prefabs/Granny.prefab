@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: e419ab20c9f22ab4ebc1dd34af4d6fce, type: 3}
+  m_Sprite: {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -303,8 +303,10 @@ MonoBehaviour:
   healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
-  phasePercents: []
+  phasePercents:
+  - 0.5
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   baseTime: 0.8
   collisionRadius: 0
@@ -315,9 +317,9 @@ MonoBehaviour:
   invincibleTime: 2
   droppedTime: 3
   bosses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3191004070358083228, guid: 5b8c2da263366f8419830d886778687c, type: 3}
+  - {fileID: 7947622557283230081, guid: 6bccd4dc61ff24f408aa2f9e203b1be4, type: 3}
+  - {fileID: 8649009401034233054, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
   - {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
   contractSpawnBounds:
   - {x: -5, y: -4}
@@ -329,7 +331,6 @@ MonoBehaviour:
   contractDestroyed: 0
   returnTime: 1.5
   arrivalThreshold: 0.1
-  gHealth: 0
 --- !u!114 &7540226778721594879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +353,7 @@ MonoBehaviour:
   phasePercents:
   - 50
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   baseSpeed: 5
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
