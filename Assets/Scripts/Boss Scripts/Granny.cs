@@ -41,7 +41,6 @@ public class Granny : Boss
     [SerializeField] GameObject contractTemplate;
     // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
-    private bool doubleContract;
 
     public bool contractDestroyed = false;
     private int initialBossCount;
@@ -69,7 +68,6 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
-        doubleContract = false;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -107,9 +105,12 @@ public class Granny : Boss
     public void TransitionToIdle()
     {
         currentState = State.Idle;
+        stateTimer = idleTime;
         rb.linearVelocity = Vector2.zero;
 
         animator.SetBool("isWalking", false);
+        animator.SetBool("isSingleIdle", false);
+        animator.SetBool("isDoubleIdle", false);
     }
 
     private void UpdateIdle()
@@ -182,12 +183,8 @@ public class Granny : Boss
                 if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
                 availableBosses.Add(instance);
                 bosses.Remove(bosses[i]);
-
-                animator.SetBool("isDouble", true);
-                StartCoroutine(ContractTime());
-                animator.SetBool("isDouble", false);
-                animator.SetBool("isDoubleIdle", true);
             }
+            StartCoroutine(PlayContractAnimation(true));
         }
         else if (bosses.Count > 0)
         {
@@ -199,17 +196,30 @@ public class Granny : Boss
             availableBosses.Add(instance);
             bosses.Remove(bosses[index]);
 
-            animator.SetBool("isSingle", true);
-            StartCoroutine(ContractTime());
-            animator.SetBool("isSingle", false);
-            animator.SetBool("isSingleIdle", true);
+            StartCoroutine(PlayContractAnimation(false));
         }
         return;
     }
 
-    IEnumerator ContractTime()
+    IEnumerator PlayContractAnimation(bool isDouble)
     {
-        yield return new WaitForSeconds(0.7f);
+        animator.SetBool("isSingleIdle", false);
+        animator.SetBool("isDoubleIdle", false);
+
+        if (isDouble)
+        {
+            animator.SetBool("isDouble", true);
+            yield return new WaitForSeconds(0.7f);
+            animator.SetBool("isDoubleIdle", true);
+            animator.SetBool("isDouble", false);
+        }
+        else
+        {
+            animator.SetBool("isSingle", true);
+            yield return new WaitForSeconds(0.7f);
+            animator.SetBool("isSingleIdle", true);
+            animator.SetBool("isSingle", false);
+        }
     }
 
     private void TransitionToContractDropped()
