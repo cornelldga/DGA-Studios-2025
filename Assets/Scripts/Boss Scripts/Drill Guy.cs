@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Splines;
 using Unity.Collections;
+using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class DrillGuy : Boss
 {
@@ -71,7 +73,15 @@ public class DrillGuy : Boss
     [Tooltip("Percent chance that throwing will be chosen phase 1")]
     [SerializeField] float phase1ThrowChance;
 
+    // dynamite
+    [SerializeField] float distanceToThrowOnMinecart = 1.0f;
+
     Vector3 movePosition;
+
+    //rail road
+    [SerializeField] GameObject railroad;
+    [SerializeField] float minecartSpeed;
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,6 +96,8 @@ public class DrillGuy : Boss
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
 
+        MinecartAttack();
+
     }
 
     /// <summary>
@@ -93,34 +105,34 @@ public class DrillGuy : Boss
     /// </summary>
     public override void Update()
     {
-        base.Update();
-        stateTimer -= Time.deltaTime;
-        attackCooldown -= Time.deltaTime * attackRate;
+        // base.Update();
+        // stateTimer -= Time.deltaTime;
+        // attackCooldown -= Time.deltaTime * attackRate;
 
-        switch (currentState)
-        {
-            case State.Walking:
-                UpdateWalking();
-                break;
-            case State.Targeting:
-                UpdateTargeting();
-                break;
-            case State.Underground_Chase:
-                UpdateUG_Chase();
-                break;
-            case State.Underground_Random:
-                UpdateUG_Random();
-                break;
-            case State.Throwing:
-                UpdateThrowing();
-                break;
-            case State.Entering:
-                UpdateEntering();
-                break;
-            case State.Exiting:
-                UpdateExiting();
-                break;
-        }
+        // switch (currentState)
+        // {
+        //     case State.Walking:
+        //         UpdateWalking();
+        //         break;
+        //     case State.Targeting:
+        //         UpdateTargeting();
+        //         break;
+        //     case State.Underground_Chase:
+        //         UpdateUG_Chase();
+        //         break;
+        //     case State.Underground_Random:
+        //         UpdateUG_Random();
+        //         break;
+        //     case State.Throwing:
+        //         UpdateThrowing();
+        //         break;
+        //     case State.Entering:
+        //         UpdateEntering();
+        //         break;
+        //     case State.Exiting:
+        //         UpdateExiting();
+        //         break;
+        // }
     }
 
     //Throws Dynamite at the player (phase 1)
@@ -148,6 +160,37 @@ public class DrillGuy : Boss
         attackCooldown = dynamite.duration;
         holePositions.Clear();
     }
+
+
+    // minecart attack
+    private void MinecartAttack()
+    {
+        // tom spawns at stsart, on the rail (can be changed later)
+
+
+        // tom moves on rails to the right  + throwing dynamite above and below itself
+        // tom reaches the end of rails, stops throwing dynamite, and appers at the other end
+        // tom moves on rails left + throwing dynamite above and below itself
+        // tom reaches end of rails, stops throwing dynamite, and spawns in the middle
+
+        Vector3 start_pos = railroad.transform.GetChild(0).position;
+        this.transform.position = start_pos;
+
+        Vector3 end_pos = railroad.transform.GetChild(1).position;
+        Vector3 moveVector = end_pos - transform.position;
+                
+        // face movement direction
+        if (moveVector.x < 0) transform.localScale = new Vector3(1, 1, 1); 
+        else transform.localScale = new Vector3(-1, 1, 1); 
+
+        // railroad movement
+        moveVector = moveVector.normalized * minecartSpeed;
+        rb.linearVelocity = new Vector2(moveVector.x, moveVector.y);
+    }
+
+
+
+
 
     /// <summary>
     /// Transition to walking.
