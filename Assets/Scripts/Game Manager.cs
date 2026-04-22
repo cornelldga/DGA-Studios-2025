@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             SaveSystem.SavePlayer(playerInstance);
         }
         
-        playerInstance = null; 
+        if (dialogueManager.OngoingDialogue()) dialogueManager.EndDialogue();
         TogglePauseMenu(false);
         LoadScene("Main Menu");
     }
