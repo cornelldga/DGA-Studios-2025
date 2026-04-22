@@ -190,8 +190,6 @@ MonoBehaviour:
   currentState: 0
   initialThrowTime: 2
   walkingTime: 2
-  debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
-  numFrenzyDigs: 3
   moveSpeed: 0.8
   moveRange: 2
   exitHolePrefab: {fileID: 6583115881950436634, guid: b58fc68cd88be4e65921c2dfd09b931a, type: 3}
@@ -200,11 +198,17 @@ MonoBehaviour:
   speedModifier: 0.5
   pushRadius: 1
   digRange: 4.5
+  numFrenzyDigs: 3
   dynamite: {fileID: 9129332198681593025, guid: 318bc69c94dbaa04ababbd0bae499eed, type: 3}
   dynamiteLandingIndicatorPrefab: {fileID: 3983551256958522771, guid: a791f15ea9f4c9e499b73d42193f628c, type: 3}
   throw1Innacuracy: 1.25
   throw2Innacuracy: 2
   phase1ThrowChance: 0.8
+  debrisPattern: {fileID: 11400000, guid: 5d9baceb709e2824598917918b2017bd, type: 2}
+  gemPatterns:
+  - {fileID: 11400000, guid: 5fd9decb802307b49882b49f058bb5ee, type: 2}
+  - {fileID: 11400000, guid: e13113b2476928e428681e72c0a6f873, type: 2}
+  - {fileID: 11400000, guid: c0b80ba2cff648240ae8cfbc22f43846, type: 2}
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7

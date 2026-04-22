@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Splines;
 using Unity.Collections;
+using Unity.VisualScripting.FullSerializer;
 
 public class DrillGuy : Boss
 {
@@ -23,8 +24,6 @@ public class DrillGuy : Boss
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<Vector3> holePositions = new List<Vector3>();
-    [SerializeField] BulletPattern debrisPattern;
-    [SerializeField] int numFrenzyDigs;
 
     [Header("Hole Settings")]
 
@@ -56,6 +55,7 @@ public class DrillGuy : Boss
 
     [Tooltip("The range in which the driller can dig from a random point in world center")]
     [SerializeField] float digRange;
+    [SerializeField] int numFrenzyDigs;
     [Tooltip("Driller Animation Controller")]
     private Animator animator;
 
@@ -71,6 +71,9 @@ public class DrillGuy : Boss
     [Tooltip("Percent chance that throwing will be chosen phase 1")]
     [SerializeField] float phase1ThrowChance;
 
+    [Header("Debris / Gem Attack")]
+    [SerializeField] BulletPattern debrisPattern;
+    [SerializeField] BulletPattern[] gemPatterns;
     Vector3 movePosition;
 
 
@@ -358,8 +361,10 @@ public class DrillGuy : Boss
         currentState = State.Exiting;
 
         Vector3 spawnPos = transform.position;
-        StartCoroutine(debrisPattern.DoBulletPattern(this));
         Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
+        StartCoroutine(debrisPattern.DoBulletPattern(this));
+        // currently summons a random gem color in the set pattern
+        StartCoroutine(gemPatterns[UnityEngine.Random.Range(0,3)].DoBulletPattern(this));
         holePositions.Add(spawnPos);
     }
 
@@ -483,6 +488,7 @@ public class DrillGuy : Boss
         
         t = 0f;
     }
+
 
     /// <summary>
     /// Called when another object enters the trigger collider.

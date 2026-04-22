@@ -33,6 +33,7 @@ public class BulletPattern : ScriptableObject
             yield return new WaitForSeconds(bulletDelays[i%bulletDelays.Length]);
             Bullet bullet = Instantiate(bullets[i % bullets.Length], boss.bulletOrigin.position, boss.bulletOrigin.rotation);
             bullet.transform.Rotate(0,0, bulletAngles[i % bulletAngles.Length], Space.Self);
+            
 
         }
         boss.SetAttackState(false);
