@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    private Vector2 defaultNamePos;
+    private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
@@ -77,6 +79,9 @@ public class DialogueManager : MonoBehaviour
     {
         choices.SetActive(false);
         gameObject.SetActive(false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        defaultNamePos = rect.anchoredPosition;
+        defaultNameRot = rect.localRotation;
     }
 
     /// <summary>
@@ -141,6 +146,13 @@ public class DialogueManager : MonoBehaviour
             isCutscene = file.name.StartsWith("cutscene");
             currentFileName = isCutscene ? "" : file.name;
             nameText.text = currentFileName;   
+
+            if (file.name == "cutscene_1")
+            {
+                RectTransform rect = nameText.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(-470f, -107f);
+                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+            }
 
             if (nameText.text=="Mirage & Ace")
             {
@@ -284,6 +296,9 @@ public class DialogueManager : MonoBehaviour
     {
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        rect.anchoredPosition = defaultNamePos;
+        rect.localRotation = defaultNameRot;
     }
 
     /// <summary>
