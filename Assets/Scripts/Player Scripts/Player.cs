@@ -90,10 +90,16 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
+    [Header("Progressions")]
     public int progression;
+    public int cutsceneProgression;
 
     void Start()
     {
+        // Load progression
+        PlayerData data = SaveSystem.LoadPlayer();
+        progression = data.progression;
+
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
@@ -125,6 +131,7 @@ public class Player : MonoBehaviour, IDamageable
         isAlive = true;
         knockedBack = false;
         GameManager.Instance.player = this;
+        GameManager.Instance.CheckForCutscenes();
     }
 
     void Update()
@@ -464,16 +471,6 @@ public class Player : MonoBehaviour, IDamageable
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);
-    }
-
-
-    /// <summary>
-    /// Load player data
-    /// </summary>
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
     }
 
 }
