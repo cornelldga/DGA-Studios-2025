@@ -21,15 +21,26 @@ public enum DialogueType
 /// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] Animator dialogueAnim;
+    public static DialogueManager Instance;
+    private System.Action onComplete;
+    [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    private Vector2 defaultNamePos;
+    private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
-    [SerializeField] Image npcImg;
+    [SerializeField] private Image npcImg;
+    private string currentFileName;
+    private bool isCutscene;
+    public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
+
+    [Header("Choice Buttons")]
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
 
     [Header("Settings")]
     [SerializeField] float typingSpeed;
@@ -68,6 +79,23 @@ public class DialogueManager : MonoBehaviour
     {
         choices.SetActive(false);
         gameObject.SetActive(false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        defaultNamePos = rect.anchoredPosition;
+        defaultNameRot = rect.localRotation;
+    }
+
+    /// <summary>
+    /// Listens to advance dialogue via space or enter key. This is incase input actions fails.
+    /// </summary>
+    void Update()
+    {
+        if (!ongoingDialogue) return;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (isTyping) CompleteCurrentLine();
+            else DisplayNextLine();
+        }
     }
 
     /// <summary>
@@ -83,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (context.action.WasPressedThisFrame() && ongoingDialogue)
+        if (ongoingDialogue)
         {
             if (isTyping)
             {
@@ -113,8 +141,19 @@ public class DialogueManager : MonoBehaviour
     {
         if (file != null)
         {
+            continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
-            nameText.text = file.name;
+            isCutscene = file.name.StartsWith("cutscene");
+            currentFileName = isCutscene ? "" : file.name;
+            nameText.text = currentFileName;   
+
+            if (file.name == "cutscene_1")
+            {
+                RectTransform rect = nameText.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(-488f, -110f);
+                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+            }
+
             if (nameText.text=="Mirage & Ace")
             {
                 dialogueText.color = Color.white;
@@ -151,7 +190,7 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.ToggleLoadoutManager(true);
             } else
             {
-                // Automatic entry/exit for the saloon
+                // Automatic entry/exit for the saloon   
                 GameManager.Instance.LoadScene(scene); 
             }
         }
@@ -176,22 +215,41 @@ public class DialogueManager : MonoBehaviour
             }
             return;
         }
+
         if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.NPC)
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+
+                    nameText.text = speakerName;
+
+                    bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
+                    bool isDuke = (speakerName == "Duke");
+
+                    if (isCutscene)
                     {
-                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                        // Hide if not Duke during cutscenes
+                        npcImg.gameObject.SetActive(isDuke);
                     }
+                    else
+                    {
+                        npcImg.gameObject.SetActive(hasEmotion);
+                    }
+
+                    if (npcImg.gameObject.activeSelf)
+                    {
+                        npcImg.sprite = currentEmotions.ContainsKey((DialogueEmotion)line.emotion) ? currentEmotions[(DialogueEmotion)line.emotion] : currentEmotions[DialogueEmotion.Neutral];
+                    }
+
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    return;
+                    return; 
                 }
             }
-            throw new System.Exception("No dialogue lines found");
+            
         }
     }
 
@@ -238,7 +296,11 @@ public class DialogueManager : MonoBehaviour
     {
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        rect.anchoredPosition = defaultNamePos;
+        rect.localRotation = defaultNameRot;
     }
+
     /// <summary>
     /// Animation trigger that closes the dialogue completely
     /// </summary>

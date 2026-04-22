@@ -90,7 +90,9 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
+    [Header("Progressions")]
     public int progression;
+    public int cutsceneProgression;
 
     void Start()
     {
@@ -125,6 +127,7 @@ public class Player : MonoBehaviour, IDamageable
         isAlive = true;
         knockedBack = false;
         GameManager.Instance.player = this;
+        GameManager.Instance.CheckForCutscenes();
     }
 
     void Update()
@@ -473,7 +476,10 @@ public class Player : MonoBehaviour, IDamageable
     public void LoadPlayer()
     {
         PlayerData data = SaveSystem.LoadPlayer();
+        if (data == null) return;
+
         progression = data.progression;
+        cutsceneProgression = data.cutsceneProgression;
     }
 
 }
