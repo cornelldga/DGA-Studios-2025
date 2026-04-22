@@ -140,6 +140,7 @@ public class CutsceneManager : MonoBehaviour
         {
             GameManager.Instance.player.cutsceneProgression++;
             SaveSystem.SavePlayer(GameManager.Instance.player);
+            // GameManager.Instance.LoadScene("Tutorial"); <- wait for tutorial to be complete to uncomment
             onComplete?.Invoke();
         };
         GameManager.Instance.GetDialogueManager.StartDialogue(cutscene_1, 1, dialogueBoxSprite,

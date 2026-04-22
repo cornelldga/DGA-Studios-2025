@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
     /// <param name="sceneName">Name of scene to transition to</param>
     public void LoadScene(string sceneName)
     {
-        string transitionTrigger = (GetCurrentSceneName() == "Saloon") ? "Saloon Exit" : sceneName;
+        string transitionTrigger = (GetCurrentSceneName() == "Saloon" && sceneName == "World Hub") ? "Saloon Exit" : sceneName;
         StartCoroutine(TransitionAnim(transitionTrigger));
         if (playerInstance != null) playerInstance.SavePlayer();
     }
