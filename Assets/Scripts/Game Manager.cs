@@ -347,6 +347,7 @@ public class GameManager : MonoBehaviour
     /// <param name="nextSceneName">Name of the next scene to load</param>
     public void BossDefeated(string nextSceneName)
     {
+        player.progression++;
         LoadScene(nextSceneName);
     }
 
