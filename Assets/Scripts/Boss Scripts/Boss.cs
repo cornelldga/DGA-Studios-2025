@@ -24,6 +24,8 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     [SerializeField] protected int currentPhase = 0;
 
+    public bool isInvulnerable = false;
+
     bool isAttacking;
     protected float attackCooldown;
 
@@ -74,6 +76,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         health -= damage;
         if (health <= 0)
         {

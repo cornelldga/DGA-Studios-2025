@@ -178,10 +178,11 @@ public class Granny : Boss
             bossActive = true;
             for (int i = 1; i >= 0; i--)
             {
-                GameObject instance = Instantiate(bosses[i]);
-                Transform bossCanvas = instance.transform.Find("Boss Canvas");
+                GameObject boss = Instantiate(bosses[i]);
+                Transform bossCanvas = boss.transform.Find("Boss Canvas");
                 if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-                availableBosses.Add(instance);
+                boss.GetComponent<Boss>().isInvulnerable = true;
+                availableBosses.Add(boss);
                 bosses.Remove(bosses[i]);
             }
             StartCoroutine(PlayContractAnimation(true));
@@ -189,11 +190,12 @@ public class Granny : Boss
         else if (bosses.Count > 0)
         {
             int index = Random.Range(0, bosses.Count);
-            GameObject instance = Instantiate(bosses[index]);
-            Transform bossCanvas = instance.transform.Find("Boss Canvas");
+            GameObject boss = Instantiate(bosses[index]);
+            Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+            boss.GetComponent<Boss>().isInvulnerable = true;
             bossActive = true;
-            availableBosses.Add(instance);
+            availableBosses.Add(boss);
             bosses.Remove(bosses[index]);
 
             StartCoroutine(PlayContractAnimation(false));
