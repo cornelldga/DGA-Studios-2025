@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using System.Runtime.CompilerServices;
 
 /// <summary>
 /// State machine controller for our Aura-based boss

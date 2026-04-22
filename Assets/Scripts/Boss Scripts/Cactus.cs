@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class Cactus : MonoBehaviour, IDamageable
 {
