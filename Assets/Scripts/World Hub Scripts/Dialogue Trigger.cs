@@ -17,6 +17,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [SerializeField] private Sprite neutralSprite;
     [SerializeField] private Sprite happySprite;
     [SerializeField] private Sprite sadSprite;
+    [SerializeField] public int bossProgression;
+    [SerializeField] public GameObject quest;
     private Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     [Header("Boss and interactable Fields")]
@@ -34,6 +36,16 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             emotionDictionary[DialogueEmotion.Happy] = happySprite;
             emotionDictionary[DialogueEmotion.Sad] = sadSprite;
         }
+        if (dialogueType == DialogueType.Boss)
+        {
+            if (bossProgression == PlayerPrefs.GetInt("progression",0))
+            {
+                quest.SetActive(true);
+            } else
+            {
+                quest.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
@@ -47,6 +59,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         }
 
     }
+
     /// <summary>
     /// Will trigger dialogue when interacted.
     /// </summary>
