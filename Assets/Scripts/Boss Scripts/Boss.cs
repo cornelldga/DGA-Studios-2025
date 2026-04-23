@@ -79,11 +79,11 @@ public abstract class Boss : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0)
         {
-            
             healthBar.fillAmount = 0;
-            GameManager.Instance.player.progression = Mathf.Max(
-                GameManager.Instance.player.progression, bossProgression);
-            GameManager.Instance.BossDefeated("World Hub");
+            PlayerPrefs.SetInt("progression", Mathf.Max(
+                PlayerPrefs.GetInt("progression",0), bossProgression
+            ));
+            GameManager.Instance.LoadScene("World Hub");
         }
         else
         {
