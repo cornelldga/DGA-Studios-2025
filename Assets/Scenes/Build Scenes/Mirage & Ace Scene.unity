@@ -390,6 +390,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1745559367814821261, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2005259732215455064, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -1417,7 +1421,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2920572, y: -0.00057, z: -10}
+  m_LocalPosition: {x: 3.307043, y: 1.2771599, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1578,10 +1582,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.1704011, y: 10.71286}
-      - {x: -14.721602, y: 10.731896}
-      - {x: -14.74546, y: -6.261851}
-      - {x: 14.208111, y: -6.318651}
-      - {x: 14.252376, y: 10.73014}
+      - {x: -12.749284, y: 10.731896}
+      - {x: -12.697284, y: -3.3033729}
+      - {x: 12.311651, y: -3.208457}
+      - {x: 12.304479, y: 10.740016}
   m_UseDelaunayMesh: 0
 --- !u!1001 &1154324150
 PrefabInstance:
@@ -1699,7 +1703,7 @@ GameObject:
   - component: {fileID: 1205616379}
   - component: {fileID: 1205616378}
   - component: {fileID: 1205616380}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: center_stage_curtains_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
