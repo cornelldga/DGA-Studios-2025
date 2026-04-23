@@ -8,6 +8,10 @@ public class Sound
     public AudioClip audioClip;
     public bool isLoop;
 
+    public float maxPitch;
+
+    public float minPitch;
+
     public bool playOnAwake;
 
     [Tooltip("can be in a range from 0 -> 1, percentage of gain from original audio source")]
