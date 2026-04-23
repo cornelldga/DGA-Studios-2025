@@ -138,7 +138,6 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
-        Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
             continueDialogueAction.action.Enable();
@@ -166,8 +165,7 @@ public class DialogueManager : MonoBehaviour
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
-
-            SetDialogueStart(GameManager.Instance.player.progression);
+            SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
@@ -200,11 +198,10 @@ public class DialogueManager : MonoBehaviour
     /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
     /// play the start with the closest value to the progression integer
     /// </summary>
-    /// <param name="progression">The progression int</param>
 
-    void SetDialogueStart(int progression)
+    void SetDialogueStart()
     {
-        int current = progression;
+        int current = PlayerPrefs.GetInt("progression",0);
         while (current >= 0)
         {
             string candidateID = current + "_start";
