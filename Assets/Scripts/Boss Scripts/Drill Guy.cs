@@ -333,6 +333,7 @@ public class DrillGuy : Boss
     public void AnimationOnEnteredGround()
     {
         Vector3 spawnPos = bulletOrigin.position;
+        spawnPos.y -= 0.8f;
         Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
         holePositions.Add(spawnPos);
         isUnderground = true;
@@ -362,6 +363,7 @@ public class DrillGuy : Boss
         currentState = State.Exiting;
 
         Vector3 spawnPos = transform.position;
+        spawnPos.y -= 0.8f;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
         Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
         holePositions.Add(spawnPos);

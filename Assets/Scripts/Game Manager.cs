@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("The background music for the current scene")]
     [SerializeField] private MusicType currentSong;
 
+    [SerializeField] private int progression;
+    [SerializeField] bool setProgression;
+
     private bool volumeOpened = false;
     private Player playerInstance;
 
@@ -68,6 +71,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            if (setProgression)
+            {
+                PlayerPrefs.SetInt("progression", progression);
+            }
             pauseMenu.SetActive(false);
         }
         else
@@ -154,11 +161,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onExitClicked()
     {
-        if (playerInstance != null)
-        {
-            SaveSystem.SavePlayer(playerInstance);
-        }
-        
         if (dialogueManager.OngoingDialogue()) dialogueManager.EndDialogue();
         TogglePauseMenu(false);
         LoadScene("Main Menu");
@@ -246,7 +248,6 @@ public class GameManager : MonoBehaviour
     {
         string transitionTrigger = (GetCurrentSceneName() == "Saloon" && sceneName == "World Hub") ? "Saloon Exit" : sceneName;
         StartCoroutine(TransitionAnim(transitionTrigger));
-        if (playerInstance != null) playerInstance.SavePlayer();
     }
 
     /// <summary>
@@ -294,21 +295,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CheckForCutscenes()
     {
-        PlayerData data = SaveSystem.LoadPlayer();
         string currentScene = GetCurrentSceneName();
 
-        if (playerInstance != null && data != null)
-        {
-            playerInstance.cutsceneProgression = data.cutsceneProgression;
-        }
-        int currentCutsceneProgression = (playerInstance != null) ? playerInstance.cutsceneProgression : (data != null ? data.cutsceneProgression : 0);
-
-        if (currentScene == "World Hub" && currentCutsceneProgression == 0)
+        if (currentScene == "World Hub" && PlayerPrefs.GetInt("progression", 0)==0)
         {
             CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
         }
 
-        else if (currentScene == "Saloon" && currentCutsceneProgression == 1)
+        else if (currentScene == "Saloon" && PlayerPrefs.GetInt("progression", 0)==0)
         {
             CutsceneManager.Instance.PlayMeetBobbyCutscene();
         }
@@ -339,16 +333,6 @@ public class GameManager : MonoBehaviour
     {
         FreezePlayer(true);
         LoadScene(GetCurrentSceneName());
-    }
-
-    /// <summary>
-    /// Called when a boss is defeated, loads the next scene.
-    /// </summary>
-    /// <param name="nextSceneName">Name of the next scene to load</param>
-    public void BossDefeated(string nextSceneName)
-    {
-        player.progression++;
-        LoadScene(nextSceneName);
     }
 
 }
