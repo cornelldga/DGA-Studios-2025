@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
 
         if (index < 0 || index >= sounds.Length)
         {
-            Debug.Log("Sound index out of bounds, refer to Audio Manager object");
+            // Debug.Log("Sound index out of bounds, refer to Audio Manager object");
             return;
         }
 
@@ -135,10 +135,8 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"pitch before clamp: {pitch}, min: {sounds[index].minPitch}, max: {sounds[index].maxPitch}");
             pitch = Mathf.Clamp(pitch, sounds[index].minPitch, sounds[index].maxPitch);
             pitch += Random.Range(-0.05f, 0.05f);
-            Debug.Log($"pitch after clamp: {pitch}");
             sounds[index].source.pitch = pitch;
         }
 
@@ -155,7 +153,7 @@ public class AudioManager : MonoBehaviour
         if (ignoreNextMusicChange)
         {
             ignoreNextMusicChange = false;
-            Debug.Log("Ignoring music change due to reset");
+            // Debug.Log("Ignoring music change due to reset");
             return;
         }
         if(musicType == MusicType.None)
