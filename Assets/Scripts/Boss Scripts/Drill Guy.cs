@@ -228,12 +228,18 @@ public class DrillGuy : Boss
         {
             Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
             StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+            GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
+            Destroy(landingIndicator, dynamite.duration);
         } 
         else if (currentPhase == 1) {
             Debug.Log("here");
-            Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
-            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
-            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+            for (int i = 0; i < 2; i++)
+            {
+                Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
+                StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+                GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
+                Destroy(landingIndicator, dynamite.duration);
+            }     
         }
     }
 
