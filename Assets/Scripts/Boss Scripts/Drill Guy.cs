@@ -3,12 +3,6 @@ using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Splines;
-using Unity.Collections;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
-using System.IO;
 
 public class DrillGuy : Boss
 {
@@ -80,7 +74,6 @@ public class DrillGuy : Boss
     private Vector3 movePosition;
     [SerializeField] GameObject trackTop, trackBot;
     [SerializeField] float minecartSpeed;
-    [SerializeField] Dynamite minecartDynamite;
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
     [SerializeField] float minecartInnacuracy = 1.0f;
@@ -227,7 +220,7 @@ public class DrillGuy : Boss
         if (currentPhase == 0)
         {
             Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
-            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+            StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
             Destroy(landingIndicator, dynamite.duration);
         } 
@@ -236,7 +229,7 @@ public class DrillGuy : Boss
             for (int i = 0; i < 2; i++)
             {
                 Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
-                StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+                StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
                 GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
                 Destroy(landingIndicator, dynamite.duration);
             }     
@@ -286,7 +279,7 @@ public class DrillGuy : Boss
         {
             this.transform.position = posBeforeDriving;
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
-            TransitionToWalking();
+            TransitionToEntering();
         }
        else if (!minecartRoutineStarted){
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
