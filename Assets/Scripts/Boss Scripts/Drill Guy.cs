@@ -77,9 +77,8 @@ public class DrillGuy : Boss
 
     [Header("Minecart Settings")]
     [SerializeField] float distanceToThrowOnMinecart = 5.0f;
-    Vector3 movePosition;
-    [SerializeField] GameObject trackTop;
-    [SerializeField] GameObject trackBot;
+    private Vector3 movePosition;
+    [SerializeField] GameObject trackTop, trackBot;
     [SerializeField] float minecartSpeed;
     [SerializeField] Dynamite minecartDynamite;
     [SerializeField] int minecartCycles = 1;
@@ -89,6 +88,7 @@ public class DrillGuy : Boss
     private bool minecartRoutineStarted = false;
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
+    [SerializeField] Collider2D wall;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -231,7 +231,7 @@ public class DrillGuy : Boss
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
             Destroy(landingIndicator, dynamite.duration);
         } 
-        else if (currentPhase == 1) {
+        else if (currentPhase == 1 || currentPhase == 2) {
             Debug.Log("here");
             for (int i = 0; i < 2; i++)
             {
@@ -285,9 +285,11 @@ public class DrillGuy : Boss
         if (minecartRoutineDone)
         {
             this.transform.position = posBeforeDriving;
+            Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
             TransitionToWalking();
         }
        else if (!minecartRoutineStarted){
+            Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
             StartCoroutine(MinecartAttackRoutine());
             minecartRoutineStarted = true;
         }
