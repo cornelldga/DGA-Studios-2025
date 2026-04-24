@@ -84,14 +84,10 @@ public class DrillGuy : Boss
     [SerializeField] Dynamite minecartDynamite;
     [SerializeField] float minecartDynamiteCooldown;
     [SerializeField] int minecartCycles = 1;
-    [SerializeField] float transitionTimeBetweenRails = 0.3f;
+    [SerializeField] float transitionTimeBetweentracks = 0.3f;
     [SerializeField] float minecartInnacuracy = 1.0f;
     private bool minecartRoutineDone = false;
     private bool minecartRoutineStarted = false;
-
-
-
-
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -105,8 +101,6 @@ public class DrillGuy : Boss
         animator = GetComponent<Animator>();
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
-
-        // StartCoroutine(MinecartAttackRoutine());
     }
 
     /// <summary>
@@ -177,57 +171,71 @@ public class DrillGuy : Boss
         holePositions.Clear();
     }
 
-private IEnumerator MinecartAttackRoutine()
-{
-    GameObject[] tracks = { trackTop, trackBot };
-    for (int i = 0; i < minecartCycles; i++)
+    // Minecart Attack: Tom throws dynamites while riding his minecart around the tracks.
+    // (one cycle =  top track +  bottom track)
+    // current spawns onto track (no walking. makes it fast which is cool)
+    private IEnumerator MinecartAttackRoutine()
     {
-        yield return StartCoroutine(MoveAlongRails(tracks));
-        if (i < minecartCycles - 1)
-            yield return new WaitForSeconds(transitionTimeBetweenRails);
-    }
-    minecartRoutineDone = true;
-}
-
-private IEnumerator MoveAlongRails(GameObject[] tracks)
-{
-    for (int i = 0; i < 2; i++)
+        Vector3 last_position = this.transform.position;
+        GameObject[] tracks = { trackTop, trackBot };
+        for (int i = 0; i < minecartCycles; i++)
         {
-            // init variables
-            Vector3 start_pos = tracks[i].transform.GetChild(0).position;
-            Vector3 end_pos = tracks[i].transform.GetChild(1).position;
-            this.transform.position = start_pos; // teleport to start pos
-            Vector3 moveVector = end_pos - transform.position;
-
-            // face correct movement direction
-            if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-            else transform.localScale = new Vector3(1, 1, 1);
-
-            Vector3 direction = moveVector.normalized;
-            rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
-
-            // throw dynamites
-            int throwDirY =  i ==  0? -1:1; //top rail throws down, bot rail throws up
-            Coroutine dynamiteRoutine = StartCoroutine(throwDynamiteOffTracks(throwDirY, throwDirY * -1));
-
-            // keep moving until end of rails
-            while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
-            rb.linearVelocity = Vector2.zero;
-
-            //cooldown b/w top and bot
-            StopCoroutine(dynamiteRoutine);
-            if (i == 0) yield return new WaitForSeconds(transitionTimeBetweenRails);
+            yield return StartCoroutine(MoveAlongtracks(tracks));
+            if (i < minecartCycles - 1)
+                yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
-}
-private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
-{
-        while (true)
-        {
-            Vector3 target = new Vector3(bulletOrigin.position.x + (throwDirX*1.5f), bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
-            StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
-            yield return new WaitForSeconds(minecartDynamiteCooldown);
-        }   
-}
+        minecartRoutineDone = true;
+        this.transform.position = last_position;
+    }
+
+    // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
+    // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
+    // While traveling on the tracks, he throws dynamites.
+    private IEnumerator MoveAlongtracks(GameObject[] tracks)
+    {
+        for (int i = 0; i < 2; i++)
+            {
+                // init variables
+                Vector3 start_pos = tracks[i].transform.GetChild(i == 0? 0: 1).position;
+                Vector3 end_pos = tracks[i].transform.GetChild(i == 0? 1:0).position;
+                this.transform.position = start_pos; // teleport to start pos
+                Vector3 moveVector = end_pos - transform.position;
+
+                // face correct movement direction
+                if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+                else transform.localScale = new Vector3(1, 1, 1);
+
+                Vector3 direction = moveVector.normalized;
+                rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
+
+                // throw dynamites (phase 0: y towards center. phase 1: y both above and below tracks)
+                int throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
+                Coroutine dynamiteRoutine1 = StartCoroutine(throwDynamiteOffTracks(throwDirY));
+                Coroutine dynamiteRoutine2 = null;
+                if (currentPhase == 1) dynamiteRoutine2 = StartCoroutine(throwDynamiteOffTracks(-throwDirY));
+                
+                // keep moving until end of tracks
+                while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
+                rb.linearVelocity = Vector2.zero;
+
+                //time b/w switching tracks
+                StopCoroutine(dynamiteRoutine1);
+                if (dynamiteRoutine2 != null) StopCoroutine(dynamiteRoutine2);
+
+                if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
+            }
+    }
+
+    // Dynamite throw during minecart attack. (specify  direction of throw)
+    private IEnumerator throwDynamiteOffTracks(int throwDirY)
+    {
+            while (true)
+            {
+                Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
+                StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+                yield return new WaitForSeconds(minecartDynamiteCooldown);
+            }   
+    }
 
     /// <summary>
     /// Transition to walking.
@@ -264,7 +272,7 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
 
 
     /// <summary>
-    /// Updates actions for the drill during throw state
+    /// Updates actions for the drill during driving state
     /// </summary>
     private void UpdateDriving()
     {
@@ -280,7 +288,7 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
 
     
     /// <summary>
-    /// Transition to throwing state
+    /// Transition to driving state
     /// </summary>
     private void TransitionToDriving()
     {
