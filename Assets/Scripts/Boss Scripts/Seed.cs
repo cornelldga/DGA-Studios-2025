@@ -17,6 +17,9 @@ public class Seed : MonoBehaviour
     private float startHeight;
     public int locationID;
 
+    //Sprite Pooling variables
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,7 +70,8 @@ public class Seed : MonoBehaviour
             cactus.locationID = locationID;
         }
 
-            GameObject.Destroy(this.gameObject);
+        //GameObject.Destroy(this.gameObject);
+        SeedReset();
     }
 
  
@@ -77,9 +81,16 @@ public class Seed : MonoBehaviour
         {
             if(!flower.GetComponent<Bush>() )
             { FindAnyObjectByType<Ash>().deployedSeeds[locationID] = false; }
-            GameObject.Destroy(this.gameObject);
+            //GameObject.Destroy(this.gameObject);
+            SeedReset();
         }
     }
 
-   
+    private void SeedReset()
+    {
+        Start();
+        this.gameObject.SetActive(false);
+    }
+
+    On
 }
