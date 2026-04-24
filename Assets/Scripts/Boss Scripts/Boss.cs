@@ -9,6 +9,8 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Boss : MonoBehaviour, IDamageable
 {
+    [Tooltip("The progression value for defeating this boss")]
+    [SerializeField] int bossProgression;
     [Tooltip("What the boss health bar name is set to")]
     [SerializeField] string bossName;
     [SerializeField] protected float maxHealth;
@@ -77,9 +79,11 @@ public abstract class Boss : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0)
         {
-            
             healthBar.fillAmount = 0;
-            GameManager.Instance.BossDefeated("World Hub");
+            PlayerPrefs.SetInt("progression", Mathf.Max(
+                PlayerPrefs.GetInt("progression",0), bossProgression
+            ));
+            GameManager.Instance.LoadScene("World Hub");
         }
         else
         {

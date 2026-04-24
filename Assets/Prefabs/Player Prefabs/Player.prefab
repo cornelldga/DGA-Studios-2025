@@ -897,7 +897,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whip
   whipSpeedMultiplier: 4
+  destroyParticle: {fileID: 8012624833522403216, guid: 632cb91c4f75b794aaf175ab60acf474, type: 3}
   damageMultiplier: 1
+  reflecting: 0
+  frameNumber: 0
 --- !u!212 &3009582985005188905
 SpriteRenderer:
   serializedVersion: 2

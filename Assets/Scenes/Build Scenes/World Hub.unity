@@ -213,11 +213,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080179304938087386, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_Name
-      value: Mirage & Ace
+      value: Ace & Mirage
       objectReference: {fileID: 0}
     - target: {fileID: 7449188679686280635, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449188679686280635, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -974,6 +978,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: progression
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: setProgression
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.70226
@@ -1187,7 +1199,7 @@ Transform:
   m_GameObject: {fileID: 2101290617}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0, z: 0}
+  m_LocalPosition: {x: -0.51, y: -0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

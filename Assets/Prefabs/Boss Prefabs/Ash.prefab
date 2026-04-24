@@ -77,7 +77,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649009401034233054}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6910191438371492863
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2a66fb773c643f2899bdd0c0c8d0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
+  bossProgression: 4
   bossName: Ash
   maxHealth: 120
   healthBar: {fileID: 159719163656866947}
@@ -236,7 +237,7 @@ MonoBehaviour:
   - 0.25
   currentPhase: 0
   attackRate: 1
-  currentState: 0
+  currentState: 1
   wanderSpeed: 3
   wanderRadius: 4
   wanderTime: 3
@@ -247,9 +248,18 @@ MonoBehaviour:
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
   tumbleweedPrefab: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
-  stompRadius: 12
+  orbitingTumbleweedPrefab: {fileID: 8745428492163385535, guid: 66f52a1be1b372e45a0fe1f1390e8ba5, type: 3}
+  lowestSpawnPoint: -4.5
+  highestSpawnPoint: 4.5
+  leftBoundary: -10.5
+  rightBoundary: 10.5
+  numOrbitingPhaseOne: 2
+  numOrbitingPhaseTwo: 3
+  numOrbitingPhaseThree: 4
+  orbitRadius: 2
+  stompRadius: 50
   stageCenter: {x: 0, y: 0}
-  stageRadius: 9
+  stageRadius: 6
   fireRadius: 0.6
   basicSeedPrefab: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
   basicSeedArcHeight: 5

@@ -155,6 +155,8 @@ public class DrillGuy : Boss
             new Vector3(UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy),
             UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy));
         GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, landingPos, Quaternion.identity);
+        landingIndicator.GetComponent<SpriteRenderer>()
+                .material.SetFloat("_BirthTime", Time.time);
         Destroy(landingIndicator, dynamite.duration);
         StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, landingPos));
         attackCooldown = dynamite.duration;
@@ -166,6 +168,8 @@ public class DrillGuy : Boss
         foreach(Vector3 pos in holePositions)
         {
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, pos, Quaternion.identity);
+            landingIndicator.GetComponent<SpriteRenderer>()
+                .material.SetFloat("_BirthTime", Time.time);
             Destroy(landingIndicator, dynamite.duration);
             StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, pos));
         }
@@ -435,6 +439,7 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
     public void AnimationOnEnteredGround()
     {
         Vector3 spawnPos = bulletOrigin.position;
+        spawnPos.y -= 0.8f;
         Instantiate(enterHolePrefab, spawnPos, Quaternion.identity);
         holePositions.Add(spawnPos);
         isUnderground = true;
@@ -464,6 +469,7 @@ private IEnumerator throwDynamiteOffTracks(int throwDirY, int throwDirX)
         currentState = State.Exiting;
 
         Vector3 spawnPos = transform.position;
+        spawnPos.y -= 0.8f;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
         Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
         holePositions.Add(spawnPos);

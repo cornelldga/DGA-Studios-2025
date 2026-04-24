@@ -4,16 +4,34 @@
             "dialogueID": "0_start",
             "dialogueText": "Hey, kid! You think you can just waltz in here and challenge us old-timers?",
             "emotion": 0,
-            "nextDialogueID": "1_start"
+            "nextDialogueID": "0_next"
         },
         {
-            "dialogueID": "1_start",
+            "dialogueID": "0_next",
             "dialogueText": "We were here before you and we'll be here long after you're gone.",
             "emotion": 0,
-            "nextDialogueID": "2_start"
+            "nextDialogueID": "0_fight"
         }, {
-            "dialogueID": "2_start",
+            "dialogueID": "0_fight",
             "dialogueText": "Just 'cause I'm old doesn't mean I can't fend off you young up-and-comers.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "You got more spirit than I gave you credit for, kid. Maybe it's time for me to put the drill down.",
+            "emotion": 0,
+            "nextDialogueID": "2_next"
+        },
+        {
+            "dialogueID": "2_next",
+            "dialogueText": "Granny, though, she's tougher than me. Fighting her is a real pain in the cheeks.",
+            "emotion": 0,
+            "nextDialogueID": "2_end"
+        }, {
+            "dialogueID": "2_end",
+            "dialogueText": "I would know. I fought her every day we were married, and I never did win. But maybe you will.",
             "emotion": 0,
             "nextDialogueID": ""
         }

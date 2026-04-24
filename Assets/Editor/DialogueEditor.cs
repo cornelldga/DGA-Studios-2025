@@ -93,7 +93,6 @@ public class DialogueEditor : EditorWindow
         else
             ShowNotification(new GUIContent($"Added {newLine.dialogueID} to {fileName}{kExt}"));
 
-        Debug.Log("Dialogue saved: {assetPath}\n{json}");
     }
 
     /// <summary>

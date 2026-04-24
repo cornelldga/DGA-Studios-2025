@@ -21,15 +21,26 @@ public enum DialogueType
 /// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] Animator dialogueAnim;
+    public static DialogueManager Instance;
+    private System.Action onComplete;
+    [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    private Vector2 defaultNamePos;
+    private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
-    [SerializeField] Image npcImg;
+    [SerializeField] private Image npcImg;
+    private string currentFileName;
+    private bool isCutscene;
+    public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
+
+    [Header("Choice Buttons")]
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
 
     [Header("Settings")]
     [SerializeField] float typingSpeed;
@@ -68,6 +79,23 @@ public class DialogueManager : MonoBehaviour
     {
         choices.SetActive(false);
         gameObject.SetActive(false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        defaultNamePos = rect.anchoredPosition;
+        defaultNameRot = rect.localRotation;
+    }
+
+    /// <summary>
+    /// Listens to advance dialogue via space or enter key. This is incase input actions fails.
+    /// </summary>
+    void Update()
+    {
+        if (!ongoingDialogue) return;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            if (isTyping) CompleteCurrentLine();
+            else DisplayNextLine();
+        }
     }
 
     /// <summary>
@@ -83,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (context.action.WasPressedThisFrame() && ongoingDialogue)
+        if (ongoingDialogue)
         {
             if (isTyping)
             {
@@ -102,19 +130,30 @@ public class DialogueManager : MonoBehaviour
     /// Changes the npcImg sprite to the correct characters sprite if a boss
     /// If an interactable or boss will change scene to what is next
     /// </summary>
-    /// <param name="progress">The progression number of the npc's dialogue</param>
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
-    public void StartDialogue(TextAsset file, int progress, Sprite dialogueBoxSprite,
+    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
         Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
     {
         if (file != null)
         {
+            continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             nameText.text = file.name;
+            isCutscene = file.name.StartsWith("cutscene");
+            currentFileName = isCutscene ? "" : file.name;
+            nameText.text = currentFileName;   
+
+            if (file.name == "cutscene_1")
+            {
+                RectTransform rect = nameText.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(-488f, -110f);
+                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+            }
+
             if (nameText.text=="Mirage & Ace")
             {
                 dialogueText.color = Color.white;
@@ -125,13 +164,12 @@ public class DialogueManager : MonoBehaviour
             ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
-            // Format followed by DialogueEditor.BuildLine()
-            currentDialogueID = progress.ToString() + "_" + "start";
             currentDialogueType = type;
+            SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
-            if (type == DialogueType.Interactive)
+            if (currentDialogueType == DialogueType.Interactive)
             {
                 npcImg.gameObject.SetActive(false);
             }
@@ -151,10 +189,30 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.ToggleLoadoutManager(true);
             } else
             {
-                // Automatic entry/exit for the saloon
+                // Automatic entry/exit for the saloon   
                 GameManager.Instance.LoadScene(scene); 
             }
         }
+    }
+    /// <summary>
+    /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
+    /// play the start with the closest value to the progression integer
+    /// </summary>
+
+    void SetDialogueStart()
+    {
+        int current = PlayerPrefs.GetInt("progression",0);
+        while (current >= 0)
+        {
+            string candidateID = current + "_start";
+            if (currentDialogueData.dialogueLines.Exists(line => line.dialogueID == candidateID))
+            {
+                currentDialogueID = candidateID;
+                return;
+            }
+            current--;
+        }
+        currentDialogueID = "0_start";
     }
 
     /// <summary>
@@ -176,22 +234,41 @@ public class DialogueManager : MonoBehaviour
             }
             return;
         }
+
         if (currentDialogueData.dialogueLines.Count > 0)
         {
             foreach (DialogueLine line in currentDialogueData.dialogueLines)
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.NPC)
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+
+                    nameText.text = speakerName;
+
+                    bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
+                    bool isDuke = (speakerName == "Duke");
+
+                    if (isCutscene)
                     {
-                        npcImg.sprite = currentEmotions[(DialogueEmotion)line.emotion];
+                        // Hide if not Duke during cutscenes
+                        npcImg.gameObject.SetActive(isDuke);
                     }
+                    else
+                    {
+                        npcImg.gameObject.SetActive(hasEmotion);
+                    }
+
+                    if (npcImg.gameObject.activeSelf)
+                    {
+                        npcImg.sprite = currentEmotions.ContainsKey((DialogueEmotion)line.emotion) ? currentEmotions[(DialogueEmotion)line.emotion] : currentEmotions[DialogueEmotion.Neutral];
+                    }
+
                     StopAllCoroutines();
                     StartCoroutine(TypeSentence(line));
-                    return;
+                    return; 
                 }
             }
-            throw new System.Exception("No dialogue lines found");
+            
         }
     }
 
@@ -238,7 +315,11 @@ public class DialogueManager : MonoBehaviour
     {
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
+        RectTransform rect = nameText.GetComponent<RectTransform>();
+        rect.anchoredPosition = defaultNamePos;
+        rect.localRotation = defaultNameRot;
     }
+
     /// <summary>
     /// Animation trigger that closes the dialogue completely
     /// </summary>

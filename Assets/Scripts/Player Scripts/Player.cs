@@ -90,7 +90,14 @@ public class Player : MonoBehaviour, IDamageable
     Mixer selectedMixer;
     Mixer backupMixer;
 
+    float gunPitchManual;
+    float startGunPitch = 0.8f;
+    int currentShots;
+    bool lastFrameWasFiring;
+
+    [Header("Progressions")]
     public int progression;
+    public int cutsceneProgression;
 
     void Start()
     {
@@ -122,9 +129,12 @@ public class Player : MonoBehaviour, IDamageable
         playerHealthAnimator.SetFloat("Health", health);
         playerHealthText.SetText(health.ToString());
 
+        currentShots = 0;
+
         isAlive = true;
         knockedBack = false;
         GameManager.Instance.player = this;
+        GameManager.Instance.CheckForCutscenes();
     }
 
     void Update()
@@ -248,6 +258,27 @@ public class Player : MonoBehaviour, IDamageable
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
+
+        if (Input.GetMouseButton(0) && !GameManager.Instance.PointerOnPause())
+        {
+            lastFrameWasFiring = true;
+        }
+        else
+        {
+            if (lastFrameWasFiring && equippedBases[baseIndex] == BaseType.Wine && currentShots > 1)
+            {
+                AudioManager.Instance.PlaySFX(SFXKey.WINEEND, false, gunPitchManual);
+                // gunPitchManual = startGunPitch;
+                currentShots = 0;
+            }
+            if (lastFrameWasFiring && equippedBases[baseIndex] == BaseType.Beer && currentShots > 1)
+            {
+                AudioManager.Instance.PlaySFX(SFXKey.BEEREND, false, gunPitchManual);
+                // gunPitchManual = startGunPitch;
+                currentShots = 0;
+            }
+            lastFrameWasFiring = false;
+        }
     }
     /// <summary>
     /// Fires the base towards the direction of the mouse with applied Mixer effects
@@ -272,7 +303,17 @@ public class Player : MonoBehaviour, IDamageable
                 AudioManager.Instance.PlaySFX(SFXKey.GIN, true);
                 break;
             case BaseType.Beer:
-                AudioManager.Instance.PlaySFX(SFXKey.BEER, true);
+                currentShots++;
+                gunPitchManual = startGunPitch + Mathf.Log(1 + currentShots) * 0.18f; // SOWWY MAGIC NUMBER
+                AudioManager.Instance.PlaySFX(SFXKey.BEERIN, false, gunPitchManual);
+                break;
+            case BaseType.Wine:
+                currentShots++;
+                gunPitchManual = startGunPitch + Mathf.Log(1 + currentShots) * 0.18f; // SOWWY MAGIC NUMBER
+                AudioManager.Instance.PlaySFX(SFXKey.WINEIN, false, gunPitchManual);
+                break;
+            case BaseType.Whiskey:
+                AudioManager.Instance.PlaySFX(SFXKey.GIN, true);
                 break;
         }
         
@@ -456,24 +497,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         var main = mixerEffect.main;
         main.startColor = mixerColor;
-    }
-
-    /// <summary>
-    /// Save player data
-    /// </summary>
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-
-
-    /// <summary>
-    /// Load player data
-    /// </summary>
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
     }
 
 }

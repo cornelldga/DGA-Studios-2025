@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using System.Runtime.CompilerServices;
 
 /// <summary>
 /// State machine controller for our Aura-based boss
@@ -51,8 +47,22 @@ public class Ash : Boss
     [Header("Tumbleweed Summon Timing")]
     [SerializeField] float tumbleweedCooldownMin = 10f;
     [SerializeField] float tumbleweedCooldownMax = 15f;
+    [SerializeField] private int numTumbleweeds = 2; // will eventually be based on what phase it is
     [Header("Tumbleweed Spawn")]
     [SerializeField] GameObject tumbleweedPrefab;
+    [SerializeField] GameObject orbitingTumbleweedPrefab;
+    [Header("Tumbleweed Spawn Boundaries")]
+    [SerializeField] float lowestSpawnPoint;
+    [SerializeField] float highestSpawnPoint;
+    [SerializeField] float leftBoundary;
+    [SerializeField] float rightBoundary;
+    [Header("Orbiting Tumbleweed Phases")]
+    [SerializeField] int numOrbitingPhaseOne =2;
+    [SerializeField] int numOrbitingPhaseTwo=3;
+    [SerializeField] int numOrbitingPhaseThree=4;
+    [SerializeField] private float orbitRadius = 1f;
+
+    private GameObject[] orbitingTumbleweeds = new GameObject[5]; // size should be maximum spawned in phase 3
  
     [Space(5)]
     [Header("Stomp Settings")]
@@ -95,6 +105,8 @@ public class Ash : Boss
     private Vector2 wanderTarget;
     private Animator animator;
     private SpriteRenderer sprite;
+    private int scatterCount;
+    private bool[] scatterTracking;
 
     [HideInInspector]
     public bool[] deployedSeeds;
@@ -115,6 +127,8 @@ public class Ash : Boss
         SetNewWanderTarget();
         tumbleweedCooldownTimer = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
         deployedSeeds = new bool[8];
+        scatterCount = 0;
+        scatterTracking = new bool[4];
     }
 
     /// <summary>
@@ -325,6 +339,10 @@ public class Ash : Boss
         currentState = State.TumbleweedSummon;
         stateTimer = tumbleweedTime;
 
+        // replenish orbiting tumbleweeds
+        StartCoroutine(SummonOrbitingTumbleweeds());
+
+
         float cooldownTime = UnityEngine.Random.Range(tumbleweedCooldownMin, tumbleweedCooldownMax);
 
         if (GetHealthPercent() <= 0.2f)
@@ -365,22 +383,29 @@ public class Ash : Boss
     private void ChooseNextAttack()
     {
         // check for desperation
-        if (currentPhase == 2 && currentState != State.Desperation)
+        /*if (currentPhase == 2 && currentState != State.Desperation)
         {
             TransitionToDesperation();
             return;
-        }
+        } */
+
+        // check for all tumbleweeds destroyed
+
+        
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
 
         if (attackChoice < 4) 
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null)
+            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase + 1)
             {
                 TransitionToMolotovAttack();
+                scatterCount = 0;
+                scatterTracking = new bool[4];
             }
             else
             {
+                scatterCount++;
                 TransitionToSeedScatter();
             }
             
@@ -434,18 +459,24 @@ public class Ash : Boss
         Array values = Enum.GetValues(typeof(SeedAttack));
         //UnityEngine.Random
         System.Random random = new System.Random();
-        switch(currentPhase)
+        int i = 0;
+        while (i == 0 || scatterTracking[(int) currentSeedPattern])
         {
-            case 0:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
-                break;
-            case 1:
-                currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
-                break;
-            case 2:
-                currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 2) + random.Next(2)); //Last 2
-                break;
+            switch (currentPhase)
+            {
+                case 0:
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(2)); // First 2
+                    break;
+                case 1:
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
+                    break;
+                case 2:
+                    currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 3) + random.Next(3)); //Last 2
+                    break;
+            }
+            i++;
         }
+        scatterTracking[ (int) currentSeedPattern] = true;
         //currentSeedPattern = (SeedAttack)values.GetValue(random.Next(values.Length));
         Vector2 point1;
         Vector2 point2;
@@ -577,7 +608,7 @@ public class Ash : Boss
 
             deployedSeeds[r] = true;
             seedScript.locationID = r;
-            seedScript.target = vec.normalized * (stageRadius / 2);
+            seedScript.target = vec.normalized * (3 * stageRadius / 4);
         }
         else { TransitionToSeedScatter(); }
         yield return new WaitForSeconds(scatterTime);
@@ -591,33 +622,60 @@ public class Ash : Boss
         yield return new WaitForSeconds(molotovTime);
     }
 
+    // Summons 'numTumbleweeds' amount of tumbleweeds on either side of the field.
     private IEnumerator SummonTumbleweeds()
     {
-        // Placeholder
-        // bulletpattern coroutine
-        // 5.5 , -5.5 (10/12) * pos
-        // get health percent , spawn however many depending on the health percent
-        // direction = point dir
-
-        //
-        for (int i = 0; i < UnityEngine.Random.Range(5, 10); i++) {
-            Vector3 tumblePosition = new Vector3(0, 0, 0);
+        
+        for (int i = 0; i < numTumbleweeds; i++) {
+            Vector3 tumblePosition = new(0, 0, 0);
             if (i % 2 == 0) { // left
-                tumblePosition = new Vector3((float)-10.5, UnityEngine.Random.Range((float)-5.0,(float)4.0), 0);
+                tumblePosition = new Vector3(leftBoundary, UnityEngine.Random.Range(lowestSpawnPoint,highestSpawnPoint), 0);
                 Instantiate(tumbleweedPrefab, tumblePosition, Quaternion.identity);
             }
             else // right
             {
-                tumblePosition = new Vector3((float)10.5,UnityEngine.Random.Range((float) - 5.0, (float)4.0) , 0);
-                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0));
-            }
-
-               
+                tumblePosition = new Vector3(rightBoundary,UnityEngine.Random.Range(lowestSpawnPoint, highestSpawnPoint) , 0);
+                Instantiate(tumbleweedPrefab, tumblePosition, new Quaternion(0,180,0,0)); // would go in reverse direction
+            }               
         }
 
-        
-        
-         
+        yield return new WaitForSeconds(tumbleweedTime);
+    }
+
+
+    // Summons orbiting tumbleweeds depending on phase
+    private IEnumerator SummonOrbitingTumbleweeds() {
+        for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
+            if (orbitingTumbleweeds[i] is null)
+            {
+                
+                // set it to be an orbiting tumbleweed
+                if (currentPhase == 0 && i < numOrbitingPhaseOne)
+                {
+                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab,spawnPos,Quaternion.identity);
+                    orbitingTumbleweeds[i].transform.parent = this.transform;
+                }
+                else if (currentPhase == 1 && i < numOrbitingPhaseTwo)
+                {
+
+                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
+                    orbitingTumbleweeds[i].transform.parent = this.transform;
+                }  
+                else if (currentPhase == 2 && i < numOrbitingPhaseThree)
+                {
+
+                    float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
+                    Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
+                    orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
+                    orbitingTumbleweeds[i].transform.parent = this.transform;
+                }
+                
+            }
+        }
         yield return new WaitForSeconds(tumbleweedTime);
     }
 

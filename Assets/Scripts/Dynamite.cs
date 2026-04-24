@@ -39,6 +39,8 @@ public class Dynamite : Projectile
 
         //spawns explosion
         Instantiate(explosionPrefab, dynamite.transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX(SFXKey.DYNAMITE, true);
+        AudioManager.Instance.PlaySFX(SFXKey.BOOM, true);
         Destroy(dynamite);
     }
 }

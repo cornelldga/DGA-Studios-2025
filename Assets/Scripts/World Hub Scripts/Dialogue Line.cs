@@ -23,6 +23,7 @@ public class DialogueLine
     public string dialogueText;
     public DialogueEmotion emotion;
     public string nextDialogueID;
+    public string speaker;
 }
 
 [System.Serializable]
