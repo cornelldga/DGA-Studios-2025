@@ -8,6 +8,7 @@ using Unity.Collections;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 public class DrillGuy : Boss
 {
@@ -79,16 +80,15 @@ public class DrillGuy : Boss
     Vector3 movePosition;
     [SerializeField] GameObject trackTop;
     [SerializeField] GameObject trackBot;
-
     [SerializeField] float minecartSpeed;
     [SerializeField] Dynamite minecartDynamite;
-    [SerializeField] float minecartDynamiteCooldown;
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
     [SerializeField] float minecartInnacuracy = 1.0f;
     private bool minecartRoutineDone = false;
     private bool minecartRoutineStarted = false;
-
+    private int throwDirY = 1;
+    private Vector3 posBeforeDriving;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -176,7 +176,7 @@ public class DrillGuy : Boss
     // current spawns onto track (no walking. makes it fast which is cool)
     private IEnumerator MinecartAttackRoutine()
     {
-        Vector3 last_position = this.transform.position;
+        posBeforeDriving = this.transform.position;
         GameObject[] tracks = { trackTop, trackBot };
         for (int i = 0; i < minecartCycles; i++)
         {
@@ -185,12 +185,10 @@ public class DrillGuy : Boss
                 yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
         minecartRoutineDone = true;
-        this.transform.position = last_position;
     }
 
     // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
     // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
-    // While traveling on the tracks, he throws dynamites.
     private IEnumerator MoveAlongtracks(GameObject[] tracks)
     {
         for (int i = 0; i < 2; i++)
@@ -208,33 +206,35 @@ public class DrillGuy : Boss
                 Vector3 direction = moveVector.normalized;
                 rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
 
-                // throw dynamites (phase 0: y towards center. phase 1: y both above and below tracks)
-                int throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
-                Coroutine dynamiteRoutine1 = StartCoroutine(throwDynamiteOffTracks(throwDirY));
-                Coroutine dynamiteRoutine2 = null;
-                if (currentPhase == 1) dynamiteRoutine2 = StartCoroutine(throwDynamiteOffTracks(-throwDirY));
+                // dynamite throw dir for phase 0, where tom throw towards center Y
+                throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
                 
                 // keep moving until end of tracks
                 while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
                 rb.linearVelocity = Vector2.zero;
 
-                //time b/w switching tracks
-                StopCoroutine(dynamiteRoutine1);
-                if (dynamiteRoutine2 != null) StopCoroutine(dynamiteRoutine2);
-
                 if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
             }
     }
 
-    // Dynamite throw during minecart attack. (specify  direction of throw)
-    private IEnumerator throwDynamiteOffTracks(int throwDirY)
+    // Dynamite throw during minecart attack.
+    // Phase 0: towards middle y
+    // Phase 1: above, on, and below tracks
+    public void ThrowDynamiteOffTracks()
     {
-            while (true)
-            {
-                Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
-                StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
-                yield return new WaitForSeconds(minecartDynamiteCooldown);
-            }   
+        if (minecartRoutineDone) return;
+        
+        if (currentPhase == 0)
+        {
+            Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
+            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+        } 
+        else if (currentPhase == 1) {
+            Debug.Log("here");
+            Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
+            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+            StartCoroutine(minecartDynamite.ThrowRoutine(bulletOrigin.position, target));
+        }
     }
 
     /// <summary>
@@ -278,6 +278,7 @@ public class DrillGuy : Boss
     {
         if (minecartRoutineDone)
         {
+            this.transform.position = posBeforeDriving;
             TransitionToWalking();
         }
        else if (!minecartRoutineStarted){
