@@ -44,7 +44,6 @@ public class CutsceneManager : MonoBehaviour
     // Runtime state
     private bool isActive;
     private bool isTyping;
-    private bool waitingToAdvance;
 
     // Panel tracking
     private int currentPanelIndex;
@@ -173,7 +172,6 @@ public class CutsceneManager : MonoBehaviour
 
         currentPanelIndex = 0;
         currentLineIndex = 0;
-        waitingToAdvance = false;
         lastInputTime = -999f;
 
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
@@ -218,16 +216,12 @@ public class CutsceneManager : MonoBehaviour
 
     IEnumerator AutoAdvance()
     {
-        waitingToAdvance = true;
-
         float delay = (currentPanelIndex == backstoryLines.Length - 1 &&
                        currentLineIndex == backstoryLines[currentPanelIndex].Length - 1)
             ? finalPanelDelay
             : autoAdvanceDelay;
 
         yield return new WaitForSeconds(delay);
-
-        waitingToAdvance = false;
 
         if (!isActive) yield break;
 
@@ -261,8 +255,6 @@ public class CutsceneManager : MonoBehaviour
     void AdvanceImmediately()
     {
         if (advanceCoroutine != null) StopCoroutine(advanceCoroutine);
-        waitingToAdvance = false;
-
         if (currentLineIndex < backstoryLines[currentPanelIndex].Length - 1)
         {
             currentLineIndex++;
@@ -306,7 +298,6 @@ public class CutsceneManager : MonoBehaviour
     {
         if (!isActive) return;
         isActive = false;
-        waitingToAdvance = false;
         stateName = null;
 
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);

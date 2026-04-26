@@ -10,20 +10,11 @@ public class GrannyPhase2 : Boss
         Idle, Lazer, MachineGun, Punch
     }
     private State currentState;
-
-    [Header("Movement Settings")]
-    //Base speed when charging (regular)
-    [SerializeField] float baseSpeed = 5f;
-
     private Vector2 targetPosition;
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
     private float idleTime = 1f;
-    //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
-    //Length of time to pull out contracts.
-    private float outTime = 1f;
 
     private float currentSpeed;
     //Time until we should change states.

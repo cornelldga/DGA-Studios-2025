@@ -22,7 +22,6 @@ public class Smoker : MonoBehaviour
     [Tooltip("The player object layer")]
     [SerializeField] LayerMask playerMask;
 
-    private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
     private Animator animator;
@@ -76,9 +75,6 @@ public class Smoker : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
-        collidedWithPlayer = false;
-
-
 
         // Make rigidbody kinematic so player cannot push it
         if (rb != null)

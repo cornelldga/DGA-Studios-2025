@@ -97,7 +97,6 @@ public class Ash : Boss
     [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
-    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
