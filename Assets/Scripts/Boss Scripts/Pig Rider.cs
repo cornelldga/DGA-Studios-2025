@@ -12,7 +12,7 @@ public class PigRider : Boss
     {
         Charging, Targeting, Stunned, Marking, Bouncing
     }
-    public State currentState;
+    private State currentState;
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)

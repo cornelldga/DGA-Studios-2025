@@ -23,7 +23,6 @@ public class TumbleweedOrbit : Bullet
     private void FixedUpdate()
 
     {
-        Debug.Log(ash.transform.position);
         transform.RotateAround(ash.transform.position, Vector3.back, orbitingSpeed);
         transform.Rotate(Vector3.back * 360f * Time.deltaTime);
         if (isOnFire) Destroy(gameObject, fireDuration);
@@ -46,7 +45,6 @@ public class TumbleweedOrbit : Bullet
 
     public override void OnProjectileHit(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.GetType());
         if (collision.CompareTag("Bush"))
         {
             Bush bush = collision.gameObject.GetComponent<Bush>();

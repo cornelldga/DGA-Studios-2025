@@ -35,7 +35,6 @@ public class Tumbleweed : Bullet
     //</summary>
     public override void OnProjectileHit(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.GetType());
         if (collision.CompareTag("Bush"))
         {
             Bush bush = collision.gameObject.GetComponent<Bush>();
