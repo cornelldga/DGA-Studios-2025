@@ -36,6 +36,8 @@ public class SmokePellet : MonoBehaviour
     //If the whip pushed this cloud away
     private bool whipped = false;
     
+    private GameObject smokeTint;
+    
 
     /// <summary>
     /// On start, the colors of each cloud piece are stored, as well as their scales. Dambing is set to zero to allow for complete velocity.
@@ -45,6 +47,7 @@ public class SmokePellet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        smokeTint = GameObject.Find("tintParent").transform.GetChild(0).gameObject;
 
         // Select a random sprite from the array
         if (smokeSprites.Length > 0)
@@ -133,5 +136,23 @@ public class SmokePellet : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(angle * pushForce);
         }
+    }
+
+        /**
+    If collides with the player, tint the screen
+    */
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            smokeTint.SetActive(true);
+    }
+
+    /// <summary>
+    /// If the player stops interacting with the smoke, turn screen tint off.
+    /// </summary>
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+            smokeTint.SetActive(false);
     }
 }
