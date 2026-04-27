@@ -126,6 +126,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
             PlayerPrefs.GetInt("progression", 0), bossProgression
         ));
         animator.SetTrigger("Defeat");
+        defeated = true;
         
     }
     /// <summary>

@@ -54,8 +54,6 @@ public class DrillGuy : Boss
 
     [Tooltip("The range in which the driller can dig from a random point in world center")]
     [SerializeField] float digRange;
-    [Tooltip("Driller Animation Controller")]
-    private Animator animator;
 
     //Time until we should change states.
     [SerializeField] Dynamite dynamite;
@@ -91,7 +89,6 @@ public class DrillGuy : Boss
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Walking;
         stateTimer = walkingTime;
-        animator = GetComponent<Animator>();
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
     }

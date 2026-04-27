@@ -228,6 +228,8 @@ public class DialogueManager : MonoBehaviour
             }
             else if(currentDialogueType == DialogueType.SceneChange)
             {
+                ongoingDialogue = false;
+                gameObject.SetActive(false);
                 GameManager.Instance.LoadScene(sceneName);
             }
             else
@@ -365,8 +367,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void YesChoice()
     {
-        ongoingDialogue = false;
         choices.SetActive(false);
+        ongoingDialogue = false;
         gameObject.SetActive(false);
         GameManager.Instance.LoadScene(sceneName);
     }
