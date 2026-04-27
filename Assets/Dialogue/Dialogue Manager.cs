@@ -27,16 +27,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] Transform defaultNameTextTransform;
-    [SerializeField] Transform cutsceneNameTextTransform;
-    private Vector2 defaultNamePos;
-    private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
     private string currentFileName;
-    private bool isCutscene;
     public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
 
     [Header("Choice Buttons")]
@@ -81,9 +76,6 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         choices.SetActive(false);
-        RectTransform rect = nameText.GetComponent<RectTransform>();
-        defaultNamePos = rect.anchoredPosition;
-        defaultNameRot = rect.localRotation;
     }
 
     /// <summary>
@@ -106,6 +98,17 @@ public class DialogueManager : MonoBehaviour
     public bool OngoingDialogue()
     {
         return ongoingDialogue;
+    }
+
+    /// <summary>
+    /// Lets CutsceneManager hide/show the normal dialogue name text.
+    /// </summary>
+    public void SetNameTextVisible(bool visible)
+    {
+        if (nameText != null)
+        {
+            nameText.gameObject.SetActive(visible);
+        }
     }
 
     /// <summary>
@@ -146,19 +149,10 @@ public class DialogueManager : MonoBehaviour
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
-            nameText.text = file.name;
-            isCutscene = file.name.StartsWith("cutscene");
-            currentFileName = isCutscene ? "" : file.name;
-            nameText.text = currentFileName;   
 
-            if (file.name == "cutscene_1")
-            {
-                nameText.transform.SetParent(cutsceneNameTextTransform, false);
-            }
-            else
-            {
-                nameText.transform.SetParent(defaultNameTextTransform, false);
-            }
+            currentFileName = file.name;
+            nameText.text = currentFileName;
+
             dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
@@ -196,7 +190,6 @@ public class DialogueManager : MonoBehaviour
     /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
     /// play the start with the closest value to the progression integer
     /// </summary>
-
     void SetDialogueStart()
     {
         int current = PlayerPrefs.GetInt("progression",0);
@@ -242,14 +235,19 @@ public class DialogueManager : MonoBehaviour
                     string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
 
                     nameText.text = speakerName;
+                    if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
+                    {
+                        CutsceneManager.Instance.SetCutsceneName(speakerName);
+                    }
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
-                    bool isDuke = (speakerName == "Duke");
+                    bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
+                    bool isDuke = speakerName == "Duke";
 
-                    if (isCutscene)
+                    if (isCutsceneDialogue)
                     {
                         // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke);
+                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
                     }
                     else
                     {
@@ -313,9 +311,6 @@ public class DialogueManager : MonoBehaviour
     {
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
-        RectTransform rect = nameText.GetComponent<RectTransform>();
-        rect.anchoredPosition = defaultNamePos;
-        rect.localRotation = defaultNameRot;
     }
 
     /// <summary>

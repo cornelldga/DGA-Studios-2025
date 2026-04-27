@@ -1571,7 +1571,9 @@ MonoBehaviour:
   cutscene_1: {fileID: 4900000, guid: 95b07264a152940dc894db0711feda68, type: 3}
   dialogueBoxSprite: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
   dukeSprite: {fileID: -766959122720910030, guid: b3c3b3e532fae4978bd30bd1e2c3992b, type: 3}
+  cutsceneNameText: {fileID: 4567377341495177794}
   dialogueText: {fileID: 5430162280122184799}
+  backstoryJson: {fileID: 4900000, guid: 67e70a5e45ce74ad9adabbdbc012bd35, type: 3}
 --- !u!222 &8915559081453419011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5164,11 +5166,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8279258713344379829, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -130
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+--- !u!114 &4567377341495177794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2375667028983024865, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}
+  m_PrefabInstance: {fileID: 2277279815849016995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &8649692416371159320 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7463419516922990523, guid: 85189ce90c34b4afeb5d44920d976c48, type: 3}

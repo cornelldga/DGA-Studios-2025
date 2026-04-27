@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfaca095e88b40dfbf4145e25126707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drill_Guy
-  bossProgression: 2
+  bossProgression: 3
   bossName: Tom, Manic Miner
   maxHealth: 70
   healthBar: {fileID: 159719163656866947}
@@ -187,6 +187,7 @@ MonoBehaviour:
   - 0.8
   - 0.3
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   currentState: 0
   initialThrowTime: 2
@@ -206,6 +207,14 @@ MonoBehaviour:
   throw1Innacuracy: 1.25
   throw2Innacuracy: 2
   phase1ThrowChance: 0.8
+  distanceToThrowOnMinecart: 5
+  trackTop: {fileID: 0}
+  trackBot: {fileID: 0}
+  minecartSpeed: 0
+  minecartCycles: 1
+  transitionTimeBetweentracks: 0.3
+  minecartInnacuracy: 1
+  wall: {fileID: 0}
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7

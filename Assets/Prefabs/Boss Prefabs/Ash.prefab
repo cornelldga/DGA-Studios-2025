@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2a66fb773c643f2899bdd0c0c8d0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
-  bossProgression: 4
+  bossProgression: 5
   bossName: Ash
   maxHealth: 120
   healthBar: {fileID: 159719163656866947}
@@ -236,6 +236,7 @@ MonoBehaviour:
   - 0.5
   - 0.25
   currentPhase: 0
+  isInvulnerable: 0
   attackRate: 1
   currentState: 1
   wanderSpeed: 3
@@ -247,6 +248,7 @@ MonoBehaviour:
   stompTime: 1.5
   tumbleweedCooldownMin: 10
   tumbleweedCooldownMax: 15
+  numTumbleweeds: 2
   tumbleweedPrefab: {fileID: 230356454635019782, guid: 55b5f7bfefbc33a4c91676c856a70a0e, type: 3}
   orbitingTumbleweedPrefab: {fileID: 8745428492163385535, guid: 66f52a1be1b372e45a0fe1f1390e8ba5, type: 3}
   lowestSpawnPoint: -4.5
@@ -273,7 +275,6 @@ MonoBehaviour:
   seedRows: 4
   molotov: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
   bushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
-  randomPercentageToThrowMolotov: 0.1
   deployedSeeds: 
 --- !u!1001 &2116001527165509890
 PrefabInstance:
