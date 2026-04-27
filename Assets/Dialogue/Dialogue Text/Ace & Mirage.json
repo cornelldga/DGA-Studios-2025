@@ -1,19 +1,27 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "1_start",
-            "dialogueText": "Well, if it isn't the new bar owner. I'm Mirage the Marvelous, and this is my assistant, Ace.",
+            "dialogueID": "Do you mind? We're having a private conversation.",
+            "dialogueText": "",
             "emotion": 1,
-            "nextDialogueID": "1_next"
+            "nextDialogueID": ""
+        },
+
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "Well, so you're the new bar owner. I'm Mirage the Marvelous, and this is my assistant, Ace.",
+            "emotion": 1,
+            "nextDialogueID": "3_next"
         },
         {
-            "dialogueID": "1_next",
+            "dialogueID": "3_next",
             "dialogueText": "I heard you're looking for entertainers, but you can't afford us. She pays us in gold.",
             "emotion": 0,
-            "nextDialogueID": "1_fight"
+            "nextDialogueID": "3_fight"
         },
         {
-            "dialogueID": "1_fight",
+            "dialogueID": "3_fight",
             "dialogueText": "The only magic trick you'll be seeing is us making you disappear from this town. Shall we?",
             "emotion": 0,
             "nextDialogueID": ""
