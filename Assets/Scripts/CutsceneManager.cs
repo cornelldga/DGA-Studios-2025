@@ -140,7 +140,7 @@ public class CutsceneManager : MonoBehaviour
         };
         GameManager.Instance.GetDialogueManager.StartDialogue(cutscene_1, dialogueBoxSprite,
             new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
-            "Tutorial", DialogueType.NPC);
+            null, DialogueType.NPC, "Tutorial");
         StartCoroutine(WaitForDialogueEnd());
     }
 
