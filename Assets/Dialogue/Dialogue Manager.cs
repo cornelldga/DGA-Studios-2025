@@ -39,7 +39,6 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
     private string currentFileName;
-    private bool isCutscene;
     public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
 
     [Header("Choice Buttons")]
@@ -109,6 +108,17 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Lets CutsceneManager hide/show the normal dialogue name text.
+    /// </summary>
+    public void SetNameTextVisible(bool visible)
+    {
+        if (nameText != null)
+        {
+            nameText.gameObject.SetActive(visible);
+        }
+    }
+
+    /// <summary>
     /// Finishes the dialogue line if not finished yet, goes to next line otherwise.
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
@@ -147,25 +157,10 @@ public class DialogueManager : MonoBehaviour
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
-            if (name == null)
-            {
-                nameText.text = file.name;
-            }
-            else
-            {
-                nameText.text = name;
-            }
-            isCutscene = file.name.StartsWith("cutscene");
-            currentFileName = isCutscene ? "" : file.name; 
 
-            if (file.name == "cutscene_1")
-            {
-                nameText.transform.SetParent(cutsceneNameTextTransform, false);
-            }
-            else
-            {
-                nameText.transform.SetParent(defaultNameTextTransform, false);
-            }
+            currentFileName = file.name;
+            nameText.text = currentFileName;
+
             dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
@@ -203,7 +198,6 @@ public class DialogueManager : MonoBehaviour
     /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
     /// play the start with the closest value to the progression integer
     /// </summary>
-
     void SetDialogueStart()
     {
         int current = PlayerPrefs.GetInt("progression",0);
@@ -255,14 +249,19 @@ public class DialogueManager : MonoBehaviour
                     string speakerName = string.IsNullOrEmpty(line.speaker) ? nameText.text : line.speaker;
 
                     nameText.text = speakerName;
+                    if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
+                    {
+                        CutsceneManager.Instance.SetCutsceneName(speakerName);
+                    }
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
-                    bool isDuke = (speakerName == "Duke");
+                    bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
+                    bool isDuke = speakerName == "Duke";
 
-                    if (isCutscene)
+                    if (isCutsceneDialogue)
                     {
                         // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke);
+                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
                     }
                     else
                     {
