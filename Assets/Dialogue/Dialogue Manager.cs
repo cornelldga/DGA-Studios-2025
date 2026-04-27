@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] Transform defaultNameTextTransform;
+    [SerializeField] Transform cutsceneNameTextTransform;
     private Vector2 defaultNamePos;
     private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button noButton;
 
     [Header("Settings")]
+    [SerializeField] Color defaultDialogueTextColor;
     [SerializeField] float typingSpeed;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
@@ -58,6 +61,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TMP_Text noButtonText;
     [SerializeField] string bossYesText;
     [SerializeField] string bossNoText;
+
 
 
     [Header("Input Controls")]
@@ -78,7 +82,6 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         choices.SetActive(false);
-        gameObject.SetActive(false);
         RectTransform rect = nameText.GetComponent<RectTransform>();
         defaultNamePos = rect.anchoredPosition;
         defaultNameRot = rect.localRotation;
@@ -135,13 +138,15 @@ public class DialogueManager : MonoBehaviour
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
+    /// <param name="textColor">The dialogue text color. Chooses default color if no color is chosen</param>
     public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type, Color? textColor = null)
     {
         if (file != null)
         {
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
+            dialogueAnim.SetBool("isOpen", true);
             nameText.text = file.name;
             isCutscene = file.name.StartsWith("cutscene");
             currentFileName = isCutscene ? "" : file.name;
@@ -149,20 +154,14 @@ public class DialogueManager : MonoBehaviour
 
             if (file.name == "cutscene_1")
             {
-                RectTransform rect = nameText.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(-488f, -110f);
-                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+                nameText.transform.SetParent(cutsceneNameTextTransform, false);
             }
-
-            if (nameText.text=="Mirage & Ace")
+            else
             {
-                dialogueText.color = Color.white;
-            } else
-            {
-                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
+                nameText.transform.SetParent(defaultNameTextTransform, false);
             }
+            dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
-            dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
             SetDialogueStart();

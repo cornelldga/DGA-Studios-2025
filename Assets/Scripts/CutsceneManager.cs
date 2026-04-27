@@ -307,9 +307,10 @@ public class CutsceneManager : MonoBehaviour
         if (introOverlay != null && introOverlay.activeSelf) introOverlay.SetActive(false);
         if (cutsceneAnimator != null && cutsceneAnimator.gameObject.activeSelf) cutsceneAnimator.gameObject.SetActive(false);
 
-        DialogueManager dialogueManager = GameManager.Instance?.GetDialogueManager;
-        if (dialogueManager != null && dialogueManager.OngoingDialogue()) 
-            dialogueManager.EndDialogue();
+        if (GameManager.Instance.GetDialogueManager.gameObject.activeSelf == true)
+        {
+            GameManager.Instance?.GetDialogueManager.EndDialogue();
+        }
 
         if (GameManager.Instance != null) GameManager.Instance.FreezePlayer(false); 
         skipButton.SetActive(false);
