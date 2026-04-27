@@ -49,8 +49,6 @@ public class Granny : Boss
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
     [SerializeField] private float returnTime = 4f;
-    [Tooltip("Distance threshold to consider pig has arrived at starting point")]
-    [SerializeField] private float arrivalThreshold = 0.1f;
 
     //Time until we should change states.
     private float stateTimer;
