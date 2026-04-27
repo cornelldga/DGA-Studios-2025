@@ -88,12 +88,9 @@ public class Drover : Boss
     private float currentSpeed;
     //Time until we should change states.
     private float stateTimer;
-    private Rigidbody2D rb;
     // Marking logic
     private bool isMarked;
     private float markTimer;
-
-    private Animator animator;
     private SpriteRenderer sprite;
 
     /// <summary>
@@ -102,9 +99,7 @@ public class Drover : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.Targeting;
         stateTimer = targetingTime;

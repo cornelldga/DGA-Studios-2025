@@ -196,6 +196,13 @@ MonoBehaviour:
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
+  defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
+  dialogueBoxSprite: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
+  neutralSprite: {fileID: 21300000, guid: 28fa78c253999124f8c839024db2cdd2, type: 3}
+  happySprite: {fileID: 21300000, guid: 28fa78c253999124f8c839024db2cdd2, type: 3}
+  sadSprite: {fileID: 21300000, guid: 28fa78c253999124f8c839024db2cdd2, type: 3}
+  customTextColor: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   currentStage: 0
   animator: {fileID: 458241386248563458}
   secondAttackRate: 1.3
