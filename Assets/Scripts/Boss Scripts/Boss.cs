@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
@@ -9,6 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Boss : MonoBehaviour, IDamageable
 {
+    [SerializeField] protected Animator animator;
     [Tooltip("The progression value for defeating this boss")]
     [SerializeField] int bossProgression;
     [Tooltip("What the boss health bar name is set to")]
@@ -16,7 +19,8 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] protected float maxHealth;
     protected float health;
     [SerializeField] Image healthBar;
-    [SerializeField] protected Animator healthBarAnimator;
+    protected Animator healthBarAnimator;
+    protected Rigidbody2D rb;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 
@@ -34,14 +38,36 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [Tooltip("The speed of the attack cooldown")]
     [SerializeField] protected float attackRate = 1;
 
+    [Header("Defeat Dialogue")]
+    [SerializeField] private TextAsset defeatDialogue;
+    [SerializeField] private Sprite dialogueBoxSprite;
+    private Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
+    [SerializeField] private Sprite neutralSprite;
+    [SerializeField] private Sprite happySprite;
+    [SerializeField] private Sprite sadSprite;
+    [SerializeField] bool customTextColor;
+    [SerializeField] Color textColor;
+
+    bool defeated;
+
     public virtual void Start()
     {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         bossNameText.text = bossName;
         health = maxHealth;
+        emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
+        emotionDictionary[DialogueEmotion.Happy] = happySprite;
+        emotionDictionary[DialogueEmotion.Sad] = sadSprite;
     }
 
     public virtual void Update()
     {
+        if (defeated)
+        {
+            return;
+        }
+
         attackCooldown -= Time.deltaTime * attackRate;
         if (!isAttacking && attackCooldown <= 0)
         {
@@ -83,10 +109,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         if (health <= 0)
         {
             healthBar.fillAmount = 0;
-            PlayerPrefs.SetInt("progression", Mathf.Max(
-                PlayerPrefs.GetInt("progression",0), bossProgression
-            ));
-            GameManager.Instance.LoadScene("World Hub");
+            Defeat();
         }
         else
         {
@@ -95,6 +118,29 @@ public abstract class Boss : MonoBehaviour, IDamageable
             CheckPhase(healthPercent);
 
         }
+    }
+    /// <summary>
+    /// Called when the boss is defeated. Set the progression of the player and play the death animation
+    /// </summary>
+    public virtual void Defeat()
+    {
+        PlayerPrefs.SetInt("progression", Mathf.Max(
+            PlayerPrefs.GetInt("progression", 0), bossProgression
+        ));
+        animator.SetTrigger("Defeat");
+        rb.simulated = false;
+        defeated = true;
+
+        
+    }
+    /// <summary>
+    /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub.
+    /// Sets the character's name to the boss name before the ','
+    /// </summary>
+    public void AnimationBossDeathComplete()
+    {
+        GameManager.Instance.GetDialogueManager.StartDialogue(defeatDialogue, dialogueBoxSprite, emotionDictionary,
+            bossName.Substring(0, bossName.IndexOf(',')), DialogueType.SceneChange, "World Hub", customTextColor ? textColor : null);
     }
     /// <summary>
     /// Checks if the boss reached a new phase based on health remaining
@@ -110,11 +156,6 @@ public abstract class Boss : MonoBehaviour, IDamageable
                 SetPhase();
             }
         }
-    }
-
-    public String getName()
-    {
-        return bossName;
     }
 
     /// <summary>

@@ -14,8 +14,6 @@ public class Contract : MonoBehaviour, IDamageable
     public void Start()
     {
         Boss bossScript = boss.GetComponent<Boss>();
-        bossScript.getName();
-
         health = maxHealth;
     }
 

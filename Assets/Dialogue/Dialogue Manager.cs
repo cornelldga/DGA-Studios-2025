@@ -10,9 +10,14 @@ using UnityEngine.InputSystem;
 /// </summary>
 public enum DialogueType
 {
+    [Tooltip("Dialogue where no choices are made")]
     NPC,
+    [Tooltip("Dialogue where a Fight/Back choice is made")]
     Boss,
-    Interactive
+    [Tooltip("Dialogue where a Yes/No choice is made")]
+    Interactive,
+    [Tooltip("Dialogue where a scene is loaded after conversation")]
+    SceneChange
 }
 
 /// <summary>
@@ -27,6 +32,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] Transform defaultNameTextTransform;
+    [SerializeField] Transform cutsceneNameTextTransform;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
@@ -116,7 +123,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (ongoingDialogue)
+        if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
             if (isTyping)
             {
@@ -138,11 +145,12 @@ public class DialogueManager : MonoBehaviour
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
+    /// <param name="name">The name associated with the dialogue. Default is the name of the file</param>
+    /// <param name="type">Type of dialogue. Default NPC/param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
-    /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
     /// <param name="textColor">The dialogue text color. Chooses default color if no color is chosen</param>
-    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type, Color? textColor = null)
+    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite, Dictionary<DialogueEmotion, Sprite> emotionDictionary,
+        string name = null, DialogueType type = DialogueType.NPC, string scene = null, Color? textColor = null)
     {
         if (file != null)
         {
@@ -219,6 +227,12 @@ public class DialogueManager : MonoBehaviour
             {
                 DialogueChoice();
             }
+            else if(currentDialogueType == DialogueType.SceneChange)
+            {
+                ongoingDialogue = false;
+                gameObject.SetActive(false);
+                GameManager.Instance.LoadScene(sceneName);
+            }
             else
             {
                 EndDialogue();
@@ -232,7 +246,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? nameText.text : line.speaker;
 
                     nameText.text = speakerName;
                     if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
@@ -359,8 +373,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void YesChoice()
     {
-        ongoingDialogue = false;
         choices.SetActive(false);
+        ongoingDialogue = false;
         gameObject.SetActive(false);
         GameManager.Instance.LoadScene(sceneName);
     }
