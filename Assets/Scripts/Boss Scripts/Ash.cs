@@ -97,13 +97,10 @@ public class Ash : Boss
     [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
-    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
-    private Rigidbody2D rb;
     private Vector2 wanderTarget;
-    private Animator animator;
     private SpriteRenderer sprite;
     private int scatterCount;
     private bool[] scatterTracking;
@@ -118,8 +115,6 @@ public class Ash : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
         currentState = State.Wandering;

@@ -188,6 +188,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
       objectReference: {fileID: 0}
@@ -199,6 +215,10 @@ PrefabInstance:
       propertyPath: neutralSprite
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: customTextColor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
@@ -977,14 +997,6 @@ PrefabInstance:
     - target: {fileID: 6819685119780777998, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_Name
       value: Game Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: progression
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: setProgression
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
