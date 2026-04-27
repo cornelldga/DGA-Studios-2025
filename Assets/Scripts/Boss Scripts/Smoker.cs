@@ -22,7 +22,6 @@ public class Smoker : MonoBehaviour
     [Tooltip("The player object layer")]
     [SerializeField] LayerMask playerMask;
 
-    private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
     private Animator animator;
@@ -64,6 +63,9 @@ public class Smoker : MonoBehaviour
     // If its the first time the magician is off stage
     private bool first;
 
+    private float smokeSoundCooldown = 5.0f;
+    private float smokeSoundTimer = 0f;
+
     void Start()
     {
         first = true;
@@ -73,9 +75,6 @@ public class Smoker : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
-        collidedWithPlayer = false;
-
-
 
         // Make rigidbody kinematic so player cannot push it
         if (rb != null)
@@ -193,10 +192,12 @@ public class Smoker : MonoBehaviour
 
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
+        smokeSoundTimer -= Time.deltaTime;
         animator.SetBool("Walking", currentVelocity.magnitude > 0.1f);
         
         if (magician.currentStage == Stage.Backstage )
         {
+            
             if(smokeTimer <= 0 & !first)
             {
                 if (!hidStage)
@@ -224,6 +225,10 @@ public class Smoker : MonoBehaviour
                     ObscureStage();
                 }
 
+                if (smokeSoundTimer <= 0f) {
+                    AudioManager.Instance.PlaySFX(SFXKey.SMOKER_AMBIANCE, false);
+                    smokeSoundTimer = smokeSoundCooldown;
+                }
                 ShootSmoke();
                 smokeTimer = smokeRate;
                 

@@ -44,12 +44,11 @@ public class Granny : Boss
 
     public bool contractDestroyed = false;
     private int initialBossCount;
+    private bool doubleContract = false;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
     [SerializeField] private float returnTime = 4f;
-    [Tooltip("Distance threshold to consider pig has arrived at starting point")]
-    [SerializeField] private float arrivalThreshold = 0.1f;
 
     //Time until we should change states.
     private float stateTimer;
@@ -58,7 +57,6 @@ public class Granny : Boss
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
     private float currentSpeed;
-    public float gHealth;
 
     public override void Start()
     {
@@ -69,7 +67,6 @@ public class Granny : Boss
         initialBossCount = bosses.Count;
         currentState = State.Idle;
         stateTimer = idleTime;
-        gHealth = base.health;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
     }
@@ -107,7 +104,12 @@ public class Granny : Boss
     public void TransitionToIdle()
     {
         currentState = State.Idle;
+        stateTimer = idleTime;
         rb.linearVelocity = Vector2.zero;
+
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isSingleIdle", false);
+        animator.SetBool("isDoubleIdle", false);
     }
 
     private void UpdateIdle()
@@ -161,6 +163,7 @@ public class Granny : Boss
     /// </summary>
     private void EnableRandomBosses()
     {
+        animator.SetBool("isHit", false);
         if (bossActive) return;
 
         if (bosses.Count == 0 && availableBosses.Count == 0)
@@ -172,23 +175,44 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
-            bossActive = true;
-            for (int i = 1; i >= 0; i--)
-            {
-                bosses[i].SetActive(true);
-                availableBosses.Add(bosses[i]);
-                bosses.Remove(bosses[i]);
-            }
+            animator.SetBool("isDouble", true);
         }
         else if (bosses.Count > 0)
         {
-            int index = Random.Range(0, bosses.Count);
-            bosses[index].SetActive(true);
-            bossActive = true;
-            availableBosses.Add(bosses[index]);
-            bosses.Remove(bosses[index]);
+            animator.SetBool("isSingle", true);
         }
         return;
+    }
+
+    public void SummonBoss()
+    {
+        if (bossActive) return;
+        int index = Random.Range(0, bosses.Count);
+        GameObject boss = Instantiate(bosses[index]);
+        Transform bossCanvas = boss.transform.Find("Boss Canvas");
+        if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+        boss.GetComponent<Boss>().isInvulnerable = true;
+
+        availableBosses.Add(boss);
+        bosses.Remove(bosses[index]);
+        bossActive = true;
+    }
+
+    public void SummonBosses()
+    {
+        if (bossActive) return;
+        for (int i = 1; i >= 0; i--)
+        {
+            GameObject boss = Instantiate(bosses[i]);
+            Transform bossCanvas = boss.transform.Find("Boss Canvas");
+            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+            boss.GetComponent<Boss>().isInvulnerable = true;
+
+            availableBosses.Add(boss);
+            bosses.Remove(bosses[i]);
+        }
+        bossActive = true;
+        doubleContract = true;
     }
 
     private void TransitionToContractDropped()
@@ -212,6 +236,8 @@ public class Granny : Boss
         currentSpeed = (rb.position - new Vector2(nearestContract.transform.position.x, nearestContract.transform.position.y)).magnitude / baseTime;
         stateTimer = scavengeTime;
         currentState = State.Scavange;
+
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateScavenge()
@@ -322,6 +348,8 @@ public class Granny : Boss
         }
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
+
+        animator.SetBool("isHit", true);
     }
 
     public override void Attack()
@@ -331,6 +359,10 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
+        if (currentPhase == 1 && !doubleContract)
+        {
+            doubleContract = true;
+        }
         healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

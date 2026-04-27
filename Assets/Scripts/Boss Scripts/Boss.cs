@@ -26,6 +26,8 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     [SerializeField] protected int currentPhase = 0;
 
+    public bool isInvulnerable = false;
+
     bool isAttacking;
     protected float attackCooldown;
 
@@ -76,14 +78,15 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         health -= damage;
         if (health <= 0)
         {
-
             healthBar.fillAmount = 0;
-            GameManager.Instance.player.progression = Mathf.Max(
-                GameManager.Instance.player.progression, bossProgression);
-            GameManager.Instance.BossDefeated("World Hub");
+            PlayerPrefs.SetInt("progression", Mathf.Max(
+                PlayerPrefs.GetInt("progression",0), bossProgression
+            ));
+            GameManager.Instance.LoadScene("World Hub");
         }
         else
         {
