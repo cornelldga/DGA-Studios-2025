@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LandingIndicatorMateiral
-  m_Shader: {fileID: 4800000, guid: e260cfa7296ee7642b167f1eb5be5023, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9db68be6ba1fe49039226b2bbb4790c8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,10 +41,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BirthTime: 0
+    - _Duration: 0.2
     - _EnableExternalAlpha: 0
+    - _ShineIntensity: 2.5
+    - _ShineWidth: 0.55
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShineColor: {r: 1, g: 0.58391255, b: 0.53333336, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

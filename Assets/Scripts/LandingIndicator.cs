@@ -23,9 +23,9 @@ public class LandingIndicator : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            float eased = Mathf.Log(1f + t * (Mathf.Exp(1) - 1f));
+            float eased = 1f - Mathf.Pow(1f - t, 4f);
 
-            transform.localScale = Vector3.one * Mathf.Lerp(spawnScale, 1.5f, eased);
+            transform.localScale = Vector3.one * Mathf.Lerp(spawnScale, 1.0f, eased);
             transform.eulerAngles = new Vector3(0, 0, startZ + spinMaxDegrees * (1f - eased));
 
             yield return null;

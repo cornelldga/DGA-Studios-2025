@@ -131,8 +131,14 @@ public class DrillGuy : Boss
             new Vector3(UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy),
             UnityEngine.Random.Range(-throwInnacuracy, throwInnacuracy));
         GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, landingPos, Quaternion.identity);
-        landingIndicator.GetComponent<SpriteRenderer>()
-                .material.SetFloat("_BirthTime", Time.time);
+        
+        var mpb = new MaterialPropertyBlock();
+        var sr = landingIndicator.GetComponent<SpriteRenderer>();
+        sr.GetPropertyBlock(mpb);
+        mpb.SetFloat("_BirthTime", Time.time);
+        mpb.SetFloat("_Duration", dynamite.duration);
+        sr.SetPropertyBlock(mpb);
+
         Destroy(landingIndicator, dynamite.duration);
         StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, landingPos));
         attackCooldown = dynamite.duration;
@@ -144,8 +150,14 @@ public class DrillGuy : Boss
         foreach(Vector3 pos in holePositions)
         {
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, pos, Quaternion.identity);
-            landingIndicator.GetComponent<SpriteRenderer>()
-                .material.SetFloat("_BirthTime", Time.time);
+
+            var mpb = new MaterialPropertyBlock();
+            var sr = landingIndicator.GetComponent<SpriteRenderer>();
+            sr.GetPropertyBlock(mpb);
+            mpb.SetFloat("_BirthTime", Time.time);
+            mpb.SetFloat("_Duration", dynamite.duration);
+            sr.SetPropertyBlock(mpb);
+
             Destroy(landingIndicator, dynamite.duration);
             StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, pos));
         }
