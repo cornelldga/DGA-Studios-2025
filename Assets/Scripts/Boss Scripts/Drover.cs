@@ -92,8 +92,6 @@ public class Drover : Boss
     // Marking logic
     private bool isMarked;
     private float markTimer;
-
-    private Animator animator;
     private SpriteRenderer sprite;
 
     /// <summary>
@@ -104,7 +102,6 @@ public class Drover : Boss
         base.Start();
         rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.Targeting;
         stateTimer = targetingTime;
