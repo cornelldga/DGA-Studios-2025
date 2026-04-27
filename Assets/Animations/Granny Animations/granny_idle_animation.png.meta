@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,28 +124,6 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites:
-    - serializedVersion: 2
-      name: granny_idle_animation_0
-      rect:
-        serializedVersion: 2
-        x: 1871
-        y: 488
-        width: 175
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f8ea9f897c77ea570800000000000000
-      internalID: 8479846847533919887
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: granny_idle_animation_1
       rect:

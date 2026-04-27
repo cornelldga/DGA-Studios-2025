@@ -11,6 +11,8 @@ public class Bullet : Projectile
     bool whipped;
     [Tooltip("True if the player whipped this projectile")]
 
+    [SerializeField] bool canWhip = true;
+
     /// <summary>
     /// Sets this projectile as 'whipped' to reverse collision logic
     /// and sets its damage based on the whipDamageMultiplier
@@ -35,6 +37,11 @@ public class Bullet : Projectile
     public bool Whipped()
     {
         return whipped;
+    }
+
+    public bool CanWhip()
+    {
+        return canWhip;
     }
 
     public override void OnProjectileHit(Collider2D collision)

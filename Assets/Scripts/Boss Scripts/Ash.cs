@@ -97,7 +97,6 @@ public class Ash : Boss
     [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
-    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
@@ -659,17 +658,13 @@ public class Ash : Boss
 
     // Summons orbiting tumbleweeds depending on phase
     private IEnumerator SummonOrbitingTumbleweeds() {
-        Debug.Log("SummonOrbitingTumbleweeds");
         for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
-            Debug.Log(orbitingTumbleweeds[i] is null);
             if (orbitingTumbleweeds[i] is null)
             {
-                Debug.Log(currentPhase);
                 
                 // set it to be an orbiting tumbleweed
                 if (currentPhase == 0 && i < numOrbitingPhaseOne)
                 {
-                    Debug.Log("one something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab,spawnPos,Quaternion.identity);
@@ -678,7 +673,6 @@ public class Ash : Boss
                 else if (currentPhase == 1 && i < numOrbitingPhaseTwo)
                 {
 
-                    Debug.Log("two something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
@@ -687,7 +681,6 @@ public class Ash : Boss
                 else if (currentPhase == 2 && i < numOrbitingPhaseThree)
                 {
 
-                    Debug.Log("three something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);

@@ -188,6 +188,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: textColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
       objectReference: {fileID: 0}
@@ -199,6 +215,10 @@ PrefabInstance:
       propertyPath: neutralSprite
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: customTextColor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
