@@ -101,10 +101,6 @@ public class Player : MonoBehaviour, IDamageable
 
     void Start()
     {
-        // Load progression
-        PlayerData data = SaveSystem.LoadPlayer();
-        progression = data.progression;
-
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         playerMixers = GetComponent<PlayerMixers>();
@@ -501,14 +497,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         var main = mixerEffect.main;
         main.startColor = mixerColor;
-    }
-
-    /// <summary>
-    /// Save player data
-    /// </summary>
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
     }
 
 }
