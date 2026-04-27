@@ -26,6 +26,8 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     [SerializeField] protected int currentPhase = 0;
 
+    public bool isInvulnerable = false;
+
     bool isAttacking;
     protected float attackCooldown;
 
@@ -76,6 +78,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         health -= damage;
         if (health <= 0)
         {
@@ -90,7 +93,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
             float healthPercent = health / maxHealth;
             healthBar.fillAmount = healthPercent;
             CheckPhase(healthPercent);
-            
+
         }
     }
     /// <summary>
@@ -103,7 +106,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         {
             if (healthPercent <= phasePercents[i])
             {
-                currentPhase = i+1;
+                currentPhase = i + 1;
                 SetPhase();
             }
         }

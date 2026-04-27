@@ -6,7 +6,7 @@ using Unity.Cinemachine;
 
 
 
-public class PigRider : Boss
+public class Drover : Boss
 {
     public enum State
     {
@@ -51,8 +51,10 @@ public class PigRider : Boss
     [Tooltip("Chance (0-1) that boss will enter enraged bounce mode when below half health")]
     [Range(0f, 1f)]
     [SerializeField] private float enragedBounceChance = 1f;
-    //How fast to move during bouncing state.
+    [Tooltip("The added speed bonus each time Drover bounces off a wall")]
+    [SerializeField] float bounceSpeedBonus;
     private float bounceSpeed;
+
     private float baseBounceSpeed = 10f;
 
     //How many more bounces we should take in bounce mode.
@@ -117,6 +119,11 @@ public class PigRider : Boss
 
         stateTimer -= Time.deltaTime;
 
+        if (isInvulnerable)
+        {
+            sprite.color = Color.purple;
+        }
+
         if (isMarked)
         {
             markTimer -= Time.deltaTime;
@@ -154,11 +161,13 @@ public class PigRider : Boss
     {
         isMarked = true;
         markTimer = markDuration;
+        sprite.color = Color.red;
     }
 
     public void removeMark()
     {
         isMarked = false;
+        sprite.color = Color.white;
     }
 
     /// <summary>
@@ -270,7 +279,7 @@ public class PigRider : Boss
     /// </summary>
     private void TransitionToMarking()
     {
-        animator.SetBool("IsShooting",true);
+        animator.SetBool("IsShooting", true);
         currentState = State.Marking;
         rb.linearVelocity = Vector2.zero;
         StartCoroutine(PerformMarkingAttack());
@@ -310,6 +319,8 @@ public class PigRider : Boss
         {
             isEnraged = true;
             bounceChance = enragedBounceChance;
+
+            base.isInvulnerable = true;
         }
 
         healthBarAnimator.SetTrigger("PhaseChange");
@@ -362,7 +373,7 @@ public class PigRider : Boss
     private void HandleBounce(RaycastHit2D hit)
     {
         int ran = UnityEngine.Random.Range(0, 2);
-        if(ran == 0)
+        if (ran == 0)
         {
             StartCoroutine(bounceAttack1.DoBulletPattern(this));
         }
@@ -394,7 +405,7 @@ public class PigRider : Boss
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(chargeDirection.normalized * bounceSpeed, ForceMode2D.Impulse);
 
-        bounceSpeed += 1;
+        bounceSpeed += bounceSpeedBonus;
         bouncesRemaining--;
 
         // Trigger screen shake on each bounce (gets stronger with speed)
