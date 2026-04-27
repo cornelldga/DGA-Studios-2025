@@ -115,6 +115,7 @@ MonoBehaviour:
   witherDuration: 3
   isWhipped: 0
   whippedCooldown: 3
+  fireTint: {fileID: 3976038185302093430, guid: effcaef5fe51c494798376b5ab6dbc77, type: 3}
 --- !u!50 &3931169507723427740
 Rigidbody2D:
   serializedVersion: 5
@@ -197,6 +198,7 @@ MonoBehaviour:
   witherDuration: 3
   isWhipped: 0
   whippedCooldown: 3
+  fireTint: {fileID: 0}
 --- !u!95 &-5895171267963191460
 Animator:
   serializedVersion: 7

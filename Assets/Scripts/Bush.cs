@@ -1,6 +1,8 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Rendering.Universal;
 
 public class Bush : MonoBehaviour
 {
@@ -34,6 +36,8 @@ public class Bush : MonoBehaviour
     private float  dukeFootOffset = .3f;
     private float ashFootOffset = .7f;
 
+    private GameObject fireTint; // screen tint
+
     public void Start()
     {
         animator = GetComponent<Animator>();
@@ -44,6 +48,7 @@ public class Bush : MonoBehaviour
         plyrSR = GameManager.Instance.player.GetComponent<SpriteRenderer>();
         frontOfDuke = false;
         frontOfAsh = false;
+        fireTint = GameObject.Find("tintParent").transform.GetChild(0).gameObject;
 
     }
 
@@ -168,14 +173,31 @@ public class Bush : MonoBehaviour
     }
 
     /**
-    If collides with player and is on fire, deal damage
+    If collides with player and is on fire, deal damage, turn on screen tint
     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isOnFire && collision.CompareTag("Player"))
+        if (isOnFire && collision.CompareTag("Player")){
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            // activate
+            fireTint.SetActive(true);
+            Debug.Log(fireTint.activeSelf+" enter");
+        }
     }
-    
+
+    /// <summary>
+    /// If the player stops interacting with the bush, turn screen tint off.
+    /// </summary>
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(isOnFire && collision.CompareTag("Player"))
+        {
+            // deactivate
+            fireTint.SetActive(false);
+            Debug.Log(fireTint.activeSelf+" exit");
+        }
+    }
+
     /// <summary>
     /// Sets this projectile as 'whipped' to reverse collision logic
     /// and sets its damage based on the whipDamageMultiplier
