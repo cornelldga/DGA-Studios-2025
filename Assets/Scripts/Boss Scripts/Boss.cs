@@ -20,6 +20,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     protected float health;
     [SerializeField] Image healthBar;
     protected Animator healthBarAnimator;
+    protected Rigidbody2D rb;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
 
@@ -52,6 +53,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         bossNameText.text = bossName;
         health = maxHealth;
         emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
@@ -126,16 +128,19 @@ public abstract class Boss : MonoBehaviour, IDamageable
             PlayerPrefs.GetInt("progression", 0), bossProgression
         ));
         animator.SetTrigger("Defeat");
+        rb.simulated = false;
         defeated = true;
+
         
     }
     /// <summary>
-    /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub
+    /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub.
+    /// Sets the character's name to the boss name before the ','
     /// </summary>
     public void AnimationBossDeathComplete()
     {
         GameManager.Instance.GetDialogueManager.StartDialogue(defeatDialogue, dialogueBoxSprite, emotionDictionary,
-            DialogueType.SceneChange, "World Hub", customTextColor ? textColor : null);
+            bossName.Substring(0, bossName.IndexOf(',')), DialogueType.SceneChange, "World Hub", customTextColor ? textColor : null);
     }
     /// <summary>
     /// Checks if the boss reached a new phase based on health remaining

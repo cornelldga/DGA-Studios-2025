@@ -17,7 +17,6 @@ public class DrillGuy : Boss
     [SerializeField] float walkingTime = 4f;
     //Time until we should change states.
     private float stateTimer;
-    private Rigidbody2D rb;
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<Vector3> holePositions = new List<Vector3>();
@@ -85,7 +84,6 @@ public class DrillGuy : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Walking;
         stateTimer = walkingTime;

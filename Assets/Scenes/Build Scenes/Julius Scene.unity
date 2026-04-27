@@ -14495,6 +14495,10 @@ PrefabInstance:
       propertyPath: trackTop
       value: 
       objectReference: {fileID: 739223835}
+    - target: {fileID: 3791971091419183918, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5002965962069388933, guid: 405e6b28ceaf0dd40ad07cbe2bd159e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.31919
