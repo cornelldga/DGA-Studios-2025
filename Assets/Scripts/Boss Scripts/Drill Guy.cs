@@ -225,7 +225,6 @@ public class DrillGuy : Boss
             Destroy(landingIndicator, dynamite.duration);
         } 
         else if (currentPhase == 1 || currentPhase == 2) {
-            Debug.Log("here");
             for (int i = 0; i < 2; i++)
             {
                 Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
