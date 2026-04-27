@@ -21,7 +21,6 @@ public enum DialogueType
 /// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
     private System.Action onComplete;
     [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
