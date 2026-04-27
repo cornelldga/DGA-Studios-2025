@@ -63,13 +63,13 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
             case ("Cider"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
                 }
                 break;
             case ("Ginger"):
-                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !DialogueManager.Instance.OngoingDialogue())
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     if (Time.time - hitTime < 0.261 && hitsInRow < 4)
                     {
