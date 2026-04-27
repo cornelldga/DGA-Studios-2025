@@ -2,17 +2,23 @@
     "dialogueLines": [
         {
             "dialogueID": "1_start",
-            "dialogueText": "Hey, kid! You think you can just waltz in here and challenge us old-timers?",
+            "dialogueText": "What do you want, kid? Scram!",
             "emotion": 0,
-            "nextDialogueID": "1_next"
+            "nextDialogueID": ""
         },
         {
-            "dialogueID": "1_next",
+            "dialogueID": "2_start",
+            "dialogueText": "Hey, kid! You think you can just waltz in here and challenge us old-timers?",
+            "emotion": 0,
+            "nextDialogueID": "2_next"
+        },
+        {
+            "dialogueID": "2_next",
             "dialogueText": "We were here before you and we'll be here long after you're gone.",
             "emotion": 0,
-            "nextDialogueID": "1_fight"
+            "nextDialogueID": "2_fight"
         }, {
-            "dialogueID": "1_fight",
+            "dialogueID": "2_fight",
             "dialogueText": "Just 'cause I'm old doesn't mean I can't fend off you young up-and-comers.",
             "emotion": 0,
             "nextDialogueID": ""
