@@ -69,10 +69,14 @@ public class CutsceneManager : MonoBehaviour
     private static float[] backstoryTimestamps = { 0f, 15f, 25f, 40f, 55f, 70f, 85f, 100f, 115f, 130f, 145f };
     private const float backstoryClipLength = 155f;
 
+    // Temp variables
+    private int temp;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        temp = 0;
     }
 
     void Update()
@@ -142,6 +146,7 @@ public class CutsceneManager : MonoBehaviour
             new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
             "Tutorial", DialogueType.NPC);
         StartCoroutine(WaitForDialogueEnd());
+
     }
 
     /// <summary>
@@ -315,5 +320,12 @@ public class CutsceneManager : MonoBehaviour
         if (GameManager.Instance != null) GameManager.Instance.FreezePlayer(false); 
         skipButton.SetActive(false);
         onComplete?.Invoke();
+        if (temp==0)
+        {
+            temp = 1;
+        } else if (temp==1)
+        {
+            PlayerPrefs.SetInt("progression", 1);
+        }
     }
 }

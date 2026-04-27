@@ -188,22 +188,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: textColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: textColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: textColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: textColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueType
       value: 1
       objectReference: {fileID: 0}
@@ -216,8 +200,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
-      propertyPath: customTextColor
-      value: 1
+      propertyPath: bossProgression
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
@@ -426,6 +410,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a1a631efb1a30cf4eaf1ca786fd234ad, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: bossProgression
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 21300000, guid: ec6a9f64e639cf94dbbf4bf4ca268899, type: 3}
@@ -532,6 +520,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: bossProgression
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 21300000, guid: 6ea34efae5c21844d8edc179bd881fce, type: 3}
@@ -637,6 +629,10 @@ PrefabInstance:
       propertyPath: neutralSprite
       value: 
       objectReference: {fileID: 21300000, guid: fe016b3dcfb466a4593a291c5a64fd2d, type: 3}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: bossProgression
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
@@ -997,6 +993,14 @@ PrefabInstance:
     - target: {fileID: 6819685119780777998, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: progression
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
+      propertyPath: setProgression
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
