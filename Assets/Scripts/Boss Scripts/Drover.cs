@@ -6,7 +6,7 @@ using Unity.Cinemachine;
 
 
 
-public class PigRider : Boss
+public class Drover : Boss
 {
     public enum State
     {
@@ -51,8 +51,10 @@ public class PigRider : Boss
     [Tooltip("Chance (0-1) that boss will enter enraged bounce mode when below half health")]
     [Range(0f, 1f)]
     [SerializeField] private float enragedBounceChance = 1f;
-    //How fast to move during bouncing state.
+    [Tooltip("The added speed bonus each time Drover bounces off a wall")]
+    [SerializeField] float bounceSpeedBonus;
     private float bounceSpeed;
+
     private float baseBounceSpeed = 10f;
 
     //How many more bounces we should take in bounce mode.
@@ -403,7 +405,7 @@ public class PigRider : Boss
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(chargeDirection.normalized * bounceSpeed, ForceMode2D.Impulse);
 
-        bounceSpeed += 1;
+        bounceSpeed += bounceSpeedBonus;
         bouncesRemaining--;
 
         // Trigger screen shake on each bounce (gets stronger with speed)

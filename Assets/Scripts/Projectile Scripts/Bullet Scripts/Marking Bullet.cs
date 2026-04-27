@@ -23,7 +23,7 @@ public class MarkingBullet : Bullet
         }
         else if (Whipped())
         {
-            PigRider pigRider = collision.gameObject.GetComponent<PigRider>();
+            Drover pigRider = collision.gameObject.GetComponent<Drover>();
             if (pigRider != null)
             {
                 pigRider.ApplyMark(markDuration);

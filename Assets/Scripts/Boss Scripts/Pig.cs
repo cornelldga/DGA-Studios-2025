@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] PigRider pigRider;
+    [SerializeField] Drover pigRider;
     [SerializeField] float ramDamage = 1f;
     [Tooltip("The layers that represent walls for collision detection")]
     public LayerMask wallLayers;
