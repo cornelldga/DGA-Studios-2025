@@ -147,7 +147,6 @@ public class DialogueManager : MonoBehaviour
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
-            Debug.Log(name);
             if (name == null)
             {
                 nameText.text = file.name;

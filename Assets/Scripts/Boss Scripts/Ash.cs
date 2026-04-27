@@ -100,7 +100,6 @@ public class Ash : Boss
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
-    private Rigidbody2D rb;
     private Vector2 wanderTarget;
     private SpriteRenderer sprite;
     private int scatterCount;
@@ -116,7 +115,6 @@ public class Ash : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
 
         currentState = State.Wandering;

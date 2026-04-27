@@ -52,7 +52,6 @@ public class Granny : Boss
 
     //Time until we should change states.
     private float stateTimer;
-    private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Vector2 startingPoint;
     private float currentSpeed;
@@ -60,7 +59,6 @@ public class Granny : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         initialBossCount = bosses.Count;
         currentState = State.Idle;
