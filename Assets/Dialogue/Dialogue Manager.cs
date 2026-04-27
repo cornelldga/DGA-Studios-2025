@@ -113,7 +113,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (ongoingDialogue)
+        if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
             if (isTyping)
             {
