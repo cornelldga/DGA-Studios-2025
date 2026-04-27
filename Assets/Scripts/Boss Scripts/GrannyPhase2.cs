@@ -33,7 +33,6 @@ public class GrannyPhase2 : Boss
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sprite;
-    private Collider2D collider;
 
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern machineGun;
@@ -53,7 +52,7 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float bullsTime;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject bullPrefab;
+    [SerializeField] private Bull bullPrefab;
     [SerializeField] private GameObject flamingBushPrefab;
     [SerializeField] private GameObject smokePrefab;
     [SerializeField] private GameObject dynamitePrefab;
@@ -91,7 +90,6 @@ public class GrannyPhase2 : Boss
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
-        collider = GetComponent<CircleCollider2D>();
         machineTimer = 0;
         stateTimer = 0;
         currentState = State.ComboAttack; // TODO Change
@@ -190,7 +188,7 @@ public class GrannyPhase2 : Boss
             {
                 // TODO: Instantiate smoke VFX here
                 sprite.enabled = false;
-                collider.enabled = false;
+                GetComponent<Collider>().enabled = false;
                 punch.SetActive(false);   
                 //randomly pick left or right
                 bool leftPunch = Random.value > 0.5f;
@@ -221,7 +219,7 @@ public class GrannyPhase2 : Boss
 
         // Phase 2: Reappear and lunge horizontally
             sprite.enabled = true;
-            collider.enabled = true;
+            GetComponent<Collider>().enabled = true;
             punch.SetActive(true);
             Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
             rb.linearVelocity = direction* punchSpeed;
@@ -278,11 +276,9 @@ public class GrannyPhase2 : Boss
     {
         for (int i = 0; i < bullsCount; i++)
         {
-            GameObject bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
-
-            Pig bullScript = bull.GetComponent<Pig>();
-            bullScript.ChargeSpecificDirection(Random.onUnitSphere);
-            bullScript.setSummoned();
+            Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
+            bull.ChargeSpecificDirection(Random.onUnitSphere);
+            bull.setSummoned();
             
             Trail trail = bull.AddComponent<Trail>();
             trail.SetTrailPrefab(prefab);
