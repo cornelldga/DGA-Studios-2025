@@ -308,6 +308,13 @@ MonoBehaviour:
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
+  defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
+  dialogueBoxSprite: {fileID: 21300000, guid: fec09dac9d0ddcf43a80ad1dbf1262a1, type: 3}
+  neutralSprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+  happySprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+  sadSprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+  customTextColor: 0
+  textColor: {r: 0, g: 0, b: 0, a: 0}
   baseTime: 0.8
   collisionRadius: 0
   checkDistance: 0
@@ -354,6 +361,13 @@ MonoBehaviour:
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
+  defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
+  dialogueBoxSprite: {fileID: 0}
+  neutralSprite: {fileID: 0}
+  happySprite: {fileID: 0}
+  sadSprite: {fileID: 0}
+  customTextColor: 0
+  textColor: {r: 0, g: 0, b: 0, a: 0}
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 11400000, guid: db008a601788e3943927a1a525d107b9, type: 2}
   machineCooldownConstant: 0

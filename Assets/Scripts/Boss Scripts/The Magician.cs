@@ -15,9 +15,6 @@ public class TheMagician : Boss
 {
     public Stage currentStage;
 
-    [Tooltip("Magician Animation Controller")]
-    [SerializeField] private Animator animator;
-
     [Tooltip("Attack rate during the second phase")]
     [SerializeField] float secondAttackRate;
 

@@ -20,8 +20,6 @@ public class GrannyPhase2 : Boss
     //Time until we should change states.
     private float stateTimer;
     private float firingCooldown;
-    private Rigidbody2D rb;
-    private Animator animator;
     private SpriteRenderer sprite;
 
     [Header("Bullet Patterns")]
@@ -36,8 +34,6 @@ public class GrannyPhase2 : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.MachineGun;
         stateTimer = idleTime;

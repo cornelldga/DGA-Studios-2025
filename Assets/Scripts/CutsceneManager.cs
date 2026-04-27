@@ -152,7 +152,7 @@ public class CutsceneManager : MonoBehaviour
 
         dialogueManager.StartDialogue(cutscene_1, dialogueBoxSprite,
             new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
-            "Tutorial", DialogueType.NPC);
+            null, DialogueType.NPC, "Tutorial");
         StartCoroutine(WaitForDialogueEnd());
     }
 
