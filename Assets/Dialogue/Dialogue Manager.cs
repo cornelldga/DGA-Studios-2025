@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] Transform defaultNameTextTransform;
+    [SerializeField] Transform cutsceneNameTextTransform;
     private Vector2 defaultNamePos;
     private Quaternion defaultNameRot;
     [Tooltip("The gray out background for when dialogue plays")]
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button noButton;
 
     [Header("Settings")]
+    [SerializeField] Color defaultDialogueTextColor;
     [SerializeField] float typingSpeed;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
@@ -51,7 +54,6 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping;
     private DialogueType currentDialogueType;
     private string sceneName;
-    private int dialogueProgression;
 
     [Header("Dialogue Choices")]
     [SerializeField] GameObject choices;
@@ -59,6 +61,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TMP_Text noButtonText;
     [SerializeField] string bossYesText;
     [SerializeField] string bossNoText;
+
 
 
     [Header("Input Controls")]
@@ -79,8 +82,6 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         choices.SetActive(false);
-        gameObject.SetActive(false);
-        dialogueProgression = 0;
         RectTransform rect = nameText.GetComponent<RectTransform>();
         defaultNamePos = rect.anchoredPosition;
         defaultNameRot = rect.localRotation;
@@ -137,14 +138,15 @@ public class DialogueManager : MonoBehaviour
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
+    /// <param name="textColor">The dialogue text color. Chooses default color if no color is chosen</param>
     public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
+        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type, Color? textColor = null)
     {
-        Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
+            dialogueAnim.SetBool("isOpen", true);
             nameText.text = file.name;
             isCutscene = file.name.StartsWith("cutscene");
             currentFileName = isCutscene ? "" : file.name;
@@ -152,25 +154,17 @@ public class DialogueManager : MonoBehaviour
 
             if (file.name == "cutscene_1")
             {
-                RectTransform rect = nameText.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(-488f, -110f);
-                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
+                nameText.transform.SetParent(cutsceneNameTextTransform, false);
             }
-
-            if (nameText.text=="Mirage & Ace")
+            else
             {
-                dialogueText.color = Color.white;
-            } else
-            {
-                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
+                nameText.transform.SetParent(defaultNameTextTransform, false);
             }
+            dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
-            dialogueAnim.SetBool("isOpen", true);
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
-            SetDialogueProgression(nameText.text);
-            // Format followed by DialogueEditor.BuildLine()
-            currentDialogueID = dialogueProgression + "_" + "start";
+            SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
@@ -198,6 +192,26 @@ public class DialogueManager : MonoBehaviour
                 GameManager.Instance.LoadScene(scene); 
             }
         }
+    }
+    /// <summary>
+    /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
+    /// play the start with the closest value to the progression integer
+    /// </summary>
+
+    void SetDialogueStart()
+    {
+        int current = PlayerPrefs.GetInt("progression",0);
+        while (current >= 0)
+        {
+            string candidateID = current + "_start";
+            if (currentDialogueData.dialogueLines.Exists(line => line.dialogueID == candidateID))
+            {
+                currentDialogueID = candidateID;
+                return;
+            }
+            current--;
+        }
+        currentDialogueID = "0_start";
     }
 
     /// <summary>
@@ -369,81 +383,5 @@ public class DialogueManager : MonoBehaviour
             collider.gameObject.GetComponent<InteractionZone>()?.SetCanInteract(true);
         }
         EndDialogue();
-    }
-
-    /// <summary>
-    /// Sets the dialogue progression number based on name text.
-    /// </summary>
-    private void SetDialogueProgression(string name)
-    {
-        if (nameText.text=="Drover")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 4)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Julius")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 5)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Ace & Mirage")
-        {
-            dialogueText.color = Color.white;
-            Debug.Log(GameManager.Instance.player.progression);
-            if (GameManager.Instance.player.progression < 6)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Ash")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 7)
-            {
-                dialogueProgression = 0;
-            } else
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }
-        } else if (nameText.text=="Granny")
-        {
-            dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            if (GameManager.Instance.player.progression < 4)
-            {
-                dialogueProgression = 0;
-                currentDialogueType = 0;
-            } else if (GameManager.Instance.player.progression < 5)
-            {
-                dialogueProgression = 1;
-                currentDialogueType = 0;
-            }  else if (GameManager.Instance.player.progression < 6)
-            {
-                dialogueProgression = 2;
-                currentDialogueType = 0;
-            } else if (GameManager.Instance.player.progression < 7)
-            {
-                dialogueProgression = 3;
-                currentDialogueType = 0;
-            } else
-            {
-                dialogueProgression = 4;
-            }
-        }
     }
 }
