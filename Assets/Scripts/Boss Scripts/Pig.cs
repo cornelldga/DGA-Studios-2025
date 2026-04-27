@@ -15,8 +15,6 @@ public class Pig : MonoBehaviour
     private float wallShakeForce = 0.05f;
     [Tooltip("Force multiplier for player collision shake")]
     private float playersShakeForce = 0.1f;
-    [Tooltip("Force multiplier for boss collision shake")]
-    private float enemyShakeForce = 0.05f;
 
     [Header("Movement Settings")]
     //Base speed when charging (regular)
