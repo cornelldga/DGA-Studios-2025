@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: decab0258f04948f6b29465e4d589577
+guid: 028ed265e909e4f8d930c3077cade8d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8168491877781818098
-    second: granny_death_animation_0
+      213: -379063588026194009
+    second: both_sheet_0
   - first:
-      213: -6780614638496069417
-    second: granny_death_animation_1
+      213: 6912761975569997243
+    second: both_sheet_1
   - first:
-      213: -7029432299955478880
-    second: granny_death_animation_2
+      213: -1868490247036910940
+    second: both_sheet_2
+  - first:
+      213: 5196037117652201142
+    second: both_sheet_3
+  - first:
+      213: -3580653645378876798
+    second: both_sheet_4
+  - first:
+      213: 868125762382268037
+    second: both_sheet_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,84 +111,137 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: granny_death_animation_0
+      name: both_sheet_0
       rect:
         serializedVersion: 2
-        x: 163
+        x: 186
         y: 0
-        width: 185
-        height: 146
+        width: 138
+        height: 171
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2fa49d595105c5170800000000000000
-      internalID: 8168491877781818098
+      spriteID: 7a7e960dcab4dbaf0800000000000000
+      internalID: -379063588026194009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: granny_death_animation_1
+      name: both_sheet_1
       rect:
         serializedVersion: 2
-        x: 676
+        x: 698
         y: 0
-        width: 183
-        height: 149
+        width: 138
+        height: 173
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d8c0a959ea66e1a0800000000000000
-      internalID: -6780614638496069417
+      spriteID: bbd5da234601fef50800000000000000
+      internalID: 6912761975569997243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: granny_death_animation_2
+      name: both_sheet_2
       rect:
         serializedVersion: 2
-        x: 1188
+        x: 1210
         y: 0
-        width: 183
-        height: 151
+        width: 138
+        height: 177
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ae1f741190727e90800000000000000
-      internalID: -7029432299955478880
+      spriteID: 4a2451f150ac116e0800000000000000
+      internalID: -1868490247036910940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: both_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 0
+        width: 138
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be676d8a380c1840800000000000000
+      internalID: 5196037117652201142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: both_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 2234
+        y: 0
+        width: 138
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a0c7b0b76fe4ec0800000000000000
+      internalID: -3580653645378876798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: both_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 2746
+        y: 0
+        width: 138
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 586092708c33c0c00800000000000000
+      internalID: 868125762382268037
       vertices: []
       indices: 
       edges: []
@@ -188,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a757c686712fa40abb73eb1527792a92
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      granny_death_animation_0: 8168491877781818098
-      granny_death_animation_1: -6780614638496069417
-      granny_death_animation_2: -7029432299955478880
+      both_sheet_0: -379063588026194009
+      both_sheet_1: 6912761975569997243
+      both_sheet_2: -1868490247036910940
+      both_sheet_3: 5196037117652201142
+      both_sheet_4: -3580653645378876798
+      both_sheet_5: 868125762382268037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

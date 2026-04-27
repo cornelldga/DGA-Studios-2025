@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Granny Idle
+  m_Name: Granny Falling
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - time: 0.3
-      value: {fileID: 6895579504248709044, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - time: 0.3
-      value: {fileID: 2142427443755984031, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - time: 0.6
-      value: {fileID: 4587086844368294202, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
+      value: {fileID: 2365086966159705555, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - time: 0.2
+      value: {fileID: 6151121988607502833, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - time: 0.4
+      value: {fileID: -3947647370171911304, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - time: 0.5
+      value: {fileID: 7993810131340151417, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - time: 0.7
+      value: {fileID: 8774263196272939489, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - time: 0.9
+      value: {fileID: -7684443413555939690, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +54,18 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 6895579504248709044, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 2142427443755984031, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 4587086844368294202, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
+    - {fileID: 2365086966159705555, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - {fileID: 6151121988607502833, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - {fileID: -3947647370171911304, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - {fileID: 7993810131340151417, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - {fileID: 8774263196272939489, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
+    - {fileID: -7684443413555939690, guid: f264ed5fe92e643c9aec8c0e9a699702, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.70000005
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

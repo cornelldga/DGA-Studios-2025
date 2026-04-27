@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Granny Idle
+  m_Name: Double Contract
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - time: 0.3
-      value: {fileID: 6895579504248709044, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - time: 0.3
-      value: {fileID: 2142427443755984031, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
+      value: {fileID: 868125762382268037, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - time: 0.1
+      value: {fileID: -3580653645378876798, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - time: 0.2
+      value: {fileID: 5196037117652201142, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - time: 0.4
+      value: {fileID: -1868490247036910940, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - time: 0.5
+      value: {fileID: 6912761975569997243, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
     - time: 0.6
-      value: {fileID: 4587086844368294202, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
+      value: {fileID: -379063588026194009, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +54,12 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 6895579504248709044, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 2142427443755984031, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
-    - {fileID: 4587086844368294202, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
+    - {fileID: 868125762382268037, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - {fileID: -3580653645378876798, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - {fileID: 5196037117652201142, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - {fileID: -1868490247036910940, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - {fileID: 6912761975569997243, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
+    - {fileID: -379063588026194009, guid: 028ed265e909e4f8d930c3077cade8d1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -78,4 +84,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.7
+    functionName: SummonBosses
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
