@@ -3,14 +3,12 @@ using Unity.Cinemachine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Splines;
-using Unity.Collections;
 
 public class DrillGuy : Boss
 {
     public enum State
     {
-        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting
+        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Driving
     }
     public State currentState;
     [Header("State Timing")]
@@ -19,7 +17,6 @@ public class DrillGuy : Boss
     [SerializeField] float walkingTime = 4f;
     //Time until we should change states.
     private float stateTimer;
-    private Rigidbody2D rb;
     private bool isUnderground;
     private CinemachineImpulseSource impulseSource;
     private List<Vector3> holePositions = new List<Vector3>();
@@ -56,8 +53,6 @@ public class DrillGuy : Boss
 
     [Tooltip("The range in which the driller can dig from a random point in world center")]
     [SerializeField] float digRange;
-    [Tooltip("Driller Animation Controller")]
-    private Animator animator;
 
     //Time until we should change states.
     [SerializeField] Dynamite dynamite;
@@ -71,21 +66,29 @@ public class DrillGuy : Boss
     [Tooltip("Percent chance that throwing will be chosen phase 1")]
     [SerializeField] float phase1ThrowChance;
 
-    Vector3 movePosition;
-
+    [Header("Minecart Settings")]
+    [SerializeField] float distanceToThrowOnMinecart = 5.0f;
+    private Vector3 movePosition;
+    [SerializeField] GameObject trackTop, trackBot;
+    [SerializeField] float minecartSpeed;
+    [SerializeField] int minecartCycles = 1;
+    [SerializeField] float transitionTimeBetweentracks = 0.3f;
+    [SerializeField] float minecartInnacuracy = 1.0f;
+    private bool minecartRoutineDone = false;
+    private bool minecartRoutineStarted = false;
+    private int throwDirY = 1;
+    private Vector3 posBeforeDriving;
+    [SerializeField] Collider2D wall;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         currentState = State.Walking;
         stateTimer = walkingTime;
-        animator = GetComponent<Animator>();
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
-
     }
 
     /// <summary>
@@ -119,6 +122,9 @@ public class DrillGuy : Boss
                 break;
             case State.Exiting:
                 UpdateExiting();
+                break;
+            case State.Driving:
+                UpdateDriving();
                 break;
         }
     }
@@ -165,6 +171,77 @@ public class DrillGuy : Boss
         holePositions.Clear();
     }
 
+    // Minecart Attack: Tom throws dynamites while riding his minecart around the tracks.
+    // (one cycle =  top track +  bottom track)
+    // current spawns onto track (no walking. makes it fast which is cool)
+    private IEnumerator MinecartAttackRoutine()
+    {
+        posBeforeDriving = this.transform.position;
+        GameObject[] tracks = { trackTop, trackBot };
+        for (int i = 0; i < minecartCycles; i++)
+        {
+            yield return StartCoroutine(MoveAlongtracks(tracks));
+            if (i < minecartCycles - 1)
+                yield return new WaitForSeconds(transitionTimeBetweentracks);
+        }
+        minecartRoutineDone = true;
+    }
+
+    // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
+    // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
+    private IEnumerator MoveAlongtracks(GameObject[] tracks)
+    {
+        for (int i = 0; i < 2; i++)
+            {
+                // init variables
+                Vector3 start_pos = tracks[i].transform.GetChild(i == 0? 0: 1).position;
+                Vector3 end_pos = tracks[i].transform.GetChild(i == 0? 1:0).position;
+                this.transform.position = start_pos; // teleport to start pos
+                Vector3 moveVector = end_pos - transform.position;
+
+                // face correct movement direction
+                if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+                else transform.localScale = new Vector3(1, 1, 1);
+
+                Vector3 direction = moveVector.normalized;
+                rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
+
+                // dynamite throw dir for phase 0, where tom throw towards center Y
+                throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
+                
+                // keep moving until end of tracks
+                while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
+                rb.linearVelocity = Vector2.zero;
+
+                if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
+            }
+    }
+
+    // Dynamite throw during minecart attack.
+    // Phase 0: towards middle y
+    // Phase 1: above, on, and below tracks
+    public void ThrowDynamiteOffTracks()
+    {
+        if (minecartRoutineDone) return;
+        
+        if (currentPhase == 0)
+        {
+            Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
+            StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
+            GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
+            Destroy(landingIndicator, dynamite.duration);
+        } 
+        else if (currentPhase == 1 || currentPhase == 2) {
+            for (int i = 0; i < 2; i++)
+            {
+                Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
+                StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
+                GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
+                Destroy(landingIndicator, dynamite.duration);
+            }     
+        }
+    }
+
     /// <summary>
     /// Transition to walking.
     /// </summary>
@@ -197,6 +274,39 @@ public class DrillGuy : Boss
             transform.localScale = new Vector3(-1, 1, 1); 
         }
     }
+
+
+    /// <summary>
+    /// Updates actions for the drill during driving state
+    /// </summary>
+    private void UpdateDriving()
+    {
+        if (minecartRoutineDone)
+        {
+            this.transform.position = posBeforeDriving;
+            Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
+            TransitionToEntering();
+        }
+       else if (!minecartRoutineStarted){
+            Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
+            StartCoroutine(MinecartAttackRoutine());
+            minecartRoutineStarted = true;
+        }
+    }
+
+    
+    /// <summary>
+    /// Transition to driving state
+    /// </summary>
+    private void TransitionToDriving()
+    {
+        ResetAllAnimatorBools();
+        animator.SetBool("isDriving", true);
+        minecartRoutineDone = false;
+        minecartRoutineStarted = false;
+        currentState = State.Driving;
+    }
+
 
     /// <summary>
     /// What the boss does when walking around
@@ -402,10 +512,10 @@ public class DrillGuy : Boss
                 TransitionToEntering();
             }
             else{
-                // ideally there is a delay before first throw, or else weird stuff can happen (animation)
-                // also our current throw function its really messy can get kinda broken in animations
-                // if not careful
-                TransitionToThrowing();
+
+                if (UnityEngine.Random.value < 0.5) TransitionToThrowing();
+                else TransitionToDriving();
+                
             }
         }
     }
@@ -527,6 +637,7 @@ public class DrillGuy : Boss
         animator.SetBool("isExiting", false);
         animator.SetBool("isEntering", false);
         animator.SetBool("isUG", false);
+        animator.SetBool("isDriving", false);
     }
 
     public override void TakeDamage(float damage)

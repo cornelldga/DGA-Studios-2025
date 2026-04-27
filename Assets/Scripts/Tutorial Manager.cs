@@ -11,6 +11,15 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] bool canInteract;
 
+    private float hitTime;
+    private float hitsInRow;
+
+    private void Start()
+    {
+        hitTime = 0;
+        hitsInRow = 1;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -51,6 +60,30 @@ public class TutorialManager : MonoBehaviour
                 if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && collision.gameObject.GetComponent<Whiskey>() != null && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
                 {
                     OnInteract();
+                }
+                break;
+            case ("Cider"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Ginger"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
+                {
+                    if (Time.time - hitTime < 0.261 && hitsInRow < 4)
+                    {
+                        hitsInRow++;
+                    }
+                    else if (Time.time - hitTime < 0.261 && hitsInRow >= 4)
+                    {
+                        OnInteract();
+                    }
+                    else if (Time.time - hitTime >= 0.261)
+                    {
+                        hitsInRow = 1;
+                    }
+                    hitTime = Time.time;
                 }
                 break;
             default:
