@@ -32,7 +32,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] Transform defaultNameTextTransform;
     [SerializeField] Transform cutsceneNameTextTransform;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
@@ -112,10 +111,22 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void SetNameTextVisible(bool visible)
     {
-        if (nameText != null)
+        if (nameText == null) return;
+
+        if (visible && gameObject.activeSelf)
         {
-            nameText.gameObject.SetActive(visible);
+            StartCoroutine(ShowNameTextAfterClose());
+            return;
         }
+
+        nameText.gameObject.SetActive(visible);
+    }
+
+    private IEnumerator ShowNameTextAfterClose()
+    {
+        yield return new WaitUntil(() => !gameObject.activeSelf);
+
+        nameText.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -158,8 +169,23 @@ public class DialogueManager : MonoBehaviour
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
 
+            bool useCutsceneNameText = !nameText.gameObject.activeSelf || file.name.StartsWith("Tutorial");
+
+            if (!useCutsceneNameText && nameText != null)
+            {
+                nameText.gameObject.SetActive(true);
+
+                if (cutsceneNameTextTransform != null)
+                {
+                    cutsceneNameTextTransform.gameObject.SetActive(false);
+                }
+            }
+            else if (cutsceneNameTextTransform != null)
+            {
+                cutsceneNameTextTransform.gameObject.SetActive(true);
+            }
+
             currentFileName = file.name;
-            nameText.text = currentFileName;
 
             dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
@@ -247,6 +273,10 @@ public class DialogueManager : MonoBehaviour
                 if (line.dialogueID == currentDialogueID)
                 {
                     string speakerName = string.IsNullOrEmpty(line.speaker) ? nameText.text : line.speaker;
+                    if (currentFileName.StartsWith("Tutorial"))
+                    {
+                        speakerName = "Tutorial";
+                    }
 
                     nameText.text = speakerName;
                     if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
