@@ -272,7 +272,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    string speakerName = string.IsNullOrEmpty(line.speaker) ? nameText.text : line.speaker;
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
                     if (currentFileName.StartsWith("Tutorial"))
                     {
                         speakerName = "Tutorial";
