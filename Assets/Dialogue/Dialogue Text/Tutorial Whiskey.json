@@ -1,8 +1,32 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "3_start",
+            "dialogueID": "0_start",
             "dialogueText": "You just shot out the whiskey. Great job!",
+            "emotion": 0,
+            "nextDialogueID": "1_dialogue"
+        },
+        {
+            "dialogueID": "1_dialogue",
+            "dialogueText": "Now, to introduce the mixers. You began this tutorial with the Ginger Ale mixer.",
+            "emotion": 0,
+            "nextDialogueID": "2_dialogue"
+        },
+        {
+            "dialogueID": "2_dialogue",
+            "dialogueText": "This makes your regular attacks deal less damage and the projectiles you whip back do more damage.",
+            "emotion": 0,
+            "nextDialogueID": "3_dialogue"
+        },
+        {
+            "dialogueID": "3_dialogue",
+            "dialogueText": "Press Tab to switch to the Apple Cider, which makes you move faster but makes your shots less accurate.",
+            "emotion": 0,
+            "nextDialogueID": "4_dialogue"
+        },
+        {
+            "dialogueID": "4_dialogue",
+            "dialogueText": "If you don't get this speed boost, you won't be able to get across before you get shot. Good luck!",
             "emotion": 0,
             "nextDialogueID": ""
         }

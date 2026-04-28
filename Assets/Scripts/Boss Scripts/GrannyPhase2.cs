@@ -10,27 +10,16 @@ public class GrannyPhase2 : Boss
         Idle, Lazer, MachineGun, Punch
     }
     private State currentState;
-
-    [Header("Movement Settings")]
-    //Base speed when charging (regular)
-    [SerializeField] float baseSpeed = 5f;
-
     private Vector2 targetPosition;
 
     [Header("State Timing")]
     //How much time to get to pull out contracts.
     private float idleTime = 1f;
-    //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
-    //Length of time to pull out contracts.
-    private float outTime = 1f;
 
     private float currentSpeed;
     //Time until we should change states.
     private float stateTimer;
     private float firingCooldown;
-    private Rigidbody2D rb;
-    private Animator animator;
     private SpriteRenderer sprite;
 
     [Header("Bullet Patterns")]
@@ -45,8 +34,6 @@ public class GrannyPhase2 : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         currentState = State.MachineGun;
         stateTimer = idleTime;

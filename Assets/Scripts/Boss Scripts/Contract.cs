@@ -14,8 +14,6 @@ public class Contract : MonoBehaviour, IDamageable
     public void Start()
     {
         Boss bossScript = boss.GetComponent<Boss>();
-        bossScript.getName();
-
         health = maxHealth;
     }
 
@@ -27,7 +25,7 @@ public class Contract : MonoBehaviour, IDamageable
             // Destroys contract and disables boss
             Destroy(gameObject);
             granny.bossActive = false;
-            boss.SetActive(false);
+            Destroy(boss);
 
             // Removes boss from Granny contracts
             granny.availableBosses.Remove(boss);
