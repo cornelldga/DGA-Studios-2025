@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  bossProgression: 1
+  bossProgression: 2
   bossName: Drover, King of Pigs
   maxHealth: 50
   healthBar: {fileID: 5020431466718295752}
@@ -330,6 +330,13 @@ MonoBehaviour:
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
+  defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
+  dialogueBoxSprite: {fileID: 21300000, guid: 6ea34efae5c21844d8edc179bd881fce, type: 3}
+  neutralSprite: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
+  happySprite: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
+  sadSprite: {fileID: 21300000, guid: 660514c817ece7344b6e50e88b10ab67, type: 3}
+  customTextColor: 0
+  textColor: {r: 0, g: 0, b: 0, a: 0}
   baseSpeed: 5
   acceleration: 1
   maxChargeSpeed: 8
