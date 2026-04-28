@@ -32,14 +32,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] Transform defaultNameTextTransform;
     [SerializeField] Transform cutsceneNameTextTransform;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
     private string currentFileName;
-    private bool isCutscene;
     public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
 
     [Header("Choice Buttons")]
@@ -109,11 +107,34 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Lets CutsceneManager hide/show the normal dialogue name text.
+    /// </summary>
+    public void SetNameTextVisible(bool visible)
+    {
+        if (nameText == null) return;
+
+        if (visible && gameObject.activeSelf)
+        {
+            StartCoroutine(ShowNameTextAfterClose());
+            return;
+        }
+
+        nameText.gameObject.SetActive(visible);
+    }
+
+    private IEnumerator ShowNameTextAfterClose()
+    {
+        yield return new WaitUntil(() => !gameObject.activeSelf);
+
+        nameText.gameObject.SetActive(true);
+    }
+
+    /// <summary>
     /// Finishes the dialogue line if not finished yet, goes to next line otherwise.
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (ongoingDialogue)
+        if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
             if (isTyping)
             {
@@ -147,25 +168,25 @@ public class DialogueManager : MonoBehaviour
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
-            if (name == null)
-            {
-                nameText.text = file.name;
-            }
-            else
-            {
-                nameText.text = name;
-            }
-            isCutscene = file.name.StartsWith("cutscene");
-            currentFileName = isCutscene ? "" : file.name; 
 
-            if (file.name == "cutscene_1")
+            bool useCutsceneNameText = !nameText.gameObject.activeSelf || file.name.StartsWith("Tutorial");
+
+            if (!useCutsceneNameText && nameText != null)
             {
-                nameText.transform.SetParent(cutsceneNameTextTransform, false);
+                nameText.gameObject.SetActive(true);
+
+                if (cutsceneNameTextTransform != null)
+                {
+                    cutsceneNameTextTransform.gameObject.SetActive(false);
+                }
             }
-            else
+            else if (cutsceneNameTextTransform != null)
             {
-                nameText.transform.SetParent(defaultNameTextTransform, false);
+                cutsceneNameTextTransform.gameObject.SetActive(true);
             }
+
+            currentFileName = file.name;
+
             dialogueText.color = textColor ?? defaultDialogueTextColor;
             ongoingDialogue = true;
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
@@ -203,7 +224,6 @@ public class DialogueManager : MonoBehaviour
     /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
     /// play the start with the closest value to the progression integer
     /// </summary>
-
     void SetDialogueStart()
     {
         int current = PlayerPrefs.GetInt("progression",0);
@@ -252,17 +272,26 @@ public class DialogueManager : MonoBehaviour
             {
                 if (line.dialogueID == currentDialogueID)
                 {
-                    string speakerName = string.IsNullOrEmpty(line.speaker) ? nameText.text : line.speaker;
+                    string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+                    if (currentFileName.StartsWith("Tutorial"))
+                    {
+                        speakerName = "Tutorial";
+                    }
 
                     nameText.text = speakerName;
+                    if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
+                    {
+                        CutsceneManager.Instance.SetCutsceneName(speakerName);
+                    }
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
-                    bool isDuke = (speakerName == "Duke");
+                    bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
+                    bool isDuke = speakerName == "Duke";
 
-                    if (isCutscene)
+                    if (isCutsceneDialogue)
                     {
                         // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke);
+                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
                     }
                     else
                     {
