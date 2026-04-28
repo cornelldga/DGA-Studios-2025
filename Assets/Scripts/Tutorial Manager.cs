@@ -93,9 +93,15 @@ public class TutorialManager : MonoBehaviour
 
     void OnInteract()
     {
-        if (canInteract)
+        if (!canInteract) return;
+
+        IInteractable target = interactable.GetComponent<IInteractable>();
+
+        if (target != null)
         {
-            interactable.GetComponent<IInteractable>().Interact();
+            GameManager.Instance.GetDialogueManager.SetNameTextVisible(false);
+
+            target.Interact();
             canInteract = false;
         }
     }

@@ -145,7 +145,7 @@ public class CutsceneManager : MonoBehaviour
         dialogueManager.SetNameTextVisible(false);
         this.onComplete = () =>
         {
-            // GameManager.Instance.LoadScene("Tutorial"); <- wait for tutorial to be complete to uncomment
+            GameManager.Instance.LoadScene("Tutorial");
             PlayerPrefs.SetInt("progression", 1);
             onComplete?.Invoke();
         };
@@ -164,7 +164,7 @@ public class CutsceneManager : MonoBehaviour
         if (cutsceneNameText == null) return;
 
         cutsceneNameText.gameObject.SetActive(true);
-        cutsceneNameText.text = speakerName;
+        cutsceneNameText.text = speakerName.StartsWith("Tutorial") ? "Tutorial" : speakerName;
     }
 
     /// <summary>
