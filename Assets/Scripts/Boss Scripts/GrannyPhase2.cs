@@ -18,18 +18,6 @@ public class GrannyPhase2 : Boss
     private Vector2 targetPosition;
 
     [Header("State Timing")]
-    //How much time to get to pull out contracts.
-    private float idleTime = 1f;
-    //How long we should scavenge for contracts.
-    private float scavengeTime = 1f;
-    //Length of time to pull out contracts.
-    private float outTime = 1f;
-    
-
-    private float currentSpeed;
-    //Time until we should change states.
-    private float stateTimer;
-    private float firingCooldown;
     private SpriteRenderer sprite;
 
     [Header("Bullet Patterns")]
@@ -78,12 +66,15 @@ public class GrannyPhase2 : Boss
     //vector to remember how we were moving after determining punch move direction
     private Vector2 punchMove;
 
-    private Coroutine machineGunRoutine;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    CircleCollider2D circleCollider;
     public override void Start()
     {
+        Debug.Log("Start phase 2");
         base.Start();
+        TakeDamage(0);
+        circleCollider = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
 
         machineTimer = 0;
@@ -116,7 +107,6 @@ public class GrannyPhase2 : Boss
     {
         base.Attack();
         int currentAttack = Random.Range(1, 5);
-        Debug.Log(currentAttack);
         switch (currentAttack)
         {
             case 1:
@@ -162,35 +152,12 @@ public class GrannyPhase2 : Boss
 
     private void MachineGun()
     {
-        //track the player location as you shoot out bullets
-        //granny moves as she shoots machine gun
-        //if player enters region above or below granny, she stops firing and repositions
-        machineGunRoutine = StartCoroutine(machineGun.DoBulletPattern(this));
-        float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
-        print(angle);
-        while ((angle < 150 && angle > 30) || machineTimer >= machineCooldownConstant)
-        {
-            machineTimer += Time.deltaTime;
-        }
-        //if (angle > 150 || angle < 30)
-        //{
-        //    StopCoroutine(machineGunRoutine);
-        //    return;
-        //}
-        //if (machineTimer >= machineCooldownConstant)
-        //{
-        //    StopCoroutine(machineGunRoutine);
-        //    machineTimer = 0;
-        //    return;
-        //} else
-
-        return;
-
-
+        StartCoroutine(machineGun.DoBulletPattern(this));
     }
 
     private void Punch()
     {
+        attackCooldown = punchingTime;
         // TODO move granny towards the player while using her punch move that is 
         // maybe make the punch a separate hitbox
 
@@ -199,7 +166,7 @@ public class GrannyPhase2 : Boss
             {
                 // TODO: Instantiate smoke VFX here
                 sprite.enabled = false;
-                GetComponent<Collider>().enabled = false;
+                circleCollider.enabled = false;
                 punch.SetActive(false);   
                 //randomly pick left or right
                 bool leftPunch = Random.value > 0.5f;
@@ -230,7 +197,7 @@ public class GrannyPhase2 : Boss
 
         // Phase 2: Reappear and lunge horizontally
             sprite.enabled = true;
-            GetComponent<Collider>().enabled = true;
+            circleCollider.enabled = true;
             punch.SetActive(true);
             Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
             rb.linearVelocity = direction* punchSpeed;
@@ -238,30 +205,6 @@ public class GrannyPhase2 : Boss
             punch.SetActive(false);
         return;
     }
-
-    //private void TransitionToPunch()
-    //{
-    //    currentState = State.Punch;
-    //    stateTimer = disappearTime + punchingTime;
-    //    //play the animation for granny disappearing
-    //}
-
-    //private void UpdateComboAttacks()
-    //{
-    //    // Shouldn't need to do anything here
-    //}
-
-    //private void TransitionToMachineGun()
-    //{
-    //    currentState = State.MachineGun;
-    //    machineTimer = 0;
-    //}
-
-    //private void TransitionToComboAttack()
-    //{
-    //    currentState = State.ComboAttack;
-    //    StartCoroutine(selectComboAttack());
-    //}
 
     private IEnumerator selectComboAttack()
     {
@@ -273,22 +216,17 @@ public class GrannyPhase2 : Boss
                 yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
                 break;
             case 2:
-        //yield return new WaitForSeconds(1.00f);
                 yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
                 break;
              case 3:
-        //yield return new WaitForSeconds(1.00f);
                 yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
                 break;
              case 4:
-        //yield return new WaitForSeconds(1f);
-            yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
+                yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
                 break;
-        //yield return new WaitForSeconds(1.00f);
              case 5:
                 yield return StartCoroutine(PointAttack(dynamitePrefab, flamingBushPrefab, fireDynamiteCount, 1));
                 break;
-            //yield return new WaitForSeconds(1.00f);
              case 6:
                 yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
                 break;
@@ -330,14 +268,6 @@ public class GrannyPhase2 : Boss
         }
         yield return new WaitForSeconds(3f); 
     }
-    
-    private void TransitionToLazer()
-    {
-        currentState = State.Lazer;
-        //showcase the lazer tuning on and honing in on the player
-        //shoot the lazer for the 1 shot hit
-        StartCoroutine(ShootLazer());
-    }
 
     private IEnumerator ShootLazer()
     {
@@ -348,7 +278,7 @@ public class GrannyPhase2 : Boss
 
     public override void SetPhase()
     {
-        healthBarAnimator.SetTrigger("PhaseChange");
+        base.SetPhase();
         switch (currentPhase)
         {
             case 1:

@@ -150,11 +150,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &63425842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6754026737141735589, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-  m_PrefabInstance: {fileID: 1074874789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &116850634
 GameObject:
   m_ObjectHideFlags: 0
@@ -18835,6 +18830,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: maxHealth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4556595847925104010, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_Name
       value: Granny
@@ -18888,61 +18891,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: punch
-      value: 
-      objectReference: {fileID: 63425842}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: bullsTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: leftBound
       value: 
       objectReference: {fileID: 1691408455}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: bullPrefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: punchPivot
-      value: 
-      objectReference: {fileID: 1494589575}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: rightBound
       value: 
       objectReference: {fileID: 243808142}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: fireBullsCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: fireSmokeCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: smokeBullsCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: fireDynamiteCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: dynamiteBullsCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: smokeDynamiteCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: machineCooldownConstant
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18979,11 +18934,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2123550125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1494589575 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6082474008645625747, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-  m_PrefabInstance: {fileID: 1074874789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1589420711
 GameObject:
   m_ObjectHideFlags: 0

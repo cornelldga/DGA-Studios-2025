@@ -234,7 +234,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -351,16 +351,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef2e79e96235e64fa9d635e8ea15908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
-  animator: {fileID: 0}
+  animator: {fileID: 8633898269983300228}
   bossProgression: 0
-  bossName: Granny
+  bossName: Granny, Super Awesome Granny
   maxHealth: 5
-  healthBar: {fileID: 2861438271388821434}
+  healthBar: {fileID: 5187320019946879446}
   healthBarAnimator: {fileID: 8633898269983300228}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
-  - 50
+  - 0.5
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
@@ -386,7 +386,7 @@ MonoBehaviour:
   flamingBushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
   smokePrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
   dynamitePrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
-  punchingTime: 1
+  punchingTime: 2.5
   disappearTime: 1
   punchRepositionOffset: 1
   punchSpeed: 1
@@ -653,17 +653,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
   m_PrefabInstance: {fileID: 6383838750220342359}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2861438271388821434 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9160934584145638381, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &4977892287978850841 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
