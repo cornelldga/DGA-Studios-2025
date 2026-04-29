@@ -176,11 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfaca095e88b40dfbf4145e25126707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drill_Guy
-  animator: {fileID: 0}
+  animator: {fileID: 3610685219928371153}
   bossProgression: 2
   bossName: Julius, Manic Miner
   maxHealth: 70
   healthBar: {fileID: 159719163656866947}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 62901968422666060}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
@@ -450,6 +451,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!95 &3610685219928371153 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 2116001527165509890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5489353766401137639 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
