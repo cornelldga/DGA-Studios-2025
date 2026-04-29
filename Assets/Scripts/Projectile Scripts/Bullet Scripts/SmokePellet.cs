@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 /// <summary>
 /// A smoke particle that grows and changes size and sprites over time
 /// </summary>
@@ -37,6 +38,7 @@ public class SmokePellet : MonoBehaviour
     private bool whipped = false;
     
     private GameObject smokeTint = null;
+    
     
 
     /// <summary>
@@ -159,6 +161,8 @@ public class SmokePellet : MonoBehaviour
     {
         this.smokeTint = smokeTint;
     }
+
+ 
 
 
 }

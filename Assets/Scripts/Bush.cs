@@ -48,8 +48,6 @@ public class Bush : MonoBehaviour
         plyrSR = GameManager.Instance.player.GetComponent<SpriteRenderer>();
         frontOfDuke = false;
         frontOfAsh = false;
-        fireTint = GameObject.Find("tintParent").transform.GetChild(0).gameObject;
-
     }
 
     public void Update()
@@ -181,7 +179,6 @@ public class Bush : MonoBehaviour
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
             // activate
             fireTint.SetActive(true);
-            Debug.Log(fireTint.activeSelf+" enter");
         }
     }
 
@@ -194,7 +191,6 @@ public class Bush : MonoBehaviour
         {
             // deactivate
             fireTint.SetActive(false);
-            Debug.Log(fireTint.activeSelf+" exit");
         }
     }
 
@@ -212,5 +208,9 @@ public class Bush : MonoBehaviour
     public void setWhipped(bool whipped)
     {
         this.isWhipped = whipped;
+    }
+    public void setTint(GameObject fireTint)
+    {
+        this.fireTint = fireTint;
     }
 }

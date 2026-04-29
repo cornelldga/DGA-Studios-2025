@@ -98,6 +98,8 @@ public class Ash : Boss
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
 
+    [Space(5)]
+    [SerializeField] GameObject fireTint;
     private float stateTimer;
     private float tumbleweedCooldownTimer;
     private Vector2 wanderTarget;
@@ -734,6 +736,7 @@ public class Ash : Boss
                 seeds[seedIncrementor].SetActive(true);
                 //seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seed = seeds[seedIncrementor];
+                seed.GetComponent<Seed>().setTint(fireTint);
                 seed.transform.position = this.transform.position;
                 seed.GetComponent<Rigidbody2D>().linearVelocityX = ((currentSeedLocation + th * randStep).x - this.transform.position.x) / basicSeedLandTime; ;
 

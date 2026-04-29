@@ -26,6 +26,7 @@ public class Smoker : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
+    [Header("Smoke Settings")]
     //How fast should smoke be shot out of smoker pipe.
     [SerializeField] float pelletSpeed = 3;
     [Tooltip("Fire rate of smoke")]
@@ -38,6 +39,7 @@ public class Smoker : MonoBehaviour
     //A transform centered on the smoker to allow for 360 smoking.
     [SerializeField] Transform pivot;
     [SerializeField] TheMagician magician;
+    [SerializeField] GameObject smokeTint;
 
     [Header("Punch Settings")]
     [Tooltip("How long must pass before this can perform another punch")]
@@ -248,6 +250,7 @@ public class Smoker : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject pellet = Instantiate(smokePelletPrefab, releasePoint.transform.position, Quaternion.identity);
+            pellet.GetComponent<SmokePellet>().setTint(smokeTint);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
             pellet.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f));
             Vector2 direction = new Vector2(releasePoint.position.x - transform.position.x, releasePoint.position.y - transform.position.y).normalized;

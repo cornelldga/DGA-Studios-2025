@@ -10,6 +10,7 @@ public class Seed : MonoBehaviour
     [Header("Flower Variables")]
     public bool planted;
     [SerializeField] GameObject flower;
+    private GameObject fireTint;
     private float maxHeight;
     private Rigidbody2D rb;
     private float startVel;
@@ -60,6 +61,7 @@ public class Seed : MonoBehaviour
 
         Cactus cactus = f.GetComponent<Cactus>();
         Fire_Flower fireflower = f.GetComponent<Fire_Flower>();
+        Bush bush = f.GetComponent<Bush>();
 
         if (fireflower)
         {
@@ -68,6 +70,10 @@ public class Seed : MonoBehaviour
         if (cactus)
         {
             cactus.locationID = locationID;
+        }
+        if (bush)
+        {
+            bush.GetComponent<Bush>().setTint(fireTint);
         }
 
         //GameObject.Destroy(this.gameObject);
@@ -106,6 +112,11 @@ public class Seed : MonoBehaviour
             (target.x - transform.position.x) / landingTime,
             startVel + (target.y - transform.position.y) / landingTime
         );
+    }
+
+    public void setTint(GameObject fireTint)
+    {
+        this.fireTint = fireTint;
     }
 
     
