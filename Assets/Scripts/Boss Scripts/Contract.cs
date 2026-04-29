@@ -6,7 +6,7 @@ public class Contract : MonoBehaviour, IDamageable
     public GameObject boss;
     public Granny granny;
 
-    public float maxHealth = 10f;
+    public float maxHealth = 2f;
 
     private float health;
 

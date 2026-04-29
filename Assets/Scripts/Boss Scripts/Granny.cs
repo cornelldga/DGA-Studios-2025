@@ -41,6 +41,7 @@ public class Granny : Boss
     [SerializeField] GameObject contractTemplate;
     // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
+    private float contractSize = 0.5f;
 
     public bool contractDestroyed = false;
     private int initialBossCount;
@@ -50,6 +51,10 @@ public class Granny : Boss
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
     [SerializeField] private float returnTime = 4f;
+
+    [Header("Visuals")]
+    [Tooltip("Shield GameObject shown while Granny is invincible")]
+    [SerializeField] private GameObject shieldVisual;
 
     //Time until we should change states.
     private float stateTimer;
@@ -123,15 +128,14 @@ public class Granny : Boss
         currentState = State.Invincible;
         stateTimer = invincibleTime;
         EnableRandomBosses();
-        // Purple until animation
-        sprite.color = Color.purple;
+        if (shieldVisual != null) shieldVisual.SetActive(true);
     }
 
     private void TransitionToHoldingContract()
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
-        sprite.color = Color.white;
+        if (shieldVisual != null) shieldVisual.SetActive(false);
     }
     public void TransitionToReturning()
     {
@@ -316,6 +320,7 @@ public class Granny : Boss
         Vector3 randomPos = new Vector3(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
             Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y), -1);
         GameObject newContract = Instantiate(contractTemplate, randomPos, Quaternion.identity);
+        newContract.transform.localScale = new Vector3(contractSize, contractSize, contractSize);
 
         Contract contractScript = newContract.GetComponent<Contract>();
         contractScript.boss = bossType;
