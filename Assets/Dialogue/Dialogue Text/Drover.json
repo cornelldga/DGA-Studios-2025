@@ -30,7 +30,24 @@
             "nextDialogueID": "2_end"
         }, {
             "dialogueID": "2_end",
-            "dialogueText": "You know what? Buy me a drink, and me and my pigs are yours.",
+            "dialogueText": "Wanna go again?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "You beat the old hag, huh? She was getting on my nerves.",
+            "emotion": 0,
+            "nextDialogueID": "6_next"
+        }, {
+            "dialogueID": "6_next",
+            "dialogueText": "But you and me, we're buddies now, right?",
+            "emotion": 0,
+            "nextDialogueID": "6_end"
+        }, {
+            "dialogueID": "6_end",
+            "dialogueText": "What's a scuffle between friends?",
             "emotion": 0,
             "nextDialogueID": ""
         }

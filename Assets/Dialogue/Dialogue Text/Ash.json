@@ -13,6 +13,20 @@
             "nextDialogueID": ""
         },
 
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "I better not hear that you hurt any of the pigs.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "So you're just beating on the elderly now?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
         
         {
             "dialogueID": "4_start",
@@ -26,7 +40,7 @@
             "nextDialogueID": "4_fight"
         }, {
             "dialogueID": "4_fight",
-            "dialogueText": "I oughta kick you out of this town once and for all. You gonna face me or what?",
+            "dialogueText": "I oughta kick you out of this town once and for all.",
             "emotion": 0,
             "nextDialogueID": ""
         },
@@ -34,17 +48,34 @@
 
         {
             "dialogueID": "5_start",
-            "dialogueText": "Duke, right? I know I'm in no position to ask for anything, but please, Granny's all I have.",
+            "dialogueText": "Duke, right? I know I'm in no position to ask for anything, but Granny's all I have.",
             "emotion": 0,
             "nextDialogueID": "5_next"
         }, {
             "dialogueID": "5_next",
-            "dialogueText": "She took me in and raised me as her own. And this business means everything to her.",
+            "dialogueText": "She's a ruthless businesswoman, yes. But she's a good lady at heart. Deep down.",
             "emotion": 0,
             "nextDialogueID": "5_fight"
         }, {
             "dialogueID": "5_fight",
-            "dialogueText": "If you win, could you take it easy on her? I'd owe you a life debt.",
+            "dialogueText": "I'll even help you train, just promise to spare her.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "You spared her. Thank you.",
+            "emotion": 0,
+            "nextDialogueID": "6_next"
+        }, {
+            "dialogueID": "6_next",
+            "dialogueText": "I misjudged you before. You're a good man.",
+            "emotion": 0,
+            "nextDialogueID": "6_fight"
+        }, {
+            "dialogueID": "6_fight",
+            "dialogueText": "Thank you again. I'm happy to train with you anytime.",
             "emotion": 0,
             "nextDialogueID": ""
         }
