@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 4b057e8ebb245254a8134e4c85d79712
+guid: ab9432a3553849a4fb748dbc27730116
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4249783061443865588
-    second: ash_idle_animation 1_0
+      213: 4401264207844841263
+    second: ash_death_init_0
   - first:
-      213: -1381538979633925714
-    second: ash_idle_animation 1_1
+      213: -5955966312550415472
+    second: ash_death_init_1
   - first:
-      213: 8196712979972001872
-    second: ash_idle_animation 1_2
+      213: -7112753666901401520
+    second: ash_death_init_2
   - first:
-      213: 3075467321998035323
-    second: ash_idle_animation 1_3
+      213: -4478535973022077253
+    second: ash_death_init_3
+  - first:
+      213: 158651581902343533
+    second: ash_death_init_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ash_idle_animation 1_0
+      name: ash_death_init_0
       rect:
         serializedVersion: 2
-        x: 92
-        y: 0
-        width: 322
-        height: 369
+        x: 113
+        y: 12
+        width: 352
+        height: 412
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4fb65d59d234afa30800000000000000
-      internalID: 4249783061443865588
+      spriteID: f279b376a7e641d30800000000000000
+      internalID: 4401264207844841263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ash_idle_animation 1_1
+      name: ash_death_init_1
       rect:
         serializedVersion: 2
-        x: 604
-        y: 0
-        width: 319
-        height: 376
+        x: 596
+        y: 12
+        width: 364
+        height: 416
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea170932e99c3dce0800000000000000
-      internalID: -1381538979633925714
+      spriteID: 0934d3ed138285da0800000000000000
+      internalID: -5955966312550415472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ash_idle_animation 1_2
+      name: ash_death_init_2
       rect:
         serializedVersion: 2
-        x: 1125
+        x: 1053
         y: 0
-        width: 311
-        height: 384
+        width: 386
+        height: 386
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0509019f60390c170800000000000000
-      internalID: 8196712979972001872
+      spriteID: 0502c75993c6a4d90800000000000000
+      internalID: -7112753666901401520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ash_idle_animation 1_3
+      name: ash_death_init_3
       rect:
         serializedVersion: 2
-        x: 1634
-        y: 0
-        width: 320
-        height: 382
+        x: 1566
+        y: 2
+        width: 359
+        height: 355
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +206,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b79c30e1c314eaa20800000000000000
-      internalID: 3075467321998035323
+      spriteID: bbee536c24b09d1c0800000000000000
+      internalID: -4478535973022077253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ash_death_init_4
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 2
+        width: 359
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6dc75ee5c4a33200800000000000000
+      internalID: 158651581902343533
       vertices: []
       indices: 
       edges: []
@@ -223,10 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ash_idle_animation 1_0: 4249783061443865588
-      ash_idle_animation 1_1: -1381538979633925714
-      ash_idle_animation 1_2: 8196712979972001872
-      ash_idle_animation 1_3: 3075467321998035323
+      ash_death_init_0: 4401264207844841263
+      ash_death_init_1: -5955966312550415472
+      ash_death_init_2: -7112753666901401520
+      ash_death_init_3: -4478535973022077253
+      ash_death_init_4: 158651581902343533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
