@@ -448,10 +448,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 107058022809676395, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6819685119780777998, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -463,10 +459,6 @@ PrefabInstance:
     - target: {fileID: 7078328412400213699, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -57.299988
-      objectReference: {fileID: 0}
-    - target: {fileID: 8652332277817582220, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15542,6 +15534,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 62901968422666060, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 62901968422666060, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5002965962069388933, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -15581,6 +15581,26 @@ PrefabInstance:
     - target: {fileID: 5002965962069388933, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910191438371492863, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: seedRows
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: fireRadius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078844864008200868, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
+      propertyPath: numTumbleweeds
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8649009401034233054, guid: 5c2b31091473841ff809025fbbbe7564, type: 3}
       propertyPath: m_Name

@@ -307,7 +307,6 @@ public class GameManager : MonoBehaviour
         {
             CutsceneManager.Instance.PlayMeetBobbyCutscene();
         }
-
     }
 
     /// <summary>
