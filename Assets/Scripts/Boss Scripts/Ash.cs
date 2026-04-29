@@ -407,10 +407,13 @@ public class Ash : Boss
         
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
-
-        if (attackChoice < 4) 
+        if (scatterCount < currentPhase && scatterCount != 0)
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase + 1)
+            attackChoice = 0;
+        }
+        if (attackChoice < 5) 
+        {
+            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase )
             {
                 TransitionToMolotovAttack();
                 scatterCount = 0;
@@ -484,7 +487,7 @@ public class Ash : Boss
                     currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
                     break;
                 case 2:
-                    currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 3) + random.Next(3)); //Last 2
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); //First 3
                     break;
             }
             i++;
