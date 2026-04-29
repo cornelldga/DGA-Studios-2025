@@ -45,6 +45,7 @@ public class Granny : Boss
     public bool contractDestroyed = false;
     private int initialBossCount;
     private bool doubleContract = false;
+    private bool pickedContract = false;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
@@ -106,6 +107,7 @@ public class Granny : Boss
         animator.SetBool("isWalking", false);
         animator.SetBool("isSingleIdle", false);
         animator.SetBool("isDoubleIdle", false);
+        animator.SetBool("PickedUp", false);
     }
 
     private void UpdateIdle()
@@ -159,7 +161,6 @@ public class Granny : Boss
     /// </summary>
     private void EnableRandomBosses()
     {
-        animator.SetBool("isHit", false);
         if (bossActive) return;
 
         if (bosses.Count == 0 && availableBosses.Count == 0)
@@ -171,10 +172,13 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
+            animator.SetBool("isSingle", false);
+            animator.SetBool("isHit", false);
             animator.SetBool("isDouble", true);
         }
         else if (bosses.Count > 0)
         {
+            animator.SetBool("isHit", false);
             animator.SetBool("isSingle", true);
         }
         return;
@@ -274,6 +278,7 @@ public class Granny : Boss
         Vector2 dist = startingPoint - rb.position;
         if (dist.magnitude < 0.1)
         {
+            if (pickedContract) animator.SetBool("PickedUp", true);
             TransitionToIdle();
         }
         else
@@ -291,6 +296,7 @@ public class Granny : Boss
             {
                 currentDroppedContracts.Remove(collision.gameObject);
                 Destroy(collision.gameObject);
+                pickedContract = true;
                 if (currentDroppedContracts.Count <= 0)
                 {
                     TransitionToReturning();
@@ -343,7 +349,14 @@ public class Granny : Boss
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
 
-        animator.SetBool("isHit", true);
+        if (doubleContract)
+        {
+            animator.SetBool("isHit2", true);
+        }
+        else
+        {
+            animator.SetBool("isHit", true);
+        }
     }
 
     public override void Attack()
