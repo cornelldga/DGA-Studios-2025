@@ -91,37 +91,52 @@ public class GrannyPhase2 : Boss
         sprite = GetComponent<SpriteRenderer>();
 
         machineTimer = 0;
-        stateTimer = 0;
-        currentState = State.ComboAttack; // TODO Change
-        // TODO remove later. For now, start with Combo Attack
-        TransitionToComboAttack();
-        // TransitionToLazer(); // Set starting state to lazer
     }
 
     // Update is called once per frame
     public override void Update()
     {
         base.Update();
-        stateTimer -= Time.deltaTime;
+        //stateTimer -= Time.deltaTime;
         UpdateFlip();
-        Debug.Log(currentState);
-        switch (currentState)
+        //switch (currentState)
+        //{
+        //    case State.ComboAttack:
+        //        UpdateComboAttacks();
+        //        break;
+        //    case State.Lazer:
+        //        UpdateLazer();
+        //        break;
+        //    case State.MachineGun:
+        //        UpdateMachineGun();
+        //        break;
+        //    case State.Punch:
+        //        UpdatePunch();
+        //        break;
+        //}
+    }
+
+    public override void Attack()
+    {
+        base.Attack();
+        int currentAttack = Random.Range(1, 5);
+        Debug.Log(currentAttack);
+        switch (currentAttack)
         {
-            case State.ComboAttack:
-                UpdateComboAttacks();
+            case 1:
+                Punch();
                 break;
-            case State.Lazer:
-                UpdateLazer();
+            case 2:
+                selectComboAttack();
                 break;
-            case State.MachineGun:
-                UpdateMachineGun();
+            case 3:
+                MachineGun();
                 break;
-            case State.Punch:
-                UpdatePunch();
+            case 4:
+                Laser();
                 break;
         }
     }
-
     /// <summary>
     /// Checks if the player sprite needs to update and updates the bullet origin
     /// </summary>
@@ -142,43 +157,43 @@ public class GrannyPhase2 : Boss
         }
     }
 
-    private void UpdateLazer()
+    private void Laser()
     {
         // Shouldn't need to do anything
+        return;
     }
 
 
-    private void UpdateMachineGun()
+    private void MachineGun()
     {
         //track the player location as you shoot out bullets
         //granny moves as she shoots machine gun
         //if player enters region above or below granny, she stops firing and repositions
-        if (machineTimer == 0)
-        {
-            machineGunRoutine = StartCoroutine(machineGun.DoBulletPattern(this));
-        }
+        machineGunRoutine = StartCoroutine(machineGun.DoBulletPattern(this));
         float angle = Vector2.Angle(GameManager.Instance.player.transform.position, this.transform.position);
         print(angle);
-        if (angle > 150 || angle < 30)
+        while ((angle < 150 && angle > 30) || machineTimer >= machineCooldownConstant)
         {
-            StopCoroutine(machineGunRoutine);
-            TransitionToComboAttack();
-            SetAttackState(false);
-        }
-        if (machineTimer >= machineCooldownConstant)
-        {
-            machineTimer = 0;
-            TransitionToComboAttack();
-        } else
-        {
-            Debug.Log("Firing");
             machineTimer += Time.deltaTime;
         }
+        //if (angle > 150 || angle < 30)
+        //{
+        //    StopCoroutine(machineGunRoutine);
+        //    return;
+        //}
+        //if (machineTimer >= machineCooldownConstant)
+        //{
+        //    StopCoroutine(machineGunRoutine);
+        //    machineTimer = 0;
+        //    return;
+        //} else
 
-          
+        return;
+
+
     }
 
-    private void UpdatePunch()
+    private void Punch()
     {
         // TODO move granny towards the player while using her punch move that is 
         // maybe make the punch a separate hitbox
@@ -225,51 +240,64 @@ public class GrannyPhase2 : Boss
             rb.linearVelocity = direction* punchSpeed;
         // Phase 3: Done
             punch.SetActive(false);
-            TransitionToMachineGun();
+        return;
     }
 
-    private void TransitionToPunch()
-    {
-        currentState = State.Punch;
-        stateTimer = disappearTime + punchingTime;
-        //play the animation for granny disappearing
-    }
+    //private void TransitionToPunch()
+    //{
+    //    currentState = State.Punch;
+    //    stateTimer = disappearTime + punchingTime;
+    //    //play the animation for granny disappearing
+    //}
 
-    private void UpdateComboAttacks()
-    {
-        // Shouldn't need to do anything here
-    }
+    //private void UpdateComboAttacks()
+    //{
+    //    // Shouldn't need to do anything here
+    //}
 
-    private void TransitionToMachineGun()
-    {
-        currentState = State.MachineGun;
-        machineTimer = 0;
-    }
+    //private void TransitionToMachineGun()
+    //{
+    //    currentState = State.MachineGun;
+    //    machineTimer = 0;
+    //}
 
-    private void TransitionToComboAttack()
-    {
-        currentState = State.ComboAttack;
-        StartCoroutine(selectComboAttack());
-    }
+    //private void TransitionToComboAttack()
+    //{
+    //    currentState = State.ComboAttack;
+    //    StartCoroutine(selectComboAttack());
+    //}
 
     private IEnumerator selectComboAttack()
     {
         // TODO: Cycle through 6 combo attacks from design document
-        yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
-        yield return new WaitForSeconds(1.00f);
-        yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
-        yield return new WaitForSeconds(1.00f);
-        yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
-        yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
-        yield return new WaitForSeconds(1.00f);
-        yield return StartCoroutine(PointAttack(dynamitePrefab, flamingBushPrefab, fireDynamiteCount, 1));
-        yield return new WaitForSeconds(1.00f);
-        yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
-
+        int currentCombo = Random.Range(1, 7);
+        switch (currentCombo)
+        {
+            case 1:
+                yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
+                break;
+            case 2:
+        //yield return new WaitForSeconds(1.00f);
+                yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
+                break;
+             case 3:
+        //yield return new WaitForSeconds(1.00f);
+                yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
+                break;
+             case 4:
+        //yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
+                break;
+        //yield return new WaitForSeconds(1.00f);
+             case 5:
+                yield return StartCoroutine(PointAttack(dynamitePrefab, flamingBushPrefab, fireDynamiteCount, 1));
+                break;
+            //yield return new WaitForSeconds(1.00f);
+             case 6:
+                yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
+                break;
+        }
         yield return new WaitForSeconds(0.25f);
-        Debug.Log("Transitioning from combo to punch");
-        TransitionToPunch();
     }
 
     private IEnumerator TrailAttack(GameObject prefab, int bullsCount, float trailLifeTime)
@@ -320,17 +348,16 @@ public class GrannyPhase2 : Boss
         bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                     - bulletOrigin.transform.position;
         yield return StartCoroutine(lazerShot.DoBulletPattern(this));
-        TransitionToPunch();
     }
 
     public override void SetPhase()
     {
+        healthBarAnimator.SetTrigger("PhaseChange");
         switch (currentPhase)
         {
             case 1:
                 break;
             case 2:
-                currentState = State.Lazer;
                 break;
         }
     }
