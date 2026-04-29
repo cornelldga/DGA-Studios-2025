@@ -188,6 +188,7 @@ public class Granny : Boss
         Transform bossCanvas = boss.transform.Find("Boss Canvas");
         if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
         boss.GetComponent<Boss>().isInvulnerable = true;
+        boss.GetComponent<Boss>().isSummoned = true;
 
         availableBosses.Add(boss);
         bosses.Remove(bosses[index]);
@@ -203,6 +204,7 @@ public class Granny : Boss
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
             boss.GetComponent<Boss>().isInvulnerable = true;
+            boss.GetComponent<Boss>().isSummoned = true;
 
             availableBosses.Add(boss);
             bosses.Remove(bosses[i]);

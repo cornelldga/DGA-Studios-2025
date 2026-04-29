@@ -31,6 +31,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] protected int currentPhase = 0;
 
     public bool isInvulnerable = false;
+    public bool isSummoned = false;
 
     bool isAttacking;
     protected float attackCooldown;
@@ -131,7 +132,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         rb.simulated = false;
         defeated = true;
 
-        
+
     }
     /// <summary>
     /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub.
