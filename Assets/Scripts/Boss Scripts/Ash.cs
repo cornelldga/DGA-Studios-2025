@@ -429,14 +429,6 @@ public class Ash : Boss
     }
 
     /// <summary>
-    /// Sets the phase of the boss. Used for changing behavior based on health thresholds.
-    /// </summary>
-    public override void SetPhase()
-    {
-       healthBarAnimator.SetTrigger("PhaseChange");
-    }
-
-    /// <summary>
     /// Sets the new location to wander to. If there are seeds in the scene, it will target the nearest seed. Otherwise, it will pick a random point within a certain radius.
     /// </summary>
     private void SetNewWanderTarget()
