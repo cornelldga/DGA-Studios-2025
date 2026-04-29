@@ -81,6 +81,7 @@ public class DrillGuy : Boss
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
+    [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -171,6 +172,7 @@ public class DrillGuy : Boss
         posBeforeDriving = this.transform.position;
         float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
         float[] trackXs = {-11.5f,11.5f,11.5f,-11.5f}; //tl, tr, br, bl
+
         for (int i = 0; i < minecartCycles; i++)
         {
             yield return StartCoroutine(MoveAlongtracks(trackYs, trackXs));
@@ -283,7 +285,6 @@ public class DrillGuy : Boss
             TransitionToEntering();
         }
        else if (!minecartRoutineStarted){
-            //walk to position
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
             StartCoroutine(MinecartAttackRoutine());
             minecartRoutineStarted = true;
@@ -509,9 +510,8 @@ public class DrillGuy : Boss
             }
             else{
 
-                //what if only does minecart attack if close enough to tracks?? (with 70%)
-                if (UnityEngine.Random.value < 0.5) TransitionToThrowing();
-                else TransitionToDriving();
+                if (UnityEngine.Random.value <= minecartAttackProbablity) TransitionToDriving();
+                else TransitionToThrowing();
                 
             }
         }
