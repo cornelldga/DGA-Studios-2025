@@ -48,6 +48,10 @@ public class Granny : Boss
     private bool doubleContract = false;
     private bool pickedContract = false;
 
+    [Header("Attack Settings")]
+    [Tooltip("Pattern fired periodically while Granny is holding the contract")]
+    [SerializeField] BulletPattern holdingContractAttack;
+
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
     [SerializeField] private float returnTime = 4f;
@@ -338,6 +342,17 @@ public class Granny : Boss
         base.TakeDamage(1);
     }
 
+    public override void Attack()
+    {
+        if (currentState != State.HoldingContract || holdingContractAttack == null)
+        {
+            SetAttackCooldown(0.5f);
+            return;
+        }
+        base.Attack();
+        StartCoroutine(holdingContractAttack.DoBulletPattern(this));
+    }
+
     /// <summary>
     /// Drops contract when taking any damage instead of dying
     /// </summary>
@@ -364,11 +379,6 @@ public class Granny : Boss
         {
             animator.SetBool("isHit", true);
         }
-    }
-
-    public override void Attack()
-    {
-        // Granny does not shoot — skip base bullet logic
     }
 
     public override void SetPhase()
