@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
             if (setProgression)
             {
+                Debug.Log("Progression Set to " + setProgression.ToString());
                 PlayerPrefs.SetInt("progression", progression);
             }
             pauseMenu.SetActive(false);
@@ -306,7 +307,6 @@ public class GameManager : MonoBehaviour
         {
             CutsceneManager.Instance.PlayMeetBobbyCutscene();
         }
-
     }
 
     /// <summary>
