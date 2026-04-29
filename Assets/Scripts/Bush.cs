@@ -63,54 +63,7 @@ public class Bush : MonoBehaviour
             whippedTimer = 0f;
         }
         if (isOnFire) witherTimer += Time.deltaTime;
-        //GameManager.Instance.transform.position).magnitude
-        //& ((ash.transform.position - .7f*Vector3.up) - this.transform.position).magnitude < 2
-        if ((ash.transform.position.y - ashFootOffset) >=  transform.position.y )
-        {
-            frontOfAsh = true;
-        }
-        else
-        {
-            frontOfAsh = false;
-        }
-        //& ((GameManager.Instance.player.transform.position - .3f * Vector3.up)  - this.transform.position).magnitude < 2)
-        if ((GameManager.Instance.player.transform.position.y - dukeFootOffset) >= transform.position.y )
-        {
-            frontOfDuke = true;
-        }
-        else
-        {
-            frontOfDuke = false;
-        }
-
-        if (frontOfDuke)
-        {
-            if (frontOfAsh)
-            {
-                sr.sortingOrder = 5;
-            }
-            else
-            {
-                sr.sortingOrder = 3;
-                ashSR.sortingOrder = 4;
-                plyrSR.sortingOrder = 2;
-            }
-
-        }
-        else
-        {
-            if (frontOfAsh)
-            {
-                sr.sortingOrder = 3;
-                ashSR.sortingOrder = 2;
-                plyrSR.sortingOrder = 4;
-            }
-            else
-            {
-                
-                sr.sortingOrder = 1;
-            }
-        }
+      
         if (isWhipped) whippedTimer += Time.deltaTime;
     }
 
