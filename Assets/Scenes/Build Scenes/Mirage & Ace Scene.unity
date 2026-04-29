@@ -1001,7 +1001,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1187975075278641551, guid: 533154baadee2a94e9bf03d410d6391e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1217,7 +1217,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1187975075278641551, guid: 533154baadee2a94e9bf03d410d6391e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1370,7 +1370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 142490411272053532, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 142490411272053532, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1403,6 +1403,10 @@ PrefabInstance:
     - target: {fileID: 3500634979462521440, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
       propertyPath: m_Name
       value: Flower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449782843590197393, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1901,6 +1905,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671241919}
     m_Modifications:
+    - target: {fileID: 1920189740314320229, guid: fd59e32d5da5e444da01b48d1608b4f3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8002097542951530403, guid: fd59e32d5da5e444da01b48d1608b4f3, type: 3}
       propertyPath: m_Name
       value: Floor Cards (1)
@@ -2187,7 +2195,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 9004737031736891111, guid: d6c3eb456b8cd4441b6014c83a8a39f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2208,7 +2216,7 @@ Transform:
   m_GameObject: {fileID: 1205616377}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.119999886, y: 4.93, z: -1}
+  m_LocalPosition: {x: 0.119999886, y: 4.93, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22516,6 +22524,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5960544633556833976, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.97
@@ -22526,7 +22538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22923,7 +22935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 142490411272053532, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 142490411272053532, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22957,6 +22969,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flower
       objectReference: {fileID: 0}
+    - target: {fileID: 4449782843590197393, guid: 5b9a7c95d5d9b7c428951cbe200d5536, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22970,6 +22986,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671241919}
     m_Modifications:
+    - target: {fileID: 5960544633556833976, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.39
@@ -22980,7 +23000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7722004609948057989, guid: 02dff252fb3bc3842a391169a575db14, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23092,6 +23112,10 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1920189740314320229, guid: fd59e32d5da5e444da01b48d1608b4f3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8002097542951530403, guid: fd59e32d5da5e444da01b48d1608b4f3, type: 3}
       propertyPath: m_Name
       value: Floor Cards
@@ -23146,15 +23170,15 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 843690091}
+  - {fileID: 1344857223}
   - {fileID: 2123550125}
-  - {fileID: 309325213}
   - {fileID: 634855318}
   - {fileID: 1958840266}
   - {fileID: 416365286}
-  - {fileID: 1344857223}
+  - {fileID: 671241919}
+  - {fileID: 309325213}
   - {fileID: 203842130}
   - {fileID: 779541904}
   - {fileID: 1154324150}
   - {fileID: 526022527}
-  - {fileID: 671241919}
   - {fileID: 6349717325462385775}
