@@ -58,12 +58,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] TMP_Text whipCooldownText;
     [SerializeField] Animator playerHealthAnimator;
     [SerializeField] TMP_Text playerHealthText;
-
-    // Sprite fields temporary. These should be removed and change the health animator
-    // [SerializeField] Animator healthAnimator;
-    [SerializeField] Sprite healthySprite;
-    [SerializeField] Sprite midSprite;
-    [SerializeField] Sprite lowHealthSprite;
     [SerializeField] float midHealthThreshold;
     [SerializeField] float criticalThreshold;
 

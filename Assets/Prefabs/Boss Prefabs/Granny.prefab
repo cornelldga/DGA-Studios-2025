@@ -160,6 +160,7 @@ Transform:
   - {fileID: 7202878485651940101}
   - {fileID: 2847181502553635105}
   - {fileID: 712806250393988786}
+  - {fileID: 6082474008645625747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3135999659832902596
@@ -233,7 +234,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -296,7 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granny
-  bossProgression: 5
+  animator: {fileID: 8633898269983300228}
+  bossProgression: 6
   bossName: Granny, The Mogul
   maxHealth: 4
   healthBar: {fileID: 5187320019946879446}
@@ -349,15 +351,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef2e79e96235e64fa9d635e8ea15908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
+  animator: {fileID: 8633898269983300228}
   bossProgression: 0
-  bossName: Granny
+  bossName: Granny, Super Awesome Granny
   maxHealth: 5
-  healthBar: {fileID: 2861438271388821434}
+  healthBar: {fileID: 5187320019946879446}
   healthBarAnimator: {fileID: 8633898269983300228}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
-  - 50
+  - 0.5
   currentPhase: 0
   isInvulnerable: 0
   attackRate: 1
@@ -368,9 +371,29 @@ MonoBehaviour:
   sadSprite: {fileID: 0}
   customTextColor: 0
   textColor: {r: 0, g: 0, b: 0, a: 0}
+  baseSpeed: 5
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 11400000, guid: db008a601788e3943927a1a525d107b9, type: 2}
-  machineCooldownConstant: 0
+  machineCooldownConstant: 3
+  fireBullsCount: 1
+  smokeBullsCount: 1
+  dynamiteBullsCount: 1
+  fireSmokeCount: 1
+  fireDynamiteCount: 1
+  smokeDynamiteCount: 1
+  bullsTime: 1
+  bullPrefab: {fileID: 4478709032104348580, guid: 0529117e1a599354484d49f998f2f5b2, type: 3}
+  flamingBushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
+  smokePrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
+  dynamitePrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
+  punchingTime: 2.5
+  disappearTime: 1
+  punchRepositionOffset: 1
+  punchSpeed: 1
+  punch: {fileID: 6754026737141735589}
+  punchPivot: {fileID: 6082474008645625747}
+  leftBound: {fileID: 0}
+  rightBound: {fileID: 0}
 --- !u!95 &3893037239640246396
 Animator:
   serializedVersion: 7
@@ -393,6 +416,129 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &6754026737141735589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7560015199446204853}
+  - component: {fileID: 3686005173321657301}
+  - component: {fileID: 2764539848510701066}
+  m_Layer: 8
+  m_Name: Punch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7560015199446204853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754026737141735589}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5270005, y: 0.0018630442, z: 1}
+  m_LocalScale: {x: 0.6168996, y: 0.28476244, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6082474008645625747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3686005173321657301
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754026737141735589}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &2764539848510701066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754026737141735589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a09c42a6280f5c4c8386c058aec50b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrannyPunchZone
+--- !u!1 &7149972652163323436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6082474008645625747}
+  m_Layer: 8
+  m_Name: Punch Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6082474008645625747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149972652163323436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.006, y: -0.092, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7560015199446204853}
+  m_Father: {fileID: 6479919401018217479}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6383838750220342359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -507,17 +653,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
   m_PrefabInstance: {fileID: 6383838750220342359}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2861438271388821434 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9160934584145638381, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &4977892287978850841 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}

@@ -868,7 +868,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1187975075278641551, guid: 533154baadee2a94e9bf03d410d6391e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1084,7 +1084,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1187975075278641551, guid: 533154baadee2a94e9bf03d410d6391e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -27325,12 +27325,13 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 843690091}
+  - {fileID: 1344857223}
   - {fileID: 2123550125}
-  - {fileID: 309325213}
   - {fileID: 634855318}
   - {fileID: 1958840266}
   - {fileID: 416365286}
-  - {fileID: 1344857223}
+  - {fileID: 671241919}
+  - {fileID: 309325213}
   - {fileID: 203842130}
   - {fileID: 779541904}
   - {fileID: 1154324150}
