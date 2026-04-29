@@ -409,7 +409,7 @@ public class Ash : Boss
         {
             attackChoice = 0;
         }
-        if (attackChoice < 5) 
+        if (attackChoice < 4) 
         {
             if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase )
             {
@@ -743,7 +743,7 @@ public class Ash : Boss
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
-                seedScript.target = currentSeedLocation + th*randStep;
+                seedScript.target = currentSeedLocation - seedStep.normalized * (UnityEngine.Random.value / 2 ) + th*randStep;
                 seedScript.SeedReset();
                 
                 randStep = UnityEngine.Random.value/2 + .5f;

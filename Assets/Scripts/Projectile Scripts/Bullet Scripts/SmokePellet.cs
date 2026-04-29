@@ -129,6 +129,11 @@ public class SmokePellet : MonoBehaviour
         }
     }
 
+    public void setSmokeLength(float lifetime, float fadeStartTime)
+    {
+        this.lifetime = lifetime;
+        this.fadeStartTime = fadeStartTime;
+    }
     public void Push(Vector2 angle)
     {
         if (rb != null && !whipped)
