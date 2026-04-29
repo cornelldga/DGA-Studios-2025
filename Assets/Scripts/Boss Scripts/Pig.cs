@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-    [SerializeField] PigRider pigRider;
+    [SerializeField] Drover pigRider;
     [SerializeField] float ramDamage = 1f;
     [Tooltip("The layers that represent walls for collision detection")]
     public LayerMask wallLayers;
@@ -39,6 +39,10 @@ public class Pig : MonoBehaviour
     [SerializeField] private float maxStartDelay = 2f;
     [Tooltip("Seconds pig is stunned after colliding")]
     [SerializeField] float stunTime;
+    [Tooltip("Distance at which pig registers a hit on Pig Rider")]
+    [SerializeField] private float pigRiderHitDistance = 0.8f;
+    [Tooltip("Knockback force when hit by the whip")]
+    [SerializeField] private float whipKnockbackForce = 8f;
     private float patrolDirectionX = 1f; // 1 for right, -1 for left
     private float patrolDirectionY = 1f; // Same meaning for as patrolDirectionX
     private float leftBoundary;
@@ -54,7 +58,7 @@ public class Pig : MonoBehaviour
     [SerializeField] private float arrivalThreshold = 0.1f;
 
     private Vector2 targetPosition;
-    private Vector2 chargeDirection;
+    protected Vector2 chargeDirection;
     private Vector2 startingPoint;
     private float currentSpeed;
     private Rigidbody2D rb;
@@ -142,6 +146,22 @@ public class Pig : MonoBehaviour
     {
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxChargeSpeed);
         rb.linearVelocity = chargeDirection * currentSpeed;
+
+        if (pigRider.IsMarked() && Vector2.Distance(transform.position, pigRider.transform.position) < pigRiderHitDistance)
+        {
+            HitPigRider();
+        }
+    }
+
+    private void HitPigRider()
+    {
+        currentState = State.Stunned;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        animator.SetBool("isStunned", true);
+        pigRider.isInvulnerable = false;
+        impulseSource.GenerateImpulse(enemyShakeForce);
+        StartCoroutine(StunCoroutine());
     }
 
     /// <summary>
@@ -242,7 +262,7 @@ public class Pig : MonoBehaviour
         animator.SetBool("isCharging", false);
     }
 
-    private void TransitionToCharging()
+    protected void TransitionToCharging()
     {
         pigCollider.enabled = true;
         animator.SetBool("isCharging", true);
@@ -265,7 +285,13 @@ public class Pig : MonoBehaviour
 
         animator.SetBool("isStunned", true);
 
-        if (collision.gameObject.CompareTag("Player")){
+        if (collision.gameObject == pigRider.gameObject)
+        {
+            pigRider.isInvulnerable = false;
+            impulseSource.GenerateImpulse(enemyShakeForce);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
             GameManager.Instance.player.TakeDamage(ramDamage);
             if (impulseSource != null)
             {
@@ -297,6 +323,17 @@ public class Pig : MonoBehaviour
         if(currentState == State.Charging)
         {
             HandleCharge(collision);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Whip"))
+        {
+            Vector2 knockbackDir = ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
+            chargeDirection = knockbackDir;
+            rb.linearVelocity = knockbackDir * whipKnockbackForce;
+            impulseSource.GenerateImpulse(playersShakeForce);
         }
     }
 }

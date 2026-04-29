@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// GameObject that reads triggers that occur specifically in tutorial
@@ -11,18 +12,28 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] bool canInteract;
 
-    // Update is called once per frame
-    void Update()
+    private float hitTime;
+    private float hitsInRow;
+
+    private void Start()
     {
-        OnStart();
+        hitTime = 0;
+        hitsInRow = 1;
     }
 
-    void OnStart()
+    private void OnEnable()
     {
-        if (TutorialTrigger.Equals("Start"))
+        if (TutorialTrigger == "Start")
         {
-            OnInteract();
+            canInteract = true;
+            StartCoroutine(StartTutorialAfterSceneLoad());
         }
+    }
+
+    private IEnumerator StartTutorialAfterSceneLoad()
+    {
+        yield return new WaitForSeconds(0.2f);
+        OnInteract();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +64,30 @@ public class TutorialManager : MonoBehaviour
                     OnInteract();
                 }
                 break;
+            case ("Cider"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
+                {
+                    OnInteract();
+                }
+                break;
+            case ("Ginger"):
+                if (collision.gameObject.layer == LayerMask.NameToLayer("Base") && !GameManager.Instance.GetDialogueManager.OngoingDialogue())
+                {
+                    if (Time.time - hitTime < 0.261 && hitsInRow < 4)
+                    {
+                        hitsInRow++;
+                    }
+                    else if (Time.time - hitTime < 0.261 && hitsInRow >= 4)
+                    {
+                        OnInteract();
+                    }
+                    else if (Time.time - hitTime >= 0.261)
+                    {
+                        hitsInRow = 1;
+                    }
+                    hitTime = Time.time;
+                }
+                break;
             default:
                 break;
         }
@@ -60,10 +95,26 @@ public class TutorialManager : MonoBehaviour
 
     void OnInteract()
     {
-        if (canInteract)
+        if (!canInteract || interactable == null) return;
+
+        IInteractable target = interactable.GetComponent<IInteractable>();
+
+        if (target != null)
         {
-            interactable.GetComponent<IInteractable>().Interact();
+            GameManager.Instance.GetDialogueManager.SetNameTextVisible(false);
+
+            target.Interact();
             canInteract = false;
+            StartCoroutine(ResetNameTextAfterDialogue());
         }
+    }
+
+    private IEnumerator ResetNameTextAfterDialogue()
+    {
+        DialogueManager dialogueManager = GameManager.Instance.GetDialogueManager;
+
+        yield return new WaitUntil(() => !dialogueManager.gameObject.activeSelf);
+
+        dialogueManager.SetNameTextVisible(true);
     }
 }
