@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granny
+  animator: {fileID: 8633898269983300228}
   bossProgression: 6
   bossName: Granny, The Mogul
   maxHealth: 4
@@ -350,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef2e79e96235e64fa9d635e8ea15908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
+  animator: {fileID: 0}
   bossProgression: 0
   bossName: Granny
   maxHealth: 5
