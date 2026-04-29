@@ -557,7 +557,7 @@ public class Ash : Boss
         {
             GameObject seed;
             Seed seedScript;
-            if (UnityEngine.Random.value < .5f)
+            if (UnityEngine.Random.value < 0f)
             {
                 seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seedScript = seed.GetComponent<Seed>();
@@ -740,22 +740,27 @@ public class Ash : Boss
             for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
             {
                 th = Vector2.Perpendicular(seedStep).normalized * fireRadius * t;
+                seeds[seedIncrementor].SetActive(true);
                 //seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seed = seeds[seedIncrementor];
-                seeds[seedIncrementor].SetActive(true);
+                seed.transform.position = this.transform.position;
+                seed.GetComponent<Rigidbody2D>().linearVelocityX = ((currentSeedLocation + th * randStep).x - this.transform.position.x) / basicSeedLandTime; ;
+
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
                 seedScript.target = currentSeedLocation + th*randStep;
+                seedScript.SeedReset();
+                
                 randStep = UnityEngine.Random.value/2 + .5f;
                 seedIncrementor++;
+
             }
             currentSeedLocation += seedStep;
         }
     }    
       //Throws Dynamite at the holes (phase 2)
     private void ThrowMolotovAtBushes()
-    
     {
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         //filter out bushes that are already on fire
