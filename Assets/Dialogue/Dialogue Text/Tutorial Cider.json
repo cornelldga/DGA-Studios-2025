@@ -22,6 +22,12 @@
             "dialogueID": "3_dialogue",
             "dialogueText": "Press Tab to switch back to the ginger ale mixer to make your accuracy normal again.",
             "emotion": 0,
+            "nextDialogueID": "4_dialogue"
+        },
+        {
+            "dialogueID": "4_dialogue",
+            "dialogueText": "You may also want to press Q again to switch back to the Beer base drink!",
+            "emotion": 0,
             "nextDialogueID": ""
         }
     ]

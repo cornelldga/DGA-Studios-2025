@@ -1126,6 +1126,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
     - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: bossProgression
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038771693700848012, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 21300000, guid: fec09dac9d0ddcf43a80ad1dbf1262a1, type: 3}

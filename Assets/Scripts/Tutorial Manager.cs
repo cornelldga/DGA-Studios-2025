@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// GameObject that reads triggers that occur specifically in tutorial
@@ -20,18 +21,19 @@ public class TutorialManager : MonoBehaviour
         hitsInRow = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        OnStart();
+        if (TutorialTrigger == "Start")
+        {
+            canInteract = true;
+            StartCoroutine(StartTutorialAfterSceneLoad());
+        }
     }
 
-    void OnStart()
+    private IEnumerator StartTutorialAfterSceneLoad()
     {
-        if (TutorialTrigger.Equals("Start"))
-        {
-            OnInteract();
-        }
+        yield return new WaitForSeconds(0.2f);
+        OnInteract();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,10 +95,26 @@ public class TutorialManager : MonoBehaviour
 
     void OnInteract()
     {
-        if (canInteract)
+        if (!canInteract || interactable == null) return;
+
+        IInteractable target = interactable.GetComponent<IInteractable>();
+
+        if (target != null)
         {
-            interactable.GetComponent<IInteractable>().Interact();
+            GameManager.Instance.GetDialogueManager.SetNameTextVisible(false);
+
+            target.Interact();
             canInteract = false;
+            StartCoroutine(ResetNameTextAfterDialogue());
         }
+    }
+
+    private IEnumerator ResetNameTextAfterDialogue()
+    {
+        DialogueManager dialogueManager = GameManager.Instance.GetDialogueManager;
+
+        yield return new WaitUntil(() => !dialogueManager.gameObject.activeSelf);
+
+        dialogueManager.SetNameTextVisible(true);
     }
 }
