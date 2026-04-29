@@ -51,6 +51,10 @@ public class Granny : Boss
     [Header("Attack Settings")]
     [Tooltip("Pattern fired periodically while Granny is holding the contract")]
     [SerializeField] BulletPattern holdingContractAttack;
+    [Tooltip("Pattern fired periodically while Granny is not holding contract")]
+    [SerializeField] BulletPattern normalAttack;
+    [Tooltip("Pattern fired periodically while Granny is holding two contracts")]
+    [SerializeField] BulletPattern doubleHoldingContractAttack;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]

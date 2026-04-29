@@ -301,7 +301,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6832567034247790384, guid: dbc9a525cad9a464492a435d211717cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -430,6 +430,8 @@ MonoBehaviour:
   currentDroppedContracts: []
   contractDestroyed: 0
   holdingContractAttack: {fileID: 11400000, guid: 3680d6c023f694caf817a9555ab3298c, type: 2}
+  normalAttack: {fileID: 0}
+  doubleHoldingContractAttack: {fileID: 0}
   returnTime: 1.5
   shieldVisual: {fileID: 2248442463614324335}
 --- !u!114 &7540226778721594879

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6490914910762157081}
   - component: {fileID: 5139313081211936209}
   - component: {fileID: 1882487745644665769}
-  - component: {fileID: 2817907862771823534}
   m_Layer: 9
   m_Name: Homing Coin
   m_TagString: Untagged
@@ -87,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 9096036054393356294, guid: 5f597e3362fee0b4480fb5fc88a69619, type: 3}
+  m_Sprite: {fileID: 7374007898200069064, guid: 0347a0cf00c5d4a418f8e084e7116fc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -192,28 +191,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.25
---- !u!95 &2817907862771823534
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478843839408097374}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0e190af214ff1b14eb3091dd1fd49c79, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7756851233065420184
 PrefabInstance:
   m_ObjectHideFlags: 0
