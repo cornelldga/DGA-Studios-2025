@@ -1,0 +1,34 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "As you can see, this mixer makes you a lot faster.",
+            "emotion": 0,
+            "nextDialogueID": "1_dialogue"
+        },
+        {
+            "dialogueID": "1_dialogue",
+            "dialogueText": "However, if you try to shoot, you'll find that you are a lot less accurate.",
+            "emotion": 0,
+            "nextDialogueID": "2_dialogue"
+        },
+        {
+            "dialogueID": "2_dialogue",
+            "dialogueText": "For this challenge, you need to hit the target five times in a row without missing.",
+            "emotion": 0,
+            "nextDialogueID": "3_dialogue"
+        },
+        {
+            "dialogueID": "3_dialogue",
+            "dialogueText": "Press Tab to switch back to the ginger ale mixer to make your accuracy normal again.",
+            "emotion": 0,
+            "nextDialogueID": "4_dialogue"
+        },
+        {
+            "dialogueID": "4_dialogue",
+            "dialogueText": "You may also want to press Q again to switch back to the Beer base drink!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+    ]
+}

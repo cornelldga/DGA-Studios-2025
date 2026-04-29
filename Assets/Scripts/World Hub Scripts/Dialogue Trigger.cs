@@ -12,11 +12,15 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [SerializeField] private TextAsset jsonTextFile;
     [SerializeField] private Sprite dialogueBoxSprite;
     [SerializeField] private DialogueType dialogueType = DialogueType.NPC;
+    [SerializeField] bool customTextColor;
+    [SerializeField] Color textColor;
 
     [Header("Boss-only Fields")]
     [SerializeField] private Sprite neutralSprite;
     [SerializeField] private Sprite happySprite;
     [SerializeField] private Sprite sadSprite;
+    [SerializeField] public int bossProgression;
+    [SerializeField] public GameObject quest;
     private Dictionary<DialogueEmotion, Sprite> emotionDictionary = new Dictionary<DialogueEmotion, Sprite>();
 
     [Header("Boss and interactable Fields")]
@@ -34,6 +38,16 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             emotionDictionary[DialogueEmotion.Happy] = happySprite;
             emotionDictionary[DialogueEmotion.Sad] = sadSprite;
         }
+        if (dialogueType == DialogueType.Boss)
+        {
+            if (bossProgression == PlayerPrefs.GetInt("progression",0))
+            {
+                quest.SetActive(true);
+            } else
+            {
+                quest.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
@@ -43,10 +57,12 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         if (!GameManager.Instance.GetDialogueManager.OngoingDialogue())
         {
-            GameManager.Instance.GetDialogueManager.StartDialogue(jsonTextFile, dialogueBoxSprite, emotionDictionary, sceneName, dialogueType);
+            GameManager.Instance.GetDialogueManager.StartDialogue(jsonTextFile, dialogueBoxSprite, emotionDictionary,
+                null, dialogueType, sceneName, customTextColor ? textColor : null);
         }
 
     }
+
     /// <summary>
     /// Will trigger dialogue when interacted.
     /// </summary>

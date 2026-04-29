@@ -1,67 +1,67 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "0_start",
+            "dialogueID": "1_start",
             "dialogueText": "Hi there. You must be the owner of this new bar.",
             "emotion": 0,
-            "nextDialogueID": "0_next"
+            "nextDialogueID": "1_next"
         }, {
-            "dialogueID": "0_next",
+            "dialogueID": "1_next",
             "dialogueText": "Seems a bit empty. I wonder how long you'll last...",
             "emotion": 0,
-            "nextDialogueID": "0_end"
+            "nextDialogueID": "1_end"
         }, {
-            "dialogueID": "0_end",
+            "dialogueID": "1_end",
             "dialogueText": "Oh, never mind, dear. I'm sure it'll all work out.",
             "emotion": 0,
             "nextDialogueID": ""
         },
 
         {
-            "dialogueID": "1_start",
+            "dialogueID": "2_start",
             "dialogueText": "You're letting those pigs into the saloon?",
             "emotion": 0,
-            "nextDialogueID": "1_next"
+            "nextDialogueID": "2_next"
         }, {
-            "dialogueID": "1_next",
+            "dialogueID": "2_next",
             "dialogueText": "Ha! No one will want to come here with all that stink and noise.",
             "emotion": 0,
-            "nextDialogueID": "1_end"
+            "nextDialogueID": "2_end"
         }, {
-            "dialogueID": "1_end",
+            "dialogueID": "2_end",
             "dialogueText": "I don't even have to get my hands dirty. You're sabotaging yourself.",
             "emotion": 0,
             "nextDialogueID": ""
         },
         {
-            "dialogueID": "2_start",
+            "dialogueID": "3_start",
             "dialogueText": "What's with all that commotion outside?",
             "emotion": 0,
-            "nextDialogueID": "2_next"
+            "nextDialogueID": "3_next"
         }, {
-            "dialogueID": "2_next",
+            "dialogueID": "3_next",
             "dialogueText": "What, Julius? You beat that old skunk?",
             "emotion": 0,
-            "nextDialogueID": "2_end"
+            "nextDialogueID": "3_end"
         }, {
-            "dialogueID": "2_end",
+            "dialogueID": "3_end",
             "dialogueText": "Well, who cares? I already knew he was weak. He's way past his prime.",
             "emotion": 0,
             "nextDialogueID": ""
         },
 
         {
-            "dialogueID": "3_start",
+            "dialogueID": "4_start",
             "dialogueText": "Those useless magicians. All they do is make my money disappear.",
             "emotion": 0,
-            "nextDialogueID": "3_next"
+            "nextDialogueID": "4_next"
         }, {
-            "dialogueID": "3_next",
+            "dialogueID": "4_next",
             "dialogueText": "I heard the fight was a snoozefest. They couldn't even make it entertaining?",
             "emotion": 0,
-            "nextDialogueID": "3_end"
+            "nextDialogueID": "4_end"
         }, {
-            "dialogueID": "3_end",
+            "dialogueID": "4_end",
             "dialogueText": "Well, can't send strangers to handle family business. My granddaughter will teach you to respect the Landry name.",
             "emotion": 0,
             "nextDialogueID": ""
@@ -69,17 +69,17 @@
 
 
         {
-            "dialogueID": "4_start",
+            "dialogueID": "5_start",
             "dialogueText": "Oh, dear, I wish it hadn't come to this. I've given you so many chances.",
             "emotion": 0,
-            "nextDialogueID": "4_next"
+            "nextDialogueID": "5_next"
         }, {
-            "dialogueID": "4_next",
+            "dialogueID": "5_next",
             "dialogueText": "And you've even gotten my own granddaughter to turn against me?",
             "emotion": 0,
-            "nextDialogueID": "4_end"
+            "nextDialogueID": "5_end"
         }, {
-            "dialogueID": "4_end",
+            "dialogueID": "5_end",
             "dialogueText": "I'll set her straight right after I kick you out of this town for good.",
             "emotion": 0,
             "nextDialogueID": ""
@@ -87,36 +87,36 @@
 
 
         {
-            "dialogueID": "5_start",
-            "dialogueText": "You're sparing me? And you're letting me keep my business?.",
+            "dialogueID": "6_start",
+            "dialogueText": "You're sparing me? And you're letting me keep my business?",
             "emotion": 0,
-            "nextDialogueID": "5_next"
+            "nextDialogueID": "6_next"
         }, {
-            "dialogueID": "5_next",
+            "dialogueID": "6_next",
             "dialogueText": "Why wouldn't you run us out of town while you have the chance?",
             "emotion": 0,
-            "nextDialogueID": "5_pause"
+            "nextDialogueID": "6_pause"
         }, 
         {
-            "dialogueID": "5_pause",
+            "dialogueID": "6_pause",
             "dialogueText": "...",
             "emotion": 0,
-            "nextDialogueID": "5_wow"
+            "nextDialogueID": "6_wow"
         },
         {
-            "dialogueID": "5_wow",
+            "dialogueID": "6_wow",
             "dialogueText": "Maybe ... I don't have to wipe everyone out to succeed.",
             "emotion": 0,
-            "nextDialogueID": "5_think"
+            "nextDialogueID": "6_think"
         },
         {
-            "dialogueID": "5_think",
+            "dialogueID": "6_think",
             "dialogueText": "Maybe ... there's enough room in this town for two saloons.",
             "emotion": 0,
-            "nextDialogueID": "5_deal"
+            "nextDialogueID": "6_deal"
         },
         {
-            "dialogueID": "5_deal",
+            "dialogueID": "6_deal",
             "dialogueText": "In that case, let's call a truce. Heck, I'll even drink to it at your saloon.",
             "emotion": 0,
             "nextDialogueID": ""

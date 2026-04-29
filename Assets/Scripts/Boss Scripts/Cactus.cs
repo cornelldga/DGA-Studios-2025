@@ -30,7 +30,6 @@ public class Cactus : MonoBehaviour, IDamageable
         spinesSpawnPos = new Vector3[this.transform.childCount];
         spinesSpawnRot = new Quaternion[this.transform.childCount];
         spineCount = spinesSpawnPos.Length;
-        Debug.Log(spinesSpawnPos.Length);
 
         for (int i = 0; i < this.transform.childCount; i++)
         {

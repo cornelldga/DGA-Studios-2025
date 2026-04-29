@@ -10,9 +10,14 @@ using UnityEngine.InputSystem;
 /// </summary>
 public enum DialogueType
 {
+    [Tooltip("Dialogue where no choices are made")]
     NPC,
+    [Tooltip("Dialogue where a Fight/Back choice is made")]
     Boss,
-    Interactive
+    [Tooltip("Dialogue where a Yes/No choice is made")]
+    Interactive,
+    [Tooltip("Dialogue where a scene is loaded after conversation")]
+    SceneChange
 }
 
 /// <summary>
@@ -21,21 +26,18 @@ public enum DialogueType
 /// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
     private System.Action onComplete;
     [SerializeField] private Animator dialogueAnim;
     [SerializeField] Image dialogueBox;
     [SerializeField] TextMeshProUGUI dialogueText;
     [Tooltip("Where the actual NPC/Boss name is displayed")]
     [SerializeField] TextMeshProUGUI nameText;
-    private Vector2 defaultNamePos;
-    private Quaternion defaultNameRot;
+    [SerializeField] Transform cutsceneNameTextTransform;
     [Tooltip("The gray out background for when dialogue plays")]
     [SerializeField] Image grayBackground;
     [Tooltip("Where the bosses sprites will show")]
     [SerializeField] private Image npcImg;
     private string currentFileName;
-    private bool isCutscene;
     public Dictionary<DialogueEmotion, Sprite> dukeEmotions;
 
     [Header("Choice Buttons")]
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Button noButton;
 
     [Header("Settings")]
+    [SerializeField] Color defaultDialogueTextColor;
     [SerializeField] float typingSpeed;
     private DialogueData currentDialogueData;
     private string currentDialogueID;
@@ -58,6 +61,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] TMP_Text noButtonText;
     [SerializeField] string bossYesText;
     [SerializeField] string bossNoText;
+
 
 
     [Header("Input Controls")]
@@ -78,10 +82,6 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         choices.SetActive(false);
-        gameObject.SetActive(false);
-        RectTransform rect = nameText.GetComponent<RectTransform>();
-        defaultNamePos = rect.anchoredPosition;
-        defaultNameRot = rect.localRotation;
     }
 
     /// <summary>
@@ -107,11 +107,34 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Lets CutsceneManager hide/show the normal dialogue name text.
+    /// </summary>
+    public void SetNameTextVisible(bool visible)
+    {
+        if (nameText == null) return;
+
+        if (visible && gameObject.activeSelf)
+        {
+            StartCoroutine(ShowNameTextAfterClose());
+            return;
+        }
+
+        nameText.gameObject.SetActive(visible);
+    }
+
+    private IEnumerator ShowNameTextAfterClose()
+    {
+        yield return new WaitUntil(() => !gameObject.activeSelf);
+
+        nameText.gameObject.SetActive(true);
+    }
+
+    /// <summary>
     /// Finishes the dialogue line if not finished yet, goes to next line otherwise.
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
-        if (ongoingDialogue)
+        if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
             if (isTyping)
             {
@@ -133,41 +156,42 @@ public class DialogueManager : MonoBehaviour
     /// <param name="file">The json file associated to the specific character.</param>
     /// <param name="dialogueBoxSprite">The dialogue box sprite</param>
     /// <param name="emotionDictionary">The dictionary of sprites associated to the character's emotions.</param>
+    /// <param name="name">The name associated with the dialogue. Default is the name of the file</param>
+    /// <param name="type">Type of dialogue. Default NPC/param>
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
-    /// <param name="type">Type of dialogue (NPC, Boss, or Interactive)</param>
-    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite,
-        Dictionary<DialogueEmotion, Sprite> emotionDictionary, string scene, DialogueType type)
+    /// <param name="textColor">The dialogue text color. Chooses default color if no color is chosen</param>
+    public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite, Dictionary<DialogueEmotion, Sprite> emotionDictionary,
+        string name = null, DialogueType type = DialogueType.NPC, string scene = null, Color? textColor = null)
     {
-        Debug.Log(GameManager.Instance.player.progression);
         if (file != null)
         {
             continueDialogueAction.action.Enable();
             gameObject.SetActive(true);
-            nameText.text = file.name;
-            isCutscene = file.name.StartsWith("cutscene");
-            currentFileName = isCutscene ? "" : file.name;
-            nameText.text = currentFileName;   
-
-            if (file.name == "cutscene_1")
-            {
-                RectTransform rect = nameText.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(-488f, -110f);
-                rect.localRotation = Quaternion.Euler(0f, 0f, 8.225f);
-            }
-
-            if (nameText.text=="Mirage & Ace")
-            {
-                dialogueText.color = Color.white;
-            } else
-            {
-                dialogueText.color = new Color(0.15f, 0.1f, 0.05f, 1.0f);
-            }
-            ongoingDialogue = true;
             dialogueAnim.SetBool("isOpen", true);
+
+            bool useCutsceneNameText = !nameText.gameObject.activeSelf || file.name.StartsWith("Tutorial");
+
+            if (!useCutsceneNameText && nameText != null)
+            {
+                nameText.gameObject.SetActive(true);
+
+                if (cutsceneNameTextTransform != null)
+                {
+                    cutsceneNameTextTransform.gameObject.SetActive(false);
+                }
+            }
+            else if (cutsceneNameTextTransform != null)
+            {
+                cutsceneNameTextTransform.gameObject.SetActive(true);
+            }
+
+            currentFileName = file.name;
+
+            dialogueText.color = textColor ?? defaultDialogueTextColor;
+            ongoingDialogue = true;
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
-
-            SetDialogueStart(GameManager.Instance.player.progression);
+            SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
             // Does emotion sprites IF a boss dialogue
@@ -200,11 +224,9 @@ public class DialogueManager : MonoBehaviour
     /// Given the progression integer, try dialogue of that integer value if it exists, otherwise
     /// play the start with the closest value to the progression integer
     /// </summary>
-    /// <param name="progression">The progression int</param>
-
-    void SetDialogueStart(int progression)
+    void SetDialogueStart()
     {
-        int current = progression;
+        int current = PlayerPrefs.GetInt("progression",0);
         while (current >= 0)
         {
             string candidateID = current + "_start";
@@ -231,6 +253,12 @@ public class DialogueManager : MonoBehaviour
             {
                 DialogueChoice();
             }
+            else if(currentDialogueType == DialogueType.SceneChange)
+            {
+                ongoingDialogue = false;
+                gameObject.SetActive(false);
+                GameManager.Instance.LoadScene(sceneName);
+            }
             else
             {
                 EndDialogue();
@@ -245,16 +273,25 @@ public class DialogueManager : MonoBehaviour
                 if (line.dialogueID == currentDialogueID)
                 {
                     string speakerName = string.IsNullOrEmpty(line.speaker) ? currentFileName : line.speaker;
+                    if (currentFileName.StartsWith("Tutorial"))
+                    {
+                        speakerName = "Tutorial";
+                    }
 
                     nameText.text = speakerName;
+                    if (!nameText.gameObject.activeSelf && CutsceneManager.Instance != null)
+                    {
+                        CutsceneManager.Instance.SetCutsceneName(speakerName);
+                    }
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
-                    bool isDuke = (speakerName == "Duke");
+                    bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
+                    bool isDuke = speakerName == "Duke";
 
-                    if (isCutscene)
+                    if (isCutsceneDialogue)
                     {
                         // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke);
+                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
                     }
                     else
                     {
@@ -318,9 +355,6 @@ public class DialogueManager : MonoBehaviour
     {
         ongoingDialogue = false;
         dialogueAnim.SetBool("isOpen", false);
-        RectTransform rect = nameText.GetComponent<RectTransform>();
-        rect.anchoredPosition = defaultNamePos;
-        rect.localRotation = defaultNameRot;
     }
 
     /// <summary>
@@ -369,8 +403,8 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void YesChoice()
     {
-        ongoingDialogue = false;
         choices.SetActive(false);
+        ongoingDialogue = false;
         gameObject.SetActive(false);
         GameManager.Instance.LoadScene(sceneName);
     }

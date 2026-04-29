@@ -97,20 +97,23 @@ public class Ash : Boss
     [Header("Molotov Settings")]
     [SerializeField] Molotov molotov;
     [SerializeField] GameObject bushPrefab;
-    [SerializeField] float randomPercentageToThrowMolotov = 0.5f;
 
     private float stateTimer;
     private float tumbleweedCooldownTimer;
-    private Rigidbody2D rb;
     private Vector2 wanderTarget;
-    private Animator animator;
     private SpriteRenderer sprite;
     private int scatterCount;
     private bool[] scatterTracking;
 
     [HideInInspector]
     public bool[] deployedSeeds;
-    
+
+    [HideInInspector]
+    public GameObject[] seeds;
+
+    [HideInInspector]
+    public int seedIncrementor;
+
 
     /// <summary>
     /// On start, we set the rigid body, and change its attributes. Immediately enter wandering and spawning her shield.
@@ -118,8 +121,6 @@ public class Ash : Boss
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
         currentState = State.Wandering;
@@ -129,6 +130,14 @@ public class Ash : Boss
         deployedSeeds = new bool[8];
         scatterCount = 0;
         scatterTracking = new bool[4];
+        seeds = new GameObject[500];
+
+        for (int i = 0; i < 500; i++)
+        {
+            seeds[i]= Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+            seeds[i].SetActive(false);
+        }
+        seedIncrementor = 0;
     }
 
     /// <summary>
@@ -394,10 +403,13 @@ public class Ash : Boss
         
 
         int attackChoice = UnityEngine.Random.Range(0, 10);
-
-        if (attackChoice < 4) 
+        if (scatterCount < currentPhase && scatterCount != 0)
         {
-            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase + 1)
+            attackChoice = 0;
+        }
+        if (attackChoice < 5) 
+        {
+            if (GameObject.FindAnyObjectByType<Bush>() != null && scatterCount >= currentPhase )
             {
                 TransitionToMolotovAttack();
                 scatterCount = 0;
@@ -414,14 +426,6 @@ public class Ash : Boss
         {
             TransitionToTurretSeed();
         }
-    }
-
-    /// <summary>
-    /// Sets the phase of the boss. Used for changing behavior based on health thresholds.
-    /// </summary>
-    public override void SetPhase()
-    {
-       healthBarAnimator.SetTrigger("PhaseChange");
     }
 
     /// <summary>
@@ -471,7 +475,7 @@ public class Ash : Boss
                     currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); // First 3
                     break;
                 case 2:
-                    currentSeedPattern = (SeedAttack)values.GetValue((values.Length - 3) + random.Next(3)); //Last 2
+                    currentSeedPattern = (SeedAttack)values.GetValue(random.Next(3)); //First 3
                     break;
             }
             i++;
@@ -544,7 +548,7 @@ public class Ash : Boss
         {
             GameObject seed;
             Seed seedScript;
-            if (UnityEngine.Random.value < .5f)
+            if (UnityEngine.Random.value < 0f)
             {
                 seed = Instantiate(fireFlowerSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
                 seedScript = seed.GetComponent<Seed>();
@@ -645,17 +649,13 @@ public class Ash : Boss
 
     // Summons orbiting tumbleweeds depending on phase
     private IEnumerator SummonOrbitingTumbleweeds() {
-        Debug.Log("SummonOrbitingTumbleweeds");
         for (int i = 0; i < orbitingTumbleweeds.Length; i++) {
-            Debug.Log(orbitingTumbleweeds[i] is null);
             if (orbitingTumbleweeds[i] is null)
             {
-                Debug.Log(currentPhase);
                 
                 // set it to be an orbiting tumbleweed
                 if (currentPhase == 0 && i < numOrbitingPhaseOne)
                 {
-                    Debug.Log("one something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab,spawnPos,Quaternion.identity);
@@ -664,7 +664,6 @@ public class Ash : Boss
                 else if (currentPhase == 1 && i < numOrbitingPhaseTwo)
                 {
 
-                    Debug.Log("two something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
@@ -673,7 +672,6 @@ public class Ash : Boss
                 else if (currentPhase == 2 && i < numOrbitingPhaseThree)
                 {
 
-                    Debug.Log("three something");
                     float angle = i * Mathf.PI * 2 / numOrbitingPhaseOne;
                     Vector3 spawnPos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * orbitRadius;
                     orbitingTumbleweeds[i] = Instantiate(orbitingTumbleweedPrefab, spawnPos, Quaternion.identity);
@@ -697,7 +695,7 @@ public class Ash : Boss
                 s.Blossom();
             }
         }
-        
+        seedIncrementor = 0;
         yield return new WaitForSeconds(stompTime);
     }
     private IEnumerator DesperationAttack()
@@ -726,24 +724,34 @@ public class Ash : Boss
         Seed seedScript;
         Vector2 th;
         float randStep = UnityEngine.Random.value/2 +.5f;
+        
+
         for (int i = 0; i <= (point2 - point1).magnitude / fireRadius; i++)
         {
             for (int t = 0- (thickness/2); t < thickness - (thickness / 2); t++)
             {
                 th = Vector2.Perpendicular(seedStep).normalized * fireRadius * t;
-                seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seeds[seedIncrementor].SetActive(true);
+                //seed = Instantiate(basicSeedPrefab, this.bulletOrigin.transform.position, Quaternion.identity);
+                seed = seeds[seedIncrementor];
+                seed.transform.position = this.transform.position;
+                seed.GetComponent<Rigidbody2D>().linearVelocityX = ((currentSeedLocation + th * randStep).x - this.transform.position.x) / basicSeedLandTime; ;
+
                 seedScript = seed.GetComponent<Seed>();
                 seedScript.landingTime = basicSeedLandTime;
                 seedScript.arcHeight = basicSeedArcHeight;
                 seedScript.target = currentSeedLocation + th*randStep;
+                seedScript.SeedReset();
+                
                 randStep = UnityEngine.Random.value/2 + .5f;
+                seedIncrementor++;
+
             }
             currentSeedLocation += seedStep;
         }
     }    
       //Throws Dynamite at the holes (phase 2)
     private void ThrowMolotovAtBushes()
-    
     {
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         //filter out bushes that are already on fire

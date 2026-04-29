@@ -1,8 +1,14 @@
 {
     "dialogueLines": [
         {
-            "dialogueID": "3_start",
+            "dialogueID": "0_start",
             "dialogueText": "You used the whip! You are so cool!",
+            "emotion": 0,
+            "nextDialogueID": "0_next"
+        },
+        {
+            "dialogueID": "0_next",
+            "dialogueText": "Press Q to change your base drink to Whiskey so that you can hit all 3 barrels at once!",
             "emotion": 0,
             "nextDialogueID": ""
         }
