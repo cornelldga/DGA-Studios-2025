@@ -632,6 +632,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11705904}
     - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
+      propertyPath: smokeTint
+      value: 
+      objectReference: {fileID: 235705865}
+    - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
@@ -980,7 +984,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2246764, y: -0.00084, z: -10}
+  m_LocalPosition: {x: 2.1045623, y: -0.00081, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

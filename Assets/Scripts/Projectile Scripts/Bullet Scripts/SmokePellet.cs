@@ -36,7 +36,7 @@ public class SmokePellet : MonoBehaviour
     //If the whip pushed this cloud away
     private bool whipped = false;
     
-    private GameObject smokeTint;
+    private GameObject smokeTint = null;
     
 
     /// <summary>
@@ -142,7 +142,7 @@ public class SmokePellet : MonoBehaviour
     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && smokeTint)
             smokeTint.SetActive(true);
     }
 
@@ -151,7 +151,7 @@ public class SmokePellet : MonoBehaviour
     /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && smokeTint)
             smokeTint.SetActive(false);
     }
 
