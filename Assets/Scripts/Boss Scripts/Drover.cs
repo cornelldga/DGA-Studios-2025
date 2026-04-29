@@ -337,6 +337,7 @@ public class Drover : Boss
     /// </summary>
     public override void SetPhase()
     {
+        base.SetPhase();
         if (currentPhase == 1 && !isEnraged)
         {
             isEnraged = true;
@@ -344,8 +345,6 @@ public class Drover : Boss
 
             base.isInvulnerable = true;
         }
-
-        healthBarAnimator.SetTrigger("PhaseChange");
     }
 
     /// <summary>
