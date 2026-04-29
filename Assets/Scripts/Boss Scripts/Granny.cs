@@ -353,10 +353,11 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
+        base.SetPhase();
         if (currentPhase == 1 && !doubleContract)
         {
             doubleContract = true;
         }
-        healthBarAnimator.SetTrigger("PhaseChange");
+        
     }
 }

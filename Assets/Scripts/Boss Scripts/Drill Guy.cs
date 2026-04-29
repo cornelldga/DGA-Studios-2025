@@ -644,9 +644,4 @@ public class DrillGuy : Boss
     {
         if (!isUnderground) base.TakeDamage(damage);
     }
-
-    public override void SetPhase()
-    {
-        healthBarAnimator.SetTrigger("PhaseChange");
-    }
 }
