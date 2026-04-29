@@ -22,6 +22,9 @@ public class Smoker : MonoBehaviour
     [Tooltip("The player object layer")]
     [SerializeField] LayerMask playerMask;
 
+    // [Tooltip("The screen tinting for the smoke")]
+    [Header("Smoke Tinting")]
+    [SerializeField] GameObject smokeTint;
     private bool collidedWithPlayer;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
@@ -74,7 +77,7 @@ public class Smoker : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
         collidedWithPlayer = false;
-
+        
 
 
         // Make rigidbody kinematic so player cannot push it
@@ -243,6 +246,7 @@ public class Smoker : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject pellet = Instantiate(smokePelletPrefab, releasePoint.transform.position, Quaternion.identity);
+            pellet.setTint(smokeTint);
             Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
             pellet.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f));
             Vector2 direction = new Vector2(releasePoint.position.x - transform.position.x, releasePoint.position.y - transform.position.y).normalized;

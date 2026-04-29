@@ -47,7 +47,6 @@ public class SmokePellet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        smokeTint = GameObject.Find("tintParent").transform.GetChild(0).gameObject;
 
         // Select a random sprite from the array
         if (smokeSprites.Length > 0)
@@ -155,4 +154,11 @@ public class SmokePellet : MonoBehaviour
         if(collision.CompareTag("Player"))
             smokeTint.SetActive(false);
     }
+
+    public void setTint(GameObject smokeTint)
+    {
+        this.smokeTint = smokeTint;
+    }
+
+
 }
