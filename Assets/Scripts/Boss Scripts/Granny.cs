@@ -47,8 +47,8 @@ public class Granny : Boss
 
     public bool contractDestroyed = false;
     private int initialBossCount;
+    private bool singleContract = false;
     private bool doubleContract = false;
-    private bool pickedContract = false;
 
     [Header("Attack Settings")]
     [Tooltip("Attack Pattern for Granny when out of contract mode")]
@@ -120,7 +120,7 @@ public class Granny : Boss
         stateTimer = idleTime;
         rb.linearVelocity = Vector2.zero;
 
-        // animator thing here
+        ResetAnimationBools();
     }
 
     private void UpdateIdle()
@@ -150,6 +150,8 @@ public class Granny : Boss
         // Speed to reach distance in time is dist/time
         currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
         currentState = State.Returning;
+
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateInvincible()
@@ -184,34 +186,27 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
+            doubleContract = true;
             // animator thing here
         }
         else if (bosses.Count > 0)
         {
-            // animator thing here
+            singleContract = true;
+            animator.SetBool("isSingle", true);
         }
         return;
     }
 
+    /// <summary>
+    /// Summons a boss for Granny
+    /// Summons two bosses when Granny's contract list is halved
+    /// </summary>
     public void SummonBoss()
     {
         if (bossActive) return;
-        int index = Random.Range(0, bosses.Count);
-        GameObject boss = Instantiate(bosses[index]);
-        Transform bossCanvas = boss.transform.Find("Boss Canvas");
-        if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-        boss.GetComponent<Boss>().isInvulnerable = true;
-        boss.GetComponent<Boss>().isSummoned = true;
+        int numOfBosses = doubleContract ? 2 : 1;
 
-        availableBosses.Add(boss);
-        bosses.Remove(bosses[index]);
-        bossActive = true;
-    }
-
-    public void SummonBosses()
-    {
-        if (bossActive) return;
-        for (int i = 1; i >= 0; i--)
+        for (int i = 0; i < numOfBosses; i++)
         {
             GameObject boss = Instantiate(bosses[i]);
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
@@ -223,7 +218,6 @@ public class Granny : Boss
             bosses.Remove(bosses[i]);
         }
         bossActive = true;
-        doubleContract = true;
     }
 
     private void TransitionToContractDropped()
@@ -248,7 +242,7 @@ public class Granny : Boss
         stateTimer = scavengeTime;
         currentState = State.Scavange;
 
-        // animator thing here
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateScavenge()
@@ -307,7 +301,6 @@ public class Granny : Boss
             {
                 currentDroppedContracts.Remove(collision.gameObject);
                 Destroy(collision.gameObject);
-                pickedContract = true;
                 if (currentDroppedContracts.Count <= 0)
                 {
                     TransitionToReturning();
@@ -335,7 +328,13 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
-
+    /// <summary>
+    /// Resets all the animation booleans for Granny
+    /// </summary>
+    private void ResetAnimationBools()
+    {
+        animator.SetBool("isSingle", false);
+    }
 
     /// <summary>
     /// When contract dies, granny takes 1/4 of health
@@ -384,15 +383,6 @@ public class Granny : Boss
         }
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
-
-        if (doubleContract)
-        {
-            // animator thing here
-        }
-        else
-        {
-            // animator thing here
-        }
     }
 
     public override void SetPhase()
