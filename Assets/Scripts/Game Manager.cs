@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
 
     [Space(10)]
     [Header("Pause Menu UI")]
-    [Tooltip("Reference to the pause button")]
-    [SerializeField] private GameObject pauseButton;
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
@@ -106,7 +104,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         HandlePauseInput();
-        UpdatePauseButtonVisibility();
     }
 
     /// <summary>
@@ -125,15 +122,6 @@ public class GameManager : MonoBehaviour
                 TogglePauseMenu(!pauseMenu.activeSelf);
             }
         }
-    }
-
-    /// <summary>
-    /// Toggles visibility of the pause button based on scene and player presence.
-    /// </summary>
-    private void UpdatePauseButtonVisibility()
-    {
-        bool isMainMenu = GetCurrentSceneName() == "Main Menu";
-        pauseButton.SetActive(!isMainMenu && playerInstance != null);
     }
 
     /// <summary>
@@ -242,16 +230,6 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Check if on pause button
-    /// </summary>
-    public bool PointerOnPause()
-    {
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            pauseButton.GetComponent<RectTransform>(), 
-            Input.mousePosition);
-    }
-
-    /// <summary>
     /// Sets the loadout manager to active.
     /// </summary>
     /// <param name="isOpen">If the loadout manager should be open</param>
@@ -331,7 +309,15 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == "World Hub" && PlayerPrefs.GetInt("progression", 0)==0)
         {
-            CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
+        CutsceneManager.Instance.PlayBackstoryCutscene(() =>
+        {
+            transitions.SetTrigger("Scene Loaded");
+
+            if (player != null)
+            {
+                player.PlayGetUpAnimation();
+            }
+        });
         }
 
         else if (currentScene == "Saloon" && PlayerPrefs.GetInt("progression", 0)==0)
