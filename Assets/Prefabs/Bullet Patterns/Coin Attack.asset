@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2865beb9522980242810bdbb41ecb8d9, type: 3}
-  m_Name: Granny Homing
+  m_Name: Coin Attack
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
   bullets:
-  - {fileID: 0}
-  bulletAngles: []
-  bulletDelays: []
-  minAttackCooldown: 0
-  maxAttackCooldown: 0
+  - {fileID: 6490914910762157081, guid: d6d83a39b07834c9686ccfe0a838691b, type: 3}
+  bulletAngles:
+  - 0
+  bulletDelays:
+  - 0
+  minAttackCooldown: 1.5
+  maxAttackCooldown: 1.5

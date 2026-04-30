@@ -52,12 +52,12 @@ public class Granny : Boss
     private bool pickedContract = false;
 
     [Header("Attack Settings")]
-    [Tooltip("Pattern fired periodically while Granny is holding the contract")]
-    [SerializeField] BulletPattern holdingContractAttack;
-    [Tooltip("Pattern fired periodically while Granny is not holding contract")]
-    [SerializeField] BulletPattern normalAttack;
-    [Tooltip("Pattern fired periodically while Granny is holding two contracts")]
-    [SerializeField] BulletPattern doubleHoldingContractAttack;
+    [Tooltip("Attack Pattern for Granny when out of contract mode")]
+    [SerializeField] BulletPattern coinAttack;
+    [Tooltip("Attack Pattern for Granny while holding a contract")]
+    [SerializeField] BulletPattern contractCoinAttack;
+    [Tooltip("Attack Pattern for Granny while holding two contracts")]
+    [SerializeField] BulletPattern doubleContractCoinAttack;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
@@ -354,13 +354,24 @@ public class Granny : Boss
 
     public override void Attack()
     {
-        if (currentState != State.HoldingContract || holdingContractAttack == null)
+        BulletPattern pattern;
+        if (currentState == State.HoldingContract)
+        {
+            pattern = doubleContract ? doubleContractCoinAttack : contractCoinAttack;
+        }
+        else
+        {
+            pattern = coinAttack;
+        }
+
+        if (pattern == null)
         {
             SetAttackCooldown(0.5f);
             return;
         }
+
         base.Attack();
-        StartCoroutine(holdingContractAttack.DoBulletPattern(this));
+        StartCoroutine(pattern.DoBulletPattern(this));
     }
 
     /// <summary>
@@ -398,7 +409,7 @@ public class Granny : Boss
         {
             doubleContract = true;
         }
-        
+
     }
 
     public override void Defeat()

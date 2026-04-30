@@ -389,11 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fe4d2162c7fe14ea4a64ef8db066b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Granny
-  animator: {fileID: 8633898269983300228}
+  animator: {fileID: 0}
   bossProgression: 6
   bossName: Granny, The Mogul
   maxHealth: 4
   healthBar: {fileID: 5187320019946879446}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
@@ -430,9 +431,9 @@ MonoBehaviour:
   contractTemplate: {fileID: 1756325054254676256, guid: d8ceb90f922d3fe43840117063f8c190, type: 3}
   currentDroppedContracts: []
   contractDestroyed: 0
-  holdingContractAttack: {fileID: 11400000, guid: 3680d6c023f694caf817a9555ab3298c, type: 2}
-  normalAttack: {fileID: 0}
-  doubleHoldingContractAttack: {fileID: 0}
+  coinAttack: {fileID: 11400000, guid: 3680d6c023f694caf817a9555ab3298c, type: 2}
+  contractCoinAttack: {fileID: 11400000, guid: 3e536a20f652e4443898079d83a1eb66, type: 2}
+  doubleContractCoinAttack: {fileID: 11400000, guid: 19eaaf7605be5424da6a59d38dc57c0a, type: 2}
   returnTime: 1.5
   shieldVisual: {fileID: 2248442463614324335}
 --- !u!114 &7540226778721594879
@@ -447,12 +448,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef2e79e96235e64fa9d635e8ea15908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
-  animator: {fileID: 8633898269983300228}
+  animator: {fileID: 0}
   bossProgression: 0
   bossName: Granny, Super Awesome Granny
   maxHealth: 5
   healthBar: {fileID: 5187320019946879446}
-  healthBarAnimator: {fileID: 8633898269983300228}
+  healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 4977892287978850841}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
