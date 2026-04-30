@@ -48,7 +48,7 @@ public class Granny : Boss
     public bool contractDestroyed = false;
     private int initialBossCount;
     private bool singleContract = false;
-    private bool doubleContract = false;
+    [SerializeField] private bool doubleContract = false;
 
     [Header("Attack Settings")]
     [Tooltip("Attack Pattern for Granny when out of contract mode")]
@@ -145,6 +145,7 @@ public class Granny : Boss
         stateTimer = outTime;
         if (shieldVisual != null) shieldVisual.SetActive(false);
     }
+
     public void TransitionToReturning()
     {
         // Speed to reach distance in time is dist/time
@@ -175,8 +176,6 @@ public class Granny : Boss
     /// </summary>
     private void EnableRandomBosses()
     {
-        if (bossActive) return;
-
         if (bosses.Count == 0 && availableBosses.Count == 0)
         {
             gameObject.GetComponent<GrannyPhase2>().enabled = true;
@@ -184,17 +183,21 @@ public class Granny : Boss
             return;
         }
 
-        if (bosses.Count == initialBossCount / 2)
+        if (bosses.Count <= initialBossCount / 2)
         {
             doubleContract = true;
-            // animator thing here
+            singleContract = false;
+            animator.SetBool("isDouble", true);
+            animator.SetBool("isSingle", false);
         }
-        else if (bosses.Count > 0)
+        else
         {
             singleContract = true;
+            doubleContract = false;
             animator.SetBool("isSingle", true);
+            animator.SetBool("isDouble", false);
         }
-        return;
+        animator.SetBool("pickedUp", true);
     }
 
     /// <summary>
@@ -206,16 +209,17 @@ public class Granny : Boss
         if (bossActive) return;
         int numOfBosses = doubleContract ? 2 : 1;
 
-        for (int i = 0; i < numOfBosses; i++)
+        for (int i = 0; i < numOfBosses && bosses.Count > 0; i++)
         {
-            GameObject boss = Instantiate(bosses[i]);
+            GameObject prefab = bosses[0];
+            GameObject boss = Instantiate(prefab);
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
             boss.GetComponent<Boss>().isInvulnerable = true;
             boss.GetComponent<Boss>().isSummoned = true;
 
             availableBosses.Add(boss);
-            bosses.Remove(bosses[i]);
+            bosses.RemoveAt(0);
         }
         bossActive = true;
     }
@@ -283,7 +287,7 @@ public class Granny : Boss
         Vector2 dist = startingPoint - rb.position;
         if (dist.magnitude < 0.1)
         {
-            // animator thing here
+            animator.SetBool("isHit", false);
             TransitionToIdle();
         }
         else
@@ -303,6 +307,7 @@ public class Granny : Boss
                 Destroy(collision.gameObject);
                 if (currentDroppedContracts.Count <= 0)
                 {
+                    animator.SetBool("pickedUp", true);
                     TransitionToReturning();
                 }
             }
@@ -324,6 +329,7 @@ public class Granny : Boss
         contractScript.boss = bossType;
         contractScript.granny = this;
 
+
         currentDroppedContracts.Add(newContract);
         TransitionToContractDropped();
     }
@@ -334,6 +340,8 @@ public class Granny : Boss
     private void ResetAnimationBools()
     {
         animator.SetBool("isSingle", false);
+        animator.SetBool("isDouble", false);
+        animator.SetBool("isWalking", false);
     }
 
     /// <summary>
@@ -383,6 +391,19 @@ public class Granny : Boss
         }
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
+
+        if (doubleContract)
+        {
+            doubleContract = false;
+            singleContract = true;
+        }
+        else
+        {
+            singleContract = false;
+        }
+
+        animator.SetBool("isHit", true);
+        animator.SetBool("pickedUp", false);
     }
 
     public override void SetPhase()
