@@ -44,6 +44,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextAsset backstoryJson;
     private BackstoryData backstoryData;
+    [SerializeField] private GameObject introblock;
 
     // Runtime state
     private bool isActive;
@@ -127,6 +128,7 @@ public class CutsceneManager : MonoBehaviour
         {
             if (GameManager.Instance != null)
             {
+                introblock.SetActive(PlayerPrefs.GetInt("progression", 0)==0);
                 onComplete?.Invoke();
             }
         });

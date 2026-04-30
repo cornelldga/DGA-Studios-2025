@@ -669,6 +669,10 @@ PrefabInstance:
       propertyPath: dialogueBoxSprite
       value: 
       objectReference: {fileID: 21300000, guid: 9b88f2de1858b410ea3a6284af2e09e9, type: 3}
+    - target: {fileID: 6086840434800185848, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.94
+      objectReference: {fileID: 0}
     - target: {fileID: 6770842795922722231, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
       propertyPath: m_Name
       value: Door
@@ -889,6 +893,14 @@ PrefabInstance:
     - target: {fileID: 2055536128362158967, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2361759369647892724, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2361759369647892724, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2620647822268028384, guid: f4add3c088ee3db41adaec24821f05c2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -247,13 +247,13 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
 
-        if (Input.GetMouseButton(0) && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0))
         {
             lastFrameWasFiring = true;
         }
@@ -480,6 +480,25 @@ public class Player : MonoBehaviour, IDamageable
         StopPlayer();
         limbs.SetActive(false);
         animationControl.SetBool("Dead", true);
+    }
+
+    public void PlayGetUpAnimation()
+    {
+        StartCoroutine(GetUpAnimation());
+    }
+
+    private IEnumerator GetUpAnimation()
+    {
+        limbs.SetActive(false);
+        armPivot.gameObject.SetActive(false);
+
+        animationControl.Play("Get Up", 0, 0f);
+
+        yield return new WaitForSeconds(1.3f);
+
+        limbs.SetActive(true);
+        armPivot.gameObject.SetActive(true);
+        animationControl.Play("Idle", 0, 0f);
     }
     /// <summary>
     /// Function called by death animation that triggers the lose game function
