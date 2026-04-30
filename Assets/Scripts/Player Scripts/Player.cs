@@ -247,13 +247,13 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
 
-        if (Input.GetMouseButton(0) && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0))
         {
             lastFrameWasFiring = true;
         }

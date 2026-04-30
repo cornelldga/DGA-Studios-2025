@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
 
     [Space(10)]
     [Header("Pause Menu UI")]
-    [Tooltip("Reference to the pause button")]
-    [SerializeField] private GameObject pauseButton;
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
@@ -106,7 +104,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         HandlePauseInput();
-        UpdatePauseButtonVisibility();
     }
 
     /// <summary>
@@ -125,15 +122,6 @@ public class GameManager : MonoBehaviour
                 TogglePauseMenu(!pauseMenu.activeSelf);
             }
         }
-    }
-
-    /// <summary>
-    /// Toggles visibility of the pause button based on scene and player presence.
-    /// </summary>
-    private void UpdatePauseButtonVisibility()
-    {
-        bool isMainMenu = GetCurrentSceneName() == "Main Menu";
-        pauseButton.SetActive(!isMainMenu && playerInstance != null);
     }
 
     /// <summary>
@@ -239,16 +227,6 @@ public class GameManager : MonoBehaviour
         pauseMenu.transform.Find("Volume").gameObject.SetActive(true);
         pauseMenu.transform.Find("Back").gameObject.SetActive(false);
         volumeOpened = false;
-    }
-
-    /// <summary>
-    /// Check if on pause button
-    /// </summary>
-    public bool PointerOnPause()
-    {
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            pauseButton.GetComponent<RectTransform>(), 
-            Input.mousePosition);
     }
 
     /// <summary>
