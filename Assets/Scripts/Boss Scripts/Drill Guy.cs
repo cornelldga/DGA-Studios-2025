@@ -68,7 +68,6 @@ public class DrillGuy : Boss
     [Header("Minecart Settings")]
     [SerializeField] float distanceToThrowOnMinecart = 5.0f;
     private Vector3 movePosition;
-    // [SerializeField] GameObject trackTop, trackBot;
     [SerializeField] float minecartSpeed;
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
@@ -78,7 +77,10 @@ public class DrillGuy : Boss
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
-    [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
+    [SerializeField] float minecartAttackProbablity = 0.7f; // for granny
+    [SerializeField] float minDistanceNearTrack = 6.0f;
+    float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
+    float[] trackXs = {-11.5f,11.5f,11.5f,-11.5f}; //tl, tr, br, bl
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -165,9 +167,6 @@ public class DrillGuy : Boss
     private IEnumerator MinecartAttackRoutine()
     {
         posBeforeDriving = this.transform.position;
-        float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
-        float[] trackXs = {-11.5f,11.5f,11.5f,-11.5f}; //tl, tr, br, bl
-
         for (int i = 0; i < minecartCycles; i++)
         {
             yield return StartCoroutine(MoveAlongtracks(trackYs, trackXs));
@@ -503,8 +502,12 @@ public class DrillGuy : Boss
                 TransitionToEntering();
             }
             else{
-
-                if (UnityEngine.Random.value <= minecartAttackProbablity) TransitionToDriving();
+                // if close to start of tracks
+                Vector2 pointA = new Vector2(trackXs[0], trackYs[0]);
+                if (Vector2.Distance(pointA, this.transform.position) < minDistanceNearTrack 
+                && UnityEngine.Random.value <= minecartAttackProbablity) {
+                    TransitionToDriving();
+                }
                 else TransitionToThrowing();
                 
             }
