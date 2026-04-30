@@ -183,7 +183,7 @@ public class Granny : Boss
             return;
         }
 
-        if (bosses.Count <= initialBossCount / 2)
+        if (bosses.Count + availableBosses.Count <= initialBossCount / 2)
         {
             doubleContract = true;
             singleContract = false;
@@ -211,7 +211,8 @@ public class Granny : Boss
 
         for (int i = 0; i < numOfBosses && bosses.Count > 0; i++)
         {
-            GameObject prefab = bosses[0];
+            int index = Random.Range(0, bosses.Count);
+            GameObject prefab = bosses[index];
             GameObject boss = Instantiate(prefab);
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
@@ -219,7 +220,7 @@ public class Granny : Boss
             boss.GetComponent<Boss>().isSummoned = true;
 
             availableBosses.Add(boss);
-            bosses.RemoveAt(0);
+            bosses.RemoveAt(index);
         }
         bossActive = true;
     }
@@ -385,7 +386,7 @@ public class Granny : Boss
             return;
         }
 
-        if (availableBosses == null)
+        if (availableBosses == null || availableBosses.Count == 0)
         {
             return;
         }
