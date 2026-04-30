@@ -42,7 +42,6 @@ public class Granny : Boss
     public bool bossActive;
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
-    // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
     private float contractSize = 0.5f;
 
@@ -121,10 +120,7 @@ public class Granny : Boss
         stateTimer = idleTime;
         rb.linearVelocity = Vector2.zero;
 
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isSingleIdle", false);
-        animator.SetBool("isDoubleIdle", false);
-        animator.SetBool("PickedUp", false);
+        // animator thing here
     }
 
     private void UpdateIdle()
@@ -188,14 +184,11 @@ public class Granny : Boss
 
         if (bosses.Count == initialBossCount / 2)
         {
-            animator.SetBool("isSingle", false);
-            animator.SetBool("isHit", false);
-            animator.SetBool("isDouble", true);
+            // animator thing here
         }
         else if (bosses.Count > 0)
         {
-            animator.SetBool("isHit", false);
-            animator.SetBool("isSingle", true);
+            // animator thing here
         }
         return;
     }
@@ -255,7 +248,7 @@ public class Granny : Boss
         stateTimer = scavengeTime;
         currentState = State.Scavange;
 
-        animator.SetBool("isWalking", true);
+        // animator thing here
     }
 
     private void UpdateScavenge()
@@ -296,7 +289,7 @@ public class Granny : Boss
         Vector2 dist = startingPoint - rb.position;
         if (dist.magnitude < 0.1)
         {
-            if (pickedContract) animator.SetBool("PickedUp", true);
+            // animator thing here
             TransitionToIdle();
         }
         else
@@ -394,11 +387,11 @@ public class Granny : Boss
 
         if (doubleContract)
         {
-            animator.SetBool("isHit2", true);
+            // animator thing here
         }
         else
         {
-            animator.SetBool("isHit", true);
+            // animator thing here
         }
     }
 
