@@ -487,6 +487,25 @@ public class Player : MonoBehaviour, IDamageable
         limbs.SetActive(false);
         animationControl.SetBool("Dead", true);
     }
+
+    public void PlayGetUpAnimation()
+    {
+        StartCoroutine(GetUpAnimation());
+    }
+
+    private IEnumerator GetUpAnimation()
+    {
+        limbs.SetActive(false);
+        armPivot.gameObject.SetActive(false);
+
+        animationControl.Play("Get Up", 0, 0f);
+
+        yield return new WaitForSeconds(1.3f);
+
+        limbs.SetActive(true);
+        armPivot.gameObject.SetActive(true);
+        animationControl.Play("Idle", 0, 0f);
+    }
     /// <summary>
     /// Function called by death animation that triggers the lose game function
     /// </summary>

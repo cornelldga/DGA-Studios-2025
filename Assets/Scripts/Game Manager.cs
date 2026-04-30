@@ -300,7 +300,15 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == "World Hub" && PlayerPrefs.GetInt("progression", 0)==0)
         {
-            CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
+        CutsceneManager.Instance.PlayBackstoryCutscene(() =>
+        {
+            transitions.SetTrigger("Scene Loaded");
+
+            if (player != null)
+            {
+                player.PlayGetUpAnimation();
+            }
+        });
         }
 
         else if (currentScene == "Saloon" && PlayerPrefs.GetInt("progression", 0)==0)
