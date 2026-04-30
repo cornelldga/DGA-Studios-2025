@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
     [SerializeField] private GameObject sliders;
+    [SerializeField] private Animator pauseMenuAnimator;
 
     [Space(5)]
     [Header("Audio Controls")]
@@ -144,8 +145,23 @@ public class GameManager : MonoBehaviour
         if (!isActive && volumeOpened)
             CloseVolumePanel();
 
-        pauseMenu.SetActive(isActive);
-        Time.timeScale = isActive ? 0 : 1;
+        if (isActive)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+            pauseMenuAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            pauseMenuAnimator.Play("Music On", 0, 0f);
+            if (musicSlider != null)
+            {
+                onMusicVolumeChanged(musicSlider.value);
+            }
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+
         FreezePlayer(isActive);
     }
 
@@ -184,8 +200,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onMuteMusicClicked()
     {
-        AudioManager.Instance.SetMusicVolume(0);
-        musicSlider.value = 0;
+        if (musicSlider != null)
+        {
+            musicSlider.value = musicSlider.minValue;
+        }
+    }
+
+    public void onMusicVolumeChanged(float value)
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetMusicVolume(value);
+        }
+
+        if (pauseMenuAnimator != null)
+        {
+            pauseMenuAnimator.speed = value <= 0.001f ? 0 : 1;
+        }
     }
 
     /// <summary>
