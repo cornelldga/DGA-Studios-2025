@@ -66,6 +66,9 @@ public class Granny : Boss
     [Header("Visuals")]
     [Tooltip("Shield GameObject shown while Granny is invincible")]
     [SerializeField] private GameObject shieldVisual;
+    [Tooltip("Seconds to wait after the defeat animation triggers before switching to Phase 2")]
+    [SerializeField] private float defeatAnimationDelay = 7f;
+    private bool isDefeated;
 
     //Time until we should change states.
     private float stateTimer;
@@ -88,6 +91,7 @@ public class Granny : Boss
     // Update is called once per frame
     public override void Update()
     {
+        if (isDefeated) return;
         base.Update();
         stateTimer -= Time.deltaTime;
 
@@ -179,8 +183,8 @@ public class Granny : Boss
     {
         if (bosses.Count == 0 && availableBosses.Count == 0)
         {
-            gameObject.GetComponent<GrannyPhase2>().enabled = true;
-            gameObject.GetComponent<Granny>().enabled = false;
+            ResetAnimationBools();
+            Defeat();
             return;
         }
 
@@ -357,6 +361,9 @@ public class Granny : Boss
         animator.SetBool("isSingle", false);
         animator.SetBool("isDouble", false);
         animator.SetBool("isWalking", false);
+        animator.SetBool("isHit", false);
+        animator.SetBool("pickedUp", false);
+        animator.SetBool("isDead", false);
     }
 
     /// <summary>
@@ -433,7 +440,19 @@ public class Granny : Boss
 
     public override void Defeat()
     {
+        if (isDefeated) return;
+        isDefeated = true;
+        if (rb != null) rb.simulated = false;
+        ResetAnimationBools();
+        animator.SetBool("isDead", true);
+        StartCoroutine(DefeatRoutine());
+    }
+
+    private IEnumerator DefeatRoutine()
+    {
+        yield return new WaitForSeconds(defeatAnimationDelay);
         grannyPhase2.enabled = true;
+        ResetAnimationBools();
         Destroy(this);
     }
 }
