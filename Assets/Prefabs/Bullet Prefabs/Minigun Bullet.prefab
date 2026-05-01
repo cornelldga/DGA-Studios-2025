@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  speed: 7.5
+  speed: 5
   duration: 5
   damage: 1
-  accuracy: 25
+  accuracy: 15
   impactSprite: {fileID: 0}
   impactParticle: {fileID: 433893833224773501}
 --- !u!50 &5139313081211936209

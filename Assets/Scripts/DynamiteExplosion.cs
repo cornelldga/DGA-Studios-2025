@@ -31,9 +31,4 @@ public class DynamiteExplosion : MonoBehaviour
         if (collision.CompareTag("Player"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         if (collision.CompareTag("Hole"))collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
     }
-
-    public void changeImpulse(float impulseForce) 
-    {
-        this.impulseForce = impulseForce;
-    }
 }

@@ -153,11 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   fireRate: 3
   spine: {fileID: 7478843839408097374, guid: 054bae8d201507746ba4c0d027f90ea0, type: 3}
-  maxHealth: 10
+  maxHealth: 5
   animator: {fileID: 6503372711025364153}
   animationTime: 2
   animOffsetTime: 0.03
-  locationID: -1
 --- !u!95 &6503372711025364153
 Animator:
   serializedVersion: 7

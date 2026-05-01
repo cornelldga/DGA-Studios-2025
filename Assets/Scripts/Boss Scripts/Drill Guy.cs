@@ -56,6 +56,7 @@ public class DrillGuy : Boss
 
     //Time until we should change states.
     [SerializeField] Dynamite dynamite;
+
     [Header("Throwing Settings")]
     [SerializeField] GameObject dynamiteLandingIndicatorPrefab;
     [Tooltip("How innacurate a dynamite throw is during phase 1")]
@@ -68,7 +69,7 @@ public class DrillGuy : Boss
     [Header("Minecart Settings")]
     [SerializeField] float distanceToThrowOnMinecart = 5.0f;
     private Vector3 movePosition;
-    // [SerializeField] GameObject trackTop, trackBot;
+    [SerializeField] GameObject trackTop, trackBot;
     [SerializeField] float minecartSpeed;
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
@@ -78,7 +79,6 @@ public class DrillGuy : Boss
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
-    [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -165,12 +165,10 @@ public class DrillGuy : Boss
     private IEnumerator MinecartAttackRoutine()
     {
         posBeforeDriving = this.transform.position;
-        float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
-        float[] trackXs = {-11.5f,11.5f,11.5f,-11.5f}; //tl, tr, br, bl
-
+        GameObject[] tracks = { trackTop, trackBot };
         for (int i = 0; i < minecartCycles; i++)
         {
-            yield return StartCoroutine(MoveAlongtracks(trackYs, trackXs));
+            yield return StartCoroutine(MoveAlongtracks(tracks));
             if (i < minecartCycles - 1)
                 yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
@@ -179,14 +177,13 @@ public class DrillGuy : Boss
 
     // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
     // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
-    private IEnumerator MoveAlongtracks(float[] trackYs, float[] trackXs)
+    private IEnumerator MoveAlongtracks(GameObject[] tracks)
     {
         for (int i = 0; i < 2; i++)
             {
                 // init variables
-                Vector3 start_pos = new Vector3(trackXs[2*i], trackYs[i], 0);
-                Vector3 end_pos = new Vector3(trackXs[(2*i)+1], trackYs[i], 0);
-
+                Vector3 start_pos = tracks[i].transform.GetChild(i == 0? 0: 1).position;
+                Vector3 end_pos = tracks[i].transform.GetChild(i == 0? 1:0).position;
                 this.transform.position = start_pos; // teleport to start pos
                 Vector3 moveVector = end_pos - transform.position;
 
@@ -504,8 +501,8 @@ public class DrillGuy : Boss
             }
             else{
 
-                if (UnityEngine.Random.value <= minecartAttackProbablity) TransitionToDriving();
-                else TransitionToThrowing();
+                if (UnityEngine.Random.value < 0.5) TransitionToThrowing();
+                else TransitionToDriving();
                 
             }
         }
@@ -634,5 +631,10 @@ public class DrillGuy : Boss
     public override void TakeDamage(float damage)
     {
         if (!isUnderground) base.TakeDamage(damage);
+    }
+
+    public override void SetPhase()
+    {
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

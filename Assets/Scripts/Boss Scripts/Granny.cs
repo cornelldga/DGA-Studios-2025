@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using System.Threading;
 
 public class Granny : Boss
 {
@@ -11,8 +10,6 @@ public class Granny : Boss
         Idle, Invincible, HoldingContract, ContractDropped, Scavange, Returning
     }
     private State currentState;
-
-    GrannyPhase2 grannyPhase2;
 
     [Header("Movement Settings")]
     //Base time to reach target while charging (regular)
@@ -68,7 +65,6 @@ public class Granny : Boss
         stateTimer = idleTime;
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
-        grannyPhase2 = GetComponent<GrannyPhase2>();
     }
 
     // Update is called once per frame
@@ -321,8 +317,6 @@ public class Granny : Boss
         TransitionToContractDropped();
     }
 
-
-
     /// <summary>
     /// When contract dies, granny takes 1/4 of health
     /// </summary>
@@ -359,17 +353,10 @@ public class Granny : Boss
 
     public override void SetPhase()
     {
-        base.SetPhase();
         if (currentPhase == 1 && !doubleContract)
         {
             doubleContract = true;
         }
-        
-    }
-
-    public override void Defeat()
-    {
-        grannyPhase2.enabled = true;
-        Destroy(this);
+        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

@@ -23,11 +23,12 @@ public class GameManager : MonoBehaviour
 
     [Space(10)]
     [Header("Pause Menu UI")]
+    [Tooltip("Reference to the pause button")]
+    [SerializeField] private GameObject pauseButton;
     [Tooltip("Reference to the pause menu")]
     [SerializeField] private GameObject pauseMenu;
     [Tooltip("Reference to the volume sliders panel")]
     [SerializeField] private GameObject sliders;
-    [SerializeField] private Animator pauseMenuAnimator;
 
     [Space(5)]
     [Header("Audio Controls")]
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         HandlePauseInput();
+        UpdatePauseButtonVisibility();
     }
 
     /// <summary>
@@ -125,6 +127,15 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Toggles visibility of the pause button based on scene and player presence.
+    /// </summary>
+    private void UpdatePauseButtonVisibility()
+    {
+        bool isMainMenu = GetCurrentSceneName() == "Main Menu";
+        pauseButton.SetActive(!isMainMenu && playerInstance != null);
+    }
+
+    /// <summary>
     /// Toggles the pause menu and freezes/unfreezes the player accordingly. If closing the pause menu while the volume panel is open, it will also close the volume panel.
     /// </summary>
     /// <param name="isActive"></param>
@@ -133,23 +144,8 @@ public class GameManager : MonoBehaviour
         if (!isActive && volumeOpened)
             CloseVolumePanel();
 
-        if (isActive)
-        {
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0;
-            pauseMenuAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
-            pauseMenuAnimator.Play("Music On", 0, 0f);
-            if (musicSlider != null)
-            {
-                onMusicVolumeChanged(musicSlider.value);
-            }
-        }
-        else
-        {
-            Time.timeScale = 1;
-            pauseMenu.SetActive(false);
-        }
-
+        pauseMenu.SetActive(isActive);
+        Time.timeScale = isActive ? 0 : 1;
         FreezePlayer(isActive);
     }
 
@@ -188,23 +184,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void onMuteMusicClicked()
     {
-        if (musicSlider != null)
-        {
-            musicSlider.value = musicSlider.minValue;
-        }
-    }
-
-    public void onMusicVolumeChanged(float value)
-    {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.SetMusicVolume(value);
-        }
-
-        if (pauseMenuAnimator != null)
-        {
-            pauseMenuAnimator.speed = value <= 0.001f ? 0 : 1;
-        }
+        AudioManager.Instance.SetMusicVolume(0);
+        musicSlider.value = 0;
     }
 
     /// <summary>
@@ -227,6 +208,16 @@ public class GameManager : MonoBehaviour
         pauseMenu.transform.Find("Volume").gameObject.SetActive(true);
         pauseMenu.transform.Find("Back").gameObject.SetActive(false);
         volumeOpened = false;
+    }
+
+    /// <summary>
+    /// Check if on pause button
+    /// </summary>
+    public bool PointerOnPause()
+    {
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            pauseButton.GetComponent<RectTransform>(), 
+            Input.mousePosition);
     }
 
     /// <summary>
@@ -309,15 +300,7 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == "World Hub" && PlayerPrefs.GetInt("progression", 0)==0)
         {
-        CutsceneManager.Instance.PlayBackstoryCutscene(() =>
-        {
-            transitions.SetTrigger("Scene Loaded");
-
-            if (player != null)
-            {
-                player.PlayGetUpAnimation();
-            }
-        });
+            CutsceneManager.Instance.PlayBackstoryCutscene(() => transitions.SetTrigger("Scene Loaded"));
         }
 
         else if (currentScene == "Saloon" && PlayerPrefs.GetInt("progression", 0)==0)

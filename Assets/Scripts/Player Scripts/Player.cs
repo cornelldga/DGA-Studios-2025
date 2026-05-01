@@ -58,6 +58,12 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] TMP_Text whipCooldownText;
     [SerializeField] Animator playerHealthAnimator;
     [SerializeField] TMP_Text playerHealthText;
+
+    // Sprite fields temporary. These should be removed and change the health animator
+    // [SerializeField] Animator healthAnimator;
+    [SerializeField] Sprite healthySprite;
+    [SerializeField] Sprite midSprite;
+    [SerializeField] Sprite lowHealthSprite;
     [SerializeField] float midHealthThreshold;
     [SerializeField] float criticalThreshold;
 
@@ -247,13 +253,13 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !GameManager.Instance.PointerOnPause())
         {
             lastFrameWasFiring = true;
         }
@@ -480,25 +486,6 @@ public class Player : MonoBehaviour, IDamageable
         StopPlayer();
         limbs.SetActive(false);
         animationControl.SetBool("Dead", true);
-    }
-
-    public void PlayGetUpAnimation()
-    {
-        StartCoroutine(GetUpAnimation());
-    }
-
-    private IEnumerator GetUpAnimation()
-    {
-        limbs.SetActive(false);
-        armPivot.gameObject.SetActive(false);
-
-        animationControl.Play("Get Up", 0, 0f);
-
-        yield return new WaitForSeconds(1.3f);
-
-        limbs.SetActive(true);
-        armPivot.gameObject.SetActive(true);
-        animationControl.Play("Idle", 0, 0f);
     }
     /// <summary>
     /// Function called by death animation that triggers the lose game function

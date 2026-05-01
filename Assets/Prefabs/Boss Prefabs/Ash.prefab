@@ -130,7 +130,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.4}
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.7
 --- !u!95 &2195040353600612936
 Animator:
@@ -228,7 +228,7 @@ MonoBehaviour:
   animator: {fileID: 3610685219928371153}
   bossProgression: 4
   bossName: Ash, Da Seed Person
-  maxHealth: 180
+  maxHealth: 120
   healthBar: {fileID: 159719163656866947}
   healthBarAnimator: {fileID: 0}
   bossNameText: {fileID: 62901968422666060}
@@ -270,7 +270,7 @@ MonoBehaviour:
   stompRadius: 50
   stageCenter: {x: 0, y: 0}
   stageRadius: 6
-  fireRadius: 0.75
+  fireRadius: 0.6
   basicSeedPrefab: {fileID: 933965916132446560, guid: 5d19540ba09d914459eb5edaf7982298, type: 3}
   basicSeedArcHeight: 5
   basicSeedLandTime: 1.5
@@ -280,12 +280,10 @@ MonoBehaviour:
   fireFlowerSeedPrefab: {fileID: 933965916132446560, guid: 48d81145ff9c71245890f981936d17f7, type: 3}
   fireSeedArcHeight: 4
   fireSeedLandTime: 1
-  seedRows: 3
+  seedRows: 4
   molotov: {fileID: 1446831194491569228, guid: b099998c63a18e4419f28ade908164ea, type: 3}
   bushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
   deployedSeeds: 
-  seeds: []
-  seedIncrementor: 0
 --- !u!1001 &2116001527165509890
 PrefabInstance:
   m_ObjectHideFlags: 0

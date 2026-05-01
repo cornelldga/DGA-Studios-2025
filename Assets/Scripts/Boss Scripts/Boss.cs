@@ -19,7 +19,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] protected float maxHealth;
     protected float health;
     [SerializeField] Image healthBar;
-    [SerializeField] Animator healthBarAnimator;
+    public Animator healthBarAnimator;
     protected Rigidbody2D rb;
     [SerializeField] TMP_Text bossNameText;
     public Transform bulletOrigin;
@@ -63,6 +63,11 @@ public abstract class Boss : MonoBehaviour, IDamageable
 
     public virtual void Update()
     {
+        if (defeated)
+        {
+            return;
+        }
+
         attackCooldown -= Time.deltaTime * attackRate;
         if (!isAttacking && attackCooldown <= 0)
         {
@@ -124,7 +129,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         ));
         animator.SetTrigger("Defeat");
         rb.simulated = false;
-        this.enabled = false;
+        defeated = true;
 
         
     }
@@ -156,8 +161,5 @@ public abstract class Boss : MonoBehaviour, IDamageable
     /// <summary>
     /// Sets the phase of the boss based on its health percentage and updates the logic accordingly
     /// </summary>
-    public virtual void SetPhase()
-    {
-        healthBarAnimator.SetTrigger("PhaseChange");
-    }
+    public abstract void SetPhase();
 }

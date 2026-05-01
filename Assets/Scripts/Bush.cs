@@ -34,7 +34,7 @@ public class Bush : MonoBehaviour
     private float  dukeFootOffset = .3f;
     private float ashFootOffset = .7f;
 
-    public void Awake()
+    public void Start()
     {
         animator = GetComponent<Animator>();
         setFire(isOnFire);

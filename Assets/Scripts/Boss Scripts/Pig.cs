@@ -58,7 +58,7 @@ public class Pig : MonoBehaviour
     [SerializeField] private float arrivalThreshold = 0.1f;
 
     private Vector2 targetPosition;
-    protected Vector2 chargeDirection;
+    private Vector2 chargeDirection;
     private Vector2 startingPoint;
     private float currentSpeed;
     private Rigidbody2D rb;
@@ -262,7 +262,7 @@ public class Pig : MonoBehaviour
         animator.SetBool("isCharging", false);
     }
 
-    protected void TransitionToCharging()
+    private void TransitionToCharging()
     {
         pigCollider.enabled = true;
         animator.SetBool("isCharging", true);
