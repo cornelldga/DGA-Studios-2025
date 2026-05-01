@@ -17,6 +17,9 @@ public class Seed : MonoBehaviour
     private float startHeight;
     public int locationID;
 
+    //Sprite Pooling variables
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,7 +70,9 @@ public class Seed : MonoBehaviour
             cactus.locationID = locationID;
         }
 
-            GameObject.Destroy(this.gameObject);
+        //GameObject.Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        SeedReset();
     }
 
  
@@ -77,9 +82,31 @@ public class Seed : MonoBehaviour
         {
             if(!flower.GetComponent<Bush>() )
             { FindAnyObjectByType<Ash>().deployedSeeds[locationID] = false; }
-            GameObject.Destroy(this.gameObject);
+            //GameObject.Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            SeedReset();
         }
     }
 
-   
+    public void SeedReset()
+    {
+        planted = false;
+        timer = 0;
+
+        rb = GetComponent<Rigidbody2D>();
+
+        // Reset position FIRST
+        transform.position = FindAnyObjectByType<Ash>().bulletOrigin.position;
+
+        startHeight = transform.position.y;
+        maxHeight = arcHeight + target.y;
+        startVel = maxHeight / (landingTime / 2);
+
+        rb.linearVelocity = new Vector2(
+            (target.x - transform.position.x) / landingTime,
+            startVel + (target.y - transform.position.y) / landingTime
+        );
+    }
+
+    
 }
