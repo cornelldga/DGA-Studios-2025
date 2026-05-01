@@ -311,7 +311,6 @@ public class Granny : Boss
         }
         else
         {
-            rb.position = new Vector3(rb.position.x, rb.position.y, -1);
             rb.linearVelocity = dist.normalized * currentSpeed;
         }
     }

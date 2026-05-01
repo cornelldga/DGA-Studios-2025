@@ -94,8 +94,10 @@ public abstract class Boss : MonoBehaviour, IDamageable
     /// </summary>
     public virtual void Attack()
     {
-        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+        Vector3 dir = GameManager.Instance.player.transform.position
             - bulletOrigin.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        bulletOrigin.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public virtual void TakeDamage(float damage)
