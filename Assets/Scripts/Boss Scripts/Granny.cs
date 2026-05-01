@@ -48,7 +48,8 @@ public class Granny : Boss
     public bool contractDestroyed = false;
     private int initialBossCount;
     private bool singleContract = false;
-    [SerializeField] private bool doubleContract = false;
+    public bool doubleContract = false;
+    public bool doubleLocked = false;
 
     [Header("Attack Settings")]
     [Tooltip("Attack Pattern for Granny when out of contract mode")]
@@ -183,7 +184,7 @@ public class Granny : Boss
             return;
         }
 
-        if (bosses.Count + availableBosses.Count <= initialBossCount / 2)
+        if (!doubleLocked && bosses.Count + availableBosses.Count <= initialBossCount / 2)
         {
             doubleContract = true;
             singleContract = false;
@@ -223,6 +224,19 @@ public class Granny : Boss
             bosses.RemoveAt(index);
         }
         bossActive = true;
+    }
+
+    /// <summary>
+    /// Locks double contract animation from happening when a contract
+    /// is destroyed when Granny is in double contract mode
+    /// </summary>
+    public void LockDouble()
+    {
+        doubleLocked = true;
+        doubleContract = false;
+        singleContract = true;
+        animator.SetBool("isDouble", false);
+        animator.SetBool("isSingle", true);
     }
 
     private void TransitionToContractDropped()
