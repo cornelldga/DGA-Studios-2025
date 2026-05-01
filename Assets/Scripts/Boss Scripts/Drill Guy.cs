@@ -77,10 +77,10 @@ public class DrillGuy : Boss
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
-    [SerializeField] float minecartAttackProbablity = 0.7f; // for granny
-    [SerializeField] float minDistanceNearTrack = 6.0f;
+    [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
+    [SerializeField] float minDistanceNearTrack = 10f;
     float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
-    float[] trackXs = {-11.5f,11.5f,11.5f,-11.5f}; //tl, tr, br, bl
+    float[] trackXs = {-9.5f,11.5f,11.5f,-9.5f}; //tl, tr, br, bl
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -161,50 +161,29 @@ public class DrillGuy : Boss
         holePositions.Clear();
     }
 
-    // Minecart Attack: Tom throws dynamites while riding his minecart around the tracks.
-    // (one cycle =  top track +  bottom track)
-    // current spawns onto track (no walking. makes it fast which is cool)
-    private IEnumerator MinecartAttackRoutine()
+    private IEnumerator MinecartAttack(float[] trackYs, float[] trackXs)
     {
         posBeforeDriving = this.transform.position;
-        for (int i = 0; i < minecartCycles; i++)
-        {
-            yield return StartCoroutine(MoveAlongtracks(trackYs, trackXs));
-            if (i < minecartCycles - 1)
-                yield return new WaitForSeconds(transitionTimeBetweentracks);
+        for (int i = 0; i < 2; i++) {
+            // init variables
+            Vector3 start_pos = new Vector3(trackXs[2*i], trackYs[i], 0);
+            Vector3 end_pos = new Vector3(trackXs[(2*i)+1], trackYs[i], 0);
+            this.transform.position = start_pos; // teleport to start pos
+            Vector3 moveVector = end_pos - transform.position;
+
+            // face correct movement direction
+            if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+            else transform.localScale = new Vector3(1, 1, 1);
+
+            Vector3 direction = moveVector.normalized;
+            rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
+            throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
+            while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
+            rb.linearVelocity = Vector2.zero;
+
+            if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
         minecartRoutineDone = true;
-    }
-
-    // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
-    // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
-    private IEnumerator MoveAlongtracks(float[] trackYs, float[] trackXs)
-    {
-        for (int i = 0; i < 2; i++)
-            {
-                // init variables
-                Vector3 start_pos = new Vector3(trackXs[2*i], trackYs[i], 0);
-                Vector3 end_pos = new Vector3(trackXs[(2*i)+1], trackYs[i], 0);
-
-                this.transform.position = start_pos; // teleport to start pos
-                Vector3 moveVector = end_pos - transform.position;
-
-                // face correct movement direction
-                if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-                else transform.localScale = new Vector3(1, 1, 1);
-
-                Vector3 direction = moveVector.normalized;
-                rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
-
-                // dynamite throw dir for phase 0, where tom throw towards center Y
-                throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
-                
-                // keep moving until end of tracks
-                while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
-                rb.linearVelocity = Vector2.zero;
-
-                if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
-            }
     }
 
     // Dynamite throw during minecart attack.
@@ -221,7 +200,7 @@ public class DrillGuy : Boss
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
             Destroy(landingIndicator, dynamite.duration);
         } 
-        else if (currentPhase == 1 || currentPhase == 2) {
+        else if (currentPhase > 0) {
             for (int i = 0; i < 2; i++)
             {
                 Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
@@ -276,11 +255,23 @@ public class DrillGuy : Boss
             this.transform.position = posBeforeDriving;
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
             TransitionToEntering();
-        }
-       else if (!minecartRoutineStarted){
-            Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
-            StartCoroutine(MinecartAttackRoutine());
-            minecartRoutineStarted = true;
+        }  
+        else if (!minecartRoutineStarted) {
+
+            //walk to start
+            Vector3 moveVector = movePosition - transform.position;
+            moveVector = moveVector.normalized * moveSpeed;
+            rb.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
+
+            if (Vector2.Distance(transform.position, movePosition) < 1f) 
+            {
+                transform.position = movePosition;
+                minecartRoutineStarted = true;
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isDriving", true);
+                Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
+                StartCoroutine(MinecartAttack(trackYs, trackXs));
+            }
         }
     }
 
@@ -291,9 +282,9 @@ public class DrillGuy : Boss
     private void TransitionToDriving()
     {
         ResetAllAnimatorBools();
-        animator.SetBool("isDriving", true);
         minecartRoutineDone = false;
         minecartRoutineStarted = false;
+        animator.SetBool("isWalking", true);
         currentState = State.Driving;
     }
 
@@ -503,13 +494,21 @@ public class DrillGuy : Boss
             }
             else{
                 // if close to start of tracks
-                Vector2 pointA = new Vector2(trackXs[0], trackYs[0]);
-                if (Vector2.Distance(pointA, this.transform.position) < minDistanceNearTrack 
-                && UnityEngine.Random.value <= minecartAttackProbablity) {
-                    TransitionToDriving();
+                Vector3 pointA = new Vector3(trackXs[0], trackYs[0], 0);
+                Vector3 pointB =  new Vector3(trackXs[2], trackYs[1], 0);
+                float percentage = UnityEngine.Random.value;
+
+                if (percentage >= minecartAttackProbablity) TransitionToThrowing();
+                else
+                {
+                    if (Vector2.Distance(pointA, this.transform.position) < minDistanceNearTrack) {
+                        movePosition = pointA;
+                        TransitionToDriving();
+                    } else if (Vector2.Distance(pointB, this.transform.position) < minDistanceNearTrack) {
+                        movePosition = pointB;
+                        TransitionToDriving();
+                    } else TransitionToThrowing();
                 }
-                else TransitionToThrowing();
-                
             }
         }
     }
