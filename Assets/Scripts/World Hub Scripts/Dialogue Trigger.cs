@@ -40,7 +40,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         }
         if (dialogueType == DialogueType.Boss)
         {
-            Debug.Log(bossProgression == PlayerPrefs.GetInt("progression",0));
             if (bossProgression == PlayerPrefs.GetInt("progression",0))
             {
                 quest.SetActive(true);

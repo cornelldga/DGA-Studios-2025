@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using System.Threading;
+using UnityEngine.AdaptivePerformance;
 
 public class Granny : Boss
 {
@@ -35,23 +36,39 @@ public class Granny : Boss
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
-    [SerializeField] List<GameObject> bosses = new List<GameObject>();
+    [SerializeField] List<GameObject> bosses;
     [Tooltip("Spawn bounds, from bottom left to top right")]
     [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
-    [SerializeField] public List<GameObject> availableBosses = new List<GameObject>();
+    List<GameObject> availableBosses = new List<GameObject>();
+    public List<GameObject> GetAvailableBoss() => availableBosses;
     public bool bossActive;
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
-    // Contracts currently dropped by Granny
     public List<GameObject> currentDroppedContracts;
+    private float contractSize = 0.5f;
 
     public bool contractDestroyed = false;
     private int initialBossCount;
-    private bool doubleContract = false;
+    private bool singleContract = false;
+    public bool doubleContract = false;
+    public bool doubleLocked = false;
+
+    [Header("Attack Settings")]
+    [Tooltip("Attack Pattern for Granny when out of contract mode")]
+    [SerializeField] BulletPattern coinAttack;
+    [Tooltip("Attack Pattern for Granny while holding a contract")]
+    [SerializeField] BulletPattern contractCoinAttack;
+    [Tooltip("Attack Pattern for Granny while holding two contracts")]
+    [SerializeField] BulletPattern doubleContractCoinAttack;
 
     [Header("Return Settings")]
     [Tooltip("Time to return to starting point")]
     [SerializeField] private float returnTime = 4f;
+
+    [Header("Visuals")]
+    [Tooltip("Shield GameObject shown while Granny is invincible")]
+    [SerializeField] private GameObject shieldVisual;
+    private bool isDefeated;
 
     //Time until we should change states.
     private float stateTimer;
@@ -74,6 +91,7 @@ public class Granny : Boss
     // Update is called once per frame
     public override void Update()
     {
+        if (isDefeated) return;
         base.Update();
         stateTimer -= Time.deltaTime;
 
@@ -107,9 +125,7 @@ public class Granny : Boss
         stateTimer = idleTime;
         rb.linearVelocity = Vector2.zero;
 
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isSingleIdle", false);
-        animator.SetBool("isDoubleIdle", false);
+        ResetAnimationBools();
     }
 
     private void UpdateIdle()
@@ -125,21 +141,23 @@ public class Granny : Boss
         currentState = State.Invincible;
         stateTimer = invincibleTime;
         EnableRandomBosses();
-        // Purple until animation
-        sprite.color = Color.purple;
+        if (shieldVisual != null) shieldVisual.SetActive(true);
     }
 
     private void TransitionToHoldingContract()
     {
         currentState = State.HoldingContract;
         stateTimer = outTime;
-        sprite.color = Color.white;
+        if (shieldVisual != null) shieldVisual.SetActive(false);
     }
+
     public void TransitionToReturning()
     {
         // Speed to reach distance in time is dist/time
         currentSpeed = (rb.position - startingPoint).magnitude / returnTime;
         currentState = State.Returning;
+
+        animator.SetBool("isWalking", true);
     }
 
     private void UpdateInvincible()
@@ -163,56 +181,66 @@ public class Granny : Boss
     /// </summary>
     private void EnableRandomBosses()
     {
-        animator.SetBool("isHit", false);
-        if (bossActive) return;
-
         if (bosses.Count == 0 && availableBosses.Count == 0)
         {
-            gameObject.GetComponent<GrannyPhase2>().enabled = true;
-            gameObject.GetComponent<Granny>().enabled = false;
+            ResetAnimationBools();
+            Defeat();
             return;
         }
 
-        if (bosses.Count == initialBossCount / 2)
+        if (!doubleLocked && bosses.Count + availableBosses.Count <= initialBossCount / 2)
         {
+            doubleContract = true;
+            singleContract = false;
             animator.SetBool("isDouble", true);
+            animator.SetBool("isSingle", false);
         }
-        else if (bosses.Count > 0)
+        else
         {
+            singleContract = true;
+            doubleContract = false;
             animator.SetBool("isSingle", true);
+            animator.SetBool("isDouble", false);
         }
-        return;
+        animator.SetBool("pickedUp", true);
     }
 
+    /// <summary>
+    /// Summons a boss for Granny
+    /// Summons two bosses when Granny's contract list is halved
+    /// </summary>
     public void SummonBoss()
     {
         if (bossActive) return;
-        int index = Random.Range(0, bosses.Count);
-        GameObject boss = Instantiate(bosses[index]);
-        Transform bossCanvas = boss.transform.Find("Boss Canvas");
-        if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-        boss.GetComponent<Boss>().isInvulnerable = true;
+        int numOfBosses = doubleContract ? 2 : 1;
 
-        availableBosses.Add(boss);
-        bosses.Remove(bosses[index]);
+        for (int i = 0; i < numOfBosses && bosses.Count > 0; i++)
+        {
+            int index = Random.Range(0, bosses.Count);
+            GameObject prefab = bosses[index];
+            Boss boss = Instantiate(prefab).GetComponent<Boss>();
+            Transform bossCanvas = boss.transform.Find("Boss Canvas");
+            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
+            boss.isInvulnerable = true;
+            boss.isSummoned = true;
+
+            availableBosses.Add(boss.gameObject);
+            bosses.RemoveAt(index);
+        }
         bossActive = true;
     }
 
-    public void SummonBosses()
+    /// <summary>
+    /// Locks double contract animation from happening when a contract
+    /// is destroyed when Granny is in double contract mode
+    /// </summary>
+    public void LockDouble()
     {
-        if (bossActive) return;
-        for (int i = 1; i >= 0; i--)
-        {
-            GameObject boss = Instantiate(bosses[i]);
-            Transform bossCanvas = boss.transform.Find("Boss Canvas");
-            if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-            boss.GetComponent<Boss>().isInvulnerable = true;
-
-            availableBosses.Add(boss);
-            bosses.Remove(bosses[i]);
-        }
-        bossActive = true;
-        doubleContract = true;
+        doubleLocked = true;
+        doubleContract = false;
+        singleContract = true;
+        animator.SetBool("isDouble", false);
+        animator.SetBool("isSingle", true);
     }
 
     private void TransitionToContractDropped()
@@ -278,11 +306,11 @@ public class Granny : Boss
         Vector2 dist = startingPoint - rb.position;
         if (dist.magnitude < 0.1)
         {
+            animator.SetBool("isHit", false);
             TransitionToIdle();
         }
         else
         {
-            rb.position = new Vector3(rb.position.x, rb.position.y, -1);
             rb.linearVelocity = dist.normalized * currentSpeed;
         }
     }
@@ -297,6 +325,7 @@ public class Granny : Boss
                 Destroy(collision.gameObject);
                 if (currentDroppedContracts.Count <= 0)
                 {
+                    animator.SetBool("pickedUp", true);
                     TransitionToReturning();
                 }
             }
@@ -312,16 +341,29 @@ public class Granny : Boss
         Vector3 randomPos = new Vector3(Random.Range(contractSpawnBounds[0].x, contractSpawnBounds[1].x),
             Random.Range(contractSpawnBounds[0].y, contractSpawnBounds[1].y), -1);
         GameObject newContract = Instantiate(contractTemplate, randomPos, Quaternion.identity);
+        newContract.transform.localScale = new Vector3(contractSize, contractSize, contractSize);
 
         Contract contractScript = newContract.GetComponent<Contract>();
         contractScript.boss = bossType;
         contractScript.granny = this;
 
+
         currentDroppedContracts.Add(newContract);
         TransitionToContractDropped();
     }
 
-
+    /// <summary>
+    /// Resets all the animation booleans for Granny
+    /// </summary>
+    private void ResetAnimationBools()
+    {
+        animator.SetBool("isSingle", false);
+        animator.SetBool("isDouble", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isHit", false);
+        animator.SetBool("pickedUp", false);
+        animator.SetBool("isDead", false);
+    }
 
     /// <summary>
     /// When contract dies, granny takes 1/4 of health
@@ -329,6 +371,28 @@ public class Granny : Boss
     public void TakeDamageFromContract()
     {
         base.TakeDamage(1);
+    }
+
+    public override void Attack()
+    {
+        BulletPattern pattern;
+        if (currentState == State.HoldingContract)
+        {
+            pattern = doubleContract ? doubleContractCoinAttack : contractCoinAttack;
+        }
+        else
+        {
+            pattern = coinAttack;
+        }
+
+        if (pattern == null)
+        {
+            SetAttackCooldown(0.5f);
+            return;
+        }
+
+        base.Attack();
+        StartCoroutine(pattern.DoBulletPattern(this));
     }
 
     /// <summary>
@@ -342,19 +406,26 @@ public class Granny : Boss
             return;
         }
 
-        if (availableBosses == null)
+        if (availableBosses == null || availableBosses.Count == 0)
         {
             return;
         }
+        base.TakeDamage(damage);
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
 
-        animator.SetBool("isHit", true);
-    }
+        if (doubleContract)
+        {
+            doubleContract = false;
+            singleContract = true;
+        }
+        else
+        {
+            singleContract = false;
+        }
 
-    public override void Attack()
-    {
-        // Granny does not shoot — skip base bullet logic
+        animator.SetBool("isHit", true);
+        animator.SetBool("pickedUp", false);
     }
 
     public override void SetPhase()
@@ -364,11 +435,23 @@ public class Granny : Boss
         {
             doubleContract = true;
         }
-        
+
     }
 
     public override void Defeat()
     {
+        rb.simulated = false;
+        this.enabled = false;
+        ResetAnimationBools();
+        animator.SetBool("isDead", true);
+    }
+    /// <summary>
+    /// Fake the death of granny and transition to phase 2
+    /// </summary>
+    public void FakeOutDeath()
+    {
+        rb.simulated = true;
+        ResetAnimationBools();
         grannyPhase2.enabled = true;
         Destroy(this);
     }

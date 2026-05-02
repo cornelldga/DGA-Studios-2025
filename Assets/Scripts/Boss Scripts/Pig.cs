@@ -51,6 +51,10 @@ public class Pig : MonoBehaviour
     private float downBoundary;
     private bool isInitialized = false;
 
+    [Header("Visuals")]
+    [Tooltip("Smoke trail GameObject shown while pig is charging")]
+    [SerializeField] private GameObject smokeTrail;
+
     [Header("Return Settings")]
     [Tooltip("Speed when returning to starting point")]
     [SerializeField] private float returnSpeed = 4f;
@@ -66,6 +70,8 @@ public class Pig : MonoBehaviour
     private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private Vector3 smokeTrailPos;
+    private Vector3 smokeTrailScale;
 
     BoxCollider2D pigCollider;
 
@@ -86,6 +92,12 @@ public class Pig : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         ignoredColliders = new List<Collider2D>();
+
+        if (smokeTrail != null)
+        {
+            smokeTrailPos = smokeTrail.transform.localPosition;
+            smokeTrailScale = smokeTrail.transform.localScale;
+        }
 
         startingPoint = new Vector2(transform.position.x, transform.position.y);
         leftBoundary = startingPoint.x - patrolDistance;
@@ -113,6 +125,20 @@ public class Pig : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (smokeTrail != null)
+        {
+            smokeTrail.SetActive(currentState == State.Charging);
+            Vector3 pos = smokeTrailPos;
+            Vector3 scale = smokeTrailScale;
+            if (spriteRenderer.flipX)
+            {
+                pos.x = -pos.x;
+                scale.x = -scale.x;
+            }
+            smokeTrail.transform.localPosition = pos;
+            smokeTrail.transform.localScale = scale;
+        }
+
         // Don't do anything until initialized
         if (!isInitialized && currentState != State.Stunned && currentState != State.Charging)
         {
@@ -170,7 +196,7 @@ public class Pig : MonoBehaviour
     /// </summary>
     private void UpdatePatrolling()
     {
-        if(currentState == State.Charging)
+        if (currentState == State.Charging)
         {
             return;
         }
@@ -181,7 +207,7 @@ public class Pig : MonoBehaviour
             return;
         }
 
-            float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
+        float elevation = Mathf.PingPong(Time.time, patrolElevation * 2) - patrolElevation;
 
         Vector2 movement = new Vector2(patrolDirectionX * patrolSpeed, patrolDirectionY * elevation);
         rb.linearVelocity = movement;
@@ -320,7 +346,7 @@ public class Pig : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(currentState == State.Charging)
+        if (currentState == State.Charging)
         {
             HandleCharge(collision);
         }

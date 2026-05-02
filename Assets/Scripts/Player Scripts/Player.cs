@@ -94,6 +94,9 @@ public class Player : MonoBehaviour, IDamageable
     public int progression;
     public int cutsceneProgression;
 
+    [Space]
+    [SerializeField] bool invulnerableMode;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -130,6 +133,11 @@ public class Player : MonoBehaviour, IDamageable
         knockedBack = false;
         GameManager.Instance.player = this;
         GameManager.Instance.CheckForCutscenes();
+        if (invulnerableMode)
+        {
+            Debug.Log("Invulernable Mode Active");
+            invulnerable = true;
+        }
     }
 
     void Update()

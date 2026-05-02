@@ -39,7 +39,6 @@ public class BouncyCactus : MonoBehaviour, IProjectileInteractable
     /// </summary>
     void Bounce(Rigidbody2D rb)
     {
-        Debug.Log("Bounce");
         Vector2 bounceDir = (rb.position - new Vector2(transform.position.x, transform.position.y)).normalized;
         bounceDir = Rotate(bounceDir, Random.Range(-ranDeflectionRange, ranDeflectionRange) * Mathf.Deg2Rad);
         rb.linearVelocity = bounceDir * bounceForceStrength;
