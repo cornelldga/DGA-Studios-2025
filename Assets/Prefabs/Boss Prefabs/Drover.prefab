@@ -525,11 +525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6bad13d306c4d0f89b7235af7f263d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  animator: {fileID: 8467035003508594074}
   bossProgression: 2
   bossName: Drover, King of Pigs
   maxHealth: 50
   healthBar: {fileID: 5020431466718295752}
+  healthBarAnimator: {fileID: 8467035003508594074}
   bossNameText: {fileID: 5135283813810275591}
   bulletOrigin: {fileID: 6029264802078557319}
   phasePercents:
@@ -776,3 +776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!95 &8467035003508594074 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 6541131322178050889}
+  m_PrefabAsset: {fileID: 0}

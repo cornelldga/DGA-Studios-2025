@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Boss : MonoBehaviour, IDamageable
 {
-    [SerializeField] protected Animator animator;
+    protected Animator animator;
     [Tooltip("The progression value for defeating this boss")]
     [SerializeField] int bossProgression;
     [Tooltip("What the boss health bar name is set to")]
