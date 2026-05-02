@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drill_Guy
   animator: {fileID: 3610685219928371153}
-  bossProgression: 2
+  bossProgression: 3
   bossName: Julius, Manic Miner
   maxHealth: 70
   healthBar: {fileID: 159719163656866947}
@@ -216,13 +216,12 @@ MonoBehaviour:
   throw2Innacuracy: 2
   phase1ThrowChance: 0.8
   distanceToThrowOnMinecart: 2
-  trackTop: {fileID: 0}
-  trackBot: {fileID: 0}
   minecartSpeed: 10
   minecartCycles: 1
   transitionTimeBetweentracks: 0.3
   minecartInnacuracy: 1
   wall: {fileID: 0}
+  minecartAttackProbablity: 0.5
 --- !u!95 &2195040353600612936
 Animator:
   serializedVersion: 7

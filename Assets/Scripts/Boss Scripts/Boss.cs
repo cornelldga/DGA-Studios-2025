@@ -115,10 +115,12 @@ public abstract class Boss : MonoBehaviour, IDamageable
         }
     }
     /// <summary>
-    /// Called when the boss is defeated. Set the progression of the player and play the death animation
+    /// Called when the boss is defeated. Set the progression of the player, make the player invulnerable,
+    /// and play the death animation
     /// </summary>
     public virtual void Defeat()
     {
+        GameManager.Instance.player.SetInvulnerable(true);
         PlayerPrefs.SetInt("progression", Mathf.Max(
             PlayerPrefs.GetInt("progression", 0), bossProgression
         ));
