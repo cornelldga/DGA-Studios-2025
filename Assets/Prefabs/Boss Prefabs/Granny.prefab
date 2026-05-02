@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyPhase2
   animator: {fileID: 8633898269983300228}
-  bossProgression: 0
+  bossProgression: 6
   bossName: Granny, Super Awesome Granny
   maxHealth: 5
   healthBar: {fileID: 5187320019946879446}
@@ -365,10 +365,10 @@ MonoBehaviour:
   isInvulnerable: 0
   attackRate: 1
   defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
-  dialogueBoxSprite: {fileID: 0}
-  neutralSprite: {fileID: 0}
-  happySprite: {fileID: 0}
-  sadSprite: {fileID: 0}
+  dialogueBoxSprite: {fileID: 21300000, guid: fec09dac9d0ddcf43a80ad1dbf1262a1, type: 3}
+  neutralSprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+  happySprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
+  sadSprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
   customTextColor: 0
   textColor: {r: 0, g: 0, b: 0, a: 0}
   baseSpeed: 5
