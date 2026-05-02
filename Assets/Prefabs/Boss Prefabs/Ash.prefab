@@ -226,11 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ash
   animator: {fileID: 3610685219928371153}
-  bossProgression: 4
+  bossProgression: 5
   bossName: Ash, Da Seed Person
   maxHealth: 180
   healthBar: {fileID: 159719163656866947}
-  healthBarAnimator: {fileID: 0}
+  healthBarAnimator: {fileID: 3610685219928371153}
   bossNameText: {fileID: 62901968422666060}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:

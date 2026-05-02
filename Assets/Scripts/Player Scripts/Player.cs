@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("Seconds player is invulnerable after taking damage")]
     [SerializeField] float invulnerabilityTime;
     bool invulnerable;
+    public void SetInvulnerable(bool isInvulnerable) => invulnerable = isInvulnerable;
 
     [Header("Player Inventory")]
     BaseType[] equippedBases;
