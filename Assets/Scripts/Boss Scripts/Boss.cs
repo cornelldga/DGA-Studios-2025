@@ -57,6 +57,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         bossNameText.text = bossName;
         health = maxHealth;
+        SetHealthBar();
         emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
         emotionDictionary[DialogueEmotion.Happy] = happySprite;
         emotionDictionary[DialogueEmotion.Sad] = sadSprite;
@@ -99,6 +100,15 @@ public abstract class Boss : MonoBehaviour, IDamageable
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         bulletOrigin.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+    /// <summary>
+    /// Sets the health bar and returns the health percentage
+    /// </summary>
+    protected float SetHealthBar()
+    {
+        float healthPercent = health / maxHealth;
+        healthBar.fillAmount = healthPercent;
+        return healthPercent;
+    }
 
     public virtual void TakeDamage(float damage)
     {
@@ -108,12 +118,12 @@ public abstract class Boss : MonoBehaviour, IDamageable
         {
             healthBar.fillAmount = 0;
             Defeat();
+            return;
         }
         else
         {
-            float healthPercent = health / maxHealth;
-            healthBar.fillAmount = healthPercent;
-            CheckPhase(healthPercent);
+            SetHealthBar();
+            CheckPhase(SetHealthBar());
 
         }
     }
@@ -137,7 +147,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub.
     /// Sets the character's name to the boss name before the ','
     /// </summary>
-    public void AnimationBossDeathComplete()
+    public virtual void AnimationBossDeathComplete()
     {
         GameManager.Instance.GetDialogueManager.StartDialogue(defeatDialogue, dialogueBoxSprite, emotionDictionary,
             bossName.Substring(0, bossName.IndexOf(',')), DialogueType.SceneChange, "World Hub", customTextColor ? textColor : null);

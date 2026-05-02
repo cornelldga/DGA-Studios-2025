@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using System.Threading;
+using UnityEngine.AdaptivePerformance;
 
 public class Granny : Boss
 {
@@ -35,10 +36,11 @@ public class Granny : Boss
 
     [Header("Contracts Settings")]
     [Tooltip("List of bosses to spawn when Granny pulls out her contracts")]
-    [SerializeField] List<GameObject> bosses = new List<GameObject>();
+    [SerializeField] List<GameObject> bosses;
     [Tooltip("Spawn bounds, from bottom left to top right")]
     [SerializeField] List<Vector2> contractSpawnBounds = new List<Vector2>();
-    [SerializeField] public List<GameObject> availableBosses = new List<GameObject>();
+    List<GameObject> availableBosses = new List<GameObject>();
+    public List<GameObject> GetAvailableBoss() => availableBosses;
     public bool bossActive;
     [Tooltip("Contract prefab to instantiate")]
     [SerializeField] GameObject contractTemplate;
@@ -66,8 +68,6 @@ public class Granny : Boss
     [Header("Visuals")]
     [Tooltip("Shield GameObject shown while Granny is invincible")]
     [SerializeField] private GameObject shieldVisual;
-    [Tooltip("Seconds to wait after the defeat animation triggers before switching to Phase 2")]
-    [SerializeField] private float defeatAnimationDelay = 7f;
     private bool isDefeated;
 
     //Time until we should change states.
@@ -218,13 +218,13 @@ public class Granny : Boss
         {
             int index = Random.Range(0, bosses.Count);
             GameObject prefab = bosses[index];
-            GameObject boss = Instantiate(prefab);
+            Boss boss = Instantiate(prefab).GetComponent<Boss>();
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
-            boss.GetComponent<Boss>().isInvulnerable = true;
-            boss.GetComponent<Boss>().isSummoned = true;
+            boss.isInvulnerable = true;
+            boss.isSummoned = true;
 
-            availableBosses.Add(boss);
+            availableBosses.Add(boss.gameObject);
             bosses.RemoveAt(index);
         }
         bossActive = true;
@@ -410,6 +410,7 @@ public class Granny : Boss
         {
             return;
         }
+        base.TakeDamage(damage);
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
 
@@ -439,19 +440,19 @@ public class Granny : Boss
 
     public override void Defeat()
     {
-        if (isDefeated) return;
-        isDefeated = true;
-        if (rb != null) rb.simulated = false;
+        rb.simulated = false;
+        this.enabled = false;
         ResetAnimationBools();
         animator.SetBool("isDead", true);
-        StartCoroutine(DefeatRoutine());
     }
-
-    private IEnumerator DefeatRoutine()
+    /// <summary>
+    /// Fake the death of granny and transition to phase 2
+    /// </summary>
+    public void FakeOutDeath()
     {
-        yield return new WaitForSeconds(defeatAnimationDelay);
-        grannyPhase2.enabled = true;
+        rb.simulated = true;
         ResetAnimationBools();
+        grannyPhase2.enabled = true;
         Destroy(this);
     }
 }

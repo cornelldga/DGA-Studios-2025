@@ -251,7 +251,6 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void DisplayNextLine()
     {
-        Debug.Log(currentDialogueType);
         if (currentDialogueID == "")
         {
             if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive)

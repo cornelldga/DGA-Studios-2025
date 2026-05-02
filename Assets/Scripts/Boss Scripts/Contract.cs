@@ -28,10 +28,10 @@ public class Contract : MonoBehaviour, IDamageable
             Destroy(boss);
 
             // Removes boss from Granny contracts
-            granny.availableBosses.Remove(boss);
+            granny.GetAvailableBoss().Remove(boss);
             granny.contractDestroyed = true;
             // Locks Granny from double contract animation when contract is destroyed
-            if (granny.availableBosses.Count > 0)
+            if (granny.GetAvailableBoss().Count > 0)
             {
                 granny.LockDouble();
             }
