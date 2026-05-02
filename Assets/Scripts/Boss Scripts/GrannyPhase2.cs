@@ -51,7 +51,6 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float punchRepositionOffset;
     [SerializeField] private float punchSpeed;
     [SerializeField] GameObject punch;
-    [SerializeField] Transform punchPivot;
 
     //left and right bound essentially tell us how far left/right is
     //"too far". This is used to prevent granny from trying to teleport 
@@ -134,11 +133,9 @@ public class GrannyPhase2 : Boss
 
         if (bulletOrigin.transform.right.x > 0) { 
             sprite.flipX = true;
-            punchPivot.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         else if (bulletOrigin.right.x < 0) { 
             sprite.flipX = false; 
-            punchPivot.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
