@@ -65,6 +65,9 @@ public class CutsceneManager : MonoBehaviour
 
     private static float[] midCutsceneTimestamps = { 0f, 20f, 40f, 60f, 80f };
     private const float midCutsceneClipLength = 100f;
+    [SerializeField] TextAsset final_cutscene;
+    private static float[] finalCutsceneTimestamps = { 0f, 60f, 90f, 120f };
+    private const float finalCutsceneClipLength = 180f;
 
     [System.Serializable]
     private class BackstoryData
@@ -180,6 +183,23 @@ public class CutsceneManager : MonoBehaviour
             PlayerPrefs.SetInt("progression", 1);
             PlayerPrefs.Save();
 
+            onComplete?.Invoke();
+        });
+    }
+
+    public void PlayFinalCutscene(System.Action onComplete = null)
+    {
+        if (final_cutscene != null)
+        {
+            currentCutsceneData = JsonUtility.FromJson<BackstoryData>(final_cutscene.text);
+        }
+
+        if (introOverlay != null) introOverlay.SetActive(true);
+
+        SetCutsceneName("Narrator");
+
+        StartCutscene("final_cutscene", finalCutsceneTimestamps, finalCutsceneClipLength, () =>
+        {
             onComplete?.Invoke();
         });
     }
