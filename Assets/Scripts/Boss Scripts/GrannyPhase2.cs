@@ -71,7 +71,6 @@ public class GrannyPhase2 : Boss
     CircleCollider2D circleCollider;
     public override void Start()
     {
-        Debug.Log("Start phase 2");
         base.Start();
         TakeDamage(0);
         circleCollider = GetComponent<CircleCollider2D>();

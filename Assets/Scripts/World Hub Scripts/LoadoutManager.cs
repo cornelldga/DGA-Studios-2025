@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,11 @@ public class LoadoutManager : MonoBehaviour
 
     public BaseType[] GetEquippedBases() => equippedBases;
     public MixerType[] GetEquippedMixers() => equippedMixers;
+
+    private List<BaseType> unlockedBases = new List<BaseType>();
+    private List<MixerType> unlockedMixers = new List<MixerType>();
+
+
     /// <summary>
     /// Set up the dictionaries
     /// </summary>
@@ -71,6 +77,33 @@ public class LoadoutManager : MonoBehaviour
                 mixerSlotTwo.sprite = mixerToButton[mixerType].image.sprite;
             }
             index++;
+        }
+        unlockedBases.Clear();
+        unlockedMixers.Clear();
+        // Default unlocked
+        unlockedBases.Add(BaseType.Beer);
+        unlockedBases.Add(BaseType.Whiskey);
+        unlockedMixers.Add(MixerType.Ginger);
+        unlockedMixers.Add(MixerType.Cider);
+        if (PlayerPrefs.GetInt("progression",0)>1)
+        {
+            // Beat Drover
+            unlockedBases.Add(BaseType.Wine);
+        }
+        if (PlayerPrefs.GetInt("progression",0)>2)
+        {
+            // Beat Julius
+            unlockedMixers.Add(MixerType.Lime);
+        }
+        if (PlayerPrefs.GetInt("progression",0)>3)
+        {
+            // Beat Ace & Mirage
+            unlockedBases.Add(BaseType.Gin);
+        }
+        if (PlayerPrefs.GetInt("progression",0)>4)
+        {
+            // Beat Ash
+            unlockedMixers.Add(MixerType.Pimiento);
         }
     }
 
