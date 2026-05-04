@@ -1,0 +1,53 @@
+{
+  "dialogueLines": [
+
+        {
+            "dialogueID": "1_start",
+            "dialogueText": "WELCOME, EMPLOYEE! PAY IS ZERO, SPIRIT IS MAXIMUM!",
+            "emotion": 0,
+            "nextDialogueID": "1_next"
+        },
+        {
+            "dialogueID": "1_next",
+            "dialogueText": "Now get out there and SELL WATER!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "YOU FOUGHT A PIG AND WON?! Drinks are spiritually on the house!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "A MINER?! WE’RE EXPANDING OUR CLIENTELE!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "4_start",
+            "dialogueText": "TWO OF THEM?! THAT’S DOUBLE THE BUSINESS!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "5_start",
+            "dialogueText": "YOU BEAT THE PLANT LADY?! NATURE FEARS US!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "WE BEAT GRANNY!!! HERO’S HAVEN FOREVER!!!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+
+    ]
+}

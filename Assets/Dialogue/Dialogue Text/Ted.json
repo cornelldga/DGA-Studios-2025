@@ -1,0 +1,53 @@
+{
+  "dialogueLines": [
+
+        {
+            "dialogueID": "1_start",
+            "dialogueText": "Unpaid, huh? Yeah, that checks out.",
+            "emotion": 0,
+            "nextDialogueID": "1_next"
+        },
+        {
+            "dialogueID": "1_next",
+            "dialogueText": "Welcome to the bottom of the food chain.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "Great. Now we’re beefing with livestock.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "We’re one OSHA violation away from shutting down.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "4_start",
+            "dialogueText": "Magicians now. Fantastic. Love that for us.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "5_start",
+            "dialogueText": "We’re officially enemies of botany.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "Huh. We lived. Didn’t expect that.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+
+    ]
+}

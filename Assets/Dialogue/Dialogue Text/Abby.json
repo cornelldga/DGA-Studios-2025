@@ -1,0 +1,53 @@
+{
+  "dialogueLines": [
+
+        {
+            "dialogueID": "1_start",
+            "dialogueText": "Howdy Duke! Thanks for helping out around here!",
+            "emotion": 0,
+            "nextDialogueID": "1_next"
+        },
+        {
+            "dialogueID": "1_next",
+            "dialogueText": "We may not pay… but we sure appreciate ya!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "That was amazing, Duke! You’re really settling in!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "You handled that so well, Duke!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "4_start",
+            "dialogueText": "That was scary… but you did it!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "5_start",
+            "dialogueText": "I knew you could do it, Duke!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "We did it… we really did it!",
+            "emotion": 0,
+            "nextDialogueID": ""
+        }
+
+    ]
+}
