@@ -32,6 +32,10 @@ public class LoadoutManager : MonoBehaviour
     private List<BaseType> unlockedBases = new List<BaseType>();
     private List<MixerType> unlockedMixers = new List<MixerType>();
 
+   [SerializeField] GameObject rows;
+   [SerializeField] GameObject Bases;
+   [SerializeField] GameObject Mixers;
+
 
     /// <summary>
     /// Set up the dictionaries
@@ -105,6 +109,11 @@ public class LoadoutManager : MonoBehaviour
             // Beat Ash
             unlockedMixers.Add(MixerType.Pimiento);
         }
+    }
+
+    public void setLoadout(bool isMixer)
+    {
+        mixer = isMixer;
     }
 
     /// <summary>
