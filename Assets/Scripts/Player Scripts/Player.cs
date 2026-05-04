@@ -76,7 +76,6 @@ public class Player : MonoBehaviour, IDamageable
     float changeCooldown;
     float whipCooldown;
     private bool whipping;
-    [HideInInspector] public bool knockedBack;
 
     int baseIndex;
     int mixerIndex;
@@ -130,7 +129,6 @@ public class Player : MonoBehaviour, IDamageable
         currentShots = 0;
 
         isAlive = true;
-        knockedBack = false;
         GameManager.Instance.player = this;
         GameManager.Instance.CheckForCutscenes();
         if (invulnerableMode)
@@ -381,7 +379,6 @@ public class Player : MonoBehaviour, IDamageable
 
     void Move()
     {
-        if (knockedBack) return;
         Vector2 direction = new(moveDirection.x, moveDirection.y);
         direction = direction.normalized;
         rb.linearVelocity = direction * speed;

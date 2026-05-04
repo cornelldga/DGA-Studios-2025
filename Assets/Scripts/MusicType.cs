@@ -2,5 +2,7 @@ public enum MusicType
 {
     None,
     Saloon,
-    Hog
+    Hog,
+    Ash,
+    Magic
 }

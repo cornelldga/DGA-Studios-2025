@@ -29,6 +29,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] MusicType sceneMusic;
     [SerializeField] private AudioSource saloonMusic;
     [SerializeField] private AudioSource hogMusic;
+    [SerializeField] AudioSource ashMusic;
+    [SerializeField] AudioSource magicMusic;
 
     [Header("Sound Effects")]
     [Tooltip("configure list here for all SFX in the game")]
@@ -79,7 +81,7 @@ public class AudioManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
-        songs = new AudioSource[] { saloonMusic, hogMusic };
+        songs = new AudioSource[] { saloonMusic, hogMusic, ashMusic, magicMusic};
         foreach (AudioSource song in songs)
         {
             if (song != null)
