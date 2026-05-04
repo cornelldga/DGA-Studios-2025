@@ -951,10 +951,6 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
-      propertyPath: speed
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
       propertyPath: magician
       value: 
       objectReference: {fileID: 479231736}
@@ -974,10 +970,6 @@ PrefabInstance:
       propertyPath: knifeStage
       value: 
       objectReference: {fileID: 116850635}
-    - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
-      propertyPath: knockbackForce
-      value: 600
-      objectReference: {fileID: 0}
     - target: {fileID: 7071902628436390820, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
       propertyPath: m_Name
       value: Mirage
@@ -1711,6 +1703,10 @@ PrefabInstance:
       propertyPath: doveStage
       value: 
       objectReference: {fileID: 11705904}
+    - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
       propertyPath: knifeStage
       value: 
