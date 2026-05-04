@@ -3832,7 +3832,6 @@ GameObject:
   - component: {fileID: 7791065030971922452}
   - component: {fileID: 1999851415766512139}
   - component: {fileID: 5744834834756807939}
-  - component: {fileID: 4131812743736203554}
   m_Layer: 5
   m_Name: Cider
   m_TagString: Untagged
@@ -3859,10 +3858,10 @@ RectTransform:
   - {fileID: 4776256862598997805}
   m_Father: {fileID: 7162199228690795412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 209.10498, y: 105.08249}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7791065030971922452
 CanvasRenderer:
@@ -3958,22 +3957,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4131812743736203554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722796768806258597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff512afe73d240d89ec56bd804259a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverInfo
-  info: {fileID: 0}
-  name: Cider
-  text: {fileID: 2936752720970603523}
-  background: {fileID: 0}
 --- !u!1 &3779434442408790772
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,7 +6497,6 @@ GameObject:
   - component: {fileID: 8345120823853062515}
   - component: {fileID: 568710556156955373}
   - component: {fileID: 6493053261974851131}
-  - component: {fileID: 7961241034285489800}
   m_Layer: 5
   m_Name: Ginger
   m_TagString: Untagged
@@ -6541,10 +6523,10 @@ RectTransform:
   - {fileID: 1136684744759909889}
   m_Father: {fileID: 7162199228690795412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 209.10498, y: -39.91751}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8345120823853062515
 CanvasRenderer:
@@ -6640,22 +6622,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7961241034285489800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6779625936902206333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff512afe73d240d89ec56bd804259a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverInfo
-  info: {fileID: 0}
-  name: Ginger
-  text: {fileID: 2936752720970603523}
-  background: {fileID: 0}
 --- !u!1 &6796315189579886610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6748,6 +6714,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d484468f72d82471d8a1779d874d9512, type: 3}
   - {fileID: 21300000, guid: b1c43fede21364ba2acf896515827404, type: 3}
   - {fileID: 21300000, guid: 039fb7aa0b44f4a71bbbaf4e63f45c22, type: 3}
+  baseLockedIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  mixerLockedIcons:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!222 &3231970282301270771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7598,7 +7570,6 @@ GameObject:
   - component: {fileID: 3010817608489848304}
   - component: {fileID: 8009890140768963306}
   - component: {fileID: 9169486998936200450}
-  - component: {fileID: 1711634411646550121}
   m_Layer: 5
   m_Name: Pimiento
   m_TagString: Untagged
@@ -7625,10 +7596,10 @@ RectTransform:
   - {fileID: 6412636800922645534}
   m_Father: {fileID: 7162199228690795412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 209.10498, y: -329.9175}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3010817608489848304
 CanvasRenderer:
@@ -7724,22 +7695,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1711634411646550121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7400883373118865769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff512afe73d240d89ec56bd804259a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverInfo
-  info: {fileID: 0}
-  name: Pimiento
-  text: {fileID: 2936752720970603523}
-  background: {fileID: 0}
 --- !u!1 &7478804316146038160
 GameObject:
   m_ObjectHideFlags: 0
@@ -7752,7 +7707,6 @@ GameObject:
   - component: {fileID: 6862834896415287288}
   - component: {fileID: 5348962200861306936}
   - component: {fileID: 2964581144172474156}
-  - component: {fileID: 150545293425128212}
   m_Layer: 5
   m_Name: Lime
   m_TagString: Untagged
@@ -7779,10 +7733,10 @@ RectTransform:
   - {fileID: 7921585980861469093}
   m_Father: {fileID: 7162199228690795412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 209.10498, y: -184.91751}
-  m_SizeDelta: {x: 90, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6862834896415287288
 CanvasRenderer:
@@ -7878,22 +7832,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &150545293425128212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478804316146038160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff512afe73d240d89ec56bd804259a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverInfo
-  info: {fileID: 0}
-  name: Lime
-  text: {fileID: 2936752720970603523}
-  background: {fileID: 0}
 --- !u!1 &7482107693789739303
 GameObject:
   m_ObjectHideFlags: 0
@@ -7910,7 +7848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7162199228690795412
 RectTransform:
   m_ObjectHideFlags: 0

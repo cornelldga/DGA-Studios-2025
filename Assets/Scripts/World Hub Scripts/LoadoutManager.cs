@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +22,7 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] Image mixerSlotOne;
     [SerializeField] Image mixerSlotTwo;
     private Image currentSlot;
+    private int slotNumber;
     private bool mixer;
     private 
 
@@ -40,6 +43,10 @@ public class LoadoutManager : MonoBehaviour
    [SerializeField] Sprite[] baseIcons;
    [Tooltip("Mixer Icons")]
    [SerializeField] Sprite[] mixerIcons;
+
+    [Tooltip("Locked Icons")]
+    [SerializeField] Sprite[] baseLockedIcons;
+    [SerializeField] Sprite[] mixerLockedIcons;
 
 
     /// <summary>
@@ -114,6 +121,8 @@ public class LoadoutManager : MonoBehaviour
             // Beat Ash
             unlockedMixers.Add(MixerType.Pimiento);
         }
+        RefreshBaseButtons();
+        RefreshMixerButtons();
     }
 
     public void setLoadout(int slot)
@@ -124,24 +133,28 @@ public class LoadoutManager : MonoBehaviour
             mixerOptions.SetActive(false);
             baseOptions.SetActive(true);
             currentSlot = baseSlotOne;
+            slotNumber = 0;
             mixer = false;
         } else if (slot==2)
         {
             mixerOptions.SetActive(false);
             baseOptions.SetActive(true);
             currentSlot = baseSlotTwo;
+            slotNumber = 1;
             mixer = false;
         } else if (slot==3)
         {
             baseOptions.SetActive(false);
             mixerOptions.SetActive(true);
             currentSlot = mixerSlotOne;
+            slotNumber = 0;
             mixer = true;
         } else
         {
             baseOptions.SetActive(false);
             mixerOptions.SetActive(true);
             currentSlot = mixerSlotTwo;
+            slotNumber = 1;
             mixer = true;
         }
     }
@@ -154,6 +167,28 @@ public class LoadoutManager : MonoBehaviour
     {
         GameManager.Instance.ToggleLoadoutManager(false);
     }
+
+    void RefreshBaseButtons()
+    {
+        foreach (var pair in baseToButton)
+        {
+            bool isEquipped = equippedBases.Contains(pair.Key);
+            bool isUnlocked = unlockedBases.Contains(pair.Key);
+
+            pair.Value.interactable = isUnlocked && !isEquipped;
+        }
+    }
+
+    void RefreshMixerButtons()
+    {
+        foreach (var pair in mixerToButton)
+        {
+            bool isEquipped = equippedMixers.Contains(pair.Key);
+            bool isUnlocked = unlockedMixers.Contains(pair.Key);
+
+            pair.Value.interactable = isUnlocked && !isEquipped;
+        }
+    }
     
     /// <summary>
     /// Choose a base to be equipped at the selected index
@@ -162,16 +197,20 @@ public class LoadoutManager : MonoBehaviour
     {
         if (mixer)
         {
-            MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)type);
-            currentSlot.sprite =  mixerIcons[type];
-            mixerToButton[swappedMixer].interactable = true;
-            mixerToButton[(MixerType)type].interactable = false;
+            if (!Array.Exists(equippedMixers, name => name == (MixerType)type)) {
+                MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(slotNumber, (MixerType)type);
+                currentSlot.sprite =  mixerIcons[type];
+                RefreshMixerButtons();
+                equippedMixers[slotNumber] = swappedMixer;
+            }
         } else
         {
-            BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)type);
+            if (!Array.Exists(equippedBases, name => name == (BaseType)type)) {
+            BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(slotNumber,(BaseType)type);
             currentSlot.sprite =  baseIcons[type];
-            baseToButton[swappedBase].interactable = true;
-            baseToButton[(BaseType)type].interactable = false;
+            RefreshBaseButtons();
+            equippedBases[slotNumber] = swappedBase;
+            }
         }
     }
 }
