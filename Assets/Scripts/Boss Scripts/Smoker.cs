@@ -123,6 +123,7 @@ public class Smoker : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         currentVelocity = Vector2.zero;
         animator.SetBool("Walking", false);
+        animator.SetTrigger("Punch");
 
         Player playerScript = target.GetComponent<Player>();
         if (playerScript == null) { isPunching = false; yield break; }

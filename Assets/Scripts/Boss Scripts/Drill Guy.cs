@@ -56,7 +56,6 @@ public class DrillGuy : Boss
 
     //Time until we should change states.
     [SerializeField] Dynamite dynamite;
-
     [Header("Throwing Settings")]
     [SerializeField] GameObject dynamiteLandingIndicatorPrefab;
     [Tooltip("How innacurate a dynamite throw is during phase 1")]
@@ -69,7 +68,7 @@ public class DrillGuy : Boss
     [Header("Minecart Settings")]
     [SerializeField] float distanceToThrowOnMinecart = 5.0f;
     private Vector3 movePosition;
-    [SerializeField] GameObject trackTop, trackBot;
+    // [SerializeField] GameObject trackTop, trackBot;
     [SerializeField] float minecartSpeed;
     [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
@@ -79,6 +78,7 @@ public class DrillGuy : Boss
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
+    [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -99,6 +99,9 @@ public class DrillGuy : Boss
         base.Update();
         stateTimer -= Time.deltaTime;
         attackCooldown -= Time.deltaTime * attackRate;
+
+        // -1 so boss never goes into minecart mode when summoned by Granny
+        if (isSummoned) minecartAttackProbablity = -1;
 
         switch (currentState)
         {
@@ -144,10 +147,10 @@ public class DrillGuy : Boss
         attackCooldown = dynamite.duration;
     }
 
-     //Throws Dynamite at the holes (phase 2)
+    //Throws Dynamite at the holes (phase 2)
     private void ThrowDynamiteAtHoles()
     {
-        foreach(Vector3 pos in holePositions)
+        foreach (Vector3 pos in holePositions)
         {
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, pos, Quaternion.identity);
             landingIndicator.GetComponent<SpriteRenderer>()
@@ -165,44 +168,47 @@ public class DrillGuy : Boss
     private IEnumerator MinecartAttackRoutine()
     {
         posBeforeDriving = this.transform.position;
-        GameObject[] tracks = { trackTop, trackBot };
+        float[] trackYs = { 3.5f, -1.45f }; //parallel so only top and bottom Y needed
+        float[] trackXs = { -11.5f, 11.5f, 11.5f, -11.5f }; //tl, tr, br, bl
+
         for (int i = 0; i < minecartCycles; i++)
         {
-            yield return StartCoroutine(MoveAlongtracks(tracks));
+            yield return StartCoroutine(MoveAlongtracks(trackYs, trackXs));
             if (i < minecartCycles - 1)
                 yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
         minecartRoutineDone = true;
     }
 
-    // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side. 
+    // Minecart Attack: At the beginning of each cycle, Tom enters top track from the left side.
     // He rides his minecart till the end of the track. Then he spawn bottom track from the right side.
-    private IEnumerator MoveAlongtracks(GameObject[] tracks)
+    private IEnumerator MoveAlongtracks(float[] trackYs, float[] trackXs)
     {
         for (int i = 0; i < 2; i++)
-            {
-                // init variables
-                Vector3 start_pos = tracks[i].transform.GetChild(i == 0? 0: 1).position;
-                Vector3 end_pos = tracks[i].transform.GetChild(i == 0? 1:0).position;
-                this.transform.position = start_pos; // teleport to start pos
-                Vector3 moveVector = end_pos - transform.position;
+        {
+            // init variables
+            Vector3 start_pos = new Vector3(trackXs[2 * i], trackYs[i], 0);
+            Vector3 end_pos = new Vector3(trackXs[(2 * i) + 1], trackYs[i], 0);
 
-                // face correct movement direction
-                if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-                else transform.localScale = new Vector3(1, 1, 1);
+            this.transform.position = start_pos; // teleport to start pos
+            Vector3 moveVector = end_pos - transform.position;
 
-                Vector3 direction = moveVector.normalized;
-                rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
+            // face correct movement direction
+            if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
+            else transform.localScale = new Vector3(1, 1, 1);
 
-                // dynamite throw dir for phase 0, where tom throw towards center Y
-                throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
-                
-                // keep moving until end of tracks
-                while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
-                rb.linearVelocity = Vector2.zero;
+            Vector3 direction = moveVector.normalized;
+            rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
 
-                if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
-            }
+            // dynamite throw dir for phase 0, where tom throw towards center Y
+            throwDirY = i == 0 ? -1 : 1; //top track throws down, bot track throws up
+
+            // keep moving until end of tracks
+            while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
+            rb.linearVelocity = Vector2.zero;
+
+            if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
+        }
     }
 
     // Dynamite throw during minecart attack.
@@ -211,22 +217,23 @@ public class DrillGuy : Boss
     public void ThrowDynamiteOffTracks()
     {
         if (minecartRoutineDone) return;
-        
+
         if (currentPhase == 0)
         {
             Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
             StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
             GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
             Destroy(landingIndicator, dynamite.duration);
-        } 
-        else if (currentPhase == 1 || currentPhase == 2) {
+        }
+        else if (currentPhase == 1 || currentPhase == 2)
+        {
             for (int i = 0; i < 2; i++)
             {
                 Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + UnityEngine.Random.Range(-distanceToThrowOnMinecart - minecartInnacuracy, distanceToThrowOnMinecart + minecartInnacuracy));
                 StartCoroutine(dynamite.ThrowRoutine(bulletOrigin.position, target));
                 GameObject landingIndicator = Instantiate(dynamiteLandingIndicatorPrefab, target, Quaternion.identity);
                 Destroy(landingIndicator, dynamite.duration);
-            }     
+            }
         }
     }
 
@@ -252,14 +259,14 @@ public class DrillGuy : Boss
         Vector2 playerPos = GameManager.Instance.player.transform.position;
         Vector2 currentPos = transform.position;
         Vector2 direction = (playerPos - currentPos).normalized;
-        
+
         if (direction.x < 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); 
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1); 
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -275,14 +282,15 @@ public class DrillGuy : Boss
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
             TransitionToEntering();
         }
-       else if (!minecartRoutineStarted){
+        else if (!minecartRoutineStarted)
+        {
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
             StartCoroutine(MinecartAttackRoutine());
             minecartRoutineStarted = true;
         }
     }
 
-    
+
     /// <summary>
     /// Transition to driving state
     /// </summary>
@@ -310,7 +318,7 @@ public class DrillGuy : Boss
         else
         {
             Vector3 moveVector = movePosition - transform.position;
-            if(moveVector.magnitude <= .1f)
+            if (moveVector.magnitude <= .1f)
             {
                 movePosition =
                 new Vector3(UnityEngine.Random.Range(-moveRange, moveRange),
@@ -346,14 +354,15 @@ public class DrillGuy : Boss
         {
             if (currentPhase == 0)
             {
-                    ThrowDynamiteAtHoles(); //phase 1
-                    TransitionToWalking();
+                ThrowDynamiteAtHoles(); //phase 1
+                TransitionToWalking();
             }
-            else if (currentPhase == 1) {
+            else if (currentPhase == 1)
+            {
                 float ran = UnityEngine.Random.Range(0, 1f);
-                if(ran <= phase1ThrowChance)
+                if (ran <= phase1ThrowChance)
                 {
-                    ThrowDynamiteAtPlayer(); //phase 2                
+                    ThrowDynamiteAtPlayer(); //phase 2
                 }
                 else
                 {
@@ -494,16 +503,18 @@ public class DrillGuy : Boss
     {
         if (currentState == State.Exiting)
         {
-            if (currentPhase == 2 && numFrenzyDigs > 0){
+            if (currentPhase == 2 && numFrenzyDigs > 0)
+            {
                 // if it's desperation phase and there's more to dig
                 numFrenzyDigs -= 1;
                 TransitionToEntering();
             }
-            else{
+            else
+            {
 
-                if (UnityEngine.Random.value < 0.5) TransitionToThrowing();
-                else TransitionToDriving();
-                
+                if (UnityEngine.Random.value <= minecartAttackProbablity) TransitionToDriving();
+                else TransitionToThrowing();
+
             }
         }
     }
@@ -515,16 +526,16 @@ public class DrillGuy : Boss
     /// </summary>
     private void CreateChasePathToPlayer()
     {
-        Vector2 p0 = transform.position; 
-        Vector2 p3 = GameManager.Instance.player.transform.position; 
-        
+        Vector2 p0 = transform.position;
+        Vector2 p3 = GameManager.Instance.player.transform.position;
+
         Vector2 directionToPlayer = (p3 - p0).normalized;
         float distanceToPlayer = Vector2.Distance(p0, p3);
-        
+
         Vector2 p1 = GenerateControlPoint(p0, p3, directionToPlayer, distanceToPlayer, 0.15f);
-        
+
         Vector2 p2 = GenerateControlPoint(p0, p3, directionToPlayer, distanceToPlayer, 0.85f);
-        
+
         currentPath = new DrillPath(p0, p1, p2, p3);
         t = 0f;
     }
@@ -544,13 +555,13 @@ public class DrillGuy : Boss
             new Vector2(UnityEngine.Random.Range(-digRange, digRange), UnityEngine.Random.Range(-digRange, digRange)),
             new Vector2(UnityEngine.Random.Range(-digRange, digRange), UnityEngine.Random.Range(-digRange, digRange))
         };
-        
-        currentPath = new DrillPath(pathLocations[0],pathLocations[1],pathLocations[2],pathLocations[3]);
+
+        currentPath = new DrillPath(pathLocations[0], pathLocations[1], pathLocations[2], pathLocations[3]);
         t = 0f;
     }
 
     /// <summary>
-    /// Generates a random control point between p0 and p3, with restriction that it 
+    /// Generates a random control point between p0 and p3, with restriction that it
     /// its projection to the line p0 p3 is stricly in between them
     /// Moidfy this (or extend with multiple splines) to make drill path more interesting
     /// </summary>
@@ -563,20 +574,20 @@ public class DrillGuy : Boss
     private Vector2 GenerateControlPoint(Vector2 p0, Vector2 p3, Vector2 forward, float distance, float tAlong)
     {
         Vector2 basePoint = p0 + forward * distance * tAlong;
-        
+
         Vector2 perpendicular = new Vector2(-forward.y, forward.x);
         float randomOffset = UnityEngine.Random.Range(-distance, distance);
-        
+
         Vector2 controlPoint = basePoint + perpendicular * randomOffset;
-        
+
         Vector2 toControl = controlPoint - p0;
         Vector2 toEnd = p3 - p0;
-        
+
         if (Vector2.Dot(toControl, toEnd) < 0)
         {
             controlPoint = basePoint;
         }
-        
+
         return controlPoint;
     }
 
@@ -596,7 +607,7 @@ public class DrillGuy : Boss
             transform.position = newPos;
             yield return new WaitForEndOfFrame();
         }
-        
+
         t = 0f;
     }
 
@@ -631,10 +642,5 @@ public class DrillGuy : Boss
     public override void TakeDamage(float damage)
     {
         if (!isUnderground) base.TakeDamage(damage);
-    }
-
-    public override void SetPhase()
-    {
-        healthBarAnimator.SetTrigger("PhaseChange");
     }
 }

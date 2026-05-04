@@ -2,19 +2,35 @@
     "dialogueLines": [
         {
             "dialogueID": "1_start",
-            "dialogueText": "Well, if it isn't the new bar owner. I'm Mirage the Marvelous, and this is my assistant, Ace.",
-            "emotion": 1,
-            "nextDialogueID": "1_next"
-        },
-        {
-            "dialogueID": "1_next",
-            "dialogueText": "I heard you're looking for entertainers, but you can't afford us. She pays us in gold.",
+            "dialogueText": "Do you mind? We're having a private conversation.",
             "emotion": 0,
-            "nextDialogueID": "1_fight"
+            "nextDialogueID": ""
+        },
+
+
+        {
+            "dialogueID": "2_start",
+            "dialogueText": "You beat that pig man or something? Is that supposed to be impressive?",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+
+        {
+            "dialogueID": "3_start",
+            "dialogueText": "You've finally worked your way up. I'm Mirage the Marvelous, and this is my assistant, Ace.",
+            "emotion": 1,
+            "nextDialogueID": "3_next"
         },
         {
-            "dialogueID": "1_fight",
-            "dialogueText": "The only magic trick you'll be seeing is us making you disappear from this town. Shall we?",
+            "dialogueID": "3_next",
+            "dialogueText": "We're premium entertainers, the best in the town. But you can't afford our shows.",
+            "emotion": 0,
+            "nextDialogueID": "3_fight"
+        },
+        {
+            "dialogueID": "3_fight",
+            "dialogueText": "The only magic trick you'll be seeing is us making you disappear from this town.",
             "emotion": 0,
             "nextDialogueID": ""
         },
@@ -28,13 +44,30 @@
         },
         {
             "dialogueID": "4_next",
-            "dialogueText": "Don't worry, we'll stay out of your way. There's no sum she could pay us to fight you again.",
+            "dialogueText": "I won't make that mistake again.",
             "emotion": 0,
             "nextDialogueID": "4_fight"
         },
         {
             "dialogueID": "4_fight",
-            "dialogueText": "Come find us when you've handled your business. We're not fighters, but we can still put on a show.",
+            "dialogueText": "Ace, were you taking notes? I say we go again.",
+            "emotion": 0,
+            "nextDialogueID": ""
+        },
+
+        {
+            "dialogueID": "6_start",
+            "dialogueText": "So you beat Granny, hm? Luckily we have more than enough savings.",
+            "emotion": 0,
+            "nextDialogueID": "6_next"
+        }, {
+            "dialogueID": "6_next",
+            "dialogueText": "Yeah, she fired us. But we decided to take a break from our shows anyway.",
+            "emotion": 0,
+            "nextDialogueID": "6_fight"
+        }, {
+            "dialogueID": "6_fight",
+            "dialogueText": "We wanted to work more on our fighting skills. Wanna test us out?",
             "emotion": 0,
             "nextDialogueID": ""
         }

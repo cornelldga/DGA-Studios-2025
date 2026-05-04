@@ -188,6 +188,7 @@ MonoBehaviour:
   bossName: Mirage & Ace, Dynamic Duo
   maxHealth: 70
   healthBar: {fileID: 2100067247850913026}
+  healthBarAnimator: {fileID: 3244883807250652752}
   bossNameText: {fileID: 2291459968752389837}
   bulletOrigin: {fileID: 6913094105630645781}
   phasePercents:
@@ -514,6 +515,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!95 &3244883807250652752 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 166091810683261059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5998097166773004902 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}

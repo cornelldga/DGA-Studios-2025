@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, IDamageable
     [Tooltip("Seconds player is invulnerable after taking damage")]
     [SerializeField] float invulnerabilityTime;
     bool invulnerable;
+    public void SetInvulnerable(bool isInvulnerable) => invulnerable = isInvulnerable;
 
     [Header("Player Inventory")]
     BaseType[] equippedBases;
@@ -58,12 +59,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] TMP_Text whipCooldownText;
     [SerializeField] Animator playerHealthAnimator;
     [SerializeField] TMP_Text playerHealthText;
-
-    // Sprite fields temporary. These should be removed and change the health animator
-    // [SerializeField] Animator healthAnimator;
-    [SerializeField] Sprite healthySprite;
-    [SerializeField] Sprite midSprite;
-    [SerializeField] Sprite lowHealthSprite;
     [SerializeField] float midHealthThreshold;
     [SerializeField] float criticalThreshold;
 
@@ -98,6 +93,9 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Progressions")]
     public int progression;
     public int cutsceneProgression;
+
+    [Space]
+    [SerializeField] bool invulnerableMode;
 
     void Start()
     {
@@ -135,6 +133,11 @@ public class Player : MonoBehaviour, IDamageable
         knockedBack = false;
         GameManager.Instance.player = this;
         GameManager.Instance.CheckForCutscenes();
+        if (invulnerableMode)
+        {
+            Debug.Log("Invulernable Mode Active");
+            invulnerable = true;
+        }
     }
 
     void Update()
@@ -253,13 +256,13 @@ public class Player : MonoBehaviour, IDamageable
             whipCooldown = whipCooldownTime;
         }
 
-        if (Input.GetMouseButton(0) && fireCooldown <= 0 && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0) && fireCooldown <= 0)
         {
             armAnimator.Play("Shoot", 0, 0f);
             Fire();
         }
 
-        if (Input.GetMouseButton(0) && !GameManager.Instance.PointerOnPause())
+        if (Input.GetMouseButton(0))
         {
             lastFrameWasFiring = true;
         }
@@ -486,6 +489,25 @@ public class Player : MonoBehaviour, IDamageable
         StopPlayer();
         limbs.SetActive(false);
         animationControl.SetBool("Dead", true);
+    }
+
+    public void PlayGetUpAnimation()
+    {
+        StartCoroutine(GetUpAnimation());
+    }
+
+    private IEnumerator GetUpAnimation()
+    {
+        limbs.SetActive(false);
+        armPivot.gameObject.SetActive(false);
+
+        animationControl.Play("Get Up", 0, 0f);
+
+        yield return new WaitForSeconds(1.3f);
+
+        limbs.SetActive(true);
+        armPivot.gameObject.SetActive(true);
+        animationControl.Play("Idle", 0, 0f);
     }
     /// <summary>
     /// Function called by death animation that triggers the lose game function

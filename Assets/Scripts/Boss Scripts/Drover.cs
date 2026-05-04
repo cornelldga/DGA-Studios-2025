@@ -74,6 +74,12 @@ public class Drover : Boss
     private bool isEnraged = false;
 
 
+    [Header("Visuals")]
+    [Tooltip("Shield GameObject shown while Drover is invulnerable")]
+    [SerializeField] private GameObject shieldVisual;
+    [Tooltip("Smoke trail GameObject shown while Drover is charging or bouncing")]
+    [SerializeField] private GameObject smokeTrail;
+
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
     [Tooltip("Force multiplier for wall collision shake")]
@@ -92,6 +98,8 @@ public class Drover : Boss
     private bool isMarked;
     private float markTimer;
     private SpriteRenderer sprite;
+    private Vector3 smokeTrailPos;
+    private Vector3 smokeTrailScale;
 
     /// <summary>
     /// On start, we set the rigid body, and change its attributes. Immediately enter targeting.
@@ -104,6 +112,11 @@ public class Drover : Boss
         currentState = State.Targeting;
         stateTimer = targetingTime;
         bounceSpeed = baseBounceSpeed;
+        if (smokeTrail != null)
+        {
+            smokeTrailPos = smokeTrail.transform.localPosition;
+            smokeTrailScale = smokeTrail.transform.localScale;
+        }
     }
     /// <summary>
     /// Updating of the statemachine.
@@ -114,9 +127,23 @@ public class Drover : Boss
 
         stateTimer -= Time.deltaTime;
 
-        if (isInvulnerable)
+        if (shieldVisual != null)
         {
-            sprite.color = Color.purple;
+            shieldVisual.SetActive(isInvulnerable && !isSummoned);
+        }
+
+        if (smokeTrail != null)
+        {
+            smokeTrail.SetActive(currentState == State.Charging);
+            Vector3 pos = smokeTrailPos;
+            Vector3 scale = smokeTrailScale;
+            if (sprite.flipX)
+            {
+                pos.x = -pos.x;
+                scale.x = -scale.x;
+            }
+            smokeTrail.transform.localPosition = pos;
+            smokeTrail.transform.localScale = scale;
         }
 
         if (isMarked)
@@ -310,6 +337,7 @@ public class Drover : Boss
     /// </summary>
     public override void SetPhase()
     {
+        base.SetPhase();
         if (currentPhase == 1 && !isEnraged)
         {
             isEnraged = true;
@@ -317,8 +345,6 @@ public class Drover : Boss
 
             base.isInvulnerable = true;
         }
-
-        healthBarAnimator.SetTrigger("PhaseChange");
     }
 
     /// <summary>
