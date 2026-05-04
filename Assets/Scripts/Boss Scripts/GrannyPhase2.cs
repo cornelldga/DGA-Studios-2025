@@ -259,9 +259,13 @@ public class GrannyPhase2 : Boss
             Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
             bull.ChargeSpecificDirection(Random.onUnitSphere);
             bull.setSummoned();
-            
+
             Trail trail = bull.AddComponent<Trail>();
             trail.SetTrailPrefab(prefab);
+            if (prefab == flamingBushPrefab)
+            {
+                trail.SetBoss(gameObject);
+            }
             trail.SetTrailLifetime(trailLifeTime);
 
             Destroy(bull, bullsTime);
