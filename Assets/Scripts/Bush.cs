@@ -195,5 +195,6 @@ public class Bush : MonoBehaviour
     public void overrideAsh(GameObject newBoss)
     {
         ash = newBoss;
+        ashSR = newBoss.GetComponent<SpriteRenderer>();
     }
 }
