@@ -1,109 +1,52 @@
 fileFormatVersion: 2
-guid: 098bc9f946cf60e47980a1e2fcd3c580
+guid: d7d4cb57f47b61e4aa62657cbe4226b0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1638243299367575115
-    second: throwcartupdated_0
+      213: 7565893054713677879
+    second: drill_attack_animation 1_0
   - first:
-      213: 7371304955828686624
-    second: throwcartupdated_1
+      213: -7248817854107198222
+    second: drill_attack_animation 1_1
   - first:
-      213: 5114160260117095385
-    second: throwcartupdated_2
+      213: -301356552592833663
+    second: drill_attack_animation 1_2
   - first:
-      213: 1633641700322665036
-    second: throwcartupdated_3
+      213: 1809284897541687658
+    second: drill_attack_animation 1_3
   - first:
-      213: 7204306916382407085
-    second: throwcartupdated_4
+      213: 7922571161456831155
+    second: drill_attack_animation 1_4
   - first:
-      213: -1285463937967401420
-    second: throwcartupdated_5
+      213: 6519872024194602774
+    second: drill_attack_animation 1_5
   - first:
-      213: 2456602571228650770
-    second: throwcartupdated_6
+      213: -3308280815130517615
+    second: drill_attack_animation 1_6
   - first:
-      213: -8503253545517333833
-    second: throwcartupdated_7
+      213: -5394275872368770567
+    second: drill_attack_animation 1_7
   - first:
-      213: -5063040964282822123
-    second: throwcartupdated_8
+      213: 5721164115662907499
+    second: drill_attack_animation 1_8
   - first:
-      213: -6225605857723668706
-    second: throwcartupdated_9
+      213: 2307637807646147292
+    second: drill_attack_animation 1_9
   - first:
-      213: -438353588733407256
-    second: throwcartupdated_10
+      213: 1288874332515830513
+    second: drill_attack_animation 1_10
   - first:
-      213: 2862266324972722029
-    second: throwcartupdated_11
+      213: -4640207715652674557
+    second: drill_attack_animation 1_11
   - first:
-      213: 757743177328788686
-    second: throwcartupdated_12
+      213: -2982406789663183297
+    second: drill_attack_animation 1_12
   - first:
-      213: -2846648253683928728
-    second: throwcartupdated_13
+      213: -2530623033574450687
+    second: drill_attack_animation 1_13
   - first:
-      213: 8221658633851050788
-    second: throwcartupdated_14
-  - first:
-      213: 4430188643238025705
-    second: throwcartupdated_15
-  - first:
-      213: 8731325128808845268
-    second: throwcartupdated_16
-  - first:
-      213: -203112385802276602
-    second: throwcartupdated_17
-  - first:
-      213: 1015809925853793907
-    second: throwcartupdated_18
-  - first:
-      213: 736387378753822969
-    second: throwcartupdated_19
-  - first:
-      213: 1957681992560424660
-    second: throwcartupdated_20
-  - first:
-      213: 8236172439506263663
-    second: throwcartupdated_21
-  - first:
-      213: -7276810654239255977
-    second: throwcartupdated_22
-  - first:
-      213: -5033605868371091199
-    second: throwcartupdated_23
-  - first:
-      213: 846832956374353058
-    second: throwcartupdated_24
-  - first:
-      213: 5358946427087312962
-    second: throwcartupdated_25
-  - first:
-      213: 1770579356827174305
-    second: throwcartupdated_26
-  - first:
-      213: -6493808337526464258
-    second: throwcartupdated_27
-  - first:
-      213: 6533469848745286510
-    second: throwcartupdated_28
-  - first:
-      213: -6084260734670052047
-    second: throwcartupdated_29
-  - first:
-      213: -5315085726568508200
-    second: throwcartupdated_30
-  - first:
-      213: -3633631844710088293
-    second: throwcartupdated_31
-  - first:
-      213: 4233637142544481575
-    second: throwcartupdated_32
-  - first:
-      213: 7275677785902184732
-    second: throwcartupdated_33
+      213: 3734873156088501586
+    second: drill_attack_animation 1_14
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -195,43 +138,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: throwcartupdated_0
+      name: drill_attack_animation 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2451
-        width: 797
-        height: 817
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b12885266ac349e0800000000000000
-      internalID: -1638243299367575115
+      spriteID: 738cdceb5a37ff860800000000000000
+      internalID: 7565893054713677879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_1
+      name: drill_attack_animation 1_1
       rect:
         serializedVersion: 2
-        x: 797
-        y: 2451
-        width: 797
-        height: 817
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 02fce3f6dc22c4660800000000000000
-      internalID: 7371304955828686624
+      spriteID: 2fc5e6c4196076b90800000000000000
+      internalID: -7248817854107198222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_2
+      name: drill_attack_animation 1_2
       rect:
         serializedVersion: 2
-        x: 1594
-        y: 2451
-        width: 797
-        height: 817
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +201,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d3e2bc19a529f640800000000000000
-      internalID: 5114160260117095385
+      spriteID: 183c7f3efcd51dbf0800000000000000
+      internalID: -301356552592833663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_3
+      name: drill_attack_animation 1_3
       rect:
         serializedVersion: 2
-        x: 2391
-        y: 2451
-        width: 797
-        height: 817
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c426ff5987cdba610800000000000000
-      internalID: 1633641700322665036
+      spriteID: a69837f370fdb1910800000000000000
+      internalID: 1809284897541687658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_4
+      name: drill_attack_animation 1_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1634
-        width: 797
-        height: 817
+        x: 2048
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da9fcdb68f6daf360800000000000000
-      internalID: 7204306916382407085
+      spriteID: 3ba636aee70a2fd60800000000000000
+      internalID: 7922571161456831155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_5
+      name: drill_attack_animation 1_5
       rect:
         serializedVersion: 2
-        x: 797
-        y: 1634
-        width: 797
-        height: 817
+        x: 2560
+        y: 1024
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,64 +267,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 436d0edeb5d192ee0800000000000000
-      internalID: -1285463937967401420
+      spriteID: 617502fef0d3b7a50800000000000000
+      internalID: 6519872024194602774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_6
-      rect:
-        serializedVersion: 2
-        x: 1594
-        y: 1634
-        width: 797
-        height: 817
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 21d156cd50b971220800000000000000
-      internalID: 2456602571228650770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: throwcartupdated_7
-      rect:
-        serializedVersion: 2
-        x: 2391
-        y: 1634
-        width: 797
-        height: 817
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7b2cb58d3ff5ef980800000000000000
-      internalID: -8503253545517333833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: throwcartupdated_8
+      name: drill_attack_animation 1_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 817
-        width: 797
-        height: 817
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,20 +289,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 512dba071177cb9b0800000000000000
-      internalID: -5063040964282822123
+      spriteID: 19fd7ec6020a612d0800000000000000
+      internalID: -3308280815130517615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_9
+      name: drill_attack_animation 1_7
       rect:
         serializedVersion: 2
-        x: 797
-        y: 817
-        width: 797
-        height: 817
+        x: 512
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,20 +311,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e172ac205743a99a0800000000000000
-      internalID: -6225605857723668706
+      spriteID: 9f1cff69caea325b0800000000000000
+      internalID: -5394275872368770567
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_10
+      name: drill_attack_animation 1_8
       rect:
         serializedVersion: 2
-        x: 1594
-        y: 817
-        width: 797
-        height: 817
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,20 +333,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ef0789cbb7aae9f0800000000000000
-      internalID: -438353588733407256
+      spriteID: b68accf7378a56f40800000000000000
+      internalID: 5721164115662907499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_11
+      name: drill_attack_animation 1_9
       rect:
         serializedVersion: 2
-        x: 2391
-        y: 817
-        width: 797
-        height: 817
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -482,20 +355,64 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d67df80ce00d8b720800000000000000
-      internalID: 2862266324972722029
+      spriteID: cd282031c50660020800000000000000
+      internalID: 2307637807646147292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_12
+      name: drill_attack_animation 1_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fa89bd606003e110800000000000000
+      internalID: 1288874332515830513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_attack_animation 1_11
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30cde70eaabaa9fb0800000000000000
+      internalID: -4640207715652674557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_attack_animation 1_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 797
-        height: 817
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -504,20 +421,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec488a3b76b048a00800000000000000
-      internalID: 757743177328788686
+      spriteID: f3ea96683dc5c96d0800000000000000
+      internalID: -2982406789663183297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_13
+      name: drill_attack_animation 1_13
       rect:
         serializedVersion: 2
-        x: 797
+        x: 512
         y: 0
-        width: 797
-        height: 817
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -526,20 +443,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 861fea6de7cae78d0800000000000000
-      internalID: -2846648253683928728
+      spriteID: 10a9f5f32cb61ecd0800000000000000
+      internalID: -2530623033574450687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: throwcartupdated_14
+      name: drill_attack_animation 1_14
       rect:
         serializedVersion: 2
-        x: 1594
+        x: 1024
         y: 0
-        width: 797
-        height: 817
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -548,8 +465,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b173f97f2391270800000000000000
-      internalID: 8221658633851050788
+      spriteID: 2551cc5e85fe4d330800000000000000
+      internalID: 3734873156088501586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_attack_animation 1_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6dcf2c623831c4b83324d94a711d81
+      internalID: 1735974376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_attack_animation 1_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85033bb8e4b2f1f438b62ecb26d602b7
+      internalID: -1421859077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drill_attack_animation 1_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a4285bccdb324941b137a6b06df55b2
+      internalID: -212574174
       vertices: []
       indices: 
       edges: []
@@ -558,7 +541,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 17375ffa83cca394c95e1573ac24c6c5
+    spriteID: aec51003f77f3804584a117fe0c7933f
     internalID: 0
     vertices: []
     indices: 
@@ -568,23 +551,26 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":797.0,"y":817.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":3.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      throwcartupdated_0: -1638243299367575115
-      throwcartupdated_1: 7371304955828686624
-      throwcartupdated_10: -438353588733407256
-      throwcartupdated_11: 2862266324972722029
-      throwcartupdated_12: 757743177328788686
-      throwcartupdated_13: -2846648253683928728
-      throwcartupdated_14: 8221658633851050788
-      throwcartupdated_2: 5114160260117095385
-      throwcartupdated_3: 1633641700322665036
-      throwcartupdated_4: 7204306916382407085
-      throwcartupdated_5: -1285463937967401420
-      throwcartupdated_6: 2456602571228650770
-      throwcartupdated_7: -8503253545517333833
-      throwcartupdated_8: -5063040964282822123
-      throwcartupdated_9: -6225605857723668706
+      drill_attack_animation 1_0: 7565893054713677879
+      drill_attack_animation 1_1: -7248817854107198222
+      drill_attack_animation 1_10: 1288874332515830513
+      drill_attack_animation 1_11: -4640207715652674557
+      drill_attack_animation 1_12: -2982406789663183297
+      drill_attack_animation 1_13: -2530623033574450687
+      drill_attack_animation 1_14: 3734873156088501586
+      drill_attack_animation 1_15: 1735974376
+      drill_attack_animation 1_16: -1421859077
+      drill_attack_animation 1_17: -212574174
+      drill_attack_animation 1_2: -301356552592833663
+      drill_attack_animation 1_3: 1809284897541687658
+      drill_attack_animation 1_4: 7922571161456831155
+      drill_attack_animation 1_5: 6519872024194602774
+      drill_attack_animation 1_6: -3308280815130517615
+      drill_attack_animation 1_7: -5394275872368770567
+      drill_attack_animation 1_8: 5721164115662907499
+      drill_attack_animation 1_9: 2307637807646147292
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
