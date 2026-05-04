@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom_DustHaze
+  m_Shader: {fileID: 4800000, guid: 2fa01a9f9ced34cfc879fa0eadf8fff7, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _HazeStrength: 0.5
+    - _Layer1Intensity: 0.15
+    - _Layer1Parallax: 0.1
+    - _Layer1Scale: 0.5
+    - _Layer2Intensity: 0.2
+    - _Layer2Parallax: 0.4
+    - _Layer2Scale: 1
+    - _Layer3Intensity: 0.25
+    - _Layer3Parallax: 0.8
+    - _Layer3Scale: 2
+    m_Colors:
+    - _DustColor: {r: 0.4811321, g: 0.2641598, b: 0.043120302, a: 0.4745098}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
