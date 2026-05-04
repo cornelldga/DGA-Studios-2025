@@ -92,7 +92,6 @@ public class GrannyPhase2 : Boss
     {
         base.Attack();
         int currentAttack = Random.Range(1, 5);
-        Debug.Log(currentAttack);
         //switch (currentAttack)
         //{
         //    case 1:
