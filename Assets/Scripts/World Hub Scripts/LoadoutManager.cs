@@ -45,8 +45,8 @@ public class LoadoutManager : MonoBehaviour
    [SerializeField] Sprite[] mixerIcons;
 
     [Tooltip("Locked Icons")]
-    [SerializeField] Sprite[] baseLockedIcons;
-    [SerializeField] Sprite[] mixerLockedIcons;
+    [SerializeField] GameObject[] baseChains;
+    [SerializeField] GameObject[] mixerChains;
 
 
     /// <summary>
@@ -174,7 +174,6 @@ public class LoadoutManager : MonoBehaviour
         {
             bool isEquipped = equippedBases.Contains(pair.Key);
             bool isUnlocked = unlockedBases.Contains(pair.Key);
-
             pair.Value.interactable = isUnlocked && !isEquipped;
         }
     }
