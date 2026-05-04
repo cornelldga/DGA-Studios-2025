@@ -370,8 +370,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spinSpeed: 50
+  whipLaunchSpeed: 10
+  smokerWhipStunTime: 1
+  maxSpeed: 1.5
   turnSpeed: 2
-  speed: 2
+  speed: 400
+  knockbackForce: 700
   playerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -381,10 +385,11 @@ MonoBehaviour:
   releasePoint: {fileID: 410701497520239722}
   pivot: {fileID: 8547894485091812972}
   magician: {fileID: 0}
-  cooldown: 1
+  punchCooldown: 2
+  punchDamping: 3
   knockTime: 1
-  punchDist: 2
   punchMagnitude: 4
+  punchRange: 2
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
   doveStage: {fileID: 0}

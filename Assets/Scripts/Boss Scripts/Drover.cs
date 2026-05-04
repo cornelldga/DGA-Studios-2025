@@ -183,13 +183,11 @@ public class Drover : Boss
     {
         isMarked = true;
         markTimer = markDuration;
-        sprite.color = Color.red;
     }
 
     public void removeMark()
     {
         isMarked = false;
-        sprite.color = Color.white;
     }
 
     /// <summary>
