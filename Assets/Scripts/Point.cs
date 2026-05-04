@@ -8,6 +8,8 @@ public class Point : MonoBehaviour
     //private float distSinceLastSpawn = 0f;
     private Vector3 SpawnPos;
 
+    public GameObject grannyGameObject;
+
     private void Start()
     {
    
@@ -27,6 +29,7 @@ public class Point : MonoBehaviour
         if (bushScript)
         {
             bushScript.setFire(true);
+            bushScript.overrideAsh(grannyGameObject);
         }
 
         Dynamite DynaScript = obj.GetComponent<Dynamite>();
