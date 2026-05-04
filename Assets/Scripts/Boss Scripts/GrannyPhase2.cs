@@ -51,7 +51,9 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float punchRepositionOffset;
     [SerializeField] private float punchSpeed;
     [SerializeField] GameObject punch;
-    [SerializeField] Transform punchPivot;
+  
+
+    private bool isPunching;
 
     //left and right bound essentially tell us how far left/right is
     //"too far". This is used to prevent granny from trying to teleport 
@@ -83,44 +85,30 @@ public class GrannyPhase2 : Boss
     public override void Update()
     {
         base.Update();
-        //stateTimer -= Time.deltaTime;
         UpdateFlip();
-        //switch (currentState)
-        //{
-        //    case State.ComboAttack:
-        //        UpdateComboAttacks();
-        //        break;
-        //    case State.Lazer:
-        //        UpdateLazer();
-        //        break;
-        //    case State.MachineGun:
-        //        UpdateMachineGun();
-        //        break;
-        //    case State.Punch:
-        //        UpdatePunch();
-        //        break;
-        //}
     }
 
     public override void Attack()
     {
         base.Attack();
         int currentAttack = Random.Range(1, 5);
-        switch (currentAttack)
-        {
-            case 1:
-                Punch();
-                break;
-            case 2:
-                selectComboAttack();
-                break;
-            case 3:
-                MachineGun();
-                break;
-            case 4:
-                Laser();
-                break;
-        }
+        Debug.Log(currentAttack);
+        //switch (currentAttack)
+        //{
+        //    case 1:
+         //StartCoroutine(Punch());
+                
+        //        break;
+        //    case 2:
+          StartCoroutine(selectComboAttack());
+        //        break;
+        //    case 3:
+        //        MachineGun();
+        //        break;
+        //    case 4:
+        //        Laser();
+        //        break;
+        //}
     }
     /// <summary>
     /// Checks if the player sprite needs to update and updates the bullet origin
@@ -132,13 +120,11 @@ public class GrannyPhase2 : Boss
         bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                 - bulletOrigin.transform.position;
 
-        if (bulletOrigin.transform.right.x > 0) { 
+        if (bulletOrigin.transform.right.x > 0) {
             sprite.flipX = true;
-            punchPivot.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (bulletOrigin.right.x < 0) { 
-            sprite.flipX = false; 
-            punchPivot.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        else if (bulletOrigin.right.x < 0) {
+            sprite.flipX = false;
         }
     }
 
@@ -152,59 +138,92 @@ public class GrannyPhase2 : Boss
     private void MachineGun()
     {
         StartCoroutine(machineGun.DoBulletPattern(this));
+        //rb.MovePosition(new Vector2(Random.Range(-5, 5), Random.Range(-3, 3)));
     }
 
-    private void Punch()
+    private IEnumerator Punch()
     {
-        attackCooldown = punchingTime;
+        //Punch
+        // punching is true
+        // disappear and teleport delay
+        // punches
+        // punch is false, set attack cooldown to punchCooldown 
+
         // TODO move granny towards the player while using her punch move that is 
         // maybe make the punch a separate hitbox
-
+        // TODO: Instantiate smoke VFX here
         // Phase 1: Disappear and snap to left of player
-            if (sprite.enabled)
-            {
-                // TODO: Instantiate smoke VFX here
-                sprite.enabled = false;
-                circleCollider.enabled = false;
-                punch.SetActive(false);   
-                //randomly pick left or right
-                bool leftPunch = Random.value > 0.5f;
-                if (leftPunch)
-                {
-                    punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
-                } else
-                {
-                    punchRepositionOffset = Mathf.Abs(punchRepositionOffset); 
-                }
-                
-            }
-            
-            Vector2 playerPos = GameManager.Instance.player.transform.position;
-            
-            if (playerPos.x + punchRepositionOffset < leftBound.transform.position.x)
-            {
-                // Player too far left, switch to attacking from the right instead
-                punchRepositionOffset = Mathf.Abs(punchRepositionOffset);
-            } else if (playerPos.x + punchRepositionOffset > rightBound.transform.position.x)
-            {
-                // Player too far right, switch to attacking from the left instead
-                punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
-            }
+        SetAttackState(true);
+        Disappear(true);
+        rb.linearVelocity = Vector2.zero;
+        yield return new WaitForSeconds(disappearTime);
+        Disappear(false);
+        Teleport();
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        animator.SetTrigger("Punch");
+                 
+   
+    }
+    /// <summary>
+    /// Toggles Granny Disappear stare for punch
+    /// </summary>
+    /// <param name="disappear"></param>
+    private void Disappear(bool disappear)
+    {
+        sprite.enabled = !disappear;
+        circleCollider.enabled = !disappear;
+    }
+    /// <summary>
+    /// Calculates where Granny teleports to based on player position
+    /// </summary>
+    private void Teleport()
+    {
+        //randomly pick left or right
+        bool leftPunch = Random.value > 0.5f;
+        if (leftPunch)
+        {
+            punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
+        }
+        else
+        {
+            punchRepositionOffset = Mathf.Abs(punchRepositionOffset);
+        }
 
-            rb.position = new Vector2(playerPos.x + punchRepositionOffset, playerPos.y);
-    
 
-        // Phase 2: Reappear and lunge horizontally
-            sprite.enabled = true;
-            circleCollider.enabled = true;
-            punch.SetActive(true);
-            Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
-            rb.linearVelocity = direction* punchSpeed;
-        // Phase 3: Done
-            punch.SetActive(false);
-        return;
+        Vector2 playerPos = GameManager.Instance.player.transform.position;
+
+
+        if (playerPos.x + punchRepositionOffset < leftBound.transform.position.x)
+        {
+            // Player too far left, switch to attacking from the right instead
+            punchRepositionOffset = Mathf.Abs(punchRepositionOffset);
+        }
+        else if (playerPos.x + punchRepositionOffset > rightBound.transform.position.x)
+        {
+            // Player too far right, switch to attacking from the left instead
+            punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
+        }
+
+        rb.position = new Vector2(playerPos.x + punchRepositionOffset, playerPos.y);
+    }
+    /// <summary>
+    /// Called when Granny reappears to punch player, enables punch collider and moves forward
+    /// </summary>
+    public void AnimationPunch()
+    {
+        punch.SetActive(true);
+        Vector2 playerPos = GameManager.Instance.player.transform.position;
+        Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
+        rb.linearVelocity = direction * punchSpeed;
     }
 
+    public void AnimationPunchComplete()
+    {
+        punch.SetActive(false);
+        attackCooldown = punchingTime;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        SetAttackState(false);
+    }
     private IEnumerator selectComboAttack()
     {
         // TODO: Cycle through 6 combo attacks from design document
