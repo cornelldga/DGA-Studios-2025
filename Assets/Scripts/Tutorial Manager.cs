@@ -109,6 +109,22 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fades in before starting mid cutscene
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PlayMidCutsceneAfterFade()
+    {
+        GameManager.Instance.FreezePlayer(true);
+        CutsceneManager.Instance.PlayFadeStart();
+        yield return new WaitForSeconds(1f);
+        CutsceneManager.Instance.PlayMidCutscene();
+    }
+
+    /// <summary>
+    /// Waits for dialogue to end before turning name text back on.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ResetNameTextAfterDialogue()
     {
         DialogueManager dialogueManager = GameManager.Instance.GetDialogueManager;
@@ -116,5 +132,10 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => !dialogueManager.gameObject.activeSelf);
 
         dialogueManager.SetNameTextVisible(true);
+
+        if (TutorialTrigger == "Ginger")
+        {
+            StartCoroutine(PlayMidCutsceneAfterFade());
+        }
     }
 }

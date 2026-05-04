@@ -455,4 +455,10 @@ public class Granny : Boss
         grannyPhase2.enabled = true;
         Destroy(this);
     }
+
+    public new void AnimationBossDeathComplete()
+    {
+        CutsceneManager.Instance.PlayFinalCutscene();
+        base.AnimationBossDeathComplete();
+    }
 }
