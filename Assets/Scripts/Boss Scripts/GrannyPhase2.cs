@@ -44,8 +44,8 @@ public class GrannyPhase2 : Boss
     [SerializeField] private GameObject dynamitePrefab;
 
     [Header("Punch Move")]
-    //how long granny is punching for
-    [SerializeField] private float punchingTime;
+    //how long granny is on cooldown after punch
+    [SerializeField] private float punchingCooldown;
     //how long granny disppears for
     [SerializeField] private float disappearTime;
     [SerializeField] private float punchRepositionOffset;
@@ -61,16 +61,10 @@ public class GrannyPhase2 : Boss
     [SerializeField] Transform leftBound;
     [SerializeField] Transform rightBound;
 
-    //if false, we punching from the right
-    //if true, we punching from the left
-    bool leftPunch;
-
-    //vector to remember how we were moving after determining punch move direction
-    private Vector2 punchMove;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     CircleCollider2D circleCollider;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
         base.Start();
@@ -113,6 +107,7 @@ public class GrannyPhase2 : Boss
     /// Checks if the player sprite needs to update and updates the bullet origin
     /// </summary>
     private void UpdateFlip(){
+        if (isPunching) { return; }
         //track the player location as you shoot out bullets
         //granny moves as she shoots machine gun
         //if player enters region above or below granny, she stops firing and repositions
@@ -157,6 +152,7 @@ public class GrannyPhase2 : Boss
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(disappearTime);
         Teleport();
+        isPunching = true;
         //appear after teleport
         Disappear(false);
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -239,9 +235,11 @@ public class GrannyPhase2 : Boss
     public void AnimationPunchComplete()
     {
         punch.SetActive(false);
-        attackCooldown = punchingTime;
+        attackCooldown = punchingCooldown;
         rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.linearVelocity = Vector2.zero;
         SetAttackState(false);
+        isPunching = false;
     }
     private IEnumerator selectComboAttack()
     {

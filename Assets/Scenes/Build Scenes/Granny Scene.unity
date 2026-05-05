@@ -18920,21 +18920,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: punchSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: rightBound
       value: 
       objectReference: {fileID: 243808142}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: punchingTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: disappearTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: fireBullsCount
       value: 1
@@ -18958,10 +18946,6 @@ PrefabInstance:
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: smokeDynamiteCount
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
-      propertyPath: punchRepositionOffset
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: machineCooldownConstant

@@ -483,10 +483,10 @@ MonoBehaviour:
   flamingBushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
   smokePrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
   dynamitePrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}
-  punchingTime: 1
-  disappearTime: 1
-  punchRepositionOffset: 1
-  punchSpeed: 5
+  punchingCooldown: 1
+  disappearTime: 2
+  punchRepositionOffset: 2
+  punchSpeed: 8
   punch: {fileID: 6754026737141735589}
   leftBound: {fileID: 0}
   rightBound: {fileID: 0}
