@@ -32,8 +32,8 @@ public class LoadoutManager : MonoBehaviour
     public BaseType[] GetEquippedBases() => equippedBases;
     public MixerType[] GetEquippedMixers() => equippedMixers;
 
-    private List<BaseType> unlockedBases = new List<BaseType>();
-    private List<MixerType> unlockedMixers = new List<MixerType>();
+    private List<BaseType> lockedBases = new List<BaseType>();
+    private List<MixerType> lockedMixers = new List<MixerType>();
 
    [SerializeField] GameObject rows;
    [SerializeField] GameObject baseOptions;
@@ -94,32 +94,27 @@ public class LoadoutManager : MonoBehaviour
             }
             index++;
         }
-        unlockedBases.Clear();
-        unlockedMixers.Clear();
-        // Default unlocked
-        unlockedBases.Add(BaseType.Beer);
-        unlockedBases.Add(BaseType.Whiskey);
-        unlockedMixers.Add(MixerType.Ginger);
-        unlockedMixers.Add(MixerType.Cider);
+        lockedBases.Clear();
+        lockedMixers.Clear();
         if (PlayerPrefs.GetInt("progression",0)>1)
         {
             // Beat Drover
-            unlockedBases.Add(BaseType.Wine);
+            lockedBases.Add(BaseType.Wine);
         }
         if (PlayerPrefs.GetInt("progression",0)>2)
         {
             // Beat Julius
-            unlockedMixers.Add(MixerType.Lime);
+            lockedMixers.Add(MixerType.Lime);
         }
         if (PlayerPrefs.GetInt("progression",0)>3)
         {
             // Beat Ace & Mirage
-            unlockedBases.Add(BaseType.Gin);
+            lockedBases.Add(BaseType.Gin);
         }
         if (PlayerPrefs.GetInt("progression",0)>4)
         {
             // Beat Ash
-            unlockedMixers.Add(MixerType.Pimiento);
+            lockedMixers.Add(MixerType.Pimiento);
         }
         RefreshBaseButtons();
         RefreshMixerButtons();
