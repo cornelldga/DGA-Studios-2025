@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Boss : MonoBehaviour, IDamageable
 {
-    [SerializeField] protected Animator animator;
+    protected Animator animator;
     [Tooltip("The progression value for defeating this boss")]
     [SerializeField] int bossProgression;
     [Tooltip("What the boss health bar name is set to")]
@@ -31,6 +31,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
     [SerializeField] protected int currentPhase = 0;
 
     public bool isInvulnerable = false;
+    public bool isSummoned = false;
 
     bool isAttacking;
     protected float attackCooldown;
@@ -56,6 +57,7 @@ public abstract class Boss : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         bossNameText.text = bossName;
         health = maxHealth;
+        SetHealthBar();
         emotionDictionary[DialogueEmotion.Neutral] = neutralSprite;
         emotionDictionary[DialogueEmotion.Happy] = happySprite;
         emotionDictionary[DialogueEmotion.Sad] = sadSprite;
@@ -93,8 +95,19 @@ public abstract class Boss : MonoBehaviour, IDamageable
     /// </summary>
     public virtual void Attack()
     {
-        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+        Vector3 dir = GameManager.Instance.player.transform.position
             - bulletOrigin.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        bulletOrigin.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+    /// <summary>
+    /// Sets the health bar and returns the health percentage
+    /// </summary>
+    protected float SetHealthBar()
+    {
+        float healthPercent = health / maxHealth;
+        healthBar.fillAmount = healthPercent;
+        return healthPercent;
     }
 
     public virtual void TakeDamage(float damage)
@@ -105,20 +118,22 @@ public abstract class Boss : MonoBehaviour, IDamageable
         {
             healthBar.fillAmount = 0;
             Defeat();
+            return;
         }
         else
         {
-            float healthPercent = health / maxHealth;
-            healthBar.fillAmount = healthPercent;
-            CheckPhase(healthPercent);
+            SetHealthBar();
+            CheckPhase(SetHealthBar());
 
         }
     }
     /// <summary>
-    /// Called when the boss is defeated. Set the progression of the player and play the death animation
+    /// Called when the boss is defeated. Set the progression of the player, make the player invulnerable,
+    /// and play the death animation
     /// </summary>
     public virtual void Defeat()
     {
+        GameManager.Instance.player.SetInvulnerable(true);
         PlayerPrefs.SetInt("progression", Mathf.Max(
             PlayerPrefs.GetInt("progression", 0), bossProgression
         ));
@@ -126,13 +141,13 @@ public abstract class Boss : MonoBehaviour, IDamageable
         rb.simulated = false;
         this.enabled = false;
 
-        
+
     }
     /// <summary>
     /// Called when the boss death animation is complete. Triggers dialogue and brings player back to World Hub.
     /// Sets the character's name to the boss name before the ','
     /// </summary>
-    public void AnimationBossDeathComplete()
+    public virtual void AnimationBossDeathComplete()
     {
         GameManager.Instance.GetDialogueManager.StartDialogue(defeatDialogue, dialogueBoxSprite, emotionDictionary,
             bossName.Substring(0, bossName.IndexOf(',')), DialogueType.SceneChange, "World Hub", customTextColor ? textColor : null);

@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class Smoker : MonoBehaviour
+public class Smoker : MonoBehaviour, IProjectileInteractable
 {
     //How fast should the smoker spin. (Can be modified later for different patterns)
     [SerializeField] float spinSpeed = 50;
+
+    [SerializeField] float whipLaunchSpeed;
+    [SerializeField] float smokerWhipStunTime;
 
     private float ogSpeed;
     private SpriteRenderer spriteRenderer;
 
     [Header("Movement")]
-    [Tooltip("Reference to the player transform to move towards")]
-    [HideInInspector] Transform player;
+    [SerializeField] float maxSpeed;
     [Tooltip("How strongly the smoker is turns towards the player")]
     [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
     [SerializeField] float speed = 3f;
+    [Tooltip("Multiplied with the projectile damage to push the smoker back")]
+    [SerializeField] float knockbackForce;
 
     [Tooltip("The player object layer")]
     [SerializeField] LayerMask playerMask;
@@ -41,13 +45,16 @@ public class Smoker : MonoBehaviour
 
     [Header("Punch Settings")]
     [Tooltip("How long must pass before this can perform another punch")]
-    private bool playerInRange = false;
-    [SerializeField] float cooldown;
+    [SerializeField] float punchCooldown;
+    float punchCooldownTime;
+    [SerializeField] float punchDamping;
     [SerializeField] float knockTime;
-    [SerializeField] float punchDist;
     [SerializeField] float punchMagnitude;
+    [SerializeField] float punchRange;
 
     private bool isPunching;
+    [Tooltip("The distance between the Smoker and Player")]
+    Vector2 distance;
 
 
 
@@ -66,22 +73,20 @@ public class Smoker : MonoBehaviour
     private float smokeSoundCooldown = 5.0f;
     private float smokeSoundTimer = 0f;
 
+    BoxCollider2D smokerCollider;
+
+    float pastDamping;
+
     void Start()
     {
         first = true;
         hidStage = true;
         ogSpeed = spinSpeed;
         rb = GetComponent<Rigidbody2D>();
+        smokerCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         spriteRenderer.flipX = false;
-
-        // Make rigidbody kinematic so player cannot push it
-        if (rb != null)
-        {
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            rb.gravityScale = 0;
-        }
     }
 
     /// <summary>
@@ -89,27 +94,19 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (player == null && GameManager.Instance?.player != null)
-            player = GameManager.Instance.player.transform;
 
-        if (rb != null && player != null && !isPunching)
+        if (rb != null && GameManager.Instance?.player != null && !isPunching)
         {
-            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-            Vector2 desiredVelocity = direction * speed;
-            currentVelocity = Vector2.Lerp(currentVelocity, desiredVelocity, turnSpeed * Time.fixedDeltaTime);
-            rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
+            Vector2 direction = ((Vector2)GameManager.Instance.player.transform.position - rb.position);
+            rb.AddForce(direction * speed, ForceMode2D.Force);
 
-            // Flip sprite based on player position
+
+            if (rb.linearVelocity.magnitude > maxSpeed)
+                rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+
             if (spriteRenderer != null)
             {
-                if (player.position.x < transform.position.x)
-                {
-                    spriteRenderer.flipX = false; // Player is to the left
-                }
-                else
-                {
-                    spriteRenderer.flipX = true; // Player is to the right
-                }
+                spriteRenderer.flipX = GameManager.Instance.player.transform.position.x > transform.position.x;
             }
         }
     }
@@ -117,69 +114,43 @@ public class Smoker : MonoBehaviour
     /// <summary>
     /// waits for cooldown seconds then attempts punch
     /// </summary>
-    IEnumerator PunchRoutine(GameObject target)
+    void Punch()
     {
         isPunching = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         currentVelocity = Vector2.zero;
         animator.SetBool("Walking", false);
+        animator.SetTrigger("Punch");
+    }
+    /// <summary>
+    /// Called when smoker swings a punch
+    /// </summary>
+    public void AnimationSwingPunch()
+    {
+        Player playerScript = GameManager.Instance.player;
+        Vector2 dist2D = playerScript.transform.position - transform.position;
 
-        Player playerScript = target.GetComponent<Player>();
-        if (playerScript == null) { isPunching = false; yield break; }
-
-        yield return new WaitForSeconds(cooldown);
-
-        if (target != null && playerInRange)
+        if (dist2D.magnitude <= punchRange)
         {
-            Vector2 dist2D = (Vector2)(target.transform.position - transform.position);
-            if (dist2D.magnitude < punchDist)
-            {
-                Vector2 direction = dist2D.normalized;
-                playerScript.knockedBack = true;
-                Rigidbody2D playerBody = target.GetComponent<Rigidbody2D>();
-                float pastDamping = playerBody.linearDamping;
-                playerBody.linearDamping = 3f;
-                playerBody.AddForce(direction * punchMagnitude, ForceMode2D.Impulse);
-                yield return new WaitForSeconds(knockTime);
-                playerBody.linearDamping = pastDamping;
-                playerScript.knockedBack = false;
-            }
-        }
-
+            GameManager.Instance.FreezePlayer(true);
+            Vector2 direction = dist2D.normalized;
+            Rigidbody2D playerBody = playerScript.GetComponent<Rigidbody2D>();
+            pastDamping = playerBody.linearDamping;
+            playerBody.linearDamping = punchDamping;
+            playerBody.AddForce(direction * punchMagnitude, ForceMode2D.Impulse);
+        }       
+    }
+    /// <summary>
+    /// Called when the smoker is done swinging his punch
+    /// </summary>
+    public void AnimationSwingPunchComplete()
+    {
+        GameManager.Instance.FreezePlayer(false);
+        GameManager.Instance.player.GetComponent<Rigidbody2D>().linearDamping = pastDamping;
         isPunching = false;
-    }
-
-    /// <summary>
-    /// If there is a collision with the player, will activate punch
-    /// </summary>
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
-        {
-            playerInRange = true;
-            StartCoroutine(PunchRoutine(other.gameObject));
-        }
-    }
-
-    /// <summary>
-    /// While colliding with the player, starts the punch. Can punch again.
-    /// </summary>
-    void OnCollisionStay2D(Collision2D other)
-    {
-        if (!isPunching && (playerMask.value & (1 << other.gameObject.layer)) > 0)
-        {
-            playerInRange = true;
-            StartCoroutine(PunchRoutine(other.gameObject));
-        }
-    }
-
-    /// <summary>
-    /// Cant punch until player is in the range again.
-    /// </summary>
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if ((playerMask.value & (1 << other.gameObject.layer)) > 0)
-            playerInRange = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        punchCooldownTime = punchCooldown;
     }
 
     // Update is called once per frame
@@ -188,12 +159,16 @@ public class Smoker : MonoBehaviour
     /// </summary>
     void Update()
     {
-
-
         pivot.transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
         smokeTimer -= Time.deltaTime;
         smokeSoundTimer -= Time.deltaTime;
-        animator.SetBool("Walking", currentVelocity.magnitude > 0.1f);
+        punchCooldownTime -= Time.deltaTime;
+        distance = GameManager.Instance.player.transform.position - transform.position;
+        if (!isPunching && distance.magnitude <= punchRange && punchCooldownTime <= 0)
+        {
+            Punch();
+        }
+        animator.SetBool("Walking", rb.linearVelocity.magnitude > 0.1f);
         
         if (magician.currentStage == Stage.Backstage )
         {
@@ -329,7 +304,15 @@ public class Smoker : MonoBehaviour
         }
         hidStage = true;
     }
-
-
+    /// <summary>
+    /// Applies a backwards force to the smoker, and damage affecting the strength of
+    /// the knockback
+    /// </summary>
+    public bool ProjectileInteraction(Projectile projectile)
+    {
+        Vector2 forceDir = (transform.position - projectile.transform.position).normalized;
+        rb.AddForce(forceDir * knockbackForce * projectile.damage, ForceMode2D.Impulse);
+        return true;
+    }
 }
 

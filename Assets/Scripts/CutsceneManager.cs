@@ -44,6 +44,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextAsset backstoryJson;
     private BackstoryData backstoryData;
+    [SerializeField] private GameObject introblock;
 
     // Runtime state
     private bool isActive;
@@ -59,6 +60,15 @@ public class CutsceneManager : MonoBehaviour
 
     private static float[] backstoryTimestamps = { 0f, 15f, 25f, 40f, 55f, 70f, 85f, 100f, 115f, 130f, 145f };
     private const float backstoryClipLength = 155f;
+
+    [SerializeField] TextAsset cutscene_2;
+    private BackstoryData currentCutsceneData;
+
+    private static float[] midCutsceneTimestamps = { 0f, 20f, 40f, 60f, 80f };
+    private const float midCutsceneClipLength = 100f;
+    [SerializeField] TextAsset final_cutscene;
+    private static float[] finalCutsceneTimestamps = { 0f, 60f, 90f, 120f };
+    private const float finalCutsceneClipLength = 180f;
 
     [System.Serializable]
     private class BackstoryData
@@ -123,10 +133,13 @@ public class CutsceneManager : MonoBehaviour
     {
         if (introOverlay != null) introOverlay.SetActive(true);
 
+        currentCutsceneData = backstoryData;
+
         StartCutscene("backstory_cutscene", backstoryTimestamps, backstoryClipLength, () =>
         {
             if (GameManager.Instance != null)
             {
+                introblock.SetActive(PlayerPrefs.GetInt("progression", 0)==0);
                 onComplete?.Invoke();
             }
         });
@@ -154,6 +167,43 @@ public class CutsceneManager : MonoBehaviour
             new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
             null, DialogueType.NPC, "Tutorial");
         StartCoroutine(WaitForDialogueEnd());
+    }
+
+    public void PlayMidCutscene(System.Action onComplete = null)
+    {
+        if (cutscene_2 != null)
+        {
+            currentCutsceneData = JsonUtility.FromJson<BackstoryData>(cutscene_2.text);
+        }
+
+        if (introOverlay != null) introOverlay.SetActive(true);
+
+        SetCutsceneName("Narrator");
+
+        StartCutscene("mid_cutscene", midCutsceneTimestamps, midCutsceneClipLength, () =>
+        {
+            PlayerPrefs.SetInt("progression", 1);
+            PlayerPrefs.Save();
+
+            onComplete?.Invoke();
+        });
+    }
+
+    public void PlayFinalCutscene(System.Action onComplete = null)
+    {
+        if (final_cutscene != null)
+        {
+            currentCutsceneData = JsonUtility.FromJson<BackstoryData>(final_cutscene.text);
+        }
+
+        if (introOverlay != null) introOverlay.SetActive(true);
+
+        SetCutsceneName("Narrator");
+
+        StartCutscene("final_cutscene", finalCutsceneTimestamps, finalCutsceneClipLength, () =>
+        {
+            onComplete?.Invoke();
+        });
     }
 
     /// <summary>
@@ -227,7 +277,7 @@ public class CutsceneManager : MonoBehaviour
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
         isTyping = false;
-        dialogueText.text = backstoryData.panels[currentPanelIndex].lines[currentLineIndex];
+        dialogueText.text = currentCutsceneData.panels[currentPanelIndex].lines[currentLineIndex];
 
         if (advanceCoroutine != null) StopCoroutine(advanceCoroutine);
         advanceCoroutine = StartCoroutine(AutoAdvance());
@@ -235,8 +285,8 @@ public class CutsceneManager : MonoBehaviour
 
     IEnumerator AutoAdvance()
     {
-        float delay = (currentPanelIndex == backstoryData.panels.Length - 1 &&
-                       currentLineIndex == backstoryData.panels[currentPanelIndex].lines.Length - 1)
+        float delay = (currentPanelIndex == currentCutsceneData.panels.Length - 1 &&
+                       currentLineIndex == currentCutsceneData.panels[currentPanelIndex].lines.Length - 1)
             ? finalPanelDelay
             : autoAdvanceDelay;
 
@@ -244,14 +294,14 @@ public class CutsceneManager : MonoBehaviour
 
         if (!isActive) yield break;
 
-        if (currentLineIndex < backstoryData.panels[currentPanelIndex].lines.Length - 1)
+        if (currentLineIndex < currentCutsceneData.panels[currentPanelIndex].lines.Length - 1)
         {
             currentLineIndex++;
-            typingCoroutine = StartCoroutine(TypeLine(backstoryData.panels[currentPanelIndex].lines[currentLineIndex]));
+            typingCoroutine = StartCoroutine(TypeLine(currentCutsceneData.panels[currentPanelIndex].lines[currentLineIndex]));
         }
         else
         {
-            if (currentPanelIndex == backstoryData.panels.Length - 1)
+            if (currentPanelIndex == currentCutsceneData.panels.Length - 1)
                 EndCutscene();
             else
                 SkipToNextTimestamp();
@@ -260,8 +310,8 @@ public class CutsceneManager : MonoBehaviour
 
     void StartPanelText(int panelIndex)
     {
-        if (backstoryData == null || backstoryData.panels == null) return;
-        if (panelIndex >= backstoryData.panels.Length) return;
+        if (currentCutsceneData == null || currentCutsceneData.panels == null) return;
+        if (panelIndex >= currentCutsceneData.panels.Length) return;
 
         currentPanelIndex = panelIndex;
         currentLineIndex = 0;
@@ -269,22 +319,22 @@ public class CutsceneManager : MonoBehaviour
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         if (advanceCoroutine != null) StopCoroutine(advanceCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeLine(backstoryData.panels[panelIndex].lines[0]));
+        typingCoroutine = StartCoroutine(TypeLine(currentCutsceneData.panels[panelIndex].lines[0]));
     }
 
     void AdvanceImmediately()
     {
         if (advanceCoroutine != null) StopCoroutine(advanceCoroutine);
 
-        if (currentLineIndex < backstoryData.panels[currentPanelIndex].lines.Length - 1)
+        if (currentLineIndex < currentCutsceneData.panels[currentPanelIndex].lines.Length - 1)
         {
             currentLineIndex++;
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-            typingCoroutine = StartCoroutine(TypeLine(backstoryData.panels[currentPanelIndex].lines[currentLineIndex]));
+            typingCoroutine = StartCoroutine(TypeLine(currentCutsceneData.panels[currentPanelIndex].lines[currentLineIndex]));
         }
         else
         {
-            if (currentPanelIndex == backstoryData.panels.Length - 1)
+            if (currentPanelIndex == currentCutsceneData.panels.Length - 1)
                 EndCutscene();
             else
                 SkipToNextTimestamp();
@@ -310,6 +360,18 @@ public class CutsceneManager : MonoBehaviour
         cutsceneAnimator.speed = 1f;
         cutsceneAnimator.Update(0f);
         StartPanelText(nextIndex);
+    }
+
+
+    /// <summary>
+    /// Plays the fade out transition before a cutscene starts.
+    /// </summary>
+    public void PlayFadeStart()
+    {
+        if (cutsceneAnimator == null) return;
+
+        cutsceneAnimator.gameObject.SetActive(true);
+        cutsceneAnimator.Play("crossfade_start", 0, 0f);
     }
 
     /// <summary>

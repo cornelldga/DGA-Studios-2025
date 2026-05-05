@@ -7,19 +7,17 @@ public class GrannyPhase2 : Boss
 {
     public enum State
     {
-        Idle, Lazer, MachineGun, Punch
+        Lazer, MachineGun, Punch, ComboAttack
     }
     private State currentState;
+
+    [Header("Movement Settings")]
+    //Base speed when charging (regular)
+    [SerializeField] float baseSpeed = 5f;
+
     private Vector2 targetPosition;
 
     [Header("State Timing")]
-    //How much time to get to pull out contracts.
-    private float idleTime = 1f;
-
-    private float currentSpeed;
-    //Time until we should change states.
-    private float stateTimer;
-    private float firingCooldown;
     private SpriteRenderer sprite;
 
     [Header("Bullet Patterns")]
@@ -28,15 +26,56 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
-    private float machineTimer;
+    //Cooldown on MachineGun bullet waves.
+    private float machineTimer = 0f;
+    [Header("Combo Attack Constants")]
+    [SerializeField] private int fireBullsCount;
+    [SerializeField] private int smokeBullsCount;
+    [SerializeField] private int dynamiteBullsCount;
+    [SerializeField] private int fireSmokeCount;
+    [SerializeField] private int fireDynamiteCount;
+    [SerializeField] private int smokeDynamiteCount;
+    [SerializeField] private float bullsTime;
+
+    [Header("Prefabs")]
+    [SerializeField] private Bull bullPrefab;
+    [SerializeField] private GameObject flamingBushPrefab;
+    [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private GameObject dynamitePrefab;
+
+    [Header("Punch Move")]
+    //how long granny is punching for
+    [SerializeField] private float punchingTime;
+    //how long granny disppears for
+    [SerializeField] private float disappearTime;
+    [SerializeField] private float punchRepositionOffset;
+    [SerializeField] private float punchSpeed;
+    [SerializeField] GameObject punch;
+    [SerializeField] Transform punchPivot;
+
+    //left and right bound essentially tell us how far left/right is
+    //"too far". This is used to prevent granny from trying to teleport 
+    // left if the player is hugging the left wall for example
+    [SerializeField] Transform leftBound;
+    [SerializeField] Transform rightBound;
+
+    //if false, we punching from the right
+    //if true, we punching from the left
+    bool leftPunch;
+
+    //vector to remember how we were moving after determining punch move direction
+    private Vector2 punchMove;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    CircleCollider2D circleCollider;
     public override void Start()
     {
         base.Start();
+        TakeDamage(0);
+        circleCollider = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        currentState = State.MachineGun;
-        stateTimer = idleTime;
+
         machineTimer = 0;
     }
 
@@ -44,93 +83,206 @@ public class GrannyPhase2 : Boss
     public override void Update()
     {
         base.Update();
+        //stateTimer -= Time.deltaTime;
+        UpdateFlip();
+        //switch (currentState)
+        //{
+        //    case State.ComboAttack:
+        //        UpdateComboAttacks();
+        //        break;
+        //    case State.Lazer:
+        //        UpdateLazer();
+        //        break;
+        //    case State.MachineGun:
+        //        UpdateMachineGun();
+        //        break;
+        //    case State.Punch:
+        //        UpdatePunch();
+        //        break;
+        //}
+    }
 
-        stateTimer -= Time.deltaTime;
-
-        switch (currentState)
+    public override void Attack()
+    {
+        base.Attack();
+        int currentAttack = Random.Range(1, 5);
+        switch (currentAttack)
         {
-            case State.Idle:
-                UpdateTargeting();
+            case 1:
+                Punch();
                 break;
-            case State.Lazer:
-                UpdateLazer();
+            case 2:
+                selectComboAttack();
                 break;
-            case State.MachineGun: 
-                UpdateMachineGun();
+            case 3:
+                MachineGun();
                 break;
-            case State.Punch:
-                UpdatePunch();
+            case 4:
+                Laser();
                 break;
         }
     }
-
-
     /// <summary>
-    /// Handles logic for targeting mode.
+    /// Checks if the player sprite needs to update and updates the bullet origin
     /// </summary>
-    private void UpdateTargeting()
-    {
-        // Track the player's position
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            targetPosition = GameManager.Instance.player.transform.position;
-        }
+    private void UpdateFlip(){
+        //track the player location as you shoot out bullets
+        //granny moves as she shoots machine gun
+        //if player enters region above or below granny, she stops firing and repositions
+        bulletOrigin.transform.right = GameManager.Instance.player.transform.position
+                - bulletOrigin.transform.position;
 
-        // When targeting time is up, decide what to do
-        if (stateTimer <= 0)
-        {
-            //decide which mode to swap to based on some randomization
+        if (bulletOrigin.transform.right.x > 0) { 
+            sprite.flipX = true;
+            punchPivot.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (bulletOrigin.right.x < 0) { 
+            sprite.flipX = false; 
+            punchPivot.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
-    private void UpdateLazer()
+    private void Laser()
     {
-        //showcase the lazer tuning on and honing in on the player
-        //shoot the lazer for the 1 shot hit
+        // Shouldn't need to do anything
+        return;
+    }
+
+
+    private void MachineGun()
+    {
+        StartCoroutine(machineGun.DoBulletPattern(this));
+    }
+
+    private void Punch()
+    {
+        attackCooldown = punchingTime;
+        // TODO move granny towards the player while using her punch move that is 
+        // maybe make the punch a separate hitbox
+
+        // Phase 1: Disappear and snap to left of player
+            if (sprite.enabled)
+            {
+                // TODO: Instantiate smoke VFX here
+                sprite.enabled = false;
+                circleCollider.enabled = false;
+                punch.SetActive(false);   
+                //randomly pick left or right
+                bool leftPunch = Random.value > 0.5f;
+                if (leftPunch)
+                {
+                    punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
+                } else
+                {
+                    punchRepositionOffset = Mathf.Abs(punchRepositionOffset); 
+                }
+                
+            }
+            
+            Vector2 playerPos = GameManager.Instance.player.transform.position;
+            
+            if (playerPos.x + punchRepositionOffset < leftBound.transform.position.x)
+            {
+                // Player too far left, switch to attacking from the right instead
+                punchRepositionOffset = Mathf.Abs(punchRepositionOffset);
+            } else if (playerPos.x + punchRepositionOffset > rightBound.transform.position.x)
+            {
+                // Player too far right, switch to attacking from the left instead
+                punchRepositionOffset = -Mathf.Abs(punchRepositionOffset);
+            }
+
+            rb.position = new Vector2(playerPos.x + punchRepositionOffset, playerPos.y);
+    
+
+        // Phase 2: Reappear and lunge horizontally
+            sprite.enabled = true;
+            circleCollider.enabled = true;
+            punch.SetActive(true);
+            Vector2 direction = new Vector2(playerPos.x - rb.position.x, 0).normalized;
+            rb.linearVelocity = direction* punchSpeed;
+        // Phase 3: Done
+            punch.SetActive(false);
+        return;
+    }
+
+    private IEnumerator selectComboAttack()
+    {
+        // TODO: Cycle through 6 combo attacks from design document
+        int currentCombo = Random.Range(1, 7);
+        switch (currentCombo)
+        {
+            case 1:
+                yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
+                break;
+            case 2:
+                yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
+                break;
+             case 3:
+                yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
+                break;
+             case 4:
+                yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
+                break;
+             case 5:
+                yield return StartCoroutine(PointAttack(dynamitePrefab, flamingBushPrefab, fireDynamiteCount, 1));
+                break;
+             case 6:
+                yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
+                break;
+        }
+        yield return new WaitForSeconds(0.25f);
+    }
+
+    private IEnumerator TrailAttack(GameObject prefab, int bullsCount, float trailLifeTime)
+    {
+        for (int i = 0; i < bullsCount; i++)
+        {
+            Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
+            bull.ChargeSpecificDirection(Random.onUnitSphere);
+            bull.setSummoned();
+            
+            Trail trail = bull.AddComponent<Trail>();
+            trail.SetTrailPrefab(prefab);
+            trail.SetTrailLifetime(trailLifeTime);
+
+            Destroy(bull, bullsTime);
+        }
+
+        yield return new WaitForSeconds(bullsTime);
+    }
+
+    private IEnumerator PointAttack(GameObject prefab, GameObject SecondaryPrefab, int ProjectileCount, float ProjectileLifeTime)
+    {
+        for (int i = 0; i < ProjectileCount; i++)
+        {
+            GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,5),Random.Range(-3,3),-1), Quaternion.identity);
+
+            Point Secondary = Primary.AddComponent<Point>();
+            Secondary.SetSecondaryPrefab(SecondaryPrefab);
+            
+            //Secondary.DropSecondaryProjectile();
+
+            Destroy(Primary, ProjectileLifeTime);
+            Secondary.DropSecondaryProjectile();
+        }
+        yield return new WaitForSeconds(3f); 
+    }
+
+    private IEnumerator ShootLazer()
+    {
         bulletOrigin.transform.right = GameManager.Instance.player.transform.position
                     - bulletOrigin.transform.position;
-        StartCoroutine(lazerShot.DoBulletPattern(this));
-
-    }
-
-
-    private void UpdateMachineGun()
-    {
-        if(machineTimer == 0)
-        {
-            //track the player location as you shoot out bullets
-            //granny moves as she shoots machine gun
-            bulletOrigin.transform.right = GameManager.Instance.player.transform.position
-                    - bulletOrigin.transform.position; 
-
-            if (bulletOrigin.transform.right.x > 0) { sprite.flipX = true; }
-            else if (bulletOrigin.right.x < 0) { sprite.flipX = false; }
-            StartCoroutine(machineGun.DoBulletPattern(this));
-            machineTimer += Time.deltaTime;
-            
-        } else if(machineTimer >= machineCooldownConstant)
-        {
-            machineTimer = 0;
-        } else
-        {
-            machineTimer += Time.deltaTime;
-        }
-    }
-
-    private void  UpdatePunch(){
-        //move granny towards the player while using her punch move that is 
-        //maybe make the punch a separate hitbox
-
+        yield return StartCoroutine(lazerShot.DoBulletPattern(this));
     }
 
     public override void SetPhase()
     {
+        base.SetPhase();
         switch (currentPhase)
         {
             case 1:
                 break;
             case 2:
-                currentState = State.Lazer;
                 break;
         }
     }

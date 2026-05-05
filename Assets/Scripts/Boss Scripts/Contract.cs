@@ -6,7 +6,7 @@ public class Contract : MonoBehaviour, IDamageable
     public GameObject boss;
     public Granny granny;
 
-    public float maxHealth = 10f;
+    public float maxHealth = 2f;
 
     private float health;
 
@@ -28,8 +28,13 @@ public class Contract : MonoBehaviour, IDamageable
             Destroy(boss);
 
             // Removes boss from Granny contracts
-            granny.availableBosses.Remove(boss);
+            granny.GetAvailableBoss().Remove(boss);
             granny.contractDestroyed = true;
+            // Locks Granny from double contract animation when contract is destroyed
+            if (granny.GetAvailableBoss().Count > 0)
+            {
+                granny.LockDouble();
+            }
 
             // Transitions and granny takes damage
             granny.TransitionToReturning();

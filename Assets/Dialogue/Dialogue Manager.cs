@@ -161,7 +161,7 @@ public class DialogueManager : MonoBehaviour
     /// <param name="scene">Scene name for transitions (boss fight or interactable)</param>
     /// <param name="textColor">The dialogue text color. Chooses default color if no color is chosen</param>
     public void StartDialogue(TextAsset file, Sprite dialogueBoxSprite, Dictionary<DialogueEmotion, Sprite> emotionDictionary,
-        string name = null, DialogueType type = DialogueType.NPC, string scene = null, Color? textColor = null)
+        string name = null, DialogueType type = DialogueType.NPC, string scene = null, Color? textColor = null, int bossProgression = -1)
     {
         if (file != null)
         {
@@ -191,6 +191,10 @@ public class DialogueManager : MonoBehaviour
             ongoingDialogue = true;
             currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
             currentDialogueType = type;
+            if (bossProgression!=-1 && bossProgression>PlayerPrefs.GetInt("progression",0))
+            {
+                currentDialogueType = DialogueType.NPC;
+            }
             SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
