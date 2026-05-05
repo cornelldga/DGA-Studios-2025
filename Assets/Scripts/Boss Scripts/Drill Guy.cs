@@ -533,8 +533,10 @@ public class DrillGuy : Boss
         Vector3 spawnPos = transform.position;
         spawnPos.y -= 0.8f;
         StartCoroutine(debrisPattern.DoBulletPattern(this));
-        Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
-        holePositions.Add(spawnPos);
+        if (!transforming) {
+            Instantiate(exitHolePrefab, spawnPos, Quaternion.identity);
+            holePositions.Add(spawnPos);
+        }
     }
 
     /// <summary>
