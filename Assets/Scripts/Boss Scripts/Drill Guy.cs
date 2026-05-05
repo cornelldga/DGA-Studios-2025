@@ -173,31 +173,43 @@ public class DrillGuy : Boss
         Vector3 end_pos = new Vector3();
 
         // set up
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             // if starting track is top
             if (startingTrack == 0)
             {
-                if (i == 0)
+                switch (i)
                 {
-                    start_pos = new Vector3(topTrackStart.x,topTrackStart.y,0);
-                    end_pos = new Vector3(track_endpoints_X[1],track_Ys[0],0);
-                } else
-                {
-                    start_pos = new Vector3(track_endpoints_X[1],track_Ys[1],0);
-                    end_pos = new Vector3(track_endpoints_X[0],track_Ys[1],0);
+                    case 0:
+                        start_pos = new Vector3(topTrackStart.x,topTrackStart.y,0);
+                        end_pos = new Vector3(track_endpoints_X[1],track_Ys[0],0);
+                        break;
+                    case 1:
+                        start_pos = new Vector3(track_endpoints_X[1],track_Ys[1],0);
+                        end_pos = new Vector3(track_endpoints_X[0],track_Ys[1],0);
+                        break;
+                    case 2:
+                        start_pos = new Vector3(track_endpoints_X[0],track_Ys[0],0);
+                        end_pos = new Vector3(topTrackStart.x,topTrackStart.y,0);
+                        break;
                 }
             }
             // if starting track is bottom
             else if (startingTrack == 1)
             {
-                if (i == 0)
+                switch (i)
                 {
-                    start_pos = new Vector3(botTrackStart.x,botTrackStart.y,0);
-                    end_pos = new Vector3(track_endpoints_X[0],track_Ys[1],0);
-                } else
-                {
-                    start_pos = new Vector3(track_endpoints_X[0],track_Ys[0],0);
-                    end_pos = new Vector3(track_endpoints_X[1],track_Ys[0],0);
+                    case 0:
+                        start_pos = new Vector3(botTrackStart.x,botTrackStart.y,0);
+                        end_pos = new Vector3(track_endpoints_X[0],track_Ys[1],0);
+                        break;
+                    case 1:
+                        start_pos = new Vector3(track_endpoints_X[0],track_Ys[0],0);
+                        end_pos = new Vector3(track_endpoints_X[1],track_Ys[0],0);
+                        break;
+                    case 2:
+                        start_pos = new Vector3(track_endpoints_X[1],track_Ys[1],0);
+                        end_pos = new Vector3(botTrackStart.x,botTrackStart.y,0);
+                        break;
                 }
             }
 
@@ -218,12 +230,10 @@ public class DrillGuy : Boss
 
             while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
             rb.linearVelocity = Vector2.zero;
-            if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
+            if (i < 2) yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
-        // snap back to start
+
         minecartRoutineDone = true;
-        this.transform.position = startingTrack == 0? topTrackStart : botTrackStart; 
-        yield return new WaitForSeconds(0.5f);
     }
 
     // Dynamite throw during minecart attack.
