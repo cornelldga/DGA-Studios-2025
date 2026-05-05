@@ -8,7 +8,7 @@ public class DrillGuy : Boss
 {
     public enum State
     {
-        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Driving
+        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Transforming, Driving
     }
     public State currentState;
     [Header("State Timing")]
@@ -69,18 +69,16 @@ public class DrillGuy : Boss
     [SerializeField] float distanceToThrowOnMinecart = 5.0f;
     private Vector3 movePosition;
     [SerializeField] float minecartSpeed;
-    [SerializeField] int minecartCycles = 1;
     [SerializeField] float transitionTimeBetweentracks = 0.3f;
     [SerializeField] float minecartInnacuracy = 1.0f;
     private bool minecartRoutineDone = false;
-    private bool minecartRoutineStarted = false;
     private int throwDirY = 1;
     private Vector3 posBeforeDriving;
     [SerializeField] Collider2D wall;
     [SerializeField] float minecartAttackProbablity = 0.5f; // for granny
     [SerializeField] float minDistanceNearTrack = 10f;
-    float[] trackYs = {3.5f,-1.45f}; //parallel so only top and bottom Y needed
-    float[] trackXs = {-9.5f,11.5f,11.5f,-9.5f}; //tl, tr, br, bl
+    float[] trackYs = {3.55f,-1.46f}; //parallel so only top and bottom Y needed
+    float[] trackXs = {-8.5f,11.5f,11.5f,-8.5f}; //tl, tr, br, bl
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -91,6 +89,7 @@ public class DrillGuy : Boss
         stateTimer = walkingTime;
         isUnderground = false;
         hurtBox = GetComponent<CircleCollider2D>();
+        TransitionToWalking();
     }
 
     /// <summary>
@@ -124,6 +123,9 @@ public class DrillGuy : Boss
                 break;
             case State.Exiting:
                 UpdateExiting();
+                break;
+            case State.Transforming:
+                UpdateTransforming();
                 break;
             case State.Driving:
                 UpdateDriving();
@@ -171,9 +173,8 @@ public class DrillGuy : Boss
             this.transform.position = start_pos; // teleport to start pos
             Vector3 moveVector = end_pos - transform.position;
 
-            // face correct movement direction
-            if (moveVector.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-            else transform.localScale = new Vector3(1, 1, 1);
+            // face correct movement direction  
+            FaceDirection(-(end_pos.x - transform.position.x)); //flipped due to flipped art asset
 
             Vector3 direction = moveVector.normalized;
             rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
@@ -192,7 +193,6 @@ public class DrillGuy : Boss
     public void ThrowDynamiteOffTracks()
     {
         if (minecartRoutineDone) return;
-        
         if (currentPhase == 0)
         {
             Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
@@ -233,15 +233,16 @@ public class DrillGuy : Boss
         Vector2 playerPos = GameManager.Instance.player.transform.position;
         Vector2 currentPos = transform.position;
         Vector2 direction = (playerPos - currentPos).normalized;
-        
-        if (direction.x < 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1); 
-        }
-        else
-        {
-            transform.localScale = new Vector3(-1, 1, 1); 
-        }
+        FaceDirection(direction.x);
+    }
+    /// <summary>
+    /// Helper function to face given direction
+    /// </summary>
+    /// <param name="xDir"></param>
+    private void FaceDirection(float xDir)
+    {
+        if (Mathf.Abs(xDir) < 0.05f) return; //don't flip on noise
+        transform.localScale = new Vector3(xDir > 0 ? -1 : 1, 1, 1);
     }
 
 
@@ -252,27 +253,10 @@ public class DrillGuy : Boss
     {
         if (minecartRoutineDone)
         {
-            this.transform.position = posBeforeDriving;
+            this.transform.position = posBeforeDriving; // snap back to starting pos
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
             TransitionToEntering();
         }  
-        else if (!minecartRoutineStarted) {
-
-            //walk to start
-            Vector3 moveVector = movePosition - transform.position;
-            moveVector = moveVector.normalized * moveSpeed;
-            rb.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
-
-            if (Vector2.Distance(transform.position, movePosition) < 1f) 
-            {
-                transform.position = movePosition;
-                minecartRoutineStarted = true;
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isDriving", true);
-                Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
-                StartCoroutine(MinecartAttack(trackYs, trackXs));
-            }
-        }
     }
 
     
@@ -281,11 +265,12 @@ public class DrillGuy : Boss
     /// </summary>
     private void TransitionToDriving()
     {
+        currentState = State.Driving;
         ResetAllAnimatorBools();
         minecartRoutineDone = false;
-        minecartRoutineStarted = false;
-        animator.SetBool("isWalking", true);
-        currentState = State.Driving;
+        animator.SetBool("isDriving", true);
+        Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), true);
+        StartCoroutine(MinecartAttack(trackYs, trackXs));
     }
 
 
@@ -295,7 +280,6 @@ public class DrillGuy : Boss
     /// </summary>
     private void UpdateWalking()
     {
-        FacePlayer();
         if (stateTimer <= 0)
         {
             TransitionToEntering();
@@ -303,6 +287,7 @@ public class DrillGuy : Boss
         else
         {
             Vector3 moveVector = movePosition - transform.position;
+            FaceDirection(moveVector.x);
             if(moveVector.magnitude <= .1f)
             {
                 movePosition =
@@ -411,6 +396,14 @@ public class DrillGuy : Boss
 
     }
 
+    private void TransitionToTransforming()
+    {
+        ResetAllAnimatorBools();
+        FaceDirection(movePosition.x - transform.position.x);
+        animator.SetBool("isWalking", true);
+        currentState = State.Transforming;
+    }
+
     /// <summary>
     /// Transitions to the Entering state
     /// </summary>
@@ -420,6 +413,30 @@ public class DrillGuy : Boss
         ResetAllAnimatorBools();
         animator.SetBool("isEntering", true);
         currentState = State.Entering;
+    }
+
+    private void UpdateTransforming()
+    {
+        // reached start pos so transform
+        if (Vector2.Distance(transform.position, movePosition) < 1f) 
+        {
+            rb.linearVelocity = Vector2.zero;
+            ResetAllAnimatorBools();
+            Vector3 start_pos = new Vector3(trackXs[0] + 1f, trackYs[0], 0);
+            this.transform.position = start_pos; // snap into place
+            FaceDirection(-(trackXs[1] - transform.position.x)); //flipped due to flipepda art asset
+            animator.SetBool("isTransforming", true);
+        } else {
+            // walk towards start of track
+            Vector3 moveVector = movePosition - transform.position;
+            moveVector = moveVector.normalized * moveSpeed * 2;
+            rb.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
+        }
+    }
+
+    public void AnimationOnTransformed()
+    {
+        TransitionToDriving();
     }
 
     /// <summary>
@@ -503,10 +520,10 @@ public class DrillGuy : Boss
                 {
                     if (Vector2.Distance(pointA, this.transform.position) < minDistanceNearTrack) {
                         movePosition = pointA;
-                        TransitionToDriving();
+                        TransitionToTransforming();
                     } else if (Vector2.Distance(pointB, this.transform.position) < minDistanceNearTrack) {
                         movePosition = pointB;
-                        TransitionToDriving();
+                        TransitionToTransforming();
                     } else TransitionToThrowing();
                 }
             }
@@ -631,6 +648,7 @@ public class DrillGuy : Boss
         animator.SetBool("isEntering", false);
         animator.SetBool("isUG", false);
         animator.SetBool("isDriving", false);
+        animator.SetBool("isTransforming", false);
     }
 
     public override void TakeDamage(float damage)
