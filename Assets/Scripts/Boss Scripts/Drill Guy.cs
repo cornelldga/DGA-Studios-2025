@@ -304,7 +304,7 @@ public class DrillGuy : Boss
         if (minecartRoutineDone)
         {
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
-            TransitionToWalking();
+            TransitionToThrowing();
         }  
     }
     
