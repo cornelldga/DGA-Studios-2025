@@ -95,11 +95,11 @@ public class GrannyPhase2 : Boss
         //switch (currentAttack)
         //{
         //    case 1:
-         //StartCoroutine(Punch());
-                
+        //StartCoroutine(Punch());
+
         //        break;
         //    case 2:
-          StartCoroutine(selectComboAttack());
+        StartCoroutine(selectComboAttack());
         //        break;
         //    case 3:
         //        MachineGun();
@@ -156,8 +156,9 @@ public class GrannyPhase2 : Boss
         Disappear(true);
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(disappearTime);
-        Disappear(false);
         Teleport();
+        //appear after teleport
+        Disappear(false);
         rb.bodyType = RigidbodyType2D.Kinematic;
         animator.SetTrigger("Punch");
                  
@@ -171,6 +172,25 @@ public class GrannyPhase2 : Boss
     {
         sprite.enabled = !disappear;
         circleCollider.enabled = !disappear;
+
+        // Shadow: disable ONLY the SpriteRenderer to make the shadow disappear when granny disappears
+        Transform shadow = transform.Find("Shadow");
+        if (shadow != null)
+        {
+            SpriteRenderer shadowSprite = shadow.GetComponent<SpriteRenderer>();
+            if (shadowSprite != null)
+            {
+                shadowSprite.enabled = !disappear;
+            }
+        }
+
+        // Punch: disable ONLY the collider to prevent player from taking damage accidentally
+        Collider2D punchCollider = punch.GetComponent<Collider2D>();
+        if (punchCollider != null)
+        {
+            punchCollider.enabled = !disappear;
+        }
+
     }
     /// <summary>
     /// Calculates where Granny teleports to based on player position
