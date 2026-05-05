@@ -8,7 +8,7 @@ public class DrillGuy : Boss
 {
     public enum State
     {
-        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Transforming, Driving
+        Walking, Targeting, Underground_Chase, Underground_Random, Throwing, Entering, Exiting, Underground_MC, Transforming, Driving
     }
     public State currentState;
     [Header("State Timing")]
@@ -82,6 +82,7 @@ public class DrillGuy : Boss
     private int startingTrack; // 0 for top, 1 for bottom
     private bool minecartRoutineDone = false;
     private int throwDirY = 1;
+    private bool transforming = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -127,8 +128,8 @@ public class DrillGuy : Boss
             case State.Exiting:
                 UpdateExiting();
                 break;
-            case State.Transforming:
-                UpdateTransforming();
+            case State.Underground_MC:
+                UpdateUG_MC();
                 break;
             case State.Driving:
                 UpdateDriving();
@@ -211,16 +212,18 @@ public class DrillGuy : Boss
             Vector3 direction = moveVector.normalized;
             rb.linearVelocity = new Vector2(direction.x, direction.y) * minecartSpeed;
             
-            // action
-            throwDirY =  i ==  0? -1:1; //top track throws down, bot track throws up
+            // dynamite throw dir
+            if (startingTrack == 0)throwDirY =  i == 0? -1:1;
+            else throwDirY =  i == 0? 1:-1;
+
             while (Vector2.Dot(end_pos - transform.position, direction) > 0) yield return null;
             rb.linearVelocity = Vector2.zero;
             if (i == 0) yield return new WaitForSeconds(transitionTimeBetweentracks);
         }
         // snap back to start
-        this.transform.position = startingTrack == 0? topTrackStart : botTrackStart; 
-
         minecartRoutineDone = true;
+        this.transform.position = startingTrack == 0? topTrackStart : botTrackStart; 
+        yield return new WaitForSeconds(0.5f);
     }
 
     // Dynamite throw during minecart attack.
@@ -228,6 +231,7 @@ public class DrillGuy : Boss
     // Phase 1: above, on, and below tracks
     public void ThrowDynamiteOffTracks()
     {
+        if (minecartRoutineDone) return;
         if (currentPhase == 0)
         {
             Vector3 target = new Vector3(bulletOrigin.position.x, bulletOrigin.position.y + (throwDirY * distanceToThrowOnMinecart) + UnityEngine.Random.Range(-minecartInnacuracy, minecartInnacuracy));
@@ -290,7 +294,7 @@ public class DrillGuy : Boss
         if (minecartRoutineDone)
         {
             Physics2D.IgnoreCollision(wall, GetComponent<Collider2D>(), false);
-            TransitionToEntering();
+            TransitionToWalking();
         }  
     }
     
@@ -394,6 +398,25 @@ public class DrillGuy : Boss
         throw new NotImplementedException();
     }
 
+    
+    private void TransitionToUG_MC()
+    {
+        ResetAllAnimatorBools();
+        animator.SetBool("isUG", true);
+        currentState = State.Underground_MC;
+        startingTrack = UnityEngine.Random.Range(0, 2); // 0 for top, 1 for bottom
+        CreateChasePathToMC();
+        StartCoroutine(DigPath());
+    }
+
+    private void UpdateUG_MC()
+    {
+        if (t >= 1f)
+        {
+            TransitionToExiting();
+        }
+    }
+
     private void TransitionToUGChase()
     {
         ResetAllAnimatorBools();
@@ -432,22 +455,9 @@ public class DrillGuy : Boss
 
     private void TransitionToTransforming()
     {
-        Vector3 top_starting_pos = new Vector3(topTrackStart.x, track_Ys[0], 0);
-        Vector3 bottom_starting_pos =  new Vector3(botTrackStart.x, track_Ys[1], 0);
-
-        // decide which track to start on based on which is closer to current position 
-        if (this.transform.position.x < 0) {
-            startingTrack = 0;
-            movePosition = top_starting_pos;
-        } else {
-            startingTrack = 1;
-            movePosition = bottom_starting_pos;
-        }
-
         ResetAllAnimatorBools();
-        FaceDirection(movePosition.x - transform.position.x);
-        animator.SetBool("isWalking", true);
-        currentState = State.Transforming;
+        FaceDirection(-(movePosition.x - transform.position.x)); // flipped due to art asset
+        animator.SetBool("isTransforming", true);
     }
 
     /// <summary>
@@ -459,33 +469,6 @@ public class DrillGuy : Boss
         ResetAllAnimatorBools();
         animator.SetBool("isEntering", true);
         currentState = State.Entering;
-    }
-
-    private void UpdateTransforming()
-    {
-        // reached start pos so transform
-        if (animator.GetBool("isTransforming"))
-        {
-            //do nothing
-        }
-        else if (Vector2.Distance(transform.position, movePosition) < 1f) 
-        {
-            rb.linearVelocity = Vector2.zero;
-            ResetAllAnimatorBools();
-            this.transform.position = movePosition; // snap into place
-            
-            movePosition = startingTrack == 0? 
-                new Vector3(track_endpoints_X[1], track_Ys[0], 0) : new Vector3(track_endpoints_X[0], track_Ys[1], 0); // set move position to the other end of the track
-            
-            FaceDirection(-(movePosition.x - transform.position.x)); //flipped due to flipepda art asset
-            animator.SetBool("isTransforming", true);
-        
-        } else {
-            // walk towards start of track
-            Vector3 moveVector = movePosition - transform.position;
-            moveVector = moveVector.normalized * moveSpeed * 2.5f;
-            rb.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
-        }
     }
 
     public void AnimationOnTransformed()
@@ -519,7 +502,8 @@ public class DrillGuy : Boss
     public void AnimationOnEnteringFinished()
     {
         hurtBox.enabled = false;
-        if (currentState == State.Entering && currentPhase < 2)
+        if (transforming) TransitionToUG_MC();
+        else if (currentState == State.Entering && currentPhase < 2)
             TransitionToUGChase();
         else
             TransitionToUGRandom();
@@ -558,17 +542,35 @@ public class DrillGuy : Boss
     {
         if (currentState == State.Exiting)
         {
-            if (currentPhase == 2 && numFrenzyDigs > 0){
+            if (transforming) TransitionToTransforming();
+            else if (currentPhase == 2 && numFrenzyDigs > 0){
                 // if it's desperation phase and there's more to dig
                 numFrenzyDigs -= 1;
                 TransitionToEntering();
             }
             else{
                 float percentage = UnityEngine.Random.value;
-                if (percentage >= minecartAttackProbablity) TransitionToTransforming();
+                if (percentage < minecartAttackProbablity) {
+                    transforming = true;
+                    TransitionToWalking(); //MC attack
+                }
                 else TransitionToThrowing();
             }
         }
+    }
+
+    private void CreateChasePathToMC()
+    {
+        Vector2 p0 = transform.position; 
+        Vector2 p3 = startingTrack == 0 ? new Vector2(topTrackStart.x, topTrackStart.y) : new Vector2(botTrackStart.x, botTrackStart.y); 
+
+        Vector2 directionToMC = (p3 - p0).normalized;
+        float distanceToMC = Vector2.Distance(p0, p3);
+        
+        Vector2 p1 = GenerateControlPoint(p0, p3, directionToMC, distanceToMC, 0.15f);
+        Vector2 p2 = GenerateControlPoint(p0, p3, directionToMC, distanceToMC, 0.85f);
+        currentPath = new DrillPath(p0, p1, p2, p3);
+        t = 0f;
     }
 
     /// <summary>
