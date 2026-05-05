@@ -1,53 +1,149 @@
 {
   "dialogueLines": [
 
-        {
-            "dialogueID": "1_start",
-            "dialogueText": "Unpaid, huh? Yeah, that checks out.",
-            "emotion": 0,
-            "nextDialogueID": "1_next"
-        },
-        {
-            "dialogueID": "1_next",
-            "dialogueText": "Welcome to the bottom of the food chain.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        },
+    {
+      "dialogueID": "1_start",
+      "dialogueText": "It looks like capitalism’s greatest defenders have descended on the saloon.",
+      "emotion": 0,
+      "nextDialogueID": "1_2"
+    },
+    {
+      "dialogueID": "1_2",
+      "dialogueText": "Even though it is far above your non-existent paygrade, good luck out there kid.",
+      "emotion": 0,
+      "nextDialogueID": "1_3"
+    },
+    {
+      "dialogueID": "1_3",
+      "dialogueText": "You’re first fighting that hog dude. Ugh, don’t get too close to him.",
+      "emotion": 0,
+      "nextDialogueID": "1_4"
+    },
+    {
+      "dialogueID": "1_4",
+      "dialogueText": "I think his secret weapon to kill us is spreading the swine flu onto us.",
+      "emotion": 0,
+      "nextDialogueID": ""
+    },
 
-        {
-            "dialogueID": "2_start",
-            "dialogueText": "Great. Now we’re beefing with livestock.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        },
+    {
+      "dialogueID": "2_start",
+      "dialogueText": "Huh nice. Congrats for not dying.",
+      "emotion": 0,
+      "nextDialogueID": "2_2"
+    },
+    {
+      "dialogueID": "2_2",
+      "dialogueText": "Next up is that miner guy. I guess they feel like expanding to fracking.",
+      "emotion": 0,
+      "nextDialogueID": "2_3"
+    },
+    {
+      "dialogueID": "2_3",
+      "dialogueText": "I heard that the miner is divorced from the CEO of this company, but still works under her for… reasons.",
+      "emotion": 0,
+      "nextDialogueID": "2_4"
+    },
+    {
+      "dialogueID": "2_4",
+      "dialogueText": "I’m not the type to kink shame, but that just seems like a humiliation ritual to me.",
+      "emotion": 0,
+      "nextDialogueID": ""
+    },
 
-        {
-            "dialogueID": "3_start",
-            "dialogueText": "We’re one OSHA violation away from shutting down.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        },
+    {
+      "dialogueID": "3_start",
+      "dialogueText": "Geez kid, you’re going crazy. I didn’t think you’d make it this far.",
+      "emotion": 0,
+      "nextDialogueID": "3_2"
+    },
+    {
+      "dialogueID": "3_2",
+      "dialogueText": "Those magicians might be the equalizer, though.",
+      "emotion": 0,
+      "nextDialogueID": "3_3"
+    },
+    {
+      "dialogueID": "3_3",
+      "dialogueText": "I’m a man of science, but even their magic scares me.",
+      "emotion": 0,
+      "nextDialogueID": "3_4"
+    },
+    {
+      "dialogueID": "3_4",
+      "dialogueText": "Good luck kid. Hopefully they’ll get distracted making out mid-fight.",
+      "emotion": 0,
+      "nextDialogueID": ""
+    },
 
-        {
-            "dialogueID": "4_start",
-            "dialogueText": "Magicians now. Fantastic. Love that for us.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        },
+    {
+      "dialogueID": "4_start",
+      "dialogueText": "Science wins over sorcery once again. Hopefully their relationship survives this.",
+      "emotion": 0,
+      "nextDialogueID": "4_2"
+    },
+    {
+      "dialogueID": "4_2",
+      "dialogueText": "Ok, that arsonist-in-training Ash is the last of Granny’s goons left.",
+      "emotion": 0,
+      "nextDialogueID": "4_3"
+    },
+    {
+      "dialogueID": "4_3",
+      "dialogueText": "If she grows plants, but then burns them down, would she be considered an eco-warrior or eco-terrorist?",
+      "emotion": 0,
+      "nextDialogueID": "4_4"
+    },
+    {
+      "dialogueID": "4_4",
+      "dialogueText": "Whatever, same difference. Make that botanist bow down!",
+      "emotion": 0,
+      "nextDialogueID": ""
+    },
 
-        {
-            "dialogueID": "5_start",
-            "dialogueText": "We’re officially enemies of botany.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        },
+    {
+      "dialogueID": "5_start",
+      "dialogueText": "This is it kid. All that’s left is Granny.",
+      "emotion": 0,
+      "nextDialogueID": "5_2"
+    },
+    {
+      "dialogueID": "5_2",
+      "dialogueText": "I’ll be honest, I had no faith initially that we’d stand any chance against Granny.",
+      "emotion": 0,
+      "nextDialogueID": "5_3"
+    },
+    {
+      "dialogueID": "5_3",
+      "dialogueText": "You proved me wrong, kid. You gave me hope. Thanks for that.",
+      "emotion": 0,
+      "nextDialogueID": "5_4"
+    },
+    {
+      "dialogueID": "5_4",
+      "dialogueText": "Alright, don’t let that hope be misplaced! Finish this Duke!",
+      "emotion": 0,
+      "nextDialogueID": ""
+    },
 
-        {
-            "dialogueID": "6_start",
-            "dialogueText": "Huh. We lived. Didn’t expect that.",
-            "emotion": 0,
-            "nextDialogueID": ""
-        }
+    {
+      "dialogueID": "6_start",
+      "dialogueText": "We lived; my will-writing awaits another day.",
+      "emotion": 0,
+      "nextDialogueID": "6_2"
+    },
+    {
+      "dialogueID": "6_2",
+      "dialogueText": "You single handedly took down the embodiment of capitalism in this town.",
+      "emotion": 0,
+      "nextDialogueID": "6_3"
+    },
+    {
+      "dialogueID": "6_3",
+      "dialogueText": "Marx would be proud.",
+      "emotion": 0,
+      "nextDialogueID": ""
+    }
 
-    ]
+  ]
 }
