@@ -23,6 +23,7 @@ public class GrannyPhase2 : Boss
     [Header("Bullet Patterns")]
     [SerializeField] BulletPattern machineGun;
     [SerializeField] BulletPattern lazerShot;
+    [SerializeField] BulletPattern bullTrailAttack;
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
@@ -132,7 +133,6 @@ public class GrannyPhase2 : Boss
     private void MachineGun()
     {
         StartCoroutine(machineGun.DoBulletPattern(this));
-        //rb.MovePosition(new Vector2(Random.Range(-5, 5), Random.Range(-3, 3)));
     }
 
     private IEnumerator Punch()
@@ -244,19 +244,20 @@ public class GrannyPhase2 : Boss
     private IEnumerator selectComboAttack()
     {
         // TODO: Cycle through 6 combo attacks from design document
-        int currentCombo = Random.Range(1, 7);
+        int currentCombo = Random.Range(4, 7);
+        SetAttackState(true);
         switch (currentCombo)
         {
-            case 1:
-                yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
-                break;
-            case 2:
-                yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
-                break;
-             case 3:
-                yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
-                break;
-             case 4:
+            //case 1:
+            //    yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
+            //    break;
+            //case 2:
+            //    yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
+            //    break;
+            //case 3:
+            //    yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
+            //    break;
+            case 4:
                 yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
                 break;
              case 5:
@@ -267,28 +268,7 @@ public class GrannyPhase2 : Boss
                 break;
         }
         yield return new WaitForSeconds(0.25f);
-    }
-
-    private IEnumerator TrailAttack(GameObject prefab, int bullsCount, float trailLifeTime)
-    {
-        for (int i = 0; i < bullsCount; i++)
-        {
-            Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
-            bull.ChargeSpecificDirection(Random.onUnitSphere);
-            bull.setSummoned();
-
-            Trail trail = bull.AddComponent<Trail>();
-            trail.SetTrailPrefab(prefab);
-            if (prefab == flamingBushPrefab)
-            {
-                trail.SetBoss(gameObject);
-            }
-            trail.SetTrailLifetime(trailLifeTime);
-
-            Destroy(bull, bullsTime);
-        }
-
-        yield return new WaitForSeconds(bullsTime);
+        SetAttackState(false);
     }
 
     private IEnumerator PointAttack(GameObject prefab, GameObject SecondaryPrefab, int ProjectileCount, float ProjectileLifeTime)

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -33,10 +33,6 @@ public class Pig : MonoBehaviour
     [SerializeField] private float patrolDistance = 1f;
     [Tooltip("Elevation offset while patrolling")]
     [SerializeField] private float patrolElevation = 1f;
-    [Tooltip("Minimum random delay before pig starts moving")]
-    [SerializeField] private float minStartDelay = 0f;
-    [Tooltip("Maximum random delay before pig starts moving")]
-    [SerializeField] private float maxStartDelay = 2f;
     [Tooltip("Seconds pig is stunned after colliding")]
     [SerializeField] float stunTime;
     [Tooltip("Distance at which pig registers a hit on Pig Rider")]
@@ -67,7 +63,6 @@ public class Pig : MonoBehaviour
     private float currentSpeed;
     private Rigidbody2D rb;
     private Collider2D thisCollider;
-    private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Vector3 smokeTrailPos;
@@ -91,7 +86,6 @@ public class Pig : MonoBehaviour
         thisCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        ignoredColliders = new List<Collider2D>();
 
         if (smokeTrail != null)
         {
@@ -106,20 +100,6 @@ public class Pig : MonoBehaviour
         downBoundary = startingPoint.y - patrolElevation;
 
         FlipSprite();
-
-        // Start with a random delay
-        float randomDelay = Random.Range(minStartDelay, maxStartDelay);
-        StartCoroutine(InitializeWithDelay(randomDelay));
-    }
-
-    /// <summary>
-    /// Initializes the pig after a random delay to desynchronize multiple pigs.
-    /// </summary>
-    private System.Collections.IEnumerator InitializeWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        isInitialized = true;
-        TransitionToPatrolling();
     }
 
     // Update is called once per frame
@@ -334,7 +314,7 @@ public class Pig : MonoBehaviour
     /// <summary>
     /// Coroutine that handles the stun state with a freeze duration.
     /// </summary>
-    private System.Collections.IEnumerator StunCoroutine()
+    private IEnumerator StunCoroutine()
     {
         yield return new WaitForSeconds(stunTime);
         animator.SetBool("isStunned", false);
