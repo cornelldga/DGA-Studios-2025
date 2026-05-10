@@ -410,7 +410,6 @@ public class Granny : Boss
         {
             return;
         }
-        base.TakeDamage(damage);
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
 
@@ -454,5 +453,11 @@ public class Granny : Boss
         ResetAnimationBools();
         grannyPhase2.enabled = true;
         Destroy(this);
+    }
+
+    public new void AnimationBossDeathComplete()
+    {
+        CutsceneManager.Instance.PlayFinalCutscene();
+        base.AnimationBossDeathComplete();
     }
 }
