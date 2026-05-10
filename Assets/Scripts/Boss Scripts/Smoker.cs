@@ -16,8 +16,6 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
 
     [Header("Movement")]
     [SerializeField] float maxSpeed;
-    [Tooltip("How strongly the smoker is turns towards the player")]
-    [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
     [SerializeField] float speed = 3f;
     [Tooltip("Multiplied with the projectile damage to push the smoker back")]

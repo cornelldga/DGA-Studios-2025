@@ -22,40 +22,40 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 7918588453439108770, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.083333336
+    - time: 0.1
       value: {fileID: -3523257349478646911, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.16666667
+    - time: 0.2
       value: {fileID: 4265711096530902713, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.25
+    - time: 0.3
       value: {fileID: -1604988207956650926, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.33333334
+    - time: 0.4
       value: {fileID: -1847974079004835983, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.41666666
-      value: {fileID: -9114734142186388436, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
     - time: 0.5
+      value: {fileID: -9114734142186388436, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
+    - time: 0.6
       value: {fileID: 516289542283834956, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.5833333
+    - time: 0.7
       value: {fileID: 8627829011220356500, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.6666667
+    - time: 0.8
       value: {fileID: 8262474404670984709, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.75
+    - time: 0.9
       value: {fileID: -540444142405000934, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.8333333
-      value: {fileID: 3033863638728191729, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 0.9166667
-      value: {fileID: -4221240449342966555, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
     - time: 1
+      value: {fileID: 3033863638728191729, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
+    - time: 1.1
+      value: {fileID: -4221240449342966555, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
+    - time: 1.2
       value: {fileID: 4091158153978058460, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 1.0833334
+    - time: 1.3
       value: {fileID: 165745984592626144, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
-    - time: 1.1666666
+    - time: 1.4
       value: {fileID: 5154705161294333687, guid: c5a747b7fd13150438a3ba79b408899a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -92,7 +92,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.25
+    m_StopTime: 1.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -112,7 +112,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6666667
+  - time: 0.8
     functionName: ThrowDynamiteOffTracks
     data: 
     objectReferenceParameter: {fileID: 0}
