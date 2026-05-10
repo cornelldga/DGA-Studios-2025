@@ -410,7 +410,6 @@ public class Granny : Boss
         {
             return;
         }
-        base.TakeDamage(damage);
         int index = Random.Range(0, availableBosses.Count);
         DropNewContract(availableBosses[index]);
 
