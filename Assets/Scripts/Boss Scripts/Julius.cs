@@ -359,9 +359,11 @@ public class Julius : Boss
             else if (currentPhase == 0)
             {
                 ThrowDynamiteAtPlayer();
+                ThrowDynamiteAtPlayer();
             }
             else
             {
+                ThrowDynamiteAtPlayer();
                 ThrowDynamiteAtPlayer();
                 ThrowDynamiteAtPlayer();
             }
