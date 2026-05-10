@@ -89,11 +89,11 @@ public class GrannyPhase2 : Boss
         //switch (currentAttack)
         //{
         //    case 1:
-        //StartCoroutine(Punch());
+        StartCoroutine(Punch());
 
         //        break;
         //    case 2:
-        StartCoroutine(selectComboAttack());
+        //StartCoroutine(selectComboAttack());
         //        break;
         //    case 3:
         //        MachineGun();
