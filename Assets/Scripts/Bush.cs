@@ -213,4 +213,9 @@ public class Bush : MonoBehaviour
     {
         this.fireTint = fireTint;
     }
+    public void overrideAsh(GameObject newBoss)
+    {
+        ash = newBoss;
+        ashSR = newBoss.GetComponent<SpriteRenderer>();
+    }
 }

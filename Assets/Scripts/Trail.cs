@@ -10,6 +10,8 @@ public class Trail : MonoBehaviour
     private float distSinceLastSpawn = 0f;
     private Vector3 lastPos;
 
+    GameObject newBoss;
+
     private void Start()
     {
         lastPos = transform.position;
@@ -25,6 +27,12 @@ public class Trail : MonoBehaviour
         {
             GameObject spawnedObject = Instantiate(trailPrefab, transform.position, Quaternion.identity);
             SetPrefabSettings(spawnedObject);
+
+            //if it is a bush set the sprite for ash
+            if (spawnedObject.GetComponent<Bush>() != null)
+            {
+                spawnedObject.GetComponent<Bush>().overrideAsh(newBoss);
+            }
             if (trailLifetime >= 0)
             {
                 Destroy(spawnedObject, trailLifetime);
@@ -57,5 +65,10 @@ public class Trail : MonoBehaviour
     public void SetTrailLifetime(float lifetime)
     {
         this.trailLifetime = lifetime;
+    }
+
+    public void SetBoss(GameObject boss)
+    {
+        newBoss = boss;
     }
 }

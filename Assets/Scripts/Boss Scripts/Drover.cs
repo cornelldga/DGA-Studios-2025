@@ -79,6 +79,8 @@ public class Drover : Boss
     [SerializeField] private GameObject shieldVisual;
     [Tooltip("Smoke trail GameObject shown while Drover is charging or bouncing")]
     [SerializeField] private GameObject smokeTrail;
+    [Tooltip("Stunned GameObject shown while Drover is stunned")]
+    [SerializeField] private GameObject stunnedStars;
 
     [Header("Screen Shake")]
     private CinemachineImpulseSource impulseSource;
@@ -132,6 +134,11 @@ public class Drover : Boss
             shieldVisual.SetActive(isInvulnerable && !isSummoned);
         }
 
+        if (stunnedStars != null)
+        {
+            stunnedStars.SetActive(currentState == State.Stunned);
+        }
+
         if (smokeTrail != null)
         {
             smokeTrail.SetActive(currentState == State.Charging);
@@ -183,13 +190,11 @@ public class Drover : Boss
     {
         isMarked = true;
         markTimer = markDuration;
-        sprite.color = Color.red;
     }
 
     public void removeMark()
     {
         isMarked = false;
-        sprite.color = Color.white;
     }
 
     /// <summary>

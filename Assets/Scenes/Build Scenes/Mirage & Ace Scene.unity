@@ -301,7 +301,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1001 &203842130
+--- !u!1001 &163472382
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -314,20 +314,16 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 5510623586176508219, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5510623586176508219, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
       propertyPath: sceneMusic
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5992615427073746898, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.91876
+      value: 200.28848
       objectReference: {fileID: 0}
     - target: {fileID: 5992615427073746898, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.94055
+      value: -68.00578
       objectReference: {fileID: 0}
     - target: {fileID: 5992615427073746898, guid: f6b8721a9cef9451ba0df5c66bb01105, type: 3}
       propertyPath: m_LocalPosition.z
@@ -953,6 +949,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1712753219387687366, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
+      propertyPath: m_LinearDamping
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
       propertyPath: magician
       value: 
@@ -1790,6 +1790,10 @@ PrefabInstance:
       propertyPath: doveStage
       value: 
       objectReference: {fileID: 11705904}
+    - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
       propertyPath: knifeStage
       value: 
@@ -27419,8 +27423,7 @@ SceneRoots:
   - {fileID: 416365286}
   - {fileID: 671241919}
   - {fileID: 309325213}
-  - {fileID: 203842130}
   - {fileID: 779541904}
   - {fileID: 1154324150}
   - {fileID: 526022527}
-  - {fileID: 671241919}
+  - {fileID: 163472382}
