@@ -257,7 +257,15 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         string transitionTrigger = (GetCurrentSceneName() == "Saloon" && sceneName == "World Hub") ? "Saloon Exit" : sceneName;
-        StartCoroutine(TransitionAnim(transitionTrigger));
+        if (sceneName == "Tutorial")
+        {
+            transform.Find("Game Canvas/Skip Tutorial").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.Find("Game Canvas/Skip Tutorial").gameObject.SetActive(false);
+        }
+            StartCoroutine(TransitionAnim(transitionTrigger));
     }
 
     /// <summary>

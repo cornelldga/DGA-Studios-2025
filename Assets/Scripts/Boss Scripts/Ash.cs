@@ -768,4 +768,12 @@ public class Ash : Boss
         }
     }
 
+    public override void Defeat()
+    {
+        Vector2 direction = (GameManager.Instance.player.transform.position - transform.position).normalized;
+        if (direction.x > 0) sprite.flipX = true;
+        else if (direction.x < 0) sprite.flipX = false;
+        base.Defeat();
+    }
+
 }

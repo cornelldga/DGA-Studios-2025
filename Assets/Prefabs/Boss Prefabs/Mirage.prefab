@@ -372,10 +372,9 @@ MonoBehaviour:
   spinSpeed: 50
   whipLaunchSpeed: 10
   smokerWhipStunTime: 1
-  maxSpeed: 1.5
-  turnSpeed: 2
-  speed: 400
-  knockbackForce: 700
+  maxSpeed: 3
+  speed: 250
+  knockbackForce: 400
   playerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -385,11 +384,11 @@ MonoBehaviour:
   releasePoint: {fileID: 410701497520239722}
   pivot: {fileID: 8547894485091812972}
   magician: {fileID: 0}
-  punchCooldown: 2
+  punchCooldown: 0.25
+  punchHitCooldown: 1
   punchDamping: 3
-  knockTime: 1
-  punchMagnitude: 4
-  punchRange: 2
+  punchMagnitude: 4.5
+  punchRange: 2.5
   backStage: {fileID: 0}
   cardStage: {fileID: 0}
   doveStage: {fileID: 0}
@@ -429,7 +428,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 50
-  m_LinearDamping: 0
+  m_LinearDamping: 3
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

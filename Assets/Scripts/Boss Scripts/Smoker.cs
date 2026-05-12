@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Smoker : MonoBehaviour, IProjectileInteractable
 {
@@ -16,8 +17,6 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
 
     [Header("Movement")]
     [SerializeField] float maxSpeed;
-    [Tooltip("How strongly the smoker is turns towards the player")]
-    [SerializeField] float turnSpeed = 2f;
     [Tooltip("How quickly the smoker moves to the player")]
     [SerializeField] float speed = 3f;
     [Tooltip("Multiplied with the projectile damage to push the smoker back")]
@@ -44,15 +43,17 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
     [SerializeField] TheMagician magician;
 
     [Header("Punch Settings")]
-    [Tooltip("How long must pass before this can perform another punch")]
+    [Tooltip("How long before another punch is thrown if Mirage misses")]
     [SerializeField] float punchCooldown;
+    [Tooltip("How long before another punch is thrown if Mirage hits the player")]
+    [SerializeField] float punchHitCooldown;
     float punchCooldownTime;
     [SerializeField] float punchDamping;
-    [SerializeField] float knockTime;
     [SerializeField] float punchMagnitude;
     [SerializeField] float punchRange;
 
     private bool isPunching;
+    bool hitPlayer;
     [Tooltip("The distance between the Smoker and Player")]
     Vector2 distance;
 
@@ -97,10 +98,7 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
 
         if (rb != null && GameManager.Instance?.player != null && !isPunching)
         {
-            Vector2 direction = ((Vector2)GameManager.Instance.player.transform.position - rb.position);
-            rb.AddForce(direction * speed, ForceMode2D.Force);
-
-
+            rb.AddForce(distance.normalized * speed, ForceMode2D.Force);
             if (rb.linearVelocity.magnitude > maxSpeed)
                 rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
 
@@ -133,6 +131,7 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
 
         if (dist2D.magnitude <= punchRange)
         {
+            hitPlayer = true;
             GameManager.Instance.FreezePlayer(true);
             Vector2 direction = dist2D.normalized;
             Rigidbody2D playerBody = playerScript.GetComponent<Rigidbody2D>();
@@ -150,7 +149,8 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
         GameManager.Instance.player.GetComponent<Rigidbody2D>().linearDamping = pastDamping;
         isPunching = false;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        punchCooldownTime = punchCooldown;
+        punchCooldownTime = hitPlayer ? punchHitCooldown : punchCooldown;
+        hitPlayer = false;
     }
 
     // Update is called once per frame
@@ -313,6 +313,15 @@ public class Smoker : MonoBehaviour, IProjectileInteractable
         Vector2 forceDir = (transform.position - projectile.transform.position).normalized;
         rb.AddForce(forceDir * knockbackForce * projectile.damage, ForceMode2D.Impulse);
         return true;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(1);
+        }
+        
     }
 }
 
