@@ -24,7 +24,6 @@ public class LoadoutManager : MonoBehaviour
     private Image currentSlot;
     private int slotNumber;
     private bool mixer;
-    private 
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -36,6 +35,7 @@ public class LoadoutManager : MonoBehaviour
     private List<MixerType> lockedMixers = new List<MixerType>();
 
    [SerializeField] GameObject rows;
+   [SerializeField] GameObject text;
    [SerializeField] GameObject baseOptions;
    [SerializeField] GameObject mixerOptions;
 
@@ -45,8 +45,8 @@ public class LoadoutManager : MonoBehaviour
    [SerializeField] Sprite[] mixerIcons;
 
     [Tooltip("Locked Icons")]
-    [SerializeField] GameObject[] baseChains;
-    [SerializeField] GameObject[] mixerChains;
+    [SerializeField] List<GameObject> baseChains;
+    [SerializeField] List<GameObject> mixerChains;
 
 
     /// <summary>
@@ -69,7 +69,6 @@ public class LoadoutManager : MonoBehaviour
         index = 0;
         foreach (BaseType baseType in equippedBases)
         {
-            baseToButton[baseType].interactable = false;
             // set base slot images
             if (index==0)
             {
@@ -83,7 +82,6 @@ public class LoadoutManager : MonoBehaviour
         index = 0;
         foreach (MixerType mixerType in equippedMixers)
         {
-            mixerToButton[mixerType].interactable = false;
             // set mixer slot images
             if (index==0)
             {
@@ -94,34 +92,56 @@ public class LoadoutManager : MonoBehaviour
             }
             index++;
         }
-        lockedBases.Clear();
-        lockedMixers.Clear();
-        if (PlayerPrefs.GetInt("progression",0)>1)
+        lockedBases = Enum.GetValues(typeof(BaseType))
+                  .Cast<BaseType>()
+                  .ToList();
+
+        lockedMixers = Enum.GetValues(typeof(MixerType))
+                        .Cast<MixerType>()
+                        .ToList();
+
+        int progression = PlayerPrefs.GetInt("progression", 0);
+
+        // Default starter items
+        lockedBases.Remove(BaseType.Beer);
+        lockedBases.Remove(BaseType.Whiskey);
+        lockedMixers.Remove(MixerType.Cider);
+        lockedMixers.Remove(MixerType.Ginger);
+        Debug.Log(progression);
+        // Beat Drover
+        if (progression > 1)
         {
-            // Beat Drover
-            lockedBases.Add(BaseType.Wine);
+            lockedBases.Remove(BaseType.Wine);
+            baseChains[0].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>2)
+
+        // Beat Julius
+        if (progression > 2)
         {
-            // Beat Julius
-            lockedMixers.Add(MixerType.Lime);
+            lockedMixers.Remove(MixerType.Lime);
+            mixerChains[0].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>3)
+
+        // Beat Ace & Mirage
+        if (progression > 3)
         {
-            // Beat Ace & Mirage
-            lockedBases.Add(BaseType.Gin);
+            lockedBases.Remove(BaseType.Gin);
+            baseChains[1].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>4)
+
+        // Beat Ash
+        if (progression > 4)
         {
-            // Beat Ash
-            lockedMixers.Add(MixerType.Pimiento);
+            lockedMixers.Remove(MixerType.Pimiento);
+            mixerChains[1].SetActive(false);
         }
-        RefreshBaseButtons();
-        RefreshMixerButtons();
+            RefreshBaseButtons();
+            RefreshMixerButtons();
     }
 
     public void setLoadout(int slot)
     {
+        text.SetActive(false);
         rows.SetActive(true);
         if (slot==1)
         {
@@ -167,9 +187,8 @@ public class LoadoutManager : MonoBehaviour
     {
         foreach (var pair in baseToButton)
         {
-            bool isEquipped = equippedBases.Contains(pair.Key);
-            bool isUnlocked = unlockedBases.Contains(pair.Key);
-            pair.Value.interactable = isUnlocked && !isEquipped;
+            bool isLocked = lockedBases.Contains(pair.Key);
+            pair.Value.interactable = !isLocked;
         }
     }
 
@@ -177,10 +196,9 @@ public class LoadoutManager : MonoBehaviour
     {
         foreach (var pair in mixerToButton)
         {
-            bool isEquipped = equippedMixers.Contains(pair.Key);
-            bool isUnlocked = unlockedMixers.Contains(pair.Key);
+            bool isLocked = lockedMixers.Contains(pair.Key);
 
-            pair.Value.interactable = isUnlocked && !isEquipped;
+            pair.Value.interactable = !isLocked;
         }
     }
     
@@ -191,19 +209,32 @@ public class LoadoutManager : MonoBehaviour
     {
         if (mixer)
         {
-            if (!Array.Exists(equippedMixers, name => name == (MixerType)type)) {
-                MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(slotNumber, (MixerType)type);
-                currentSlot.sprite =  mixerIcons[type];
+            MixerType newMixer = (MixerType)type;
+
+            if (!Array.Exists(equippedMixers, m => m == newMixer))
+            {
+                GameManager.Instance.player.SwapMixerSlot(slotNumber, newMixer);
+
+                equippedMixers[slotNumber] = newMixer;
+
+                currentSlot.sprite = mixerIcons[type];
+
                 RefreshMixerButtons();
-                equippedMixers[slotNumber] = swappedMixer;
             }
-        } else
+        }
+        else
         {
-            if (!Array.Exists(equippedBases, name => name == (BaseType)type)) {
-            BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(slotNumber,(BaseType)type);
-            currentSlot.sprite =  baseIcons[type];
-            RefreshBaseButtons();
-            equippedBases[slotNumber] = swappedBase;
+            BaseType newBase = (BaseType)type;
+
+            if (!Array.Exists(equippedBases, b => b == newBase))
+            {
+                GameManager.Instance.player.SwapBaseSlot(slotNumber, newBase);
+
+                equippedBases[slotNumber] = newBase;
+
+                currentSlot.sprite = baseIcons[type];
+
+                RefreshBaseButtons();
             }
         }
     }
