@@ -946,10 +946,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1712753219387687366, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
-      propertyPath: m_LinearDamping
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4461911503230129346, guid: 61392b8bce3d69b408de64d7a75b7d61, type: 3}
       propertyPath: magician
       value: 
@@ -1703,10 +1699,6 @@ PrefabInstance:
       propertyPath: doveStage
       value: 
       objectReference: {fileID: 11705904}
-    - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
-      propertyPath: maxHealth
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6069878188257071985, guid: 5b8c2da263366f8419830d886778687c, type: 3}
       propertyPath: knifeStage
       value: 
