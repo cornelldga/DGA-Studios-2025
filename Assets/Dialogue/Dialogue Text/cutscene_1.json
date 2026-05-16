@@ -1,24 +1,24 @@
 {
   "dialogueLines": [
     { "dialogueID": "0_start", "speaker": "Duke", "dialogueText": "Uhh, hello there… can I get something to-", "emotion": 0, "nextDialogueID": "2_dialogue" },
-    { "dialogueID": "2_dialogue", "speaker": "Duke", "dialogueText": "*HUAAWRK*", "emotion": 1, "nextDialogueID": "3_dialogue" },
+    { "dialogueID": "2_dialogue", "speaker": "Duke", "dialogueText": "*HUAAWRK*", "emotion": 0, "nextDialogueID": "3_dialogue" },
     { "dialogueID": "3_dialogue", "speaker": "Duke", "dialogueText": "...drink?", "emotion": 0, "nextDialogueID": "4_dialogue" },
 
     { "dialogueID": "4_dialogue", "speaker": "Ted", "dialogueText": "YO! Bobby! Look alive!", "emotion": 0, "nextDialogueID": "5_dialogue" },
     { "dialogueID": "5_dialogue", "speaker": "Abby", "dialogueText": "See Mister? I told you someone would eventually come!", "emotion": 0, "nextDialogueID": "6_dialogue" },
-    { "dialogueID": "6_dialogue", "speaker": "Bobby", "dialogueText": "Oh Abby, did you drink something from the back again?", "emotion": 0, "nextDialogueID": "7_dialogue" },
-    { "dialogueID": "7_dialogue", "speaker": "Bobby", "dialogueText": "You really need to stop having these delus-", "emotion": 0, "nextDialogueID": "8_dialogue" },
+    { "dialogueID": "6_dialogue", "speaker": "Bobby", "dialogueText": "Oh Abby, did you drink something from the back again?", "emotion": 1, "nextDialogueID": "7_dialogue" },
+    { "dialogueID": "7_dialogue", "speaker": "Bobby", "dialogueText": "You really need to stop having these delus-", "emotion": 1, "nextDialogueID": "8_dialogue" },
 
-    { "dialogueID": "8_dialogue", "speaker": "Bobby", "dialogueText": "WHAT IN THE SAM HILL!!!", "emotion": 2, "nextDialogueID": "9_dialogue" },
-    { "dialogueID": "9_dialogue", "speaker": "Bobby", "dialogueText": "ANYTHING! LITERALLY ANYTHING IS YOURS!", "emotion": 2, "nextDialogueID": "10_dialogue" },
-    { "dialogueID": "10_dialogue", "speaker": "Bobby", "dialogueText": "LIQUOR, SPRITES, BEERS, VODKA, YOU NAME IT, WE GOT IT!!", "emotion": 2, "nextDialogueID": "11_dialogue" },
-    { "dialogueID": "11_dialogue", "speaker": "Bobby", "dialogueText": "ANY OF THEM FOR JUST ONE CENT!", "emotion": 2, "nextDialogueID": "12_dialogue" },
-    { "dialogueID": "12_dialogue", "speaker": "Bobby", "dialogueText": "WE’LL MOVE HEAVENS AND EARTH TO IMPRESS YOU!", "emotion": 2, "nextDialogueID": "13_dialogue" },
+    { "dialogueID": "8_dialogue", "speaker": "Bobby", "dialogueText": "WHAT IN THE SAM HILL!!!", "emotion": 1, "nextDialogueID": "9_dialogue" },
+    { "dialogueID": "9_dialogue", "speaker": "Bobby", "dialogueText": "ANYTHING! LITERALLY ANYTHING IS YOURS!", "emotion": 1, "nextDialogueID": "10_dialogue" },
+    { "dialogueID": "10_dialogue", "speaker": "Bobby", "dialogueText": "LIQUOR, SPRITES, BEERS, VODKA, YOU NAME IT, WE GOT IT!!", "emotion": 1, "nextDialogueID": "11_dialogue" },
+    { "dialogueID": "11_dialogue", "speaker": "Bobby", "dialogueText": "ANY OF THEM FOR JUST ONE CENT!", "emotion": 1, "nextDialogueID": "12_dialogue" },
+    { "dialogueID": "12_dialogue", "speaker": "Bobby", "dialogueText": "WE’LL MOVE HEAVENS AND EARTH TO IMPRESS YOU!", "emotion": 1, "nextDialogueID": "13_dialogue" },
 
     { "dialogueID": "13_dialogue", "speaker": "Duke", "dialogueText": ".....", "emotion": 0, "nextDialogueID": "14_dialogue" },
     { "dialogueID": "14_dialogue", "speaker": "Duke", "dialogueText": "... some water please?", "emotion": 0, "nextDialogueID": "15_dialogue" },
 
-    { "dialogueID": "15_dialogue", "speaker": "Bobby", "dialogueText": "IT WILL BE THE GREATEST WATER OF YOUR LIFE!", "emotion": 2, "nextDialogueID": "16_dialogue" },
+    { "dialogueID": "15_dialogue", "speaker": "Bobby", "dialogueText": "IT WILL BE THE GREATEST WATER OF YOUR LIFE!", "emotion": 1, "nextDialogueID": "16_dialogue" },
 
     { "dialogueID": "16_dialogue", "speaker": "Ted", "dialogueText": "The funny thing’s that we didn’t even have half of those things in stock.", "emotion": 0, "nextDialogueID": "17_dialogue" },
     { "dialogueID": "17_dialogue", "speaker": "Abby", "dialogueText": "Howdy traveler! What be your name?", "emotion": 0, "nextDialogueID": "18_dialogue" },
@@ -37,18 +37,18 @@
     { "dialogueID": "26_dialogue", "speaker": "Abby", "dialogueText": "A big company came and took over everything.", "emotion": 0, "nextDialogueID": "27_dialogue" },
     { "dialogueID": "27_dialogue", "speaker": "Ted", "dialogueText": "Except us. For obvious reasons.", "emotion": 0, "nextDialogueID": "28_dialogue" },
 
-    { "dialogueID": "28_dialogue", "speaker": "Bobby", "dialogueText": "Order Up!", "emotion": 2, "nextDialogueID": "29_dialogue" },
+    { "dialogueID": "28_dialogue", "speaker": "Bobby", "dialogueText": "Order Up!", "emotion": 1, "nextDialogueID": "29_dialogue" },
 
-    { "dialogueID": "29_dialogue", "speaker": "Bobby", "dialogueText": "So? How does the water taste?", "emotion": 0, "nextDialogueID": "30_dialogue" },
+    { "dialogueID": "29_dialogue", "speaker": "Bobby", "dialogueText": "So? How does the water taste?", "emotion": 1, "nextDialogueID": "30_dialogue" },
     { "dialogueID": "30_dialogue", "speaker": "Duke", "dialogueText": "Just like water. Just the way I like it.", "emotion": 0, "nextDialogueID": "31_dialogue" },
 
     { "dialogueID": "31_dialogue", "speaker": "Duke", "dialogueText": "Say… if I wanted a job here-", "emotion": 0, "nextDialogueID": "32_dialogue" },
-    { "dialogueID": "32_dialogue", "speaker": "Bobby", "dialogueText": "YOU’RE HIRED!!!", "emotion": 2, "nextDialogueID": "33_dialogue" },
+    { "dialogueID": "32_dialogue", "speaker": "Bobby", "dialogueText": "YOU’RE HIRED!!!", "emotion": 1, "nextDialogueID": "33_dialogue" },
 
     { "dialogueID": "33_dialogue", "speaker": "Bobby", "dialogueText": "You’ll be an unpaid volunteer!", "emotion": 1, "nextDialogueID": "34_dialogue" },
     { "dialogueID": "34_dialogue", "speaker": "Ted", "dialogueText": "That sounds a lot like slavery.", "emotion": 0, "nextDialogueID": "35_dialogue" },
 
-    { "dialogueID": "35_dialogue", "speaker": "Bobby", "dialogueText": "We offer free food!", "emotion": 2, "nextDialogueID": "36_dialogue" },
+    { "dialogueID": "35_dialogue", "speaker": "Bobby", "dialogueText": "We offer free food!", "emotion": 1, "nextDialogueID": "36_dialogue" },
     { "dialogueID": "36_dialogue", "speaker": "Duke", "dialogueText": "Sounds delicious…", "emotion": 0, "nextDialogueID": "" }
   ]
 }
