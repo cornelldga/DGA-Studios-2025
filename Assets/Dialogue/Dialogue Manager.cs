@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Choice Buttons")]
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
+    private bool allowDialogueChoices;
 
     [Header("Settings")]
     [SerializeField] Color defaultDialogueTextColor;
@@ -169,8 +170,22 @@ public class DialogueManager : MonoBehaviour
             gameObject.SetActive(true);
             dialogueAnim.SetBool("isOpen", true);
 
-            bool useCutsceneNameText = !nameText.gameObject.activeSelf || file.name.StartsWith("Tutorial");
+            currentFileName = file.name;
 
+            dialogueText.color = textColor ?? defaultDialogueTextColor;
+            ongoingDialogue = true;
+            currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
+
+            currentDialogueType = type;
+
+            allowDialogueChoices = currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive;
+
+            if (bossProgression != -1 && bossProgression > PlayerPrefs.GetInt("progression", 0))
+            {
+                allowDialogueChoices = false;
+            }
+
+            bool useCutsceneNameText = currentDialogueType == DialogueType.NPC || file.name.StartsWith("Tutorial");
             if (!useCutsceneNameText && nameText != null)
             {
                 nameText.gameObject.SetActive(true);
@@ -182,19 +197,10 @@ public class DialogueManager : MonoBehaviour
             }
             else if (cutsceneNameTextTransform != null)
             {
+                nameText.gameObject.SetActive(false);
                 cutsceneNameTextTransform.gameObject.SetActive(true);
             }
 
-            currentFileName = file.name;
-
-            dialogueText.color = textColor ?? defaultDialogueTextColor;
-            ongoingDialogue = true;
-            currentDialogueData = JsonUtility.FromJson<DialogueData>(file.text);
-            currentDialogueType = type;
-            if (bossProgression!=-1 && bossProgression>PlayerPrefs.GetInt("progression",0))
-            {
-                currentDialogueType = DialogueType.NPC;
-            }
             SetDialogueStart();
             sceneName = scene;
             dialogueBox.sprite = dialogueBoxSprite;
@@ -253,7 +259,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentDialogueID == "")
         {
-            if (currentDialogueType == DialogueType.Boss || currentDialogueType == DialogueType.Interactive)
+            if (allowDialogueChoices)
             {
                 DialogueChoice();
             }
@@ -290,12 +296,12 @@ public class DialogueManager : MonoBehaviour
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
                     bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
-                    bool isDuke = speakerName == "Duke";
+                    bool showPortrait = speakerName == "Duke" || speakerName == "Bobby";
 
                     if (isCutsceneDialogue)
                     {
-                        // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
+                        // Hide if not Duke or Bobby during cutscenes
+                        npcImg.gameObject.SetActive(showPortrait && hasEmotion);
                     }
                     else
                     {
