@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,9 +21,9 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] Image baseSlotTwo;
     [SerializeField] Image mixerSlotOne;
     [SerializeField] Image mixerSlotTwo;
-    private Image highlighted;
+    private Image currentSlot;
+    private int slotNumber;
     private bool mixer;
-    private 
 
     Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
     Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
@@ -29,8 +31,22 @@ public class LoadoutManager : MonoBehaviour
     public BaseType[] GetEquippedBases() => equippedBases;
     public MixerType[] GetEquippedMixers() => equippedMixers;
 
-    private List<BaseType> unlockedBases = new List<BaseType>();
-    private List<MixerType> unlockedMixers = new List<MixerType>();
+    private List<BaseType> lockedBases = new List<BaseType>();
+    private List<MixerType> lockedMixers = new List<MixerType>();
+
+   [SerializeField] GameObject rows;
+   [SerializeField] GameObject text;
+   [SerializeField] GameObject baseOptions;
+   [SerializeField] GameObject mixerOptions;
+
+   [Tooltip("Base Icons")]
+   [SerializeField] Sprite[] baseIcons;
+   [Tooltip("Mixer Icons")]
+   [SerializeField] Sprite[] mixerIcons;
+
+    [Tooltip("Locked Icons")]
+    [SerializeField] List<GameObject> baseChains;
+    [SerializeField] List<GameObject> mixerChains;
 
 
     /// <summary>
@@ -53,124 +69,111 @@ public class LoadoutManager : MonoBehaviour
         index = 0;
         foreach (BaseType baseType in equippedBases)
         {
-            baseToButton[baseType].interactable = false;
             // set base slot images
             if (index==0)
             {
-                baseSlotOne.sprite = baseToButton[baseType].image.sprite;
+                baseSlotOne.sprite = baseIcons[(int) baseType];
             } else
             {
-                baseSlotTwo.sprite = baseToButton[baseType].image.sprite;
+                baseSlotTwo.sprite = baseIcons[(int) baseType];
             }
             index++;
         }
         index = 0;
         foreach (MixerType mixerType in equippedMixers)
         {
-            mixerToButton[mixerType].interactable = false;
             // set mixer slot images
             if (index==0)
             {
-                mixerSlotOne.sprite = mixerToButton[mixerType].image.sprite;
+                mixerSlotOne.sprite = mixerIcons[(int) mixerType];
             } else
             {
-                mixerSlotTwo.sprite = mixerToButton[mixerType].image.sprite;
+                mixerSlotTwo.sprite = mixerIcons[(int) mixerType];
             }
             index++;
         }
-        unlockedBases.Clear();
-        unlockedMixers.Clear();
-        // Default unlocked
-        unlockedBases.Add(BaseType.Beer);
-        unlockedBases.Add(BaseType.Whiskey);
-        unlockedMixers.Add(MixerType.Ginger);
-        unlockedMixers.Add(MixerType.Cider);
-        if (PlayerPrefs.GetInt("progression",0)>1)
+        lockedBases = Enum.GetValues(typeof(BaseType))
+                  .Cast<BaseType>()
+                  .ToList();
+
+        lockedMixers = Enum.GetValues(typeof(MixerType))
+                        .Cast<MixerType>()
+                        .ToList();
+
+        int progression = PlayerPrefs.GetInt("progression", 0);
+
+        // Default starter items
+        lockedBases.Remove(BaseType.Beer);
+        lockedBases.Remove(BaseType.Whiskey);
+        lockedMixers.Remove(MixerType.Cider);
+        lockedMixers.Remove(MixerType.Ginger);
+        Debug.Log(progression);
+        // Beat Drover
+        if (progression > 1)
         {
-            // Beat Drover
-            unlockedBases.Add(BaseType.Wine);
+            lockedBases.Remove(BaseType.Wine);
+            baseChains[0].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>2)
+
+        // Beat Julius
+        if (progression > 2)
         {
-            // Beat Julius
-            unlockedMixers.Add(MixerType.Lime);
+            lockedMixers.Remove(MixerType.Lime);
+            mixerChains[0].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>3)
+
+        // Beat Ace & Mirage
+        if (progression > 3)
         {
-            // Beat Ace & Mirage
-            unlockedBases.Add(BaseType.Gin);
+            lockedBases.Remove(BaseType.Gin);
+            baseChains[1].SetActive(false);
         }
-        if (PlayerPrefs.GetInt("progression",0)>4)
+
+        // Beat Ash
+        if (progression > 4)
         {
-            // Beat Ash
-            unlockedMixers.Add(MixerType.Pimiento);
+            lockedMixers.Remove(MixerType.Pimiento);
+            mixerChains[1].SetActive(false);
+        }
+            RefreshBaseButtons();
+            RefreshMixerButtons();
+    }
+
+    public void setLoadout(int slot)
+    {
+        text.SetActive(false);
+        rows.SetActive(true);
+        if (slot==1)
+        {
+            mixerOptions.SetActive(false);
+            baseOptions.SetActive(true);
+            currentSlot = baseSlotOne;
+            slotNumber = 0;
+            mixer = false;
+        } else if (slot==2)
+        {
+            mixerOptions.SetActive(false);
+            baseOptions.SetActive(true);
+            currentSlot = baseSlotTwo;
+            slotNumber = 1;
+            mixer = false;
+        } else if (slot==3)
+        {
+            baseOptions.SetActive(false);
+            mixerOptions.SetActive(true);
+            currentSlot = mixerSlotOne;
+            slotNumber = 0;
+            mixer = true;
+        } else
+        {
+            baseOptions.SetActive(false);
+            mixerOptions.SetActive(true);
+            currentSlot = mixerSlotTwo;
+            slotNumber = 1;
+            mixer = true;
         }
     }
 
-    /// <summary>
-    /// Swaps the item out in a slot
-    /// </summary>
-    /// <param name="slot"></param>
-    private void SelectSlot(Image slot)
-    {
-        if (highlighted!=null)
-        {
-            // something already selected
-            highlighted.color = Color.white;
-            foreach (var button in mixerButtons)
-            {
-                button.image.color = Color.white;
-            }
-            foreach (var button in baseButtons)
-            {
-                button.image.color = Color.white;
-            }
-            if (highlighted == slot)
-            {
-                // they are the same, then unselect
-                highlighted = null;
-                return;
-            }
-        }
-        slot.color = Color.lightGreen;
-        highlighted = slot;
-    }
-
-    /// <summary>
-    /// Highlights the base slot that is being changed and the available bases
-    /// </summary>
-    /// <param name="slot"></param>
-    public void SelectBase(Image slot)
-    {
-        foreach (var button in baseButtons)
-        {
-            if (button.interactable==true)
-            {
-                button.image.color = Color.lightGreen;
-                button.transform.localScale = Vector3.one * 1.2f;
-            }
-        }
-        SelectSlot(slot);
-        mixer = false;
-    }
-
-    /// <summary>
-    /// Highlights the mixer slot that is being changed and the available mixers
-    /// </summary>
-    /// <param name="slot"></param>
-    public void SelectMixer(Image slot)
-    {
-        foreach (var button in mixerButtons)
-        {
-            if (button.interactable==true)
-            {
-                button.image.color = Color.lightGreen;
-                button.transform.localScale = Vector3.one * 1.2f;
-            }
-        }
-        SelectSlot(slot);
-        mixer = true;
-    }
 
     /// <summary>
     /// Close the loadout manager
@@ -179,101 +182,59 @@ public class LoadoutManager : MonoBehaviour
     {
         GameManager.Instance.ToggleLoadoutManager(false);
     }
+
+    void RefreshBaseButtons()
+    {
+        foreach (var pair in baseToButton)
+        {
+            bool isLocked = lockedBases.Contains(pair.Key);
+            pair.Value.interactable = !isLocked;
+        }
+    }
+
+    void RefreshMixerButtons()
+    {
+        foreach (var pair in mixerToButton)
+        {
+            bool isLocked = lockedMixers.Contains(pair.Key);
+
+            pair.Value.interactable = !isLocked;
+        }
+    }
     
     /// <summary>
     /// Choose a base to be equipped at the selected index
     /// </summary>
-    public void ChooseBase(int baseType)
+    public void Choose(int type)
     {
-        if (highlighted==null || !mixer)
+        if (mixer)
         {
-            if (highlighted==null)
+            MixerType newMixer = (MixerType)type;
+
+            if (!Array.Exists(equippedMixers, m => m == newMixer))
             {
-                if (baseToButton[(BaseType)baseType].image.sprite==baseSlotOne.sprite)
-                {
-                    index=0;
-                } else
-                {
-                    index=1;
-                }
-            } else if (highlighted==baseSlotOne)
-            {
-               index = 0; 
-            } else
-            {
-                index = 1;
-            }
-            BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(index,(BaseType)baseType);
-            baseToButton[swappedBase].interactable = true;
-            baseToButton[(BaseType)baseType].interactable = false;
-            if (highlighted!=null)
-            {
-                highlighted.color = Color.white;
-                highlighted.sprite = baseToButton[(BaseType)baseType].image.sprite;
-                highlighted = null;
-            } else
-            {
-                if (index==0)
-                {
-                    baseSlotOne.sprite = baseToButton[(BaseType)baseType].image.sprite;
-                } else
-                {
-                    baseSlotTwo.sprite = baseToButton[(BaseType)baseType].image.sprite;
-                }
-            }
-            foreach (var button in baseButtons)
-            {
-                button.image.color = Color.white;
-                button.transform.localScale = Vector3.one;
+                GameManager.Instance.player.SwapMixerSlot(slotNumber, newMixer);
+
+                equippedMixers[slotNumber] = newMixer;
+
+                currentSlot.sprite = mixerIcons[type];
+
+                RefreshMixerButtons();
             }
         }
-    }
-
-    /// <summary>
-    /// Choose a mixer to be equipped at the selected index
-    /// </summary>
-    public void ChooseMixer(int mixerType)
-    {
-        if (highlighted==null || mixer)
+        else
         {
-            if (highlighted==null)
+            BaseType newBase = (BaseType)type;
+
+            if (!Array.Exists(equippedBases, b => b == newBase))
             {
-                if (mixerToButton[(MixerType)mixerType].image.sprite==mixerSlotOne.sprite)
-                {
-                    index=0;
-                } else
-                {
-                    index=1;
-                }
-            } else if (highlighted==mixerSlotOne)
-            {
-               index = 0; 
-            } else
-            {
-                index = 1;
-            }
-            MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(index, (MixerType)mixerType);
-            mixerToButton[swappedMixer].interactable = true;
-            mixerToButton[(MixerType)mixerType].interactable = false;
-            if (highlighted!=null)
-            {
-                highlighted.color = Color.white;
-                highlighted.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-                highlighted = null;
-            } else
-            {
-                if (index==0)
-                {
-                    mixerSlotOne.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-                } else
-                {
-                    mixerSlotTwo.sprite = mixerToButton[(MixerType)mixerType].image.sprite;
-                }
-            }
-            foreach (var button in mixerButtons)
-            {
-                button.image.color = Color.white;
-                button.transform.localScale = Vector3.one;
+                GameManager.Instance.player.SwapBaseSlot(slotNumber, newBase);
+
+                equippedBases[slotNumber] = newBase;
+
+                currentSlot.sprite = baseIcons[type];
+
+                RefreshBaseButtons();
             }
         }
     }

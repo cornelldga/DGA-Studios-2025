@@ -9,9 +9,9 @@ using UnityEngine;
 public enum BaseType
 {
     Beer,
-    Gin,
     Whiskey,
-    Wine
+    Wine,
+    Gin
 }
 
 

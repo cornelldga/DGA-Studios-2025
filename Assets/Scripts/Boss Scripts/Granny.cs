@@ -49,7 +49,6 @@ public class Granny : Boss
 
     public bool contractDestroyed = false;
     private int initialBossCount;
-    private bool singleContract = false;
     public bool doubleContract = false;
     public bool doubleLocked = false;
 
@@ -191,13 +190,11 @@ public class Granny : Boss
         if (!doubleLocked && bosses.Count + availableBosses.Count <= initialBossCount / 2)
         {
             doubleContract = true;
-            singleContract = false;
             animator.SetBool("isDouble", true);
             animator.SetBool("isSingle", false);
         }
         else
         {
-            singleContract = true;
             doubleContract = false;
             animator.SetBool("isSingle", true);
             animator.SetBool("isDouble", false);
@@ -238,7 +235,6 @@ public class Granny : Boss
     {
         doubleLocked = true;
         doubleContract = false;
-        singleContract = true;
         animator.SetBool("isDouble", false);
         animator.SetBool("isSingle", true);
     }
@@ -416,11 +412,10 @@ public class Granny : Boss
         if (doubleContract)
         {
             doubleContract = false;
-            singleContract = true;
         }
         else
         {
-            singleContract = false;
+            
         }
 
         animator.SetBool("isHit", true);

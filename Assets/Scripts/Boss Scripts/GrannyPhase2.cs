@@ -11,10 +11,6 @@ public class GrannyPhase2 : Boss
     }
     private State currentState;
 
-    [Header("Movement Settings")]
-    //Base speed when charging (regular)
-    [SerializeField] float baseSpeed = 5f;
-
     private Vector2 targetPosition;
 
     [Header("State Timing")]
@@ -26,8 +22,6 @@ public class GrannyPhase2 : Boss
 
     [Header("Attack Constants")]
     [SerializeField] private float machineCooldownConstant;
-    //Cooldown on MachineGun bullet waves.
-    private float machineTimer = 0f;
     [Header("Combo Attack Constants")]
     [SerializeField] private int fireBullsCount;
     [SerializeField] private int smokeBullsCount;
@@ -71,8 +65,6 @@ public class GrannyPhase2 : Boss
         TakeDamage(0);
         circleCollider = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
-
-        machineTimer = 0;
     }
 
     // Update is called once per frame
@@ -275,7 +267,6 @@ public class GrannyPhase2 : Boss
         {
             Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
             bull.ChargeSpecificDirection(Random.onUnitSphere);
-            bull.setSummoned();
 
             Trail trail = bull.AddComponent<Trail>();
             trail.SetTrailPrefab(prefab);
