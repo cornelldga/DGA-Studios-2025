@@ -296,12 +296,12 @@ public class DialogueManager : MonoBehaviour
 
                     bool hasEmotion = currentEmotions != null && currentEmotions.ContainsKey((DialogueEmotion)line.emotion);
                     bool isCutsceneDialogue = !nameText.gameObject.activeSelf;
-                    bool isDuke = speakerName == "Duke";
+                    bool showPortrait = speakerName == "Duke" || speakerName == "Bobby";
 
                     if (isCutsceneDialogue)
                     {
-                        // Hide if not Duke during cutscenes
-                        npcImg.gameObject.SetActive(isDuke && hasEmotion);
+                        // Hide if not Duke or Bobby during cutscenes
+                        npcImg.gameObject.SetActive(showPortrait && hasEmotion);
                     }
                     else
                     {

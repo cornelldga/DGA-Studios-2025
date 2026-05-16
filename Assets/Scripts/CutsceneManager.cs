@@ -38,6 +38,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] TextAsset cutscene_1;
     [SerializeField] Sprite dialogueBoxSprite;
     [SerializeField] Sprite dukeSprite;
+    [SerializeField] Sprite bobbySprite;
     [SerializeField] TextMeshProUGUI cutsceneNameText;
 
     [Header("Backstory Text")]
@@ -153,9 +154,8 @@ public class CutsceneManager : MonoBehaviour
         };
 
         dialogueManager.StartDialogue(cutscene_1, dialogueBoxSprite,
-            new Dictionary<DialogueEmotion, Sprite> { { DialogueEmotion.Neutral, dukeSprite } },
-            null, DialogueType.NPC, "Tutorial");
-        StartCoroutine(WaitForDialogueEnd());
+        new Dictionary<DialogueEmotion, Sprite>{{ DialogueEmotion.Neutral, dukeSprite },{ DialogueEmotion.Happy, bobbySprite }},
+        null, DialogueType.NPC, "Tutorial");
     }
 
     /// <summary>
