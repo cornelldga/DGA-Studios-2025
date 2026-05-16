@@ -191,4 +191,10 @@ public class Bush : MonoBehaviour
     {
         this.isWhipped = whipped;
     }
+
+    public void overrideAsh(GameObject newBoss)
+    {
+        ash = newBoss;
+        ashSR = newBoss.GetComponent<SpriteRenderer>();
+    }
 }
