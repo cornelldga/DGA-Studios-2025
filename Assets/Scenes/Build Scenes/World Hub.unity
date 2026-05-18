@@ -1196,6 +1196,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2390142266443859914}
     m_Modifications:
+    - target: {fileID: 2071062040624361938, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8123450956610158057, guid: 18a2d58c6579c4fd089959099aae625a, type: 2}
     - target: {fileID: 2374065731416743144, guid: 632287bc423c24a63abf8b6e5ce492e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -1348,14 +1352,6 @@ PrefabInstance:
       propertyPath: introblock
       value: 
       objectReference: {fileID: 401211471}
-    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: progression
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249711244943537642, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
-      propertyPath: setProgression
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.70226
