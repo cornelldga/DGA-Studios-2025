@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 2851984168932598319}
   - component: {fileID: 4370169063251675363}
   - component: {fileID: 6509641886899451697}
-  - component: {fileID: 7511754533799154311}
   - component: {fileID: 9086773922758924528}
   - component: {fileID: 4367437263087779699}
-  - component: {fileID: 3434196571054363853}
+  - component: {fileID: 3723285886200735}
   m_Layer: 9
   m_Name: Tutorial Speed Bullet
   m_TagString: Untagged
@@ -123,24 +122,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7511754533799154311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270256214020196548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1b3a9205742e94d8c3c3253e111456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 8
-  duration: 4
-  damage: 0
-  accuracy: 0
-  impactSprite: {fileID: 0}
-  canWhip: 0
 --- !u!58 &9086773922758924528
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -199,7 +180,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3434196571054363853
+--- !u!114 &3723285886200735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 270256214020196548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ca5b4b11cd9ee4c9800893cd190eb5, type: 3}
+  m_Script: {fileID: 11500000, guid: f20632cd41f2e9245af9de70a3045874, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialSpeedBullet
+  speed: 8
+  duration: 4
+  damage: 0
+  accuracy: 0
+  impactSprite: {fileID: 0}
+  canWhip: 0
   position: {x: -25, y: 28, z: 0}

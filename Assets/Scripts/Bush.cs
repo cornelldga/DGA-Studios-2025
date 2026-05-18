@@ -6,6 +6,7 @@ public class Bush : MonoBehaviour
 {
 
     [SerializeField] public bool isOnFire;
+    public bool isFire() => isOnFire;
     [SerializeField] float damage;
     [SerializeField] float fireSpreadCooldown;
     [SerializeField] float fireSpreadRadius;
@@ -137,11 +138,6 @@ public class Bush : MonoBehaviour
         }
     }
 
-    public bool isFire()
-    {
-        return isOnFire;
-    }
-
 /// <summary>
 /// For every firespreadcooldown time that passes, the fire spreads from one bush to another within fire spreadradius.
 /// </summary>
@@ -174,13 +170,15 @@ public class Bush : MonoBehaviour
     {
         if (isOnFire && collision.CompareTag("Player"))
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+        if (isOnFire && collision.CompareTag("Whip"))
+            WhipBush();
     }
     
     /// <summary>
     /// Sets this projectile as 'whipped' to reverse collision logic
     /// and sets its damage based on the whipDamageMultiplier
     /// </summary>
-    public void WhipBush()
+    void WhipBush()
     {
         whippedTimer = 0f;
         setFire(false);

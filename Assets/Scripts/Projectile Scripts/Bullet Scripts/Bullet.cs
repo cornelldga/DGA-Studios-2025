@@ -43,12 +43,4 @@ public class Bullet : Projectile
     {
         return canWhip;
     }
-
-    public override void OnProjectileHit(Collider2D collision)
-    {
-        if (!collision.CompareTag("Whip"))
-        {
-            base.OnProjectileHit(collision);
-        }
-    }
 }

@@ -434,9 +434,9 @@ MonoBehaviour:
   midHealthThreshold: 0.6
   criticalThreshold: 0.2
   mixerEffect: {fileID: 2368722963072355761}
-  knockedBack: 0
   progression: 0
   cutsceneProgression: 0
+  invulnerableMode: 0
 --- !u!114 &7699641391322968756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ MonoBehaviour:
   whipSpeedMultiplier: 4
   destroyParticle: {fileID: 8012624833522403216, guid: 632cb91c4f75b794aaf175ab60acf474, type: 3}
   damageMultiplier: 1
-  reflecting: 0
+  reflecting: 1
   frameNumber: 0
 --- !u!212 &3009582985005188905
 SpriteRenderer:

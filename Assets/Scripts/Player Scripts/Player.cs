@@ -333,7 +333,7 @@ public class Player : MonoBehaviour, IDamageable
         mouse.z = Mathf.Abs(Camera.main.transform.position.z);
         Vector3 world = Camera.main.ScreenToWorldPoint(mouse);
 
-        Vector3 dir = transform.localScale.x < 0 ? - (world - whipPivot.position) : world - whipPivot.position;
+        Vector3 dir = transform.localScale.x < 0 ? -(world - whipPivot.position) : world - whipPivot.position;
         whipPivot.right = dir;
         whipAnimator.SetTrigger("Whip");
         AudioManager.Instance.PlaySFX(SFXKey.WHIPHIT, true);
