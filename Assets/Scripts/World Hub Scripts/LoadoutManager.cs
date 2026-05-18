@@ -99,8 +99,22 @@ public class LoadoutManager : MonoBehaviour
         lockedMixers = Enum.GetValues(typeof(MixerType))
                         .Cast<MixerType>()
                         .ToList();
+    }
 
+    private void Start()
+    {
+        setUp();
+        setLoadout(1);
+    }
+
+    private void setUp()
+    {
         int progression = PlayerPrefs.GetInt("progression", 0);
+        foreach (var chain in baseChains)
+            chain.SetActive(true);
+
+        foreach (var chain in mixerChains)
+            chain.SetActive(true);
 
         // Default starter items
         lockedBases.Remove(BaseType.Beer);
@@ -210,32 +224,40 @@ public class LoadoutManager : MonoBehaviour
         if (mixer)
         {
             MixerType newMixer = (MixerType)type;
+            if (lockedMixers.Contains(newMixer))
+                return;
+            bool alreadyEquipped =
+                equippedMixers[0] == newMixer ||
+                equippedMixers[1] == newMixer;
 
-            if (!Array.Exists(equippedMixers, m => m == newMixer))
-            {
-                GameManager.Instance.player.SwapMixerSlot(slotNumber, newMixer);
+            if (alreadyEquipped)
+                return;
 
-                equippedMixers[slotNumber] = newMixer;
+            GameManager.Instance.player.SwapMixerSlot(slotNumber, newMixer);
+            equippedMixers[slotNumber] = newMixer;
 
-                currentSlot.sprite = mixerIcons[type];
+            currentSlot.sprite = mixerIcons[type];
 
-                RefreshMixerButtons();
-            }
+            RefreshMixerButtons();
         }
         else
         {
             BaseType newBase = (BaseType)type;
+            if (lockedBases.Contains(newBase))
+                return;
 
-            if (!Array.Exists(equippedBases, b => b == newBase))
-            {
-                GameManager.Instance.player.SwapBaseSlot(slotNumber, newBase);
+            bool alreadyEquipped =
+                equippedBases[0] == newBase ||
+                equippedBases[1] == newBase;
 
-                equippedBases[slotNumber] = newBase;
+            if (alreadyEquipped)
+                return;
 
-                currentSlot.sprite = baseIcons[type];
+            GameManager.Instance.player.SwapBaseSlot(slotNumber, newBase);
+            equippedBases[slotNumber] = newBase;
+            currentSlot.sprite = baseIcons[type];
 
-                RefreshBaseButtons();
-            }
+            RefreshBaseButtons();
         }
     }
 }
