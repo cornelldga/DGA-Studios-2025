@@ -31,7 +31,6 @@ public class Whip : MonoBehaviour, IProjectileInteractable
         {
             if (bullet.CanWhip())
             {
-                Debug.Log("Deflect");
                 if (reflecting && !bullet.Whipped())
                 {
                     bullet.WhipBullet(damageMultiplier);

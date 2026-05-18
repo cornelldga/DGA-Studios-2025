@@ -51,6 +51,7 @@ MonoBehaviour:
   explosionDuration: 0.8
   impulseForce: 0.2
   impulseSource: {fileID: 7936553018244026329}
+  dynamiteBulletPrefab: {fileID: 2660713567375334150, guid: 8ad484062a6db2b4a9e1f938efbdbcdb, type: 3}
 --- !u!58 &4445359206661660920
 CircleCollider2D:
   m_ObjectHideFlags: 0

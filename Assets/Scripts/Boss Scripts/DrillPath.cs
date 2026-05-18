@@ -4,7 +4,7 @@ using UnityEngine;
 /// A parameterizable path that the drill guy will take underground, implemented as a cubic bezier
 /// Admittedly I only made an extra class so the drill guy wasn't cluttered - andrew
 /// </summary>
-public class DrillPath : MonoBehaviour
+public class DrillPath
 {
     // The control points for this cubic bezier (must be 4 points)
     private Vector2[] controlPoints;
