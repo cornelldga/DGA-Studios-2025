@@ -376,6 +376,10 @@ public class Granny : Boss
         {
             pattern = doubleContract ? doubleContractCoinAttack : contractCoinAttack;
         }
+        else if (currentState == State.Scavange || currentState == State.ContractDropped)
+        {
+            pattern = null;
+        }
         else
         {
             pattern = coinAttack;

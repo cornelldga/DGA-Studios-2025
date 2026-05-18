@@ -131,7 +131,7 @@ GameObject:
   m_Layer: 0
   m_Name: Dove Stage
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 11705903}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.62, y: 4.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39345,7 +39345,7 @@ PrefabInstance:
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_Data
       value: 
-      objectReference: {fileID: 2070989401, guid: 189959eb231f24212b833202796ad19e, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[8].m_Data
       value: 
@@ -39377,7 +39377,7 @@ PrefabInstance:
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[11].m_Data
       value: 
-      objectReference: {fileID: 1222670100, guid: 189959eb231f24212b833202796ad19e, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[12].m_Data
       value: 
@@ -39385,7 +39385,7 @@ PrefabInstance:
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[13].m_Data
       value: 
-      objectReference: {fileID: -123527512, guid: 189959eb231f24212b833202796ad19e, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_Data
       value: 
@@ -39393,19 +39393,19 @@ PrefabInstance:
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_Data
       value: 
-      objectReference: {fileID: -1612450698, guid: 189959eb231f24212b833202796ad19e, type: 3}
+      objectReference: {fileID: 2070989401, guid: 189959eb231f24212b833202796ad19e, type: 3}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[16].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1222670100, guid: 189959eb231f24212b833202796ad19e, type: 3}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[17].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -123527512, guid: 189959eb231f24212b833202796ad19e, type: 3}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[18].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -1612450698, guid: 189959eb231f24212b833202796ad19e, type: 3}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[19].m_Data
       value: 
@@ -40060,7 +40060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[7].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[8].m_RefCount
@@ -40192,7 +40192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[11].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[12].m_RefCount
@@ -40200,7 +40200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[13].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_RefCount
@@ -40212,15 +40212,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[16].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[17].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[18].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[19].m_RefCount
@@ -41232,7 +41232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[45].second.m_TileSpriteIndex
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[46].second.m_TileMatrixIndex
@@ -41368,7 +41368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[62].second.m_TileSpriteIndex
-      value: 13
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[63].second.m_TileMatrixIndex
@@ -41392,7 +41392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[65].second.m_TileSpriteIndex
-      value: 11
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[66].second.m_TileMatrixIndex
@@ -41528,7 +41528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[82].second.m_TileSpriteIndex
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2127314829259428459, guid: ded9a5ef942082b42942e9fcfd03f009, type: 3}
       propertyPath: m_Tiles.Array.data[83].second.m_TileMatrixIndex
@@ -46547,7 +46547,7 @@ GameObject:
   m_Layer: 0
   m_Name: Knife Stage
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46560,7 +46560,7 @@ Transform:
   m_GameObject: {fileID: 116850634}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -6.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46654,6 +46654,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3794241950991282618, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5515114130909986609, guid: 29b64fe8a71dd6f4486455a85542b1a1, type: 3}
     - target: {fileID: 4557611548015582227, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -46696,6 +46700,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4588022867240271486, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977588195904675085, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+      propertyPath: invulnerableMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -46812,7 +46820,7 @@ GameObject:
   m_Layer: 0
   m_Name: Backstage
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46919,7 +46927,7 @@ Transform:
   m_GameObject: {fileID: 843690088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3900003, y: 0.1, z: -10}
+  m_LocalPosition: {x: 5.2563453, y: 0.09997, z: -10}
   m_LocalScale: {x: 0.91667, y: 0.85499996, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47014,6 +47022,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 591620562845585178, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4556595847925104010, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: m_Name
       value: Granny
@@ -47071,6 +47083,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1691408455}
     - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7540226778721594879, guid: 43bb6ed0e6f85df41b2b1586415e00a2, type: 3}
       propertyPath: rightBound
       value: 
       objectReference: {fileID: 243808142}
@@ -47091,7 +47107,7 @@ GameObject:
   m_Layer: 0
   m_Name: Card Stage
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47104,7 +47120,7 @@ Transform:
   m_GameObject: {fileID: 1457449396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 5.84, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

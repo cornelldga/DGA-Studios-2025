@@ -468,18 +468,17 @@ MonoBehaviour:
   sadSprite: {fileID: 21300000, guid: 36f32564e624028408efdb29ca6e1d56, type: 3}
   customTextColor: 0
   textColor: {r: 0, g: 0, b: 0, a: 0}
-  baseSpeed: 5
   machineGun: {fileID: 11400000, guid: e6f2ef2b8b1914943a0910fb850b2aed, type: 2}
   lazerShot: {fileID: 11400000, guid: db008a601788e3943927a1a525d107b9, type: 2}
   machineCooldownConstant: 3
   fireBullsCount: 1
   smokeBullsCount: 1
   dynamiteBullsCount: 1
-  fireSmokeCount: 1
-  fireDynamiteCount: 1
-  smokeDynamiteCount: 1
+  fireSmokeCount: 5
+  fireDynamiteCount: 5
+  smokeDynamiteCount: 5
   bullsTime: 1
-  bullPrefab: {fileID: 4478709032104348580, guid: 0529117e1a599354484d49f998f2f5b2, type: 3}
+  bullPrefab: {fileID: 4831847076364540954, guid: b12b991846d131440933b9cf6a7ae02b, type: 3}
   flamingBushPrefab: {fileID: 1972657450894808517, guid: 0252371b3615b9e4e9e4de3bc56c858c, type: 3}
   smokePrefab: {fileID: 8638474580147778060, guid: 4f436d71a3ca640fa8ce15ebf38e1be0, type: 3}
   dynamitePrefab: {fileID: 1509684010894471729, guid: 44ddd4c207826f24780e364d0c768376, type: 3}

@@ -32,7 +32,7 @@ public class GrannyPhase2 : Boss
     [SerializeField] private float bullsTime;
 
     [Header("Prefabs")]
-    [SerializeField] private Bull bullPrefab;
+    [SerializeField] private GameObject bullPrefab;
     [SerializeField] private GameObject flamingBushPrefab;
     [SerializeField] private GameObject smokePrefab;
     [SerializeField] private GameObject dynamitePrefab;
@@ -78,22 +78,22 @@ public class GrannyPhase2 : Boss
     {
         base.Attack();
         int currentAttack = Random.Range(1, 5);
-        //switch (currentAttack)
-        //{
-        //    case 1:
-        StartCoroutine(Punch());
-
-        //        break;
-        //    case 2:
-        //StartCoroutine(selectComboAttack());
-        //        break;
-        //    case 3:
-        //        MachineGun();
-        //        break;
-        //    case 4:
-        //        Laser();
-        //        break;
-        //}
+        Debug.Log(currentAttack);
+        switch (currentAttack)
+        {
+            case 1:
+                StartCoroutine(Punch());
+                break;
+            case 2:
+                StartCoroutine(selectComboAttack());
+                break;
+            case 3:
+                MachineGun();
+                break;
+            case 4:
+                Laser();
+                break;
+        }
     }
     /// <summary>
     /// Checks if the player sprite needs to update and updates the bullet origin
@@ -116,8 +116,15 @@ public class GrannyPhase2 : Boss
 
     private void Laser()
     {
-        // Shouldn't need to do anything
-        return;
+        if (currentPhase == 2)
+        {
+           StartCoroutine(ShootLazer());
+           return;
+        }
+        else
+        {
+           return;
+        }
     }
 
 
@@ -129,17 +136,6 @@ public class GrannyPhase2 : Boss
 
     private IEnumerator Punch()
     {
-        //Punch
-        // punching is true
-        // disappear and teleport delay
-        // punches
-        // punch is false, set attack cooldown to punchCooldown 
-
-        // TODO move granny towards the player while using her punch move that is 
-        // maybe make the punch a separate hitbox
-        // TODO: Instantiate smoke VFX here
-        // Phase 1: Disappear and snap to left of player
-        SetAttackState(true);
         Disappear(true);
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(disappearTime);
@@ -232,11 +228,12 @@ public class GrannyPhase2 : Boss
         rb.linearVelocity = Vector2.zero;
         SetAttackState(false);
         isPunching = false;
+        animator.SetTrigger("Idle");
     }
     private IEnumerator selectComboAttack()
     {
-        // TODO: Cycle through 6 combo attacks from design document
         int currentCombo = Random.Range(1, 7);
+        SetAttackState(true);
         switch (currentCombo)
         {
             case 1:
@@ -258,15 +255,17 @@ public class GrannyPhase2 : Boss
                 yield return StartCoroutine(PointAttack(dynamitePrefab, smokePrefab, smokeDynamiteCount, 1));
                 break;
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(3f);
+        SetAttackState(false);
     }
 
     private IEnumerator TrailAttack(GameObject prefab, int bullsCount, float trailLifeTime)
     {
         for (int i = 0; i < bullsCount; i++)
         {
-            Bull bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
-            bull.ChargeSpecificDirection(Random.onUnitSphere);
+            GameObject bull = Instantiate(bullPrefab, this.transform.position, Quaternion.identity);
+            Bull bulls = bull.AddComponent<Bull>();
+            bulls.ChargeSpecificDirection(Random.onUnitSphere);
 
             Trail trail = bull.AddComponent<Trail>();
             trail.SetTrailPrefab(prefab);
@@ -286,17 +285,15 @@ public class GrannyPhase2 : Boss
     {
         for (int i = 0; i < ProjectileCount; i++)
         {
-            GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,5),Random.Range(-3,3),-1), Quaternion.identity);
+            GameObject Primary = Instantiate(prefab, new Vector3(Random.Range(-5,10),Random.Range(-3,6),-1), Quaternion.identity);
 
             Point Secondary = Primary.AddComponent<Point>();
             Secondary.grannyGameObject = gameObject;
             Secondary.SetSecondaryPrefab(SecondaryPrefab);
-            //Secondary.DropSecondaryProjectile();
-
             Destroy(Primary, ProjectileLifeTime);
             Secondary.DropSecondaryProjectile();
         }
-        yield return new WaitForSeconds(3f); 
+        yield return new WaitForSeconds(3); 
     }
 
     private IEnumerator ShootLazer()
@@ -317,4 +314,5 @@ public class GrannyPhase2 : Boss
                 break;
         }
     }
+
 }

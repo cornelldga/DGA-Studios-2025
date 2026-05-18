@@ -7,5 +7,4 @@ public class Bull : Pig
         TransitionToCharging();
         this.chargeDirection = randomDirection.normalized;
     }
-    
 }
