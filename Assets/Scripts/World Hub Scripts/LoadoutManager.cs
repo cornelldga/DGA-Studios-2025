@@ -203,6 +203,7 @@ public class LoadoutManager : MonoBehaviour
         {
             bool isLocked = lockedBases.Contains(pair.Key);
             pair.Value.interactable = !isLocked;
+            Debug.Log($"SET {pair.Key} -> {pair.Value.name} | id={pair.Value.GetInstanceID()} | interactable={pair.Value.interactable}");
         }
     }
 
