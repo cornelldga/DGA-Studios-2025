@@ -38,18 +38,24 @@
 
         {
             "dialogueID": "4_start",
-            "dialogueText": "Seems like you had a few tricks up your own sleeve. Guess I underestimated you.",
-            "emotion": 1,
+            "dialogueText": "Mirage? Mirage! Blast you Duke! You knocked her out cold!",
+            "emotion": 0,
             "nextDialogueID": "4_next"
         },
         {
             "dialogueID": "4_next",
-            "dialogueText": "I won't make that mistake again.",
+            "dialogueText": "Argh! You do know how much you derailed our couples therapy session this week?",
             "emotion": 0,
             "nextDialogueID": "4_fight"
         },
         {
             "dialogueID": "4_fight",
+            "dialogueText": "There there Mirage… you did well against this wannabe cowboy sweetie… Don’t fret my love, you still looked as hot as ever while fighting him",
+            "emotion": 1,
+            "nextDialogueID": "4_again"
+        },
+        {
+            "dialogueID": "4_again",
             "dialogueText": "Ace, were you taking notes? I say we go again.",
             "emotion": 0,
             "nextDialogueID": ""
