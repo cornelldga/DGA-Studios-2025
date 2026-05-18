@@ -53,6 +53,8 @@ public class TheMagician : Boss
     [SerializeField] float appearDelay = 2f;
     private float appearDelayTimer;
 
+    public bool grannyControlled = false;
+
 
 
 
@@ -62,10 +64,12 @@ public class TheMagician : Boss
         currentStage = Stage.Backstage;
         stageTimer = attackTime;
         teleportDelayTimer = teleportDelay;
-
-        ogCard = cardStage.position;
-        ogKnife = knifeStage.position;
-        ogDove = doveStage.position;
+        if (!grannyControlled)
+        {
+            ogCard = cardStage.position;
+            ogKnife = knifeStage.position;
+            ogDove = doveStage.position;
+        }
         appearDelayTimer = 0;
 
         animator.SetFloat("aR", attackRate);
@@ -79,11 +83,16 @@ public class TheMagician : Boss
 
         if (appearDelay / (currentPhase + 1) < appearDelayTimer)
         {
-            base.Update();
+            base.Update();    
             stageTimer -= Time.deltaTime;
           
             if (stageTimer <= 0)
             {
+                if (grannyControlled)
+                {
+                    ChooseNewStage();
+                    return;
+                }
                 teleportDelayTimer -= Time.deltaTime * attackRate;
                 if (teleportDelayTimer <= 0)
                 {
@@ -102,6 +111,10 @@ public class TheMagician : Boss
                         ChooseNewStage();
                     }
                 }
+            }
+            if (grannyControlled)
+            {
+                return;
             }
             MoveToStage();
         }

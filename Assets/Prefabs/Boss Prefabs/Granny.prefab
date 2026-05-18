@@ -251,8 +251,8 @@ Transform:
   - {fileID: 7202878485651940101}
   - {fileID: 4611642670959121828}
   - {fileID: 2847181502553635105}
-  - {fileID: 712806250393988786}
   - {fileID: 7560015199446204853}
+  - {fileID: 3814176269389582025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3135999659832902596
@@ -392,9 +392,9 @@ MonoBehaviour:
   bossProgression: 6
   bossName: Granny, The Mogul
   maxHealth: 4
-  healthBar: {fileID: 5187320019946879446}
-  healthBarAnimator: {fileID: 8633898269983300228}
-  bossNameText: {fileID: 4977892287978850841}
+  healthBar: {fileID: 8860788882563471789}
+  healthBarAnimator: {fileID: 5393918321742543615}
+  bossNameText: {fileID: 8655863717218183778}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
   - 0.5
@@ -451,9 +451,9 @@ MonoBehaviour:
   bossProgression: 6
   bossName: Granny, Super Awesome Granny
   maxHealth: 5
-  healthBar: {fileID: 5187320019946879446}
-  healthBarAnimator: {fileID: 8633898269983300228}
-  bossNameText: {fileID: 4977892287978850841}
+  healthBar: {fileID: 0}
+  healthBarAnimator: {fileID: 0}
+  bossNameText: {fileID: 0}
   bulletOrigin: {fileID: 2847181502553635105}
   phasePercents:
   - 0.5
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc9486ff87afe54ba22c494deb5e2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Punch
---- !u!1001 &6383838750220342359
+--- !u!1001 &7322073564538500140
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -610,14 +610,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6479919401018217479}
     m_Modifications:
-    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -702,24 +694,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 7888061159898206469, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
---- !u!224 &712806250393988786 stripped
+--- !u!224 &3814176269389582025 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
+  m_PrefabInstance: {fileID: 7322073564538500140}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4977892287978850841 stripped
+--- !u!95 &5393918321742543615 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 7322073564538500140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8655863717218183778 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
+  m_PrefabInstance: {fileID: 7322073564538500140}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -727,10 +724,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!114 &5187320019946879446 stripped
+--- !u!114 &8860788882563471789 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2263871996753702273, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
+  m_PrefabInstance: {fileID: 7322073564538500140}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -738,8 +735,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!95 &8633898269983300228 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6383838750220342359}
-  m_PrefabAsset: {fileID: 0}

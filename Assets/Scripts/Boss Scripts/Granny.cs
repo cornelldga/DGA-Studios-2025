@@ -216,6 +216,10 @@ public class Granny : Boss
             int index = Random.Range(0, bosses.Count);
             GameObject prefab = bosses[index];
             Boss boss = Instantiate(prefab).GetComponent<Boss>();
+            if(boss.gameObject.TryGetComponent<TheMagician>(out TheMagician magician) )
+            {
+                magician.grannyControlled = true;
+            }
             Transform bossCanvas = boss.transform.Find("Boss Canvas");
             if (bossCanvas != null) bossCanvas.gameObject.SetActive(false);
             boss.isInvulnerable = true;
