@@ -1,0 +1,32 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Mirage? Mirage! Blast you Duke! You knocked her out cold!",
+            "emotion": 2,
+            "nextDialogueID": "0_couple",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_couple",
+            "dialogueText": "Argh! You do know how much you derailed our couples therapy session this week?",
+            "emotion": 2,
+            "nextDialogueID": "0_cowboy",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_cowboy",
+            "dialogueText": "There there Mirage… you did well against this wannabe cowboy sweetie…",
+            "emotion": 2,
+            "nextDialogueID": "0_love",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_love",
+            "dialogueText": "Don’t fret my love, you still looked as hot as ever while fighting him",
+            "emotion": 2,
+            "nextDialogueID": "",
+            "speaker": ""
+        }
+    ]
+}

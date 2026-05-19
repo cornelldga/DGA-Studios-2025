@@ -1,0 +1,25 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "Geez… you are one hell of an opponent … they usually leave fights with me in a body bag…",
+            "emotion": 2,
+            "nextDialogueID": "0_huff",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_huff",
+            "dialogueText": "... Huff .. what? … you’re taking on my grandmammy? You know what, go for it!",
+            "emotion": 2,
+            "nextDialogueID": "0_love",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_love",
+            "dialogueText": "...COUGH.. Love her, but … huff… she sometimes needs a kick in the hams…",
+            "emotion": 2,
+            "nextDialogueID": "",
+            "speaker": ""
+        }
+    ]
+}

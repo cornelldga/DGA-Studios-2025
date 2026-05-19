@@ -1,0 +1,25 @@
+{
+    "dialogueLines": [
+        {
+            "dialogueID": "0_start",
+            "dialogueText": "… Huh not too bad whippersnapper…. You really put up your dukes and worked me out…",
+            "emotion": 2,
+            "nextDialogueID": "0_whippersnapper",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_whippersnapper",
+            "dialogueText": ".. if only I could’ve worked out that marriage of mine…my loss probably won’t help things…",
+            "emotion": 2,
+            "nextDialogueID": "0_marriage",
+            "speaker": ""
+        },
+        {
+            "dialogueID": "0_marriage",
+            "dialogueText": "...care to ignore my silly old murder attempt and play matchmaker for me sonny",
+            "emotion": 2,
+            "nextDialogueID": "",
+            "speaker": ""
+        }
+    ]
+}
