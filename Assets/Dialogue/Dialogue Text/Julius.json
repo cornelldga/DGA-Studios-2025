@@ -31,25 +31,18 @@
 
         {
             "dialogueID": "3_start",
-            "dialogueText": "… Huh not too bad whippersnapper…. You really put up your dukes and worked me out…",
+            "dialogueText": "You got more spirit than I gave you credit for, kid.",
             "emotion": 0,
             "nextDialogueID": "3_next"
         },
         {
             "dialogueID": "3_next",
-            "dialogueText": "... if only I could’ve worked out that marriage of mine…my loss probably won’t help things…",
+            "dialogueText": "Maybe I can learn a thing or two from you.",
             "emotion": 0,
             "nextDialogueID": "3_end"
-        },
-        {
+        }, {
             "dialogueID": "3_end",
-            "dialogueText": "...care to ignore my silly old murder attempt and play matchmaker for me sonny?",
-            "emotion": 0,
-            "nextDialogueID": "3_again"
-        },
-        {
-            "dialogueID": "3_again",
-            "dialogueText": "If not... we can go again?",
+            "dialogueText": "If you're willing, that is.",
             "emotion": 0,
             "nextDialogueID": ""
         },
