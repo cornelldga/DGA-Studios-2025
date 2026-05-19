@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: Assembly-CSharp::BulletPattern
   bullets:
-  - {fileID: 0}
-  bulletAngles: []
-  bulletDelays: []
+  - {fileID: 2660713567375334150, guid: 834feb14e2e0fa844a414a001327ffa5, type: 3}
+  bulletAngles:
+  - 0
+  bulletDelays:
+  - 2
   minAttackCooldown: 0
   maxAttackCooldown: 0

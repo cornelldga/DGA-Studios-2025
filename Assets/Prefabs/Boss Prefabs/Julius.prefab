@@ -96,9 +96,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5489353766401137639}
   - {fileID: 4606974957378827531}
   - {fileID: 5800447950608822647}
+  - {fileID: 4057963755175666867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7197086526577444502
@@ -179,9 +179,9 @@ MonoBehaviour:
   bossProgression: 3
   bossName: Julius, Manic Miner
   maxHealth: 70
-  healthBar: {fileID: 159719163656866947}
-  healthBarAnimator: {fileID: 3610685219928371153}
-  bossNameText: {fileID: 62901968422666060}
+  healthBar: {fileID: 8523551680753185751}
+  healthBarAnimator: {fileID: 5072576761816436869}
+  bossNameText: {fileID: 8404187093767307288}
   bulletOrigin: {fileID: 4606974957378827531}
   phasePercents:
   - 0.8
@@ -303,7 +303,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1001 &2116001527165509890
+--- !u!1001 &7576002962893266518
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -311,26 +311,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5002965962069388933}
     m_Modifications:
-    - target: {fileID: 86667809260493348, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 679403136592591396, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998426260685106248, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_text
-      value: Tom, Manic Miner
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -415,23 +395,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583123046418625142, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
+    - target: {fileID: 7888061159898206469, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
---- !u!114 &62901968422666060 stripped
+--- !u!224 &4057963755175666867 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 7576002962893266518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5072576761816436869 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 7576002962893266518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8404187093767307288 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 2116001527165509890}
+  m_PrefabInstance: {fileID: 7576002962893266518}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -439,10 +425,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!114 &159719163656866947 stripped
+--- !u!114 &8523551680753185751 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2263871996753702273, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 2116001527165509890}
+  m_PrefabInstance: {fileID: 7576002962893266518}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -450,13 +436,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!95 &3610685219928371153 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 2116001527165509890}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &5489353766401137639 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 2116001527165509890}
-  m_PrefabAsset: {fileID: 0}

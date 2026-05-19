@@ -48,17 +48,25 @@
 
         {
             "dialogueID": "5_start",
-            "dialogueText": "Duke, right? I know I'm in no position to ask for anything, but Granny's all I have.",
+            "dialogueText": "Geez… you are one hell of an opponent … they usually leave fights with me in a body bag…",
             "emotion": 0,
             "nextDialogueID": "5_next"
-        }, {
+        },
+        {
             "dialogueID": "5_next",
-            "dialogueText": "She's a ruthless businesswoman, yes. But she's a good lady at heart. Deep down.",
+            "dialogueText": "... Huff .. what? … you’re taking on my grandmammy? You know what, go for it!",
             "emotion": 0,
             "nextDialogueID": "5_fight"
-        }, {
+        },
+        {
             "dialogueID": "5_fight",
-            "dialogueText": "I'll even help you train, just promise to spare her.",
+            "dialogueText": "...COUGH.. Love her, but … huff… she sometimes needs a kick in the hams…",
+            "emotion": 0,
+            "nextDialogueID": "5_again"
+        },
+        {
+            "dialogueID": "5_again",
+            "dialogueText": "I can help you out with that! Would you like to train?",
             "emotion": 0,
             "nextDialogueID": ""
         },

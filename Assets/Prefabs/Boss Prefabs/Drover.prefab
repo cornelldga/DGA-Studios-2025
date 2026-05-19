@@ -476,12 +476,12 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 843670943551332780}
   - {fileID: 7412522925185864300}
   - {fileID: 5210574288019768129}
   - {fileID: 8620910839299060731}
   - {fileID: 2181703785728384213}
   - {fileID: 6029264802078557319}
+  - {fileID: 786144330789523053}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8052876817063253788
@@ -643,9 +643,9 @@ MonoBehaviour:
   bossProgression: 2
   bossName: Drover, King of Pigs
   maxHealth: 50
-  healthBar: {fileID: 5020431466718295752}
-  healthBarAnimator: {fileID: 8467035003508594074}
-  bossNameText: {fileID: 5135283813810275591}
+  healthBar: {fileID: 4967900897380686089}
+  healthBarAnimator: {fileID: 8420978292063615579}
+  bossNameText: {fileID: 5051228100699761350}
   bulletOrigin: {fileID: 6029264802078557319}
   phasePercents:
   - 0.5
@@ -736,7 +736,7 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!1001 &6541131322178050889
+--- !u!1001 &6600979757457552520
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -744,26 +744,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4953554823208090808}
     m_Modifications:
-    - target: {fileID: 86667809260493348, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 679403136592591396, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998426260685106248, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_text
-      value: Drover, King of Pigs
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -848,32 +828,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7888061159898206469, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583123046418625142, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
---- !u!224 &843670943551332780 stripped
+--- !u!224 &786144330789523053 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6541131322178050889}
+  m_PrefabInstance: {fileID: 6600979757457552520}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5020431466718295752 stripped
+--- !u!114 &4967900897380686089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2263871996753702273, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6541131322178050889}
+  m_PrefabInstance: {fileID: 6600979757457552520}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -881,10 +853,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &5135283813810275591 stripped
+--- !u!114 &5051228100699761350 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6541131322178050889}
+  m_PrefabInstance: {fileID: 6600979757457552520}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -892,8 +864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!95 &8467035003508594074 stripped
+--- !u!95 &8420978292063615579 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 6541131322178050889}
+  m_PrefabInstance: {fileID: 6600979757457552520}
   m_PrefabAsset: {fileID: 0}

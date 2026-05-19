@@ -90,6 +90,7 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (Time.timeScale == 0) return;
         if (!ongoingDialogue) return;
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
@@ -135,16 +136,12 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     void ContinueDialogue(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0) return;
+
         if (context.action.WasPressedThisFrame() && ongoingDialogue)
         {
-            if (isTyping)
-            {
-                CompleteCurrentLine();
-            }
-            else
-            {
-                DisplayNextLine();
-            }
+            if (isTyping) CompleteCurrentLine();
+            else DisplayNextLine();
         }
     }
 

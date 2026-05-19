@@ -35,8 +35,8 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1209733427329219906}
-  - {fileID: 5998097166773004902}
   - {fileID: 6913094105630645781}
+  - {fileID: 5314794189263581289}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3522220637217935748
@@ -183,19 +183,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad45a26da4f9b4e8ab6edbd9f1ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TheMagician
-  animator: {fileID: 458241386248563458}
   bossProgression: 4
   bossName: Mirage & Ace, Dynamic Duo
   maxHealth: 70
-  healthBar: {fileID: 2100067247850913026}
-  healthBarAnimator: {fileID: 3244883807250652752}
-  bossNameText: {fileID: 2291459968752389837}
+  healthBar: {fileID: 565347674614687501}
+  healthBarAnimator: {fileID: 4031935658800055391}
+  bossNameText: {fileID: 373959351961261250}
   bulletOrigin: {fileID: 6913094105630645781}
   phasePercents:
   - 0.65
   - 0.25
   currentPhase: 0
   isInvulnerable: 0
+  isSummoned: 0
   attackRate: 1
   defeatDialogue: {fileID: 4900000, guid: 9f30c16fb4d7ea342bcd5de3dec026ad, type: 3}
   dialogueBoxSprite: {fileID: 21300000, guid: fcb71f2ccb5e37d4fa60bf9df956ca28, type: 3}
@@ -220,6 +220,7 @@ MonoBehaviour:
   DesperationAttack: {fileID: 11400000, guid: 59e941ebc45089d4592437e1e63bcc6c, type: 2}
   backStageTime: 2
   appearDelay: 2
+  grannyControlled: 0
 --- !u!95 &458241386248563458
 Animator:
   serializedVersion: 7
@@ -364,7 +365,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3717318877211396489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &166091810683261059
+--- !u!1001 &1779598193650371212
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -372,26 +373,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3717318877211396489}
     m_Modifications:
-    - target: {fileID: 86667809260493348, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 679403136592591396, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998426260685106248, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_text
-      value: Mirage & Ace, Dynamic Duo
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497816840611875354, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -476,38 +457,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7601995560908498870, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7888061159898206469, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583123046418625142, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
---- !u!114 &2100067247850913026 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2263871996753702273, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 166091810683261059}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &2291459968752389837 stripped
+--- !u!114 &373959351961261250 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126531544496676430, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 166091810683261059}
+  m_PrefabInstance: {fileID: 1779598193650371212}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -515,13 +477,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!95 &3244883807250652752 stripped
+--- !u!114 &565347674614687501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2263871996753702273, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
+  m_PrefabInstance: {fileID: 1779598193650371212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!95 &4031935658800055391 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3406470908711734995, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 166091810683261059}
+  m_PrefabInstance: {fileID: 1779598193650371212}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &5998097166773004902 stripped
+--- !u!224 &5314794189263581289 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869199696843029221, guid: bac5048f1ba8eb842a058172fb880c55, type: 3}
-  m_PrefabInstance: {fileID: 166091810683261059}
+  m_PrefabInstance: {fileID: 1779598193650371212}
   m_PrefabAsset: {fileID: 0}

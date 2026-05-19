@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(false);
         }
 
-        FreezePlayer(isActive);
+        FreezePlayer(isActive || dialogueManager.OngoingDialogue() || cutsceneManager.IsActive());
     }
 
     /// <summary>
