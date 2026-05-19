@@ -96,6 +96,7 @@ public class CutsceneManager : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
         if (!isActive) return;
 
         if (Keyboard.current != null &&
@@ -113,6 +114,7 @@ public class CutsceneManager : MonoBehaviour
 
     void HandleContinue()
     {
+        if (Time.timeScale == 0) return;
         if (!isActive) return;
         if (Time.time <= lastInputTime + INPUT_COOLDOWN) return;
 
@@ -153,6 +155,7 @@ public class CutsceneManager : MonoBehaviour
     public void PlayMeetBobbyCutscene(System.Action onComplete = null)
     {
         isActive = true;
+        GameManager.Instance.FreezePlayer(true);
         skipButton.SetActive(true);
         SetCutsceneName("Duke");
         DialogueManager dialogueManager = GameManager.Instance.GetDialogueManager;
@@ -409,4 +412,9 @@ public class CutsceneManager : MonoBehaviour
 
         onComplete?.Invoke();
     }
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
 }
