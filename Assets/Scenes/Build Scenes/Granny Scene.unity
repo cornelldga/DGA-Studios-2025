@@ -46723,6 +46723,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9073252018920763932, guid: 2c163e7e26ad29b4999901f9bc67dfc1, type: 3}
   m_PrefabInstance: {fileID: 416365286}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &486663028 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 871742177484969984, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
+  m_PrefabInstance: {fileID: 1426656931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &717211468
 GameObject:
   m_ObjectHideFlags: 0
@@ -47057,10 +47062,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5977588195904675085, guid: 38d31a48a04354b1dbf0b1ccd1cb2191, type: 3}
-      propertyPath: invulnerableMode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47227,7 +47228,7 @@ PrefabInstance:
     - target: {fileID: 1268472078111149479, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 486663028}
     - target: {fileID: 2348387358040995328, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_Name
       value: Player Camera
@@ -47238,11 +47239,11 @@ PrefabInstance:
       objectReference: {fileID: 1589420713}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.3
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.17
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 8501663709167020460, guid: 6c63b5c30f8a67a4f89722cdaa3a87d3, type: 3}
       propertyPath: m_LocalPosition.z
