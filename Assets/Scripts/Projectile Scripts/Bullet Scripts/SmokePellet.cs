@@ -120,7 +120,8 @@ public class SmokePellet : MonoBehaviour
         }
         if (aliveTime >= lifetime)
         {
-            SmokePool.Instance.RemoveFromPool(gameObject);
+            if(SmokePool.Instance != null)
+                SmokePool.Instance.RemoveFromPool(gameObject);
             Destroy(gameObject);
         }
     }

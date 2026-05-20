@@ -78,7 +78,6 @@ public class GrannyPhase2 : Boss
     {
         base.Attack();
         int currentAttack = Random.Range(1, 5);
-        Debug.Log(currentAttack);
         switch (currentAttack)
         {
             case 1:
@@ -232,19 +231,19 @@ public class GrannyPhase2 : Boss
     }
     private IEnumerator selectComboAttack()
     {
-        int currentCombo = Random.Range(1, 7);
+        int currentCombo = Random.Range(4, 7);
         SetAttackState(true);
         switch (currentCombo)
         {
-            case 1:
-                yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
-                break;
-            case 2:
-                yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
-                break;
-             case 3:
-                yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
-                break;
+            //case 1:
+            //    yield return StartCoroutine(TrailAttack(flamingBushPrefab, fireBullsCount, 10));
+            //    break;
+            //case 2:
+            //    yield return StartCoroutine(TrailAttack(smokePrefab, smokeBullsCount, -1));
+            //    break;
+            // case 3:
+            //    yield return StartCoroutine(TrailAttack(dynamitePrefab, dynamiteBullsCount, -1));
+                //break;
              case 4:
                 yield return StartCoroutine(PointAttack(smokePrefab, flamingBushPrefab, fireSmokeCount, 10));
                 break;
