@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,167 +13,78 @@ public class LoadoutManager : MonoBehaviour
     [SerializeField] MixerType[] equippedMixers;
     [Space(10)]
     [Tooltip("Index of the base/mixer to be swapped")]
-    int index;
+    [SerializeField] GameObject baseGrid;
+    [SerializeField] GameObject mixerGrid;
     [SerializeField] List<Button> baseButtons;
     [SerializeField] List<Button> mixerButtons;
+    [SerializeField] List<GameObject> baseChains;
+    [SerializeField] List<GameObject> mixerChains;
+    [SerializeField] Image baseEquipImage1;
+    [SerializeField] Image baseEquipImage2;
+    [SerializeField] Image mixerEquipImage1;
+    [SerializeField] Image mixerEquipImage2;
+    [SerializeField] float selectScale;
 
-
-    [Tooltip("Equipped slots")]
-    [SerializeField] Image baseSlotOne;
-    [SerializeField] Image baseSlotTwo;
-    [SerializeField] Image mixerSlotOne;
-    [SerializeField] Image mixerSlotTwo;
-    private Image currentSlot;
-    private int slotNumber;
-    private bool mixer;
-
-    Dictionary<BaseType, Button> baseToButton = new Dictionary<BaseType, Button>();
-    Dictionary<MixerType, Button> mixerToButton = new Dictionary<MixerType, Button>();
+    private int slotIndex = -1;
+    int baseIndex = -1;
+    int mixerIndex = -1;
 
     public BaseType[] GetEquippedBases() => equippedBases;
     public MixerType[] GetEquippedMixers() => equippedMixers;
 
-    private List<BaseType> lockedBases = new List<BaseType>();
-    private List<MixerType> lockedMixers = new List<MixerType>();
-
-   [SerializeField] GameObject rows;
-   [SerializeField] GameObject text;
-   [SerializeField] GameObject baseOptions;
-   [SerializeField] GameObject mixerOptions;
-
-   [Tooltip("Base Icons")]
-   [SerializeField] Sprite[] baseIcons;
-   [Tooltip("Mixer Icons")]
-   [SerializeField] Sprite[] mixerIcons;
-
-    [Tooltip("Locked Icons")]
-    [SerializeField] List<GameObject> baseChains;
-    [SerializeField] List<GameObject> mixerChains;
-
-
-    /// <summary>
-    /// Set up the dictionaries
-    /// </summary>
-    private void Awake()
+    private void OnEnable()
     {
-        int index = 0;
-        foreach(var button in baseButtons)
-        {
-            baseToButton[(BaseType)index] = button;
-            index++;
-        }
-        index = 0;
-        foreach(var button in mixerButtons)
-        {
-            mixerToButton[(MixerType)index] = button;
-            index++;
-        }
-        index = 0;
-        foreach (BaseType baseType in equippedBases)
-        {
-            // set base slot images
-            if (index==0)
-            {
-                baseSlotOne.sprite = baseIcons[(int) baseType];
-            } else
-            {
-                baseSlotTwo.sprite = baseIcons[(int) baseType];
-            }
-            index++;
-        }
-        index = 0;
-        foreach (MixerType mixerType in equippedMixers)
-        {
-            // set mixer slot images
-            if (index==0)
-            {
-                mixerSlotOne.sprite = mixerIcons[(int) mixerType];
-            } else
-            {
-                mixerSlotTwo.sprite = mixerIcons[(int) mixerType];
-            }
-            index++;
-        }
-        lockedBases = Enum.GetValues(typeof(BaseType))
-                  .Cast<BaseType>()
-                  .ToList();
+        baseGrid.SetActive(false);
+        mixerGrid.SetActive(false);
+    }
 
-        lockedMixers = Enum.GetValues(typeof(MixerType))
-                        .Cast<MixerType>()
-                        .ToList();
 
+    private void Start()
+    {
         int progression = PlayerPrefs.GetInt("progression", 0);
-
-        // Default starter items
-        lockedBases.Remove(BaseType.Beer);
-        lockedBases.Remove(BaseType.Whiskey);
-        lockedMixers.Remove(MixerType.Cider);
-        lockedMixers.Remove(MixerType.Ginger);
-        Debug.Log(progression);
         // Beat Drover
         if (progression > 1)
         {
-            lockedBases.Remove(BaseType.Wine);
             baseChains[0].SetActive(false);
+            baseButtons[2].interactable = true;
         }
 
         // Beat Julius
         if (progression > 2)
         {
-            lockedMixers.Remove(MixerType.Lime);
             mixerChains[0].SetActive(false);
+            mixerButtons[2].interactable = true;
         }
 
         // Beat Ace & Mirage
         if (progression > 3)
         {
-            lockedBases.Remove(BaseType.Gin);
             baseChains[1].SetActive(false);
+            baseButtons[3].interactable = true;
         }
 
         // Beat Ash
         if (progression > 4)
         {
-            lockedMixers.Remove(MixerType.Pimiento);
             mixerChains[1].SetActive(false);
+            mixerButtons[3].interactable = true;
         }
-            RefreshBaseButtons();
-            RefreshMixerButtons();
-    }
 
-    public void setLoadout(int slot)
+        SetLoadoutUI();
+    }
+    /// <summary>
+    /// Sets the equip sprites and interactables of the current equiped loadout
+    /// </summary>
+    void SetLoadoutUI()
     {
-        text.SetActive(false);
-        rows.SetActive(true);
-        if (slot==1)
-        {
-            mixerOptions.SetActive(false);
-            baseOptions.SetActive(true);
-            currentSlot = baseSlotOne;
-            slotNumber = 0;
-            mixer = false;
-        } else if (slot==2)
-        {
-            mixerOptions.SetActive(false);
-            baseOptions.SetActive(true);
-            currentSlot = baseSlotTwo;
-            slotNumber = 1;
-            mixer = false;
-        } else if (slot==3)
-        {
-            baseOptions.SetActive(false);
-            mixerOptions.SetActive(true);
-            currentSlot = mixerSlotOne;
-            slotNumber = 0;
-            mixer = true;
-        } else
-        {
-            baseOptions.SetActive(false);
-            mixerOptions.SetActive(true);
-            currentSlot = mixerSlotTwo;
-            slotNumber = 1;
-            mixer = true;
-        }
+        baseEquipImage1.sprite = baseButtons[(int)equippedBases[0]].image.sprite;
+        baseButtons[(int)equippedBases[0]].interactable = false;
+        baseEquipImage2.sprite = baseButtons[(int)equippedBases[1]].image.sprite;
+        baseButtons[(int)equippedBases[1]].interactable = false;
+        mixerEquipImage1.sprite = mixerButtons[(int)equippedMixers[0]].image.sprite;
+        mixerButtons[(int)equippedMixers[0]].interactable = false;
+        mixerEquipImage2.sprite = mixerButtons[(int)equippedMixers[1]].image.sprite;
+        mixerButtons[(int)equippedMixers[1]].interactable = false;
     }
 
 
@@ -182,60 +95,145 @@ public class LoadoutManager : MonoBehaviour
     {
         GameManager.Instance.ToggleLoadoutManager(false);
     }
-
-    void RefreshBaseButtons()
-    {
-        foreach (var pair in baseToButton)
-        {
-            bool isLocked = lockedBases.Contains(pair.Key);
-            pair.Value.interactable = !isLocked;
-        }
-    }
-
-    void RefreshMixerButtons()
-    {
-        foreach (var pair in mixerToButton)
-        {
-            bool isLocked = lockedMixers.Contains(pair.Key);
-
-            pair.Value.interactable = !isLocked;
-        }
-    }
-    
     /// <summary>
-    /// Choose a base to be equipped at the selected index
+    /// Sets a slot index. If a base is not selected, increases the scale of all base buttons that are interactable
     /// </summary>
-    public void Choose(int type)
+    /// <param name="slot"></param>
+    public void ChooseBaseSlot(int slot)
     {
-        if (mixer)
+        slotIndex = slot;
+        baseGrid.SetActive(true);
+        mixerGrid.SetActive(false);
+        if (baseIndex != -1)
         {
-            MixerType newMixer = (MixerType)type;
-
-            if (!Array.Exists(equippedMixers, m => m == newMixer))
-            {
-                GameManager.Instance.player.SwapMixerSlot(slotNumber, newMixer);
-
-                equippedMixers[slotNumber] = newMixer;
-
-                currentSlot.sprite = mixerIcons[type];
-
-                RefreshMixerButtons();
-            }
+            SwapBase();
         }
         else
         {
-            BaseType newBase = (BaseType)type;
-
-            if (!Array.Exists(equippedBases, b => b == newBase))
+            foreach (Button baseButton in baseButtons)
             {
-                GameManager.Instance.player.SwapBaseSlot(slotNumber, newBase);
-
-                equippedBases[slotNumber] = newBase;
-
-                currentSlot.sprite = baseIcons[type];
-
-                RefreshBaseButtons();
+                if (baseButton.interactable)
+                {
+                    baseButton.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+                }
             }
         }
+    }
+    /// <summary>
+    /// Sets the baseIndex and checks if a slot index was chosen. If not, scale up the slot index
+    /// </summary>
+    /// <param name="baseType"></param>
+    public void ChooseBase(int baseType)
+    {
+        baseIndex = baseType;
+        if(slotIndex != -1)
+        {
+            SwapBase();
+        }
+        else
+        {
+            baseEquipImage1.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+            baseEquipImage2.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+        }
+
+    }
+    /// <summary>
+    /// Swap the bases and toggle interaction. resets any scaling
+    /// </summary>
+    void SwapBase()
+    {
+        BaseType swappedBase = GameManager.Instance.player.SwapBaseSlot(slotIndex, (BaseType)baseIndex);
+
+        if(slotIndex == 0)
+        {
+            baseEquipImage1.sprite = baseButtons[baseIndex].image.sprite;
+        }
+        else
+        {
+            baseEquipImage2.sprite = baseButtons[baseIndex].image.sprite;
+        }
+
+         baseButtons[baseIndex].interactable = false;
+        baseButtons[(int)swappedBase].interactable = true;
+
+        baseIndex = -1;
+        slotIndex = -1;
+        foreach (Button baseButton in baseButtons)
+        {
+            baseButton.GetComponent<Transform>().localScale = Vector3.one;
+        }
+        baseEquipImage1.GetComponent<Transform>().localScale = Vector3.one;
+        baseEquipImage2.GetComponent<Transform>().localScale = Vector3.one ;
+    }
+
+    /// <summary>
+    /// Sets the slot index. If a mixer is not selected, increases the scale of all mixer buttons that are interactable
+    /// </summary>
+    /// <param name="slot"></param>
+    public void ChooseMixerSlot(int slot)
+    {
+        slotIndex = slot;
+        mixerGrid.SetActive(true);
+        baseGrid.SetActive(false);
+        if (mixerIndex != -1)
+        {
+            SwapMixer();
+        }
+        else
+        {
+            foreach (Button mixerButton in mixerButtons)
+            {
+                if (mixerButton.interactable)
+                {
+                    mixerButton.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Sets the mixerIndex and checks if a slot index was chosen. If not, scale up the slot index
+    /// </summary>
+    /// <param name="mixerType"></param>
+    public void ChooseMixer(int mixerType)
+    {
+        mixerIndex = mixerType;
+        if (slotIndex != -1)
+        {
+            SwapMixer();
+        }
+        else
+        {
+            mixerEquipImage1.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+            mixerEquipImage2.GetComponent<Transform>().localScale = Vector3.one * selectScale;
+        }
+
+    }
+    /// <summary>
+    /// Swap the mixers and toggle interaction. resets any scaling
+    /// </summary>
+    void SwapMixer()
+    {
+        MixerType swappedMixer = GameManager.Instance.player.SwapMixerSlot(slotIndex, (MixerType)mixerIndex);
+
+        if (slotIndex == 0)
+        {
+            mixerEquipImage1.sprite = mixerButtons[mixerIndex].image.sprite;
+        }
+        else
+        {
+            mixerEquipImage2.sprite = mixerButtons[mixerIndex].image.sprite;
+        }
+
+        mixerButtons[mixerIndex].interactable = false;
+        mixerButtons[(int)swappedMixer].interactable = true;
+
+        mixerIndex = -1;
+        slotIndex = -1;
+        foreach (Button mixerButton in mixerButtons)
+        {
+            mixerButton.GetComponent<Transform>().localScale = Vector3.one;
+        }
+        mixerEquipImage1.GetComponent<Transform>().localScale = Vector3.one;
+        mixerEquipImage2.GetComponent<Transform>().localScale = Vector3.one;
     }
 }
