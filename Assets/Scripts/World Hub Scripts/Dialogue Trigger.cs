@@ -38,15 +38,14 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             emotionDictionary[DialogueEmotion.Happy] = happySprite;
             emotionDictionary[DialogueEmotion.Sad] = sadSprite;
         }
-        if (dialogueType == DialogueType.Boss)
+        if (bossProgression == 0) return;
+        if (bossProgression == PlayerPrefs.GetInt("progression", 0))
         {
-            if (bossProgression == PlayerPrefs.GetInt("progression",0))
-            {
-                quest.SetActive(true);
-            } else
-            {
-                quest.SetActive(false);
-            }
+            quest.SetActive(true);
+        }
+        else
+        {
+            quest.SetActive(false);
         }
     }
 

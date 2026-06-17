@@ -36,10 +36,12 @@ public class LoadoutManager : MonoBehaviour
     {
         baseGrid.SetActive(false);
         mixerGrid.SetActive(false);
+        SetUnlocks();
+        SetLoadoutUI();
     }
 
 
-    private void Start()
+    void SetUnlocks()
     {
         int progression = PlayerPrefs.GetInt("progression", 0);
         // Beat Drover
@@ -69,8 +71,6 @@ public class LoadoutManager : MonoBehaviour
             mixerChains[1].SetActive(false);
             mixerButtons[3].interactable = true;
         }
-
-        SetLoadoutUI();
     }
     /// <summary>
     /// Sets the equip sprites and interactables of the current equiped loadout
